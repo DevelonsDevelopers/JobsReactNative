@@ -19,6 +19,7 @@ import thunk from "redux-thunk";
 import {Provider} from "react-redux";
 import Profile from "./pages/Profile";
 import PersonalInfo from "./pages/PersonalInfo";
+import AccountInfo from "./pages/AccountInfo";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
@@ -62,6 +63,7 @@ function App() {
                     <Stack.Screen name="Home" component={Home} options={{title: "Home", headerShown: false}}/>
                     <Stack.Screen name="Profile" component={Profile} options={{title: "Profile", headerShown: false}}/>
                     <Stack.Screen name="PersonalInfo" component={PersonalInfo} options={{title: "PersonalInfo", headerShown: false}}/>
+                    <Stack.Screen name="AccountInfo" component={AccountInfo} options={{title: "AccountInfo", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>

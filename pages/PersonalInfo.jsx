@@ -95,6 +95,23 @@ function PersonalInfo({ navigation }) {
                         </View>
                     </View>
                 </View>
+                <Pressable onPress={() => navigation.push('AccountInfo')} style={{
+                    backgroundColor: '#13A3E1',
+                    borderRadius: 25,
+                    alignItems: 'center',
+                    padding: 15,
+                    marginTop: 15,
+                    marginHorizontal: 25
+                }}><Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}>Update</Text></Pressable>
+                <Pressable onPress={() => navigation.push('Profile')} style={{
+                    borderColor: '#000',
+                    borderWidth: 1,
+                    borderRadius: 25,
+                    alignItems: 'center',
+                    padding: 15,
+                    marginTop: 15,
+                    marginHorizontal: 25
+                }}><Text style={{color: '#000', fontWeight: '800', fontSize: 15}}>Change Password</Text></Pressable>
             </ScrollView>
         </View>
     )
