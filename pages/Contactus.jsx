@@ -1,4 +1,4 @@
-import { Image, Text } from 'react-native'
+import { Image, Text, Pressable } from 'react-native'
 import React from 'react'
 import { View } from 'react-native'
 
@@ -7,7 +7,9 @@ function Contactus({navigation}){
     <View>
         <View style={{ display: "flex", flexDirection: "row", marginTop: 40, }}>
                 <Image style={{ width: 25, height: 25, marginLeft: 25, marginTop: 15, alignSelf: 'flex-start' }} source={require('../assets/menu.png')} />
+                <Pressable onPress={() => navigation.push('History') }>
                 <Image style={{ width: 160, height: 50, marginLeft: 60 }} source={require('../assets/logo.png')} />
+                </Pressable>
                 <Image style={{ width: 30, height: 30, marginLeft: 65, marginTop: 12 }} source={require('../assets/home.png')} />
             </View>
             <Text style={{ fontSize: 23, fontWeight: 500, alignSelf: 'center' }}>Contact Us</Text>
