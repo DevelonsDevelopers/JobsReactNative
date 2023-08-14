@@ -7,7 +7,7 @@ function Cities({ navigation }) {
     return (
         <View style={{ backgroundColor: '#EAEAEA' }}>
             <View style={{ display: "flex", flexDirection: "row", marginTop: 40 }}>
-                <Image style={{ width: 40, height: 25, marginLeft: 25, marginTop: 15, alignSelf: 'flex-start' }} source={require('../assets/back_arrow.png')} />
+                <Image style={{ width: 41, height: 25, marginLeft: 25, marginTop: 15, alignSelf: 'flex-start' }} source={require('../assets/back_arrow.png')} />
                 <Pressable onPress={() => navigation.push('Categories')}>
                 <Image style={{ width: 160, height: 50, marginLeft: 60 }} source={require('../assets/logo.png')} />
                 </Pressable>
