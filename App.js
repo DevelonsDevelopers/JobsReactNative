@@ -19,6 +19,12 @@ import thunk from "redux-thunk";
 import {Provider} from "react-redux";
 import Profile from "./pages/Profile";
 import PersonalInfo from "./pages/PersonalInfo";
+import Companies from './pages/Companies';
+import Cities from './pages/Cities';
+import Categories from './pages/Categories';
+import Termsandconditions from './pages/Termsandconditions';
+import Privacypolicy from './pages/Privacypolicy';
+import Contactus from './pages/Contactus';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
@@ -62,6 +68,12 @@ function App() {
                     <Stack.Screen name="Home" component={Home} options={{title: "Home", headerShown: false}}/>
                     <Stack.Screen name="Profile" component={Profile} options={{title: "Profile", headerShown: false}}/>
                     <Stack.Screen name="PersonalInfo" component={PersonalInfo} options={{title: "PersonalInfo", headerShown: false}}/>
+                    <Stack.Screen name="Companies" component={Companies} options={{title: "Companies", headerShown: false}}/>
+                    <Stack.Screen name="Cities" component={Cities} options={{title: "Cities", headerShown: false}}/>
+                    <Stack.Screen name="Categories" component={Categories} options={{title: "Categories", headerShown: false}}/>
+                    <Stack.Screen name="Termsandconditions" component={Termsandconditions} options={{title: "Termsandconditions", headerShown: false}}/>
+                    <Stack.Screen name="Privacypolicy" component={Privacypolicy} options={{title: "Privacypolicy", headerShown: false}}/>
+                    <Stack.Screen name="Contactus" component={Contactus} options={{title: "Contactus", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>

@@ -27,8 +27,8 @@ function Home({navigation}) {
                             tintColor: '#fff'
                         }} source={require('../assets/menu.png')} alt={'Okay'}/>
                         <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
-                            <Image style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
-                                   source={require('../assets/logo.png')} alt={'Okay'}/>
+                        <Pressable onPress={() => navigation.push('Companies')}><Image style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
+                                   source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
                         </View>
                     </View>
                     <Text style={{color: '#fff', fontSize: 16, fontWeight: '500', width: '100%', textAlign: 'center'}}>Good
