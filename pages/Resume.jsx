@@ -1,4 +1,4 @@
-import { Image, Text, ScrollView, } from 'react-native'
+import { Image, Text, ScrollView, FlatList } from 'react-native'
 import React from 'react'
 import { View } from 'react-native'
 
@@ -43,7 +43,7 @@ function Resume({ navigation }) {
                         <Text style={{
                             fontSize: 19,
                             fontWeight: 800,
-                            fontFamily: 'poppins_medium'
+                            fontFamily: 'poppins_medium',
                         }}>Jack Donaldson
                         </Text>
                         <Text style={{
@@ -57,7 +57,7 @@ function Resume({ navigation }) {
                         <View style={{
                             display: 'flex',
                             flexDirection: 'row',
-                            paddingTop: 3.5,
+                            paddingTop: 6,
                             paddingBottom: 0,
                         }}>
                             <Text style={{
@@ -85,7 +85,7 @@ function Resume({ navigation }) {
                                 fontSize: 11,
                                 fontFamily: 'poppins_regular',
                             }}
-                            >Address : 15th Street NewYork, US
+                            >Address : 15th Street NewYork, United States
                             </Text>
                         </View>
                         <View style={{
@@ -95,11 +95,23 @@ function Resume({ navigation }) {
                             <Text style={{
                                 fontSize: 11,
                                 fontFamily: 'poppins_regular',
-                                marginTop: 1,
+                                marginTop: 3,
                                 padding: 0
                             }}
                             >Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus ea quod esse eius illum!
                             </Text>
+                        </View>
+                        <View style={{
+                            width: 335,
+                            marginTop: 10,
+                            marginBottom: 10,
+                            marginLeft: 10,
+                            marginRight: 10,
+                            height: 2.5,
+                            elevation: 2,
+                            backgroundColor: '#BDBDBD',
+                            borderColor: 'black'
+                        }}>
                         </View>
                         <View>
                             <Text style={{
@@ -116,12 +128,12 @@ function Resume({ navigation }) {
                                 <Text style={{
                                     fontSize: 11,
                                     fontFamily: 'poppins_regular',
-                                    paddingTop: 2.5
+                                    marginTop: 3
                                 }}>
                                     2016-06 - present
                                 </Text>
                                 <Text style={{
-                                    marginLeft: 25,
+                                    marginLeft: 55,
                                     fontSize: 13,
                                     fontFamily: 'poppins_semibold',
                                 }}>
@@ -143,7 +155,7 @@ function Resume({ navigation }) {
                                 <Text style={{
                                     fontSize: 11,
                                     fontFamily: 'poppins_regular',
-                                    marginLeft: 43,
+                                    marginLeft: 61,
                                     marginTop: 0,
                                     marginBottom: 0,
                                     padding: 0
@@ -151,7 +163,6 @@ function Resume({ navigation }) {
                                 >Address : Los Angeles
                                 </Text>
                             </View>
-                            
                             <View style={{
                                 marginTop: 0,
                                 padding: 0
@@ -165,7 +176,8 @@ function Resume({ navigation }) {
                             </View>
                             <View style={{
                                 display: 'flex',
-                                flexDirection: 'row'
+                                flexDirection: 'row',
+                                marginTop: 7
                             }}>
                                 <Text style={{
                                     fontSize: 11,
@@ -175,7 +187,7 @@ function Resume({ navigation }) {
                                     2014-08 - 2016-06
                                 </Text>
                                 <Text style={{
-                                    marginLeft: 25,
+                                    marginLeft: 53,
                                     fontSize: 13,
                                     fontFamily: 'poppins_semibold',
                                 }}>
@@ -192,17 +204,17 @@ function Resume({ navigation }) {
                                     fontSize: 11,
                                     fontWeight: 400
                                 }}
-                                >Company : Octagon Digital
+                                >Company : Shopify
                                 </Text>
                                 <Text style={{
                                     fontSize: 11,
                                     fontFamily: 'poppins_regular',
-                                    marginLeft: 43,
+                                    marginLeft: 103,
                                     marginTop: 0,
                                     marginBottom: 0,
                                     padding: 0
                                 }}
-                                >Address : NewYork
+                                >Address : Ottawa, Ontario
                                 </Text>
                             </View>
                             <View style={{
@@ -213,11 +225,463 @@ function Resume({ navigation }) {
                                     fontSize: 11,
                                     fontFamily: 'poppins_regular',
                                 }}
+                                >Phone : 656-923-2222
+                                </Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                marginTop: 7
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    paddingTop: 2.5
+                                }}>
+                                    2012-02 - 2014-08
+                                </Text>
+                                <Text style={{
+                                    marginLeft: 55.7,
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_semibold',
+                                }}>
+                                    FrontEnd App Developer
+                                </Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                paddingTop: 0,
+                                paddingBottom: 0,
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontWeight: 400
+                                }}
+                                >Company : YouTube
+                                </Text>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    marginLeft: 97,
+                                    marginTop: 0,
+                                    marginBottom: 0,
+                                    padding: 0
+                                }}
+                                >Address : Florida, US
+                                </Text>
+                            </View>
+                            <View style={{
+                                marginTop: 0,
+                                padding: 0
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                }}
+                                >Phone : 656-923-4444
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={{
+                            width: 335,
+                            marginTop: 10,
+                            marginBottom: 10,
+                            marginLeft: 10,
+                            marginRight: 10,
+                            height: 2.5,
+                            elevation: 2,
+                            backgroundColor: '#BDBDBD',
+                            borderColor: 'black'
+                        }}>
+                        </View>
+                        <View>
+                            <Text style={{
+                                fontSize: 16,
+                                fontFamily: 'poppins_semibold',
+                                marginTop: 2
+                            }}>
+                                Education
+                            </Text>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row'
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    paddingTop: 2.5
+                                }}>
+                                    2010 - 2012
+                                </Text>
+                                <Text style={{
+                                    marginLeft: 105,
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_semibold',
+                                }}>
+                                    Software Engineering
+                                </Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                paddingTop: 0,
+                                paddingBottom: 0,
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    margin: 0,
+                                    padding: 0
+                                }}
+                                >University of Harward
+                                </Text>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    marginLeft: 77
+                                }}
                                 >Phone : 656-923-0000
                                 </Text>
                             </View>
 
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                marginTop: 7
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    paddingTop: 2.5
+                                }}>
+                                    2008 - 2010
+                                </Text>
+                                <Text style={{
+                                    marginLeft: 101,
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_semibold',
+                                }}>
+                                    FSC-Pre Engineering
+                                </Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                paddingTop: 0,
+                                paddingBottom: 0,
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    margin: 0,
+                                    padding: 0
+                                }}
+                                >College of Mango
+                                </Text>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    marginLeft: 97.7
+                                }}
+                                >Phone : 656-923-0000
+                                </Text>
+                            </View>
 
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                marginTop: 7
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    paddingTop: 2.5
+                                }}>
+                                    2006 - 2008
+                                </Text>
+                                <Text style={{
+                                    marginLeft: 97,
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_semibold',
+                                }}>
+                                    Metric
+                                </Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                paddingTop: 0,
+                                paddingBottom: 0,
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    margin: 0,
+                                    padding: 0
+                                }}
+                                >School of Harward
+                                </Text>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    marginLeft: 95
+                                }}
+                                >Phone : 656-923-0000
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={{
+                            width: 335,
+                            marginTop: 10,
+                            marginBottom: 10,
+                            marginLeft: 10,
+                            marginRight: 10,
+                            height: 2.5,
+                            elevation: 2,
+                            backgroundColor: '#BDBDBD',
+                            borderColor: 'black'
+                        }}>
+                        </View>
+
+
+
+                        <View>
+                            <Text style={{
+                                fontSize: 16,
+                                fontFamily: 'poppins_semibold',
+                                marginTop: 2
+                            }}>
+                                Courses
+                            </Text>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row'
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    marginTop: 3
+                                }}>
+                                    6 Months - 2012
+                                </Text>
+                                <Text style={{
+                                    marginLeft: 77,
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_semibold',
+                                }}>
+                                    Software Developing
+                                </Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                paddingTop: 0,
+                                paddingBottom: 0,
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    margin: 0,
+                                    padding: 0
+                                }}
+                                >University of Harward
+                                </Text>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    marginLeft: 77
+                                }}
+                                >Phone : 656-923-0000
+                                </Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                marginTop: 7
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    paddingTop: 2.5
+                                }}>
+                                    1 Year - 2013
+                                </Text>
+                                <Text style={{
+                                    marginLeft: 98,
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_semibold',
+                                }}>
+                                    Android Developing
+                                </Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                paddingTop: 0,
+                                paddingBottom: 0,
+                            }}>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    margin: 0,
+                                    padding: 0
+                                }}
+                                >University of Harward
+                                </Text>
+                                <Text style={{
+                                    fontSize: 11,
+                                    fontFamily: 'poppins_regular',
+                                    marginLeft: 77
+                                }}
+                                >Phone : 656-923-0000
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={{
+                            width: 335,
+                            marginTop: 10,
+                            marginBottom: 10,
+                            marginLeft: 10,
+                            marginRight: 10,
+                            height: 2.5,
+                            elevation: 2,
+                            backgroundColor: '#BDBDBD',
+                            borderColor: 'black'
+                        }}>
+                        </View>
+                        <View>
+                            <Text style={{
+                                fontSize: 16,
+                                fontFamily: 'poppins_semibold',
+                                marginTop: 2
+                            }}>
+                                Skils
+                            </Text>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row'
+                            }}>
+                                <Text style={{
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular'
+                                }}>Java Script
+                                </Text>
+                                <Text style={{
+                                    marginLeft: 173,
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular'
+                                }}
+                                >React Native
+                                </Text>
+                            </View>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                marginTop: 7
+                            }}>
+                                <Text style={{
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular'
+                                }}
+                                >HTML
+                                </Text>
+                                <Text style={{
+                                    marginLeft: 219,
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular'
+                                }}
+                                >CSS
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={{
+                            width: 335,
+                            marginTop: 10,
+                            marginBottom: 10,
+                            marginLeft: 10,
+                            marginRight: 10,
+                            height: 2.5,
+                            elevation: 2,
+                            backgroundColor: '#BDBDBD',
+                            borderColor: 'black'
+                        }}>
+                        </View>
+                        <View>
+                            <Text style={{
+                                fontSize: 16,
+                                fontFamily: 'poppins_semibold',
+                                marginTop: 2
+                            }}>Languages
+                            </Text>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row'
+                            }}>
+                                <Text style={{
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular'
+                                }}>French
+                                </Text>
+                                <Text style={{
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular',
+                                    marginLeft: 105,
+                                    marginRight: 68
+                                }}
+                                >English
+                                </Text>
+                                <Text style={{
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular'
+                                }}
+                                >Japanese
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={{
+                            width: 335,
+                            marginTop: 10,
+                            marginBottom: 10,
+                            marginLeft: 10,
+                            marginRight: 10,
+                            height: 2.5,
+                            elevation: 2,
+                            backgroundColor: '#BDBDBD',
+                            borderColor: 'black'
+                        }}>
+                        </View>
+                        <View>
+                            <Text style={{
+                                fontSize: 16,
+                                fontFamily: 'poppins_semibold',
+                                marginTop: 2
+                            }}>Interests
+                            </Text>
+                            <View style={{
+                                display: 'flex',
+                                flexDirection: 'row'
+                            }}>
+                                <Text style={{
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular'
+                                }}>Exercise
+                                </Text>
+                                <Text style={{
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular',
+                                    marginLeft: 96,
+                                    marginRight: 74
+                                }}
+                                >Sports
+                                </Text>
+                                <Text style={{
+                                    fontSize: 13,
+                                    fontFamily: 'poppins_regular'
+                                }}
+                                >Shows
+                                </Text>
+                            </View>
                         </View>
                     </View>
                 </View>
