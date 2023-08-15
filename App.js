@@ -31,6 +31,7 @@ import Jobs from "./pages/Jobs";
 import Resume from './pages/Resume';
 import Offers from './pages/Offers';
 import SocialMarketing from './pages/SocialMarketing';
+import AdvanceSearch from './pages/AdvanceSearch';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
@@ -86,6 +87,7 @@ function App() {
                     <Stack.Screen name="Resume" component={Resume} options={{title: "Resume", headerShown: false}}/>
                     <Stack.Screen name="Offers" component={Offers} options={{title: "Offers", headerShown: false}}/>
                     <Stack.Screen name="SocialMarketing" component={SocialMarketing} options={{title: "SocialMarketing", headerShown: false}}/>
+                    <Stack.Screen name="AdvanceSearch" component={AdvanceSearch} options={{title: "AdvanceSearch", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
