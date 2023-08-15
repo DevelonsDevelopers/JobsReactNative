@@ -10,7 +10,7 @@ const data = [
     {"name": "Youtube"}
 ]
 
-function Companies({navigation}) {
+function Jobs({navigation}) {
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
             <View style={{backgroundColor: '#EAEAEA'}}>
@@ -29,49 +29,50 @@ function Companies({navigation}) {
                     </View>
                 </View>
                 <View>
-                    <TextInput style={{
-                        backgroundColor: '#fff',
-                        marginHorizontal: 30,
-                        height: 50,
-                        borderRadius: 25,
-                        paddingHorizontal: 20,
-                        marginTop: 30,
-                        borderColor: 'black',
-                        fontSize: 17,
-                        elevation: 10
-                    }} placeholder={'Search'}/>
                     <Text style={{
                         fontSize: 18,
                         fontFamily: 'poppins_bold',
                         width: '100%',
-                        textAlign: 'center',
+                        paddingHorizontal: 30,
+                        textAlign: 'left',
                         marginVertical: 20,
                         padding: 0
-                    }}>Browse by Companies</Text>
+                    }}>Jobs</Text>
                 </View>
                 <SafeAreaView>
-                    <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                        style={{marginHorizontal: 0, marginTop: 10}} data={data} renderItem={({item}) => (
+                    <FlatList nestedScrollEnabled={false} scrollEnabled={false}
+                              style={{marginHorizontal: 0, marginTop: 10}} data={data} renderItem={({item}) => (
                         <View style={{
                             marginLeft: 25,
                             marginRight: 25,
-                            borderWidth: 0.5,
                             marginBottom: 8,
                             borderColor: '#4C4C4C',
-                            borderRadius: 12,
-                            padding: 15,
+                            borderRadius: 15,
+                            paddingHorizontal: 25,
+                            paddingVertical: 15,
                             display: "flex",
-                            flexDirection: "row",
+                            flexDirection: "column",
                             backgroundColor: '#fff'
                         }}>
-                            <Image style={{width: 45, height: 45, marginLeft: 10}}
-                                   source={require('../assets/fblogosquare.png')}/>
-                            <Text style={{
-                                marginTop: 8,
-                                fontSize: 16,
-                                fontFamily: 'poppins_semibold',
-                                marginLeft: 20
-                            }}>{item.name}</Text>
+                            <View style={{ flexDirection: 'row', flex: 1 }}>
+                                <Text style={{
+                                    color: '#207A00',
+                                    backgroundColor: 'rgba(0,180,18,0.2)',
+                                    paddingHorizontal: 10,
+                                    paddingTop: 4,
+                                    fontSize: 10,
+                                    fontFamily: 'poppins_medium',
+                                    borderRadius: 5
+                                }}>NEW</Text>
+                                <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_light', fontSize: 13 }}>Today</Text>
+                            </View>
+                            <View style={{ flex: 1, flexDirection: 'row' }}>
+                                <View style={{ flex: 0.8 }}>
+                                    <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', marginTop: 5, fontSize: 15 }}>Need Android Developer</Text>
+                                    <Text style={{ fontFamily: 'poppins_regular', marginTop: 0, fontSize: 12 }}>Facebook</Text>
+                                </View>
+                                <Image style={{ width: 20, height: 20, marginLeft: 'auto', marginTop: 10 }} source={require('../assets/bookmarkIcon.png')}/>
+                            </View>
                         </View>
                     )}/>
                 </SafeAreaView>
@@ -80,4 +81,4 @@ function Companies({navigation}) {
     )
 }
 
-export default Companies
+export default Jobs

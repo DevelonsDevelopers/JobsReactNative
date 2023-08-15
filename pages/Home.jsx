@@ -8,6 +8,7 @@ function Home({navigation}) {
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
     const categories = useSelector(state => state.category.categories)
+    const loading = useSelector(state => state.category.isLoading)
 
     const [visible, setVisible] = useState(false)
     const toggleVisibility = () => setVisible(!visible)
@@ -128,6 +129,9 @@ function Home({navigation}) {
                     }}><Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}>Log In</Text></Pressable>
                 }
                 <SafeAreaView style={{flex: 1}}>
+                    {loading ?
+                        <Text style={{ flex: 1, textAlign: 'center' }}>Loading</Text>
+                        :
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                               style={{marginHorizontal: 30, marginTop: 10}} data={categories} renderItem={({item}) => (
                         <View
@@ -151,6 +155,7 @@ function Home({navigation}) {
                         </View>
                     )}
                               numColumns={2}/>
+                    }
                 </SafeAreaView>
                 <View
                     style={{

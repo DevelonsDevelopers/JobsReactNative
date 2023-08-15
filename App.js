@@ -27,6 +27,7 @@ import Termsandconditions from './pages/Termsandconditions';
 import Privacypolicy from './pages/Privacypolicy';
 import Contactus from './pages/Contactus';
 import History from './pages/History';
+import Jobs from "./pages/Jobs";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
@@ -78,6 +79,7 @@ function App() {
                     <Stack.Screen name="Privacypolicy" component={Privacypolicy} options={{title: "Privacypolicy", headerShown: false}}/>
                     <Stack.Screen name="Contactus" component={Contactus} options={{title: "Contactus", headerShown: false}}/>
                     <Stack.Screen name="History" component={History} options={{title: "History", headerShown: false}}/>
+                    <Stack.Screen name="Jobs" component={Jobs} options={{title: "Jobs", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
