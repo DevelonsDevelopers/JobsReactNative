@@ -2,6 +2,7 @@ import {Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView} f
 import {View} from 'react-native'
 import React from 'react'
 import Categories from './Categories'
+import Resume from './Resume'
 
 const data = [
     {"city": "Lahore", "country": 'Pakistan'},
