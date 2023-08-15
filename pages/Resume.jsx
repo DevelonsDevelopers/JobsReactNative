@@ -1,4 +1,4 @@
-import { Image, Text, ScrollView, FlatList } from 'react-native'
+import { Image, Text, ScrollView, FlatList, Pressable } from 'react-native'
 import React from 'react'
 import { View } from 'react-native'
 
@@ -15,9 +15,9 @@ function Resume({ navigation }) {
                         tintColor: '#000'
                     }} source={require('../assets/back_arrow.png')} alt={'Okay'} />
                     <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                        <Image
-                            style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                            source={require('../assets/logo.png')} alt={'Okay'} />
+                    <Pressable onPress={() => navigation.push('AdvanceSearch')}><Image
+              style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+              source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                     </View>
                 </View>
                 <View>
