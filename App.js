@@ -83,7 +83,7 @@ function App() {
                     <Stack.Screen name="History" component={History} options={{title: "History", headerShown: false}}/>
                     <Stack.Screen name="Jobs" component={Jobs} options={{title: "Jobs", headerShown: false}}/>
                     <Stack.Screen name="Resume" component={Resume} options={{title: "Resume", headerShown: false}}/>
-                    <Stack.Screen name="offers" component={Offers} options={{title: "Offers", headerShown: false}}/>
+                    <Stack.Screen name="Offers" component={Offers} options={{title: "Offers", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
