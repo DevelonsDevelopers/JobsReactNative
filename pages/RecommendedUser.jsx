@@ -89,12 +89,12 @@ function AppliedUsers({ navigation }) {
             tintColor: '#fff'
           }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
           <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-            <Pressable onPress={() => navigation.push('RecommendedUser')}><Image style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
+            <Pressable onPress={() => navigation.push('Response')}><Image style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
           </View>
         </View>
         <Text style={{ textAlign: "center", color: 'white', marginTop: -10, marginBottom: 10, fontSize: 16, }}>Provider</Text>
-        <Text style={{ color: '#fff', fontSize: 23, fontWeight: '500', width: '100%', textAlign: 'center' }}>Applied Users</Text>
+        <Text style={{ color: '#fff', fontSize: 23, fontWeight: '500', width: '100%', textAlign: 'center' }}>Recommended Users</Text>
 
       </View>
 

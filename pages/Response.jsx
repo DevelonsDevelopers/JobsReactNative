@@ -89,7 +89,7 @@ function Response({ navigation }) {
             tintColor: '#fff'
           }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
           <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-            <Pressable onPress={() => navigation.push('OfferAccepted')}><Image style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
+            <Pressable onPress={() => navigation.push('Resume')}><Image style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
           </View>
         </View>
