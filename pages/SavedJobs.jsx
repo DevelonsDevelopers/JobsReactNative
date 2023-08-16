@@ -11,7 +11,7 @@ const data = [
   { "name": "Youtube" }
 ]
 
-function Jobs({ navigation }) {
+function SavedJobs ({ navigation }) {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
       <View style={{ backgroundColor: '#EAEAEA' }}>
@@ -24,21 +24,17 @@ function Jobs({ navigation }) {
             tintColor: '#000'
           }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
           <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-            <Pressable onPress={() => navigation.push('Recommendedjobs')}><Image
+            <Pressable onPress={() => navigation.push('Offers')}><Image
               style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
           </View>
         </View>
-        <View>
-          <Text style={{
-            fontSize: 18,
-            fontFamily: 'poppins_bold',
-            width: '100%',
-            paddingHorizontal: 30,
-            textAlign: 'left',
-            marginVertical: 20,
-            padding: 0
-          }}>Jobs</Text>
+        <View style={{ flexDirection:'row',justifyContent:'space-between',paddingHorizontal:35,marginVertical:30 }}>
+        
+          <Text style={{ fontSize:17,fontFamily:'poppins_bold',borderBottomWidth:3  }}>Saved jobs</Text>
+          <Pressable onPress={() => navigation.push('AppliedJobs')}>
+          <Text style={{ fontSize:17,fontFamily:'poppins_medium',}}> Applied Jobs</Text>
+          </Pressable>
         </View>
         <SafeAreaView>
           <FlatList nestedScrollEnabled={false} scrollEnabled={false}
@@ -56,15 +52,7 @@ function Jobs({ navigation }) {
                 backgroundColor: '#fff'
               }}>
                 <View style={{ flexDirection: 'row', flex: 1 }}>
-                  <Text style={{
-                    color: '#207A00',
-                    backgroundColor: 'rgba(0,180,18,0.2)',
-                    paddingHorizontal: 10,
-                    paddingTop: 4,
-                    fontSize: 10,
-                    fontFamily: 'poppins_medium',
-                    borderRadius: 5
-                  }}>NEW</Text>
+                  
                   <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13 }}>Today</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -110,4 +98,4 @@ function Jobs({ navigation }) {
   )
 }
 
-export default Jobs
+export default SavedJobs

@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import Resume from "./Resume";
 
-const SocialMarketing = ( { navigation }) => {
+const OfferAccepted = ( { navigation }) => {
   return (
     <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
       <View style={{ backgroundColor: '#EAEAEA' }}>
@@ -17,23 +17,16 @@ const SocialMarketing = ( { navigation }) => {
             tintColor: '#000'
           }} source={require('../assets/back_arrow.png')} alt={''} /></Pressable>
           <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-            <Pressable onPress={() => navigation.push('AdvanceSearch')}><Image
+            <Pressable onPress={() => navigation.push('OfferRejected')}><Image
               style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
           </View>
         </View>
-        <View>
-          <Text style={{
-            fontSize: 18,
-            fontFamily: 'poppins_bold',
-            width: '100%',
-            paddingHorizontal: 30,
-            textAlign: 'center',
-            marginTop: 30,
-            padding: 0
-          }}>Social Media Marketing</Text>
-        </View>
-        <SafeAreaView style={{ marginTop: 30 }}>
+        <Text style={{ fontSize:22,fontFamily:'poppins_bold',textAlign:"center",marginTop:40 }}>Social Media Marketing</Text>
+        <View style={{ paddingHorizontal:106,marginTop:4 }}>
+                  <Text style={{ backgroundColor:'#0EB000',textAlign:"center",borderRadius:20,fontSize:16,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:7 }}>OFFER ACCEPTED</Text>
+              </View>
+        <SafeAreaView style={{ marginTop: 10 }}>
 
 
           <View style={{
@@ -59,8 +52,8 @@ const SocialMarketing = ( { navigation }) => {
               }}>Facebook</Text>
               <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13, marginRight: 25 }}>Today</Text>
             </View>
-            <View style={{ paddingHorizontal: 90, }}>
-              <Text style={{ fontFamily: 'poppins_medium', fontSize: 15, textAlign: 'center', marginTop: 4, backgroundColor: '#00A224', color: "white", paddingHorizontal: 10, paddingVertical: 2, borderRadius: 10, margin: 'auto', }} >
+            <View style={{ paddingHorizontal: 110, }}>
+              <Text style={{ fontFamily: 'poppins_medium', fontSize: 15, textAlign: 'center', marginTop: 4, backgroundColor: '#00A224', color: "white", paddingHorizontal: 10, paddingVertical: 2, borderRadius: 20, margin: 'auto', }} >
               Salary $5000/month
               </Text>
             </View>
@@ -95,11 +88,11 @@ const SocialMarketing = ( { navigation }) => {
                       </View>
               </View>
             </View>
-<Text style={{ fontSize:18,fontFamily:'poppins_bold',marginLeft:15,marginTop:10 }}>Description: </Text>
+<Text style={{ fontSize:18,fontFamily:'poppins_bold',marginLeft:15,marginTop:10 }}>About Me: </Text>
 <Text style={{ marginHorizontal:25 ,fontSize:15,fontFamily:'poppins_medium'}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
        <View style={{ flexDirection:'row',justifyContent:"center",gap:20,marginTop:10}}>
-<Text style={{ fontSize:18,fontFamily:'poppins_bold',backgroundColor:'#143D59',color:'white' ,width:150,textAlign:"center",paddingVertical:5,borderRadius:20, }}>SAVE</Text>
-<Text style={{ fontSize:18,fontFamily:'poppins_bold',backgroundColor:'#13A3E1',color:'white' ,width:150,textAlign:"center",paddingVertical:5,borderRadius:20, }}>APPLY NOW</Text>
+<Text style={{ fontSize:16,fontFamily:'poppins_medium',backgroundColor:'#143D59',color:'white' ,width:150,textAlign:"center",paddingVertical:5,borderRadius:20, }}>Hire</Text>
+<Text style={{ fontSize:16,fontFamily:'poppins_medium',backgroundColor:'#13A3E1',color:'white' ,width:150,textAlign:"center",paddingVertical:5,borderRadius:20, }}>Ignore</Text>
 
        </View>
        
@@ -111,4 +104,4 @@ const SocialMarketing = ( { navigation }) => {
   )
 }
 
-export default SocialMarketing
+export default OfferAccepted

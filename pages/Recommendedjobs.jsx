@@ -11,7 +11,7 @@ const data = [
   { "name": "Youtube" }
 ]
 
-function Jobs({ navigation }) {
+function Recommendedjobs ({ navigation }) {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
       <View style={{ backgroundColor: '#EAEAEA' }}>
@@ -24,7 +24,7 @@ function Jobs({ navigation }) {
             tintColor: '#000'
           }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
           <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-            <Pressable onPress={() => navigation.push('Recommendedjobs')}><Image
+            <Pressable onPress={() => navigation.push('AppliedJobs')}><Image
               style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
           </View>
@@ -38,7 +38,7 @@ function Jobs({ navigation }) {
             textAlign: 'left',
             marginVertical: 20,
             padding: 0
-          }}>Jobs</Text>
+          }}>Recommended Jobs</Text>
         </View>
         <SafeAreaView>
           <FlatList nestedScrollEnabled={false} scrollEnabled={false}
@@ -110,4 +110,4 @@ function Jobs({ navigation }) {
   )
 }
 
-export default Jobs
+export default Recommendedjobs

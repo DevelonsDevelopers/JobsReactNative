@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
 
-function PostJob({ navigation }) {
+function JobPosted({ navigation }) {
 
   const dispatch = useDispatch();
   const [login, isLogin] = useState(false);
@@ -16,15 +16,17 @@ function PostJob({ navigation }) {
   useEffect(() => {
     dispatch(AllCategories())
   }, [dispatch, navigation]);
-const data =[
-  {'name':'Social media marketing ','department':'IT communication'},
-  {'name':'Web Developer','department':'IT communication'},
-  {'name':'Engineer ','department':'IT communication'},
-  {'name':'Software Developer ','department':'IT communication'},
-  {'name':'Web Developer','department':'IT communication'},
- 
-]
+  const data = [
+    { 'name': 'Today', 'department': 'React Native ','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
+    { 'name': 'Today', 'department': 'React  Developer','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
+    { 'name': 'Today', 'department': 'React Native Developer','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
+    { 'name': 'Today', 'department': ' Native Developer','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
+    { 'name': 'Today', 'department': 'React Native Developer','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
+
+
+  ]
   return (
+
     <View style={{ flex: 1 }}>
       <Modal visible={visible} animationType={"fade"} transparent={true}>
         <View onTouchStart={() => toggleVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.6)' }}>
@@ -77,7 +79,7 @@ const data =[
         </View>
       </Modal>
       <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
-        <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
+        <View style={{ flexDirection: 'column', width: '100%', height: 200, backgroundColor: '#13A3E1' }}>
           <View style={{ flexDirection: 'row', height: 130 }}>
             <Pressable onPress={() => toggleVisibility()}><Image style={{
               width: 22,
@@ -88,67 +90,42 @@ const data =[
               tintColor: '#fff'
             }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
             <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-              <Pressable onPress={() => navigation.push('JobPosted')}><Image style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
+              <Pressable onPress={() => navigation.push('AppliedUsers')}><Image style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
             </View>
           </View>
-          <Text style={{ textAlign: "center", color: 'white', marginTop: -10, marginBottom: 10, fontSize: 20, }}>Provider</Text>
-          <Text style={{ color: '#fff', fontSize: 23, fontWeight: '500', width: '100%', textAlign: 'center' }}>Good
-            Morning!</Text>
+          <Text style={{ textAlign: "center", color: 'white', marginTop: -10, marginBottom: 10, fontSize: 16, }}>Provider</Text>
+          <Text style={{ color: '#fff', fontSize: 23, fontWeight: '500', width: '100%', textAlign: 'center' }}>Jobs
+            Posted</Text>
 
         </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 30 }}>
-          <View style={{ backgroundColor: '#F0A51E', paddingHorizontal: 35, paddingVertical: 20, borderRadius: 20 }}>
-            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center" }}>Applid </Text>
-            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center", marginTop: -5, marginLeft: -4 }}>Users</Text>
-          </View>
-          <View style={{ backgroundColor: '#F0A51E', paddingHorizontal: 45, paddingVertical: 20, borderRadius: 20 }}>
-            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center" }}>Sent </Text>
-            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center", marginTop: -5, marginLeft: -4 }}>Offers</Text>
-          </View>
-        </View>
-        <View style={{ backgroundColor: '#a6d6ec', paddingVertical: 20, marginTop: 20, marginHorizontal: 30, borderRadius: 20 }}>
-          <Text style={{ textAlign: 'center', color: '#0D25B2', fontSize: 20, fontFamily: 'poppins_bold' }}>  Post job</Text>
-          <Text style={{ textAlign: 'center', fontSize: 14, fontFamily: 'poppins_medium', }}>You can see reports about your </Text>
-          <Text style={{ textAlign: 'center', fontSize: 14, fontFamily: 'poppins_medium', }}>job posts and detailed data  on your Portal</Text>
-          <Text style={{ textAlign: 'center', color: 'white', fontSize: 20, fontFamily: 'poppins_bold', paddingVertical: 10 }}>Post Jobs using your portal</Text>
-          <View style={{ paddingHorizontal: 60 }}>
-            <Text style={{ textAlign: 'center', backgroundColor: 'white', paddingVertical: 8, borderRadius: 20, color: '#0038FF', fontSize: 14, fontFamily: 'poppins_medium' }}>https://www.example.com</Text>
-          </View>
-          <Text style={{ textAlign: 'center', color: '#4E4E4E', fontSize: 13, fontFamily: 'poppins_medium', marginTop: 10 }}>Login to your portal using app credentials </Text>
-          <Text style={{ textAlign: 'center', color: '#4E4E4E', fontSize: 13, fontFamily: 'poppins_medium', }}>(email and password)</Text>
 
-        </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 47, marginTop: 30 }}>
-          <Text style={{ fontSize: 17, fontFamily: 'poppins_bold' }}>posted jobs</Text>
-          <Text style={{ backgroundColor: '#CBCBCB', paddingHorizontal: 16, paddingVertical: 6, fontSize: 13, fontFamily: 'poppins_medium', borderRadius: 20, color: 'rgba(0, 0, 0, 0.81)' }}>Show All</Text>
-        </View>
+
+
         <SafeAreaView style={{ flex: 1 }}>
           <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-            style={{ marginHorizontal: 30, marginTop: 10 }} data={data} renderItem={({ item }) => (
+            style={{ marginHorizontal: 26, marginTop: 10 }} data={data} renderItem={({ item }) => (
               <View
                 style={{
-                  flex: 1,
-                  flexDirection: 'row',
                   margin: 5,
                   backgroundColor: '#fff',
                   borderColor: '#c2c2c2',
                   borderWidth: 1,
-                  height: 50,
                   borderRadius: 25,
-                  elevation: 5,
-                  alignItems: 'center',
-                  paddingHorizontal: 20
+                  paddingVertical:20,
+                  paddingHorizontal:20
                 }}>
-                <Text ellipsizeMode={'tail'} numberOfLines={1}
-                  style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.name}</Text>
-                <Text numberOfLines={1} style={{
-                  fontFamily: 'poppins_light',
-                  fontSize: 9,
-                  marginLeft: 'auto',
-                  width: 110
-                }}>{item.department}</Text>
+                <Text style={{ fontFamily: 'poppins_medium', fontSize: 14, marginLeft: 'auto'}}>{item.name}</Text>
+                <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', fontSize: 16, textAlign: 'center', color:'#F0A51E' }}>{item.department}</Text>
+              <Text style={{ textAlign:"center",fontSize:14,fontFamily:'poppins_medium',paddingVertical:5 }}>{item.category}</Text>
+              <View style={{paddingHorizontal:50}}><Text style={{ backgroundColor:'#D9D9D9',textAlign:"center",paddingVertical:6,borderRadius:20,fontSize:12,fontFamily:'poppins_medium' }}>Salary {item.salary}/month</Text></View>
+              <View style={{ paddingHorizontal:30,marginTop:14 }}>
+                <Text style={{ backgroundColor:'#143D59',textAlign:"center",paddingVertical:6,borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b1}</Text>
+                <Text style={{ backgroundColor:'#207A00',textAlign:"center",paddingVertical:6,borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b2}</Text>
+                <Text style={{ backgroundColor:'#0098FF',textAlign:"center",paddingVertical:6,borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b3}</Text>
               </View>
+              </View>
+
             )}
           />
         </SafeAreaView>
@@ -161,4 +138,4 @@ const data =[
   )
 }
 
-export default PostJob
+export default JobPosted

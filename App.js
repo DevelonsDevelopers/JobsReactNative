@@ -33,6 +33,14 @@ import Offers from './pages/Offers';
 import SocialMarketing from './pages/SocialMarketing';
 import AdvanceSearch from './pages/AdvanceSearch';
 import PostJob from './pages/PostJob';
+import JobPosted from './pages/JobPosted';
+import AppliedUsers from './pages/AppliedUsers';
+import Response from './pages/Response';
+import OfferAccepted from './pages/OfferAccepted';
+import OfferRejected from './pages/OfferRejected';
+import Recommendedjobs from './pages/Recommendedjobs';
+import AppliedJobs from './pages/AppliedJobs';
+import SavedJobs from './pages/SavedJobs';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
@@ -90,6 +98,14 @@ function App() {
                     <Stack.Screen name="SocialMarketing" component={SocialMarketing} options={{title: "SocialMarketing", headerShown: false}}/>
                     <Stack.Screen name="AdvanceSearch" component={AdvanceSearch} options={{title: "AdvanceSearch", headerShown: false}}/>
                     <Stack.Screen name="PostJob" component={PostJob} options={{title: "PostJob", headerShown: false}}/>
+                    <Stack.Screen name="JobPosted" component={JobPosted} options={{title: "JobPosted", headerShown: false}}/>
+                    <Stack.Screen name="AppliedUsers" component={AppliedUsers} options={{title: "AppliedUsers", headerShown: false}}/>
+                    <Stack.Screen name="Response" component={Response} options={{title: "Response", headerShown: false}}/>
+                    <Stack.Screen name="OfferAccepted" component={OfferAccepted} options={{title: "OfferAccepted", headerShown: false}}/>
+                    <Stack.Screen name="OfferRejected" component={OfferRejected} options={{title: "OfferRejected", headerShown: false}}/>
+                    <Stack.Screen name="Recommendedjobs" component={Recommendedjobs} options={{title: "Recommendedjobs", headerShown: false}}/>
+                    <Stack.Screen name="AppliedJobs" component={AppliedJobs} options={{title: "AppliedJobs", headerShown: false}}/>
+                    <Stack.Screen name="SavedJobs" component={SavedJobs} options={{title: "SavedJobs", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
