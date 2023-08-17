@@ -2,6 +2,7 @@ import {FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextI
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AllCategories} from "../API/actions/categoryActions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Home({navigation}) {
 
@@ -10,21 +11,52 @@ function Home({navigation}) {
     const categories = useSelector(state => state.category.categories)
     const loading = useSelector(state => state.category.isLoading)
 
+    const [loginval, setLoginVal] = useState('')
+
     const [visible, setVisible] = useState(false)
     const toggleVisibility = () => setVisible(!visible)
 
     useEffect(() => {
-        dispatch(AllCategories())
-    }, [dispatch, navigation]);
+        if (categories === null || categories === undefined || categories.length === 0){
+            dispatch(AllCategories())
+        }
+    }, [dispatch, navigation, categories]);
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('LOGIN')
+        setLoginVal(value);
+    }
+
+    useEffect(() => {
+        if (loginval === 'true'){
+            isLogin(true)
+        } else {
+            isLogin(false)
+        }
+
+    }, [loginval])
+
+    const Logout = async () => {
+        await AsyncStorage.setItem("LOGIN", 'false')
+        await AsyncStorage.setItem("ID", '')
+        await AsyncStorage.setItem("NAME", '')
+        await AsyncStorage.setItem("EMAIL", '')
+        await AsyncStorage.setItem("USERNAME", '')
+        setLoginVal('false')
+        toggleVisibility()
+    }
 
     return (
         <View style={{flex: 1}}>
             <Modal visible={visible} animationType={"fade"} transparent={true}>
-                <View onTouchStart={() => toggleVisibility()} style={{ flex:1, alignContent:'center', justifyContent:'center', backgroundColor: 'rgba(0,0,0,0.6)' }}>
+                <View style={{ flex:1, alignContent:'center', justifyContent:'center', backgroundColor: 'rgba(0,0,0,0.6)' }}>
                     <View style={{ width:'100%', maxWidth:300, margin:48, elevation:24, borderRadius:15, backgroundColor:'#fff', opacity:1, padding: 20 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center' }}>Menu</Text>
-                            <Image style={{ width: 15, height: 15, marginLeft: 'auto' }} source={require('../assets/close.png')}/>
+                            <Pressable onPress={() => toggleVisibility()}><Image style={{ width: 15, height: 15, marginLeft: 'auto' }} source={require('../assets/close.png')}/></Pressable>
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 10 }}>
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Profile</Text>
@@ -62,10 +94,10 @@ function Home({navigation}) {
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Contact</Text>
                             <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')}/>
                         </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
+                        <Pressable onPress={async () => Logout()}><View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Sign Out</Text>
                             <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')}/>
-                        </View>
+                        </View></Pressable>
                     </View>
                 </View>
             </Modal>
@@ -119,7 +151,7 @@ function Home({navigation}) {
                             marginLeft: 'auto'
                         }} source={require('../assets/recommended_jobs_icon.png')} alt={'Okay'}/>
                     </Pressable>
-                    : <Pressable onPress={() => navigation.push('Profile')} style={{
+                    : <Pressable onPress={() => navigation.push('Login')} style={{
                         backgroundColor: '#13A3E1',
                         borderRadius: 25,
                         alignItems: 'center',
@@ -286,7 +318,7 @@ function Home({navigation}) {
                         marginTop: 2
                     }}>Advance</Text>
                 </View>
-                <View style={{
+                <Pressable onPress={() => navigation.push('Profile')}><View style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
@@ -304,7 +336,7 @@ function Home({navigation}) {
                         color: '#fff',
                         marginTop: 2
                     }}>Profile</Text>
-                </View>
+                </View></Pressable>
                 {/*<View style={{ height: '100%', flex: 1 }}>*/}
 
                 {/*</View>*/}

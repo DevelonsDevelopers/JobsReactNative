@@ -1,12 +1,29 @@
 import {Button, Image, Pressable, ScrollView, Text, TextInput, View} from "react-native";
+import {useState} from "react";
+import {useDispatch} from "react-redux";
+import {LoginAuthentication} from "../API/actions/loginActions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Login({ navigation }) {
+
+    const [show, setShow] = useState(false);
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const dispatch = useDispatch()
+
+    const toggleVisibility = () => setShow(!show)
+
+    const LoginUser = () => {
+        dispatch(LoginAuthentication(navigation, email, password))
+    }
+
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F0A51E'}}>
             <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
                 <Image style={{tintColor: '#000', width: 40, height: 40}}
                        source={require('../assets/back_arrow.png')}/>
-                <Pressable style={{
+                <Pressable onPress={() => navigation.replace('Home')} style={{
                     marginLeft: 'auto',
                     marginRight: 30,
                     paddingHorizontal: 50,
@@ -21,7 +38,7 @@ function Login({ navigation }) {
                     help you meet up
                     your task</Text>
                 <Image style={{ height: 150, width: 150 }} source={require('../assets/login_icon.png')}/>
-                <TextInput style={{
+                <TextInput onChangeText={(text) => setEmail(text)} style={{
                     height: 50,
                     backgroundColor: '#fff',
                     width: '85%',
@@ -31,19 +48,28 @@ function Login({ navigation }) {
                     color: '#626262',
                     elevation: 10
                 }} placeholder={'Enter your Email'} inputMode={'text'}/>
-                <TextInput style={{
-                    height: 50,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 25,
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
                     marginTop: 15,
+                    backgroundColor: '#fff',
+                    elevation: 10,
+                    borderRadius: 25,
+                    width: '85%',
+                    paddingRight: 20
+                }}>
+                <TextInput onChangeText={(text) => setPassword(text)} style={{
+                    height: 50,
                     paddingHorizontal: 20,
                     color: '#626262',
-                    elevation: 10
-                }} placeholder={'Enter your Password'} secureTextEntry={true}/>
+                    flex: 1
+                }} placeholder={'Enter your Password'} secureTextEntry={show}/>
+                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/show.png')}/></Pressable>
+                        : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/hide.png')}/></Pressable>}
+                </View>
                 <Text style={{color: '#000', fontWeight: 400, width: '85%', textAlign: 'right', marginTop: 20}}>Forgot
                     Password?</Text>
-                <Pressable onPress={() => navigation.navigate('Onboarding')} style={{
+                <Pressable onPress={() => LoginUser()} style={{
                     width: '85%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',

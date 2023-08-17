@@ -9,7 +9,7 @@ function Splash({navigation}) {
     useEffect(() => {
 
         sleep(5000).then(() => {
-            navigation.replace('UserType')
+            navigation.replace('Home')
         });
     });
 
