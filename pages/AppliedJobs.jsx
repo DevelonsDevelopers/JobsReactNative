@@ -11,7 +11,7 @@ const data = [
   { "name": "Youtube" }
 ]
 
-function Jobs({ navigation }) {
+function AppliedJobs ({ navigation }) {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
       <View style={{ backgroundColor: '#EAEAEA' }}>
@@ -24,21 +24,17 @@ function Jobs({ navigation }) {
             tintColor: '#000'
           }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
           <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-            <Pressable onPress={() => navigation.push('Recommendedjobs')}><Image
+            <Pressable onPress={() => navigation.push('SavedJobs')}><Image
               style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
           </View>
         </View>
-        <View>
-          <Text style={{
-            fontSize: 18,
-            fontFamily: 'poppins_bold',
-            width: '100%',
-            paddingHorizontal: 30,
-            textAlign: 'left',
-            marginVertical: 20,
-            padding: 0
-          }}>Jobs</Text>
+        <View style={{ flexDirection:'row',justifyContent:'space-between',paddingHorizontal:35,marginVertical:30 }}>
+        <Pressable onPress={() => navigation.push('SavedJobs')}>
+          <Text style={{ fontSize:17,fontFamily:'poppins_medium' }}>Saved jobs</Text></Pressable>
+        
+          <Text style={{ fontSize:17,fontFamily:'poppins_bold',borderBottomWidth:3 }}> Applied Jobs</Text>
+
         </View>
         <SafeAreaView>
           <FlatList nestedScrollEnabled={false} scrollEnabled={false}
@@ -110,4 +106,4 @@ function Jobs({ navigation }) {
   )
 }
 
-export default Jobs
+export default AppliedJobs

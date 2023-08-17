@@ -11,7 +11,7 @@ const data = [
   { "name": "Youtube" }
 ]
 
-function Jobs({ navigation }) {
+function Search ({ navigation }) {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
       <View style={{ backgroundColor: '#EAEAEA' }}>
@@ -24,22 +24,16 @@ function Jobs({ navigation }) {
             tintColor: '#000'
           }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
           <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-            <Pressable onPress={() => navigation.push('Recommendedjobs')}><Image
+            <Pressable onPress={() => navigation.push('AdvanceSearch')}><Image
               style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
           </View>
         </View>
         <View>
-          <Text style={{
-            fontSize: 18,
-            fontFamily: 'poppins_bold',
-            width: '100%',
-            paddingHorizontal: 30,
-            textAlign: 'left',
-            marginVertical: 20,
-            padding: 0
-          }}>Jobs</Text>
-        </View>
+        <TextInput style={{ backgroundColor: '#fff', marginHorizontal: 30, height: 50, borderRadius: 25, paddingHorizontal: 20, marginTop: 30 }} placeholder={'Search'} />
+        <Image style={{ position: "relative", top: -35.5, left: 335, width: 25, height: 25 }} source={require('../assets/search-interface-symbol.png')} />
+        <Text style={{ fontFamily: 'poppins_medium', fontSize: 20, fontWeight: '800', width: '100%', textAlign: 'center', marginTop: 0, padding: 0 }}>History</Text>
+    </View>
         <SafeAreaView>
           <FlatList nestedScrollEnabled={false} scrollEnabled={false}
             style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
@@ -110,4 +104,4 @@ function Jobs({ navigation }) {
   )
 }
 
-export default Jobs
+export default Search
