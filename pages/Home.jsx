@@ -1,4 +1,4 @@
-import {FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
+import {ActivityIndicator, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AllCategories} from "../API/actions/categoryActions";
@@ -183,11 +183,13 @@ function Home({navigation}) {
                 </View>
                 <SafeAreaView style={{flex: 1}}>
                     {loading ?
-                        <Text style={{ flex: 1, textAlign: 'center' }}>Loading</Text>
-                        :
-                    <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                              style={{marginHorizontal: 30, marginTop: 10}} data={categories} renderItem={({item}) => (
-                        <View
+                        <ActivityIndicator size={60} color="#13A3E1" />
+                       
+                       :
+                       <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                       style={{marginHorizontal: 30, marginTop: 10}} data={categories} renderItem={({item}) => (
+                          
+                           <View
                             style={{
                                 flex: 1,
                                 flexDirection: 'column',
@@ -210,6 +212,7 @@ function Home({navigation}) {
                               numColumns={2}/>
                     }
                 </SafeAreaView>
+               
                 <View
                     style={{
                         flex: 1,
