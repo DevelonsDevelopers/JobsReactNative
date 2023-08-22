@@ -1,9 +1,9 @@
 import {ALL_CATEGORIES, ERROR, LOADING, SUCCESS} from "../../Utils/Constants";
 
-const category = (state = {isLoading: true, success: false, error: false, categories: []}, action) => {
+const category = (state = {isLoading: true, success: false, error: false}, action) => {
     switch (action.type) {
         case LOADING:
-            return {...state, isLoading: true}
+            return {...state, isLoading: true, success: true, error: false}
         case SUCCESS:
             return {...state, isLoading: false, success: true, error: false}
         case ERROR:

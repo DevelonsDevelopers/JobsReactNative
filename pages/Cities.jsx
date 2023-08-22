@@ -1,8 +1,10 @@
 import {Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView} from 'react-native'
 import {View} from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
 import Categories from './Categories'
 import Resume from './Resume'
+import {useDispatch, useSelector} from "react-redux";
+import {AllCities} from "../API/actions/cityActions";
 
 const data = [
     {"city": "Lahore", "country": 'Pakistan'},
@@ -22,6 +24,18 @@ const data = [
 ]
 
 function Cities({navigation}) {
+
+    const cities = useSelector(state => state.city.cities)
+    const isLoading = useSelector(state => state.city.isLoading)
+    const success = useSelector(state => state.city.success)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!cities){
+            dispatch(AllCities())
+        }
+    }, [dispatch, cities]);
+
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
         <View style={{backgroundColor: '#F1F1F1'}}>

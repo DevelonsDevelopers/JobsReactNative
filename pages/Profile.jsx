@@ -1,9 +1,36 @@
 import {FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchSeeker} from "../API/actions/seekerActions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Profile({ navigation }) {
 
-    const [login, isLogin] = useState(false);
+    const seeker = useSelector(state => state.seeker.seeker)
+    const dispatch = useDispatch();
+    const [ID, setID] = useState()
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
+
+    useEffect(() => {
+        if (ID) {
+            if (!seeker) {
+                dispatch(fetchSeeker(ID))
+            } else if ((seeker.id).toString() !== ID){
+                dispatch(fetchSeeker(ID))
+            }
+        }
+    }, [dispatch, navigation, seeker, ID]);
+
+    useEffect(() => {
+        console.log(seeker)
+    }, [seeker])
 
     return (
         <View style={{ flex: 1 }}>
@@ -23,12 +50,12 @@ function Profile({ navigation }) {
                                    source={require('../assets/logo.png')} alt={'Okay'}/>
                         </View>
                     </View>
-                    <Text style={{color: '#fff', fontSize: 35, fontFamily: 'poppins_bold', width: '100%', textAlign: 'center', marginTop: 10}}>Tayyab</Text>
+                    <Text style={{color: '#fff', fontSize: 35, fontFamily: 'poppins_bold', width: '100%', textAlign: 'center', marginTop: 10}}>{seeker?.name}</Text>
                 </View>
                 <View style={{ backgroundColor: '#fff', paddingVertical: 20, marginHorizontal: 10, marginRight: 30, marginLeft: 30, borderRadius: 30, marginTop: -20 }}>
-                    <Text style={{color: '#000', fontSize: 16, fontFamily: 'poppins_medium', width: '100%', textAlign: 'center'}}>+923001234567</Text>
-                    <Text style={{color: '#000', fontSize: 15, fontFamily: 'poppins_semibold', width: '100%', textAlign: 'center'}}>tayyab@email.com</Text>
-                    <Text style={{color: '#000', fontSize: 14, fontFamily: 'poppins_light', width: '100%', textAlign: 'center'}}>Lahore</Text>
+                    <Text style={{color: '#000', fontSize: 16, fontFamily: 'poppins_medium', width: '100%', textAlign: 'center'}}>{seeker?.phone}</Text>
+                    <Text style={{color: '#000', fontSize: 15, fontFamily: 'poppins_semibold', width: '100%', textAlign: 'center'}}>{seeker?.email}</Text>
+                    <Text style={{color: '#000', fontSize: 14, fontFamily: 'poppins_light', width: '100%', textAlign: 'center'}}>{seeker?.address}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', backgroundColor: '#13A3E1', paddingVertical: 20, marginHorizontal: 10, marginRight: 30, marginLeft: 30, borderRadius: 30, marginTop: 20 }}>
                     <View style={{ flex: 1, paddingVertical: 20 }}>
@@ -42,9 +69,9 @@ function Profile({ navigation }) {
                     </View>
                 </View>
                 <View style={{ flexDirection: 'column', backgroundColor: '#F0A51E', paddingHorizontal: 20, marginHorizontal: 10, marginRight: 30, marginLeft: 30, borderRadius: 30, marginTop: 20 }}>
-                    <View style={{ flex: 1, paddingVertical: 10, marginTop: 10 }}>
+                    <Pressable onPress={() => navigation.push('AccountInfo')}><View style={{ flex: 1, paddingVertical: 10, marginTop: 10 }}>
                         <Text style={{color: '#000', fontSize: 15, fontFamily: 'poppins_semibold', width: '100%', textAlign: 'center'}}>Manage Your Resume</Text>
-                    </View>
+                    </View></Pressable>
                     <View style={{ backgroundColor: '#000', height: 3 }}/>
                     <View style={{ flex: 1, paddingVertical: 10, marginBottom: 10 }}>
                         <Text style={{color: '#000', fontSize: 15, fontFamily: 'poppins_semibold', width: '100%', textAlign: 'center'}}>My History</Text>

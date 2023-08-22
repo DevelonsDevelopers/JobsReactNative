@@ -1,8 +1,8 @@
-import {ERROR, GET_SEEKER, LOADING, SUCCESS} from "../../Utils/Constants";
+import {ERROR, GET_SEEKER, LOADING, SUCCESS, UPDATE_SEEKER} from "../../Utils/Constants";
 import {defaults} from "axios";
 
-const seeker = (state = {isLoading: true, success: false, error: false, seekers: []}, action) => {
-    switch (action){
+const seeker = (state = {isLoading: true, success: false, error: false, seekers: [], seeker: null}, action) => {
+    switch (action.type){
         case LOADING:
             return {...state, isLoading: true, success: false, error:false}
         case SUCCESS:
@@ -10,7 +10,9 @@ const seeker = (state = {isLoading: true, success: false, error: false, seekers:
         case ERROR:
             return {...state, isLoading: false, success: false, error: true}
         case GET_SEEKER:
-            return {...state, seeker: action.payload.seeker}
+            return {...state, seeker: action.payload.data}
+        case UPDATE_SEEKER:
+            return {...state, seeker: action.payload.data}
         default:
             return state
     }

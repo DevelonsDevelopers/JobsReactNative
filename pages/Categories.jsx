@@ -1,12 +1,20 @@
 import {Image, TextInput, Text, Pressable, ScrollView, FlatList, SafeAreaView} from 'react-native'
-import React from 'react'
+import React, {useEffect} from 'react'
 import {View} from 'react-native'
 import Termsandconditions from './Termsandconditions'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {AllCategories} from "../API/actions/categoryActions";
 
 function Categories({navigation}) {
 
     const categories = useSelector(state => state.category.categories)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!categories){
+            dispatch(AllCategories())
+        }
+    }, [dispatch, navigation, categories]);
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
