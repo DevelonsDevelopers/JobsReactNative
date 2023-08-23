@@ -1,4 +1,4 @@
-import {FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
+import {ActivityIndicator, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AllCategories, FeaturedCategories} from "../API/actions/categoryActions";
@@ -183,11 +183,13 @@ function Home({navigation}) {
                 </View>
                 <SafeAreaView style={{flex: 1}}>
                     {loading ?
-                        <Text style={{ flex: 1, textAlign: 'center' }}>Loading</Text>
-                        :
-                    <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                              style={{marginHorizontal: 30, marginTop: 10}} data={categories} renderItem={({item}) => (
-                        <View
+                        <ActivityIndicator size={60} color="#13A3E1" />
+                       
+                       :
+                       <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                       style={{marginHorizontal: 30, marginTop: 10}} data={categories} renderItem={({item}) => (
+                          
+                           <View
                             style={{
                                 flex: 1,
                                 flexDirection: 'column',
@@ -210,6 +212,7 @@ function Home({navigation}) {
                               numColumns={2}/>
                     }
                 </SafeAreaView>
+               
                 <View
                     style={{
                         flex: 1,
@@ -279,7 +282,7 @@ function Home({navigation}) {
                             alignItems: 'center',
                             borderRadius: 25
                         }}>
-                        <Text style={{fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10, textAlign: 'center', color: '#13A3E1'}}>{"Browse\nBy\nCities"}</Text>
+                        <Text style={{fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10, textAlign: 'center', color: '#13A3E1'}}>{"Browse By\nCities"}</Text>
                     </Pressable>
                     <Pressable onPress={() => navigation.push('Companies')}
                         style={{
@@ -294,7 +297,7 @@ function Home({navigation}) {
                             alignItems: 'center',
                             borderRadius: 25
                         }}>
-                        <Text style={{fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse\nBy\nCompanies"}</Text>
+                        <Text style={{fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCompanies"}</Text>
                     </Pressable>
                 </View>
                 <View style={{height: 90}}/>
@@ -305,8 +308,7 @@ function Home({navigation}) {
                 height: 60,
                 borderRadius: 30,
                 marginHorizontal: 20,
-                marginBottom: 15,
-                alignItems: 'center',
+                marginBottom: 15,            
                 paddingHorizontal: 20
             }}>
                 <View style={{
@@ -314,12 +316,14 @@ function Home({navigation}) {
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                   
+                    marginLeft:-6,
                 }}>
                     <Image style={{
-                        width: 20,
+                        width: 15,
                         height: 20,
-                        tintColor: '#fff'
+                        tintColor: '#fff',
+                        marginLeft:20,
                     }} source={require('../assets/saveIcon.png')} alt={'Okay'}/>
                     <Text numberOfLines={1}
                           style={{fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2}}>Saved
@@ -330,12 +334,12 @@ function Home({navigation}) {
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    marginLeft:-6,
                 }}>
                     <Image style={{
-                        width: 20,
+                        width: 25,
                         height: 20,
-                        tintColor: '#fff'
+                        tintColor: '#fff',marginLeft:13,
                     }} source={require('../assets/cvBuilderIcon.png')} alt={'Okay'}/>
                     <Text numberOfLines={1}
                           style={{fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2}}>CV
@@ -346,28 +350,28 @@ function Home({navigation}) {
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    alignItems: 'center'
                 }}>
                     <Image style={{
-                        width: 20,
-                        height: 20,
+                        width: 40,
+                        height: 25,
                         tintColor: '#fff'
                     }} source={require('../assets/homeIcon.png')} alt={'Okay'}/>
                     <Text numberOfLines={1}
-                          style={{fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2}}>Home</Text>
-                    <View style={{height: 4, width: 35, borderRadius: 2, backgroundColor: '#F0A51E'}}/>
+                          style={{fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2,marginLeft:3}}>Home</Text>
+                    <View style={{height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E',marginLeft:-4}}/>
                 </View>
                 <View style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    marginLeft:-4,
                 }}>
                     <Image style={{
                         width: 20,
                         height: 20,
-                        tintColor: '#fff'
+                        tintColor: '#fff',
+                        marginLeft:10
                     }} source={require('../assets/searchIcon.png')} alt={'Okay'}/>
                     <Text numberOfLines={1} style={{
                         fontFamily: 'poppins_medium',
@@ -381,32 +385,21 @@ function Home({navigation}) {
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
+                    marginLeft:-8,                }}>
                     <Image style={{
                         width: 20,
                         height: 20,
-                        tintColor: '#fff'
+                        tintColor: '#fff',
+                        marginLeft:2
                     }} source={require('../assets/profileIcon.png')} alt={'Okay'}/>
                     <Text numberOfLines={1} style={{
                         fontFamily: 'poppins_medium',
-                        fontSize: 9,
+                        fontSize: 10,
                         color: '#fff',
                         marginTop: 2
                     }}>Profile</Text>
                 </View></Pressable>
-                {/*<View style={{ height: '100%', flex: 1 }}>*/}
-
-                {/*</View>*/}
-                {/*<View style={{ height: '100%', flex: 1 }}>*/}
-
-                {/*</View>*/}
-                {/*<View style={{ height: '100%', flex: 1 }}>*/}
-
-                {/*</View>*/}
-                {/*<View style={{ height: '100%', flex: 1 }}>*/}
-
-                {/*</View>*/}
+            
             </View>
         </View>
     )
