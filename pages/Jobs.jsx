@@ -1,8 +1,11 @@
 import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView } from "react-native";
-import React from 'react'
+import React, {useEffect} from 'react'
 import { View } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import Resume from "./Resume";
+import {useDispatch, useSelector} from "react-redux";
+import {AllCities} from "../API/actions/cityActions";
+import {AllJobs} from "../API/actions/jobActions";
 
 const data = [
   { "name": "Facebook" },
@@ -12,6 +15,18 @@ const data = [
 ]
 
 function Jobs({ navigation }) {
+
+  const jobs = useSelector(state => state.job.jobs)
+  const isLoading = useSelector(state => state.job.isLoading)
+  const success = useSelector(state => state.job.success)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (!jobs){
+      dispatch(AllJobs())
+    }
+  }, [dispatch, jobs]);
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
       <View style={{ backgroundColor: '#EAEAEA' }}>
@@ -42,7 +57,7 @@ function Jobs({ navigation }) {
         </View>
         <SafeAreaView>
           <FlatList nestedScrollEnabled={false} scrollEnabled={false}
-            style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
+            style={{ marginHorizontal: 0, marginTop: 10 }} data={jobs} renderItem={({ item }) => (
               <View style={{
                 marginLeft: 25,
                 marginRight: 25,
@@ -65,26 +80,26 @@ function Jobs({ navigation }) {
                     fontFamily: 'poppins_medium',
                     borderRadius: 5
                   }}>NEW</Text>
-                  <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13 }}>Today</Text>
+                  <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13 }}>{item.date}</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
                   <View style={{ flex: 0.8 }}>
-                    <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', marginTop: 5, fontSize: 15 }}>Need Android Developer</Text>
-                    <Text style={{ fontFamily: 'poppins_regular', marginTop: 0, fontSize: 12 }}>Facebook</Text>
+                    <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', marginTop: 5, fontSize: 15 }}>{item.title}</Text>
+                    <Text style={{ fontFamily: 'poppins_regular', marginTop: 0, fontSize: 12 }}>{item.company_name}</Text>
                   </View>
                   <Image style={{ width: 20, height: 20, marginLeft: 'auto', marginTop: 10 }} source={require('../assets/bookmarkIcon.png')} />
                 </View>
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                   <Text style={{
                     fontFamily: 'poppins_bold',
-                    
+
                     fontSize: 16,
-                  }}>IT & Communications</Text>
-                  <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13 }}>Bachelors</Text>
+                  }}>{item.category_name}</Text>
+                  <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13 }}>{item.qualification}</Text>
                 </View>
                 <View style={{ paddingHorizontal:64, }}>
                 <Text style={{  fontFamily:'poppins_medium',fontSize:13, textAlign: 'center',marginTop: 4, backgroundColor: '#d9d9d9', paddingHorizontal:10,paddingVertical:2,borderRadius:10, margin:'auto', }} >
-                Salary $5000/month 
+                Salary {item.salary}
                 </Text>
                 </View>
 
@@ -97,8 +112,8 @@ function Jobs({ navigation }) {
                     fontSize: 15,
                     fontFamily: 'poppins_medium',
                     borderRadius: 14
-                  }}>Full time</Text>
-                  <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13,  paddingTop: 6, }}>Lahore</Text>
+                  }}>{item.type}</Text>
+                  <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13,  paddingTop: 6, }}>{item.city_name}</Text>
                 </View>
 
 

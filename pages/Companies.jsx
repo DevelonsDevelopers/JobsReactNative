@@ -1,7 +1,10 @@
 import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView} from "react-native";
-import React from 'react'
+import React, {useEffect} from 'react'
 import {View} from 'react-native'
 import {useNavigation} from "@react-navigation/native";
+import {useDispatch, useSelector} from "react-redux";
+import {AllCities} from "../API/actions/cityActions";
+import {AllCompanies} from "../API/actions/companyActions";
 
 const data = [
     {"name": "Facebook"},
@@ -11,6 +14,18 @@ const data = [
 ]
 
 function Companies({navigation}) {
+
+    const companies = useSelector(state => state.company.companies)
+    const isLoading = useSelector(state => state.company.isLoading)
+    const success = useSelector(state => state.company.success)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (!companies){
+            dispatch(AllCompanies())
+        }
+    }, [dispatch, companies]);
+
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
             <View style={{backgroundColor: '#EAEAEA'}}>
@@ -51,7 +66,7 @@ function Companies({navigation}) {
                 </View>
                 <SafeAreaView>
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                        style={{marginHorizontal: 0, marginTop: 10}} data={data} renderItem={({item}) => (
+                        style={{marginHorizontal: 0, marginTop: 10}} data={companies} renderItem={({item}) => (
                         <View style={{
                             marginLeft: 25,
                             marginRight: 25,

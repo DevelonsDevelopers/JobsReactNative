@@ -1,4 +1,4 @@
-import {ALL_CATEGORIES, ERROR, LOADING, SUCCESS} from "../../Utils/Constants";
+import {ALL_CATEGORIES, ERROR, FEATURED_CATEGORIES, LOADING, SUCCESS} from "../../Utils/Constants";
 
 const category = (state = {isLoading: true, success: false, error: false}, action) => {
     switch (action.type) {
@@ -10,6 +10,8 @@ const category = (state = {isLoading: true, success: false, error: false}, actio
             return {...state, isLoading: false, success: false, error: true}
         case ALL_CATEGORIES:
             return {...state, categories: action.payload.categories}
+        case FEATURED_CATEGORIES:
+            return {...state, featured_categories: action.payload.featured_categories}
         default:
             return state
     }

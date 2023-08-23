@@ -1,14 +1,14 @@
 import {FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {AllCategories} from "../API/actions/categoryActions";
+import {AllCategories, FeaturedCategories} from "../API/actions/categoryActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Home({navigation}) {
 
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
-    const categories = useSelector(state => state.category.categories)
+    const categories = useSelector(state => state.category.featured_categories)
     const loading = useSelector(state => state.category.isLoading)
 
     const [loginval, setLoginVal] = useState('')
@@ -18,7 +18,7 @@ function Home({navigation}) {
 
     useEffect(() => {
         if (!categories){
-            dispatch(AllCategories())
+            dispatch(FeaturedCategories())
         }
     }, [dispatch, navigation, categories]);
 

@@ -23,6 +23,7 @@ export const login = (email, password) => API.post('/seekerAuth/login', {
 
 //CATEGORIES API CALL ============================
 export const fetchAllCategories = () => API.get(`/categories/all`)
+export const fetchFeaturedCategories = () => API.get(`/categories/featured`)
 
 
 //SEEKERS API CALL ===============================
@@ -43,4 +44,14 @@ export const updateSeeker = (name, city, country, username, phone, address, dob,
 //CITIES API CALL
 export const fetchAllCities = () => API.get(`/cities/all`)
 
+
+//COUNTRIES API CALL
 export const fetchAllCountries = () => API.get('/countries/all')
+
+
+//COMPANIES API CALL
+export const fetchAllCompanies = () => API.get('/companies/all')
+
+
+//JOBS API CALL
+export const fetchAllJobs = () => API.get('/jobs/all')

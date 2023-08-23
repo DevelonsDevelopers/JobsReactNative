@@ -6,5 +6,7 @@ import login from './login'
 import seeker from './seeker'
 import city from './city'
 import country from './country'
+import company from "./company";
+import job from "./job";
 
-export default combineReducers({ category, register, login, seeker, city, country })
+export default combineReducers({ category, register, login, seeker, city, country, company, job })

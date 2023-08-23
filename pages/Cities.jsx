@@ -90,17 +90,17 @@ function Cities({navigation}) {
                 marginTop: 9
             }}>
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                    style={{marginHorizontal: 0, marginTop: 10}} data={data} renderItem={({item}) => (
+                    style={{marginHorizontal: 0, marginTop: 10}} data={cities} renderItem={({item}) => (
                     <View>
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Text style={{fontSize: 15, fontWeight: 600, fontFamily: 'poppins_semibold'}}>{item.city}</Text>
+                            <Text style={{fontSize: 15, fontWeight: 600, fontFamily: 'poppins_semibold'}}>{item.name}</Text>
                             <Text style={{
                                 marginTop: 4,
                                 fontSize: 15,
                                 fontFamily: 'poppins_light',
                                 marginHorizontal: 15
                             }}>-</Text>
-                            <Text style={{fontSize: 12, fontWeight: 200, fontFamily: 'poppins_light'}}>{item.country}</Text>
+                            <Text style={{fontSize: 12, fontWeight: 200, fontFamily: 'poppins_light'}}>{item.country_name}</Text>
                         </View>
                         <View style={{
                             backgroundColor: '#777777',

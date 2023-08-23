@@ -10,6 +10,7 @@ export const LOGIN = "LOGIN"
 
 // CATEGORIES:=====
 export const ALL_CATEGORIES = "ALL_CATEGORIES";
+export const FEATURED_CATEGORIES = "FEATURED_CATEGORIES";
 export const GET_CATEGORY = "GET_CATEGORY";
 
 
