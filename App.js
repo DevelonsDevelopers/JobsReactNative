@@ -43,6 +43,7 @@ import AppliedJobs from './pages/AppliedJobs';
 import SavedJobs from './pages/SavedJobs';
 import Search from './pages/Search';
 import RecommendedUser from './pages/RecommendedUser';
+import Test from './pages/Test';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
@@ -111,6 +112,7 @@ function App() {
                     <Stack.Screen name="SavedJobs" component={SavedJobs} options={{title: "SavedJobs", headerShown: false}}/>
                     <Stack.Screen name="Search" component={Search} options={{title: "Search", headerShown: false}}/>
                     <Stack.Screen name="RecommendedUser" component={RecommendedUser} options={{title: "RecommendedUser", headerShown: false}}/>
+                    <Stack.Screen name="Test" component={Test} options={{title: "Test", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
