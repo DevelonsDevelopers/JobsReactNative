@@ -6,6 +6,7 @@ import Resume from "./Resume";
 import {useDispatch, useSelector} from "react-redux";
 import {AllCities} from "../API/actions/cityActions";
 import {AllJobs} from "../API/actions/jobActions";
+import moment from "moment";
 
 const data = [
   { "name": "Facebook" },
@@ -80,7 +81,7 @@ function Jobs({ navigation }) {
                     fontFamily: 'poppins_medium',
                     borderRadius: 5
                   }}>NEW</Text>
-                  <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13 }}>{item.date}</Text>
+                  <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13 }}>{moment(item.date).fromNow()}</Text>
                 </View>
                 <View style={{ flex: 1, flexDirection: 'row' }}>
                   <View style={{ flex: 0.8 }}>

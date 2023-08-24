@@ -55,3 +55,7 @@ export const fetchAllCompanies = () => API.get('/companies/all')
 
 //JOBS API CALL
 export const fetchAllJobs = () => API.get('/jobs/all')
+
+
+//INTERACTIONS API CALL
+export const recordInteraction = () => API.post()
