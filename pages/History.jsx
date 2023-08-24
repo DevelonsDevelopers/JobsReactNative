@@ -1,88 +1,95 @@
-import { Image, Text, TextInput } from 'react-native'
-import React from 'react'
-import { Pressable, View } from 'react-native'
-import Contactus from './Contactus'
+import {Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView} from 'react-native'
+import {View} from 'react-native'
+import React, {useEffect} from 'react'
+import Categories from './Categories'
+import Resume from './Resume'
+import {useDispatch, useSelector} from "react-redux";
+import {AllCities} from "../API/actions/cityActions";
+
+const data = [
+    {"city": "Lahore", "country": 'Pakistan'},
+    {"city": "Sydney", "country": 'Australia'},
+    {"city": "Delhi", "country": 'India'},
+    {"city": "Beijing", "country": 'China'},
+    {"city": "Al Ain", "country": 'UAE'},
+    {"city": "London", "country": 'UK'},
+    {"city": "New York", "country": 'USA'},
+    {"city": "Lahore", "country": 'Pakistan'},
+    {"city": "Sydney", "country": 'Australia'},
+    {"city": "Delhi", "country": 'India'},
+    {"city": "Beijing", "country": 'China'},
+    {"city": "Al Ain", "country": 'UAE'},
+    {"city": "London", "country": 'UK'},
+    {"city": "New York", "country": 'USA'}
+]
 
 const History = ({navigation}) => {
   return (
-    <View style={{ backgroundColor: '#EAEAEA' }}>
-    <View style={{ display: "flex", flexDirection: "row", marginTop: 40 }}>
-        <Image style={{ width: 40, height: 25, marginLeft: 25, marginTop: 15, alignSelf: 'flex-start' }} source={require('../assets/back_arrow.png')} />
-        <Pressable onPress={() => navigation.push('PostJob')}>
-        <Image style={{ width: 160, height: 50, marginLeft: 60 }} source={require('../assets/logo.png')} />
-        </Pressable>
-        <Image style={{ width: 30, height: 30, marginLeft: 65, marginTop: 12 }} source={require('../assets/home.png')} />
-    </View>
-    <View>
-        <TextInput style={{ backgroundColor: '#fff', marginHorizontal: 30, height: 50, borderRadius: 25, paddingHorizontal: 20, marginTop: 30 }} placeholder={'Search'} />
-        <Image style={{ position: "relative", top: -35.5, left: 335, width: 25, height: 25 }} source={require('../assets/search-interface-symbol.png')} />
-        <Text style={{ fontFamily: 'poppins_medium', fontSize: 20, fontWeight: '800', width: '100%', textAlign: 'center', marginTop: 0, padding: 0 }}>History</Text>
-    </View>
-    <View style={{ backgroundColor: '#fff', borderRadius: 5, padding: 23, borderTopLeftRadius: 40, borderTopRightRadius: 40, marginTop: 9 }}>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 0 }}>
-            <Text style={{ fontSize: 17, fontWeight: 600, fontFamily: 'poppins_medium' }}>Android</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 200, fontFamily: 'poppins_light' }}>1 Day Ago</Text>
+   
+        <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
+        <View style={{backgroundColor: '#F1F1F1'}}>
+            <View style={{flexDirection: 'row', height: 90}}>
+                <Pressable onPress={() => toggleVisibility()}><Image style={{
+                    width: 22,
+                    height: 20,
+                    marginTop: 70,
+                    marginLeft: 30,
+                    tintColor: '#000'
+                }} source={require('../assets/back_arrow.png')} alt={'Okay'}/></Pressable>
+                <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                    <Image
+                        style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
+                        source={require('../assets/logo.png')} alt={'Okay'}/>
+                </View>
+            </View>
+            <View>
+                <TextInput style={{
+                    backgroundColor: '#fff',
+                    marginHorizontal: 30,
+                    height: 50,
+                    borderRadius: 25,
+                    paddingHorizontal: 20,
+                    marginTop: 30,
+                    borderColor: 'black',
+                    fontSize: 17,
+                    elevation: 10
+                }} placeholder={'Search'}/>
+                <Text style={{
+                    fontSize: 18,
+                    fontFamily: 'poppins_bold',
+                    width: '100%',
+                    textAlign: 'center',
+                    marginVertical: 20,
+                    padding: 0
+                }}>Browse by History</Text>
+            </View>
+            <SafeAreaView style={{
+                backgroundColor: '#fff',
+                borderRadius: 5,
+                padding: 23,
+                borderTopLeftRadius: 40,
+                borderTopRightRadius: 40,
+                marginTop: 9
+            }}>
+                <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                    style={{marginHorizontal: 0, marginTop: 10}} data={data} renderItem={({item}) => (
+                    <View>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style={{fontSize: 15, fontWeight: 600, fontFamily: 'poppins_semibold'}}>{item.city}</Text>
+                           
+                            <Text style={{fontSize: 12, fontWeight: 200, fontFamily: 'poppins_light' ,marginLeft:'auto',marginRight:10}}>{item.country}</Text>
+                        </View>
+                        <View style={{
+                            backgroundColor: '#777777',
+                            height: 0.5,
+                            marginHorizontal: 10,
+                            marginVertical: 5
+                        }}></View>
+                    </View>
+                )}/>
+            </SafeAreaView>
         </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 9, marginLeft: 6 }}>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-            <Text style={{ fontSize: 17, fontWeight: 600, fontFamily: 'poppins_medium' }}>React</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 218, fontFamily: 'poppins_light' }}>2 Day Ago</Text>
-        </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 10, marginLeft: 6 }}>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-            <Text style={{ fontSize: 17, fontWeight: 600, fontFamily: 'poppins_medium' }}>React Native</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 152, fontFamily: 'poppins_light' }}>2 Day Ago</Text>
-        </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 10, marginLeft: 6 }}>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-            <Text style={{ fontSize: 19, fontWeight: 600, fontFamily: 'poppins_medium' }}>React.Js</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 182, fontFamily: 'poppins_light' }}>3 Day Ago</Text>
-        </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 10, marginLeft: 6 }}>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-            <Text style={{ fontSize: 17, fontWeight: 600, fontFamily: 'poppins_medium' }}>Web</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 229, fontFamily: 'poppins_light' }}>5 Day Ago</Text>
-        </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 10, marginLeft: 6 }}>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-            <Text style={{ fontSize: 17, fontWeight: 600, fontFamily: 'poppins_medium' }}>React API</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 183, fontFamily: 'poppins_light' }}>A Week Ago</Text>
-        </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 10, marginLeft: 6 }}>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-            <Text style={{ fontSize: 17, fontWeight: 600, fontFamily: 'poppins_medium' }}>API</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 243, fontFamily: 'poppins_light' }}>2 Week Ago</Text>
-        </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 10, marginLeft: 6 }}>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-            <Text style={{ fontSize: 17, fontWeight: 600, fontFamily: 'poppins_medium' }}>Node</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 222, fontFamily: 'poppins_light' }}>3 Week Ago</Text>
-        </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 10, marginLeft: 6 }}>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-            <Text style={{ fontSize: 17, fontWeight: 600, fontFamily: 'poppins_medium' }}>Node.Js</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 198, fontFamily: 'poppins_light' }}>1 Month Ago</Text>
-        </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 10, marginLeft: 6 }}>
-        </View>
-        <View style={{ display: 'flex', flexDirection: 'row', marginTop: 15 }}>
-            <Text style={{ fontSize: 17, fontWeight: 600, fontFamily: 'poppins_medium' }}>Developer</Text>
-            <Text style={{ marginTop: 4, fontSize: 13, fontWeight: 200, marginLeft: 176, fontFamily: 'poppins_light' }}>2 Month Ago</Text>
-        </View>
-        <View style={{ backgroundColor: '#CCCCCC', width: 358, height: 2, marginTop: 10, marginLeft: 6 }}>
-        </View>
-        
-        
-    </View>
-</View>
+        </ScrollView>
   )
 }
 

@@ -48,6 +48,7 @@ const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
 const Stack = createNativeStackNavigator();
 
+
 function App() {
 
     let [fontLoad] = useFonts({

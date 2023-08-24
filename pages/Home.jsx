@@ -258,7 +258,7 @@ function Home({navigation}) {
                                 fontSize: 9,
                                 marginLeft: 'auto',
                                 width: 110
-                            }}>{item.name}</Text>
+                            }}>{item.description}</Text>
                         </View>
                     )}
                     />
@@ -267,37 +267,39 @@ function Home({navigation}) {
                     flex: 1,
                     flexDirection: 'row',
                     marginVertical: 20,
-                    marginHorizontal: 15
+                    marginHorizontal: 35
                 }}>
                     <Pressable onPress={() => navigation.push('Cities')}
                         style={{
                             flex: 0.5,
                             flexDirection: 'column',
                             marginRight: 7,
-                            backgroundColor: '#fff',
-                            borderColor: '#000',
-                            borderWidth: 0.5,
-                            height: 110,
+                            backgroundColor: 'white',
+                             borderColor: '#c2c2c2',
+                            // borderWidth: 0.30,
+                            elevation: 5,
+                            paddingVertical:19,
                             justifyContent: 'center',
                             alignItems: 'center',
                             borderRadius: 25
                         }}>
-                        <Text style={{fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10, textAlign: 'center', color: '#13A3E1'}}>{"Browse By\nCities"}</Text>
+                        <Text style={{fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1'}}>{"Browse By\nCities"}</Text>
                     </Pressable>
                     <Pressable onPress={() => navigation.push('Companies')}
                         style={{
                             flex: 0.5,
                             flexDirection: 'column',
-                            marginLeft: 7,
-                            backgroundColor: '#fff',
-                            borderColor: '#000',
-                            borderWidth: 0.5,
-                            height: 110,
+                            // marginLeft: 7,
+                            backgroundColor: 'white',
+                            borderColor: '#c2c2c2',
+                                       elevation: 5,
+                            // borderWidth: 0.30,
+                            paddingVertical:19,
                             justifyContent: 'center',
                             alignItems: 'center',
                             borderRadius: 25
                         }}>
-                        <Text style={{fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCompanies"}</Text>
+                        <Text style={{fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCompanies"}</Text>
                     </Pressable>
                 </View>
                 <View style={{height: 90}}/>
@@ -380,12 +382,21 @@ function Home({navigation}) {
                         marginTop: 2
                     }}>Advance</Text>
                 </View>
-                <Pressable onPress={() => navigation.push('Profile')}><View style={{
+                <Pressable 
+                onPress={() => {
+                    if (login){
+                        navigation.push('Profile')
+                    } else {
+                        navigation.push('Login')
+                    }
+                }}               
+                ><View style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
-                    marginLeft:-8,                }}>
+                    marginLeft:-8,
+                    }}>
                     <Image style={{
                         width: 20,
                         height: 20,

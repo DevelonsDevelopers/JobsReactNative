@@ -44,7 +44,7 @@ function Profile({ navigation }) {
                             marginLeft: 30,
                             marginBottom: 250,
                             tintColor: '#fff'
-                        }} source={require('../assets/menu.png')} alt={'Okay'}/>
+                        }} source={require('../assets/back_arrow.png')} alt={'Okay'}/>
                         <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
                             <Image style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
                                    source={require('../assets/logo.png')} alt={'Okay'}/>
@@ -73,9 +73,11 @@ function Profile({ navigation }) {
                         <Text style={{color: '#000', fontSize: 15, fontFamily: 'poppins_semibold', width: '100%', textAlign: 'center'}}>Manage Your Resume</Text>
                     </View></Pressable>
                     <View style={{ backgroundColor: '#000', height: 3 }}/>
+                    <Pressable onPress={() => navigation.push('History')}>
                     <View style={{ flex: 1, paddingVertical: 10, marginBottom: 10 }}>
                         <Text style={{color: '#000', fontSize: 15, fontFamily: 'poppins_semibold', width: '100%', textAlign: 'center'}}>My History</Text>
                     </View>
+                    </Pressable>
                 </View>
                 <View style={{ flexDirection: 'column', backgroundColor: '#fff', paddingHorizontal: 30, marginHorizontal: 10, marginRight: 30, marginLeft: 30, borderRadius: 30, marginTop: 20, }}>
                     <Pressable onPress={() => navigation.push('PersonalInfo')} ><View style={{ flexDirection: 'row', flex: 1, marginTop: 20, alignItems: 'center' }}>
