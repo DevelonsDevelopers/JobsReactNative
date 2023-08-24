@@ -177,7 +177,7 @@ export default function Test({navigation}) {
           </View>
         </View>
     <TabView
-    activeColor={{color:'black'}}
+   
       navigationState={{ index, routes }}
       renderScene={renderScene}
       onIndexChange={setIndex}
