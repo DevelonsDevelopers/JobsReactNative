@@ -58,4 +58,10 @@ export const fetchAllJobs = () => API.get('/jobs/all')
 
 
 //INTERACTIONS API CALL
-export const recordInteraction = () => API.post()
+export const recordInteraction = (job, user, query, title, interactiontype) => API.post('/interactions/create', {
+    job: job,
+    user: user,
+    query: query,
+    title: title,
+    interactiontype: interactiontype
+})

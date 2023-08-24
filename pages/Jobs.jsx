@@ -1,5 +1,5 @@
 import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView } from "react-native";
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { View } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import Resume from "./Resume";
@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {AllCities} from "../API/actions/cityActions";
 import {AllJobs} from "../API/actions/jobActions";
 import moment from "moment";
+import {recordInteraction} from "../API";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const data = [
   { "name": "Facebook" },
@@ -22,11 +24,25 @@ function Jobs({ navigation }) {
   const success = useSelector(state => state.job.success)
   const dispatch = useDispatch()
 
+  const [ID, setID] = useState()
+
   useEffect(() => {
     if (!jobs){
       dispatch(AllJobs())
     }
   }, [dispatch, jobs]);
+
+  const JobClick = (id) => {
+    recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
+  }
+
+  useEffect(() => {
+    GetData()
+  }, []);
+  const GetData = async () => {
+    const id = await AsyncStorage.getItem('ID')
+    setID(id);
+  }
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
@@ -59,7 +75,7 @@ function Jobs({ navigation }) {
         <SafeAreaView>
           <FlatList nestedScrollEnabled={false} scrollEnabled={false}
             style={{ marginHorizontal: 0, marginTop: 10 }} data={jobs} renderItem={({ item }) => (
-              <View style={{
+              <Pressable onPress={() => JobClick(item.id)}><View style={{
                 marginLeft: 25,
                 marginRight: 25,
                 marginBottom: 8,
@@ -118,7 +134,7 @@ function Jobs({ navigation }) {
                 </View>
 
 
-              </View>
+              </View></Pressable>
             )} />
         </SafeAreaView>
       </View>
