@@ -1,5 +1,12 @@
 import { Button, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
 import React, { useState } from "react";
+import EducationModal from "../Components/EducationModal";
+import CareerVisible from "../Components/CareerVisible";
+import CourseVisible from "../Components/CourseVisible";
+import SkillVisible from "../Components/SkillVisible";
+import InterestVisible from "../Components/InterestVisible";
+import LanguageVisible from "../Components/LanguageVisible";
+import ResumeVisible from "../Components/ResumeVisible";
 
 function AccountInfo({ navigation }) {
 
@@ -29,78 +36,19 @@ function AccountInfo({ navigation }) {
     const toggleResumeVisibility = () => setResumeVisible(!resumeVisible)
 
     return (
-        <View style={{ flex: 1 }}>
-            <Modal visible={educationVisible} animationType={"fade"} transparent={true}>
-                <View onTouchStart={() => toggleEducationVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
-                    <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Education</Text>
-                        <TextInput placeholder={'Degree'} style={{ width: '80%', marginTop: 20, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <TextInput placeholder={'University'} style={{ width: '80%', marginTop: 8, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <TextInput placeholder={'Time Period'} style={{ width: '80%', marginTop: 8, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <Pressable style={{ paddingHorizontal: 60, paddingVertical: 13, backgroundColor: '#13A3E1', borderRadius: 25, marginTop: 10 }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
-                    </View>
-                </View>
-            </Modal>
-            <Modal visible={careerVisible} animationType={"fade"} transparent={true}>
-                <View onTouchStart={() => toggleCareerVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
-                    <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Career</Text>
-                        <TextInput placeholder={'Company'} style={{ width: '80%', marginTop: 20, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <TextInput placeholder={'Job'} style={{ width: '80%', marginTop: 8, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <TextInput placeholder={'Time Period'} style={{ width: '80%', marginTop: 8, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <TextInput placeholder={'Address'} style={{ width: '80%', marginTop: 8, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <TextInput placeholder={'Phone'} style={{ width: '80%', marginTop: 8, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <Pressable style={{ paddingHorizontal: 60, paddingVertical: 13, backgroundColor: '#13A3E1', borderRadius: 25, marginTop: 10 }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
-                    </View>
-                </View>
-            </Modal>
-            <Modal visible={courseVisible} animationType={"fade"} transparent={true}>
-                <View onTouchStart={() => toggleCourseVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
-                    <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Courses</Text>
-                        <TextInput placeholder={'Course'} style={{ width: '80%', marginTop: 20, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <TextInput placeholder={'Institute'} style={{ width: '80%', marginTop: 8, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <TextInput placeholder={'Time Period'} style={{ width: '80%', marginTop: 8, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <Pressable style={{ paddingHorizontal: 60, paddingVertical: 13, backgroundColor: '#13A3E1', borderRadius: 25, marginTop: 10 }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
-                    </View>
-                </View>
-            </Modal>
-            <Modal visible={skillVisible} animationType={"fade"} transparent={true}>
-                <View onTouchStart={() => toggleSkillVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
-                    <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Skills</Text>
-                        <TextInput placeholder={'Skill No 1'} style={{ width: '80%', marginTop: 20, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <Pressable style={{ paddingHorizontal: 60, paddingVertical: 13, backgroundColor: '#13A3E1', borderRadius: 25, marginTop: 10 }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
-                    </View>
-                </View>
-            </Modal>
-            <Modal visible={interestVisible} animationType={"fade"} transparent={true}>
-                <View onTouchStart={() => toggleInterestVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
-                    <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Interests</Text>
-                        <TextInput placeholder={'Interest No 1'} style={{ width: '80%', marginTop: 20, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <Pressable style={{ paddingHorizontal: 60, paddingVertical: 13, backgroundColor: '#13A3E1', borderRadius: 25, marginTop: 10 }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
-                    </View>
-                </View>
-            </Modal>
-            <Modal visible={languageVisible} animationType={"fade"} transparent={true}>
-                <View onTouchStart={() => toggleLanguageVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
-                    <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Languages</Text>
-                        <TextInput placeholder={'Language No 1'} style={{ width: '80%', marginTop: 20, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <Pressable style={{ paddingHorizontal: 60, paddingVertical: 13, backgroundColor: '#13A3E1', borderRadius: 25, marginTop: 10 }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
-                    </View>
-                </View>
-            </Modal>
-            <Modal visible={resumeVisible} animationType={"fade"} transparent={true}>
-                <View onTouchStart={() => toggleResumeVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
-                    <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Resumes</Text>
-                        <TextInput placeholder={'Resume No 1'} style={{ width: '80%', marginTop: 20, borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, height: 50, textAlign: 'center' }}></TextInput>
-                        <Pressable style={{ paddingHorizontal: 60, paddingVertical: 13, backgroundColor: '#13A3E1', borderRadius: 25, marginTop: 10 }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
-                    </View>
-                </View>
-            </Modal>
+        <View style={{ flex: 1 }}>    
+
+           <EducationModal  visible={educationVisible} toggleEducationVisibility={toggleEducationVisibility}   />
+<CareerVisible visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} />
+         <CourseVisible  visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility}  />
+         
+<SkillVisible visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
+
+    <InterestVisible visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
+           
+          <LanguageVisible visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
+
+          <ResumeVisible visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>
