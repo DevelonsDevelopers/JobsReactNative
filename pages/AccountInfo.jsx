@@ -111,10 +111,10 @@ function AccountInfo({ navigation }) {
                             marginLeft: 30,
                             marginBottom: 250,
                             tintColor: '#fff'
-                        }} source={require('../assets/menu.png')} alt={'Okay'} />
-                        <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                            <Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                                source={require('../assets/logo.png')} alt={'Okay'} />
+                        }} source={require('../assets/back_arrow.png')} alt={'Okay'}/>
+                        <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                            <Image style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
+                                   source={require('../assets/logo.png')} alt={'Okay'}/>
                         </View>
                     </View>
                     <Text style={{
