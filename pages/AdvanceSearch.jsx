@@ -9,7 +9,7 @@ const AdvanceSearch = ({ navigation }) => {
   return (
     
         <View style={{flex: 1}}>
-      {/* <View>Your content</View> */}
+     
       <BottomSheet isOpen>
         {(onScrollEndDrag) => (
           <ScrollView onScrollEndDrag={onScrollEndDrag}>
