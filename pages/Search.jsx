@@ -30,13 +30,11 @@ function Search ({ navigation }) {
           </View>
         </View>
         <View>
-        <TextInput style={{ backgroundColor: '#fff', marginHorizontal: 30, height: 50, borderRadius: 25, paddingHorizontal: 20, marginTop: 30 }} placeholder={'Search'} />
-        <Image style={{ position: "relative", top: -35.5, left: 335, width: 25, height: 25 }} source={require('../assets/search-interface-symbol.png')} />
-        <Text style={{ fontFamily: 'poppins_medium', fontSize: 20, fontWeight: '800', width: '100%', textAlign: 'center', marginTop: 0, padding: 0 }}>History</Text>
+        <TextInput style={{ backgroundColor: '#fff', marginHorizontal: 30, height: 50, borderRadius: 25, paddingHorizontal: 20, marginTop: 30, elevation: 10 }} placeholder={'Search'} />
     </View>
         <SafeAreaView>
           <FlatList nestedScrollEnabled={false} scrollEnabled={false}
-            style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
+            style={{ marginHorizontal: 0, marginTop: 20 }} data={data} renderItem={({ item }) => (
               <View style={{
                 marginLeft: 25,
                 marginRight: 25,
@@ -71,14 +69,14 @@ function Search ({ navigation }) {
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                   <Text style={{
                     fontFamily: 'poppins_bold',
-                    
+
                     fontSize: 16,
                   }}>IT & Communications</Text>
                   <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13 }}>Bachelors</Text>
                 </View>
                 <View style={{ paddingHorizontal:64, }}>
                 <Text style={{  fontFamily:'poppins_medium',fontSize:13, textAlign: 'center',marginTop: 4, backgroundColor: '#d9d9d9', paddingHorizontal:10,paddingVertical:2,borderRadius:10, margin:'auto', }} >
-                Salary $5000/month 
+                Salary $5000/month
                 </Text>
                 </View>
 

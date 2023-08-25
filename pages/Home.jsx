@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories, FeaturedCategories } from "../API/actions/categoryActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {RecentJobs} from "../API/actions/jobActions";
 
 function Home({ navigation }) {
 
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
     const categories = useSelector(state => state.category.featured_categories)
+    const recentJobs = useSelector(state => state.job.recentJobs)
     const loading = useSelector(state => state.category.isLoading)
 
     const [loginval, setLoginVal] = useState('')
@@ -21,6 +23,12 @@ function Home({ navigation }) {
             dispatch(FeaturedCategories())
         }
     }, [dispatch, navigation, categories]);
+
+    useEffect(() => {
+        if (!recentJobs) {
+            dispatch(RecentJobs())
+        }
+    }, [dispatch, navigation, recentJobs]);
 
     useEffect(() => {
         GetData()
@@ -55,9 +63,9 @@ function Home({ navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
-            <Modal visible={visible} animationType={"fade"} transparent={true}>
-                <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.6)' }}>
-                    <View style={{ width: '100%', maxWidth: 300, margin: 48, elevation: 24, borderRadius: 15, backgroundColor: '#fff', opacity: 1, padding: 20 }}>
+            <Modal visible={visible} animationType={"slide"} transparent={true}>
+                <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.2)' }}>
+                    <View style={{ width: '100%', maxWidth: 300, margin: 48, elevation: 200, borderRadius: 15, backgroundColor: '#fff', opacity: 1, padding: 20 }}>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center' }}>Menu</Text>
                             <Pressable style={{ marginLeft: 'auto' }} onPress={() => toggleVisibility()}><Image style={{ width: 15, height: 15, marginLeft: 'auto' }} source={require('../assets/close.png')} /></Pressable>
@@ -94,10 +102,10 @@ function Home({ navigation }) {
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Rate</Text>
                             <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
                         </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
+                        <Pressable onPress={() => {}} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Contact</Text>
                             <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-                        </View>
+                        </Pressable>
                         <Pressable onPress={async () => toggleLoadingVisibility()}><View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Sign Out</Text>
                             <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
@@ -254,7 +262,7 @@ function Home({ navigation }) {
                 </View>
                 <SafeAreaView style={{ flex: 1 }}>
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                        style={{ marginHorizontal: 30, marginTop: 10 }} data={categories} renderItem={({ item }) => (
+                        style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
                             <View
                                 style={{
                                     flex: 1,
@@ -270,13 +278,13 @@ function Home({ navigation }) {
                                     paddingHorizontal: 20
                                 }}>
                                 <Text ellipsizeMode={'tail'} numberOfLines={1}
-                                    style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.name}</Text>
+                                    style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.title}</Text>
                                 <Text numberOfLines={1} style={{
                                     fontFamily: 'poppins_light',
                                     fontSize: 9,
                                     marginLeft: 'auto',
                                     width: 110
-                                }}>{item.description}</Text>
+                                }}>{item.city_name}</Text>
                             </View>
                         )}
                     />
@@ -380,7 +388,7 @@ function Home({ navigation }) {
                         style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Home</Text>
                     <View style={{ height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E', marginLeft: -4 }} />
                 </View>
-                <View style={{
+                <Pressable onPress={() => navigation.push('Search')} style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
@@ -399,7 +407,7 @@ function Home({ navigation }) {
                         color: '#fff',
                         marginTop: 2
                     }}>Advance</Text>
-                </View>
+                </Pressable>
                 <Pressable
                     onPress={() => {
                         if (login) {

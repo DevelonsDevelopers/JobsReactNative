@@ -33,6 +33,7 @@ export const GET_COUNTRY = "GET_COUNTRY";
 
 //JOBS:========
 export const ALL_JOBS = "ALL_JOBS";
+export const RECENT_JOBS = "RECENT_JOBS";
 export const GET_JOB = "GET_JOB";
 export const GET_JOBS_BY_CATEGORY = "GET_JOBS_BY_CATEGORY";
 export const GET_JOBS_BY_COUNTRY = "GET_JOBS_BY_COUNTRY";
