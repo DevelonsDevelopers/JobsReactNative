@@ -40,10 +40,10 @@ function AccountInfo({ navigation }) {
             <EducationModal visible={educationVisible} toggleEducationVisibility={toggleEducationVisibility} />
             <CareerVisible visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} />
             <CourseVisible visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility} />
-            <SkillVisible visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
-            <InterestVisible visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
-            <LanguageVisible visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
-            <ResumeVisible visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
+            <SkillModal visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
+            <InterestModal visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
+            <LanguageModal visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
+            <ResumeModal visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>
