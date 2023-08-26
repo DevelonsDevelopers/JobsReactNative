@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import EducationModal from "../Components/EducationModal";
 import CareerVisible from "../Components/CareerVisible";
 import CourseVisible from "../Components/CourseVisible";
-import SkillVisible from "../Components/SkillVisible";
-import InterestVisible from "../Components/InterestVisible";
-import LanguageVisible from "../Components/LanguageVisible";
-import ResumeVisible from "../Components/ResumeVisible";
+import SkillModal from "../Components/SkillModal";
+import InterestModal from "../Components/InterestModal";
+import LanguageModal from "../Components/LanguageModal";
+import ResumeModal from "../Components/ResumeModal";
 
 function AccountInfo({ navigation }) {
 
@@ -36,19 +36,19 @@ function AccountInfo({ navigation }) {
     const toggleResumeVisibility = () => setResumeVisible(!resumeVisible)
 
     return (
-        <View style={{ flex: 1 }}>    
+        <View style={{ flex: 1 }}>
 
            <EducationModal  visible={educationVisible} toggleEducationVisibility={toggleEducationVisibility}   />
 <CareerVisible visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} />
          <CourseVisible  visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility}  />
-         
-<SkillVisible visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
 
-    <InterestVisible visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
-           
-          <LanguageVisible visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
+<SkillModal visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
 
-          <ResumeVisible visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
+    <InterestModal visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
+
+          <LanguageModal visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
+
+          <ResumeModal visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>

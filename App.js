@@ -30,7 +30,7 @@ import History from './pages/History';
 import Jobs from "./pages/Jobs";
 import Resume from './pages/Resume';
 import Offers from './pages/Offers';
-import SocialMarketing from './pages/SocialMarketing';
+import JobDetails from './pages/JobDetails';
 import AdvanceSearch from './pages/AdvanceSearch';
 import PostJob from './pages/PostJob';
 import JobPosted from './pages/JobPosted';
@@ -99,7 +99,7 @@ function App() {
                     <Stack.Screen name="Jobs" component={Jobs} options={{title: "Jobs", headerShown: false}}/>
                     <Stack.Screen name="Resume" component={Resume} options={{title: "Resume", headerShown: false}}/>
                     <Stack.Screen name="Offers" component={Offers} options={{title: "Offers", headerShown: false}}/>
-                    <Stack.Screen name="SocialMarketing" component={SocialMarketing} options={{title: "SocialMarketing", headerShown: false}}/>
+                    <Stack.Screen name="JobDetails" component={JobDetails} options={{title: "JobDetails", headerShown: false}}/>
                     <Stack.Screen name="AdvanceSearch" component={AdvanceSearch} options={{title: "AdvanceSearch", headerShown: false}}/>
                     <Stack.Screen name="PostJob" component={PostJob} options={{title: "PostJob", headerShown: false}}/>
                     <Stack.Screen name="JobPosted" component={JobPosted} options={{title: "JobPosted", headerShown: false}}/>

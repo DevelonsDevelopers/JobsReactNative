@@ -203,7 +203,7 @@ function Home({ navigation }) {
                 <SafeAreaView style={{ flex: 1 }}>
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                         style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
-                            <View
+                            <Pressable onPress={() => navigation.push('JobDetails', { ID: item.id })}
                                 style={{
                                     flex: 1,
                                     flexDirection: 'row',
@@ -225,7 +225,7 @@ function Home({ navigation }) {
                                     marginLeft: 'auto',
                                     width: 110
                                 }}>{item.city_name}</Text>
-                            </View>
+                            </Pressable>
                         )}
                     />
                 </SafeAreaView>
