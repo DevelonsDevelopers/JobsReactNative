@@ -13,9 +13,9 @@ const data = [
 ]
 
 function Search({ navigation }) {
-    const[partTime,setPartTime] = useState (false)
-    const[fullTime,setfullTime] = useState (false)
-    const[remote,setReomote] = useState (false)
+    const [partTime, setPartTime] = useState(false)
+    const [fullTime, setFullTime] = useState(false)
+    const [remote, setReomote] = useState(false)
 
 
     return (
@@ -195,12 +195,12 @@ function Search({ navigation }) {
                             </View>
 
                             <View style={{ width: '100%', flexDirection: 'column', marginTop: 10 }}>
-                                <Text numberOfLines={1} style={{ fontFamily: 'poppins_semibold', marginTop: 7, fontSize: 14,marginBottom:10 }}>Salary Range</Text>
+                                <Text numberOfLines={1} style={{ fontFamily: 'poppins_semibold', marginTop: 7, fontSize: 14, marginBottom: 10 }}>Salary Range</Text>
 
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginHorizontal: 45,gap:40 }}>
-                                    <Text  style={{ marginRight:50,fontSize:13,fontFamily:'poppins_medium' }}>starting</Text>
-                                    <Text style={{ marginRight:20,fontSize:13,fontFamily:'poppins_medium' }} >End</Text>
-                                    </View><View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 45 }}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginHorizontal: 45, gap: 40 }}>
+                                    <Text style={{ marginRight: 50, fontSize: 13, fontFamily: 'poppins_medium' }}>starting</Text>
+                                    <Text style={{ marginRight: 20, fontSize: 13, fontFamily: 'poppins_medium' }} >End</Text>
+                                </View><View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 45 }}>
                                     <TextInput style={{ borderWidth: 0.7, paddingHorizontal: 30, fontSize: 14, fontFamily: 'poppins_medium', paddingVertical: 5, borderRadius: 10 }}>$6940</TextInput>
                                     <Text style={{ backgroundColor: 'black', width: 7, height: 1, marginTop: 15 }}>-</Text>
                                     <TextInput style={{ borderWidth: 0.7, paddingHorizontal: 30, fontSize: 14, fontFamily: 'poppins_medium', paddingVertical: 5, borderRadius: 10 }}>$6940</TextInput>
@@ -208,24 +208,24 @@ function Search({ navigation }) {
                                 </View>
                             </View>
                             <View style={{ width: '100%', flexDirection: 'column', marginTop: 10 }}>
-                                <Text numberOfLines={1} style={{ fontFamily: 'poppins_semibold', marginTop: 7, fontSize: 14,marginBottom:10 }}>job type</Text>
-                                <View style={{ flexDirection:'row',justifyContent:'space-evenly' }}>
+                                <Text numberOfLines={1} style={{ fontFamily: 'poppins_semibold', marginTop: 7, fontSize: 14, marginBottom: 10 }}>job type</Text>
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
 
-                                    <Pressable onPress={() => setPartTime(!partTime)} style={ partTime ? { backgroundColor:'#f5f5f5',paddingHorizontal:10,paddingVertical:7,borderRadius:20 } : { backgroundColor:'#13A3E1',paddingHorizontal:10,paddingVertical:7,borderRadius:20 }}>
-                                         <Text style={ partTime ? { fontSize:12,fontFamily:'poppins_medium',color:'gray', } : { fontSize:12,fontFamily:'poppins_medium',color:'white', }}>Part Time</Text>
-                                       </Pressable>
-
-                                    <View style={{ backgroundColor:'#f5f5f5',paddingHorizontal:10,paddingVertical:7,borderRadius:20 }}>
-                                        <Text style={{ fontSize:12,fontFamily:'poppins_medium',color:'gray' }}>Full Time</Text>
-                                    </View>
-                                    <View style={{ backgroundColor:'#f5f5f5',paddingHorizontal:10,paddingVertical:7,borderRadius:20 }}>
-                                        <Text style={{ fontSize:12,fontFamily:'poppins_medium',color:'gray' }}>Remote</Text>
-                                    </View>
+                                    <Pressable onPress={() => setPartTime(!partTime)} style={partTime ? { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
+                                        <Text style={partTime ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray', } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'white', }}>Part Time</Text>
+                                    </Pressable>
+                                    <Pressable onPress={() => setFullTime(!fullTime)} style={fullTime ? { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
+                                        <Text style={fullTime ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray' } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'white', }}>Full Time</Text>
+                                    </Pressable>
+                                    <Pressable onPress={() => setReomote(!remote)} style={remote ? { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
+                                        <Text style={remote ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray' } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'white', }}>Remote</Text>
+                                    </Pressable>
+                                   
                                 </View>
                             </View>
 
                             <View >
-                                <Text style={{ backgroundColor:'#13A3E1',color:'white',fontSize:15,fontFamily:'poppins_bold',borderRadius:20,paddingHorizontal:30,paddingVertical:3,marginTop:20}}>Search</Text>
+                                <Text style={{ backgroundColor: '#13A3E1', color: 'white', fontSize: 15, fontFamily: 'poppins_bold', borderRadius: 20, paddingHorizontal: 30, paddingVertical: 3, marginTop: 20 }}>Search</Text>
                             </View>
 
 

@@ -37,18 +37,13 @@ function AccountInfo({ navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
-
-           <EducationModal  visible={educationVisible} toggleEducationVisibility={toggleEducationVisibility}   />
-<CareerVisible visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} />
-         <CourseVisible  visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility}  />
-
-<SkillModal visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
-
-    <InterestModal visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
-
-          <LanguageModal visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
-
-          <ResumeModal visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
+            <EducationModal visible={educationVisible} toggleEducationVisibility={toggleEducationVisibility} />
+            <CareerVisible visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} />
+            <CourseVisible visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility} />
+            <SkillVisible visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
+            <InterestVisible visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
+            <LanguageVisible visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
+            <ResumeVisible visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>
@@ -59,10 +54,10 @@ function AccountInfo({ navigation }) {
                             marginLeft: 30,
                             marginBottom: 250,
                             tintColor: '#fff'
-                        }} source={require('../assets/back_arrow.png')} alt={'Okay'}/>
-                        <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
-                            <Image style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
-                                   source={require('../assets/logo.png')} alt={'Okay'}/>
+                        }} source={require('../assets/back_arrow.png')} alt={'Okay'} />
+                        <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
+                            <Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+                                source={require('../assets/logo.png')} alt={'Okay'} />
                         </View>
                     </View>
                     <Text style={{
