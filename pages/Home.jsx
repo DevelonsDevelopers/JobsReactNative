@@ -225,10 +225,11 @@ function Home({ navigation }) {
                                 borderRadius: 10
                             }}>Show All</Text></Pressable>
                         </View>
-                        {/* {jobLoading ?
-                    <ActivityIndicator size={60} color="#13A3E1" />
-                    :
-                    <> */}
+                        {error ?
+                             <View>
+                                <Image  source={require( '../assets/delete.png')} style={{ width:30,height:30,marginLeft:190,marginBottom:-20,marginTop:40 }} />
+                        <Text style={{ textAlign:'center',marginVertical:20,fontFamily:'poppins_medium' }}>Network Error...!</Text>
+                        </View> : <>
                         <SafeAreaView style={{ flex: 1 }}>
 
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
@@ -259,7 +260,7 @@ function Home({ navigation }) {
                                 )}
                             />
                         </SafeAreaView>
-                        {/* </>} */}
+                         </>} 
                         <View style={{
                             flex: 1,
                             flexDirection: 'row',

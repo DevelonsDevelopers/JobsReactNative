@@ -1,11 +1,11 @@
-import {Image, Text, ScrollView, FlatList, Pressable} from 'react-native'
-import React, {useEffect, useState} from 'react'
-import {View} from 'react-native'
-import {useDispatch, useSelector} from "react-redux";
+import { Image, Text, ScrollView, FlatList, Pressable } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
+import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {CVByUser} from "../API/actions/cvActions";
+import { CVByUser } from "../API/actions/cvActions";
 
-function Resume({navigation}) {
+function Resume({ navigation }) {
 
     const dispatch = useDispatch();
 
@@ -27,20 +27,20 @@ function Resume({navigation}) {
     }, [dispatch, ID])
 
     return (
-        <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
-            <View style={{backgroundColor: '#EAEAEA'}}>
-                <View style={{flexDirection: 'row', height: 90}}>
+        <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+            <View style={{ backgroundColor: '#EAEAEA' }}>
+                <View style={{ flexDirection: 'row', height: 90 }}>
                     <Image style={{
                         width: 22,
                         height: 20,
                         marginTop: 70,
                         marginLeft: 30,
                         tintColor: '#000'
-                    }} source={require('../assets/back_arrow.png')} alt={'Okay'}/>
-                    <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                    }} source={require('../assets/back_arrow.png')} alt={'Okay'} />
+                    <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
                         <Pressable onPress={() => navigation.push('OfferAccepted')}><Image
-                            style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
-                            source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
+                            style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+                            source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                     </View>
                 </View>
                 <View>
@@ -55,257 +55,68 @@ function Resume({navigation}) {
                         marginBottom: 0
                     }}>Resume</Text>
                 </View>
-                <View style={{
-                    padding: 15,
-                    marginTop: 0
-                }}>
-                    <View style={{
-                        backgroundColor: '#fff',
-                        padding: 13,
-                    }}>
-                        <Text style={{
-                            fontSize: 19,
-                            fontWeight: 800,
-                            fontFamily: 'poppins_medium',
-                        }}>Jack Donaldson
+                <View style={{ padding: 15, marginTop: 0 }}>
+                    <View style={{ backgroundColor: '#fff', padding: 13, }}>
+                        <Text style={{ fontSize: 19, fontWeight: 800, fontFamily: 'poppins_medium', }}>
+                            Jack Donaldson
                         </Text>
-                        <Text style={{
-                            fontSize: 15,
-                            fontWeight: 400,
-                            fontFamily: 'poppins_light',
-                            paddingTop: 0,
-                            marginTop: 0
-                        }}>App Developer
+                        <Text style={{ fontSize: 15, fontWeight: 400, fontFamily: 'poppins_light', paddingTop: 0, marginTop: 0 }}>
+                            App Developer
                         </Text>
-                        <View style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            paddingTop: 6,
-                            paddingBottom: 0,
-                        }}>
-                            <Text style={{
-                                fontSize: 11,
-                                fontWeight: 400
-                            }}
-                            >Phone : 656-923-0000
+                        <View style={{ display: 'flex', flexDirection: 'row', paddingTop: 6, paddingBottom: 0, }}>
+                            <Text style={{ fontSize: 11, fontWeight: 400 }}>
+                                Phone : 656-923-0000
                             </Text>
-                            <Text style={{
-                                fontSize: 11,
-                                fontFamily: 'poppins_regular',
-                                marginLeft: 43,
-                                marginTop: 0,
-                                marginBottom: 0,
-                                padding: 0
-                            }}
-                            >Email : jackdon368@gmail.com
+                            <Text style={{fontSize: 11,fontFamily: 'poppins_regular',marginLeft: 43, marginTop: 0,marginBottom: 0,padding: 0}}>
+                                Email : jackdon368@gmail.com
                             </Text>
                         </View>
-                        <View style={{
-                            marginTop: 0,
-                            padding: 0
-                        }}>
-                            <Text style={{
-                                fontSize: 11,
-                                fontFamily: 'poppins_regular',
-                            }}
-                            >Address : 15th Street NewYork, United States
+                        <View style={{ marginTop: 0, padding: 0}}>
+                            <Text style={{fontSize: 11,fontFamily: 'poppins_regular',}}>
+                                Address : 15th Street NewYork, United States
                             </Text>
                         </View>
-                        <View style={{
-                            marginTop: 4,
-                            padding: 0
-                        }}>
-                            <Text style={{
-                                fontSize: 11,
-                                fontFamily: 'poppins_regular',
-                                marginTop: 3,
-                                padding: 0
-                            }}
-                            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus ea quod esse eius
+                        <View style={{marginTop: 4,padding: 0}}>
+                            <Text style={{fontSize: 11,fontFamily: 'poppins_regular',marginTop: 3,padding: 0}}>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus ea quod esse eius
                                 illum!
                             </Text>
                         </View>
-                        <View style={{
-                            width: 335,
-                            marginTop: 10,
-                            marginBottom: 10,
-                            marginLeft: 10,
-                            marginRight: 10,
-                            height: 2.5,
-                            elevation: 2,
-                            backgroundColor: '#BDBDBD',
-                            borderColor: 'black'
-                        }}>
+                        <View style={{width: 335, marginTop: 10,marginBottom: 10,marginLeft: 10, marginRight: 10,height: 2.5,elevation: 2, backgroundColor: '#BDBDBD',borderColor: 'black'}}>
                         </View>
                         <View>
-                            <Text style={{
-                                fontSize: 16,
-                                fontFamily: 'poppins_semibold',
-                                marginTop: 2
-                            }}>
+                            <Text style={{fontSize: 16,fontFamily: 'poppins_semibold',marginTop: 2}}>
                                 Experience
                             </Text>
-                            <View style={{
-                                display: 'flex',
-                                flexDirection: 'row'
-                            }}>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontFamily: 'poppins_regular',
-                                    marginTop: 3
-                                }}>
-                                    2016-06 - present
+                            
+                            <View>
+                            <View style={{}}>
+                                <Text style={{fontSize: 11,fontFamily: 'poppins_medium',marginTop: 3,fontSize:12}}>
+                                    2016-2023
                                 </Text>
-                                <Text style={{
-                                    marginLeft: 55,
-                                    fontSize: 13,
-                                    fontFamily: 'poppins_semibold',
-                                }}>
+                                <Text style={{fontSize: 13,fontFamily: 'poppins_semibold',marginRight:6}}>
                                     Full Stack App Developer
                                 </Text>
                             </View>
-                            <View style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                paddingTop: 0,
-                                paddingBottom: 0,
-                            }}>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontWeight: 400
-                                }}
-                                >Company : Octagon Digital
+                            <View style={{display: 'flex',flexDirection: 'row',paddingTop: 0,paddingBottom: 0,}}>
+                                <Text style={{fontSize: 11,fontWeight: 400}}>
+                                    Company : Octagon Digital
                                 </Text>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontFamily: 'poppins_regular',
-                                    marginLeft: 61,
-                                    marginTop: 0,
-                                    marginBottom: 0,
-                                    padding: 0
-                                }}
-                                >Address : Los Angeles
+                                <Text style={{fontSize: 11,fontFamily: 'poppins_regular',marginLeft: 61,marginTop: 0,marginBottom: 0,padding: 0 }}>
+                                    Address : Los Angeles
                                 </Text>
                             </View>
-                            <View style={{
-                                marginTop: 0,
-                                padding: 0
-                            }}>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontFamily: 'poppins_regular',
-                                }}
-                                >Phone : 656-923-0000
+                            <View style={{marginTop: 0,padding: 0}}>
+                                <Text style={{fontSize: 11, fontFamily: 'poppins_regular',}}>
+                                    Phone : 656-923-0000
                                 </Text>
                             </View>
-                            <View style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                marginTop: 7
-                            }}>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontFamily: 'poppins_regular',
-                                    paddingTop: 2.5
-                                }}>
-                                    2014-08 - 2016-06
-                                </Text>
-                                <Text style={{
-                                    marginLeft: 53,
-                                    fontSize: 13,
-                                    fontFamily: 'poppins_semibold',
-                                }}>
-                                    BackEnd App Developer
-                                </Text>
+
                             </View>
-                            <View style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                paddingTop: 0,
-                                paddingBottom: 0,
-                            }}>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontWeight: 400
-                                }}
-                                >Company : Shopify
-                                </Text>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontFamily: 'poppins_regular',
-                                    marginLeft: 103,
-                                    marginTop: 0,
-                                    marginBottom: 0,
-                                    padding: 0
-                                }}
-                                >Address : Ottawa, Ontario
-                                </Text>
-                            </View>
-                            <View style={{
-                                marginTop: 0,
-                                padding: 0
-                            }}>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontFamily: 'poppins_regular',
-                                }}
-                                >Phone : 656-923-2222
-                                </Text>
-                            </View>
-                            <View style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                marginTop: 7
-                            }}>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontFamily: 'poppins_regular',
-                                    paddingTop: 2.5
-                                }}>
-                                    2012-02 - 2014-08
-                                </Text>
-                                <Text style={{
-                                    marginLeft: 55.7,
-                                    fontSize: 13,
-                                    fontFamily: 'poppins_semibold',
-                                }}>
-                                    FrontEnd App Developer
-                                </Text>
-                            </View>
-                            <View style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                paddingTop: 0,
-                                paddingBottom: 0,
-                            }}>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontWeight: 400
-                                }}
-                                >Company : YouTube
-                                </Text>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontFamily: 'poppins_regular',
-                                    marginLeft: 97,
-                                    marginTop: 0,
-                                    marginBottom: 0,
-                                    padding: 0
-                                }}
-                                >Address : Florida, US
-                                </Text>
-                            </View>
-                            <View style={{
-                                marginTop: 0,
-                                padding: 0
-                            }}>
-                                <Text style={{
-                                    fontSize: 11,
-                                    fontFamily: 'poppins_regular',
-                                }}
-                                >Phone : 656-923-4444
-                                </Text>
-                            </View>
+
+
+
+                            
                         </View>
                         <View style={{
                             width: 335,

@@ -32,7 +32,8 @@ function Cities({navigation}) {
     const cities = useSelector(state => state.city.cities)
     const loading = useSelector(state => state.city.isLoading)
     const success = useSelector(state => state.city.success)
-    const network = useSelector(state => state.city.error)
+    const error = useSelector(state => state.city.error)
+  
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -46,13 +47,17 @@ function Cities({navigation}) {
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
-      
             {loading ?
              <View style={{ marginTop:400 }}>
              <ActivityIndicator size={60} color="#13A3E1" />
              </View> 
              :
              <>
+                 {error ?
+                                       <View>
+                                          <Image  source={require( '../assets/delete.png')} style={{ width:30,height:30,marginLeft:190,marginBottom:-20,marginTop:40 }} />
+                                  <Text style={{ textAlign:'center',marginVertical:20,fontFamily:'poppins_medium' }}>Network Error...!</Text>
+                                  </View> :<>
         <View style={{backgroundColor: '#F1F1F1'}}>
             <View style={{flexDirection: 'row', height: 90}}>
                 <Pressable onPress={() => toggleVisibility()}><Image style={{
@@ -128,7 +133,7 @@ function Cities({navigation}) {
             </SafeAreaView>
         </View>
         </> }
-       
+        </>}
         </ScrollView>
     )
 }
