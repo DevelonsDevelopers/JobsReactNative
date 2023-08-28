@@ -1,23 +1,46 @@
-import { Image, Text, ScrollView, FlatList, Pressable } from 'react-native'
-import React from 'react'
-import { View } from 'react-native'
+import {Image, Text, ScrollView, FlatList, Pressable} from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {View} from 'react-native'
+import {useDispatch, useSelector} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {CVByUser} from "../API/actions/cvActions";
 
-function Resume({ navigation }) {
+function Resume({navigation}) {
+
+    const dispatch = useDispatch();
+
+    const [ID, setID] = useState()
+    const cv = useSelector(state => state.cv.cv);
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
+
+    useEffect(() => {
+        if (ID) {
+            dispatch(CVByUser(ID))
+        }
+    }, [dispatch, ID])
+
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
-            <View style={{ backgroundColor: '#EAEAEA' }}>
-                <View style={{ flexDirection: 'row', height: 90 }}>
+        <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
+            <View style={{backgroundColor: '#EAEAEA'}}>
+                <View style={{flexDirection: 'row', height: 90}}>
                     <Image style={{
                         width: 22,
                         height: 20,
                         marginTop: 70,
                         marginLeft: 30,
                         tintColor: '#000'
-                    }} source={require('../assets/back_arrow.png')} alt={'Okay'} />
-                    <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                    <Pressable onPress={() => navigation.push('OfferAccepted')}><Image
-              style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-              source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
+                    }} source={require('../assets/back_arrow.png')} alt={'Okay'}/>
+                    <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                        <Pressable onPress={() => navigation.push('OfferAccepted')}><Image
+                            style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
+                            source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
                     </View>
                 </View>
                 <View>
@@ -98,7 +121,8 @@ function Resume({ navigation }) {
                                 marginTop: 3,
                                 padding: 0
                             }}
-                            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus ea quod esse eius illum!
+                            >Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus ea quod esse eius
+                                illum!
                             </Text>
                         </View>
                         <View style={{
@@ -443,7 +467,6 @@ function Resume({ navigation }) {
                             borderColor: 'black'
                         }}>
                         </View>
-
 
 
                         <View>
