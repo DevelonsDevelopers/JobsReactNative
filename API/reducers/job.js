@@ -1,13 +1,15 @@
-import {ALL_JOBS, ERROR, GET_JOB, LOADING, RECENT_JOBS, SUCCESS} from "../../Utils/Constants";
+import {ALL_JOBS, ERROR, GET_JOB, LOADING, NODATA, RECENT_JOBS, SUCCESS} from "../../Utils/Constants";
 
-const job = (state = {isLoading: true, success: false, error: false}, action) => {
+const job = (state = {isLoading: true, success: false, error: false, nodata: false}, action) => {
     switch (action.type){
         case LOADING:
-            return {...state, isLoading: true, success: false, error: false}
+            return {...state, isLoading: true, success: false, error: false, nodata: false}
         case SUCCESS:
-            return {...state, isLoading: false, success: true, error: false}
+            return {...state, isLoading: false, success: true, error: false, nodata: false}
         case ERROR:
-            return {...state, isLoading: false, success: false, error: true}
+            return {...state, isLoading: false, success: false, error: true, nodata: false}
+        case NODATA:
+            return {...state, isLoading: false, success: false, error: false, nodata: true}
         case ALL_JOBS:
             return {...state, jobs: action.payload.jobs}
         case RECENT_JOBS:
