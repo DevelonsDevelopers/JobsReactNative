@@ -87,37 +87,40 @@ const JobDetails = ({ route, navigation }) => {
             </View>
             <View style={{ flex: 1, flexDirection: 'row' }}>
               <View style={{ flex: 1 }}>
-                <Text numberOfLines={1} style={{ fontFamily: 'poppins_medium', marginTop: 15, fontSize: 17, textAlign: "center", }}>IT & Communications</Text>
+                <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', marginTop: 15, fontSize: 17, textAlign: "center", }}>IT & Communications</Text>
                 <Text style={{ fontFamily: 'poppins_medium', marginTop: 0, fontSize: 13, textAlign: "center" }}>Lahore</Text>
               </View>
             </View>
-            <View style={{ flexDirection: "row", marginTop: 20, backgroundColor: '#F6F6F6', }}>
+            <View style={{ flexDirection: "row", marginTop: 20, backgroundColor: 'white',gap:-10 }}>
               <View style={{ backgroundColor: 'rgba(19, 163, 225, 0.20)',  paddingHorizontal: 30,width:'50%',paddingVertical:25, borderTopRightRadius:40,borderBottomRightRadius:40 }}>
                 <View style={{ flexDirection: 'column' }}>
+                  <View style={{ paddingHorizontal:30 }}>
                   <Text style={{
                     color: 'white',
                     backgroundColor: '#13a3e1',
-                    paddingHorizontal: 10,
+                    paddingHorizontal: 6,
                     paddingVertical: 8,
                     fontSize: 14,
                     fontFamily: 'poppins_medium',
-                    borderRadius: 14, textAlign: "center"
+                    borderRadius: 14, 
+                    textAlign: "center",
                   }}>Full time</Text>
-                  <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', textAlign: "center" }}>  Mon - Sat </Text>
+                  </View>
+                  <Text style={{ fontSize: 16, fontFamily: 'poppins_bold', textAlign: "center" }}>  Mon - Sat </Text>
                   <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', textAlign: "center" }}>  9AM - 5PM </Text>
                 </View>
               </View>
               <View>
-              <View style={{ flexDirection: 'column', paddingVertical:25, }}>
-                 <Text style={{ textAlign:"center",fontSize:19,fontFamily:'poppins_medium' }}>5 years</Text>
-                 <Text style={{ textAlign:"center",fontSize:20,fontFamily:'poppins_medium' }}>Bachelors</Text>
+              <View style={{ flexDirection: 'column', paddingVertical:25,  }}>
+                 <Text style={{ textAlign:"center",fontSize:15,fontFamily:'poppins_medium' }}>5 years</Text>
+                 <Text style={{ textAlign:"center",fontSize:20,fontFamily:'poppins_bold' }}>Bachelors</Text>
                  <Text style={{ textAlign:"center",width:'80%',marginLeft:15,fontSize:12,fontFamily:'poppins_medium' }}>Java, JavaScript, Android, IOS, WEB</Text>
 
                       </View>
               </View>
             </View>
 <Text style={{ fontSize:18,fontFamily:'poppins_medium',marginLeft:15,marginTop:10 }}>Description: </Text>
-<Text style={{ marginHorizontal:25 ,fontSize:13,fontFamily:'poppins_medium'}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+<Text style={{ marginHorizontal:25 ,fontSize:12,fontFamily:'poppins_medium'}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
        <View style={{ flexDirection:'row',justifyContent:"center",gap:20,marginTop:10,fontFamily:'poppins_medium'}}>
 <Text style={{ fontSize:14,fontFamily:'poppins_medium',backgroundColor:'#143D59',color:'white' ,width:150,textAlign:"center",paddingVertical:6,borderRadius:20, }}>SAVE</Text>
 <Text style={{ fontSize:14,fontFamily:'poppins_medium',backgroundColor:'#13A3E1',color:'white' ,width:150,textAlign:"center",paddingVertical:6,borderRadius:20, }}>APPLY NOW</Text>

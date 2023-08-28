@@ -1,4 +1,4 @@
-import {Image, Pressable, ScrollView, Text, TextInput, View} from "react-native";
+import {ActivityIndicator, Image, Modal, Pressable, ScrollView, Text, TextInput, View} from "react-native";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Registeration} from "../API/actions/registerActions";
@@ -17,11 +17,23 @@ function Register({navigation}) {
     const toggleVisibility = () => setShow(!show);
 
     const RegisterUser = () => {
-        dispatch(Registeration(navigation, name, username, email, '', '', '', '', password))
+        dispatch(Registeration(navigation, name, username, email, '', '', '', '', password));
+        toggleLoadingVisibility()
     }
+    // loading===============
+    const [loadingVisible, setLoadingVisible] = useState(false)
+    const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F0A51E'}}>
+               <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
+                <View  style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
+                    <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center',marginHorizontal:100 }}>
+                       <Text style={{ paddingBottom:16,fontSize:14,fontFamily:'poppins_medium' }}>Please Wait ...</Text>
+                       <ActivityIndicator size={60} color="#13A3E1" />
+                    </View>
+                </View>
+            </Modal>
             <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
                 <Image style={{tintColor: '#000', width: 40, height: 40}}
                        source={require('../assets/back_arrow.png')}/>

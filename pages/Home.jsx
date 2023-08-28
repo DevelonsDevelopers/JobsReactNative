@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories, FeaturedCategories } from "../API/actions/categoryActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {RecentJobs} from "../API/actions/jobActions";
+import { RecentJobs } from "../API/actions/jobActions";
 import NavigationDrawer from "../Components/NavigationDrawer";
 import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
 
@@ -14,6 +14,8 @@ function Home({ navigation }) {
     const categories = useSelector(state => state.category.featured_categories)
     const recentJobs = useSelector(state => state.job.recentJobs)
     const loading = useSelector(state => state.category.isLoading)
+    const jobLoading = useSelector(state => state.job.isLoading)
+
 
     const [loginval, setLoginVal] = useState('')
 
@@ -25,6 +27,18 @@ function Home({ navigation }) {
             dispatch(FeaturedCategories())
         }
     }, [dispatch, navigation, categories]);
+
+    const [isloading, setIsLoading] = useState(false)
+    useEffect(() => {
+        if (loading && jobLoading) {
+            setIsLoading(true)
+        } else {
+            setIsLoading(false)
+        }
+    }, [loading ,jobLoading])
+
+
+
 
     useEffect(() => {
         if (!recentJobs) {
@@ -46,7 +60,6 @@ function Home({ navigation }) {
         } else {
             isLogin(false)
         }
-
     }, [loginval])
 
     const Logout = async () => {
@@ -65,8 +78,10 @@ function Home({ navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
+
             <NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={isLogin} toggleLoadingVisibility={toggleLoadingVisibility} />
             <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
+
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>
@@ -94,6 +109,7 @@ function Home({ navigation }) {
                         marginTop: 10
                     }} placeholder={'Start your Job Search'} />
                 </View>
+
                 {login ?
                     <Pressable onPress={() => navigation.push('Recommendedjobs')} aria-hidden={true} style={{
                         backgroundColor: '#F0A51E',
@@ -126,149 +142,163 @@ function Home({ navigation }) {
                         marginHorizontal: 25
                     }}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Log In</Text></Pressable>
                 }
-                <View
-                    style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        marginTop: 20,
-                        borderRadius: 25,
-                        alignItems: 'center',
-                        paddingHorizontal: 30
-                    }}>
-                    <Text ellipsizeMode={'tail'} numberOfLines={1}
-                        style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Categories</Text>
-                    <Pressable style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Categories')}><Text numberOfLines={1} style={{
-                        fontFamily: 'poppins_light',
-                        fontSize: 12,
-                        marginLeft: 'auto',
-                        backgroundColor: '#d7d7d7',
-                        paddingHorizontal: 10,
-                        paddingVertical: 1,
-                        borderRadius: 10
-                    }}>Show All</Text></Pressable>
-                </View>
-                <SafeAreaView style={{ flex: 1 }}>
-                    {loading ?
+
+                {isloading ? 
+               <View style={{ marginTop:100 }}>
+               <ActivityIndicator size={60} color="#13A3E1" />
+               </View>
+                    :
+                    <>
+                        <View
+                            style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                marginTop: 20,
+                                borderRadius: 25,
+                                alignItems: 'center',
+                                paddingHorizontal: 30
+                            }}>
+                            <Text ellipsizeMode={'tail'} numberOfLines={1}
+                                style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Categories</Text>
+                            <Pressable style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Categories')}><Text numberOfLines={1} style={{
+                                fontFamily: 'poppins_light',
+                                fontSize: 12,
+                                marginLeft: 'auto',
+                                backgroundColor: '#d7d7d7',
+                                paddingHorizontal: 10,
+                                paddingVertical: 1,
+                                borderRadius: 10
+                            }}>Show All</Text></Pressable>
+                        </View>
+                        <SafeAreaView style={{ flex: 1 }}>
+                            {/* {loading ?
                         <ActivityIndicator size={60} color="#13A3E1" />
 
-                        :
-                        <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                            style={{ marginHorizontal: 30, marginTop: 10 }} data={categories} renderItem={({ item }) => (
+                        : */}
+                            <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                                style={{ marginHorizontal: 30, marginTop: 10 }} data={categories} renderItem={({ item }) => (
 
-                                <View
-                                    style={{
-                                        flex: 1,
-                                        flexDirection: 'column',
-                                        margin: 7,
-                                        backgroundColor: '#fff',
-                                        height: 90,
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        borderRadius: 20,
-                                        elevation: 5
-                                    }}>
-                                    <Image style={{
-                                        width: 25,
-                                        height: 25,
-                                        tintColor: '#000'
-                                    }} source={require('../assets/provider.png')} alt={'Okay'} />
-                                    <Text style={{ fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10 }}>{item.name}</Text>
-                                </View>
-                            )}
-                            numColumns={2} />
-                    }
-                </SafeAreaView>
+                                    <View
+                                        style={{
+                                            flex: 1,
+                                            flexDirection: 'column',
+                                            margin: 7,
+                                            backgroundColor: '#fff',
+                                            height: 90,
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            borderRadius: 20,
+                                            elevation: 5
+                                        }}>
+                                        <Image style={{
+                                            width: 25,
+                                            height: 25,
+                                            tintColor: '#000'
+                                        }} source={require('../assets/provider.png')} alt={'Okay'} />
+                                        <Text style={{ fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10 }}>{item.name}</Text>
+                                    </View>
+                                )}
+                                numColumns={2} />
+                            {/* } */}
+                        </SafeAreaView>
 
-                <View
-                    style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        marginTop: 20,
-                        borderRadius: 25,
-                        alignItems: 'center',
-                        paddingHorizontal: 30
-                    }}>
-                    <Text ellipsizeMode={'tail'} numberOfLines={1}
-                        style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Recent Jobs</Text>
-                    <Pressable style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Jobs')}><Text numberOfLines={1} style={{
-                        fontFamily: 'poppins_light',
-                        fontSize: 12,
-                        marginLeft: 'auto',
-                        backgroundColor: '#d7d7d7',
-                        paddingHorizontal: 10,
-                        paddingVertical: 1,
-                        borderRadius: 10
-                    }}>Show All</Text></Pressable>
-                </View>
-                <SafeAreaView style={{ flex: 1 }}>
-                    <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                        style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
-                            <Pressable onPress={() => navigation.push('JobDetails', { ID: item.id })}
+                        <View
+                            style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                marginTop: 20,
+                                borderRadius: 25,
+                                alignItems: 'center',
+                                paddingHorizontal: 30
+                            }}>
+                            <Text ellipsizeMode={'tail'} numberOfLines={1}
+                                style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Recent Jobs</Text>
+                            <Pressable style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Jobs')}><Text numberOfLines={1} style={{
+                                fontFamily: 'poppins_light',
+                                fontSize: 12,
+                                marginLeft: 'auto',
+                                backgroundColor: '#d7d7d7',
+                                paddingHorizontal: 10,
+                                paddingVertical: 1,
+                                borderRadius: 10
+                            }}>Show All</Text></Pressable>
+                        </View>
+                        {/* {jobLoading ?
+                    <ActivityIndicator size={60} color="#13A3E1" />
+                    :
+                    <> */}
+                        <SafeAreaView style={{ flex: 1 }}>
+
+                            <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                                style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
+                                    <Pressable onPress={() => navigation.push('JobDetails', { ID: item.id })}
+                                        style={{
+                                            flex: 1,
+                                            flexDirection: 'row',
+                                            margin: 5,
+                                            backgroundColor: '#fff',
+                                            borderColor: '#c2c2c2',
+                                            borderWidth: 1,
+                                            height: 50,
+                                            borderRadius: 25,
+                                            elevation: 5,
+                                            alignItems: 'center',
+                                            paddingHorizontal: 20
+                                        }}>
+                                        <Text ellipsizeMode={'tail'} numberOfLines={1}
+                                            style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.title}</Text>
+                                        <Text numberOfLines={1} style={{
+                                            fontFamily: 'poppins_light',
+                                            fontSize: 9,
+                                            marginLeft: 'auto',
+                                            width: 110
+                                        }}>{item.city_name}</Text>
+                                    </Pressable>
+                                )}
+                            />
+                        </SafeAreaView>
+                        {/* </>} */}
+                        <View style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            marginVertical: 20,
+                            marginHorizontal: 35
+                        }}>
+                            <Pressable onPress={() => navigation.push('Cities')}
                                 style={{
-                                    flex: 1,
-                                    flexDirection: 'row',
-                                    margin: 5,
-                                    backgroundColor: '#fff',
+                                    flex: 0.5,
+                                    flexDirection: 'column',
+                                    marginRight: 7,
+                                    backgroundColor: 'white',
                                     borderColor: '#c2c2c2',
-                                    borderWidth: 1,
-                                    height: 50,
-                                    borderRadius: 25,
+                                    // borderWidth: 0.30,
                                     elevation: 5,
+                                    paddingVertical: 19,
+                                    justifyContent: 'center',
                                     alignItems: 'center',
-                                    paddingHorizontal: 20
+                                    borderRadius: 25
                                 }}>
-                                <Text ellipsizeMode={'tail'} numberOfLines={1}
-                                    style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.title}</Text>
-                                <Text numberOfLines={1} style={{
-                                    fontFamily: 'poppins_light',
-                                    fontSize: 9,
-                                    marginLeft: 'auto',
-                                    width: 110
-                                }}>{item.city_name}</Text>
+                                <Text style={{ fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCities"}</Text>
                             </Pressable>
-                        )}
-                    />
-                </SafeAreaView>
-                <View style={{
-                    flex: 1,
-                    flexDirection: 'row',
-                    marginVertical: 20,
-                    marginHorizontal: 35
-                }}>
-                    <Pressable onPress={() => navigation.push('Cities')}
-                        style={{
-                            flex: 0.5,
-                            flexDirection: 'column',
-                            marginRight: 7,
-                            backgroundColor: 'white',
-                            borderColor: '#c2c2c2',
-                            // borderWidth: 0.30,
-                            elevation: 5,
-                            paddingVertical: 19,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            borderRadius: 25
-                        }}>
-                        <Text style={{ fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCities"}</Text>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.push('Companies')}
-                        style={{
-                            flex: 0.5,
-                            flexDirection: 'column',
-                            // marginLeft: 7,
-                            backgroundColor: 'white',
-                            borderColor: '#c2c2c2',
-                            elevation: 5,
-                            // borderWidth: 0.30,
-                            paddingVertical: 19,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            borderRadius: 25
-                        }}>
-                        <Text style={{ fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCompanies"}</Text>
-                    </Pressable>
-                </View>
-                <View style={{ height: 90 }} />
+                            <Pressable onPress={() => navigation.push('Companies')}
+                                style={{
+                                    flex: 0.5,
+                                    flexDirection: 'column',
+                                    // marginLeft: 7,
+                                    backgroundColor: 'white',
+                                    borderColor: '#c2c2c2',
+                                    elevation: 5,
+                                    // borderWidth: 0.30,
+                                    paddingVertical: 19,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    borderRadius: 25
+                                }}>
+                                <Text style={{ fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCompanies"}</Text>
+                            </Pressable>
+                        </View>
+                        <View style={{ height: 90 }} />
+                    </>}
             </ScrollView>
             <View style={{
                 flexDirection: 'row',
