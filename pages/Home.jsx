@@ -312,14 +312,15 @@ function Home({ navigation }) {
                 marginBottom: 15,
                 paddingHorizontal: 20
             }}>
-                <View style={{
+                <Pressable onPress={() => navigation.push('SavedJobs')} style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
 
                     marginLeft: -6,
-                }}>
+                }} >
+                <View >
                     <Image style={{
                         width: 15,
                         height: 20,
@@ -330,13 +331,15 @@ function Home({ navigation }) {
                         style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Saved
                         Jobs</Text>
                 </View>
-                <View style={{
+                </Pressable>
+                <Pressable onPress={() => navigation.push('Resume')} style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
                     marginLeft: -6,
                 }}>
+                <View >
                     <Image style={{
                         width: 25,
                         height: 20,
@@ -346,6 +349,7 @@ function Home({ navigation }) {
                         style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>CV
                         Builder</Text>
                 </View>
+                </Pressable>
                 <View style={{
                     height: '100%',
                     flex: 1,

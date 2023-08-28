@@ -92,18 +92,11 @@ function Resume({ navigation }) {
             </Text>
             <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
               <View style={{ flex: 0.8 }}>
-                <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}>
-                  Address :
-                </Text>
+                <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}> Address :</Text>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_light' }}> 15th Street NewYork, United States </Text>
-                <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}>
-                  About :
+                <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}> About :</Text>
+                <Text style={{ fontSize: 11, fontFamily: 'poppins_regular', marginTop: 3, padding: 0 }}> Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus ea quod esse eius illum!
                 </Text>
-                <Text style={{ fontSize: 11, fontFamily: 'poppins_regular', marginTop: 3, padding: 0 }}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus ea quod esse eius
-                  illum!
-                </Text>
-
               </View>
               <View style={{ display: 'flex', flexDirection: 'column', paddingTop: 6, flex: 0.5 }}>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}>
@@ -196,7 +189,7 @@ function Resume({ navigation }) {
                         </Text>
                         <Text style={{ backgroundColor: '#BDBDBD', height: 1 }} >-</Text>
                       </View>
-                    )} keyExtractor={item => item.toString()} />
+                    )}  />
                 </SafeAreaView>
               </View>
             </View>
@@ -215,7 +208,7 @@ function Resume({ navigation }) {
                     )} />
                 </SafeAreaView>
               </View>
-              <Text style={{ backgroundColor:'black',width:1,marginTop:93 }}> |</Text>
+              <Text style={{ backgroundColor: 'black', width: 1, marginTop: 93 }}> |</Text>
               <View style={{}}>
                 <Text style={{ fontSize: 16, fontFamily: 'poppins_semibold', marginTop: 2, textAlign: 'center', paddingVertical: 20 }}>
                   Langauges
@@ -229,7 +222,7 @@ function Resume({ navigation }) {
                     )} />
                 </SafeAreaView>
               </View>
-              <Text style={{ backgroundColor:'black',width:1,marginTop:93 }}> |</Text>
+              <Text style={{ backgroundColor: 'black', width: 1, marginTop: 93 }}> |</Text>
               <View>
                 <Text style={{ fontSize: 16, fontFamily: 'poppins_semibold', marginTop: 2, textAlign: 'center', paddingVertical: 20 }}>
                   Interests
