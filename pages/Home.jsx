@@ -173,8 +173,10 @@ function Home({ navigation }) {
                         </View>
                         <SafeAreaView style={{ flex: 1 }}>
                              {error ?
-                        <Text>ERROR</Text>
-                        :
+                             <View>
+                                <Image  source={require( '../assets/delete.png')} style={{ width:30,height:30,marginLeft:190,marginBottom:-20,marginTop:40 }} />
+                        <Text style={{ textAlign:'center',marginVertical:20,fontFamily:'poppins_medium' }}>Network Error...!</Text>
+                        </View> :
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginHorizontal: 30, marginTop: 10 }} data={categories} renderItem={({ item }) => (
 
