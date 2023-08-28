@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL: 'http://192.168.1.25:5001'})
+const API = axios.create({ baseURL: 'http://192.168.1.26:5001'})
 
 
 export const register = (name, username, email, phone, address, dob, gender, password) => API.post(`/seekerAuth/register`, {

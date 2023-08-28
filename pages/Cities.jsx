@@ -5,6 +5,10 @@ import Categories from './Categories'
 import Resume from './Resume'
 import {useDispatch, useSelector} from "react-redux";
 import {AllCities} from "../API/actions/cityActions";
+import { ActivityIndicator } from 'react-native'
+import NetworkErrorModal from '../Components/NetworkErrorModal'
+import { useState } from 'react'
+
 
 const data = [
     {"city": "Lahore", "country": 'Pakistan'},
@@ -26,18 +30,29 @@ const data = [
 function Cities({navigation}) {
 
     const cities = useSelector(state => state.city.cities)
-    const isLoading = useSelector(state => state.city.isLoading)
+    const loading = useSelector(state => state.city.isLoading)
     const success = useSelector(state => state.city.success)
+    const network = useSelector(state => state.city.error)
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (!cities){
             dispatch(AllCities())
+         
         }
     }, [dispatch, cities]);
 
+
+
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
+      
+            {loading ?
+             <View style={{ marginTop:400 }}>
+             <ActivityIndicator size={60} color="#13A3E1" />
+             </View> 
+             :
+             <>
         <View style={{backgroundColor: '#F1F1F1'}}>
             <View style={{flexDirection: 'row', height: 90}}>
                 <Pressable onPress={() => toggleVisibility()}><Image style={{
@@ -112,6 +127,8 @@ function Cities({navigation}) {
                 )}/>
             </SafeAreaView>
         </View>
+        </> }
+       
         </ScrollView>
     )
 }
