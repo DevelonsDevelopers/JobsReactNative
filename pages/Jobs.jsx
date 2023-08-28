@@ -34,6 +34,7 @@ function Jobs({ navigation }) {
 
   const JobClick = (id) => {
     recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
+    navigation.push('JobDetails', { ID: id })
   }
 
   useEffect(() => {

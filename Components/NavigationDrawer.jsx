@@ -10,10 +10,10 @@ const NavigationDrawer = ({visible, toggleVisibility, navigation, isLogin, toggl
                       <Text style={{ width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center' }}>Menu</Text>
                       <Pressable style={{ marginLeft: 'auto' }} onPress={() => toggleVisibility()}><Image style={{ width: 15, height: 15, marginLeft: 'auto' }} source={require('../assets/close.png')} /></Pressable>
                   </View>
-                  <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 10 }}>
+                  <Pressable onPress={() => navigation.push('Profile')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 10 }}>
                       <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Profile</Text>
                       <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-                  </View>
+                  </Pressable>
                   <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
                       <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Applied Jobs</Text>
                       <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />

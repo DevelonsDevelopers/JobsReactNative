@@ -150,14 +150,14 @@ function PersonalInfo({navigation}) {
             <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75}}>
                 <View style={{flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1'}}>
                     <View style={{flexDirection: 'row', height: 130}}>
-                        <Image style={{
+                        <Pressable onPress={() => navigation.goBack()}><Image style={{
                             width: 22,
                             height: 20,
                             marginTop: 70,
                             marginLeft: 30,
                             marginBottom: 250,
                             tintColor: '#fff'
-                        }} source={require('../assets/menu.png')} alt={'Okay'}/>
+                        }} source={require('../assets/back_arrow.png')} alt={'Okay'}/></Pressable>
                         <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
                             <Image style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
                                    source={require('../assets/logo.png')} alt={'Okay'}/>

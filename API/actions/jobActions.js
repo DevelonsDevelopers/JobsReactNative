@@ -37,6 +37,7 @@ export const JobByID = (id) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
         const { data: { data } } = await api.fetchJobByID(id);
+        console.log(data)
         dispatch ({ type: GET_JOB, payload: { job: data } })
         dispatch ({ type: SUCCESS })
     } catch (error) {
