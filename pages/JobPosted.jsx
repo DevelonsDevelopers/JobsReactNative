@@ -120,9 +120,9 @@ function JobPosted({ navigation }) {
               <Text style={{ textAlign:"center",fontSize:14,fontFamily:'poppins_medium',paddingVertical:5 }}>{item.category}</Text>
               <View style={{paddingHorizontal:50}}><Text style={{ backgroundColor:'#D9D9D9',textAlign:"center",paddingVertical:6,borderRadius:20,fontSize:12,fontFamily:'poppins_medium' }}>Salary {item.salary}/month</Text></View>
               <View style={{ paddingHorizontal:30,marginTop:14 }}>
-                <Text style={{ backgroundColor:'#143D59',textAlign:"center",paddingVertical:6,borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b1}</Text>
-                <Text style={{ backgroundColor:'#207A00',textAlign:"center",paddingVertical:6,borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b2}</Text>
-                <Text style={{ backgroundColor:'#0098FF',textAlign:"center",paddingVertical:6,borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b3}</Text>
+                <Text style={{ backgroundColor:'#143D59',textAlign:"center",borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b1}</Text>
+                <Text style={{ backgroundColor:'#207A00',textAlign:"center",borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b2}</Text>
+                <Text style={{ backgroundColor:'#0098FF',textAlign:"center",borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b3}</Text>
               </View>
               </View>
 

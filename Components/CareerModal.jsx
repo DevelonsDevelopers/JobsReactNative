@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Modal, Pressable, Text, View } from 'react-native'
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler'
 
-const CareerVisible = ({visible,toggleCareerVisibility }) => {
+const CareerModal = ({visible,toggleCareerVisibility }) => {
   return (
     <Modal visible={visible} animationType={"fade"} transparent={true}>
     <GestureHandlerRootView  style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
@@ -21,4 +21,4 @@ const CareerVisible = ({visible,toggleCareerVisibility }) => {
   )
 }
 
-export default CareerVisible
+export default CareerModal

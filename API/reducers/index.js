@@ -8,5 +8,6 @@ import city from './city'
 import country from './country'
 import company from "./company";
 import job from "./job";
+import cv from "./cv";
 
-export default combineReducers({ category, register, login, seeker, city, country, company, job })
+export default combineReducers({ category, register, login, seeker, city, country, company, job, cv })

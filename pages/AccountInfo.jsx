@@ -1,14 +1,19 @@
 import { Button, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import EducationModal from "../Components/EducationModal";
-import CareerVisible from "../Components/CareerVisible";
-import CourseVisible from "../Components/CourseVisible";
 import SkillModal from "../Components/SkillModal";
 import InterestModal from "../Components/InterestModal";
 import LanguageModal from "../Components/LanguageModal";
 import ResumeModal from "../Components/ResumeModal";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useDispatch, useSelector} from "react-redux";
+import {CVByUser, CVEducation} from "../API/actions/cvActions";
+import CareerModal from "../Components/CareerModal";
+import CourseModal from "../Components/CourseModal";
 
 function AccountInfo({ navigation }) {
+
+    const dispatch = useDispatch()
 
     const [login, isLogin] = useState(false);
     const [education, setEducation] = useState([]);
@@ -27,6 +32,34 @@ function AccountInfo({ navigation }) {
     const [languageVisible, setLanguageVisible] = useState(false)
     const [resumeVisible, setResumeVisible] = useState(false)
 
+    const [trigger, setTrigger] = useState(false)
+
+    const [ID, setID] = useState()
+    const cv = useSelector(state => state.cv.cv);
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
+
+    useEffect(() => {
+        if (ID){
+            dispatch(CVByUser(ID))
+        }
+    }, [ID, trigger])
+
+    useEffect(() => {
+        console.log(cv)
+    }, [cv]);
+
+    const addEducation = (qualification, timeperiod, institute) => {
+        dispatch(CVEducation(cv.id, qualification, timeperiod, institute))
+        setTrigger(!trigger)
+    }
+
     const toggleEducationVisibility = () => setEducationVisible(!educationVisible);
     const toggleCareerVisibility = () => setCareerVisible(!careerVisible);
     const toggleCourseVisibility = () => setCourseVisible(!courseVisible);
@@ -37,13 +70,13 @@ function AccountInfo({ navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
-            <EducationModal visible={educationVisible} toggleEducationVisibility={toggleEducationVisibility} />
-            <CareerVisible visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} />
-            <CourseVisible visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility} />
-            <SkillVisible visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
-            <InterestVisible visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
-            <LanguageVisible visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
-            <ResumeVisible visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
+            <EducationModal visible={educationVisible} toggleEducationVisibility={toggleEducationVisibility} add={addEducation}/>
+            <CareerModal visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} />
+            <CourseModal visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility} />
+            <SkillModal visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
+            <InterestModal visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
+            <LanguageModal visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
+            <ResumeModal visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>
@@ -99,13 +132,13 @@ function AccountInfo({ navigation }) {
                         }}><Text
                             style={{ color: '#000', fontFamily: 'poppins_medium', fontSize: 12 }}>Add</Text></Pressable>
                     </View>
-                    <SafeAreaView style={{ flex: 1, height: 90, justifyContent: 'center', alignItems: 'center' }}>
-                        {education.length === 0 ?
+                    <SafeAreaView style={{ flex: 1, minHeight: 90, justifyContent: 'center', alignItems: 'center' }}>
+                        {cv?.educations.length === 0 ?
                             <Text style={{ fontFamily: 'poppins_light', color: '#a6a6a6' }}>No Education Added</Text>
                             :
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginVertical: 15, width: '100%', paddingHorizontal: 15 }}
-                                data={education}
+                                data={cv?.educations}
                                 renderItem={({ item }) => (
                                     <View
                                         style={{
@@ -122,7 +155,7 @@ function AccountInfo({ navigation }) {
                                         <Text style={{
                                             fontFamily: 'poppins_light',
                                             fontSize: 14,
-                                        }}>{item.name}</Text>
+                                        }}>{item.qualification}</Text>
                                         <Image style={{ width: 15, height: 15, marginLeft: 'auto' }}
                                             source={require('../assets/editIcon.png')} />
                                     </View>
@@ -154,13 +187,13 @@ function AccountInfo({ navigation }) {
                         }}><Text
                             style={{ color: '#000', fontFamily: 'poppins_medium', fontSize: 12 }}>Add</Text></Pressable>
                     </View>
-                    <SafeAreaView style={{ flex: 1, height: 90, justifyContent: 'center', alignItems: 'center' }}>
-                        {career.length === 0 ?
+                    <SafeAreaView style={{ flex: 1, minHeight: 90, justifyContent: 'center', alignItems: 'center' }}>
+                        {cv?.careers.length === 0 ?
                             <Text style={{ fontFamily: 'poppins_light', color: '#a6a6a6' }}>No Career Added</Text>
                             :
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginVertical: 15, width: '100%', paddingHorizontal: 15 }}
-                                data={career}
+                                data={cv?.careers}
                                 renderItem={({ item }) => (
                                     <View
                                         style={{
@@ -209,13 +242,13 @@ function AccountInfo({ navigation }) {
                         }}><Text
                             style={{ color: '#000', fontFamily: 'poppins_medium', fontSize: 12 }}>Add</Text></Pressable>
                     </View>
-                    <SafeAreaView style={{ flex: 1, height: 90, justifyContent: 'center', alignItems: 'center' }}>
-                        {course.length === 0 ?
+                    <SafeAreaView style={{ flex: 1, minHeight: 90, justifyContent: 'center', alignItems: 'center' }}>
+                        {cv?.courses.length === 0 ?
                             <Text style={{ fontFamily: 'poppins_light', color: '#a6a6a6' }}>No Course Added</Text>
                             :
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginVertical: 15, width: '100%', paddingHorizontal: 15 }}
-                                data={course}
+                                data={cv?.courses}
                                 renderItem={({ item }) => (
                                     <View
                                         style={{
@@ -264,13 +297,13 @@ function AccountInfo({ navigation }) {
                         }}><Text
                             style={{ color: '#000', fontFamily: 'poppins_medium', fontSize: 12 }}>Add</Text></Pressable>
                     </View>
-                    <SafeAreaView style={{ flex: 1, height: 90, justifyContent: 'center', alignItems: 'center' }}>
-                        {skill.length === 0 ?
+                    <SafeAreaView style={{ flex: 1, minHeight: 90, justifyContent: 'center', alignItems: 'center' }}>
+                        {cv?.skills.length === 0 ?
                             <Text style={{ fontFamily: 'poppins_light', color: '#a6a6a6' }}>No Skills Added</Text>
                             :
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginVertical: 15, width: '100%', paddingHorizontal: 15 }}
-                                data={skill}
+                                data={cv?.skills}
                                 renderItem={({ item }) => (
                                     <View
                                         style={{
@@ -319,13 +352,13 @@ function AccountInfo({ navigation }) {
                         }}><Text
                             style={{ color: '#000', fontFamily: 'poppins_medium', fontSize: 12 }}>Add</Text></Pressable>
                     </View>
-                    <SafeAreaView style={{ flex: 1, height: 90, justifyContent: 'center', alignItems: 'center' }}>
-                        {interest.length === 0 ?
+                    <SafeAreaView style={{ flex: 1, minHeight: 90, justifyContent: 'center', alignItems: 'center' }}>
+                        {cv?.interests.length === 0 ?
                             <Text style={{ fontFamily: 'poppins_light', color: '#a6a6a6' }}>No Interest Added</Text>
                             :
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginVertical: 15, width: '100%', paddingHorizontal: 15 }}
-                                data={interest}
+                                data={cv?.interests}
                                 renderItem={({ item }) => (
                                     <View
                                         style={{
@@ -374,13 +407,13 @@ function AccountInfo({ navigation }) {
                         }}><Text
                             style={{ color: '#000', fontFamily: 'poppins_medium', fontSize: 12 }}>Add</Text></Pressable>
                     </View>
-                    <SafeAreaView style={{ flex: 1, height: 90, justifyContent: 'center', alignItems: 'center' }}>
-                        {language.length === 0 ?
+                    <SafeAreaView style={{ flex: 1, minHeight: 90, justifyContent: 'center', alignItems: 'center' }}>
+                        {cv?.languages.length === 0 ?
                             <Text style={{ fontFamily: 'poppins_light', color: '#a6a6a6' }}>No Language Added</Text>
                             :
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginVertical: 15, width: '100%', paddingHorizontal: 15 }}
-                                data={language}
+                                data={cv?.languages}
                                 renderItem={({ item }) => (
                                     <View
                                         style={{
@@ -430,13 +463,13 @@ function AccountInfo({ navigation }) {
                         }}><Text
                             style={{ color: '#000', fontFamily: 'poppins_medium', fontSize: 12 }}>Add</Text></Pressable>
                     </View>
-                    <SafeAreaView style={{ flex: 1, height: 90, justifyContent: 'center', alignItems: 'center' }}>
-                        {resume.length === 0 ?
+                    <SafeAreaView style={{ flex: 1, minHeight: 90, justifyContent: 'center', alignItems: 'center' }}>
+                        {cv?.resumes.length === 0 ?
                             <Text style={{ fontFamily: 'poppins_light', color: '#a6a6a6' }}>No Resume Added</Text>
                             :
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginVertical: 15, width: '100%', paddingHorizontal: 15 }}
-                                data={resume}
+                                data={cv?.resumes}
                                 renderItem={({ item }) => (
                                     <View
                                         style={{

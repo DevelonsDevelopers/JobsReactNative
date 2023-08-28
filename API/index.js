@@ -67,3 +67,43 @@ export const recordInteraction = (job, user, query, title, interactiontype) => A
     title: title,
     interactiontype: interactiontype
 })
+
+
+//CV API CALL
+export const fetchCVByUser = (user) => API.post('/cv/user', { user: user })
+export const addCVEducation = (cv, qualification, timeperiod, institute) => API.post('/cvEducation/create', {
+    cv: cv,
+    qualification: qualification,
+    timeperiod: timeperiod,
+    institute: institute
+})
+export const addCVCareer = (cv, company, job, timeperiod, address, phone) => API.post('/cvCareer/create', {
+    cv: cv,
+    company: company,
+    job: job,
+    timeperiod: timeperiod,
+    address: address,
+    phone: phone
+})
+export const addCVCourse = (cv, course, timeperiod, institute) => API.post('/cvCourse/create', {
+    cv: cv,
+    course: course,
+    timeperiod: timeperiod,
+    institute: institute
+})
+export const addCVInterest = (cv, interest) => API.post('/cvInterest/create', {
+    cv: cv,
+    interest: interest
+})
+export const addCVLanguage = (cv, language) => API.post('/cvLanguage/create', {
+    cv: cv,
+    language: language
+})
+export const addCVResume = (cv, resume) => API.post('/cvResume/create', {
+    cv: cv,
+    resume: resume
+})
+export const addCVSkill = (cv, skill) => API.post('/cvSkill/create', {
+    cv: cv,
+    skill: skill
+})

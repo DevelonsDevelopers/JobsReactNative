@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Modal, Pressable, Text, View } from 'react-native'
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler'
 
-const CourseVisible = ({visible,toggleCourseVisibility}) => {
+const CourseModal = ({visible,toggleCourseVisibility}) => {
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true}>
             <GestureHandlerRootView  style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
@@ -19,4 +19,4 @@ const CourseVisible = ({visible,toggleCourseVisibility}) => {
     )
 }
 
-export default CourseVisible
+export default CourseModal
