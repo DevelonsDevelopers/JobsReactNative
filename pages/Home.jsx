@@ -15,6 +15,7 @@ function Home({ navigation }) {
     const recentJobs = useSelector(state => state.job.recentJobs)
     const loading = useSelector(state => state.category.isLoading)
     const jobLoading = useSelector(state => state.job.isLoading)
+    const error = useSelector(state => state.category.error)
 
 
     const [loginval, setLoginVal] = useState('')
@@ -143,7 +144,7 @@ function Home({ navigation }) {
                     }}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Log In</Text></Pressable>
                 }
 
-                {isloading ? 
+                {isloading ?
                <View style={{ marginTop:100 }}>
                <ActivityIndicator size={60} color="#13A3E1" />
                </View>
@@ -171,10 +172,9 @@ function Home({ navigation }) {
                             }}>Show All</Text></Pressable>
                         </View>
                         <SafeAreaView style={{ flex: 1 }}>
-                            {/* {loading ?
-                        <ActivityIndicator size={60} color="#13A3E1" />
-
-                        : */}
+                             {error ?
+                        <Text>ERROR</Text>
+                        :
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginHorizontal: 30, marginTop: 10 }} data={categories} renderItem={({ item }) => (
 
@@ -199,7 +199,7 @@ function Home({ navigation }) {
                                     </View>
                                 )}
                                 numColumns={2} />
-                            {/* } */}
+                             }
                         </SafeAreaView>
 
                         <View

@@ -7,7 +7,16 @@ import LanguageModal from "../Components/LanguageModal";
 import ResumeModal from "../Components/ResumeModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDispatch, useSelector} from "react-redux";
-import {CVByUser, CVEducation} from "../API/actions/cvActions";
+import {
+    CVByUser,
+    CVCareer,
+    CVCourse,
+    CVEducation,
+    CVInterest,
+    CVLanguage,
+    CVResume,
+    CVSkill
+} from "../API/actions/cvActions";
 import CareerModal from "../Components/CareerModal";
 import CourseModal from "../Components/CourseModal";
 
@@ -60,6 +69,36 @@ function AccountInfo({ navigation }) {
         setTrigger(!trigger)
     }
 
+    const addCareer = (company, job, timeperiod, address, phone) => {
+        dispatch(CVCareer(cv.id, company, job, timeperiod, address, phone))
+        setTrigger(!trigger)
+    }
+
+    const addCourse = (course, timeperiod, institute) => {
+        dispatch(CVCourse(cv.id, course, timeperiod, institute))
+        setTrigger(!trigger)
+    }
+
+    const addInterest = (interest) => {
+        dispatch(CVInterest(cv, interest))
+        setTrigger(!trigger)
+    }
+
+    const addLanguage = (language) => {
+        dispatch(CVLanguage(cv.id, language))
+        setTrigger(!trigger)
+    }
+
+    const addResume = (resume) => {
+        dispatch(CVResume(cv.id, resume))
+        setTrigger(!trigger)
+    }
+
+    const addSkill = (skill) => {
+        dispatch(CVSkill(cv.id, skill))
+        setTrigger(!trigger)
+    }
+
     const toggleEducationVisibility = () => setEducationVisible(!educationVisible);
     const toggleCareerVisibility = () => setCareerVisible(!careerVisible);
     const toggleCourseVisibility = () => setCourseVisible(!courseVisible);
@@ -71,12 +110,12 @@ function AccountInfo({ navigation }) {
     return (
         <View style={{ flex: 1 }}>
             <EducationModal visible={educationVisible} toggleEducationVisibility={toggleEducationVisibility} add={addEducation}/>
-            <CareerModal visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} />
-            <CourseModal visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility} />
-            <SkillModal visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} />
-            <InterestModal visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} />
-            <LanguageModal visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} />
-            <ResumeModal visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} />
+            <CareerModal visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} add={addCareer}/>
+            <CourseModal visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility} add={addCourse}/>
+            <SkillModal visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility} add={addSkill}/>
+            <InterestModal visible={interestVisible} toggleInterestVisibility={toggleInterestVisibility} add={addInterest}/>
+            <LanguageModal visible={languageVisible} toggleLanguageVisibility={toggleLanguageVisibility} add={addLanguage}/>
+            <ResumeModal visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility} add={addResume}/>
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>
