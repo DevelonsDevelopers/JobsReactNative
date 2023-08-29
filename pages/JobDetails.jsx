@@ -1,9 +1,10 @@
 import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator} from "react-native";
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {View} from 'react-native'
 import {useDispatch, useSelector} from "react-redux";
 import {JobByID} from "../API/actions/jobActions";
 import moment from "moment";
+import {RESET} from "../Utils/Constants";
 
 const JobDetails = ({route, navigation}) => {
 
@@ -11,11 +12,20 @@ const JobDetails = ({route, navigation}) => {
 
     const job = useSelector(state => state.job.job)
     const loading = useSelector(state => state.job.isLoading)
+    const success = useSelector(state => state.job.success)
     const dispatch = useDispatch()
+    const [isloading, setIsLoading] = useState(true)
 
     useEffect(() => {
         dispatch(JobByID(ID))
     }, [dispatch]);
+
+    useEffect(() => {
+        if (success){
+            setIsLoading(false)
+            dispatch({ type: RESET })
+        }
+    }, [success]);
 
     useEffect(() => {
         console.log(job)
@@ -49,7 +59,7 @@ const JobDetails = ({route, navigation}) => {
                         padding: 0
                     }}>{job?.title}</Text>
                 </View>
-                {loading ?
+                {isloading ?
                     <View style={{marginTop: 300}}>
                         <ActivityIndicator size={60} color="#13A3E1"/></View>
                     : <>

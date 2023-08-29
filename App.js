@@ -44,6 +44,9 @@ import SavedJobs from './pages/SavedJobs';
 import Search from './pages/Search';
 import RecommendedUser from './pages/RecommendedUser';
 import Test from './pages/Test';
+import JobsByCity from "./pages/JobsByCity";
+import JobsByCategory from "./pages/JobsByCategory";
+import JobsByCompany from "./pages/JobsByCompany";
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
@@ -97,6 +100,9 @@ function App() {
                     <Stack.Screen name="Contactus" component={Contactus} options={{title: "Contactus", headerShown: false}}/>
                     <Stack.Screen name="History" component={History} options={{title: "History", headerShown: false}}/>
                     <Stack.Screen name="Jobs" component={Jobs} options={{title: "Jobs", headerShown: false}}/>
+                    <Stack.Screen name="JobsByCity" component={JobsByCity} options={{title: "JobsByCity", headerShown: false}}/>
+                    <Stack.Screen name="JobsByCategory" component={JobsByCategory} options={{title: "JobsByCategory", headerShown: false}}/>
+                    <Stack.Screen name="JobsByCompany" component={JobsByCompany} options={{title: "JobsByCompany", headerShown: false}}/>
                     <Stack.Screen name="Resume" component={Resume} options={{title: "Resume", headerShown: false}}/>
                     <Stack.Screen name="Offers" component={Offers} options={{title: "Offers", headerShown: false}}/>
                     <Stack.Screen name="JobDetails" component={JobDetails} options={{title: "JobDetails", headerShown: false}}/>

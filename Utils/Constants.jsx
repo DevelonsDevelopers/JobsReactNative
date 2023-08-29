@@ -3,6 +3,7 @@ export const LOADING = "LOADING"
 export const SUCCESS = "SUCCESS"
 export const ERROR = "ERROR"
 export const NODATA = "NODATA"
+export const RESET = "RESET"
 
 export const REGISTER = "REGISTER"
 

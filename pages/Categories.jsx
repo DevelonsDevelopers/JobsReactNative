@@ -57,7 +57,7 @@ function Categories({navigation}) {
                 <SafeAreaView>
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                               style={{marginHorizontal: 20}} data={categories} renderItem={({item}) => (
-                        <View style={{
+                        <Pressable onPress={() => navigation.push('JobsByCategory', { CATID: item.id })} style={{
                             flex: 1,
                             backgroundColor: '#fff',
                             height: 120,
@@ -70,7 +70,7 @@ function Categories({navigation}) {
                             <Image style={{width: 40, height: 40, marginTop: 5}}
                                    source={require('../assets/marketing.png')}/>
                             <Text style={{fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 12}}>{item.name}</Text>
-                        </View>
+                        </Pressable>
                     )}
                               numColumns={2}/>
                 </SafeAreaView>

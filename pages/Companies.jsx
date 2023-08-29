@@ -25,7 +25,7 @@ function Companies({ navigation }) {
         if (!companies) {
             dispatch(AllCompanies())
         }
-    }, [dispatch, companies]);
+    }, [dispatch, navigation, companies]);
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
@@ -74,7 +74,7 @@ function Companies({ navigation }) {
                         <SafeAreaView>
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginHorizontal: 0, marginTop: 10 }} data={companies} renderItem={({ item }) => (
-                                    <View style={{
+                                    <Pressable onPress={() => navigation.push('JobsByCompany', { COMID: item.id })} style={{
                                         marginLeft: 25,
                                         marginRight: 25,
                                         borderWidth: 0.5,
@@ -94,7 +94,7 @@ function Companies({ navigation }) {
                                             fontFamily: 'poppins_semibold',
                                             marginLeft: 20
                                         }}>{item.name}</Text>
-                                    </View>
+                                    </Pressable>
                                 )} />
                         </SafeAreaView>
                     </View>

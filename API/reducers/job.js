@@ -1,6 +1,16 @@
-import {ALL_JOBS, ERROR, GET_JOB, LOADING, NODATA, RECENT_JOBS, SUCCESS} from "../../Utils/Constants";
+import {
+    ALL_JOBS,
+    ERROR,
+    GET_JOB,
+    GET_JOBS_BY_CATEGORY,
+    GET_JOBS_BY_CITY, GET_JOBS_BY_COMPANY,
+    LOADING,
+    NODATA,
+    RECENT_JOBS, RESET,
+    SUCCESS
+} from "../../Utils/Constants";
 
-const job = (state = {isLoading: true, jobLoading: true, success: false, error: false, nodata: false}, action) => {
+const job = (state = {isLoading: true, success: false, error: false, nodata: false}, action) => {
     switch (action.type){
         case LOADING:
             return {...state, isLoading: true, success: false, error: false, nodata: false}
@@ -15,7 +25,15 @@ const job = (state = {isLoading: true, jobLoading: true, success: false, error: 
         case RECENT_JOBS:
             return {...state, recentJobs: action.payload.recentJobs}
         case GET_JOB:
-            return {...state, jobLoading: false, job: action.payload.job}
+            return {...state, job: action.payload.job}
+        case GET_JOBS_BY_CITY:
+            return {...state, cityJobs: action.payload.cityJobs}
+        case GET_JOBS_BY_CATEGORY:
+            return {...state, categoryJobs: action.payload.categoryJobs}
+        case GET_JOBS_BY_COMPANY:
+            return {...state, companyJobs: action.payload.companyJobs}
+        case RESET:
+            return {...state, isLoading: true, success: false, error: false, nodata: false}
         default:
             return state
     }
