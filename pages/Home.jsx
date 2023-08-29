@@ -225,10 +225,11 @@ function Home({ navigation }) {
                                 borderRadius: 10
                             }}>Show All</Text></Pressable>
                         </View>
-                        {/* {jobLoading ?
-                    <ActivityIndicator size={60} color="#13A3E1" />
-                    :
-                    <> */}
+                        {error ?
+                             <View>
+                                <Image  source={require( '../assets/delete.png')} style={{ width:30,height:30,marginLeft:190,marginBottom:-20,marginTop:40 }} />
+                        <Text style={{ textAlign:'center',marginVertical:20,fontFamily:'poppins_medium' }}>Network Error...!</Text>
+                        </View> : <>
                         <SafeAreaView style={{ flex: 1 }}>
 
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
@@ -259,7 +260,7 @@ function Home({ navigation }) {
                                 )}
                             />
                         </SafeAreaView>
-                        {/* </>} */}
+                         </>} 
                         <View style={{
                             flex: 1,
                             flexDirection: 'row',
@@ -311,14 +312,15 @@ function Home({ navigation }) {
                 marginBottom: 15,
                 paddingHorizontal: 20
             }}>
-                <View style={{
+                <Pressable onPress={() => navigation.push('SavedJobs')} style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
 
                     marginLeft: -6,
-                }}>
+                }} >
+                <View >
                     <Image style={{
                         width: 15,
                         height: 20,
@@ -329,13 +331,15 @@ function Home({ navigation }) {
                         style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Saved
                         Jobs</Text>
                 </View>
-                <View style={{
+                </Pressable>
+                <Pressable onPress={() => navigation.push('Resume')} style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
                     justifyContent: 'center',
                     marginLeft: -6,
                 }}>
+                <View >
                     <Image style={{
                         width: 25,
                         height: 20,
@@ -345,6 +349,7 @@ function Home({ navigation }) {
                         style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>CV
                         Builder</Text>
                 </View>
+                </Pressable>
                 <View style={{
                     height: '100%',
                     flex: 1,
