@@ -34,7 +34,7 @@ const SkillModal = ({visible, toggleSkillVisibility, add}) => {
                         style={{width: 15, height: 15, marginLeft: 'auto'}}
                         source={require('../assets/close.png')}/></Pressable>
                     <Text style={{fontSize: 16, fontFamily: 'poppins_bold'}}>Skills</Text>
-                    <TextInput onChangeText={text => setSkill(text)} placeholder={'Skill No 1'} style={{
+                    <TextInput onChangeText={text => setSkill(text)} placeholder={'Enter Your Skills'} style={{
                         width: '80%',
                         marginTop: 20,
                         borderColor: '#adadad',

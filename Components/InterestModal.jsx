@@ -34,7 +34,7 @@ const InterestModal = ({visible, toggleInterestVisibility, add}) => {
                         style={{width: 15, height: 15, marginLeft: 'auto'}}
                         source={require('../assets/close.png')}/></Pressable>
                     <Text style={{fontSize: 16, fontFamily: 'poppins_bold'}}>Interests</Text>
-                    <TextInput onChangeText={text => setInterest(text)} placeholder={'Interest No 1'} style={{
+                    <TextInput onChangeText={text => setInterest(text)} placeholder={'Enter Your Interest'} style={{
                         width: '80%',
                         marginTop: 20,
                         borderColor: '#adadad',

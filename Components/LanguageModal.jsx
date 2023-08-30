@@ -34,7 +34,7 @@ const LanguageModal = ({visible, toggleLanguageVisibility, add}) => {
                         style={{width: 15, height: 15, marginLeft: 'auto'}}
                         source={require('../assets/close.png')}/></Pressable>
                     <Text style={{fontSize: 16, fontFamily: 'poppins_bold'}}>Languages</Text>
-                    <TextInput onChangeText={text => setLanguage(text)} placeholder={'Language No 1'} style={{
+                    <TextInput onChangeText={text => setLanguage(text)} placeholder={'Enter Your Language'} style={{
                         width: '80%',
                         marginTop: 20,
                         borderColor: '#adadad',
