@@ -45,6 +45,7 @@ function Resume({ navigation }) {
 
   const [ID, setID] = useState()
   const cv = useSelector(state => state.cv.cv);
+ 
 
   useEffect(() => {
     GetData()
@@ -85,7 +86,7 @@ function Resume({ navigation }) {
         <View style={{ padding: 15, marginTop: 0 }}>
           <View style={{ backgroundColor: '#fff', padding: 13, }}>
             <Text style={{ fontSize: 19, fontWeight: 800, fontFamily: 'poppins_bold', textAlign: 'center' }}>
-              Jack Donaldson
+              {cv?.name}
             </Text>
             <Text style={{ fontSize: 12, fontWeight: 400, fontFamily: 'poppins_light', textAlign: 'center' }}>
               App Developer
@@ -93,20 +94,20 @@ function Resume({ navigation }) {
             <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
               <View style={{ flex: 0.8 }}>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}> Address :</Text>
-                <Text style={{ fontSize: 13, fontFamily: 'poppins_light' }}> 15th Street NewYork, United States </Text>
+                <Text style={{ fontSize: 13, fontFamily: 'poppins_light' }}> {cv?.address} </Text>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}> About :</Text>
-                <Text style={{ fontSize: 11, fontFamily: 'poppins_regular', marginTop: 3, padding: 0 }}> Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo delectus ea quod esse eius illum!
+                <Text style={{ fontSize: 11, fontFamily: 'poppins_regular', marginTop: 3, padding: 0 }}>{cv?.statement }
                 </Text>
               </View>
               <View style={{ display: 'flex', flexDirection: 'column', paddingTop: 6, flex: 0.5 }}>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}>
                   Phone :
                 </Text>
-                <Text>656-923-0000 </Text>
+                <Text>{cv?.phone} </Text>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}>
                   Email :
                 </Text>
-                <Text> jackdon368@gmail.com</Text>
+                <Text> {cv?.email} </Text>
               </View>
             </View>
             <View style={{ width: 335, marginTop: 10, marginBottom: 10, marginLeft: 10, marginRight: 10, height: 2.5, elevation: 2, backgroundColor: '#BDBDBD', borderColor: 'black' }}>
@@ -117,11 +118,11 @@ function Resume({ navigation }) {
               </Text>
               <ScrollView>
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                  data={data} renderItem={({ item }) => (
+                  data={cv?.careers} renderItem={({ item }) => (
                     <View>
                       <View >
                         <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', marginTop: 3, fontSize: 12 }}>
-                          {item.timeperiod}
+                          {item.timeperiod }
                         </Text>
                         <Text style={{ fontSize: 13, fontFamily: 'poppins_semibold', marginRight: 6 }}>
                           {item.job}
@@ -150,17 +151,17 @@ function Resume({ navigation }) {
                 </Text>
                 <SafeAreaView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                    data={education} renderItem={({ item }) => (
+                    data={cv?.educations} renderItem={({ item }) => (
                       <View style={{ flex: 1 }}>
                         <Text style={{ fontSize: 11, fontFamily: 'poppins_regular', paddingTop: 2.5 }}>
-                          {item.period}
+                          {item.institute}
                         </Text>
                         <Text style={{ fontSize: 13, fontFamily: 'poppins_semibold', }}>
-                          {item.qualification}
+                          {item.qualification }
                         </Text>
                         <View style={{ display: 'flex', flexDirection: 'row', paddingTop: 0, paddingBottom: 0, }}>
                           <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', margin: 0, padding: 0 }}>
-                            {item.institute}
+                            {item.timeperiod}
                           </Text>
                         </View>
                         <Text style={{ backgroundColor: '#BDBDBD', height: 1 }} >-</Text>
@@ -175,11 +176,11 @@ function Resume({ navigation }) {
                 </Text>
                 <SafeAreaView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                    data={course} renderItem={({ item }) => (
+                    data={cv?.courses} renderItem={({ item }) => (
                       <View style={{ flex: 1 }}>
 
                         <Text style={{ fontSize: 11, fontFamily: 'poppins_regular', paddingTop: 2.5, textAlign: 'right' }}>
-                          {item.timeperiod}
+                          {item.timeperiod }
                         </Text>
                         <Text style={{ fontSize: 13, fontFamily: 'poppins_semibold', textAlign: 'right' }}>
                           {item.course}
@@ -189,7 +190,7 @@ function Resume({ navigation }) {
                         </Text>
                         <Text style={{ backgroundColor: '#BDBDBD', height: 1 }} >-</Text>
                       </View>
-                    )}  />
+                    )} />
                 </SafeAreaView>
               </View>
             </View>
@@ -201,7 +202,7 @@ function Resume({ navigation }) {
                 </Text>
                 <SafeAreaView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                    data={skills} renderItem={({ item }) => (
+                    data={cv?.skills} renderItem={({ item }) => (
                       <Text style={{ fontSize: 13, fontFamily: 'poppins_regular', flex: 1, marginTop: 10, textAlign: 'left' }}>
                         {item.skill}
                       </Text>
@@ -215,7 +216,7 @@ function Resume({ navigation }) {
                 </Text>
                 <SafeAreaView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                    data={languages} renderItem={({ item }) => (
+                    data={cv?.languages} renderItem={({ item }) => (
                       <Text style={{ fontSize: 13, fontFamily: 'poppins_regular', flex: 1, marginTop: 10, textAlign: 'center' }}>
                         {item.language}
                       </Text>
@@ -229,7 +230,7 @@ function Resume({ navigation }) {
                 </Text>
                 <SafeAreaView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                    data={Interests} renderItem={({ item }) => (
+                    data={cv?.interests} renderItem={({ item }) => (
                       <Text style={{ fontSize: 13, fontFamily: 'poppins_regular', flex: 1, marginTop: 10, textAlign: 'right' }}>
                         {item.interest}
                       </Text>
