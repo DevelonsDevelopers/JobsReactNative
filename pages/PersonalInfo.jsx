@@ -91,7 +91,6 @@ function PersonalInfo({ navigation }) {
 
     const update = () => {
         dispatch(updateSeeker(seekerData.name, seekerData.city, seekerData.country, seekerData.username, seekerData.phone, seekerData.address, seekerData.dob, seekerData.gender, seekerData.id))
-        
         toggleLoadingVisibility()
     }
 
@@ -108,7 +107,7 @@ function PersonalInfo({ navigation }) {
     //         BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
     //     };
     // }, []);
-
+    
 // loading============
 const [loadingVisible, setLoadingVisible] = useState(false)
 const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);

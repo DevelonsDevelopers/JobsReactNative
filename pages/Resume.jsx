@@ -107,7 +107,7 @@ function Resume({ navigation }) {
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}>
                   Email :
                 </Text>
-                <Text> {cv?.email} </Text>
+                <Text > {cv?.email} </Text>
               </View>
             </View>
             <View style={{ width: 335, marginTop: 10, marginBottom: 10, marginLeft: 10, marginRight: 10, height: 2.5, elevation: 2, backgroundColor: '#BDBDBD', borderColor: 'black' }}>
