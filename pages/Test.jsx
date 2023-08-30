@@ -20,6 +20,7 @@ const data = [
 const FirstRoute = () => (
 
   <GestureHandlerRootView>
+    <ScrollView>
     <FlatList nestedScrollEnabled={false} scrollEnabled={false}
       style={{ marginHorizontal: 0, marginTop: 10 }} data={data1} renderItem={({ item }) => (
         <View style={{
@@ -75,11 +76,13 @@ const FirstRoute = () => (
 
         </View>
       )} />
+      </ScrollView>
  </GestureHandlerRootView>
 );
 
 const SecondRoute = () => (
   <GestureHandlerRootView>
+    <ScrollView>
     <FlatList nestedScrollEnabled={false} scrollEnabled={false}
             style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
               <View style={{
@@ -143,6 +146,7 @@ const SecondRoute = () => (
 
               </View>
             )} />
+            </ScrollView>
   </GestureHandlerRootView>
 );
 
@@ -156,7 +160,7 @@ export default function Test({navigation}) {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'Saved Job', title: 'Saved Job' },
+    { key: 'Saved Job', title: 'Saved Job'  },
     { key: 'Applied job', title: 'Applied job' },
   ]);
 
