@@ -50,7 +50,7 @@ function Profile({ navigation }) {
                                    source={require('../assets/logo.png')} alt={'Okay'}/>
                         </View>
                     </View>
-                    <Text numberOfLines={1} ellipsizeMode={"tail"} style={{color: '#fff', fontSize: 30, fontFamily: 'poppins_bold', textAlign: 'center', marginTop: 10, marginHorizontal: 20}}>{seeker?.name}</Text>
+                    <Text  ellipsizeMode={"tail"} style={{color: '#fff', fontSize: 30, fontFamily: 'poppins_bold', textAlign: 'center', marginTop: 10, marginHorizontal: 20,paddingBottom:20}}>{seeker?.name}</Text>
                 </View>
                 <View style={{ backgroundColor: '#fff', paddingVertical: 20, marginHorizontal: 10, marginRight: 30, marginLeft: 30, borderRadius: 30, marginTop: -20 }}>
                     <Text style={{color: '#000', fontSize: 16, fontFamily: 'poppins_medium', width: '100%', textAlign: 'center'}}>{seeker?.phone}</Text>
