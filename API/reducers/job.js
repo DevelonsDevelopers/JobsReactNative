@@ -3,7 +3,7 @@ import {
     ERROR,
     GET_JOB,
     GET_JOBS_BY_CATEGORY,
-    GET_JOBS_BY_CITY, GET_JOBS_BY_COMPANY,
+    GET_JOBS_BY_CITY, GET_JOBS_BY_COMPANY, GET_RECOMMENDED_JOBS, JOB_SEARCH,
     LOADING,
     NODATA,
     RECENT_JOBS, RESET,
@@ -32,6 +32,8 @@ const job = (state = {isLoading: true, success: false, error: false, nodata: fal
             return {...state, categoryJobs: action.payload.categoryJobs}
         case GET_JOBS_BY_COMPANY:
             return {...state, companyJobs: action.payload.companyJobs}
+        case GET_RECOMMENDED_JOBS:
+            return {...state, recommendedJobs: action.payload.recommendedJobs}
         case RESET:
             return {...state, isLoading: true, success: false, error: false, nodata: false}
         default:

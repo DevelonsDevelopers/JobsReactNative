@@ -56,10 +56,27 @@ export const fetchAllCompanies = () => API.get('/companies/all')
 //JOBS API CALL
 export const fetchAllJobs = () => API.get('/jobs/all')
 export const fetchRecentJobs = () => API.get('/jobs/recent')
+export const fetchRecommendedJobs = (tag) => API.post('/jobs/recommended', { tag: tag })
 export const fetchJobByID = (id) => API.post('/jobs/get', { id: id })
 export const fetchJobByCategory = (id) => API.post('/jobs/category', { category: id })
 export const fetchJobByCity = (id) => API.post('/jobs/city', { city: id })
 export const fetchJobByCompany = (id) => API.post('/jobs/company', { company: id })
+export const fetchSearchJob = (search, country, category, city, company, salaryStart, salaryEnd, type, isCountry, isCategory, isCity, isCompany, isSalary, isType) => API.post('/jobs/search', {
+    search: search,
+    country: country,
+    category: category,
+    city: city,
+    company: company,
+    salaryStart: salaryStart,
+    salaryEnd: salaryEnd,
+    type: type,
+    isCountry: isCountry,
+    isCategory: isCategory,
+    isCity: isCity,
+    isCompany: isCompany,
+    isSalary: isSalary,
+    isType: isType,
+})
 
 
 //INTERACTIONS API CALL
@@ -70,6 +87,7 @@ export const recordInteraction = (job, user, query, title, interactiontype) => A
     title: title,
     interactiontype: interactiontype
 })
+export const fetchInteractionsByUser = (user) => API.post('/interactions/user', { user: user })
 
 
 //CV API CALL
@@ -109,4 +127,10 @@ export const addCVResume = (cv, resume) => API.post('/cvResume/create', {
 export const addCVSkill = (cv, skill) => API.post('/cvSkill/create', {
     cv: cv,
     skill: skill
+})
+
+
+//TAGS API CALL
+export const fetchtopTags = (user) => API.post('/tags/top', {
+    user: user
 })

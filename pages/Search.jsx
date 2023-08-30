@@ -147,7 +147,7 @@ function Search({ navigation }) {
                     </SafeAreaView>
                 </View>
             </ScrollView>
-            <BottomSheet isOpen sliderMaxHeight={800}>
+            <BottomSheet isOpen={false} sliderMaxHeight={800}>
                 {(onScrollEndDrag) => (
                     <ScrollView onScrollEndDrag={onScrollEndDrag}>
                         {/*{[...Array(10)].map((_, index) => (*/}
@@ -220,7 +220,7 @@ function Search({ navigation }) {
                                     <Pressable onPress={() => setReomote(!remote)} style={remote ? { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
                                         <Text style={remote ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray' } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'white', }}>Remote</Text>
                                     </Pressable>
-                                   
+
                                 </View>
                             </View>
 

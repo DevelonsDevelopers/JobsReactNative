@@ -9,5 +9,7 @@ import country from './country'
 import company from "./company";
 import job from "./job";
 import cv from "./cv";
+import tag from "./tag";
+import interactions from "./interactions";
 
-export default combineReducers({ category, register, login, seeker, city, country, company, job, cv })
+export default combineReducers({ category, register, login, seeker, city, country, company, job, cv, tag, interactions })

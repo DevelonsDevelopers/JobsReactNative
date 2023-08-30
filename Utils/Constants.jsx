@@ -41,6 +41,8 @@ export const GET_JOBS_BY_CATEGORY = "GET_JOBS_BY_CATEGORY";
 export const GET_JOBS_BY_COUNTRY = "GET_JOBS_BY_COUNTRY";
 export const GET_JOBS_BY_CITY = "GET_JOBS_BY_CITY";
 export const GET_JOBS_BY_COMPANY = "GET_JOBS_BY_COMPANY";
+export const GET_RECOMMENDED_JOBS = "GET_RECOMMENDED_JOBS"
+export const JOB_SEARCH = "JOB_SEARCH";
 
 
 //INTERACTIONS:=====
@@ -66,6 +68,9 @@ export const ALL_SEEKERS = "ALL_SEEKERS";
 export const GET_SEEKER = "GET_SEEKER";
 export const UPDATE_SEEKER = "UPDATE_SEEKER";
 
+//Tags:=========
+export const GET_ALL_TAGS = "GET_ALL_TAGS";
+export const GET_TOP_TAGS = "GET_TOP_TAGS";
 
 //APPLIED:=====
 export const ALL_APPLIED = "ALL_APPLIED";
