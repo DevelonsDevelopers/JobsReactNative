@@ -5,7 +5,7 @@ export const AllCategories = () => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
         const { data: { data } } = await api.fetchAllCategories();
-        if (data.length > 0) {
+        if (data.length === 0) {
             dispatch({type: ALL_CATEGORIES, payload: {categories: data}})
             dispatch({type: SUCCESS})
         } else {

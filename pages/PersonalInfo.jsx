@@ -46,6 +46,17 @@ function PersonalInfo({navigation}) {
     const cities = useSelector(state => state.city.cities)
     const countries = useSelector(state => state.country.countries)
     const success = useSelector(state => state.seeker.success)
+
+const [loading,setLoading] = useState(false)
+
+useEffect(()=>{
+if (seeker && cities && countries && success == 'false' ) {
+    setLoading(true)
+} else {
+    setLoading(false)
+}
+},[ seeker ,cities ,countries ,success])
+
     const dispatch = useDispatch();
     const [ID, setID] = useState()
     const [seekerData, setSeekerData] = useState({
@@ -333,6 +344,12 @@ function PersonalInfo({navigation}) {
                         paddingTop: 1
                     }}>Complete Your Profile</Text>
                 </View>
+                {loading ?
+               <View style={{ marginTop:200 }}>
+               <ActivityIndicator size={60} color="#13A3E1" />
+               </View>
+                    :
+                    <> 
                 <View style={{
                     flexDirection: 'column',
                     borderColor: '#b2b2b2',
@@ -669,7 +686,9 @@ function PersonalInfo({navigation}) {
                     marginTop: 15,
                     marginHorizontal: 25
                 }}><Text style={{color: '#000', fontWeight: '800', fontSize: 15}}>Change Password</Text></Pressable>
+        </>}
             </ScrollView>
+
         </View>
     )
 }

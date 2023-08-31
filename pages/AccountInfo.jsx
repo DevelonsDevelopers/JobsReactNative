@@ -1,4 +1,4 @@
-import {Button, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
+import {ActivityIndicator, Button, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import EducationModal from "../Components/EducationModal";
 import SkillModal from "../Components/SkillModal";
@@ -45,6 +45,7 @@ function AccountInfo({navigation}) {
 
     const [ID, setID] = useState()
     const cv = useSelector(state => state.cv.cv);
+    const loading = useSelector(state => state.cv.isLoading);
 
     useEffect(() => {
         GetData()
@@ -151,6 +152,12 @@ function AccountInfo({navigation}) {
                         marginHorizontal: 100
                     }}><Text style={{color: '#000', fontWeight: '800', fontSize: 15}}>Build CV</Text></Pressable>
                 </View>
+                {loading ?
+               <View style={{ marginTop:200 }}>
+               <ActivityIndicator size={60} color="#13A3E1" />
+               </View>
+                    :
+                    <> 
                 <View style={{
                     flexDirection: 'column',
                     borderColor: '#b2b2b2',
@@ -539,6 +546,7 @@ function AccountInfo({navigation}) {
                         }
                     </SafeAreaView>
                 </View>
+                </>}
             </ScrollView>
         </View>
     )

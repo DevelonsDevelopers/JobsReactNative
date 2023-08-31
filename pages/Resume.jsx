@@ -1,4 +1,4 @@
-import { Image, Text, ScrollView, FlatList, Pressable, SafeAreaView } from 'react-native'
+import { Image, Text, ScrollView, FlatList, Pressable, SafeAreaView, ActivityIndicator } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
@@ -45,6 +45,7 @@ function Resume({ navigation }) {
 
   const [ID, setID] = useState()
   const cv = useSelector(state => state.cv.cv);
+  const loading = useSelector(state => state.cv.isLoading);
  
 
   useEffect(() => {
@@ -63,6 +64,12 @@ function Resume({ navigation }) {
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+         {loading ?
+               <View style={{ marginTop:400 }}>
+               <ActivityIndicator size={60} color="#13A3E1" />
+               </View>
+                    :
+                    <>
       <View style={{ backgroundColor: '#EAEAEA' }}>
         <View style={{ flexDirection: 'row', height: 90 }}>
           <Image style={{
@@ -95,9 +102,7 @@ function Resume({ navigation }) {
               <View style={{ flex: 0.8 }}>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}> Address :</Text>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_light' }}> {cv?.address} </Text>
-                <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}> About :</Text>
-                <Text style={{ fontSize: 11, fontFamily: 'poppins_regular', marginTop: 3, padding: 0 }}>{cv?.statement }
-                </Text>
+               
               </View>
               <View style={{ display: 'flex', flexDirection: 'column', paddingTop: 6, flex: 0.5 }}>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}>
@@ -110,6 +115,11 @@ function Resume({ navigation }) {
                 <Text > {cv?.email} </Text>
               </View>
             </View>
+            <View>
+                <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}> About :</Text>
+                <Text style={{ fontSize: 13, fontFamily: 'poppins_light', marginLeft:5 }}>{cv?.statement }
+                </Text>
+                </View>
             <View style={{ width: 335, marginTop: 10, marginBottom: 10, marginLeft: 10, marginRight: 10, height: 2.5, elevation: 2, backgroundColor: '#BDBDBD', borderColor: 'black' }}>
             </View>
             <View>
@@ -241,6 +251,7 @@ function Resume({ navigation }) {
           </View>
         </View>
       </View>
+      </>}
     </ScrollView>
   )
 }

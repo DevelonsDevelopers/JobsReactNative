@@ -1,4 +1,4 @@
-import {FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
+import {ActivityIndicator, FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchSeeker} from "../API/actions/seekerActions";
@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 function Profile({ navigation }) {
 
     const seeker = useSelector(state => state.seeker.seeker)
+    const loading = useSelector(state => state.seeker.isLoading)
     const dispatch = useDispatch();
     const [ID, setID] = useState()
 
@@ -34,6 +35,12 @@ function Profile({ navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
+   {loading ?
+               <View style={{ marginTop:400 }}>
+               <ActivityIndicator size={60} color="#13A3E1" />
+               </View>
+                    :
+                    <> 
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
                 <View style={{flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1'}}>
                     <View style={{flexDirection: 'row', height: 130}}>
@@ -90,6 +97,7 @@ function Profile({ navigation }) {
                     </View>
                 </View>
             </ScrollView>
+            </>}
         </View>
     )
 }

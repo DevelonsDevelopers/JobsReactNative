@@ -1,4 +1,4 @@
-import {Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView} from 'react-native'
+import {Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView, ActivityIndicator} from 'react-native'
 import {View} from 'react-native'
 import React, {useEffect, useState} from 'react'
 import Categories from './Categories'
@@ -30,6 +30,7 @@ const History = ({navigation}) => {
 
     const dispatch = useDispatch();
     const interactions = useSelector(state => state.interactions.interactions)
+    const loading = useSelector(state => state.interactions.isLoading)
 
     const [ID, setID] = useState()
 
@@ -57,7 +58,7 @@ const History = ({navigation}) => {
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
             <View style={{backgroundColor: '#F1F1F1'}}>
                 <View style={{flexDirection: 'row', height: 90}}>
-                    <Pressable onPress={() => toggleVisibility()}><Image style={{
+                    <Pressable onPress={() => navigation.goBack()}><Image style={{
                         width: 22,
                         height: 20,
                         marginTop: 70,
@@ -91,6 +92,12 @@ const History = ({navigation}) => {
                         padding: 0
                     }}>Browse by History</Text>
                 </View>
+                {loading ?
+               <View style={{ marginTop:200 }}>
+               <ActivityIndicator size={60} color="#13A3E1" />
+               </View>
+                    :
+                    <> 
                 <SafeAreaView style={{
                     backgroundColor: '#fff',
                     borderRadius: 5,
@@ -126,6 +133,7 @@ const History = ({navigation}) => {
                         </View>
                     )}/>
                 </SafeAreaView>
+                </> }
             </View>
         </ScrollView>
     )
