@@ -46,6 +46,8 @@ function AccountInfo({navigation}) {
     const [ID, setID] = useState()
     const cv = useSelector(state => state.cv.cv);
     const loading = useSelector(state => state.cv.isLoading);
+    const data = useSelector(state => state.cv.nodata);
+    const error = useSelector(state => state.cv.error);
 
     useEffect(() => {
         GetData()
@@ -110,6 +112,24 @@ function AccountInfo({navigation}) {
 
     return (
         <View style={{flex: 1}}>
+ {loading ?
+               <View style={{ marginTop:400 }}>
+               <ActivityIndicator size={60} color="#13A3E1" />
+               </View>
+                    :
+                    <>
+            {data ? <View style={{ marginTop:200 }}>
+                <Image source={require('../assets/nodata.png')} style={{ width: 260, height: 260, marginLeft:80 ,  marginBottom: -20, marginTop: 40 }} />
+                <Text style={{ textAlign: 'center',  fontFamily: 'poppins_medium' }}>No Data Found</Text>
+            </View> :
+            <>
+            {error ?
+                             <View style={{ marginTop:360 }}>
+                                <Image  source={require( '../assets/delete.png')} style={{ width:30,height:30,marginLeft:190,marginBottom:-20,marginTop:40 }} />
+                        <Text style={{ textAlign:'center',marginVertical:20,fontFamily:'poppins_medium' }}>Network Error...!</Text>
+                        </View> :<>
+
+            
             <EducationModal visible={educationVisible} toggleEducationVisibility={toggleEducationVisibility}
                             add={addEducation}/>
             <CareerModal visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility} add={addCareer}/>
@@ -548,6 +568,11 @@ function AccountInfo({navigation}) {
                 </View>
                 </>}
             </ScrollView>
+
+            </>
+            }
+                </>}
+            </>}
         </View>
     )
 }
