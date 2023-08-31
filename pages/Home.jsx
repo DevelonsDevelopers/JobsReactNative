@@ -188,7 +188,7 @@ function Home({ navigation }) {
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginHorizontal: 30, marginTop: 10 }} data={categories} renderItem={({ item }) => (
 
-                                    <View
+                                    <Pressable onPress={() => navigation.push('JobsByCategory', { CATID: item.id })}
                                         style={{
                                             flex: 1,
                                             flexDirection: 'column',
@@ -206,7 +206,7 @@ function Home({ navigation }) {
                                             tintColor: '#000'
                                         }} source={require('../assets/provider.png')} alt={'Okay'} />
                                         <Text style={{ fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10 }}>{item.name}</Text>
-                                    </View>
+                                    </Pressable>
                                 )}
                                 numColumns={2} />
                              }
