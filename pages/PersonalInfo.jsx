@@ -19,6 +19,8 @@ import {AllCities} from "../API/actions/cityActions";
 import {AllCountries} from "../API/actions/countryActions";
 import {RESET_SEEKER} from "../Utils/Constants";
 import city from "../API/reducers/city";
+import CitySelectModal from "../Components/CitySelectModal";
+import CountrySelectModal from "../Components/CountrySelectModal";
 
 const data = [
     {"city": "Lahore", "country": 'Pakistan'},
@@ -132,128 +134,142 @@ function PersonalInfo({navigation}) {
         }
     }, [dispatch, countries]);
 
+    const cityClick = (item) => {
+        setSeekerData({...seekerData, city: item.id})
+        toggleVisibility()
+        setNameCity(item.name)
+    }
+
+    const countryClick = (item) => {
+        setSeekerData({...seekerData, country: item.id})
+        toggleCountryVisibility()
+        setCountryName(item.name)
+    }
+
     return (
         <View style={{flex: 1}}>
 
-            <Modal visible={cityVisible} animationType={"fade"} transparent={true}>
-                <View style={{
-                    flex: 1,
-                    alignContent: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'rgba(0,0,0,0.6)'
-                }}>
-                    <SafeAreaView style={{
-                        backgroundColor: '#fff',
-                        borderRadius: 40,
-                        padding: 23,
-                        margin: 20
-                    }}>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Text style={{
-                                width: '100%',
-                                fontFamily: 'poppins_semibold',
-                                textAlign: 'center',
-                                color: '#13A3E1'
-                            }}>Select</Text>
-                            <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
-                                style={{width: 15, height: 15, marginLeft: 'auto'}}
-                                source={require('../assets/close.png')}/></Pressable>
-                        </View>
-                        <View style={{
-                            backgroundColor: '#000',
-                            height: 4,
-                            width: '30%',
-                            alignSelf: 'center',
-                            borderRadius: 3
-                        }}></View>
-                        <FlatList scrollEnabled={true} nestedScrollEnabled={false}
-                                  style={{marginHorizontal: 0, marginTop: 20, height: 500}} data={cities}
-                                  renderItem={({item}) => (
-                                      <Pressable onPress={() => {
-                                          setSeekerData({...seekerData, city: item.id})
-                                          toggleVisibility()
-                                          setNameCity(item.name)
-                                      }}><View>
-                                          <View style={{
-                                              flexDirection: 'row',
-                                              alignItems: 'center',
-                                              justifyContent: 'center'
-                                          }}>
-                                              <Text style={{
-                                                  fontSize: 15,
-                                                  fontWeight: 600,
-                                                  fontFamily: 'poppins_semibold'
-                                              }}>{item.name}</Text>
-                                          </View>
-                                          <View style={{
-                                              backgroundColor: '#777777',
-                                              height: 0.5,
-                                              marginHorizontal: 10,
-                                              marginVertical: 5
-                                          }}></View>
-                                      </View></Pressable>
-                                  )}/>
-                    </SafeAreaView>
-                </View>
-            </Modal>
+            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick}/>
+            <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries} click={countryClick}/>
+            {/*<Modal visible={cityVisible} animationType={"fade"} transparent={true}>*/}
+            {/*    <View style={{*/}
+            {/*        flex: 1,*/}
+            {/*        alignContent: 'center',*/}
+            {/*        justifyContent: 'center',*/}
+            {/*        backgroundColor: 'rgba(0,0,0,0.6)'*/}
+            {/*    }}>*/}
+            {/*        <SafeAreaView style={{*/}
+            {/*            backgroundColor: '#fff',*/}
+            {/*            borderRadius: 40,*/}
+            {/*            padding: 23,*/}
+            {/*            margin: 20*/}
+            {/*        }}>*/}
+            {/*            <View style={{flexDirection: 'row', alignItems: 'center'}}>*/}
+            {/*                <Text style={{*/}
+            {/*                    width: '100%',*/}
+            {/*                    fontFamily: 'poppins_semibold',*/}
+            {/*                    textAlign: 'center',*/}
+            {/*                    color: '#13A3E1'*/}
+            {/*                }}>Select</Text>*/}
+            {/*                <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image*/}
+            {/*                    style={{width: 15, height: 15, marginLeft: 'auto'}}*/}
+            {/*                    source={require('../assets/close.png')}/></Pressable>*/}
+            {/*            </View>*/}
+            {/*            <View style={{*/}
+            {/*                backgroundColor: '#000',*/}
+            {/*                height: 4,*/}
+            {/*                width: '30%',*/}
+            {/*                alignSelf: 'center',*/}
+            {/*                borderRadius: 3*/}
+            {/*            }}></View>*/}
+            {/*            <FlatList scrollEnabled={true} nestedScrollEnabled={false}*/}
+            {/*                      style={{marginHorizontal: 0, marginTop: 20, height: 500}} data={cities}*/}
+            {/*                      renderItem={({item}) => (*/}
+            {/*                          <Pressable onPress={() => {*/}
+            {/*                              setSeekerData({...seekerData, city: item.id})*/}
+            {/*                              toggleVisibility()*/}
+            {/*                              setNameCity(item.name)*/}
+            {/*                          }}><View>*/}
+            {/*                              <View style={{*/}
+            {/*                                  flexDirection: 'row',*/}
+            {/*                                  alignItems: 'center',*/}
+            {/*                                  justifyContent: 'center'*/}
+            {/*                              }}>*/}
+            {/*                                  <Text style={{*/}
+            {/*                                      fontSize: 15,*/}
+            {/*                                      fontWeight: 600,*/}
+            {/*                                      fontFamily: 'poppins_semibold'*/}
+            {/*                                  }}>{item.name}</Text>*/}
+            {/*                              </View>*/}
+            {/*                              <View style={{*/}
+            {/*                                  backgroundColor: '#777777',*/}
+            {/*                                  height: 0.5,*/}
+            {/*                                  marginHorizontal: 10,*/}
+            {/*                                  marginVertical: 5*/}
+            {/*                              }}></View>*/}
+            {/*                          </View></Pressable>*/}
+            {/*                      )}/>*/}
+            {/*        </SafeAreaView>*/}
+            {/*    </View>*/}
+            {/*</Modal>*/}
 
-            <Modal visible={countryVisible} animationType={"fade"} transparent={true}>
-                <View style={{
-                    flex: 1,
-                    alignContent: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'rgba(0,0,0,0.6)'
-                }}>
-                    <SafeAreaView style={{
-                        backgroundColor: '#fff',
-                        borderRadius: 40,
-                        padding: 23,
-                        margin: 20
-                    }}>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                            <Text style={{
-                                width: '100%',
-                                fontFamily: 'poppins_semibold',
-                                textAlign: 'center',
-                                color: '#13A3E1'
-                            }}>Select</Text>
-                            <Pressable onPress={() => toggleCountryVisibility()} style={{marginLeft: 'auto'}}><Image
-                                style={{width: 15, height: 15, marginLeft: 'auto'}}
-                                source={require('../assets/close.png')}/></Pressable>
-                        </View>
-                        <View style={{
-                            backgroundColor: '#000',
-                            height: 4,
-                            width: '30%',
-                            alignSelf: 'center',
-                            borderRadius: 3
-                        }}></View>
-                        <FlatList scrollEnabled={true} nestedScrollEnabled={false}
-                                  style={{marginHorizontal: 0, marginTop: 20, height: 500}} data={countries}
-                                  renderItem={({item}) => (
-                                      <Pressable onPress={() => setSeekerData({...seekerData, country: item.id})}><View>
-                                          <View style={{
-                                              flexDirection: 'row',
-                                              alignItems: 'center',
-                                              justifyContent: 'center'
-                                          }}>
-                                              <Text style={{
-                                                  fontSize: 15,
-                                                  fontWeight: 600,
-                                                  fontFamily: 'poppins_semibold'
-                                              }}>{item.name}</Text>
-                                          </View>
-                                          <View style={{
-                                              backgroundColor: '#777777',
-                                              height: 0.5,
-                                              marginHorizontal: 10,
-                                              marginVertical: 5
-                                          }}></View>
-                                      </View></Pressable>
-                                  )}/>
-                    </SafeAreaView>
-                </View>
-            </Modal>
+            {/*<Modal visible={countryVisible} animationType={"fade"} transparent={true}>*/}
+            {/*    <View style={{*/}
+            {/*        flex: 1,*/}
+            {/*        alignContent: 'center',*/}
+            {/*        justifyContent: 'center',*/}
+            {/*        backgroundColor: 'rgba(0,0,0,0.6)'*/}
+            {/*    }}>*/}
+            {/*        <SafeAreaView style={{*/}
+            {/*            backgroundColor: '#fff',*/}
+            {/*            borderRadius: 40,*/}
+            {/*            padding: 23,*/}
+            {/*            margin: 20*/}
+            {/*        }}>*/}
+            {/*            <View style={{flexDirection: 'row', alignItems: 'center'}}>*/}
+            {/*                <Text style={{*/}
+            {/*                    width: '100%',*/}
+            {/*                    fontFamily: 'poppins_semibold',*/}
+            {/*                    textAlign: 'center',*/}
+            {/*                    color: '#13A3E1'*/}
+            {/*                }}>Select</Text>*/}
+            {/*                <Pressable onPress={() => toggleCountryVisibility()} style={{marginLeft: 'auto'}}><Image*/}
+            {/*                    style={{width: 15, height: 15, marginLeft: 'auto'}}*/}
+            {/*                    source={require('../assets/close.png')}/></Pressable>*/}
+            {/*            </View>*/}
+            {/*            <View style={{*/}
+            {/*                backgroundColor: '#000',*/}
+            {/*                height: 4,*/}
+            {/*                width: '30%',*/}
+            {/*                alignSelf: 'center',*/}
+            {/*                borderRadius: 3*/}
+            {/*            }}></View>*/}
+            {/*            <FlatList scrollEnabled={true} nestedScrollEnabled={false}*/}
+            {/*                      style={{marginHorizontal: 0, marginTop: 20, height: 500}} data={countries}*/}
+            {/*                      renderItem={({item}) => (*/}
+            {/*                          <Pressable onPress={() => setSeekerData({...seekerData, country: item.id})}><View>*/}
+            {/*                              <View style={{*/}
+            {/*                                  flexDirection: 'row',*/}
+            {/*                                  alignItems: 'center',*/}
+            {/*                                  justifyContent: 'center'*/}
+            {/*                              }}>*/}
+            {/*                                  <Text style={{*/}
+            {/*                                      fontSize: 15,*/}
+            {/*                                      fontWeight: 600,*/}
+            {/*                                      fontFamily: 'poppins_semibold'*/}
+            {/*                                  }}>{item.name}</Text>*/}
+            {/*                              </View>*/}
+            {/*                              <View style={{*/}
+            {/*                                  backgroundColor: '#777777',*/}
+            {/*                                  height: 0.5,*/}
+            {/*                                  marginHorizontal: 10,*/}
+            {/*                                  marginVertical: 5*/}
+            {/*                              }}></View>*/}
+            {/*                          </View></Pressable>*/}
+            {/*                      )}/>*/}
+            {/*        </SafeAreaView>*/}
+            {/*    </View>*/}
+            {/*</Modal>*/}
 
             <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                 <View style={{
@@ -586,13 +602,13 @@ function PersonalInfo({navigation}) {
                             paddingHorizontal: 20,
                             paddingVertical: 5
                         }}>
-                            <TextInput onFocus={() => toggleVisibility()} placeholder={'Missing!!!'} style={{
+                            <Pressable onPress={() => toggleVisibility()}><TextInput editable={false} onFocus={() => toggleVisibility()} placeholder={'Missing!!!'} style={{
                                 color: '#000',
                                 fontSize: 14,
                                 fontFamily: 'poppins_medium',
                                 width: '100%',
                                 textAlign: 'left'
-                            }}>{cityName}</TextInput>
+                            }}>{cityName}</TextInput></Pressable>
                         </View>
                     </View>
                     <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
@@ -621,13 +637,13 @@ function PersonalInfo({navigation}) {
                             paddingHorizontal: 20,
                             paddingVertical: 5
                         }}>
-                            <TextInput onFocus={() => toggleCountryVisibility()} placeholder={'Missing!!!'} style={{
+                            <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false} onFocus={() => toggleCountryVisibility()} placeholder={'Missing!!!'} style={{
                                 color: '#000',
                                 fontSize: 14,
                                 fontFamily: 'poppins_medium',
                                 width: '100%',
                                 textAlign: 'left'
-                            }}>{countryName}</TextInput>
+                            }}>{countryName}</TextInput></Pressable>
                         </View>
                     </View>
                 </View>

@@ -35,9 +35,9 @@ const CountrySelectModal = ({ visible, click, list, toggleVisibility }) => {
                       borderRadius: 3
                   }}></View>
                   <FlatList scrollEnabled={true} nestedScrollEnabled={false}
-                            style={{marginHorizontal: 0, marginTop: 20, height: 500}} data={countries}
+                            style={{marginHorizontal: 0, marginTop: 20, height: 500}} data={list}
                             renderItem={({item}) => (
-                                <Pressable onPress={() => click()}><View>
+                                <Pressable onPress={() => click(item)}><View>
                                     <View style={{
                                         flexDirection: 'row',
                                         alignItems: 'center',
