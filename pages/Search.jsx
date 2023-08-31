@@ -1,9 +1,11 @@
 import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
-import Resume from "./Resume";
 import BottomSheet from "react-native-simple-bottom-sheet";
+import {useDispatch, useSelector} from "react-redux";
+import {AllCategories} from "../API/actions/categoryActions";
+import {AllCompanies} from "../API/actions/companyActions";
+import {AllCities} from "../API/actions/cityActions";
 
 const data = [
     { "name": "Facebook" },
@@ -12,11 +14,52 @@ const data = [
     { "name": "Youtube" }
 ]
 
-function Search({ navigation }) {
+function Search({ route, navigation }) {
+
+    const { query } = route.params;
+
     const [partTime, setPartTime] = useState(false)
     const [fullTime, setFullTime] = useState(false)
     const [remote, setReomote] = useState(false)
 
+    const [search, setSearch] = useState(query)
+    const [country, setCountry] = useState("")
+    const [countryID, setCountryID] = useState(0)
+    const [category, setCategory] = useState("")
+    const [city, setCity] = useState("")
+    const [company, setCompany] = useState("")
+    const [startSalary, setStartSalary] = useState("")
+    const [salaryEnd, setSalaryEnd] = useState("")
+    const [type, setType] = useState("")
+    const [isCountry, setIsCountry] = useState("false")
+    const [isCategory, setIsCategory] = useState("false")
+    const [isCity, setIsCity] = useState("false")
+    const [isCompany, setIsCompany] = useState("false")
+    const [isSalary, setIsSalary] = useState("false")
+    const [isType, setIsType] = useState("false")
+
+    const categories = useSelector(state => state.category.categories)
+    const cities = useSelector(state => state.city.cities)
+    const companies = useSelector(state => state.company.companies)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (!categories){
+            dispatch(AllCategories())
+        }
+    }, [dispatch, navigation, categories]);
+
+    useEffect(() => {
+        if (!companies) {
+            dispatch(AllCompanies())
+        }
+    }, [dispatch, navigation, companies]);
+
+    useEffect(() => {
+        if (!cities){
+            dispatch(AllCities())
+        }
+    }, [dispatch, cities]);
 
     return (
         <View style={{ flex: 1 }}>
@@ -159,7 +202,7 @@ function Search({ navigation }) {
                             <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', fontSize: 20 }}>Advance Search</Text>
                             <View style={{ width: '100%', flexDirection: 'column', marginTop: 10 }}>
                                 <Text numberOfLines={1} style={{ fontFamily: 'poppins_semibold', marginTop: 7, fontSize: 12 }}>Category</Text>
-                                <TextInput style={{
+                                <Text style={{
                                     backgroundColor: '#f5f5f5',
                                     marginHorizontal: 5,
                                     height: 50,
@@ -167,7 +210,7 @@ function Search({ navigation }) {
                                     paddingHorizontal: 20,
                                     marginTop: 2,
                                     elevation: 5
-                                }} placeholder={'IT'} />
+                                }}>{country}</Text>
                             </View>
                             <View style={{ width: '100%', flexDirection: 'column', marginTop: 10 }}>
                                 <Text numberOfLines={1} style={{ fontFamily: 'poppins_semibold', marginTop: 7, fontSize: 12 }}>City</Text>
@@ -211,14 +254,14 @@ function Search({ navigation }) {
                                 <Text numberOfLines={1} style={{ fontFamily: 'poppins_semibold', marginTop: 7, fontSize: 14, marginBottom: 10 }}>job type</Text>
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
 
-                                    <Pressable onPress={() => setPartTime(!partTime)} style={partTime ? { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
-                                        <Text style={partTime ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray', } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'white', }}>Part Time</Text>
+                                    <Pressable onPress={() => setPartTime(!partTime)} style={partTime ? { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
+                                        <Text style={partTime ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'white', } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray', }}>Part Time</Text>
                                     </Pressable>
-                                    <Pressable onPress={() => setFullTime(!fullTime)} style={fullTime ? { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
-                                        <Text style={fullTime ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray' } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'white', }}>Full Time</Text>
+                                    <Pressable onPress={() => setFullTime(!fullTime)} style={fullTime ? { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
+                                        <Text style={fullTime ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'white' } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray', }}>Full Time</Text>
                                     </Pressable>
-                                    <Pressable onPress={() => setReomote(!remote)} style={remote ? { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
-                                        <Text style={remote ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray' } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'white', }}>Remote</Text>
+                                    <Pressable onPress={() => setReomote(!remote)} style={remote ? { backgroundColor: '#13A3E1', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 } : { backgroundColor: '#f5f5f5', paddingHorizontal: 10, paddingVertical: 7, borderRadius: 20 }}>
+                                        <Text style={remote ? { fontSize: 12, fontFamily: 'poppins_medium', color: 'white' } : { fontSize: 12, fontFamily: 'poppins_medium', color: 'gray', }}>Remote</Text>
                                     </Pressable>
 
                                 </View>

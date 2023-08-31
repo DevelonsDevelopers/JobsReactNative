@@ -9,6 +9,8 @@ export const AllCountries = () => async (dispatch) => {
             dispatch({type: ALL_COUNTRIES, payload: {countries: data}})
             dispatch({type: SUCCESS})
         } else {
+            dispatch({type: ALL_COUNTRIES, payload: {countries: data}})
+            dispatch({type: SUCCESS})
             dispatch({type: NODATA})
         }
     } catch (error) {

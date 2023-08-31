@@ -1,4 +1,4 @@
-import {ERROR, GET_SEEKER, LOADING, NODATA, SUCCESS, UPDATE_SEEKER} from "../../Utils/Constants";
+import {ERROR, GET_SEEKER, LOADING, NODATA, RESET_SEEKER, SUCCESS, UPDATE_SEEKER} from "../../Utils/Constants";
 import {defaults} from "axios";
 
 const seeker = (state = {isLoading: true, success: false, error: false, nodata: false}, action) => {
@@ -15,6 +15,8 @@ const seeker = (state = {isLoading: true, success: false, error: false, nodata: 
             return {...state, seeker: action.payload.data}
         case UPDATE_SEEKER:
             return {...state, seeker: action.payload.data}
+        case RESET_SEEKER:
+            return {...state, isLoading: true, success: false, error:false, nodata: false, seeker: null}
         default:
             return state
     }

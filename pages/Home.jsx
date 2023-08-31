@@ -11,6 +11,7 @@ function Home({ navigation }) {
 
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
+    const [search, setSearch] = useState('');
     const categories = useSelector(state => state.category.featured_categories)
     const recentJobs = useSelector(state => state.job.recentJobs)
     const loading = useSelector(state => state.category.isLoading)
@@ -101,14 +102,21 @@ function Home({ navigation }) {
                     </View>
                     <Text style={{ color: '#fff', fontSize: 16, fontWeight: '500', width: '100%', textAlign: 'center' }}>Good
                         Morning!</Text>
-                    <TextInput style={{
+                    <View style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
                         backgroundColor: '#fff',
                         marginHorizontal: 30,
                         height: 50,
                         borderRadius: 25,
                         paddingHorizontal: 20,
                         marginTop: 10
-                    }} placeholder={'Start your Job Search'} />
+                    }}>
+                        <TextInput onChangeText={text => setSearch(text)} style={{
+                            height: 50,
+                        }} placeholder={'Start your Job Search'} />
+                        <Pressable onPress={() => navigation.push('Search', { query: search })} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/search-interface-symbol.png')}/></Pressable>
+                    </View>
                 </View>
 
                 {login ?
@@ -260,7 +268,7 @@ function Home({ navigation }) {
                                 )}
                             />
                         </SafeAreaView>
-                         </>} 
+                         </>}
                         <View style={{
                             flex: 1,
                             flexDirection: 'row',

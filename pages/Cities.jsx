@@ -38,7 +38,6 @@ function Cities({navigation}) {
     useEffect(() => {
         if (!cities){
             dispatch(AllCities())
-
         }
     }, [dispatch, cities]);
 

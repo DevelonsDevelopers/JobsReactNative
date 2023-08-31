@@ -67,6 +67,7 @@ export const GET_REPORT_BY_ID = "GET_REPORT_BY_ID";
 export const ALL_SEEKERS = "ALL_SEEKERS";
 export const GET_SEEKER = "GET_SEEKER";
 export const UPDATE_SEEKER = "UPDATE_SEEKER";
+export const RESET_SEEKER = "RESET_SEEKER";
 
 //Tags:=========
 export const GET_ALL_TAGS = "GET_ALL_TAGS";
