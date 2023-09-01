@@ -2,6 +2,8 @@ import {ActivityIndicator, Image, Modal, Pressable, ScrollView, Text, TextInput,
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Registeration} from "../API/actions/registerActions";
+import Toast from "react-native-toast-message";
+import {RESET_SEEKER} from "../Utils/Constants";
 
 function Register({navigation}) {
 
@@ -17,12 +19,50 @@ function Register({navigation}) {
     const toggleVisibility = () => setShow(!show);
 
     const RegisterUser = () => {
-        dispatch(Registeration(navigation, name, username, email, '', '', '', '', password));
-        toggleLoadingVisibility()
+        if (name.length >= 4) {
+            if (username.length >= 6) {
+                if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address'})
+                } else {
+                    if (password.length >= 9) {
+                        if (password === confirmPassword) {
+                            dispatch(Registeration(navigation, name, username, email, '', '', '', '', password));
+                            toggleLoadingVisibility()
+                        } else {
+                            Toast.show({type: 'error', position: 'top', text1: 'Password Not Match'})
+                        }
+                    } else {
+                        Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Strong Password'})
+                    }
+                }
+            } else {
+                Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid UserName'})
+            }
+        } else {
+            Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid Name'})
+        }
     }
+
+
+
+        const error = useSelector(state => state.register.error)
+
+        useEffect(() => {
+            if (error){
+                toggleLoadingVisibility()
+                Toast.show({ type: 'error', position: 'top', text1: 'Failed to Login', text2: 'User Name OR Email Already Exist' })
+                dispatch({ type: RESET_SEEKER })
+            }
+        }, [error]);
+
+
     // loading===============
     const [loadingVisible, setLoadingVisible] = useState(false)
     const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
+
+
+
+
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F0A51E'}}>
@@ -127,6 +167,10 @@ function Register({navigation}) {
                         style={{color: '#000', fontWeight: '900', fontSize: 15}}> Sign In</Text></Pressable>
                 </View>
             </View>
+            <Toast
+                position='top'
+                bottomOffset={20}
+            />
         </ScrollView>
     );
 }

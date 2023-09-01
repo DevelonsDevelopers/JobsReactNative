@@ -7,6 +7,7 @@ export const LoginAuthentication = (navigation, email, password) => async (dispa
         dispatch ({ type: LOADING })
         const response = await api.login(email, password)
         const { data: { responseCode } } = response
+        const { data: { message } } = response
         const { data: { data } } = response
         console.log(responseCode)
         var ID = (data.id).toString()

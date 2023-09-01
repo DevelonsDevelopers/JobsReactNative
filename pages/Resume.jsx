@@ -154,8 +154,8 @@ function Resume({ navigation }) {
                   )} />
               </ScrollView>
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-              <View style={{ width: 190 }}>
+            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-evenly', padding: 5 }}>
+              <View style={{ flex: 0.5 }}>
                 <Text style={{ fontSize: 16, fontFamily: 'poppins_semibold', marginTop: 12, textAlign: 'center', paddingVertical: 20 }}>
                   Education
                 </Text>
@@ -180,7 +180,7 @@ function Resume({ navigation }) {
                 </SafeAreaView>
               </View>
               <Text style={{ backgroundColor: 'black', width: 1, marginTop: 80 }}> |</Text>
-              <View style={{ width: 200 }}>
+              <View style={{ flex: 0.5 }}>
                 <Text style={{ fontSize: 16, fontFamily: 'poppins_semibold', marginTop: 12, textAlign: 'center', paddingVertical: 20 }}>
                   Courses
                 </Text>

@@ -322,7 +322,7 @@ function Home({ navigation }) {
                 marginBottom: 15,
                 paddingHorizontal: 20
             }}>
-                <Pressable onPress={() => navigation.push('Test')} style={{
+                <Pressable onPress={() => navigation.push('AppliedSaved')} style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',

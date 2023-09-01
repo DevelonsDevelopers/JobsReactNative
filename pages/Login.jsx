@@ -1,7 +1,9 @@
 import {ActivityIndicator, Button, Image, Modal, Pressable, ScrollView, Text, TextInput, View} from "react-native";
-import {useState} from "react";
-import {useDispatch} from "react-redux";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {LoginAuthentication} from "../API/actions/loginActions";
+import Toast from "react-native-toast-message";
+import {RESET_SEEKER} from "../Utils/Constants";
 
 
 function Login({ navigation }) {
@@ -14,10 +16,24 @@ function Login({ navigation }) {
 
     const toggleVisibility = () => setShow(!show)
 
+    const error = useSelector(state => state.seeker.error)
+
     const LoginUser = () => {
-        dispatch(LoginAuthentication(navigation, email, password))
-        toggleLoadingVisibility()
+        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address' })
+        } else {
+            dispatch(LoginAuthentication(navigation, email, password))
+            toggleLoadingVisibility()
+        }
     }
+
+    useEffect(() => {
+        if (error){
+            toggleLoadingVisibility()
+            Toast.show({ type: 'error', position: 'top', text1: 'Failed to Login', text2: 'Invalid Username or Password' })
+            dispatch({ type: RESET_SEEKER })
+        }
+    }, [error]);
 
     // loadingModal================
     const [loading, setLoading] = useState([]);
@@ -78,8 +94,8 @@ function Login({ navigation }) {
                     color: '#626262',
                     flex: 1
                 }} placeholder={'Enter your Password'} secureTextEntry={show}/>
-                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/show.png')}/></Pressable>
-                        : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/hide.png')}/></Pressable>}
+                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/hide.png')}/></Pressable>
+                        : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/show.png')}/></Pressable>}
                 </View>
                 <Text style={{color: '#000', fontWeight: 400, width: '85%', textAlign: 'right', marginTop: 20}}>Forgot
                     Password?</Text>
@@ -120,6 +136,10 @@ function Login({ navigation }) {
                     <Pressable onPress={() => navigation.replace('Register')} ><Text style={{color: '#000', fontWeight: '900', fontSize: 15}}> Register</Text></Pressable>
                 </View>
             </View>
+            <Toast
+                position='top'
+                bottomOffset={20}
+            />
         </ScrollView>
     );
 }
