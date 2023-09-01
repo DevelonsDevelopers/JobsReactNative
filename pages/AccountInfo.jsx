@@ -57,9 +57,11 @@ function AccountInfo({navigation}) {
 
     const [ID, setID] = useState()
     const cv = useSelector(state => state.cv.cv);
-    const loading = useSelector(state => state.cv.isLoading);
+    
     const data = useSelector(state => state.cv.nodata);
     const error = useSelector(state => state.cv.error);
+    const success = useSelector(state => state.cv.success);
+    const loading = useSelector(state => state.cv.isloading);
 
     useEffect(() => {
         GetData()
@@ -122,9 +124,19 @@ function AccountInfo({navigation}) {
     const toggleLanguageVisibility = () => setLanguageVisible(!languageVisible)
     const toggleResumeVisibility = () => setResumeVisible(!resumeVisible)
 
+
+const [isloading,setIsLoading] = useState(true)
+
+useEffect(()=>{
+if (success) {
+    setIsLoading(false)
+}
+},[success])
+
+
     return (
         <View style={{flex: 1}}>
-            {loading ?
+            {isloading ?
                 <View style={{marginTop: 400}}>
                     <ActivityIndicator size={60} color="#13A3E1"/>
                 </View>

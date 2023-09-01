@@ -46,6 +46,7 @@ function Resume({ navigation }) {
   const [ID, setID] = useState()
   const cv = useSelector(state => state.cv.cv);
   const loading = useSelector(state => state.cv.isLoading);
+  const success = useSelector(state => state.cv.success);
 
 
   useEffect(() => {
@@ -62,9 +63,18 @@ function Resume({ navigation }) {
     }
   }, [dispatch, ID])
 
+const [isLoading,setIsLoading] = useState(true)
+useEffect(()=>{
+  if (success) {
+    setIsLoading(false)
+  }
+},[success])
+
+
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
-         {loading ?
+         {isLoading ?
                <View style={{ marginTop:400 }}>
                <ActivityIndicator size={60} color="#13A3E1" />
                </View>
