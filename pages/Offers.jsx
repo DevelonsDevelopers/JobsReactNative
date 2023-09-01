@@ -12,9 +12,10 @@ const data = [
 const Offers = ({ navigation }) => {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+
       <View style={{ backgroundColor: '#EAEAEA' }}>
         <View style={{ flexDirection: 'row', height: 90 }}>
-          <Pressable onPress={() => toggleVisibility()}><Image style={{
+          <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
             width: 22,
             height: 20,
             marginTop: 70,

@@ -90,7 +90,7 @@ function Recommendedjobs ({ navigation }) {
 
       <View style={{ backgroundColor: '#EAEAEA' }}>
         <View style={{ flexDirection: 'row', height: 90 }}>
-          <Pressable onPress={() => navigation.goBack()}><Image style={{
+          <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
             width: 22,
             height: 20,
             marginTop: 70,

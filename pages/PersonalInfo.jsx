@@ -310,7 +310,7 @@ if (seeker && cities && countries && success == 'false' ) {
             <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75}}>
                 <View style={{flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1'}}>
                     <View style={{flexDirection: 'row', height: 130}}>
-                        <Pressable onPress={() => navigation.goBack()}><Image style={{
+                        <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
                             width: 22,
                             height: 20,
                             marginTop: 70,

@@ -81,7 +81,7 @@ function JobPosted({ navigation }) {
       <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
         <View style={{ flexDirection: 'column', width: '100%', height: 200, backgroundColor: '#13A3E1' }}>
           <View style={{ flexDirection: 'row', height: 130 }}>
-            <Pressable onPress={() => toggleVisibility()}><Image style={{
+            <Pressable onPress={() => toggleVisibility()} style={{ padiingRight:5 }}><Image style={{
               width: 22,
               height: 20,
               marginTop: 70,

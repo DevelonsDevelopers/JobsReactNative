@@ -27,6 +27,7 @@ function AppliedUsers({ navigation }) {
   ]
   return (
     <View style={{ flex: 1 }}>
+
     <Modal visible={visible} animationType={"fade"} transparent={true}>
       <View onTouchStart={() => toggleVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.6)' }}>
         <View style={{ width: '100%', maxWidth: 300, margin: 48, elevation: 24, borderRadius: 15, backgroundColor: '#fff', opacity: 1, padding: 20 }}>
@@ -77,17 +78,18 @@ function AppliedUsers({ navigation }) {
         </View>
       </View>
     </Modal>
+
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
       <View style={{ flexDirection: 'column', width: '100%', height: 200, backgroundColor: '#13A3E1' }}>
         <View style={{ flexDirection: 'row', height: 130 }}>
-          <Pressable onPress={() => toggleVisibility()}><Image style={{
+          <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
             width: 22,
             height: 20,
             marginTop: 70,
             marginLeft: 30,
             marginBottom: 250,
             tintColor: '#fff'
-          }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
+          }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
           <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
             <Pressable onPress={() => navigation.push('Response')}><Image style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
