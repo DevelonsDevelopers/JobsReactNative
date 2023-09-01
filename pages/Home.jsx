@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RecentJobs } from "../API/actions/jobActions";
 import NavigationDrawer from "../Components/NavigationDrawer";
 import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
+import {RESET} from "../Utils/Constants";
 
 function Home({ navigation }) {
 
@@ -36,6 +37,7 @@ function Home({ navigation }) {
             setIsLoading(true)
         } else {
             setIsLoading(false)
+            dispatch({type: RESET})
         }
     }, [loading ,jobLoading])
 

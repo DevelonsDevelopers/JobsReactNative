@@ -32,17 +32,25 @@ function JobsByCompany({route, navigation}) {
     const [ID, setID] = useState()
 
     useEffect(() => {
-        if (loading) {
-            if (!jobs) {
-                dispatch(CompanyJobs(COMID))
-            } else if (jobs.length === 0 || jobs[0].company !== COMID) {
-                dispatch(CompanyJobs(COMID))
-            } else {
-                setLoading(false)
-                setData(jobs)
+        if (ID) {
+            if (loading) {
+                if (!jobs) {
+                    dispatch(CompanyJobs(ID, COMID))
+                } else if (jobs.length === 0 || jobs[0].company !== COMID) {
+                    dispatch(CompanyJobs(ID, COMID))
+                } else {
+                    setLoading(false)
+                    setData(jobs)
+                }
             }
         }
-    }, [dispatch, jobs]);
+    }, [dispatch, jobs, ID]);
+
+    useEffect(() => {
+        if (jobs){
+            setData(jobs)
+        }
+    }, [jobs]);
 
     useEffect(() => {
         if (success) {
@@ -69,7 +77,7 @@ function JobsByCompany({route, navigation}) {
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
             <View style={{backgroundColor: '#EAEAEA'}}>
                 <View style={{flexDirection: 'row', height: 90}}>
-                    <Pressable onPress={() => toggleVisibility()}><Image style={{
+                    <Pressable onPress={() => navigation.goBack()}><Image style={{
                         width: 22,
                         height: 20,
                         marginTop: 70,
@@ -100,7 +108,7 @@ function JobsByCompany({route, navigation}) {
                     :
                 <SafeAreaView>
                     <FlatList nestedScrollEnabled={false} scrollEnabled={false}
-                              style={{marginHorizontal: 0, marginTop: 10}} data={jobs} renderItem={({item}) => (
+                              style={{marginHorizontal: 0, marginTop: 10}} data={data} renderItem={({item}) => (
                         <Pressable onPress={() => JobClick(item.id)}><View style={{
                             marginLeft: 25,
                             marginRight: 25,
@@ -143,8 +151,21 @@ function JobsByCompany({route, navigation}) {
                                         fontSize: 12
                                     }}>{item.company_name}</Text>
                                 </View>
-                                <Image style={{width: 20, height: 20, marginLeft: 'auto', marginTop: 10}}
-                                       source={require('../assets/bookmarkIcon.png')}/>
+                                {item.bookmark === 0 ?
+                                    <Image style={{
+                                        width: 20,
+                                        height: 20,
+                                        marginLeft: 'auto',
+                                        marginTop: 10
+                                    }} source={require('../assets/bookmarked.png')}/>
+                                    :
+                                    <Image style={{
+                                        width: 20,
+                                        height: 20,
+                                        marginLeft: 'auto',
+                                        marginTop: 10
+                                    }} source={require('../assets/bookmark.png')}/>
+                                }
                             </View>
                             <View style={{flexDirection: 'row', flex: 1}}>
                                 <Text style={{

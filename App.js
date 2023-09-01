@@ -43,7 +43,7 @@ import AppliedJobs from './pages/AppliedJobs';
 import SavedJobs from './pages/SavedJobs';
 import Search from './pages/Search';
 import RecommendedUser from './pages/RecommendedUser';
-import Test from './pages/Test';
+import AppliedSaved from './pages/AppliedSaved';
 import JobsByCity from "./pages/JobsByCity";
 import JobsByCategory from "./pages/JobsByCategory";
 import JobsByCompany from "./pages/JobsByCompany";
@@ -114,11 +114,10 @@ function App() {
                     <Stack.Screen name="OfferAccepted" component={OfferAccepted} options={{title: "OfferAccepted", headerShown: false}}/>
                     <Stack.Screen name="OfferRejected" component={OfferRejected} options={{title: "OfferRejected", headerShown: false}}/>
                     <Stack.Screen name="Recommendedjobs" component={Recommendedjobs} options={{title: "Recommendedjobs", headerShown: false}}/>
-                    <Stack.Screen name="AppliedJobs" component={AppliedJobs} options={{title: "AppliedJobs", headerShown: false}}/>
                     <Stack.Screen name="SavedJobs" component={SavedJobs} options={{title: "SavedJobs", headerShown: false}}/>
                     <Stack.Screen name="Search" component={Search} options={{title: "Search", headerShown: false}}/>
                     <Stack.Screen name="RecommendedUser" component={RecommendedUser} options={{title: "RecommendedUser", headerShown: false}}/>
-                    <Stack.Screen name="Test" component={Test} options={{title: "Test", headerShown: false}}/>
+                    <Stack.Screen name="AppliedSaved" component={AppliedSaved} options={{title: "AppliedSaved", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>

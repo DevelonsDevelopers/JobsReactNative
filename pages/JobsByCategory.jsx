@@ -10,6 +10,7 @@ import moment from "moment";
 import {recordInteraction} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {RESET} from "../Utils/Constants";
+import categories from "./Categories";
 
 const data = [
     {"name": "Facebook"},
@@ -32,17 +33,25 @@ function JobsByCategory({route, navigation}) {
     const [ID, setID] = useState()
 
     useEffect(() => {
-        if (loading) {
-            if (!jobs) {
-                dispatch(CategoryJobs(CATID))
-            } else if (jobs.length === 0 || jobs[0].category !== CATID) {
-                dispatch(CategoryJobs(CATID))
-            } else {
-                setLoading(false)
-                setData(jobs)
+        if (ID) {
+            if (loading) {
+                if (!jobs) {
+                    dispatch(CategoryJobs(ID, CATID))
+                } else if (jobs.length === 0 || jobs[0].category !== CATID) {
+                    dispatch(CategoryJobs(ID, CATID))
+                } else {
+                    setLoading(false)
+                    setData(jobs)
+                }
             }
         }
-    }, [dispatch, jobs]);
+    }, [dispatch, jobs, ID]);
+
+    useEffect(() => {
+        if (jobs){
+            setData(jobs)
+        }
+    }, [jobs]);
 
     useEffect(() => {
         if (success) {
@@ -147,8 +156,21 @@ function JobsByCategory({route, navigation}) {
                                             fontSize: 12
                                         }}>{item.company_name}</Text>
                                     </View>
-                                    <Image style={{width: 20, height: 20, marginLeft: 'auto', marginTop: 10}}
-                                           source={require('../assets/bookmarkIcon.png')}/>
+                                    {item.bookmark === 0 ?
+                                        <Image style={{
+                                            width: 20,
+                                            height: 20,
+                                            marginLeft: 'auto',
+                                            marginTop: 10
+                                        }} source={require('../assets/bookmarked.png')}/>
+                                        :
+                                        <Image style={{
+                                            width: 20,
+                                            height: 20,
+                                            marginLeft: 'auto',
+                                            marginTop: 10
+                                        }} source={require('../assets/bookmark.png')}/>
+                                    }
                                 </View>
                                 <View style={{flexDirection: 'row', flex: 1}}>
                                     <Text style={{

@@ -10,6 +10,7 @@ import moment from "moment";
 import {recordInteraction} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {RESET} from "../Utils/Constants";
+import cities from "./Cities";
 
 const data = [
     {"name": "Facebook"},
@@ -33,17 +34,19 @@ function JobsByCity({route, navigation}) {
     const [ID, setID] = useState()
 
     useEffect(() => {
-        if (loading) {
-            if (!jobs) {
-                dispatch(CityJobs(CITYID))
-            } else if (jobs.length === 0 || jobs[0].city !== CITYID) {
-                dispatch(CityJobs(CITYID))
-            } else {
-                setLoading(false)
-                setData(jobs)
+        if (ID) {
+            if (loading) {
+                if (!jobs) {
+                    dispatch(CityJobs(ID, CITYID))
+                } else if (jobs.length === 0 || jobs[0].city !== CITYID) {
+                    dispatch(CityJobs(ID, CITYID))
+                } else {
+                    setLoading(false)
+                    setData(jobs)
+                }
             }
         }
-    }, [dispatch, jobs]);
+    }, [dispatch, jobs, ID]);
 
     useEffect(() => {
         if (success) {
@@ -52,6 +55,12 @@ function JobsByCity({route, navigation}) {
             dispatch({ type: RESET })
         }
     }, [success]);
+
+    useEffect(() => {
+        if (jobs){
+            setData(jobs)
+        }
+    }, [jobs]);
 
     const JobClick = (id) => {
         recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
@@ -70,7 +79,7 @@ function JobsByCity({route, navigation}) {
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
             <View style={{backgroundColor: '#EAEAEA'}}>
                 <View style={{flexDirection: 'row', height: 90}}>
-                    <Pressable><Image style={{
+                    <Pressable onPress={() => navigation.goBack()}><Image style={{
                         width: 22,
                         height: 20,
                         marginTop: 70,
@@ -78,9 +87,9 @@ function JobsByCity({route, navigation}) {
                         tintColor: '#000'
                     }} source={require('../assets/back_arrow.png')} alt={'Okay'}/></Pressable>
                     <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
-                        <Pressable onPress={() => navigation.push('Recommendedjobs')}><Image
+                        <Image
                             style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
-                            source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
+                            source={require('../assets/logo.png')} alt={'Okay'}/>
                     </View>
                 </View>
                 <View>
@@ -144,8 +153,21 @@ function JobsByCity({route, navigation}) {
                                         fontSize: 12
                                     }}>{item.company_name}</Text>
                                 </View>
-                                <Image style={{width: 20, height: 20, marginLeft: 'auto', marginTop: 10}}
-                                       source={require('../assets/bookmarkIcon.png')}/>
+                                {item.bookmark === 0 ?
+                                    <Image style={{
+                                        width: 20,
+                                        height: 20,
+                                        marginLeft: 'auto',
+                                        marginTop: 10
+                                    }} source={require('../assets/bookmarked.png')}/>
+                                    :
+                                    <Image style={{
+                                        width: 20,
+                                        height: 20,
+                                        marginLeft: 'auto',
+                                        marginTop: 10
+                                    }} source={require('../assets/bookmark.png')}/>
+                                }
                             </View>
                             <View style={{flexDirection: 'row', flex: 1}}>
                                 <Text style={{

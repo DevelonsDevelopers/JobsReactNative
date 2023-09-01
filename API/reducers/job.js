@@ -1,5 +1,5 @@
 import {
-    ALL_JOBS,
+    ALL_JOBS, BOOKMARK_JOB,
     ERROR,
     GET_JOB,
     GET_JOBS_BY_CATEGORY,
@@ -34,6 +34,13 @@ const job = (state = {isLoading: true, success: false, error: false, nodata: fal
             return {...state, companyJobs: action.payload.companyJobs}
         case GET_RECOMMENDED_JOBS:
             return {...state, recommendedJobs: action.payload.recommendedJobs}
+        case BOOKMARK_JOB:
+            console.log(action.payload)
+            const jobs = state.jobs?.map((job) => (job.id === action.payload.job ? {...job, bookmark: action.payload.bookmark} : job))
+            const cityJobs = state.cityJobs?.map((job) => (job.id === action.payload.job ? {...job, bookmark: action.payload.bookmark} : job))
+            const companyJobs = state.companyJobs?.map((job) => (job.id === action.payload.job ? {...job, bookmark: action.payload.bookmark} : job))
+            const categoryJobs = state.categoryJobs?.map((job) =>  (job.id === action.payload.job ? {...job, bookmark: action.payload.bookmark} : job))
+            return {...state, jobs: jobs, cityJobs: cityJobs, companyJobs: companyJobs, categoryJobs: categoryJobs,}
         case RESET:
             return {...state, isLoading: true, success: false, error: false, nodata: false}
         default:

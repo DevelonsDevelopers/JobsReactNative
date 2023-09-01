@@ -11,5 +11,7 @@ import job from "./job";
 import cv from "./cv";
 import tag from "./tag";
 import interactions from "./interactions";
+import bookmark from './bookmark';
+import applied from "./applied";
 
-export default combineReducers({ category, register, login, seeker, city, country, company, job, cv, tag, interactions })
+export default combineReducers({ category, register, login, seeker, city, country, company, job, cv, tag, interactions, bookmark, applied })

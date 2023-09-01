@@ -4,7 +4,7 @@ import React from "react";
 const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, toggleLoadingVisibility }) => {
     return (
         <Modal visible={visible} animationType={"slide"} transparent={true}>
-           
+
             <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.2)' }}>
                 <View style={{ width: '100%', maxWidth: 300, margin: 48, elevation: 200, borderRadius: 15, backgroundColor: '#fff', opacity: 1, padding: 20 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -17,14 +17,14 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                         <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
                     </Pressable>
 
-                    <Pressable onPress={() => navigation.push('AppliedJobs')}>
+                    <Pressable onPress={() => navigation.push('AppliedSaved')}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Applied Jobs</Text>
                             <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
                         </View>
                     </Pressable>
 
-                    <Pressable onPress={() => navigation.push('SavedJobs')}>
+                    <Pressable onPress={() => navigation.push('AppliedSaved')}>
                         <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Saved Jobs</Text>
                             <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />

@@ -20,6 +20,14 @@ export const login = (email, password) => API.post('/seekerAuth/login', {
     password: password
 })
 
+//APPLIED API CALL ==============================
+export const applyJob = (job, user, date, proposal) => API.post('/applied/create', {
+    job: job,
+    user: user,
+    date: date,
+    proposal: proposal
+})
+export const appliedJobs = (user) => API.post('/applied/user', { user: user })
 
 //CATEGORIES API CALL ============================
 export const fetchAllCategories = () => API.get(`/categories/all`)
@@ -54,13 +62,13 @@ export const fetchAllCompanies = () => API.get('/companies/all')
 
 
 //JOBS API CALL
-export const fetchAllJobs = () => API.get('/jobs/all')
+export const fetchAllJobs = (user) => API.post('/jobs/all', { user: user })
 export const fetchRecentJobs = () => API.get('/jobs/recent')
 export const fetchRecommendedJobs = (tag) => API.post('/jobs/recommended', { tag: tag })
-export const fetchJobByID = (id) => API.post('/jobs/get', { id: id })
-export const fetchJobByCategory = (id) => API.post('/jobs/category', { category: id })
-export const fetchJobByCity = (id) => API.post('/jobs/city', { city: id })
-export const fetchJobByCompany = (id) => API.post('/jobs/company', { company: id })
+export const fetchJobByID = (user, id) => API.post('/jobs/get', { user: user, id: id })
+export const fetchJobByCategory = (user, id) => API.post('/jobs/category', { user: user, category: id })
+export const fetchJobByCity = (user, id) => API.post('/jobs/city', { user: user, city: id })
+export const fetchJobByCompany = (user, id) => API.post('/jobs/company', { user: user, company: id })
 export const fetchSearchJob = (search, country, category, city, company, salaryStart, salaryEnd, type, isCountry, isCategory, isCity, isCompany, isSalary, isType) => API.post('/jobs/search', {
     search: search,
     country: country,
@@ -134,3 +142,8 @@ export const addCVSkill = (cv, skill) => API.post('/cvSkill/create', {
 export const fetchtopTags = (user) => API.post('/tags/top', {
     user: user
 })
+
+//BOOKMARKS API CALL
+export const fetchBookmarks = (user) => API.post('/bookmarks/all', { user: user })
+export const bookmarkJob = (job, user) => API.post('/bookmarks/add', { job: job, user: user })
+export const removeBookmark = (id) => API.delete('/bookmarks/remove', { data: { id: id }})

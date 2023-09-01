@@ -4,7 +4,9 @@ import {View} from 'react-native'
 import {useDispatch, useSelector} from "react-redux";
 import {JobByID} from "../API/actions/jobActions";
 import moment from "moment";
-import {RESET} from "../Utils/Constants";
+import {BOOKMARK_JOB, RESET} from "../Utils/Constants";
+import {applyJob, bookmarkJob, removeBookmark} from "../API";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const JobDetails = ({route, navigation}) => {
 
@@ -15,27 +17,74 @@ const JobDetails = ({route, navigation}) => {
     const success = useSelector(state => state.job.success)
     const dispatch = useDispatch()
     const [isloading, setIsLoading] = useState(true)
+    const [USERID, setUSERID] = useState()
+    const [applied, setApplied] = useState(0)
+    const [bookmark, setBookmark] = useState(0)
 
     useEffect(() => {
-        dispatch(JobByID(ID))
-    }, [dispatch]);
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setUSERID(value);
+    }
 
     useEffect(() => {
-        if (success){
+        if (USERID) {
+            dispatch(JobByID(USERID, ID))
+        }
+    }, [dispatch, USERID]);
+
+    useEffect(() => {
+        if (success) {
             setIsLoading(false)
-            dispatch({ type: RESET })
+            dispatch({type: RESET})
         }
     }, [success]);
 
     useEffect(() => {
-        console.log(job)
+        if (job) {
+            setApplied(job.applied)
+            setBookmark(job.bookmark)
+        }
     }, [job]);
+
+    const ApplyJob = () => {
+        const date = moment().format("YYYY-MM-DD")
+        console.log(date)
+        applyJob(job.id, USERID, date, "This is Proposal").then(res => {
+            const {data: {data}} = res;
+            if (data.affectedRows === 1) {
+                setApplied(data.insertId)
+            }
+        })
+    }
+
+    const BookmarkJob = () => {
+        bookmarkJob(job.id, USERID).then(res => {
+            const {data: {data}} = res;
+            if (data.affectedRows === 1) {
+                setBookmark(data.insertId)
+                dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: data.insertId}})
+            }
+        })
+    }
+
+    const RemoveBookmark = () => {
+        removeBookmark(bookmark).then(res => {
+            const {data: {data}} = res;
+            if (data.affectedRows === 1) {
+                setBookmark(0)
+                dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: 0}})
+            }
+        })
+    }
 
     return (
         <ScrollView style={{backgroundColor: '#F1F1F1'}}>
             <View style={{backgroundColor: '#EAEAEA'}}>
                 <View style={{flexDirection: 'row', height: 90}}>
-                    <Pressable onPress={() => toggleVisibility()}><Image style={{
+                    <Pressable onPress={() => navigation.goBack()}><Image style={{
                         width: 22,
                         height: 20,
                         marginTop: 70,
@@ -43,7 +92,7 @@ const JobDetails = ({route, navigation}) => {
                         tintColor: '#000'
                     }} source={require('../assets/back_arrow.png')} alt={''}/></Pressable>
                     <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
-                        <Pressable onPress={() => navigation.push('Search')}><Image
+                        <Pressable onPress={() => null}><Image
                             style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
                             source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
                     </View>
@@ -208,26 +257,58 @@ const JobDetails = ({route, navigation}) => {
                                     marginTop: 10,
                                     fontFamily: 'poppins_medium'
                                 }}>
-                                    <Text style={{
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_medium',
-                                        backgroundColor: '#143D59',
-                                        color: 'white',
-                                        width: 150,
-                                        textAlign: "center",
-                                        paddingVertical: 6,
-                                        borderRadius: 20,
-                                    }}>SAVE</Text>
-                                    <Text style={{
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_medium',
-                                        backgroundColor: '#13A3E1',
-                                        color: 'white',
-                                        width: 150,
-                                        textAlign: "center",
-                                        paddingVertical: 6,
-                                        borderRadius: 20,
-                                    }}>APPLY NOW</Text>
+                                    {bookmark === 0 ?
+                                        <Pressable onPress={() => BookmarkJob()}><Text style={{
+                                            justifyContent: 'center',
+                                            height: 50,
+                                            fontSize: 15,
+                                            fontFamily: 'poppins_bold',
+                                            backgroundColor: '#143D59',
+                                            color: 'white',
+                                            width: 150,
+                                            textAlign: "center",
+                                            paddingVertical: 10,
+                                            borderRadius: 25,
+                                        }}>SAVE</Text></Pressable>
+                                        :
+                                        <Pressable onPress={() => RemoveBookmark()}><Text style={{
+                                            justifyContent: 'center',
+                                            height: 50,
+                                            fontSize: 15,
+                                            fontFamily: 'poppins_bold',
+                                            backgroundColor: '#143D59',
+                                            color: 'white',
+                                            width: 150,
+                                            textAlign: "center",
+                                            paddingVertical: 10,
+                                            borderRadius: 25,
+                                        }}>SAVED</Text></Pressable>
+                                    }
+                                    {applied === 0 ?
+                                        <Pressable onPress={() => ApplyJob()}><Text style={{
+                                            justifyContent: 'center',
+                                            height: 50,
+                                            fontSize: 15,
+                                            fontFamily: 'poppins_bold',
+                                            backgroundColor: '#13A3E1',
+                                            color: 'white',
+                                            width: 150,
+                                            textAlign: "center",
+                                            paddingVertical: 10,
+                                            borderRadius: 25,
+                                        }}>APPLY NOW</Text></Pressable>
+                                        : <Text style={{
+                                            justifyContent: 'center',
+                                            height: 50,
+                                            fontSize: 15,
+                                            fontFamily: 'poppins_bold',
+                                            backgroundColor: '#13A3E1',
+                                            color: 'white',
+                                            width: 150,
+                                            textAlign: "center",
+                                            paddingVertical: 10,
+                                            borderRadius: 25,
+                                        }}>APPLIED</Text>}
 
                                 </View>
 

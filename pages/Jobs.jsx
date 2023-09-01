@@ -9,6 +9,7 @@ import {AllJobs} from "../API/actions/jobActions";
 import moment from "moment";
 import {recordInteraction} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {RESET, SUCCESS} from "../Utils/Constants";
 
 const data = [
     {"name": "Facebook"},
@@ -20,9 +21,11 @@ const data = [
 function Jobs({navigation}) {
 
     const jobs = useSelector(state => state.job.jobs)
-    const loading = useSelector(state => state.job.isLoading)
+    const isloading = useSelector(state => state.job.isLoading)
     const error = useSelector(state => state.job.error)
     const nodata = useSelector(state => state.job.nodata)
+    const [loading, setLoading] = useState(true)
+    const [data, setData] = useState([])
 
     const success = useSelector(state => state.job.success)
     const dispatch = useDispatch()
@@ -30,10 +33,25 @@ function Jobs({navigation}) {
     const [ID, setID] = useState()
 
     useEffect(() => {
-        if (!jobs) {
-            dispatch(AllJobs())
+        if (ID) {
+            if (loading) {
+                if (!jobs) {
+                    dispatch(AllJobs(ID))
+                } else {
+                    setLoading(false)
+                    setData(jobs)
+                }
+            }
         }
-    }, [dispatch, jobs]);
+    }, [dispatch, jobs, ID]);
+
+    useEffect(() => {
+        if (success) {
+            setData(jobs)
+            setLoading(false)
+            dispatch({ type: RESET })
+        }
+    }, [success]);
 
     const JobClick = (id) => {
         recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
@@ -77,7 +95,7 @@ function Jobs({navigation}) {
                                 </View> : <>
                                     <View style={{backgroundColor: '#EAEAEA'}}>
                                         <View style={{flexDirection: 'row', height: 90}}>
-                                            <Pressable onPress={() => toggleVisibility()}><Image style={{
+                                            <Pressable onPress={() => navigation.goBack()}><Image style={{
                                                 width: 22,
                                                 height: 20,
                                                 marginTop: 70,
@@ -147,12 +165,21 @@ function Jobs({navigation}) {
                                                                           fontSize: 12
                                                                       }}>{item.company_name}</Text>
                                                                   </View>
+                                                                  {item.bookmark === 0 ?
                                                                   <Image style={{
                                                                       width: 20,
                                                                       height: 20,
                                                                       marginLeft: 'auto',
                                                                       marginTop: 10
-                                                                  }} source={require('../assets/bookmarkIcon.png')}/>
+                                                                  }} source={require('../assets/bookmarked.png')}/>
+                                                                      :
+                                                                      <Image style={{
+                                                                          width: 20,
+                                                                          height: 20,
+                                                                          marginLeft: 'auto',
+                                                                          marginTop: 10
+                                                                      }} source={require('../assets/bookmark.png')}/>
+                                                                  }
                                                               </View>
                                                               <View style={{flexDirection: 'row', flex: 1}}>
                                                                   <Text style={{

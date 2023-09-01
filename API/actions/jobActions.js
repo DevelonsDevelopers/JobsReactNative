@@ -11,10 +11,10 @@ import {
     SUCCESS
 } from "../../Utils/Constants";
 
-export const AllJobs = () => async (dispatch) => {
+export const AllJobs = (user) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { data } } = await api.fetchAllJobs();
+        const { data: { data } } = await api.fetchAllJobs(user);
         if (data.length > 0) {
             dispatch({type: ALL_JOBS, payload: {jobs: data}})
             dispatch({type: SUCCESS})
@@ -81,10 +81,10 @@ export const RecommendedJobs = (tag) => async (dispatch) => {
     }
 }
 
-export const JobByID = (id) => async (dispatch) => {
+export const JobByID = (user, id) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { data } } = await api.fetchJobByID(id);
+        const { data: { data } } = await api.fetchJobByID(user, id);
         dispatch ({ type: GET_JOB, payload: { job: data } })
         dispatch ({ type: SUCCESS })
     } catch (error) {
@@ -92,10 +92,10 @@ export const JobByID = (id) => async (dispatch) => {
     }
 }
 
-export const CityJobs = (id) => async (dispatch) => {
+export const CityJobs = (user, id) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { data } } = await api.fetchJobByCity(id);
+        const { data: { data } } = await api.fetchJobByCity(user, id);
         if (data.length > 0) {
             dispatch({type: GET_JOBS_BY_CITY, payload: {cityJobs: data}})
             dispatch({type: SUCCESS})
@@ -110,10 +110,10 @@ export const CityJobs = (id) => async (dispatch) => {
     }
 }
 
-export const CompanyJobs = (id) => async (dispatch) => {
+export const CompanyJobs = (user, id) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { data } } = await api.fetchJobByCompany(id);
+        const { data: { data } } = await api.fetchJobByCompany(user, id);
         if (data.length > 0) {
             dispatch({type: GET_JOBS_BY_COMPANY, payload: {companyJobs: data}})
             dispatch({type: SUCCESS})
@@ -128,10 +128,10 @@ export const CompanyJobs = (id) => async (dispatch) => {
     }
 }
 
-export const CategoryJobs = (id) => async (dispatch) => {
+export const CategoryJobs = (user, id) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { data } } = await api.fetchJobByCategory(id);
+        const { data: { data } } = await api.fetchJobByCategory(user, id);
         if (data.length > 0) {
             dispatch({type: GET_JOBS_BY_CATEGORY, payload: {categoryJobs: data}})
             dispatch({type: SUCCESS})

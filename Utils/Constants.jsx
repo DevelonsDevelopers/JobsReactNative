@@ -44,7 +44,6 @@ export const GET_JOBS_BY_COMPANY = "GET_JOBS_BY_COMPANY";
 export const GET_RECOMMENDED_JOBS = "GET_RECOMMENDED_JOBS"
 export const JOB_SEARCH = "JOB_SEARCH";
 
-
 //INTERACTIONS:=====
 export const ALL_INTERACTIONS = "ALL_INTERACTIONS";
 export const GET_INTERACTIONS = "GET_INTERACTION";
@@ -69,9 +68,11 @@ export const GET_SEEKER = "GET_SEEKER";
 export const UPDATE_SEEKER = "UPDATE_SEEKER";
 export const RESET_SEEKER = "RESET_SEEKER";
 
+
 //Tags:=========
 export const GET_ALL_TAGS = "GET_ALL_TAGS";
 export const GET_TOP_TAGS = "GET_TOP_TAGS";
+
 
 //APPLIED:=====
 export const ALL_APPLIED = "ALL_APPLIED";
@@ -90,3 +91,8 @@ export const CREATE_CV_RESUME = "CREATE_CV_RESUME"
 export const CREATE_CV_SKILL = "CREATE_CV_SKILL"
 export const CREATE_CV_CAREER = "CREATE_CV_CAREER"
 export const CREATE_CV_COURSE = "CREATE_CV_COURSE"
+
+
+//BOOKMARK: ========
+export const ALL_BOOKMARKS = "ALL_BOOKMARK";
+export const BOOKMARK_JOB = "BOOKMARK_JOB";
