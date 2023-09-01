@@ -2,7 +2,7 @@ import {ActivityIndicator, Button, Image, Modal, Pressable, ScrollView, Text, Te
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {LoginAuthentication} from "../API/actions/loginActions";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 function Login({ navigation }) {
 
@@ -23,7 +23,7 @@ function Login({ navigation }) {
     const [loading, setLoading] = useState([]);
     const [loadingVisible, setLoadingVisible] = useState(false)
     const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
-    
+
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F0A51E'}}>
            <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
@@ -92,7 +92,7 @@ function Login({ navigation }) {
                     paddingVertical: 15
                 }}><Text style={{color: '#fff', fontWeight: '900', fontSize: 15}}>Log In</Text></Pressable>
                 <View style={{flexDirection: 'row'}}>
-                    <Pressable onPress={() => navigation.push('ChangePassword')} style={{
+                    <Pressable onPress={() => GoogleLogin()} style={{
                         width: '41%',
                         backgroundColor: '#fff',
                         alignItems: 'center',
