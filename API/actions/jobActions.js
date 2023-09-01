@@ -63,10 +63,10 @@ export const SearchJobs = (search, country, category, city, company, salaryStart
     }
 }
 
-export const RecommendedJobs = (tag) => async (dispatch) => {
+export const RecommendedJobs = (user, tag) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { data } } = await api.fetchRecommendedJobs(tag);
+        const { data: { data } } = await api.fetchRecommendedJobs(user, tag);
         if (data.length > 0) {
             dispatch({type: GET_RECOMMENDED_JOBS, payload: {recommendedJobs: data}})
             dispatch({type: SUCCESS})

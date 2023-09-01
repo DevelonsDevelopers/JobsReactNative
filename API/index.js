@@ -64,7 +64,7 @@ export const fetchAllCompanies = () => API.get('/companies/all')
 //JOBS API CALL
 export const fetchAllJobs = (user) => API.post('/jobs/all', { user: user })
 export const fetchRecentJobs = () => API.get('/jobs/recent')
-export const fetchRecommendedJobs = (tag) => API.post('/jobs/recommended', { tag: tag })
+export const fetchRecommendedJobs = (user, tag) => API.post('/jobs/recommended', { user: user, tag: tag })
 export const fetchJobByID = (user, id) => API.post('/jobs/get', { user: user, id: id })
 export const fetchJobByCategory = (user, id) => API.post('/jobs/category', { user: user, category: id })
 export const fetchJobByCity = (user, id) => API.post('/jobs/city', { user: user, city: id })

@@ -46,7 +46,7 @@ function Resume({ navigation }) {
   const [ID, setID] = useState()
   const cv = useSelector(state => state.cv.cv);
   const loading = useSelector(state => state.cv.isLoading);
- 
+
 
   useEffect(() => {
     GetData()
@@ -102,7 +102,7 @@ function Resume({ navigation }) {
               <View style={{ flex: 0.8 }}>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}> Address :</Text>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_light' }}> {cv?.address} </Text>
-               
+
               </View>
               <View style={{ display: 'flex', flexDirection: 'column', paddingTop: 6, flex: 0.5 }}>
                 <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', }}>
@@ -131,7 +131,7 @@ function Resume({ navigation }) {
                   data={cv?.careers} renderItem={({ item }) => (
                     <View>
                       <View >
-                        <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', marginTop: 3, fontSize: 12 }}>
+                        <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', marginTop: 3 }}>
                           {item.timeperiod }
                         </Text>
                         <Text style={{ fontSize: 13, fontFamily: 'poppins_semibold', marginRight: 6 }}>
@@ -176,7 +176,7 @@ function Resume({ navigation }) {
                         </View>
                         <Text style={{ backgroundColor: '#BDBDBD', height: 1 }} >-</Text>
                       </View>
-                    )} keyExtractor={item => item.toString()} />
+                    )} />
                 </SafeAreaView>
               </View>
               <Text style={{ backgroundColor: 'black', width: 1, marginTop: 80 }}> |</Text>
