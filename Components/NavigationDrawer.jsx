@@ -9,7 +9,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                 <View style={{ width: '100%', maxWidth: 300, margin: 48, elevation: 200, borderRadius: 15, backgroundColor: '#fff', opacity: 1, padding: 20 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={{ width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center' }}>Menu</Text>
-                        <Pressable style={{ marginLeft: 'auto' }} onPress={() => toggleVisibility()}><Image style={{ width: 15, height: 15, marginLeft: 'auto' }} source={require('../assets/close.png')} /></Pressable>
+                        <Pressable style={{ marginLeft: 'auto', padding:20 }} onPress={() => toggleVisibility()}><Image style={{ width: 13, height: 13, marginLeft: 'auto',marginTop:-10 }} source={require('../assets/close.png')} /></Pressable>
                     </View>
 
                     <Pressable onPress={() => navigation.push('Profile')} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 10 }}>

@@ -176,7 +176,7 @@ function AccountInfo({navigation}) {
                                             backgroundColor: '#13A3E1'
                                         }}>
                                             <View style={{flexDirection: 'row', height: 130}}>
-                                                <Pressable onPress={() => navigation.goBack()}><Image style={{
+                                                <Pressable onPress={() => navigation.goBack()} style={{paddingRight:5 }}><Image style={{
                                                     width: 22,
                                                     height: 20,
                                                     marginTop: 70,
