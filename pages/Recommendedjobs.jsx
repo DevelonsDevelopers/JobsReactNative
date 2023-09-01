@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView } from "react-native";
+import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
 import React, {useEffect, useState} from 'react'
 import { View } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
@@ -22,6 +22,9 @@ function Recommendedjobs ({ navigation }) {
   const dispatch = useDispatch()
   const topTags = useSelector(state => state.tag.topTags)
   const recommendedJobs = useSelector(state => state.job.recommendedJobs)
+  const loading = useSelector(state => state.job.isLoading)
+  const error = useSelector(state => state.job.error)
+  const data = useSelector(state => state.job.nodata)
   const [ID, setID] = useState()
 
   useEffect(() => {
@@ -57,6 +60,34 @@ function Recommendedjobs ({ navigation }) {
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+ {loading ?
+                <View style={{marginTop: 400}}>
+                    <ActivityIndicator size={60} color="#13A3E1"/>
+                </View>
+                :
+                <>
+                    {data ? <View style={{marginTop: 200}}>
+                            <Image source={require('../assets/nodata.png')}
+                                   style={{width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40}}/>
+                            <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
+                        </View> :
+                        <>
+                            {error ?
+                                <View style={{marginTop: 360}}>
+                                    <Image source={require('../assets/delete.png')} style={{
+                                        width: 30,
+                                        height: 30,
+                                        marginLeft: 190,
+                                        marginBottom: -20,
+                                        marginTop: 40
+                                    }}/>
+                                    <Text
+                                        style={{textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium'}}>Network
+                                        Error...!</Text>
+                                </View> : <>
+
+
+
       <View style={{ backgroundColor: '#EAEAEA' }}>
         <View style={{ flexDirection: 'row', height: 90 }}>
           <Pressable onPress={() => navigation.goBack()}><Image style={{
@@ -149,6 +180,10 @@ function Recommendedjobs ({ navigation }) {
           )} />
         </SafeAreaView>
       </View>
+      </>
+                            }
+                        </>}
+                </>}
     </ScrollView>
   )
 }

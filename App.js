@@ -39,8 +39,8 @@ import Response from './pages/Response';
 import OfferAccepted from './pages/OfferAccepted';
 import OfferRejected from './pages/OfferRejected';
 import Recommendedjobs from './pages/Recommendedjobs';
-import AppliedJobs from './pages/AppliedJobs';
-import SavedJobs from './pages/SavedJobs';
+// import AppliedJobs from './pages/AppliedJobs';
+// import SavedJobs from './pages/SavedJobs';
 import Search from './pages/Search';
 import RecommendedUser from './pages/RecommendedUser';
 import AppliedSaved from './pages/AppliedSaved';
@@ -114,7 +114,7 @@ function App() {
                     <Stack.Screen name="OfferAccepted" component={OfferAccepted} options={{title: "OfferAccepted", headerShown: false}}/>
                     <Stack.Screen name="OfferRejected" component={OfferRejected} options={{title: "OfferRejected", headerShown: false}}/>
                     <Stack.Screen name="Recommendedjobs" component={Recommendedjobs} options={{title: "Recommendedjobs", headerShown: false}}/>
-                    <Stack.Screen name="SavedJobs" component={SavedJobs} options={{title: "SavedJobs", headerShown: false}}/>
+                    {/* <Stack.Screen name="SavedJobs" component={SavedJobs} options={{title: "SavedJobs", headerShown: false}}/> */}
                     <Stack.Screen name="Search" component={Search} options={{title: "Search", headerShown: false}}/>
                     <Stack.Screen name="RecommendedUser" component={RecommendedUser} options={{title: "RecommendedUser", headerShown: false}}/>
                     <Stack.Screen name="AppliedSaved" component={AppliedSaved} options={{title: "AppliedSaved", headerShown: false}}/>
