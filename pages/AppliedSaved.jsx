@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Image, Pressable, Text, View, useWindowDimensions} from 'react-native';
+import {ActivityIndicator, Image, Pressable, Text, View, useWindowDimensions} from 'react-native';
 import {FlatList, GestureHandlerRootView, ScrollView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
@@ -29,7 +29,7 @@ const FirstRoute = () => {
     const bookmarks = useSelector(state => state.bookmark.bookmarks);
     const loading = useSelector(state => state.bookmark.isLoading)
     const error = useSelector(state => state.bookmark.error)
-    const data = useSelector(state => state.bookmark.nodata)
+    const noData = useSelector(state => state.bookmark.nodata)
     const [ID, setID] = useState()
 
     useEffect(() => {
@@ -52,6 +52,31 @@ const FirstRoute = () => {
 
     return (
         <GestureHandlerRootView>
+            {loading ?
+                <View style={{marginTop: 200}}>
+                    <ActivityIndicator size={60} color="#13A3E1"/>
+                </View>
+                :
+                <>
+                    {noData ? <View style={{marginTop: 200}}>
+                            <Image source={require('../assets/nodata.png')}
+                                   style={{width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40}}/>
+                            <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
+                        </View> :
+                        <>
+                            {error ?
+                                <View style={{marginTop: 360}}>
+                                    <Image source={require('../assets/delete.png')} style={{
+                                        width: 30,
+                                        height: 30,
+                                        marginLeft: 190,
+                                        marginBottom: -20,
+                                        marginTop: 40
+                                    }}/>
+                                    <Text
+                                        style={{textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium'}}>Network
+                                        Error...!</Text>
+                                </View> : <>
             <FlatList nestedScrollEnabled={true} scrollEnabled={true}
                       style={{marginHorizontal: 0, marginTop: 20}} data={bookmarks} renderItem={({item}) => (
                 <View style={{
@@ -134,6 +159,10 @@ const FirstRoute = () => {
 
                 </View>
             )}/>
+                   </>
+                            }
+                        </>}
+                </>}
         </GestureHandlerRootView>
     )
 };
@@ -144,7 +173,7 @@ const SecondRoute = () => {
     const applied = useSelector(state => state.applied.appliedJobs);
     const loading = useSelector(state => state.applied.isLoading)
     const error = useSelector(state => state.applied.error)
-    const data = useSelector(state => state.applied.nodata)
+    const noData = useSelector(state => state.applied.nodata)
     const [ID, setID] = useState()
 
     useEffect(() => {
@@ -167,6 +196,31 @@ const SecondRoute = () => {
 
     return (
     <GestureHandlerRootView>
+         {loading ?
+                <View style={{marginTop: 200}}>
+                    <ActivityIndicator size={60} color="#13A3E1"/>
+                </View>
+                :
+                <>
+                    {noData ? <View style={{marginTop: 200}}>
+                            <Image source={require('../assets/nodata.png')}
+                                   style={{width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40}}/>
+                            <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
+                        </View> :
+                        <>
+                            {error ?
+                                <View style={{marginTop: 360}}>
+                                    <Image source={require('../assets/delete.png')} style={{
+                                        width: 30,
+                                        height: 30,
+                                        marginLeft: 190,
+                                        marginBottom: -20,
+                                        marginTop: 40
+                                    }}/>
+                                    <Text
+                                        style={{textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium'}}>Network
+                                        Error...!</Text>
+                                </View> : <>
         <FlatList nestedScrollEnabled={true} scrollEnabled={true}
                   style={{marginHorizontal: 0, marginTop: 20}} data={applied} renderItem={({item}) => (
             <View style={{
@@ -229,6 +283,10 @@ const SecondRoute = () => {
 
             </View>
         )}/>
+               </>
+                            }
+                        </>}
+                </>}
     </GestureHandlerRootView>
 )};
 

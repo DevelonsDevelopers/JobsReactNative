@@ -322,7 +322,7 @@ function Home({ navigation }) {
                 marginBottom: 15,
                 paddingHorizontal: 20
             }}>
-                <Pressable onPress={() => navigation.push('SavedJobs')} style={{
+                <Pressable onPress={() => navigation.push('Test')} style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
@@ -411,10 +411,10 @@ function Home({ navigation }) {
                     marginLeft: -8,
                 }}>
                         <Image style={{
-                            width: 20,
-                            height: 20,
+                            width: 25,
+                            height: 25,
                             tintColor: '#fff',
-                            marginLeft: 2
+                            marginLeft: 3
                         }} source={require('../assets/profileIcon.png')} alt={'Okay'} />
                         <Text numberOfLines={1} style={{
                             fontFamily: 'poppins_medium',
