@@ -1,5 +1,5 @@
 import {Image, TextInput, Text, Pressable, ScrollView, FlatList, SafeAreaView, ActivityIndicator} from 'react-native'
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {View} from 'react-native'
 import Termsandconditions from './Termsandconditions'
 import {useDispatch, useSelector} from "react-redux";
@@ -8,16 +8,30 @@ import {AllCategories} from "../API/actions/categoryActions";
 function Categories({navigation}) {
 
     const categories = useSelector(state => state.category.categories)
-    const data = useSelector(state => state.category.nodata)
+    const noData = useSelector(state => state.category.nodata)
     const loading = useSelector(state => state.category.isLoading)
     const error = useSelector(state => state.category.error)
     const dispatch = useDispatch();
+    const [data, setData] = useState()
 
     useEffect(() => {
         if (!categories) {
             dispatch(AllCategories())
         }
     }, [dispatch, navigation, categories]);
+
+    useEffect(() => {
+        if (categories){
+            setData(categories)
+        }
+    }, [categories]);
+
+    const search = (query) => {
+        const searched = categories.filter((category) => {
+            return (category.name).toLowerCase().includes(query.toLowerCase());
+        })
+        setData(searched)
+    }
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
@@ -84,7 +98,7 @@ function Categories({navigation}) {
                                         </View>
                                         <SafeAreaView>
                                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                                                      style={{marginHorizontal: 20}} data={categories}
+                                                      style={{marginHorizontal: 20}} data={data}
                                                       renderItem={({item}) => (
                                                           <Pressable
                                                               onPress={() => navigation.push('JobsByCategory', {CATID: item.id})}
