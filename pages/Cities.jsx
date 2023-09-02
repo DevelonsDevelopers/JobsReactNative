@@ -1,39 +1,22 @@
 import {Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView} from 'react-native'
 import {View} from 'react-native'
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import Categories from './Categories'
 import Resume from './Resume'
 import {useDispatch, useSelector} from "react-redux";
 import {AllCities} from "../API/actions/cityActions";
 import {ActivityIndicator} from 'react-native'
 import NetworkErrorModal from '../Components/NetworkErrorModal'
-import {useState} from 'react'
-
-
-const data = [
-    {"city": "Lahore", "country": 'Pakistan'},
-    {"city": "Sydney", "country": 'Australia'},
-    {"city": "Delhi", "country": 'India'},
-    {"city": "Beijing", "country": 'China'},
-    {"city": "Al Ain", "country": 'UAE'},
-    {"city": "London", "country": 'UK'},
-    {"city": "New York", "country": 'USA'},
-    {"city": "Lahore", "country": 'Pakistan'},
-    {"city": "Sydney", "country": 'Australia'},
-    {"city": "Delhi", "country": 'India'},
-    {"city": "Beijing", "country": 'China'},
-    {"city": "Al Ain", "country": 'UAE'},
-    {"city": "London", "country": 'UK'},
-    {"city": "New York", "country": 'USA'}
-]
+import categories from "./Categories";
 
 function Cities({navigation}) {
 
     const cities = useSelector(state => state.city.cities)
     const loading = useSelector(state => state.city.isLoading)
     const error = useSelector(state => state.city.error)
-    const data = useSelector(state => state.city.nodata)
+    const nodata = useSelector(state => state.city.nodata)
     const dispatch = useDispatch()
+    const [data, setData] = useState()
 
     useEffect(() => {
         if (!cities) {
@@ -41,6 +24,20 @@ function Cities({navigation}) {
         }
     }, [dispatch, navigation, cities]);
 
+    useEffect(() => {
+        if (cities){
+            setData(cities)
+        }
+    }, [cities]);
+
+    const search = (query) => {
+        const searched = cities.filter((city) => {
+            console.log(city)
+            console.log(query)
+            return (city.name).toLowerCase().includes(query.toLowerCase());
+        })
+        setData(searched)
+    }
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
@@ -51,7 +48,7 @@ function Cities({navigation}) {
                 </View>
                 :
                 <>
-                    {data ? <View style={{marginTop: 200}}>
+                    {nodata ? <View style={{marginTop: 200}}>
                             <Image source={require('../assets/nodata.png')}
                                    style={{width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40}}/>
                             <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
@@ -93,7 +90,7 @@ function Cities({navigation}) {
                                         {/*    <Image style={{ width: 30, height: 30, marginLeft: 65, marginTop: 12 }} source={require('../assets/home.png')} />*/}
                                         {/*</View>*/}
                                         <View>
-                                            <TextInput style={{
+                                            <TextInput onChangeText={text => search(text)} style={{
                                                 backgroundColor: '#fff',
                                                 marginHorizontal: 30,
                                                 height: 50,
@@ -122,7 +119,7 @@ function Cities({navigation}) {
                                             marginTop: 9
                                         }}>
                                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                                                      style={{marginHorizontal: 0, marginTop: 10}} data={cities}
+                                                      style={{marginHorizontal: 0, marginTop: 10}} data={data}
                                                       renderItem={({item}) => (
                                                           <Pressable onPress={() => navigation.push('JobsByCity', { CITYID: item.id })}>
                                                               <View
