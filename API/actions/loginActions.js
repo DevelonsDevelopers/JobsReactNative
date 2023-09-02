@@ -45,7 +45,7 @@ export const ProviderLoginAuthentication = (navigation, email, password) => asyn
         await AsyncStorage.setItem("EMAIL", data.email)
         console.log("Provider")
         if (responseCode === 200){
-            navigation.replace('PostJob')
+            navigation.replace('ProviderProfile')
             dispatch ({ type: SUCCESS })
         } else {
             dispatch ({ type: ERROR })
