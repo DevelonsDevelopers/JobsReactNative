@@ -8,7 +8,7 @@ import { AllCountries } from '../API/actions/countryActions'
 import CountrySelectModal from '../Components/CountrySelectModal'
 import ProviderTypeModal from '../Components/ProviderTypeModal'
 
-const ProviderProfile = () => {
+const ProviderProfile = ({navigation}) => {
 
     // city country modal==============
     const dispatch = useDispatch();
@@ -155,7 +155,7 @@ const ProviderProfile = () => {
                     </View>
                 </Pressable>
 
-                <Pressable style={{
+                <Pressable onPress={() => navigation.push('PostJob')} style={{
                     width: '85%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',
