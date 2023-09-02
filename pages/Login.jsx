@@ -1,12 +1,14 @@
 import {ActivityIndicator, Button, Image, Modal, Pressable, ScrollView, Text, TextInput, View} from "react-native";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {LoginAuthentication} from "../API/actions/loginActions";
+import {LoginAuthentication, ProviderLoginAuthentication} from "../API/actions/loginActions";
 import Toast from "react-native-toast-message";
 import {RESET_SEEKER} from "../Utils/Constants";
 
 
-function Login({ navigation }) {
+function Login({ route, navigation }) {
+
+    const { USER } = route.params
 
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('')
@@ -16,14 +18,19 @@ function Login({ navigation }) {
 
     const toggleVisibility = () => setShow(!show)
 
-    const error = useSelector(state => state.seeker.error)
+    const error = useSelector(state => state.login.error)
 
     const LoginUser = () => {
         if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
             Toast.show({ type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address' })
         } else {
-            dispatch(LoginAuthentication(navigation, email, password))
-            toggleLoadingVisibility()
+            if (USER === "SEEKER") {
+                dispatch(LoginAuthentication(navigation, email, password))
+                toggleLoadingVisibility()
+            } else {
+                dispatch(ProviderLoginAuthentication(navigation, email, password))
+                toggleLoadingVisibility()
+            }
         }
     }
 
@@ -31,7 +38,6 @@ function Login({ navigation }) {
         if (error){
             toggleLoadingVisibility()
             Toast.show({ type: 'error', position: 'top', text1: 'Failed to Login', text2: 'Invalid Username or Password' })
-            dispatch({ type: RESET_SEEKER })
         }
     }, [error]);
 
@@ -133,7 +139,7 @@ function Login({ navigation }) {
                 </View>
                 <View style={{flexDirection: 'row', marginTop: 25}}>
                     <Text style={{color: '#fff', fontWeight: '900', fontSize: 15}}>Don't have an account?</Text>
-                    <Pressable onPress={() => navigation.replace('Register')} ><Text style={{color: '#000', fontWeight: '900', fontSize: 15}}> Register</Text></Pressable>
+                    <Pressable onPress={() => navigation.replace('Register', { USER: USER })} ><Text style={{color: '#000', fontWeight: '900', fontSize: 15}}> Register</Text></Pressable>
                 </View>
             </View>
             <Toast

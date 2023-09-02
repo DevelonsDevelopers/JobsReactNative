@@ -9,7 +9,7 @@ function UserType({navigation}) {
                 <Text style={{textAlign: 'center', fontSize: 18, fontFamily: 'poppins_bold', color: '#fff'}}>Are you a
                     hiring agency, recruiter, or job bank? Click here to log in</Text>
             </ImageBackground>
-            <Pressable onPress={() => navigation.navigate('Login')} style={{
+            <Pressable onPress={() => navigation.navigate('Login', { USER: 'PROVIDER' })} style={{
                 alignItems: 'center',
                 backgroundColor: '#13A3E1',
                 paddingHorizontal: 90,
@@ -24,7 +24,7 @@ function UserType({navigation}) {
                 <Text style={{fontSize: 15, color: '#fff', marginTop: 15, fontFamily: 'poppins_black'}}>Job
                     Provider</Text>
             </Pressable>
-            <Pressable onPress={() => navigation.navigate('Login')} style={{
+            <Pressable onPress={() => navigation.navigate('Login', { USER: 'SEEKER' })} style={{
                 alignItems: 'center',
                 backgroundColor: '#13A3E1',
                 paddingHorizontal: 90,

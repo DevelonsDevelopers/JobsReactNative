@@ -20,6 +20,24 @@ export const login = (email, password) => API.post('/seekerAuth/login', {
     password: password
 })
 
+export const registerProvider = (name, size, city, country, email, phone, address, headquater, type, password) => API.post('/providerAuth/register', {
+    name: name,
+    size: size,
+    city: city,
+    country: country,
+    email: email,
+    phone: phone,
+    address: address,
+    headquater: headquater,
+    type: type,
+    password: password
+})
+
+export const loginProvider = (email, password) => API.post('/providerAuth/login', {
+    email: email,
+    password: password
+})
+
 //APPLIED API CALL ==============================
 export const applyJob = (job, user, date, proposal) => API.post('/applied/create', {
     job: job,

@@ -14,6 +14,7 @@ export const LoginAuthentication = (navigation, email, password) => async (dispa
         console.log(ID)
         await AsyncStorage.setItem("LOGIN", 'true')
         await AsyncStorage.setItem("ID", ID)
+        await AsyncStorage.setItem("USER", "SEEKER")
         await AsyncStorage.setItem("NAME", data.name)
         await AsyncStorage.setItem("EMAIL", data.email)
         await AsyncStorage.setItem("USERNAME", data.username)
@@ -24,6 +25,33 @@ export const LoginAuthentication = (navigation, email, password) => async (dispa
             dispatch ({ type: ERROR })
         }
     } catch (e){
+        dispatch({ type: ERROR })
+    }
+}
+
+export const ProviderLoginAuthentication = (navigation, email, password) => async (dispatch) => {
+    try {
+        dispatch ({ type: LOADING })
+        const response = await api.loginProvider(email, password)
+        const { data: { responseCode } } = response
+        const { data: { message } } = response
+        const { data: { data } } = response
+        console.log(responseCode)
+        var ID = (data.id).toString()
+        await AsyncStorage.setItem("LOGIN", 'true')
+        await AsyncStorage.setItem("ID", ID)
+        await AsyncStorage.setItem("USER", "PROVIDER")
+        await AsyncStorage.setItem("NAME", data.name)
+        await AsyncStorage.setItem("EMAIL", data.email)
+        console.log("Provider")
+        if (responseCode === 200){
+            navigation.replace('PostJob')
+            dispatch ({ type: SUCCESS })
+        } else {
+            dispatch ({ type: ERROR })
+        }
+    } catch (e){
+        console.log("error")
         dispatch({ type: ERROR })
     }
 }

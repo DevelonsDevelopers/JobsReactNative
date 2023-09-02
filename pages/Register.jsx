@@ -1,11 +1,13 @@
 import {ActivityIndicator, Image, Modal, Pressable, ScrollView, Text, TextInput, View} from "react-native";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Registeration} from "../API/actions/registerActions";
+import {ProviderRegistration, Registeration} from "../API/actions/registerActions";
 import Toast from "react-native-toast-message";
 import {RESET_SEEKER} from "../Utils/Constants";
 
-function Register({navigation}) {
+function Register({ route, navigation }) {
+
+    const { USER } = route.params
 
     const [show, setShow] = useState(true)
     const [name, setName] = useState('')
@@ -13,6 +15,7 @@ function Register({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [size, setSize] = useState('')
 
     const dispatch = useDispatch();
 
@@ -20,23 +23,44 @@ function Register({navigation}) {
 
     const RegisterUser = () => {
         if (name.length >= 4) {
-            if (username.length >= 6) {
-                if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address'})
-                } else {
-                    if (password.length >= 9) {
-                        if (password === confirmPassword) {
-                            dispatch(Registeration(navigation, name, username, email, '', '', '', '', password));
-                            toggleLoadingVisibility()
-                        } else {
-                            Toast.show({type: 'error', position: 'top', text1: 'Password Not Match'})
-                        }
+            if (USER === "SEEKER") {
+                if (username.length >= 6) {
+                    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+                        Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address'})
                     } else {
-                        Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Strong Password'})
+                        if (password.length >= 9) {
+                            if (password === confirmPassword) {
+                                    dispatch(Registeration(navigation, name, username, email, '', '', '', '', password));
+                                    toggleLoadingVisibility()
+                            } else {
+                                Toast.show({type: 'error', position: 'top', text1: 'Password Not Match'})
+                            }
+                        } else {
+                            Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Strong Password'})
+                        }
                     }
+                } else {
+                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid UserName'})
                 }
             } else {
-                Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid UserName'})
+                if (size.length >= 1) {
+                    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+                        Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address'})
+                    } else {
+                        if (password.length >= 9) {
+                            if (password === confirmPassword) {
+                                    dispatch(ProviderRegistration(navigation, name, size, 0, 0, email, '', '', '', '', password));
+                                    toggleLoadingVisibility()
+                            } else {
+                                Toast.show({type: 'error', position: 'top', text1: 'Password Not Match'})
+                            }
+                        } else {
+                            Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Strong Password'})
+                        }
+                    }
+                } else {
+                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid UserName'})
+                }
             }
         } else {
             Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid Name'})
@@ -92,17 +116,31 @@ function Register({navigation}) {
                     paddingHorizontal: 20,
                     color: '#626262',
                     elevation: 10
-                }} placeholder={'Enter your full Name'} inputMode={'text'}/>
-                <TextInput onChangeText={(text) => setUsername(text)} style={{
-                    height: 50,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 25,
-                    marginTop: 15,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }} placeholder={'Enter your username'}/>
+                }} placeholder={USER === "SEEKER" ? 'Enter your full Name' : 'Enter Your Company Name'} inputMode={'text'}/>
+                {USER === "SEEKER" ?
+                    <TextInput onChangeText={(text) => setUsername(text)} style={{
+                        height: 50,
+                        backgroundColor: '#fff',
+                        width: '85%',
+                        borderRadius: 25,
+                        marginTop: 15,
+                        paddingHorizontal: 20,
+                        color: '#626262',
+                        elevation: 10
+                    }} placeholder={'Enter your username'}/>
+                    :
+                    <TextInput onChangeText={(text) => setSize(text)} style={{
+                        height: 50,
+                        backgroundColor: '#fff',
+                        width: '85%',
+                        borderRadius: 25,
+                        marginTop: 15,
+                        paddingHorizontal: 20,
+                        color: '#626262',
+                        elevation: 10
+                    }} placeholder={'Enter your Company Size'}/>
+                }
+
                 <TextInput onChangeText={(text) => setEmail(text)} style={{
                     height: 50,
                     backgroundColor: '#fff',
