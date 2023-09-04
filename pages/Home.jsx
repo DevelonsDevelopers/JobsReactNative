@@ -83,7 +83,7 @@ function Home({ navigation }) {
     return (
         <View style={{ flex: 1 }}>
 
-            <NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={isLogin} toggleLoadingVisibility={toggleLoadingVisibility} />
+            <NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={login} toggleLoadingVisibility={toggleLoadingVisibility} />
             <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
 
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled">
@@ -144,7 +144,7 @@ function Home({ navigation }) {
                             marginLeft: 'auto'
                         }} source={require('../assets/recommended_jobs_icon.png')} alt={'Okay'} />
                     </Pressable>
-                    : <Pressable onPress={() => navigation.push('Login', { USER: 'SEEKER' })} style={{
+                    : <Pressable onPress={() => navigation.push('UserType')} style={{
                         backgroundColor: '#13A3E1',
                         borderRadius: 25,
                         alignItems: 'center',
@@ -400,7 +400,7 @@ function Home({ navigation }) {
                         if (login) {
                             navigation.push('Profile')
                         } else {
-                            navigation.push('Login')
+                            navigation.push('Login', { USER: "SEEKER" })
                         }
                     }}
                 ><View style={{
