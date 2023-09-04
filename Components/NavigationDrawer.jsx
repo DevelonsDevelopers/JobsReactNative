@@ -5,7 +5,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
     return (
         <Modal visible={visible} animationType={"slide"} transparent={true}>
 
-            <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.2)' }}>
+            <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.2)' }} onTouchStart={() => toggleVisibility()}>
                 <View style={{ width: '100%', maxWidth: 300, margin: 48, elevation: 200, borderRadius: 15, backgroundColor: '#fff', opacity: 1, padding: 20 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Text style={{ width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center' }}>Menu</Text>

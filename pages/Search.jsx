@@ -1,4 +1,4 @@
-import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView} from "react-native";
+import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator} from "react-native";
 import React, {useEffect, useState} from 'react'
 import {View} from 'react-native'
 import BottomSheet from "react-native-simple-bottom-sheet";
@@ -154,6 +154,12 @@ function Search({route, navigation}) {
                                  list={categories} click={categoryClick}/>
             <CompanySelectModal visible={companyVisibility} toggleVisibility={toggleCompanyVisibility} list={companies}
                                 click={companyClick}/>
+                                  {isloading ?
+               <View style={{ marginTop:'auto',marginBottom:'auto' }}>
+               <ActivityIndicator size={60} color="#13A3E1" />
+               </View>
+                    :
+                    <>
             <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}} keyboardShouldPersistTaps="handled">
                 <View style={{backgroundColor: '#EAEAEA'}}>
                     <View style={{flexDirection: 'row', height: 90}}>
@@ -304,222 +310,7 @@ function Search({route, navigation}) {
                     </SafeAreaView>
                 </View>
             </ScrollView>
-            {/*<BottomSheet isOpen={false} sliderMaxHeight={800}>*/}
-            {/*    {(onScrollEndDrag) => (*/}
-            {/*        <ScrollView onScrollEndDrag={onScrollEndDrag}>*/}
-            {/*            /!*{[...Array(10)].map((_, index) => (*!/*/}
-            {/*            /!*    <View key={`${index}`}>*!/*/}
-            {/*            /!*        <Text>{`List Item ${index + 1}`}</Text>*!/*/}
-            {/*            /!*    </View>*!/*/}
-            {/*            /!*))}*!/*/}
-            {/*            <View style={{padding: 15, alignItems: 'center'}}>*/}
-            {/*                <Text numberOfLines={1} style={{fontFamily: 'poppins_bold', fontSize: 20}}>Advance*/}
-            {/*                    Search</Text>*/}
-            {/*                <View style={{width: '100%', flexDirection: 'column', marginTop: 10}}>*/}
-            {/*                    <Text numberOfLines={1} style={{*/}
-            {/*                        fontFamily: 'poppins_semibold',*/}
-            {/*                        marginTop: 7,*/}
-            {/*                        fontSize: 12*/}
-            {/*                    }}>Category</Text>*/}
-            {/*                    <Pressable onPress={() => toggleCategoryVisibility()}>*/}
-            {/*                        <TextInput editable={false}*/}
-            {/*                                   placeholder={"Select Category"}*/}
-            {/*                                   style={{*/}
-            {/*                                       backgroundColor: '#f5f5f5',*/}
-            {/*                                       marginHorizontal: 5,*/}
-            {/*                                       height: 50,*/}
-            {/*                                       borderRadius: 25,*/}
-            {/*                                       paddingHorizontal: 20,*/}
-            {/*                                       marginTop: 2,*/}
-            {/*                                       elevation: 5,*/}
-            {/*                                       color: '#000'*/}
-            {/*                                   }}></TextInput></Pressable>*/}
-            {/*                    <SafeAreaView>*/}
-            {/*                        <FlatList nestedScrollEnabled={true} scrollEnabled={true} horizontal={true}*/}
-            {/*                                  style={{marginHorizontal: 0, marginTop: 20}} data={category}*/}
-            {/*                                  renderItem={({item, index}) => (*/}
-            {/*                                      <Pressable onPress={() => setCategory(category.splice(index + 1, 1))}><View*/}
-            {/*                                          style={{*/}
-            {/*                                              backgroundColor: '#dadada',*/}
-            {/*                                              paddingHorizontal: 10,*/}
-            {/*                                              paddingVertical: 3,*/}
-            {/*                                              marginHorizontal: 3,*/}
-            {/*                                              borderRadius: 15,*/}
-            {/*                                              flexDirection: "row",*/}
-            {/*                                              alignItems: 'center'*/}
-            {/*                                          }}><Text>{item}</Text>*/}
-            {/*                                          <Image style={{width: 8, height: 8, marginLeft: 10}}*/}
-            {/*                                                 source={require('../assets/close.png')}/>*/}
-            {/*                                      </View>*/}
-            {/*                                      </Pressable>*/}
-            {/*                                  )}/>*/}
-            {/*                    </SafeAreaView>*/}
-            {/*                </View>*/}
-            {/*                <View style={{width: '100%', flexDirection: 'column', marginTop: 10}}>*/}
-            {/*                    <Text numberOfLines={1}*/}
-            {/*                          style={{fontFamily: 'poppins_semibold', marginTop: 7, fontSize: 12}}>City</Text>*/}
-            {/*                    <Pressable onPress={() => toggleCityVisibility()}><TextInput editable={false} style={{*/}
-            {/*                        backgroundColor: '#f5f5f5',*/}
-            {/*                        marginHorizontal: 5,*/}
-            {/*                        height: 50,*/}
-            {/*                        borderRadius: 25,*/}
-            {/*                        paddingHorizontal: 20,*/}
-            {/*                        marginTop: 2,*/}
-            {/*                        elevation: 5,*/}
-            {/*                        color: '#000'*/}
-            {/*                    }} placeholder={'Select City'}>{city}</TextInput></Pressable>*/}
-            {/*                </View>*/}
-            {/*                <View style={{width: '100%', flexDirection: 'column', marginTop: 10}}>*/}
-            {/*                    <Text numberOfLines={1} style={{*/}
-            {/*                        fontFamily: 'poppins_semibold',*/}
-            {/*                        marginTop: 7,*/}
-            {/*                        fontSize: 12*/}
-            {/*                    }}>Company</Text>*/}
-            {/*                    <Pressable onPress={() => toggleCompanyVisibility()}><TextInput editable={false}*/}
-            {/*                                                                                    style={{*/}
-            {/*                                                                                        backgroundColor: '#f5f5f5',*/}
-            {/*                                                                                        marginHorizontal: 5,*/}
-            {/*                                                                                        height: 50,*/}
-            {/*                                                                                        borderRadius: 25,*/}
-            {/*                                                                                        paddingHorizontal: 20,*/}
-            {/*                                                                                        marginTop: 2,*/}
-            {/*                                                                                        elevation: 5,*/}
-            {/*                                                                                        color: '#000'*/}
-            {/*                                                                                    }}*/}
-            {/*                                                                                    placeholder={'Select Company'}>{company}</TextInput></Pressable>*/}
-            {/*                </View>*/}
-
-            {/*                <View style={{width: '100%', flexDirection: 'column', marginTop: 10}}>*/}
-            {/*                    <Text numberOfLines={1} style={{*/}
-            {/*                        fontFamily: 'poppins_semibold',*/}
-            {/*                        marginTop: 7,*/}
-            {/*                        fontSize: 14,*/}
-            {/*                        marginBottom: 10*/}
-            {/*                    }}>Salary Range</Text>*/}
-
-            {/*                    <View style={{*/}
-            {/*                        flexDirection: 'row',*/}
-            {/*                        justifyContent: 'space-evenly',*/}
-            {/*                        marginHorizontal: 45,*/}
-            {/*                        gap: 40*/}
-            {/*                    }}>*/}
-            {/*                        <Text style={{*/}
-            {/*                            marginRight: 50,*/}
-            {/*                            fontSize: 13,*/}
-            {/*                            fontFamily: 'poppins_medium'*/}
-            {/*                        }}>starting</Text>*/}
-            {/*                        <Text*/}
-            {/*                            style={{marginRight: 20, fontSize: 13, fontFamily: 'poppins_medium'}}>End</Text>*/}
-            {/*                    </View><View*/}
-            {/*                    style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 45}}>*/}
-            {/*                    <TextInput placeholder={"0"} style={{*/}
-            {/*                        textAlign: 'center',*/}
-            {/*                        borderWidth: 0.7,*/}
-            {/*                        paddingHorizontal: 30,*/}
-            {/*                        fontSize: 14,*/}
-            {/*                        fontFamily: 'poppins_medium',*/}
-            {/*                        paddingVertical: 5,*/}
-            {/*                        borderRadius: 10*/}
-            {/*                    }}></TextInput>*/}
-            {/*                    <Text style={{backgroundColor: 'black', width: 7, height: 1, marginTop: 15}}>-</Text>*/}
-            {/*                    <TextInput placeholder={"0"} style={{*/}
-            {/*                        textAlign: 'center',*/}
-            {/*                        borderWidth: 0.7,*/}
-            {/*                        paddingHorizontal: 30,*/}
-            {/*                        fontSize: 14,*/}
-            {/*                        fontFamily: 'poppins_medium',*/}
-            {/*                        paddingVertical: 5,*/}
-            {/*                        borderRadius: 10*/}
-            {/*                    }}></TextInput>*/}
-
-            {/*                </View>*/}
-            {/*                </View>*/}
-            {/*                <View style={{width: '100%', flexDirection: 'column', marginTop: 10}}>*/}
-            {/*                    <Text numberOfLines={1} style={{*/}
-            {/*                        fontFamily: 'poppins_semibold',*/}
-            {/*                        marginTop: 7,*/}
-            {/*                        fontSize: 14,*/}
-            {/*                        marginBottom: 10*/}
-            {/*                    }}>job type</Text>*/}
-            {/*                    <View style={{flexDirection: 'row', justifyContent: 'space-evenly'}}>*/}
-
-            {/*                        <Pressable onPress={() => setPartTime(!partTime)} style={partTime ? {*/}
-            {/*                            backgroundColor: '#13A3E1',*/}
-            {/*                            paddingHorizontal: 10,*/}
-            {/*                            paddingVertical: 7,*/}
-            {/*                            borderRadius: 20*/}
-            {/*                        } : {*/}
-            {/*                            backgroundColor: '#f5f5f5',*/}
-            {/*                            paddingHorizontal: 10,*/}
-            {/*                            paddingVertical: 7,*/}
-            {/*                            borderRadius: 20*/}
-            {/*                        }}>*/}
-            {/*                            <Text style={partTime ? {*/}
-            {/*                                fontSize: 12,*/}
-            {/*                                fontFamily: 'poppins_medium',*/}
-            {/*                                color: 'white',*/}
-            {/*                            } : {fontSize: 12, fontFamily: 'poppins_medium', color: 'gray',}}>Part*/}
-            {/*                                Time</Text>*/}
-            {/*                        </Pressable>*/}
-            {/*                        <Pressable onPress={() => setFullTime(!fullTime)} style={fullTime ? {*/}
-            {/*                            backgroundColor: '#13A3E1',*/}
-            {/*                            paddingHorizontal: 10,*/}
-            {/*                            paddingVertical: 7,*/}
-            {/*                            borderRadius: 20*/}
-            {/*                        } : {*/}
-            {/*                            backgroundColor: '#f5f5f5',*/}
-            {/*                            paddingHorizontal: 10,*/}
-            {/*                            paddingVertical: 7,*/}
-            {/*                            borderRadius: 20*/}
-            {/*                        }}>*/}
-            {/*                            <Text style={fullTime ? {*/}
-            {/*                                fontSize: 12,*/}
-            {/*                                fontFamily: 'poppins_medium',*/}
-            {/*                                color: 'white'*/}
-            {/*                            } : {fontSize: 12, fontFamily: 'poppins_medium', color: 'gray',}}>Full*/}
-            {/*                                Time</Text>*/}
-            {/*                        </Pressable>*/}
-            {/*                        <Pressable onPress={() => setReomote(!remote)} style={remote ? {*/}
-            {/*                            backgroundColor: '#13A3E1',*/}
-            {/*                            paddingHorizontal: 10,*/}
-            {/*                            paddingVertical: 7,*/}
-            {/*                            borderRadius: 20*/}
-            {/*                        } : {*/}
-            {/*                            backgroundColor: '#f5f5f5',*/}
-            {/*                            paddingHorizontal: 10,*/}
-            {/*                            paddingVertical: 7,*/}
-            {/*                            borderRadius: 20*/}
-            {/*                        }}>*/}
-            {/*                            <Text style={remote ? {*/}
-            {/*                                fontSize: 12,*/}
-            {/*                                fontFamily: 'poppins_medium',*/}
-            {/*                                color: 'white'*/}
-            {/*                            } : {fontSize: 12, fontFamily: 'poppins_medium', color: 'gray',}}>Remote</Text>*/}
-            {/*                        </Pressable>*/}
-
-            {/*                    </View>*/}
-            {/*                </View>*/}
-
-            {/*                <View>*/}
-            {/*                    <Text style={{*/}
-            {/*                        alignItems: 'center',*/}
-            {/*                        height: 50,*/}
-            {/*                        backgroundColor: '#13A3E1',*/}
-            {/*                        color: 'white',*/}
-            {/*                        fontSize: 15,*/}
-            {/*                        fontFamily: 'poppins_bold',*/}
-            {/*                        borderRadius: 20,*/}
-            {/*                        paddingHorizontal: 30,*/}
-            {/*                        paddingVertical: 3,*/}
-            {/*                        marginTop: 20*/}
-            {/*                    }}>Search</Text>*/}
-            {/*                </View>*/}
-
-
-            {/*            </View>*/}
-            {/*        </ScrollView>*/}
-            {/*    )}*/}
-            {/*</BottomSheet>*/}
+       </>}
         </View>
     )
 }

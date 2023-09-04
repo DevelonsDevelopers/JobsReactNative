@@ -348,8 +348,8 @@ const toggleGenderVisibility = () => setGender(!gender)
                     }} >
                         <View >
                             <TextInput 
-                    onFocus={() =>toggleGenderVisibility()}
-                    onTouchStart={() => toggleGenderVisibility()}
+                 
+                    onTouchStart ={() => toggleGenderVisibility()}
                             onChangeText={(text) => setSeekerData({...seekerData, gender: text})}
                                        placeholder={'Missing!!!'} style={{
                                 color: '#000',
@@ -431,7 +431,9 @@ const toggleGenderVisibility = () => setGender(!gender)
                             paddingHorizontal: 20,
                             paddingVertical: 5
                         }}>
-                            <TextInput onChangeText={(text) => setSeekerData({...seekerData, phone: text})}
+                            <TextInput 
+                            keyboardType="numeric"
+                            onChangeText={(text) => setSeekerData({...seekerData, phone: text})}
                                        placeholder={'Missing!!!'} style={{
                                 color: '#000',
                                 fontSize: 14,
