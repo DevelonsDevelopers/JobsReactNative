@@ -559,7 +559,7 @@ if (seeker && cities && countries && success == 'false' ) {
                     >Update
                     </Text>
                 </Pressable>
-                <Pressable onPress={() => navigation.push('Profile')} style={{
+                <Pressable onPress={() => navigation.push('ChangePassword')} style={{
                     borderColor: '#000',
                     borderWidth: 1,
                     borderRadius: 25,

@@ -56,8 +56,8 @@ function Profile({ navigation }) {
         setLoginVal('false')
         toggleVisibility()
         toggleLoadingVisibility()
-        navigation.reset()
-        navigation.push('Login')
+        navigation.popToTop()
+        navigation.replace('Home')
     }
     // log out===================
     const [loadingVisible, setLoadingVisible] = useState(false)

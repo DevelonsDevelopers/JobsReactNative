@@ -73,10 +73,11 @@ function Search({route, navigation}) {
 
     useEffect(() => {
         if (loading) {
-            dispatch(SearchJobs(search, countryID, categoryID, cityID, companyID, startSalary, salaryEnd, type, isCountry, isCategory, isCity, isCompany, isSalary, isType))
+            if (!searchJobs) {
+                dispatch(SearchJobs(search, countryID, categoryID, cityID, companyID, startSalary, salaryEnd, type, isCountry, isCategory, isCity, isCompany, isSalary, isType))
+            }
         }
-
-    }, [dispatch, searchJobs, search]);
+    }, [dispatch, searchJobs]);
 
     useEffect(() => {
         if (success) {
@@ -141,9 +142,9 @@ function Search({route, navigation}) {
 
     const data1 = ["Good", "LevelGood", "New"]
 
-    const SearchQuery = () => {
-        setLoading(true)
-    }
+    // const SearchQuery = () => {
+    //     setLoading(true)
+    // }
 
     return (
         <View style={{flex: 1}}>
