@@ -36,11 +36,11 @@ function Register({ route, navigation }) {
                                 Toast.show({type: 'error', position: 'top', text1: 'Password Not Match'})
                             }
                         } else {
-                            Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Strong Password'})
+                            Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Strong Password', text2: 'Password must be greater than 8 letters and contain numbers, capital and lower letters'})
                         }
                     }
                 } else {
-                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid UserName'})
+                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid UserName', text2: 'Username must be more than 6 Letters'})
                 }
             } else {
                 if (size.length >= 1) {
@@ -201,7 +201,7 @@ function Register({ route, navigation }) {
                 }}><Text style={{color: '#fff', fontWeight: '900', fontSize: 15}}>Register</Text></Pressable>
                 <View style={{flexDirection: 'row', marginTop: 25}}>
                     <Text style={{color: '#fff', fontWeight: '900', fontSize: 15}}>Already have an account?</Text>
-                    <Pressable onPress={() => navigation.replace('Login')}><Text
+                    <Pressable onPress={() => navigation.replace('Login', { USER: USER })}><Text
                         style={{color: '#000', fontWeight: '900', fontSize: 15}}> Sign In</Text></Pressable>
                 </View>
             </View>

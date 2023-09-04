@@ -1,13 +1,9 @@
 import {Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView} from 'react-native'
 import {View} from 'react-native'
 import React, {useEffect, useState} from 'react'
-import Categories from './Categories'
-import Resume from './Resume'
 import {useDispatch, useSelector} from "react-redux";
 import {AllCities} from "../API/actions/cityActions";
 import {ActivityIndicator} from 'react-native'
-import NetworkErrorModal from '../Components/NetworkErrorModal'
-import categories from "./Categories";
 
 function Cities({navigation}) {
 
@@ -25,15 +21,13 @@ function Cities({navigation}) {
     }, [dispatch, navigation, cities]);
 
     useEffect(() => {
-        if (cities){
+        if (cities) {
             setData(cities)
         }
     }, [cities]);
 
     const search = (query) => {
         const searched = cities.filter((city) => {
-            console.log(city)
-            console.log(query)
             return (city.name).toLowerCase().includes(query.toLowerCase());
         })
         setData(searched)
@@ -69,7 +63,8 @@ function Cities({navigation}) {
                                 </View> : <>
                                     <View style={{backgroundColor: '#F1F1F1'}}>
                                         <View style={{flexDirection: 'row', height: 90}}>
-                                            <Pressable onPress={() => navigation.goBack()} style={{ paddingRight:5 }}><Image style={{
+                                            <Pressable onPress={() => navigation.goBack()}
+                                                       style={{paddingRight: 5}}><Image style={{
                                                 width: 22,
                                                 height: 20,
                                                 marginTop: 70,
@@ -118,10 +113,43 @@ function Cities({navigation}) {
                                             borderTopRightRadius: 40,
                                             marginTop: 9
                                         }}>
+                                            {/*{data?.map((item, index) => {*/}
+                                            {/*    return (*/}
+                                            {/*    <Pressable key={index} onPress={() => navigation.push('JobsByCity', { CITYID: item.id })}>*/}
+                                            {/*        <View*/}
+                                            {/*            style={{flexDirection: 'row', alignItems: 'center'}}>*/}
+                                            {/*            <Text style={{*/}
+                                            {/*                fontSize: 15,*/}
+                                            {/*                fontWeight: 600,*/}
+                                            {/*                fontFamily: 'poppins_semibold'*/}
+                                            {/*            }}>{item.name}</Text>*/}
+                                            {/*            <Text style={{*/}
+                                            {/*                marginTop: 4,*/}
+                                            {/*                fontSize: 15,*/}
+                                            {/*                fontFamily: 'poppins_light',*/}
+                                            {/*                marginHorizontal: 15*/}
+                                            {/*            }}>-</Text>*/}
+                                            {/*            <Text style={{*/}
+                                            {/*                fontSize: 12,*/}
+                                            {/*                fontWeight: 200,*/}
+                                            {/*                fontFamily: 'poppins_light'*/}
+                                            {/*            }}>{item.country_name}</Text>*/}
+                                            {/*        </View>*/}
+                                            {/*        <View style={{*/}
+                                            {/*            backgroundColor: '#777777',*/}
+                                            {/*            height: 0.5,*/}
+                                            {/*            marginHorizontal: 10,*/}
+                                            {/*            marginVertical: 5*/}
+                                            {/*        }}></View>*/}
+                                            {/*    </Pressable>*/}
+                                            {/*    )*/}
+                                            {/*})}*/}
+
                                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                                       style={{marginHorizontal: 0, marginTop: 10}} data={data}
                                                       renderItem={({item}) => (
-                                                          <Pressable onPress={() => navigation.push('JobsByCity', { CITYID: item.id })}>
+                                                          <Pressable
+                                                              onPress={() => navigation.push('JobsByCity', {CITYID: item.id})}>
                                                               <View
                                                                   style={{flexDirection: 'row', alignItems: 'center'}}>
                                                                   <Text style={{

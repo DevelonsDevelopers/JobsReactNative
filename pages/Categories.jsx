@@ -9,14 +9,17 @@ function Categories({navigation}) {
 
     const categories = useSelector(state => state.category.categories)
     const noData = useSelector(state => state.category.nodata)
-    const loading = useSelector(state => state.category.isLoading)
+    const isLoading = useSelector(state => state.category.isLoading)
     const error = useSelector(state => state.category.error)
     const dispatch = useDispatch();
     const [data, setData] = useState()
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (!categories) {
-            dispatch(AllCategories())
+        if (loading) {
+            if (!categories) {
+                dispatch(AllCategories())
+            }
         }
     }, [dispatch, navigation, categories]);
 
@@ -35,13 +38,13 @@ function Categories({navigation}) {
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
-            {loading ?
+            {isLoading ?
                 <View style={{marginTop: 400}}>
                     <ActivityIndicator size={60} color="#13A3E1"/>
                 </View>
                 :
                 <>
-                    {data ? <View style={{marginTop: 200}}>
+                    {noData ? <View style={{marginTop: 200}}>
                             <Image source={require('../assets/nodata.png')}
                                    style={{width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40}}/>
                             <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
@@ -76,7 +79,7 @@ function Categories({navigation}) {
                                             </View>
                                         </View>
                                         <View>
-                                            <TextInput style={{
+                                            <TextInput onChangeText={text => search(text)} style={{
                                                 backgroundColor: '#fff',
                                                 marginHorizontal: 30,
                                                 height: 50,

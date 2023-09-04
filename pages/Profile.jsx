@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSeeker } from "../API/actions/seekerActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
 
 function Profile({ navigation }) {
 
@@ -36,14 +37,35 @@ function Profile({ navigation }) {
 
     const [isloading, setIsLoading] = useState(true)
     useEffect(() => {
-        if (loading) {
+        if (success) {
             setIsLoading(false)
         }
-    }, [loading ])
+    }, [success])
 
+    const [loginval, setLoginVal] = useState('')
+
+    const [visible, setVisible] = useState(false)
+    const toggleVisibility = () => setVisible(!visible)
+
+    const Logout = async () => {
+        await AsyncStorage.setItem("LOGIN", 'false')
+        await AsyncStorage.setItem("ID", '')
+        await AsyncStorage.setItem("NAME", '')
+        await AsyncStorage.setItem("EMAIL", '')
+        await AsyncStorage.setItem("USERNAME", '')
+        setLoginVal('false')
+        toggleVisibility()
+        toggleLoadingVisibility()
+        navigation.reset()
+        navigation.push('Login')
+    }
+    // log out===================
+    const [loadingVisible, setLoadingVisible] = useState(false)
+    const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
 
     return (
         <View style={{ flex: 1 }}>
+            <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
             {isloading ?
                 <View style={{ marginTop: 400 }}>
                     <ActivityIndicator size={60} color="#13A3E1" />
@@ -104,10 +126,10 @@ function Profile({ navigation }) {
                                         <Image style={{ width: 20, height: 20 }} source={require('../assets/manageaccounticon.png')} />
                                         <Text style={{ color: '#000', fontSize: 16, fontFamily: 'poppins_regular', width: '100%', textAlign: 'left', marginLeft: 20 }}>Manage Your Account</Text>
                                     </View></Pressable>
-                                    <View style={{ flexDirection: 'row', flex: 1, marginBottom: 20, alignItems: 'center', marginTop: 5 }}>
+                                    <Pressable onPress={async () => toggleLoadingVisibility()}><View style={{ flexDirection: 'row', flex: 1, marginBottom: 20, alignItems: 'center', marginTop: 5 }}>
                                         <Image style={{ width: 20, height: 20 }} source={require('../assets/logouticon.png')} />
                                         <Text style={{ color: '#000', fontSize: 16, fontFamily: 'poppins_regular', width: '100%', textAlign: 'left', marginLeft: 20 }}>Log out</Text>
-                                    </View>
+                                    </View></Pressable>
                                 </View>
                             </ScrollView>
                         </>}

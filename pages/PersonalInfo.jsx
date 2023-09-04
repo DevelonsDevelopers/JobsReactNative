@@ -77,6 +77,9 @@ if (seeker && cities && countries && success == 'false' ) {
 
     const [cityVisible, setCityVisible] = useState(false)
     const [countryVisible, setCountryVisible] = useState(false)
+
+    const [changed, setChanged] = useState(false)
+
     const toggleVisibility = () => setCityVisible(!cityVisible)
     const toggleCountryVisibility = () => setCountryVisible(!countryVisible)
 
@@ -159,129 +162,8 @@ if (seeker && cities && countries && success == 'false' ) {
 
     return (
         <View style={{flex: 1}}>
-
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick}/>
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries} click={countryClick}/>
-            {/*<Modal visible={cityVisible} animationType={"fade"} transparent={true}>*/}
-            {/*    <View style={{*/}
-            {/*        flex: 1,*/}
-            {/*        alignContent: 'center',*/}
-            {/*        justifyContent: 'center',*/}
-            {/*        backgroundColor: 'rgba(0,0,0,0.6)'*/}
-            {/*    }}>*/}
-            {/*        <SafeAreaView style={{*/}
-            {/*            backgroundColor: '#fff',*/}
-            {/*            borderRadius: 40,*/}
-            {/*            padding: 23,*/}
-            {/*            margin: 20*/}
-            {/*        }}>*/}
-            {/*            <View style={{flexDirection: 'row', alignItems: 'center'}}>*/}
-            {/*                <Text style={{*/}
-            {/*                    width: '100%',*/}
-            {/*                    fontFamily: 'poppins_semibold',*/}
-            {/*                    textAlign: 'center',*/}
-            {/*                    color: '#13A3E1'*/}
-            {/*                }}>Select</Text>*/}
-            {/*                <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image*/}
-            {/*                    style={{width: 15, height: 15, marginLeft: 'auto'}}*/}
-            {/*                    source={require('../assets/close.png')}/></Pressable>*/}
-            {/*            </View>*/}
-            {/*            <View style={{*/}
-            {/*                backgroundColor: '#000',*/}
-            {/*                height: 4,*/}
-            {/*                width: '30%',*/}
-            {/*                alignSelf: 'center',*/}
-            {/*                borderRadius: 3*/}
-            {/*            }}></View>*/}
-            {/*            <FlatList scrollEnabled={true} nestedScrollEnabled={false}*/}
-            {/*                      style={{marginHorizontal: 0, marginTop: 20, height: 500}} data={cities}*/}
-            {/*                      renderItem={({item}) => (*/}
-            {/*                          <Pressable onPress={() => {*/}
-            {/*                              setSeekerData({...seekerData, city: item.id})*/}
-            {/*                              toggleVisibility()*/}
-            {/*                              setNameCity(item.name)*/}
-            {/*                          }}><View>*/}
-            {/*                              <View style={{*/}
-            {/*                                  flexDirection: 'row',*/}
-            {/*                                  alignItems: 'center',*/}
-            {/*                                  justifyContent: 'center'*/}
-            {/*                              }}>*/}
-            {/*                                  <Text style={{*/}
-            {/*                                      fontSize: 15,*/}
-            {/*                                      fontWeight: 600,*/}
-            {/*                                      fontFamily: 'poppins_semibold'*/}
-            {/*                                  }}>{item.name}</Text>*/}
-            {/*                              </View>*/}
-            {/*                              <View style={{*/}
-            {/*                                  backgroundColor: '#777777',*/}
-            {/*                                  height: 0.5,*/}
-            {/*                                  marginHorizontal: 10,*/}
-            {/*                                  marginVertical: 5*/}
-            {/*                              }}></View>*/}
-            {/*                          </View></Pressable>*/}
-            {/*                      )}/>*/}
-            {/*        </SafeAreaView>*/}
-            {/*    </View>*/}
-            {/*</Modal>*/}
-
-            {/*<Modal visible={countryVisible} animationType={"fade"} transparent={true}>*/}
-            {/*    <View style={{*/}
-            {/*        flex: 1,*/}
-            {/*        alignContent: 'center',*/}
-            {/*        justifyContent: 'center',*/}
-            {/*        backgroundColor: 'rgba(0,0,0,0.6)'*/}
-            {/*    }}>*/}
-            {/*        <SafeAreaView style={{*/}
-            {/*            backgroundColor: '#fff',*/}
-            {/*            borderRadius: 40,*/}
-            {/*            padding: 23,*/}
-            {/*            margin: 20*/}
-            {/*        }}>*/}
-            {/*            <View style={{flexDirection: 'row', alignItems: 'center'}}>*/}
-            {/*                <Text style={{*/}
-            {/*                    width: '100%',*/}
-            {/*                    fontFamily: 'poppins_semibold',*/}
-            {/*                    textAlign: 'center',*/}
-            {/*                    color: '#13A3E1'*/}
-            {/*                }}>Select</Text>*/}
-            {/*                <Pressable onPress={() => toggleCountryVisibility()} style={{marginLeft: 'auto'}}><Image*/}
-            {/*                    style={{width: 15, height: 15, marginLeft: 'auto'}}*/}
-            {/*                    source={require('../assets/close.png')}/></Pressable>*/}
-            {/*            </View>*/}
-            {/*            <View style={{*/}
-            {/*                backgroundColor: '#000',*/}
-            {/*                height: 4,*/}
-            {/*                width: '30%',*/}
-            {/*                alignSelf: 'center',*/}
-            {/*                borderRadius: 3*/}
-            {/*            }}></View>*/}
-            {/*            <FlatList scrollEnabled={true} nestedScrollEnabled={false}*/}
-            {/*                      style={{marginHorizontal: 0, marginTop: 20, height: 500}} data={countries}*/}
-            {/*                      renderItem={({item}) => (*/}
-            {/*                          <Pressable onPress={() => setSeekerData({...seekerData, country: item.id})}><View>*/}
-            {/*                              <View style={{*/}
-            {/*                                  flexDirection: 'row',*/}
-            {/*                                  alignItems: 'center',*/}
-            {/*                                  justifyContent: 'center'*/}
-            {/*                              }}>*/}
-            {/*                                  <Text style={{*/}
-            {/*                                      fontSize: 15,*/}
-            {/*                                      fontWeight: 600,*/}
-            {/*                                      fontFamily: 'poppins_semibold'*/}
-            {/*                                  }}>{item.name}</Text>*/}
-            {/*                              </View>*/}
-            {/*                              <View style={{*/}
-            {/*                                  backgroundColor: '#777777',*/}
-            {/*                                  height: 0.5,*/}
-            {/*                                  marginHorizontal: 10,*/}
-            {/*                                  marginVertical: 5*/}
-            {/*                              }}></View>*/}
-            {/*                          </View></Pressable>*/}
-            {/*                      )}/>*/}
-            {/*        </SafeAreaView>*/}
-            {/*    </View>*/}
-            {/*</Modal>*/}
-
             <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                 <View style={{
                     flex: 1,
@@ -349,7 +231,7 @@ if (seeker && cities && countries && success == 'false' ) {
                <ActivityIndicator size={60} color="#13A3E1" />
                </View>
                     :
-                    <> 
+                    <>
                 <View style={{
                     flexDirection: 'column',
                     borderColor: '#b2b2b2',

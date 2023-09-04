@@ -34,6 +34,8 @@ const job = (state = {isLoading: true, success: false, error: false, nodata: fal
             return {...state, companyJobs: action.payload.companyJobs}
         case GET_RECOMMENDED_JOBS:
             return {...state, recommendedJobs: action.payload.recommendedJobs}
+        case JOB_SEARCH:
+            return {...state, searchJobs: action.payload.searchJobs}
         case BOOKMARK_JOB:
             console.log(action.payload)
             const jobs = state.jobs?.map((job) => (job.id === action.payload.job ? {...job, bookmark: action.payload.bookmark} : job))

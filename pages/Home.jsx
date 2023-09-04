@@ -86,7 +86,7 @@ function Home({ navigation }) {
             <NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={isLogin} toggleLoadingVisibility={toggleLoadingVisibility} />
             <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
 
-            <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
+            <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled">
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>
                         <Pressable onPress={() => toggleVisibility()}><Image style={{
@@ -144,7 +144,7 @@ function Home({ navigation }) {
                             marginLeft: 'auto'
                         }} source={require('../assets/recommended_jobs_icon.png')} alt={'Okay'} />
                     </Pressable>
-                    : <Pressable onPress={() => navigation.push('Login')} style={{
+                    : <Pressable onPress={() => navigation.push('Login', { USER: 'SEEKER' })} style={{
                         backgroundColor: '#13A3E1',
                         borderRadius: 25,
                         alignItems: 'center',
@@ -375,7 +375,7 @@ function Home({ navigation }) {
                         style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Home</Text>
                     <View style={{ height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E', marginLeft: -4 }} />
                 </View>
-                <Pressable onPress={() => navigation.push('Search')} style={{
+                <Pressable onPress={() => navigation.push('Search', { query: '' })} style={{
                     height: '100%',
                     flex: 1,
                     flexDirection: 'column',
