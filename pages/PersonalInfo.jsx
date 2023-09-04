@@ -21,6 +21,7 @@ import {RESET_SEEKER} from "../Utils/Constants";
 import city from "../API/reducers/city";
 import CitySelectModal from "../Components/CitySelectModal";
 import CountrySelectModal from "../Components/CountrySelectModal";
+import GenderModal from "../Components/GenderModal";
 
 const data = [
     {"city": "Lahore", "country": 'Pakistan'},
@@ -160,10 +161,16 @@ if (seeker && cities && countries && success == 'false' ) {
         setCountryName(item.name)
     }
 
+// gendermodal==============
+
+const [gender , setGender] = useState(false)
+const toggleGenderVisibility = () => setGender(!gender)
+
     return (
         <View style={{flex: 1}}>
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick}/>
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries} click={countryClick}/>
+            <GenderModal visible={gender} toggleVisibility={toggleGenderVisibility} />
             <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                 <View style={{
                     flex: 1,
@@ -330,15 +337,20 @@ if (seeker && cities && countries && success == 'false' ) {
                                 textAlign: 'left'
                             }}>Gender</Text>
                         </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderBottomRightRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <TextInput onChangeText={(text) => setSeekerData({...seekerData, gender: text})}
+                        <Pressable onPress={() => toggleGenderVisibility()} 
+                       style={{
+                        flex: 1.3,
+                        borderBottomRightRadius: 30,
+                        borderColor: '#b2b2b2',
+                        borderWidth: 1,
+                        paddingHorizontal: 20,
+                        paddingVertical: 5
+                    }} >
+                        <View >
+                            <TextInput 
+                    onFocus={() =>toggleGenderVisibility()}
+                    onTouchStart={() => toggleGenderVisibility()}
+                            onChangeText={(text) => setSeekerData({...seekerData, gender: text})}
                                        placeholder={'Missing!!!'} style={{
                                 color: '#000',
                                 fontSize: 14,
@@ -347,6 +359,7 @@ if (seeker && cities && countries && success == 'false' ) {
                                 textAlign: 'left'
                             }}>{seeker?.gender}</TextInput>
                         </View>
+                        </Pressable>
                     </View>
                 </View>
                 <View style={{

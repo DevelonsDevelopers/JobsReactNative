@@ -58,7 +58,7 @@ const FirstRoute = () => {
                 </View>
                 :
                 <>
-                    {noData ? <View style={{marginTop: 200}}>
+                    {noData ? <View style={{justifyContent:'center'}}>
                             <Image source={require('../assets/nodata.png')}
                                    style={{width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40}}/>
                             <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
@@ -202,7 +202,7 @@ const SecondRoute = () => {
                 </View>
                 :
                 <>
-                    {noData ? <View style={{marginTop: 200}}>
+                    {noData ? <View style={{justifyContent:'center'}}>
                             <Image source={require('../assets/nodata.png')}
                                    style={{width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40}}/>
                             <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
