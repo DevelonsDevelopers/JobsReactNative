@@ -47,6 +47,8 @@ import AppliedSaved from './pages/AppliedSaved';
 import JobsByCity from "./pages/JobsByCity";
 import JobsByCategory from "./pages/JobsByCategory";
 import JobsByCompany from "./pages/JobsByCompany";
+import ProviderProfile from './pages/ProviderProfile';
+import ProviderTypeModal from './Components/ProviderTypeModal';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
@@ -118,6 +120,8 @@ function App() {
                     <Stack.Screen name="Search" component={Search} options={{title: "Search", headerShown: false}}/>
                     <Stack.Screen name="RecommendedUser" component={RecommendedUser} options={{title: "RecommendedUser", headerShown: false}}/>
                     <Stack.Screen name="AppliedSaved" component={AppliedSaved} options={{title: "AppliedSaved", headerShown: false}}/>
+                    <Stack.Screen name="ProviderProfile" component={ProviderProfile} options={{title: "ProviderProfile", headerShown: false}}/>
+                    <Stack.Screen name="ProviderTypeModal" component={ProviderTypeModal} options={{title: "ProviderTypeModal", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
