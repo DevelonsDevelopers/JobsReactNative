@@ -110,10 +110,10 @@ export const CityJobs = (user, id) => async (dispatch) => {
     }
 }
 
-export const CompanyJobs = (user, id) => async (dispatch) => {
+export const CompanyJobs = (id) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { data } } = await api.fetchJobByCompany(user, id);
+        const { data: { data } } = await api.fetchJobByCompany(id);
         if (data.length > 0) {
             dispatch({type: GET_JOBS_BY_COMPANY, payload: {companyJobs: data}})
             dispatch({type: SUCCESS})

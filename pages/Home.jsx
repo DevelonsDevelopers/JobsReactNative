@@ -50,9 +50,11 @@ function Home({ navigation }) {
         }
     }, [dispatch, navigation, recentJobs]);
 
+
     useEffect(() => {
         GetData()
     }, []);
+
     const GetData = async () => {
         const value = await AsyncStorage.getItem('LOGIN')
         setLoginVal(value);
