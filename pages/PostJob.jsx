@@ -2,6 +2,7 @@ import { FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, Text
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
+import { CompanyJobs } from "../API/actions/jobActions";
 
 function PostJob({ navigation }) {
 
@@ -10,20 +11,50 @@ function PostJob({ navigation }) {
   const categories = useSelector(state => state.category.categories)
   const loading = useSelector(state => state.category.isLoading)
 
+  // companyjob dispatch==========
+  const [ID, setID] = useState()
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
+
+  const companyJobs = useSelector(state => state.job.companyJobs)
+
+  useEffect(() => {
+    if(ID){    
+      if (!companyJobs) {
+        dispatch(CompanyJobs(ID))
+       
+    }
+  }
+}, [dispatch,  companyJobs,ID]);
+
+
+useEffect(()=>{
+  console.log(companyJobs)
+}, [companyJobs])
+
+
   const [visible, setVisible] = useState(false)
   const toggleVisibility = () => setVisible(!visible)
 
-  useEffect(() => {
-    dispatch(AllCategories())
-  }, [dispatch, navigation]);
-const data =[
-  {'name':'Social media marketing ','department':'IT communication'},
-  {'name':'Web Developer','department':'IT communication'},
-  {'name':'Engineer ','department':'IT communication'},
-  {'name':'Software Developer ','department':'IT communication'},
-  {'name':'Web Developer','department':'IT communication'},
- 
-]
+
+
+
+  const data = [
+    { 'name': 'Social media marketing ', 'department': 'IT communication' },
+    { 'name': 'Web Developer', 'department': 'IT communication' },
+    { 'name': 'Engineer ', 'department': 'IT communication' },
+    { 'name': 'Software Developer ', 'department': 'IT communication' },
+    { 'name': 'Web Developer', 'department': 'IT communication' },
+
+  ]
+
+
   return (
     <View style={{ flex: 1 }}>
       <Modal visible={visible} animationType={"fade"} transparent={true}>
@@ -98,10 +129,12 @@ const data =[
 
         </View>
         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 30 }}>
-          <View style={{ backgroundColor: '#F0A51E', paddingHorizontal: 35, paddingVertical: 20, borderRadius: 20 }}>
-            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center" }}>Applid </Text>
-            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center", marginTop: -5, marginLeft: -4 }}>Users</Text>
-          </View>
+          <Pressable onPress={() => navigation.push('AppliedUsers')}>
+            <View style={{ backgroundColor: '#F0A51E', paddingHorizontal: 35, paddingVertical: 20, borderRadius: 20 }}>
+              <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center" }}>Applid </Text>
+              <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center", marginTop: -5, marginLeft: -4 }}>Users</Text>
+            </View>
+          </Pressable>
           <View style={{ backgroundColor: '#F0A51E', paddingHorizontal: 45, paddingVertical: 20, borderRadius: 20 }}>
             <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center" }}>Sent </Text>
             <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center", marginTop: -5, marginLeft: -4 }}>Offers</Text>
@@ -125,7 +158,7 @@ const data =[
         </View>
         <SafeAreaView style={{ flex: 1 }}>
           <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-            style={{ marginHorizontal: 30, marginTop: 10 }} data={data} renderItem={({ item }) => (
+            style={{ marginHorizontal: 30, marginTop: 10 }} data={companyJobs} renderItem={({ item }) => (
               <View
                 style={{
                   flex: 1,
@@ -141,13 +174,13 @@ const data =[
                   paddingHorizontal: 20
                 }}>
                 <Text ellipsizeMode={'tail'} numberOfLines={1}
-                  style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.name}</Text>
+                  style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.title}</Text>
                 <Text numberOfLines={1} style={{
                   fontFamily: 'poppins_light',
                   fontSize: 9,
                   marginLeft: 'auto',
                   width: 110
-                }}>{item.department}</Text>
+                }}>{item.qualification}</Text>
               </View>
             )}
           />

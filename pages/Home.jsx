@@ -50,9 +50,11 @@ function Home({ navigation }) {
         }
     }, [dispatch, navigation, recentJobs]);
 
+
     useEffect(() => {
         GetData()
     }, []);
+
     const GetData = async () => {
         const value = await AsyncStorage.getItem('LOGIN')
         setLoginVal(value);
@@ -98,7 +100,7 @@ function Home({ navigation }) {
                             tintColor: '#fff'
                         }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
                         <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                            <Pressable onPress={() => navigation.push('Companies')}><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+                            <Pressable onPress={() => navigation.push('UserType')}><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
                                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                         </View>
                     </View>

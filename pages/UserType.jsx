@@ -12,12 +12,12 @@ function UserType({navigation}) {
             <Pressable onPress={() => navigation.navigate('Login', { USER: 'PROVIDER' })} style={{
                 alignItems: 'center',
                 backgroundColor: '#13A3E1',
-                paddingHorizontal: 90,
-                paddingVertical: 25,
+                
+                paddingVertical: 10,
                 borderRadius: 25,
-                marginTop: 10,
+                marginTop: 5,
                 elevation: 10,
-                marginHorizontal: 60,
+                marginHorizontal: 80,
                 zIndex: 1
             }}>
                 <Image style={{width: 70, height: 70}} source={require('../assets/provider.png')}/>
@@ -27,16 +27,16 @@ function UserType({navigation}) {
             <Pressable onPress={() => navigation.navigate('Login', { USER: 'SEEKER' })} style={{
                 alignItems: 'center',
                 backgroundColor: '#13A3E1',
-                paddingHorizontal: 90,
-                paddingVertical: 25,
+                
+                paddingVertical: 10,
                 borderRadius: 25,
                 marginTop: 20,
                 elevation: 10,
-                marginHorizontal: 60,
+                marginHorizontal: 80,
                 zIndex: 1
             }}>
                 <Image style={{width: 70, height: 70}} source={require('../assets/seeker.png')}/>
-                <Text style={{fontSize: 15, color: '#fff', marginTop: 15, fontFamily: 'poppins_black'}}>Job
+                <Text style={{fontSize: 15, color: '#fff', marginTop: 15, fontFamily: 'poppins_black',textAlign:'center'}}>Job
                     Seeker</Text>
             </Pressable>
             <ImageBackground style={{width: 270, height: 287, marginTop: 'auto', marginLeft: 'auto', paddingTop: 40}}

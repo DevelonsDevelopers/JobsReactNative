@@ -50,6 +50,8 @@ import JobsByCompany from "./pages/JobsByCompany";
 import ProviderProfile from './pages/ProviderProfile';
 import ProviderTypeModal from './Components/ProviderTypeModal';
 import firebase from "firebase/compat";
+import ApplyModal from './Components/ApplyModal';
+
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
@@ -134,6 +136,7 @@ function App() {
                     <Stack.Screen name="AppliedSaved" component={AppliedSaved} options={{title: "AppliedSaved", headerShown: false}}/>
                     <Stack.Screen name="ProviderProfile" component={ProviderProfile} options={{title: "ProviderProfile", headerShown: false}}/>
                     <Stack.Screen name="ProviderTypeModal" component={ProviderTypeModal} options={{title: "ProviderTypeModal", headerShown: false}}/>
+                    <Stack.Screen name="ApplyModal" component={ApplyModal} options={{title: "ApplyModal", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>

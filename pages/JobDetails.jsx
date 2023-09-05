@@ -7,6 +7,7 @@ import moment from "moment";
 import {BOOKMARK_JOB, RESET} from "../Utils/Constants";
 import {applyJob, bookmarkJob, removeBookmark} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ApplyModal from "../Components/ApplyModal";
 
 const JobDetails = ({route, navigation}) => {
 
@@ -58,6 +59,7 @@ const JobDetails = ({route, navigation}) => {
                 setApplied(data.insertId)
             }
         })
+        toggleApplyVisibility()
     }
 
     const BookmarkJob = () => {
@@ -80,8 +82,13 @@ const JobDetails = ({route, navigation}) => {
         })
     }
 
+// Apply Modal ============
+const [applyVisible,setApplyVisible] = useState(false)
+const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
+
     return (
         <ScrollView style={{backgroundColor: '#F1F1F1'}}>
+            <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility}   />
             <View style={{backgroundColor: '#EAEAEA'}}>
                 <View style={{flexDirection: 'row', height: 90}}>
                     <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
