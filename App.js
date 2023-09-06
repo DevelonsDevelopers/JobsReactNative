@@ -51,10 +51,10 @@ import ProviderProfile from './pages/ProviderProfile';
 import ProviderTypeModal from './Components/ProviderTypeModal';
 import ApplyModal from './Components/ApplyModal';
 
+
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
 const Stack = createNativeStackNavigator();
-
 
 function App() {
 

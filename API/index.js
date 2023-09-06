@@ -20,6 +20,17 @@ export const login = (email, password) => API.post('/seekerAuth/login', {
     password: password
 })
 
+export const google = (name, username, email, phone ,address, dob, gender, password) => API.post(`/seekerAuth/google`, {
+    name: name,
+    username: username,
+    email: email,
+    phone: phone,
+    address: address,
+    dob: dob,
+    gender: gender,
+    password: password,
+})
+
 export const registerProvider = (name, size, city, country, email, phone, address, headquater, type, password) => API.post('/providerAuth/register', {
     name: name,
     size: size,
