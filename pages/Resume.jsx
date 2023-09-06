@@ -103,8 +103,6 @@ function Resume({ navigation }) {
                     data={cv?.skills} renderItem={({ item }) => (
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', flex: 1, paddingVertical:2, color:'white',}}>
                         {`\u2022 ${item.skill}`}
-                       
-                       
                       </Text>
                     )} />
                 </SafeAreaView>
