@@ -78,7 +78,7 @@ function Resume({ navigation }) {
               <Text style={{ fontSize: 18, fontFamily: 'poppins_bold', textAlign: 'center', marginVertical: 20 }}>
                 Resume
               </Text>
-              <View style={{ backgroundColor: '#A2DFF5', padding: 13, width:120, height:550 }}>
+              <View style={{ backgroundColor: '#A2DFF5', padding: 13, width:120,  }}>
                 <Text style={{ fontSize: 15, fontWeight: '800', fontFamily: 'poppins_bold', textAlign: 'center' }}>
                   {cv?.name}
                 </Text>
