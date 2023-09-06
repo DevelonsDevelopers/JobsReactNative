@@ -27,6 +27,8 @@ function Profile({ navigation }) {
                 dispatch(fetchSeeker(ID))
             } else if ((seeker.id).toString() !== ID) {
                 dispatch(fetchSeeker(ID))
+            } else {
+                setIsLoading(false)
             }
         }
     }, [dispatch, navigation, seeker, ID]);

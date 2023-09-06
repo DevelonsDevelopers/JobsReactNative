@@ -1,6 +1,19 @@
 import {Button, Image, Pressable, ScrollView, Text, TextInput, View} from "react-native";
+import {useState} from "react";
 
 function ChangePassword({ navigation }) {
+
+    const [password, setPassword] = useState()
+    const [cPassword, setCPassword] = useState()
+
+    const changePassword = () => {
+        if (password === cPassword){
+            navigation.navigate('Verify', { password: password })
+        } else {
+            console.log('Password not matched')
+        }
+    }
+
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
             <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
@@ -10,7 +23,7 @@ function ChangePassword({ navigation }) {
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Image style={{ height: 200, width: 200, marginTop: 100 }} source={require('../assets/change_password.png')}/>
                 <Text style={{color: '#000', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center'}}>Change Password</Text>
-                <TextInput style={{
+                <TextInput onChangeText={text => setPassword(text)} style={{
                     height: 50,
                     backgroundColor: '#fff',
                     width: '85%',
@@ -20,7 +33,7 @@ function ChangePassword({ navigation }) {
                     color: '#626262',
                     elevation: 10
                 }} placeholder={'New Password'} inputMode={'text'}/>
-                <TextInput style={{
+                <TextInput onChangeText={text => setCPassword(text)} style={{
                     height: 50,
                     backgroundColor: '#fff',
                     width: '85%',
@@ -30,7 +43,7 @@ function ChangePassword({ navigation }) {
                     color: '#626262',
                     elevation: 10
                 }} placeholder={'Confirm Your Password'} secureTextEntry={true}/>
-                <Pressable onPress={() => navigation.navigate('Verify')} style={{
+                <Pressable onPress={() => changePassword()} style={{
                     width: '85%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',
