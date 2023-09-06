@@ -68,56 +68,71 @@ function Resume({ navigation }) {
             </View>
           </View>
 
-          <View style={{ backgroundColor: '#8FD6E1', marginTop: 40, paddingVertical: 10 }}>
-            <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: '#333333', textAlign: 'center' }}>Steven Terry </Text>
-            <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: '#333333', textAlign: 'center' }}>Graphic Designer</Text>
+          <View style={{ backgroundColor: '#083F5D', marginTop: 40, paddingVertical: 10 }}>
+            <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'white', textAlign: 'center' }}>{cv?.name} </Text>
+            <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', color: 'white', textAlign: 'center' }}>Developer</Text>
           </View>
 
           <View style={{ flex: 1, flexDirection: 'row', marginTop: 20 }}>
 
-            <View style={{ backgroundColor: '#8FD6E1', flex: 0.6, paddingHorizontal: 20,borderRadius:10 }}>
-              <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingBottom: 10, paddingTop: 20 }}>Contact</Text>
-              <View style={{ paddingVertical: 6 }}>
-                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium' }}>Phone:</Text>
-                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium' }}>11-22-33-44</Text>
+            <View style={{ backgroundColor: '#083F5D', flex: 0.6, paddingHorizontal: 20, borderRadius: 10, }}>
+              <View style={{ flexDirection:'row',marginTop:20,marginBottom:10,gap:4 }}>
+                <Text style={{ backgroundColor:'white' }}>.</Text>
+              <Text style={{ fontSize: 17, fontFamily: 'poppins_medium', textAlign: 'center', color:'white' }}>Contact</Text>
               </View>
-              <View style={{ paddingVertical: 6 }}>
-                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium' }}>Eamil:</Text>
-                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium' }}>johndoe@gmail.com</Text>
+              <View style={{ paddingVertical: 4 }}>
+                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium',color:'white' }}>Phone:</Text>
+                <Text style={{ fontSize: 9, fontFamily: 'poppins_medium',color:'white' }}>{cv?.phone}</Text>
               </View>
-              <View style={{ paddingVertical: 6 }}>
-                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium' }}>Addres:</Text>
-                <Text style={{ fontSize: 10, fontFamily: 'poppins_medium' }}>Ghaziabad,Cant,Lahore,Pakistan</Text>
+              <View style={{ paddingVertical: 4 }}>
+                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium',color:'white' }}>Eamil:</Text>
+                <Text style={{ fontSize: 9, fontFamily: 'poppins_medium',color:'white' }}>{cv?.email}</Text>
               </View>
-              <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingBottom: 10 }}>Skills</Text>
-              <SafeAreaView>
-                <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                  data={cv?.skills} renderItem={({ item }) => (
-                    <Text style={{ fontSize: 13, fontFamily: 'poppins_regular', flex: 1, marginTop: 10, textAlign: 'left' }}>
-                      {item.skill}
-                      FootBall
-                    </Text>
-                  )} />
-              </SafeAreaView>
+              <View style={{ paddingVertical: 4 }}>
+                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium',color:'white' }}>Address:</Text>
+                <Text style={{ fontSize: 9, fontFamily: 'poppins_medium',color:'white' }}>{cv?.address}</Text>
+              </View>
 
-              <View>
-                <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingBottom: 10 }}>Interest</Text>
+              <View style={{ paddingBottom: 10 }}>
+              <View style={{ flexDirection:'row',marginTop:15,marginBottom:10,gap:4 }}>
+                <Text style={{ backgroundColor:'white' }}>.</Text>
+              <Text style={{ fontSize: 17, fontFamily: 'poppins_medium', textAlign: 'center', color:'white' }}>Skill</Text>
+              </View>  
+               <SafeAreaView>
+                  <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                    data={cv?.skills} renderItem={({ item }) => (
+                      <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', flex: 1, paddingVertical:2, color:'white',}}>
+                        {`\u2022 ${item.skill}`}
+                      </Text>
+                    )} />
+                </SafeAreaView>
+              </View>
+              <View style={{ paddingBottom: 10 }}>
+              <View style={{ flexDirection:'row',marginTop:10,marginBottom:10,gap:4 }}>
+                <Text style={{ backgroundColor:'white' }}>.</Text>
+              <Text style={{ fontSize: 17, fontFamily: 'poppins_medium', textAlign: 'center', color:'white' }}>Interest</Text>
+              </View> 
                 <SafeAreaView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                     data={cv?.interests} renderItem={({ item }) => (
-                      <Text style={{ fontSize: 13, fontFamily: 'poppins_regular', flex: 1, marginTop: 10, textAlign: 'right' }}>
-                        {item.interest}
+                      <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', flex: 1, paddingVertical:2,color:'white' }}>
+                        {`\u2022 ${item.interest}`}
+                      
                       </Text>
                     )} />
                 </SafeAreaView>
               </View>
               <View style={{ paddingBottom: 20 }}>
-                <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingBottom: 10 }}>Languages</Text>
-                <SafeAreaView>
+              <View style={{ flexDirection:'row',marginTop:10,marginBottom:10,gap:4 }}>
+                <Text style={{ backgroundColor:'white' }}>.</Text>
+              <Text style={{ fontSize: 17, fontFamily: 'poppins_medium', textAlign: 'center', color:'white' }}>Language</Text>
+              </View>
+                 <SafeAreaView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                     data={cv?.languages} renderItem={({ item }) => (
-                      <Text style={{ fontSize: 13, fontFamily: 'poppins_regular', flex: 1, marginTop: 10, textAlign: 'center' }}>
-                        {item.language}
+                      <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', flex: 1, paddingVertical:2, color:'white'}}>
+                         {`\u2022 ${item.language}`}
+                       
                       </Text>
                     )} />
                 </SafeAreaView>
@@ -129,74 +144,85 @@ function Resume({ navigation }) {
                 <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingBottom: 10 }}>About</Text>
                 <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla ab officiis, minima provident distinctio nobis </Text>
               </View>
-              <View>
-                <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingBottom: 10, paddingTop: 10 }}>Experience</Text>
+              <View style={{marginTop:10 }}>
+                <View style={{flexDirection:'row',marginVertical:10,gap:4 }}>
+                  <Text style={{backgroundColor:'#083F5D'}}>.</Text>
+                <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center',  }}>Experience</Text>
+                </View>
                 <ScrollView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                     data={cv?.careers} renderItem={({ item }) => (
                       <View>
                         <View >
-                          <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', marginTop: 3 }}>
+                          <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', }}>
                             {item.timeperiod}
                           </Text>
-                          <Text style={{ fontSize: 13, fontFamily: 'poppins_semibold', marginRight: 6 }}>
+                          <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginRight: 6 }}>
                             {item.job}
                           </Text>
                         </View>
-                        <Text style={{ fontSize: 11, fontFamily: 'poppins_medium' }}>
+                        <Text style={{ fontSize: 10, fontFamily: 'poppins_medium' }}>
                           Company : {item.company}
                         </Text>
-                        <View style={{ flexDirection: 'row', marginTop: 4 }}>
-                          <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', marginTop: 0, marginBottom: 0, padding: 0 }}>
+                        <View style={{ flexDirection: 'row', }}>
+                          <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 0, marginBottom: 0, padding: 0 }}>
                             Address : {item.address}
                           </Text>
-                          <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', marginLeft: 'auto' }}>
-                            Phone : {item.phone}
-                          </Text>
                         </View>
-
+                        <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft: 'auto',marginTop:6,marginBottom:6 }}>
+                          Phone : {item.phone}
+                        </Text>
+                        <Text style={{ backgroundColor: 'black', height: 1 }}>-</Text>
                       </View>
                     )} />
                 </ScrollView>
               </View>
 
               <View>
-                <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingBottom: 10, paddingTop: 10 }}>Education</Text>
+              <View style={{flexDirection:'row',marginVertical:10,gap:4 }}>
+                  <Text style={{backgroundColor:'#083F5D'}}>.</Text>
+                <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center',  }}>Education</Text>
+                </View>   
                 <SafeAreaView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                     data={cv?.educations} renderItem={({ item }) => (
                       <View style={{ flex: 1 }}>
-                        <Text style={{ fontSize: 11, fontFamily: 'poppins_regular', paddingTop: 2.5 }}>
+                        <Text style={{ fontSize: 10, fontFamily: 'poppins_regular',  }}>
                           {item.institute}
                         </Text>
-                        <Text style={{ fontSize: 13, fontFamily: 'poppins_semibold', }}>
-                          {item.qualification }
+                        <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
+                          {item.qualification}
                         </Text>
-                        <View style={{ display: 'flex', flexDirection: 'row', paddingTop: 0, paddingBottom: 0, }}>
-                          <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', margin: 0, padding: 0 }}>
+                        <View style={{ display: 'flex', flexDirection: 'row',  }}>
+                          <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft:'auto' }}>
                             {item.timeperiod}
                           </Text>
                         </View>
+                        <Text style={{ backgroundColor: 'black', height: 1 }}>-</Text>
                       </View>
                     )} />
                 </SafeAreaView>
               </View>
               <View>
-              <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingBottom: 10, paddingTop: 10 }}>Courses</Text>
-              <SafeAreaView>
+              <View style={{flexDirection:'row',marginVertical:10,gap:4 }}>
+                  <Text style={{backgroundColor:'#083F5D',}}>.</Text>
+                <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center',  }}>Courses</Text>
+                </View>
+                    <SafeAreaView>
                   <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                     data={cv?.courses} renderItem={({ item }) => (
                       <View style={{ flex: 1 }}>
 
-                        <Text style={{ fontSize: 11, fontFamily: 'poppins_regular', paddingTop: 2.5, textAlign: 'right' }}>
-                          {item.timeperiod }
+                        <Text style={{ fontSize: 10, fontFamily: 'poppins_regular',   }}>
+                          {item.timeperiod}
                         </Text>
-                        <Text style={{ fontSize: 13, fontFamily: 'poppins_semibold', textAlign: 'right' }}>
+                        <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold',  }}>
                           {item.course}
                         </Text>
-                        <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', textAlign: 'right' }}>
+                        <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft:'auto', }}>
                           {item.institute}
                         </Text>
+                        <Text style={{ backgroundColor: 'black', height: 1 }}>-</Text>
                       </View>
                     )} />
                 </SafeAreaView>
