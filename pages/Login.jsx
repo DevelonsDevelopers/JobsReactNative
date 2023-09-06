@@ -4,8 +4,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {LoginAuthentication, ProviderLoginAuthentication} from "../API/actions/loginActions";
 import Toast from "react-native-toast-message";
 import {RESET_SEEKER} from "../Utils/Constants";
+import {GoogleSignin, statusCodes} from "@react-native-google-signin/google-signin";
 import firebase from "firebase/compat";
-// import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
+import {google} from "../API";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+// import {GoogleSignin, statusCodes} from "@react-native-google-signin/google-signin";
 
 
 function Login({ route, navigation }) {
@@ -48,31 +51,48 @@ function Login({ route, navigation }) {
     const [loadingVisible, setLoadingVisible] = useState(false)
     const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
 
-    // GoogleSignin.configure({
-    //     webClientId: '404623696003-doe1cpjrlljj8om770ha3ri9s9vatoc8.apps.googleusercontent.com', // Replace with your actual Web Client ID
-    // });
+    GoogleSignin.configure({
+        webClientId: '404623696003-doe1cpjrlljj8om770ha3ri9s9vatoc8.apps.googleusercontent.com', // Replace with your actual Web Client ID
+    });
 
-    // const GoogleLogin = () => {
-    //     const handleGoogleSignIn = async () => {
-    //         try {
-    //             await GoogleSignin.hasPlayServices();
-    //             const userInfo = await GoogleSignin.signIn();
-    //             const {idToken} = userInfo;
-    //             const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
-    //             await firebase.auth().signInWithCredential(credential);
-    //         } catch (error) {
-    //             // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-    //             //     // User canceled the sign-in process
-    //             //     console.log('Google sign-in canceled');
-    //             // } else if (error.code === statusCodes.IN_PROGRESS) {
-    //             //     // Another sign-in process is already in progress
-    //             //     console.log('Google sign-in in progress');
-    //             // } else {
-    //             //     console.error('Google sign-in error:', error);
-    //             // }
-    //         }
-    //     };
-    // }
+
+        const handleGoogleSignIn = async () => {
+            try {
+                await GoogleSignin.hasPlayServices();
+                const userInfo = await GoogleSignin.signIn();
+                const {idToken} = userInfo;
+                const { user } = userInfo;
+                await google(user.name, user.givenName + (user.id).substring((user.id).length - 6), user.email, '', '', '', '', user.id).then(async res => {
+                    const {data: {data}} = res;
+                    const {data: {responseCode}} = res;
+                    const {data: {message}} = res;
+                    console.log(message)
+                    if (responseCode === 200) {
+                        var ID = (data.id).toString()
+                        await AsyncStorage.setItem("LOGIN", 'true')
+                        await AsyncStorage.setItem("ID", ID)
+                        await AsyncStorage.setItem("USER", "SEEKER")
+                        await AsyncStorage.setItem("NAME", data.name)
+                        await AsyncStorage.setItem("EMAIL", data.email)
+                        await AsyncStorage.setItem("USERNAME", data.username)
+                        navigation.replace('Home')
+                    } else {
+
+                    }
+                })
+            } catch (error) {
+                if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                    // User canceled the sign-in process
+                    console.log('Google sign-in canceled');
+                } else if (error.code === statusCodes.IN_PROGRESS) {
+                    // Another sign-in process is already in progress
+                    console.log('Google sign-in in progress');
+                } else {
+                    console.error('Google sign-in error:', error);
+                }
+            }
+        };
+
 
     // const isUserEqual = (googleUser, firebaseUser) => {
     //     if (firebaseUser) {
@@ -219,7 +239,7 @@ function Login({ route, navigation }) {
                     paddingVertical: 15
                 }}><Text style={{color: '#fff', fontWeight: '900', fontSize: 15}}>Log In</Text></Pressable>
                 <View style={{flexDirection: 'row'}}>
-                    <Pressable onPress={() => GoogleLogin()} style={{
+                    <Pressable onPress={() => handleGoogleSignIn()} style={{
                         width: '41%',
                         backgroundColor: '#fff',
                         alignItems: 'center',

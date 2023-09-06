@@ -1,8 +1,10 @@
 {
   "expo": {
     "name": "jobsApplication",
-    "slug": "jobsApplication",
-    "plugins": ["@react-native-google-signin/google-signin"],
+    "slug": "jobsapplication",
+    "plugins": [
+      "@react-native-google-signin/google-signin"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,17 +18,25 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.jobsApplication"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "googleServicesFile": "./google-services.json",
       "package": "com.anonymous.jobsApplication"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7060e1ae-b62b-4807-9345-9f3a2baf0afc"
+      }
+    },
+    "owner": "tayyabrana"
   }
 }
