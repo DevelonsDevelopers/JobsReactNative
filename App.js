@@ -49,11 +49,25 @@ import JobsByCategory from "./pages/JobsByCategory";
 import JobsByCompany from "./pages/JobsByCompany";
 import ProviderProfile from './pages/ProviderProfile';
 import ProviderTypeModal from './Components/ProviderTypeModal';
+import firebase from "firebase/compat";
+import ApplyModal from './Components/ApplyModal';
+
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
 const Stack = createNativeStackNavigator();
 
+const firebaseConfig = {
+    apiKey: "AIzaSyDUKN9OJU0kzknUTxPOp_r87GtAroT4G_8",
+    authDomain: "reactnative-authenticati-33afb.firebaseapp.com",
+    projectId: "reactnative-authenticati-33afb",
+    storageBucket: "reactnative-authenticati-33afb.appspot.com",
+    messagingSenderId: "404623696003",
+    appId: "1:404623696003:web:a60e65c60b06e3e79ebbb6",
+    measurementId: "G-7CNEMEG53P"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 function App() {
 
@@ -122,6 +136,7 @@ function App() {
                     <Stack.Screen name="AppliedSaved" component={AppliedSaved} options={{title: "AppliedSaved", headerShown: false}}/>
                     <Stack.Screen name="ProviderProfile" component={ProviderProfile} options={{title: "ProviderProfile", headerShown: false}}/>
                     <Stack.Screen name="ProviderTypeModal" component={ProviderTypeModal} options={{title: "ProviderTypeModal", headerShown: false}}/>
+                    <Stack.Screen name="ApplyModal" component={ApplyModal} options={{title: "ApplyModal", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>

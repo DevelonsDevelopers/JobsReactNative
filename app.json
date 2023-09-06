@@ -2,6 +2,7 @@
   "expo": {
     "name": "jobsApplication",
     "slug": "jobsApplication",
+    "plugins": ["@react-native-google-signin/google-signin"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

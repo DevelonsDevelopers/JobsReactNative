@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {LoginAuthentication, ProviderLoginAuthentication} from "../API/actions/loginActions";
 import Toast from "react-native-toast-message";
 import {RESET_SEEKER} from "../Utils/Constants";
+import firebase from "firebase/compat";
+// import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 
 
 function Login({ route, navigation }) {
@@ -45,6 +47,109 @@ function Login({ route, navigation }) {
     const [loading, setLoading] = useState([]);
     const [loadingVisible, setLoadingVisible] = useState(false)
     const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
+
+    // GoogleSignin.configure({
+    //     webClientId: '404623696003-doe1cpjrlljj8om770ha3ri9s9vatoc8.apps.googleusercontent.com', // Replace with your actual Web Client ID
+    // });
+
+    // const GoogleLogin = () => {
+    //     const handleGoogleSignIn = async () => {
+    //         try {
+    //             await GoogleSignin.hasPlayServices();
+    //             const userInfo = await GoogleSignin.signIn();
+    //             const {idToken} = userInfo;
+    //             const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
+    //             await firebase.auth().signInWithCredential(credential);
+    //         } catch (error) {
+    //             // if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+    //             //     // User canceled the sign-in process
+    //             //     console.log('Google sign-in canceled');
+    //             // } else if (error.code === statusCodes.IN_PROGRESS) {
+    //             //     // Another sign-in process is already in progress
+    //             //     console.log('Google sign-in in progress');
+    //             // } else {
+    //             //     console.error('Google sign-in error:', error);
+    //             // }
+    //         }
+    //     };
+    // }
+
+    // const isUserEqual = (googleUser, firebaseUser) => {
+    //     if (firebaseUser) {
+    //         var providerData = firebaseUser.providerData;
+    //         for (var i = 0; i < providerData.length; i++) {
+    //             if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+    //                 providerData[i].uid === googleUser.getBasicProfile().getId()) {
+    //                 // We don't need to reauth the Firebase connection.
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     return false;
+    // }
+    //
+    // const onSignIn = (googleUser)  => {
+    //     console.log('Google Auth Response', googleUser);
+    //     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+    //     var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
+    //         unsubscribe();
+    //         // Check if we are already signed-in Firebase with the correct user.
+    //         if (!isUserEqual(googleUser, firebaseUser)) {
+    //             // Build Firebase credential with the Google ID token.
+    //             var credential = firebase.auth.GoogleAuthProvider.credential(
+    //                 googleUser.idToken,
+    //                 googleUser.accessToken);
+    //             // Sign in with credential from the Google user.
+    //             firebase.auth().signInAndRetrieveDataWithCredential(credential).then(function(result){
+    //
+    //                 console.log("user sign in");
+    //                 firebase
+    //                     .database()
+    //                     .ref('/users'+result.user.uid)
+    //                     .set({
+    //                         gmail:result.user.email,
+    //                         profile_picture:result.additionalUserInfo.profile.profile_picture,
+    //                         locale:result.additionalUserInfo.profile_picture.locale,
+    //                         first_name:result.additionalUserInfo.given_name,
+    //                         last_name:result.additionalUserInfo.first_name
+    //                     })
+    //                     .then(function(snapshot){
+    //
+    //                     });
+    //             }).catch(function(error) {
+    //                 // Handle Errors here.
+    //                 var errorCode = error.code;
+    //                 var errorMessage = error.message;
+    //                 // The email of the user's account used.
+    //                 var email = error.email;
+    //                 // The firebase.auth.AuthCredential type that was used.
+    //                 var credential = error.credential;
+    //                 // ...
+    //             });
+    //         } else {
+    //             console.log('User already signed-in Firebase.');
+    //         }
+    //     }.bind(this));
+    // }
+    // const signInWithGoogleAsync = async () => {
+    //     try {
+    //         const result = await Google.logInAsync({
+    //             androidClientId: '404623696003-ige6pbsc79139f0rl6846n33df3kenfo.apps.googleusercontent.com',
+    //             behavior: 'web',
+    //             iosClientId: '404623696003-tsj6kofl9jsis8jro1o68l4ohp09t1i1.apps.googleusercontent.com', //enter ios client id
+    //             scopes: ['profile', 'email']
+    //         });
+    //
+    //         if (result.type === 'success') {
+    //             onSignIn(result);
+    //             return result.accessToken;
+    //         } else {
+    //             return { cancelled: true };
+    //         }
+    //     } catch (e) {
+    //         return { error: true };
+    //     }
+    // };
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F0A51E'}}>
