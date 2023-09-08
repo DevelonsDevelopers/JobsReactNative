@@ -133,6 +133,10 @@ export const fetchInteractionsByUser = (user) => API.post('/interactions/user', 
 
 //CV API CALL
 export const fetchCVByUser = (user) => API.post('/cv/user', { user: user })
+export const cvStatement = (id, statement) => API.post('/cv/statement', {
+    id: id,
+    statement: statement
+})
 export const addCVEducation = (cv, qualification, timeperiod, institute) => API.post('/cvEducation/create', {
     cv: cv,
     qualification: qualification,

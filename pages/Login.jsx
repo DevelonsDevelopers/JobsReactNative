@@ -5,15 +5,15 @@ import {LoginAuthentication, ProviderLoginAuthentication} from "../API/actions/l
 import Toast from "react-native-toast-message";
 import {RESET_SEEKER} from "../Utils/Constants";
 import {GoogleSignin, statusCodes} from "@react-native-google-signin/google-signin";
-import firebase from "firebase/compat";
 import {google} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
 // import {GoogleSignin, statusCodes} from "@react-native-google-signin/google-signin";
 
 
-function Login({ route, navigation }) {
+function Login({route, navigation}) {
 
-    const { USER } = route.params
+    const {USER} = route.params
 
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('')
@@ -27,7 +27,7 @@ function Login({ route, navigation }) {
 
     const LoginUser = () => {
         if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
-            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address' })
+            Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address'})
         } else {
             if (USER === "SEEKER") {
                 dispatch(LoginAuthentication(navigation, email, password))
@@ -40,9 +40,14 @@ function Login({ route, navigation }) {
     }
 
     useEffect(() => {
-        if (error){
+        if (error) {
             toggleLoadingVisibility()
-            Toast.show({ type: 'error', position: 'top', text1: 'Failed to Login', text2: 'Invalid Username or Password' })
+            Toast.show({
+                type: 'error',
+                position: 'top',
+                text1: 'Failed to Login',
+                text2: 'Invalid Username or Password'
+            })
         }
     }, [error]);
 
@@ -56,42 +61,42 @@ function Login({ route, navigation }) {
     });
 
 
-        const handleGoogleSignIn = async () => {
-            try {
-                await GoogleSignin.hasPlayServices();
-                const userInfo = await GoogleSignin.signIn();
-                const {idToken} = userInfo;
-                const { user } = userInfo;
-                await google(user.name, user.givenName + (user.id).substring((user.id).length - 6), user.email, '', '', '', '', user.id).then(async res => {
-                    const {data: {data}} = res;
-                    const {data: {responseCode}} = res;
-                    const {data: {message}} = res;
-                    console.log(message)
-                    if (responseCode === 200) {
-                        var ID = (data.id).toString()
-                        await AsyncStorage.setItem("LOGIN", 'true')
-                        await AsyncStorage.setItem("ID", ID)
-                        await AsyncStorage.setItem("USER", "SEEKER")
-                        await AsyncStorage.setItem("NAME", data.name)
-                        await AsyncStorage.setItem("EMAIL", data.email)
-                        await AsyncStorage.setItem("USERNAME", data.username)
-                        navigation.replace('Home')
-                    } else {
-
-                    }
-                })
-            } catch (error) {
-                if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                    // User canceled the sign-in process
-                    console.log('Google sign-in canceled');
-                } else if (error.code === statusCodes.IN_PROGRESS) {
-                    // Another sign-in process is already in progress
-                    console.log('Google sign-in in progress');
+    const handleGoogleSignIn = async () => {
+        try {
+            await GoogleSignin.hasPlayServices();
+            const userInfo = await GoogleSignin.signIn();
+            const {idToken} = userInfo;
+            const {user} = userInfo;
+            await google(user.name, user.givenName + (user.id).substring((user.id).length - 6), user.email, '', '', '', '', user.id).then(async res => {
+                const {data: {data}} = res;
+                const {data: {responseCode}} = res;
+                const {data: {message}} = res;
+                console.log(message)
+                if (responseCode === 200) {
+                    var ID = (data.id).toString()
+                    await AsyncStorage.setItem("LOGIN", 'true')
+                    await AsyncStorage.setItem("ID", ID)
+                    await AsyncStorage.setItem("USER", "SEEKER")
+                    await AsyncStorage.setItem("NAME", data.name)
+                    await AsyncStorage.setItem("EMAIL", data.email)
+                    await AsyncStorage.setItem("USERNAME", data.username)
+                    navigation.replace('Home')
                 } else {
-                    console.error('Google sign-in error:', error);
+
                 }
+            })
+        } catch (error) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // User canceled the sign-in process
+                console.log('Google sign-in canceled');
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                // Another sign-in process is already in progress
+                console.log('Google sign-in in progress');
+            } else {
+                console.error('Google sign-in error:', error);
             }
-        };
+        }
+    };
 
 
     // const isUserEqual = (googleUser, firebaseUser) => {
@@ -173,11 +178,27 @@ function Login({ route, navigation }) {
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F0A51E'}}>
-           <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
-                <View  style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
-                    <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center',marginHorizontal:100 }}>
-                       <Text style={{ paddingBottom:16,fontSize:14,fontFamily:'poppins_medium' }}>Please Wait ...</Text>
-                       <ActivityIndicator size={60} color="#13A3E1" />
+            <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
+                <View style={{
+                    flex: 1,
+                    alignContent: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: 'rgba(66, 66, 66, 0.4)'
+                }}>
+                    <View style={{
+                        margin: 35,
+                        elevation: 24,
+                        borderRadius: 25,
+                        backgroundColor: '#fff',
+                        opacity: 1,
+                        padding: 20,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginHorizontal: 100
+                    }}>
+                        <Text style={{paddingBottom: 16, fontSize: 14, fontFamily: 'poppins_medium'}}>Please Wait
+                            ...</Text>
+                        <ActivityIndicator size={60} color="#13A3E1"/>
                     </View>
                 </View>
             </Modal>
@@ -198,7 +219,7 @@ function Login({ route, navigation }) {
                 <Text style={{color: '#000', fontWeight: 200, width: 130, textAlign: 'center', marginBottom: 20}}>Let's
                     help you meet up
                     your task</Text>
-                <Image style={{ height: 150, width: 150 }} source={require('../assets/login_icon.png')}/>
+                <Image style={{height: 150, width: 150}} source={require('../assets/login_icon.png')}/>
                 <TextInput onChangeText={(text) => setEmail(text)} style={{
                     height: 50,
                     backgroundColor: '#fff',
@@ -219,14 +240,16 @@ function Login({ route, navigation }) {
                     width: '85%',
                     paddingRight: 20
                 }}>
-                <TextInput onChangeText={(text) => setPassword(text)} style={{
-                    height: 50,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    flex: 1
-                }} placeholder={'Enter your Password'} secureTextEntry={show}/>
-                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/hide.png')}/></Pressable>
-                        : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/show.png')}/></Pressable>}
+                    <TextInput onChangeText={(text) => setPassword(text)} style={{
+                        height: 50,
+                        paddingHorizontal: 20,
+                        color: '#626262',
+                        flex: 1
+                    }} placeholder={'Enter your Password'} secureTextEntry={show}/>
+                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
+                            style={{width: 25, height: 25}} source={require('../assets/hide.png')}/></Pressable>
+                        : <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
+                            style={{width: 25, height: 25}} source={require('../assets/show.png')}/></Pressable>}
                 </View>
                 <Text style={{color: '#000', fontWeight: 400, width: '85%', textAlign: 'right', marginTop: 20}}>Forgot
                     Password?</Text>
@@ -249,7 +272,9 @@ function Login({ route, navigation }) {
                         marginRight: 5,
                         flexDirection: 'row',
                         justifyContent: 'center'
-                    }}><Image style={{ width: 25, height: 25, marginRight: 10 }} source={require('../assets/google.png')}/><Text style={{color: '#000', fontWeight: '900', fontSize: 15}}>Google</Text></Pressable>
+                    }}><Image style={{width: 25, height: 25, marginRight: 10}}
+                              source={require('../assets/google.png')}/><Text
+                        style={{color: '#000', fontWeight: '900', fontSize: 15}}>Google</Text></Pressable>
                     <Pressable style={{
                         width: '41%',
                         backgroundColor: '#fff',
@@ -260,11 +285,14 @@ function Login({ route, navigation }) {
                         marginLeft: 5,
                         flexDirection: 'row',
                         justifyContent: 'center'
-                    }}><Image style={{ width: 25, height: 25, marginRight: 10 }} source={require('../assets/facebook.png')}/><Text style={{color: '#000', fontWeight: '900', fontSize: 15}}>Facebook</Text></Pressable>
+                    }}><Image style={{width: 25, height: 25, marginRight: 10}}
+                              source={require('../assets/facebook.png')}/><Text
+                        style={{color: '#000', fontWeight: '900', fontSize: 15}}>Facebook</Text></Pressable>
                 </View>
                 <View style={{flexDirection: 'row', marginTop: 25}}>
                     <Text style={{color: '#fff', fontWeight: '900', fontSize: 15}}>Don't have an account?</Text>
-                    <Pressable onPress={() => navigation.replace('Register', { USER: USER })} ><Text style={{color: '#000', fontWeight: '900', fontSize: 15}}> Register</Text></Pressable>
+                    <Pressable onPress={() => navigation.replace('Register', {USER: USER})}><Text
+                        style={{color: '#000', fontWeight: '900', fontSize: 15}}> Register</Text></Pressable>
                 </View>
             </View>
             <Toast
