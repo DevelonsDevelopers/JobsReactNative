@@ -71,9 +71,11 @@ function VerificationCode({ route, navigation }) {
                     if (responseCode === 200) {
                         if (password){
                             changePassword(password, ID).then(res => {
+                                navigation.popToTop()
                                 navigation.push('Home')
                             })
                         } else {
+                            navigation.popToTop()
                             navigation.push('Home')
                         }
                     } else {
