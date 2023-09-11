@@ -168,7 +168,7 @@ function Profile({navigation}) {
                             borderRadius: 30,
                             marginTop: 20
                         }}>
-                            <View style={{flex: 1, paddingVertical: 20}}>
+                            <Pressable onPress={() => navigation.push('AppliedSaved', {screen: 0})} style={{flex: 1, paddingVertical: 20}}>
                                 <Text style={{
                                     color: '#fff',
                                     fontSize: 14,
@@ -183,10 +183,10 @@ function Profile({navigation}) {
                                     width: '100%',
                                     textAlign: 'center',
                                     marginTop: 20
-                                }}>15</Text>
-                            </View>
+                                }}>{seeker?.saved}</Text>
+                            </Pressable>
                             <View style={{backgroundColor: '#fff', width: 3}}/>
-                            <View style={{flex: 1, paddingVertical: 20}}>
+                            <Pressable onPress={() => navigation.push('AppliedSaved', {screen: 1})} style={{flex: 1, paddingVertical: 20}}>
                                 <Text style={{
                                     color: '#fff',
                                     fontSize: 14,
@@ -201,8 +201,8 @@ function Profile({navigation}) {
                                     width: '100%',
                                     textAlign: 'center',
                                     marginTop: 20
-                                }}>9</Text>
-                            </View>
+                                }}>{seeker?.applied}</Text>
+                            </Pressable>
                         </View>
                         <View style={{
                             flexDirection: 'column',

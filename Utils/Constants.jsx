@@ -5,6 +5,11 @@ export const ERROR = "ERROR"
 export const NODATA = "NODATA"
 export const RESET = "RESET"
 
+export const BOOKMARKLOADING = "BOOKKMARKLOADING"
+export const BOOKMARKSUCCESS = "BOOKMARKSUCCESS"
+export const BOOKMARKERROR = "BOOKMARKERROR"
+export const BOOKMARKNODATA = "BOOKMARKNODATA"
+
 export const REGISTER = "REGISTER"
 
 export const LOGIN = "LOGIN"

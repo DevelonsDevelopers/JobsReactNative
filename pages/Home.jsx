@@ -106,7 +106,7 @@ function Home({ navigation }) {
                                     tintColor: '#fff'
                                 }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
                                 <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                                    <Pressable 
+                                    <Pressable
                                     // onPress={() => navigation.push('Home')}
                                     ><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
                                         source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
@@ -132,7 +132,7 @@ function Home({ navigation }) {
                         </View>
 
                         {login ?
-                            <Ripple rippleColor="#F0A51E" rippleOpacity={0.3} rippleDuration={300} rippleSize={100} 
+                            <Ripple rippleColor="#F0A51E" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
                              onPress={() => navigation.push('Recommendedjobs')} aria-hidden={true} style={{
                                 backgroundColor: '#F0A51E',
                                 borderRadius: 25,
@@ -178,7 +178,7 @@ function Home({ navigation }) {
                             }}>
                             <Text ellipsizeMode={'tail'} numberOfLines={1}
                                 style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Categories</Text>
-                            <Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100} 
+                            <Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
                              style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Categories')}><Text numberOfLines={1} style={{
                                 fontFamily: 'poppins_light',
                                 fontSize: 12,
@@ -234,7 +234,7 @@ function Home({ navigation }) {
                             }}>
                             <Text ellipsizeMode={'tail'} numberOfLines={1}
                                 style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Recent Jobs</Text>
-                            <Ripple  rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100} 
+                            <Ripple  rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
                              style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Jobs')}><Text numberOfLines={1} style={{
                                 fontFamily: 'poppins_light',
                                 fontSize: 12,
@@ -254,7 +254,7 @@ function Home({ navigation }) {
 
                                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                         style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
-                                            <Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={300} 
+                                            <Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={300}
                                              onPress={() => navigation.push('JobDetails', { ID: item.id })}
                                                 style={{
                                                     flex: 1,
@@ -335,7 +335,7 @@ function Home({ navigation }) {
                         marginBottom: 15,
                         paddingHorizontal: 20
                     }}>
-                        <Pressable onPress={() => navigation.push('AppliedSaved')} style={{
+                        <Pressable onPress={() => navigation.push('AppliedSaved', {screen: 0})} style={{
                             height: '100%',
                             flex: 1,
                             flexDirection: 'column',
