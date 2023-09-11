@@ -50,6 +50,7 @@ import JobsByCompany from "./pages/JobsByCompany";
 import ProviderProfile from './pages/ProviderProfile';
 import ProviderTypeModal from './Components/ProviderTypeModal';
 import ApplyModal from './Components/ApplyModal';
+import CoverLetter from './pages/CoverLetter';
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
@@ -124,6 +125,7 @@ function App() {
                     <Stack.Screen name="ProviderProfile" component={ProviderProfile} options={{title: "ProviderProfile", headerShown: false}}/>
                     <Stack.Screen name="ProviderTypeModal" component={ProviderTypeModal} options={{title: "ProviderTypeModal", headerShown: false}}/>
                     <Stack.Screen name="ApplyModal" component={ApplyModal} options={{title: "ApplyModal", headerShown: false}}/>
+                    <Stack.Screen name="CoverLetter" component={CoverLetter} options={{title: "CoverLetter", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>
