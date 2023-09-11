@@ -4,7 +4,7 @@ import {
     CREATE_CV_EDUCATION, CREATE_CV_INTEREST, CREATE_CV_LANGUAGE, CREATE_CV_RESUME, CREATE_CV_SKILL,
     ERROR,
     GET_CV_BY_USER,
-    LOADING,
+    LOADING, RESET,
     SUCCESS
 } from "../../Utils/Constants";
 
@@ -32,6 +32,8 @@ const cv = (state = {isLoading: true, success: false, error: false}, action) => 
             return {...state, resume: action.payload.data}
         case CREATE_CV_SKILL:
             return {...state, skill: action.payload.data}
+        case RESET:
+            return {...state, isLoading: true, success: false, error: false}
         default:
             return state
     }

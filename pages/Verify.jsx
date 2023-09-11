@@ -4,9 +4,10 @@ import {useEffect, useState} from "react";
 
 function ChangePassword({ route, navigation }) {
 
+    const { verifyPhone } = route.params
     const { password } = route.params;
 
-    const [phone, setPhone] = useState()
+    const [phone, setPhone] = useState(verifyPhone)
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
@@ -17,7 +18,7 @@ function ChangePassword({ route, navigation }) {
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Image style={{ height: 200, width: 200, marginTop: 100 }} source={require('../assets/verify.png')}/>
                 <Text style={{color: '#000', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center'}}>Verify</Text>
-                <TextInput onChangeText={text => setPhone(text)} style={{
+                <TextInput value={phone} onChangeText={text => setPhone(text)} style={{
                     height: 50,
                     backgroundColor: '#fff',
                     width: '85%',

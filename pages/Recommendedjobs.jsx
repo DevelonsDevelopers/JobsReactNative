@@ -48,8 +48,12 @@ function Recommendedjobs({navigation}) {
     useEffect(() => {
         if (ID) {
             if (topTags) {
-                if (loading) {
-                    dispatch(RecommendedJobs(ID, topTags[0].name))
+                if (topTags.length !== 0) {
+                    if (loading) {
+                        dispatch(RecommendedJobs(ID, topTags[0].name))
+                    }
+                } else {
+                    setLoading(false)
                 }
             }
         }

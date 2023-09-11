@@ -295,10 +295,12 @@ const renderScene = SceneMap({
     'Applied job': SecondRoute,
 });
 
-export default function AppliedSaved({navigation}) {
+export default function AppliedSaved({ route, navigation }) {
     const layout = useWindowDimensions();
 
-    const [index, setIndex] = React.useState(0);
+    const { screen } = route.params
+
+    const [index, setIndex] = React.useState(screen);
     const [routes] = React.useState([
         {key: 'Saved Job', title: 'Saved Job'},
         {key: 'Applied job', title: 'Applied job'},

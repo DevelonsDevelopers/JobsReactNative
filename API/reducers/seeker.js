@@ -1,4 +1,4 @@
-import {ERROR, GET_SEEKER, LOADING, NODATA, RESET, RESET_SEEKER, SUCCESS, UPDATE_SEEKER} from "../../Utils/Constants";
+import {ERROR, GET_SEEKER, LOADING, NODATA, RESET, SUCCESS, UPDATE_SEEKER} from "../../Utils/Constants";
 import {defaults} from "axios";
 
 const seeker = (state = {isLoading: true, success: false, error: false, nodata: false}, action) => {
