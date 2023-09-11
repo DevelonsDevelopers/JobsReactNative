@@ -8,7 +8,7 @@ function Splash({navigation}) {
 
     useEffect(() => {
 
-        sleep(5000).then(() => {
+        sleep(3000).then(() => {
             navigation.replace('Home')
         });
     });

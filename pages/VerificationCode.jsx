@@ -2,6 +2,9 @@ import {Button, Image, Pressable, ScrollView, Text, TextInput, View, StyleSheet}
 import {CodeField, useBlurOnFulfill, useClearByFocusCell, Cursor} from "react-native-confirmation-code-field";
 import {useEffect, useState} from "react";
 import {firebase} from "@react-native-firebase/auth";
+import {changePassword, verifySeeker} from "../API";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
 const styles = StyleSheet.create({
     root: {flex: 1, padding: 20},
@@ -25,18 +28,27 @@ const styles = StyleSheet.create({
 
 const CELL_COUNT = 6;
 
-function ChangePassword({ route, navigation }) {
+function VerificationCode({ route, navigation }) {
 
     const { phone } = route.params
     const { password } = route.params
 
     const [confirm, setConfirm] = useState()
     const [code, setCode] = useState('');
+    const [ID, setID] = useState()
 
     function onAuthStateChanged(user) {
         if (user) {
             console.log(user)
         }
+    }
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
     }
 
     useEffect(() => {
@@ -52,10 +64,25 @@ function ChangePassword({ route, navigation }) {
     async function confirmCode() {
         try {
             await confirm.confirm(value).then(res => {
-                console.log(res)
+                verifySeeker("true", phone, ID).then(res => {
+                    const {data: {data}} = res;
+                    const {data: {responseCode}} = res;
+                    const {data: {message}} = res;
+                    if (responseCode === 200) {
+                        if (password){
+                            changePassword(password, ID).then(res => {
+                                navigation.push('Home')
+                            })
+                        } else {
+                            navigation.push('Home')
+                        }
+                    } else {
+                        Toast.show({type: 'error', position: 'top', text1: 'Error', text2: 'Unknown error occurred'})
+                    }
+                })
             })
         } catch (error) {
-            console.log('Invalid code.');
+            Toast.show({type: 'error', position: 'top', text1: 'Error', text2: 'The code you entered is not valid'})
         }
     }
 
@@ -115,8 +142,12 @@ function ChangePassword({ route, navigation }) {
                     paddingVertical: 15,
                 }}><Text style={{color: '#13A3E1', fontFamily: 'poppins_semibold', fontSize: 15}}>Resend Code</Text></Pressable>
             </View>
+            <Toast
+                position='top'
+                bottomOffset={20}
+            />
         </ScrollView>
     );
 }
 
-export default ChangePassword
+export default VerificationCode

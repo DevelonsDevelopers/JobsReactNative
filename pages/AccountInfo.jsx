@@ -59,13 +59,14 @@ function AccountInfo({navigation}) {
 
     const [trigger, setTrigger] = useState(false)
 
+    const [isloading, setIsLoading] = useState(true)
+
     const [ID, setID] = useState()
     const cv = useSelector(state => state.cv.cv);
 
     const data = useSelector(state => state.cv.nodata);
     const error = useSelector(state => state.cv.error);
     const success = useSelector(state => state.cv.success);
-    const loading = useSelector(state => state.cv.isloading);
 
     useEffect(() => {
         GetData()
@@ -136,9 +137,9 @@ function AccountInfo({navigation}) {
     const toggleResumeVisibility = () => setResumeVisible(!resumeVisible)
 
 
-    const [isloading, setIsLoading] = useState(true)
-
     useEffect(() => {
+        console.log("SUCCESSISHERE")
+        console.log(success)
         if (success) {
             setIsLoading(false)
         }

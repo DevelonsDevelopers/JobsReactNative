@@ -80,6 +80,7 @@ function Login({route, navigation}) {
                     await AsyncStorage.setItem("NAME", data.name)
                     await AsyncStorage.setItem("EMAIL", data.email)
                     await AsyncStorage.setItem("USERNAME", data.username)
+                    navigation.popToTop()
                     navigation.replace('Home')
                 } else {
 
@@ -245,7 +246,7 @@ function Login({route, navigation}) {
                         paddingHorizontal: 20,
                         color: '#626262',
                         flex: 1
-                    }} placeholder={'Enter your Password'} secureTextEntry={show}/>
+                    }} placeholder={'Enter your Password'} secureTextEntry={!show}/>
                     {show === true ? <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
                             style={{width: 25, height: 25}} source={require('../assets/hide.png')}/></Pressable>
                         : <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image

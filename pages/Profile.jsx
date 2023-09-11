@@ -14,7 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchSeeker} from "../API/actions/seekerActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
-import {RESET_SEEKER} from "../Utils/Constants";
+import {RESET, RESET_SEEKER} from "../Utils/Constants";
 
 function Profile({navigation}) {
 
@@ -25,6 +25,8 @@ function Profile({navigation}) {
     const [ID, setID] = useState()
 
     const [isloading, setIsLoading] = useState(true)
+
+    const [loginVal, setLoginVal] = useState()
 
     useEffect(() => {
         GetData()
@@ -62,7 +64,7 @@ function Profile({navigation}) {
         if (success) {
             console.log("SUCCESS")
             setIsLoading(false)
-            dispatch({type: RESET_SEEKER})
+            dispatch({type: RESET})
         }
     }, [success])
 

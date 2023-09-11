@@ -50,16 +50,15 @@ const JobDetails = ({route, navigation}) => {
         }
     }, [job]);
 
-    const ApplyJob = () => {
+    const ApplyJob = (proposal) => {
         const date = moment().format("YYYY-MM-DD")
         console.log(date)
-        applyJob(job.id, USERID, date, "This is Proposal").then(res => {
+        applyJob(job.id, USERID, date, proposal).then(res => {
             const {data: {data}} = res;
             if (data.affectedRows === 1) {
                 setApplied(data.insertId)
             }
         })
-        toggleApplyVisibility()
     }
 
     const BookmarkJob = () => {
@@ -88,7 +87,7 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
 
     return (
         <ScrollView style={{backgroundColor: '#F1F1F1'}}>
-            <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility}   />
+            <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob}/>
             <View style={{backgroundColor: '#EAEAEA'}}>
                 <View style={{flexDirection: 'row', height: 90}}>
                     <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
@@ -292,7 +291,7 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                         }}>SAVED</Text></Pressable>
                                     }
                                     {applied === 0 ?
-                                        <Pressable onPress={() => ApplyJob()}><Text style={{
+                                        <Pressable onPress={() => toggleApplyVisibility()}><Text style={{
                                             justifyContent: 'center',
                                             height: 50,
                                             fontSize: 15,

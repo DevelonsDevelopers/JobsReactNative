@@ -17,28 +17,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {fetchSeeker, updateSeeker} from "../API/actions/seekerActions";
 import {AllCities} from "../API/actions/cityActions";
 import {AllCountries} from "../API/actions/countryActions";
-import {RESET_SEEKER} from "../Utils/Constants";
+import {RESET, RESET_SEEKER} from "../Utils/Constants";
 import city from "../API/reducers/city";
 import CitySelectModal from "../Components/CitySelectModal";
 import CountrySelectModal from "../Components/CountrySelectModal";
 import GenderModal from "../Components/GenderModal";
-
-const data = [
-    {"city": "Lahore", "country": 'Pakistan'},
-    {"city": "Sydney", "country": 'Australia'},
-    {"city": "Delhi", "country": 'India'},
-    {"city": "Beijing", "country": 'China'},
-    {"city": "Al Ain", "country": 'UAE'},
-    {"city": "London", "country": 'UK'},
-    {"city": "New York", "country": 'USA'},
-    {"city": "Lahore", "country": 'Pakistan'},
-    {"city": "Sydney", "country": 'Australia'},
-    {"city": "Delhi", "country": 'India'},
-    {"city": "Beijing", "country": 'China'},
-    {"city": "Al Ain", "country": 'UAE'},
-    {"city": "London", "country": 'UK'},
-    {"city": "New York", "country": 'USA'}
-]
+import DatePicker from "react-native-date-picker";
 
 function PersonalInfo({navigation}) {
 
@@ -47,16 +31,18 @@ function PersonalInfo({navigation}) {
     const cities = useSelector(state => state.city.cities)
     const countries = useSelector(state => state.country.countries)
     const success = useSelector(state => state.seeker.success)
+    const [completed, setCompleted] = useState(false)
+    const [verified, setVerified] = useState(false)
 
-const [loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
 
-useEffect(()=>{
-if (seeker && cities && countries && success == 'false' ) {
-    setLoading(true)
-} else {
-    setLoading(false)
-}
-},[ seeker ,cities ,countries ,success])
+    useEffect(() => {
+        if (seeker && cities && countries && success == 'false') {
+            setLoading(true)
+        } else {
+            setLoading(false)
+        }
+    }, [seeker, cities, countries, success])
 
     const dispatch = useDispatch();
     const [ID, setID] = useState()
@@ -74,6 +60,7 @@ if (seeker && cities && countries && success == 'false' ) {
 
     const [cityName, setNameCity] = useState('')
     const [countryName, setCountryName] = useState('')
+    const [gen, setGen] = useState('')
     const [trigger, setTrigger] = useState(false)
 
     const [cityVisible, setCityVisible] = useState(false)
@@ -103,8 +90,9 @@ if (seeker && cities && countries && success == 'false' ) {
     }, [dispatch, seeker, ID, navigation, trigger]);
 
     useEffect(() => {
-        if (seeker !== null || seeker !== undefined) {
+        if (seeker) {
             setSeekerData({
+                ...seekerData,
                 name: seeker?.name,
                 city: seeker?.city,
                 country: seeker?.country,
@@ -115,18 +103,38 @@ if (seeker && cities && countries && success == 'false' ) {
                 gender: seeker?.gender,
                 id: seeker?.id
             })
+            setGen(seeker?.gender)
             setNameCity(seeker?.city_name)
             setCountryName(seeker?.country_name)
         }
+        if (seeker?.address && seeker?.city && seeker?.country && seeker?.dob && seeker?.email && seeker?.gender && seeker?.id && seeker?.name && seeker?.password && seeker?.phone && seeker?.username) {
+            setCompleted(true)
+        } else {
+            setCompleted(false)
+        }
+        if (seeker?.verified === "true") {
+            setVerified(true)
+        } else {
+            setVerified(false)
+        }
     }, [seeker])
 
-    const update = () => {
-        dispatch(updateSeeker(seekerData.name, seekerData.city, seekerData.country, seekerData.username, seekerData.phone, seekerData.address, seekerData.dob, seekerData.gender, seekerData.id))
-        toggleLoadingVisibility()
-        dispatch({ type: RESET_SEEKER })
-        setTrigger(!trigger)
+    const updateGender = (gender) => {
+        setSeekerData({...seekerData, gender: gender})
+        setGen(gender)
     }
 
+    useEffect(() => {
+        console.log(seekerData)
+    }, [seekerData]);
+
+    const update = () => {
+        console.log(seekerData)
+        dispatch(updateSeeker(seekerData.name, seekerData.city, seekerData.country, seekerData.username, seekerData.phone, seekerData.address, seekerData.dob, seekerData.gender, seekerData.id))
+        toggleLoadingVisibility()
+        dispatch({type: RESET})
+        setTrigger(!trigger)
+    }
 
     const [loadingVisible, setLoadingVisible] = useState(false)
     const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
@@ -161,16 +169,32 @@ if (seeker && cities && countries && success == 'false' ) {
         setCountryName(item.name)
     }
 
+    const [date, setDate] = useState(new Date())
+    const [open, setOpen] = useState(false)
+
 // gendermodal==============
 
-const [gender , setGender] = useState(false)
-const toggleGenderVisibility = () => setGender(!gender)
+    const [gender, setGender] = useState(false)
+    const toggleGenderVisibility = () => setGender(!gender)
 
     return (
         <View style={{flex: 1}}>
+            <DatePicker
+                modal
+                open={open}
+                date={date}
+                onConfirm={(date) => {
+                    setOpen(false)
+                    setDate(date)
+                }}
+                onCancel={() => {
+                    setOpen(false)
+                }}
+            />
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick}/>
-            <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries} click={countryClick}/>
-            <GenderModal visible={gender} toggleVisibility={toggleGenderVisibility} />
+            <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
+                                click={countryClick}/>
+            <GenderModal visible={gender} toggleVisibility={toggleGenderVisibility} set={updateGender}/>
             <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                 <View style={{
                     flex: 1,
@@ -199,7 +223,7 @@ const toggleGenderVisibility = () => setGender(!gender)
             <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75}}>
                 <View style={{flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1'}}>
                     <View style={{flexDirection: 'row', height: 130}}>
-                        <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
+                        <Pressable onPress={() => navigation.goBack()} style={{padiingRight: 5}}><Image style={{
                             width: 22,
                             height: 20,
                             marginTop: 70,
@@ -220,372 +244,418 @@ const toggleGenderVisibility = () => setGender(!gender)
                         textAlign: 'center',
                         marginTop: 10
                     }}>Personal Info</Text>
-                    <Text style={{
-                        color: '#fff',
-                        fontSize: 12,
-                        fontFamily: 'poppins_semibold',
-                        width: '60%',
-                        alignSelf: 'center',
-                        textAlign: 'center',
-                        marginTop: 5,
-                        backgroundColor: '#ff0000',
-                        borderRadius: 10,
-                        paddingTop: 1
-                    }}>Complete Your Profile</Text>
+                    {!completed ?
+                        <Text style={{
+                            color: '#fff',
+                            fontSize: 12,
+                            fontFamily: 'poppins_semibold',
+                            width: '60%',
+                            alignSelf: 'center',
+                            textAlign: 'center',
+                            marginTop: 5,
+                            backgroundColor: '#ff0000',
+                            borderRadius: 10,
+                            paddingTop: 1
+                        }}>Complete Your Profile</Text>
+                        : ''}
                 </View>
                 {loading ?
-               <View style={{ marginTop:200 }}>
-               <ActivityIndicator size={60} color="#13A3E1" />
-               </View>
+                    <View style={{marginTop: 200}}>
+                        <ActivityIndicator size={60} color="#13A3E1"/>
+                    </View>
                     :
                     <>
-                <View style={{
-                    flexDirection: 'column',
-                    borderColor: '#b2b2b2',
-                    backgroundColor: '#fff',
-                    marginHorizontal: 10,
-                    marginRight: 30,
-                    marginLeft: 30,
-                    borderRadius: 30,
-                    marginTop: 20
-                }}>
-                    <View style={{flexDirection: 'row', flex: 1}}>
                         <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderTopLeftRadius: 30,
+                            flexDirection: 'column',
                             borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
+                            backgroundColor: '#fff',
+                            marginHorizontal: 10,
+                            marginRight: 30,
+                            marginLeft: 30,
+                            borderRadius: 30,
+                            marginTop: 20
                         }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>Name</Text>
+                            <View style={{flexDirection: 'row', flex: 1}}>
+                                <View style={{
+                                    flex: 0.7,
+                                    backgroundColor: '#E6E6E6',
+                                    borderTopLeftRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_light',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>Name</Text>
+                                </View>
+                                <View style={{
+                                    flex: 1.3,
+                                    borderTopRightRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <TextInput onChangeText={(text) => setSeekerData({...seekerData, name: text})}
+                                               placeholder={'Missing!!!'} style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_medium',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>{seeker?.name}</TextInput>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
+                                <View style={{
+                                    flex: 0.7,
+                                    backgroundColor: '#E6E6E6',
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_light',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>Birthday</Text>
+                                </View>
+                                <View style={{
+                                    flex: 1.3,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <TextInput editable={false}
+                                               onChangeText={(text) => setSeekerData({...seekerData, dob: text})}
+                                               placeholder={'Missing!!!'} style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_medium',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>{seeker?.dob}</TextInput>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
+                                <View style={{
+                                    flex: 0.7,
+                                    backgroundColor: '#E6E6E6',
+                                    borderBottomLeftRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_light',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>Gender</Text>
+                                </View>
+                                <Pressable onPress={() => toggleGenderVisibility()}
+                                           style={{
+                                               flex: 1.3,
+                                               borderBottomRightRadius: 30,
+                                               borderColor: '#b2b2b2',
+                                               borderWidth: 1,
+                                               paddingHorizontal: 20,
+                                               paddingVertical: 5
+                                           }}>
+                                    <View>
+                                        <TextInput
+
+                                            onTouchStart={() => toggleGenderVisibility()}
+                                            placeholder={'Missing!!!'} style={{
+                                            color: '#000',
+                                            fontSize: 14,
+                                            fontFamily: 'poppins_medium',
+                                            width: '100%',
+                                            textAlign: 'left'
+                                        }}>{gen}</TextInput>
+                                    </View>
+                                </Pressable>
+                            </View>
                         </View>
                         <View style={{
-                            flex: 1.3,
-                            borderTopRightRadius: 30,
+                            flexDirection: 'column',
                             borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
+                            backgroundColor: '#fff',
+                            marginHorizontal: 10,
+                            marginRight: 30,
+                            marginLeft: 30,
+                            borderRadius: 30,
+                            marginTop: 20
                         }}>
-                            <TextInput onChangeText={(text) => setSeekerData({...seekerData, name: text})}
-                                       placeholder={'Missing!!!'} style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_medium',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>{seeker?.name}</TextInput>
+                            <View style={{flexDirection: 'row', flex: 1}}>
+                                <View style={{
+                                    flex: 0.7,
+                                    backgroundColor: '#E6E6E6',
+                                    borderTopLeftRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_light',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>Email</Text>
+                                </View>
+                                <View style={{
+                                    flex: 1.3,
+                                    borderTopRightRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <TextInput editable={false} placeholder={'Missing!!!'} style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_medium',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>{seeker?.email}</TextInput>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
+                                <View style={{
+                                    flex: 0.7,
+                                    backgroundColor: '#E6E6E6',
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_light',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>Phone</Text>
+                                </View>
+                                <View style={{
+                                    flex: 1.3,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <View style={{width: '100%', flexDirection: 'row', alignItems: 'center'}}>
+                                        <TextInput
+                                            onChangeText={(text) => setSeekerData({...seekerData, phone: text})}
+                                            placeholder={'Missing!!!'} style={{
+                                            color: '#000',
+                                            fontSize: 14,
+                                            fontFamily: 'poppins_medium',
+                                            textAlign: 'left'
+                                        }}>{seeker?.phone}</TextInput>
+                                        {verified ?
+                                            <Image style={{width: 14, height: 14, marginLeft: 'auto'}}
+                                                   source={require('../assets/verified.png')}/>
+                                            :
+                                            <Image style={{width: 14, height: 14, marginLeft: 'auto'}}
+                                                   source={require('../assets/unverified.png')}/>
+                                        }
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
+                                <View style={{
+                                    flex: 0.7,
+                                    backgroundColor: '#E6E6E6',
+                                    borderBottomLeftRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_light',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>Address</Text>
+                                </View>
+                                <View style={{
+                                    flex: 1.3,
+                                    borderBottomRightRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <TextInput onChangeText={(text) => setSeekerData({...seekerData, address: text})}
+                                               placeholder={'Missing!!!'} style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_medium',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>{seeker?.address}</TextInput>
+                                </View>
+                            </View>
                         </View>
-                    </View>
-                    <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
                         <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
+                            flexDirection: 'column',
                             borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
+                            backgroundColor: '#fff',
+                            marginHorizontal: 10,
+                            marginRight: 30,
+                            marginLeft: 30,
+                            borderRadius: 30,
+                            marginTop: 20
                         }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>Birthday</Text>
+                            <View style={{flexDirection: 'row', flex: 1}}>
+                                <View style={{
+                                    flex: 0.7,
+                                    backgroundColor: '#E6E6E6',
+                                    borderTopLeftRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_light',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>City</Text>
+                                </View>
+                                <View style={{
+                                    flex: 1.3,
+                                    borderTopRightRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Pressable onPress={() => toggleVisibility()}><TextInput editable={false}
+                                                                                             onFocus={() => toggleVisibility()}
+                                                                                             placeholder={'Missing!!!'}
+                                                                                             style={{
+                                                                                                 color: '#000',
+                                                                                                 fontSize: 14,
+                                                                                                 fontFamily: 'poppins_medium',
+                                                                                                 width: '100%',
+                                                                                                 textAlign: 'left'
+                                                                                             }}>{cityName}</TextInput></Pressable>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
+                                <View style={{
+                                    flex: 0.7,
+                                    backgroundColor: '#E6E6E6',
+                                    borderBottomLeftRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_light',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>Country</Text>
+                                </View>
+                                <View style={{
+                                    flex: 1.3,
+                                    borderBottomRightRadius: 30,
+                                    borderColor: '#b2b2b2',
+                                    borderWidth: 1,
+                                    paddingHorizontal: 20,
+                                    paddingVertical: 5
+                                }}>
+                                    <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
+                                                                                                    onFocus={() => toggleCountryVisibility()}
+                                                                                                    placeholder={'Missing!!!'}
+                                                                                                    style={{
+                                                                                                        color: '#000',
+                                                                                                        fontSize: 14,
+                                                                                                        fontFamily: 'poppins_medium',
+                                                                                                        width: '100%',
+                                                                                                        textAlign: 'left'
+                                                                                                    }}>{countryName}</TextInput></Pressable>
+                                </View>
+                            </View>
                         </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
+
+                        <Pressable onPress={() => update()} style={{
+                            backgroundColor: '#13A3E1',
+                            borderRadius: 25,
+                            alignItems: 'center',
+                            padding: 15,
+                            marginTop: 15,
+                            marginHorizontal: 25
                         }}>
-                            <TextInput onChangeText={(text) => setSeekerData({...seekerData, dob: text})}
-                                       placeholder={'Missing!!!'} style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_medium',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>{seeker?.dob}</TextInput>
-                        </View>
-                    </View>
-                    <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
-                        <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderBottomLeftRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>Gender</Text>
-                        </View>
-                        <Pressable onPress={() => toggleGenderVisibility()} 
-                       style={{
-                        flex: 1.3,
-                        borderBottomRightRadius: 30,
-                        borderColor: '#b2b2b2',
-                        borderWidth: 1,
-                        paddingHorizontal: 20,
-                        paddingVertical: 5
-                    }} >
-                        <View >
-                            <TextInput 
-                 
-                    onTouchStart ={() => toggleGenderVisibility()}
-                            onChangeText={(text) => setSeekerData({...seekerData, gender: text})}
-                                       placeholder={'Missing!!!'} style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_medium',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>{seeker?.gender}</TextInput>
-                        </View>
+                            <Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}
+                            >Update
+                            </Text>
                         </Pressable>
-                    </View>
-                </View>
-                <View style={{
-                    flexDirection: 'column',
-                    borderColor: '#b2b2b2',
-                    backgroundColor: '#fff',
-                    marginHorizontal: 10,
-                    marginRight: 30,
-                    marginLeft: 30,
-                    borderRadius: 30,
-                    marginTop: 20
-                }}>
-                    <View style={{flexDirection: 'row', flex: 1}}>
-                        <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderTopLeftRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>Email</Text>
-                        </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderTopRightRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <TextInput editable={false} placeholder={'Missing!!!'} style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_medium',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>{seeker?.email}</TextInput>
-                        </View>
-                    </View>
-                    <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
-                        <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>Phone</Text>
-                        </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <TextInput 
-                            keyboardType="numeric"
-                            onChangeText={(text) => setSeekerData({...seekerData, phone: text})}
-                                       placeholder={'Missing!!!'} style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_medium',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>{seeker?.phone}</TextInput>
-                        </View>
-                    </View>
-                    <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
-                        <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderBottomLeftRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>Address</Text>
-                        </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderBottomRightRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <TextInput onChangeText={(text) => setSeekerData({...seekerData, address: text})}
-                                       placeholder={'Missing!!!'} style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_medium',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>{seeker?.address}</TextInput>
-                        </View>
-                    </View>
-                </View>
-                <View style={{
-                    flexDirection: 'column',
-                    borderColor: '#b2b2b2',
-                    backgroundColor: '#fff',
-                    marginHorizontal: 10,
-                    marginRight: 30,
-                    marginLeft: 30,
-                    borderRadius: 30,
-                    marginTop: 20
-                }}>
-                    <View style={{flexDirection: 'row', flex: 1}}>
-                        <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderTopLeftRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>City</Text>
-                        </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderTopRightRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Pressable onPress={() => toggleVisibility()}><TextInput editable={false} onFocus={() => toggleVisibility()} placeholder={'Missing!!!'} style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_medium',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>{cityName}</TextInput></Pressable>
-                        </View>
-                    </View>
-                    <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
-                        <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderBottomLeftRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>Country</Text>
-                        </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderBottomRightRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false} onFocus={() => toggleCountryVisibility()} placeholder={'Missing!!!'} style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_medium',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>{countryName}</TextInput></Pressable>
-                        </View>
-                    </View>
-                </View>
-
-                <Pressable onPress={() => update()} style={{
-                    backgroundColor: '#13A3E1',
-                    borderRadius: 25,
-                    alignItems: 'center',
-                    padding: 15,
-                    marginTop: 15,
-                    marginHorizontal: 25
-                }}>
-                    <Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}
-                    >Update
-                    </Text>
-                </Pressable>
-                <Pressable onPress={() => navigation.push('ChangePassword')} style={{
-                    borderColor: '#000',
-                    borderWidth: 1,
-                    borderRadius: 25,
-                    alignItems: 'center',
-                    padding: 15,
-                    marginTop: 15,
-                    marginHorizontal: 25
-                }}><Text style={{color: '#000', fontWeight: '800', fontSize: 15}}>Change Password</Text></Pressable>
-        </>}
+                        {seeker?.type === "GOOGLE" ?
+                            <Pressable onPress={() => null}
+                                       style={{
+                                           borderColor: '#000',
+                                           borderWidth: 1,
+                                           borderRadius: 25,
+                                           alignItems: 'center',
+                                           padding: 15,
+                                           marginTop: 15,
+                                           marginHorizontal: 25
+                                       }}><Text style={{color: '#000', fontWeight: '800', fontSize: 15}}>Logged In using
+                                Google</Text></Pressable>
+                            :
+                            <Pressable onPress={() => navigation.push('ChangePassword', {verifyPhone: seeker?.phone})}
+                                       style={{
+                                           borderColor: '#000',
+                                           borderWidth: 1,
+                                           borderRadius: 25,
+                                           alignItems: 'center',
+                                           padding: 15,
+                                           marginTop: 15,
+                                           marginHorizontal: 25
+                                       }}><Text style={{color: '#000', fontWeight: '800', fontSize: 15}}>Change
+                                Password</Text></Pressable>
+                        }
+                        {!verified ?
+                            <Pressable onPress={() => navigation.push('Verify', {verifyPhone: seeker?.phone})}
+                                       style={{
+                                           borderColor: '#000',
+                                           backgroundColor: '#000',
+                                           borderWidth: 1,
+                                           borderRadius: 25,
+                                           alignItems: 'center',
+                                           padding: 15,
+                                           marginTop: 15,
+                                           marginHorizontal: 25
+                                       }}><Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}>Verify
+                                Phone</Text></Pressable>
+                            :
+                            ''
+                        }
+                    </>}
             </ScrollView>
-
         </View>
     )
 }
