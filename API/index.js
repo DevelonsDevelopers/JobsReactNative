@@ -31,6 +31,10 @@ export const google = (name, username, email, phone ,address, dob, gender, passw
     password: password,
 })
 
+export const changePassword = (password) => API.post('/seekerAuth/password', {
+    password: password
+})
+
 export const registerProvider = (name, size, city, country, email, phone, address, headquater, type, password) => API.post('/providerAuth/register', {
     name: name,
     size: size,
@@ -129,6 +133,10 @@ export const fetchInteractionsByUser = (user) => API.post('/interactions/user', 
 
 //CV API CALL
 export const fetchCVByUser = (user) => API.post('/cv/user', { user: user })
+export const cvStatement = (id, statement) => API.post('/cv/statement', {
+    id: id,
+    statement: statement
+})
 export const addCVEducation = (cv, qualification, timeperiod, institute) => API.post('/cvEducation/create', {
     cv: cv,
     qualification: qualification,

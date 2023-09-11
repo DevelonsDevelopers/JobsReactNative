@@ -1,6 +1,7 @@
 import {Button, Image, Pressable, ScrollView, Text, TextInput, View, StyleSheet} from "react-native";
 import {CodeField, useBlurOnFulfill, useClearByFocusCell, Cursor} from "react-native-confirmation-code-field";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {firebase} from "@react-native-firebase/auth";
 
 const styles = StyleSheet.create({
     root: {flex: 1, padding: 20},
@@ -24,7 +25,44 @@ const styles = StyleSheet.create({
 
 const CELL_COUNT = 6;
 
-function ChangePassword({ navigation }) {
+function ChangePassword({ route, navigation }) {
+
+    const { phone } = route.params
+    const { password } = route.params
+
+    const [confirm, setConfirm] = useState()
+    const [code, setCode] = useState('');
+
+    function onAuthStateChanged(user) {
+        if (user) {
+            console.log(user)
+        }
+    }
+
+    useEffect(() => {
+        const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber;
+    }, []);
+
+    async function signInWithPhoneNumber(phoneNumber) {
+        const confirmation = await firebase.auth().signInWithPhoneNumber(phoneNumber);
+        setConfirm(confirmation)
+    }
+
+    async function confirmCode() {
+        try {
+            await confirm.confirm(value).then(res => {
+                console.log(res)
+            })
+        } catch (error) {
+            console.log('Invalid code.');
+        }
+    }
+
+    useEffect(() => {
+        signInWithPhoneNumber(phone);
+    }, [phone]);
+
     const [value, setValue] = useState('');
     const ref = useBlurOnFulfill({value, cellCount: CELL_COUNT});
     const [props, getCellOnLayoutHandler] = useClearByFocusCell({
@@ -61,7 +99,7 @@ function ChangePassword({ navigation }) {
                         </Text>
                     )}
                 />
-                <Pressable onPress={() => navigation.navigate('Onboarding')} style={{
+                <Pressable onPress={() => confirmCode()} style={{
                     width: '85%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',
@@ -69,7 +107,7 @@ function ChangePassword({ navigation }) {
                     marginTop: 100,
                     paddingVertical: 15,
                 }}><Text style={{color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15}}>Verify</Text></Pressable>
-                <Pressable onPress={() => navigation.navigate('Onboarding')} style={{
+                <Pressable onPress={() => {}} style={{
                     width: '85%',
                     alignItems: 'center',
                     borderRadius: 25,

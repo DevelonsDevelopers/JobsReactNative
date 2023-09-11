@@ -3,7 +3,9 @@
     "name": "jobsApplication",
     "slug": "jobsapplication",
     "plugins": [
-      "@react-native-google-signin/google-signin"
+      "@react-native-google-signin/google-signin",
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
