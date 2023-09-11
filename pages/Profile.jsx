@@ -96,7 +96,7 @@ function Profile({navigation}) {
                 <View style={{marginTop: 400}}>
                     <ActivityIndicator size={60} color="#13A3E1"/>
                 </View> : <>
-                    <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75}}>
+                    <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
                         <View style={{
                             flexDirection: 'column',
                             width: '100%',
@@ -225,7 +225,7 @@ function Profile({navigation}) {
                                 }}>Manage Your Resume</Text>
                             </View></Pressable>
                             <View style={{backgroundColor: '#000', height: 3}}/>
-                            <Pressable onPress={() => navigation.push('History')}>
+                            <Pressable onPress={() => navigation.push('CoverLetter')}>
                                 <View style={{flex: 1, paddingVertical: 10, marginBottom: 10}}>
                                     <Text style={{
                                         color: '#000',
@@ -233,7 +233,7 @@ function Profile({navigation}) {
                                         fontFamily: 'poppins_semibold',
                                         width: '100%',
                                         textAlign: 'center'
-                                    }}>My History</Text>
+                                    }}>Manage Your Cover Letter</Text>
                                 </View>
                             </Pressable>
                         </View>
@@ -259,6 +259,19 @@ function Profile({navigation}) {
                                     textAlign: 'left',
                                     marginLeft: 20
                                 }}>Manage Your Account</Text>
+                            </View></Pressable>
+                            <Pressable onPress={() => navigation.push('History')}><View
+                                style={{flexDirection: 'row', flex: 1, marginTop: 10, alignItems: 'center'}}>
+                                <Image style={{width: 20, height: 20}}
+                                       source={require('../assets/coverLetter.png')}/>
+                                <Text style={{
+                                    color: '#000',
+                                    fontSize: 16,
+                                    fontFamily: 'poppins_regular',
+                                    width: '100%',
+                                    textAlign: 'left',
+                                    marginLeft: 20
+                                }}>History</Text>
                             </View></Pressable>
                             <Pressable onPress={async () => toggleLoadingVisibility()}><View style={{
                                 flexDirection: 'row',

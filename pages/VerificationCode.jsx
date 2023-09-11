@@ -99,15 +99,12 @@ function VerificationCode({ route, navigation }) {
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
-            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
-                <Image style={{tintColor: '#000', width: 40, height: 40}}
-                       source={require('../assets/back_arrow.png')}/>
-            </View>
+           <Pressable onPress={() => navigation.goBack()}><Image style={{ width: 22, height: 20, marginTop: 70, marginLeft: 30, tintColor: 'gray', }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
+         
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                <Image style={{ height: 200, width: 200, marginTop: 70 }} source={require('../assets/verification_code.png')}/>
-                <Text style={{color: '#000', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center'}}>Verification Code</Text>
-                <Text style={{color: '#000', fontFamily: 'poppins_regular', fontSize: 12, width: '85%', textAlign: 'center', marginTop: 5, alignSelf: 'center'}}>Please enter your code send
-                    to xxxxxxxxxxx</Text>
+                <Image style={{ height: 200, width: 200,  }} source={require('../assets/verification_code.png')}/>
+                <Text style={{color: '#000', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center'}}>Verification</Text>
+                <Text style={{color: '#000', fontFamily: 'poppins_regular', fontSize: 12, width: '85%', textAlign: 'center', marginTop: 5, alignSelf: 'center'}}>Enter your OTP code number</Text>
                 <CodeField
                     ref={ref}
                     {...props}
@@ -127,20 +124,20 @@ function VerificationCode({ route, navigation }) {
                     )}
                 />
                 <Pressable onPress={() => confirmCode()} style={{
-                    width: '85%',
+                    width: '75%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',
-                    borderRadius: 25,
-                    marginTop: 100,
+                    borderRadius: 15,
+                    marginTop: 40,
                     paddingVertical: 15,
                 }}><Text style={{color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15}}>Verify</Text></Pressable>
+                <Text style={{ marginTop:40,fontFamily:'poppins_medium',fontSize:13,color:'gray' }}>Didn't recieve any code ?</Text>
                 <Pressable onPress={() => {}} style={{
                     width: '85%',
                     alignItems: 'center',
                     borderRadius: 25,
-                    marginTop: 20,
-                    paddingVertical: 15,
-                }}><Text style={{color: '#13A3E1', fontFamily: 'poppins_semibold', fontSize: 15}}>Resend Code</Text></Pressable>
+                    marginTop:5
+                }}><Text style={{color: '#13A3E1', fontFamily: 'poppins_semibold', fontSize: 15}}>Resend New Code</Text></Pressable>
             </View>
             <Toast
                 position='top'
