@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {AllBookmarks} from "../API/actions/bookmarkActions";
 import moment from "moment";
 import {AllApplied} from "../API/actions/appliedActions";
+import {useNavigation} from "@react-navigation/native";
 
 const data1 = [
     {"name": "Facebook"},
@@ -22,8 +23,7 @@ const data = [
     {"name": "Netflix"},
     {"name": "Youtube"}
 ]
-
-const FirstRoute = () => {
+const FirstRoute = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const bookmarks = useSelector(state => state.bookmark.bookmarks);
@@ -90,7 +90,7 @@ const FirstRoute = () => {
                                     <FlatList nestedScrollEnabled={true} scrollEnabled={true}
                                               style={{marginHorizontal: 0, marginTop: 20}} data={bookmarks}
                                               renderItem={({item}) => (
-                                                  <View style={{
+                                                  <Pressable onPress={() => {}} style={{
                                                       marginLeft: 25,
                                                       marginRight: 25,
                                                       marginBottom: 8,
@@ -181,7 +181,7 @@ const FirstRoute = () => {
                                                       </View>
 
 
-                                                  </View>
+                                                  </Pressable>
                                               )}/>
                                 </>
                             }
@@ -191,7 +191,7 @@ const FirstRoute = () => {
     )
 };
 
-const SecondRoute = () => {
+const SecondRoute = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const applied = useSelector(state => state.applied.appliedJobs);
@@ -254,7 +254,7 @@ const SecondRoute = () => {
                                     <FlatList nestedScrollEnabled={true} scrollEnabled={true}
                                               style={{marginHorizontal: 0, marginTop: 20}} data={applied}
                                               renderItem={({item}) => (
-                                                  <View style={{
+                                                  <Pressable onPress={() => navigation.push('JobResponse', { response: item.response, ID: item.job })} style={{
                                                       marginLeft: 25,
                                                       marginRight: 25,
                                                       marginBottom: 8,
@@ -327,7 +327,7 @@ const SecondRoute = () => {
                                                       </View>
 
 
-                                                  </View>
+                                                  </Pressable>
                                               )}/>
                                 </>
                             }
@@ -337,15 +337,19 @@ const SecondRoute = () => {
     )
 };
 
-const renderScene = SceneMap({
-    'Saved Job': FirstRoute,
-    'Applied job': SecondRoute,
-});
-
 export default function AppliedSaved({route, navigation}) {
     const layout = useWindowDimensions();
 
     const {screen} = route.params
+
+    const appliedClick = () => {
+
+    }
+
+    const renderScene = SceneMap({
+        'Saved Job': () => <FirstRoute navigation={navigation}/>,
+        'Applied job': () => <SecondRoute navigation={navigation} />
+    });
 
     const [index, setIndex] = React.useState(screen);
     const [routes] = React.useState([
