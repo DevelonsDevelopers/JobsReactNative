@@ -31,7 +31,6 @@ import {
 } from "../API/actions/cvActions";
 import CareerModal from "../Components/CareerModal";
 import CourseModal from "../Components/CourseModal";
-
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import {cvStatement} from "../API";
 import PersonalStatementModal from "../Components/PersonalStatementModal";

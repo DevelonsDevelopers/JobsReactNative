@@ -225,7 +225,7 @@ function Profile({navigation}) {
                                 }}>Manage Your Resume</Text>
                             </View></Pressable>
                             <View style={{backgroundColor: '#000', height: 3}}/>
-                            <Pressable onPress={() => navigation.push('CoverLetter')}>
+                            <Pressable onPress={() => navigation.push('CoverLetterForm')}>
                                 <View style={{flex: 1, paddingVertical: 10, marginBottom: 10}}>
                                     <Text style={{
                                         color: '#000',

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Image, Pressable, Text, View } from 'react-native'
 import { FlatList, GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
@@ -11,11 +11,28 @@ const data = [
 ]
 
 
-const CoverLetter = () => {
+const CoverLetter = ({navigation}) => {
 	const cv = useSelector((state) => state.cv.cv);
 	return (
 		<GestureHandlerRootView style={{ paddingBottom: 40 }}>
 			<ScrollView>
+				<View style={{ flexDirection: 'row', height: 90 }}>
+					<Pressable onPress={() => navigation.goBack()}
+						style={{ paddingRight: 5 }}><Image style={{
+							width: 22,
+							height: 20,
+							marginTop: 70,
+							marginLeft: 30,
+							tintColor: '#000'
+						}} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
+					<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
+						<Pressable onPress={() => navigation.push('Home')}><Image
+							style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+							source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
+					</View>
+				</View>
+
+
 				<View style={{ backgroundColor: '#D3D3D3', marginTop: 40, paddingVertical: 10, marginHorizontal: 40, borderRadius: 20 }}>
 					<Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.name}</Text>
 					<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.address}</Text>
