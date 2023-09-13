@@ -99,8 +99,8 @@ const CoverLetter = ({ route, navigation }) => {
 				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: -3, marginHorizontal: 30 }}>I am available at short notice to attend an interview, and I look forward to hearing further on my application. </Text>
 				<Text style={{ fontSize: 12, fontFamily: 'poppins_medium', marginTop: 11, marginHorizontal: 30 }}>Your's Sincerly</Text>
 				<Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 10, marginHorizontal: 30, marginLeft: 'auto' }}>{cv?.name}</Text>
-				<View style={{ marginHorizontal:120,paddingVertical:20 }}>
-					<Text style={{ backgroundColor:'#13A3E1',color:'white',fontSize:16,fontFamily:'poppins_medium',textAlign:'center',paddingVertical:4,borderRadius:10 }}>Confirm</Text>
+				<View style={{ marginHorizontal: 120, paddingTop: 20 }}>
+					<Text style={{ backgroundColor: '#13A3E1', color: 'white', fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingVertical: 6, borderRadius: 10 }}>Confirm</Text>
 				</View>
 			</ScrollView>
 		</GestureHandlerRootView>
