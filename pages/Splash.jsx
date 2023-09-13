@@ -1,15 +1,32 @@
 import {Button, Image, ImageBackground, Text, View} from "react-native";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Splash({navigation}) {
 
-    const sleep = ms =>
-        new Promise(resolve => setTimeout(resolve, ms));
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    const [user, setUser] = useState()
+
+    useEffect(() => {
+        GetData()
+    }, []);
+
+    const GetData = async () => {
+        sleep(1000).then( async () => {
+            const value = await AsyncStorage.getItem('USER')
+            setUser(value);
+        })
+    }
 
     useEffect(() => {
 
         sleep(3000).then(() => {
-            navigation.replace('Home')
+            if (user === "SEEKER") {
+                navigation.replace('Home')
+            } else {
+                navigation.replace('PostJob')
+            }
         });
     });
 

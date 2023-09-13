@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Image, Modal, Pressable, Text, TextInput, View } from 'react-native'
-import { GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler'
+import React, {useEffect, useState} from 'react'
+import {Image, Modal, Pressable, Text, TextInput, View} from 'react-native'
+import {GestureHandlerRootView, ScrollView} from 'react-native-gesture-handler'
 import CitySelectModal from '../Components/CitySelectModal'
-import { AllCities } from '../API/actions/cityActions'
-import { useDispatch, useSelector } from 'react-redux'
-import { AllCountries } from '../API/actions/countryActions'
+import {AllCities} from '../API/actions/cityActions'
+import {useDispatch, useSelector} from 'react-redux'
+import {AllCountries} from '../API/actions/countryActions'
 import CountrySelectModal from '../Components/CountrySelectModal'
 import ProviderTypeModal from '../Components/ProviderTypeModal'
 
@@ -33,13 +33,13 @@ const ProviderProfile = ({navigation}) => {
     }, [dispatch, countries]);
 
     const cityClick = (item) => {
-        setSeekerData({ ...seekerData, city: item.id })
+        setSeekerData({...seekerData, city: item.id})
         toggleVisibility()
         setNameCity(item.name)
     }
 
     const countryClick = (item) => {
-        setSeekerData({ ...seekerData, country: item.id })
+        setSeekerData({...seekerData, country: item.id})
         toggleCountryVisibility()
         setCountryName(item.name)
     }
@@ -49,16 +49,24 @@ const ProviderProfile = ({navigation}) => {
 
     return (
 
-        <View style={{ flex: 1, backgroundColor: '#F0A51E' }}>
+        <View style={{flex: 1, backgroundColor: '#F0A51E'}}>
 
-            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
-            <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries} click={countryClick} />
-<ProviderTypeModal visible={type} toggleVisibility={toggleType} />
-         
+            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick}/>
+            <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
+                                click={countryClick}/>
+            <ProviderTypeModal visible={type} toggleVisibility={toggleType}/>
 
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              
-                <Text style={{ color: 'white', fontFamily: 'poppins_bold',fontSize:17, width: 250, textAlign: 'center', marginBottom: 10 }}>
+
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+                <Text style={{
+                    color: 'white',
+                    fontFamily: 'poppins_bold',
+                    fontSize: 17,
+                    width: 250,
+                    textAlign: 'center',
+                    marginBottom: 10
+                }}>
                     Please Complete Your Profile !!!
                 </Text>
                 <Pressable onPress={() => toggleCountryVisibility()} style={{
@@ -71,7 +79,8 @@ const ProviderProfile = ({navigation}) => {
                     color: '#626262',
                     elevation: 10
                 }}>
-                    <TextInput onFocus={() => toggleCountryVisibility()} placeholder='Enter your Country' inputMode={'text'} />
+                    <TextInput onFocus={() => toggleCountryVisibility()} placeholder='Enter your Country'
+                               inputMode={'text'}/>
                 </Pressable>
                 <Pressable onPress={() => toggleVisibility()} style={{
                     paddingVertical: 10,
@@ -83,7 +92,7 @@ const ProviderProfile = ({navigation}) => {
                     color: '#626262',
                     elevation: 10
                 }}>
-                    <TextInput onFocus={() => toggleVisibility()} placeholder={'Enter your City'} />
+                    <TextInput onFocus={() => toggleVisibility()} placeholder={'Enter your City'}/>
                 </Pressable>
 
                 <TextInput style={{
@@ -95,7 +104,7 @@ const ProviderProfile = ({navigation}) => {
                     paddingHorizontal: 20,
                     color: '#626262',
                     elevation: 10
-                }} placeholder={'Enter your Phone'} />
+                }} placeholder={'Enter your Phone'}/>
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -111,8 +120,8 @@ const ProviderProfile = ({navigation}) => {
                         paddingHorizontal: 20,
                         color: '#626262',
                         flex: 1
-                    }} placeholder={'Enter your Address'} />
-                    <Pressable style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} /></Pressable>
+                    }} placeholder={'Enter your Address'}/>
+                    <Pressable style={{marginLeft: 'auto'}}><Image style={{width: 25, height: 25}}/></Pressable>
 
                 </View>
                 <View style={{
@@ -130,7 +139,7 @@ const ProviderProfile = ({navigation}) => {
                         paddingHorizontal: 20,
                         color: '#626262',
                         flex: 1
-                    }} placeholder={'Enter your HeadQuarter Address'} />
+                    }} placeholder={'Enter your HeadQuarter Address'}/>
 
                 </View>
                 <Pressable onPress={() => toggleType()}>
@@ -150,7 +159,7 @@ const ProviderProfile = ({navigation}) => {
                             paddingHorizontal: 20,
                             color: '#626262',
                             flex: 1
-                        }} placeholder={'Enter your Company Type'} />
+                        }} placeholder={'Enter your Company Type'}/>
 
                     </View>
                 </Pressable>
@@ -162,7 +171,7 @@ const ProviderProfile = ({navigation}) => {
                     borderRadius: 25,
                     marginTop: 50,
                     paddingVertical: 15
-                }}><Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Continue</Text></Pressable>
+                }}><Text style={{color: '#fff', fontWeight: '900', fontSize: 15}}>Continue</Text></Pressable>
 
             </View>
 
