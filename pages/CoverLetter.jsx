@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from "moment/moment";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CVByUser } from "../API/actions/cvActions";
+import {applyJob, createCover} from "../API";
 
 const data = [
 	{ 'data': 'Enhanced domestic helicopter transfer sales by 60% in 2018/2019 via business-to-business concept ' },
@@ -19,6 +20,7 @@ const CoverLetter = ({ route, navigation }) => {
 	const { role } = route.params;
 	const { intro } = route.params;
 	const { body } = route.params;
+	const { job } = route.params;
 
 	const dispatch = useDispatch();
 
@@ -41,6 +43,25 @@ const CoverLetter = ({ route, navigation }) => {
 			dispatch(CVByUser(ID));
 		}
 	}, [dispatch, ID]);
+
+	const ApplyJob = () => {
+		const postDate = moment().format("YYYY-MM-DD")
+		createCover(ID, job, postDate, role, intro, body).then(res => {
+			console.log(res)
+			const {data: {data}} = res;
+			if (data.affectedRows === 1) {
+				const cover = data.insertId;
+				applyJob(job, ID, postDate, cover).then(res => {
+					console.log(res)
+					const {data: {data}} = res;
+					if (data.affectedRows === 1) {
+						navigation.push('Home')
+					}
+				})
+			}
+		})
+
+	}
 
 	return (
 		<GestureHandlerRootView style={{ paddingBottom: 40 }}>
@@ -99,9 +120,9 @@ const CoverLetter = ({ route, navigation }) => {
 				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: -3, marginHorizontal: 30 }}>I am available at short notice to attend an interview, and I look forward to hearing further on my application. </Text>
 				<Text style={{ fontSize: 12, fontFamily: 'poppins_medium', marginTop: 11, marginHorizontal: 30 }}>Your's Sincerly</Text>
 				<Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 10, marginHorizontal: 30, marginLeft: 'auto' }}>{cv?.name}</Text>
-				<View style={{ marginHorizontal: 120, paddingTop: 20 }}>
+				<Pressable onPress={() => ApplyJob()} style={{ marginHorizontal: 120, paddingTop: 20 }}>
 					<Text style={{ backgroundColor: '#13A3E1', color: 'white', fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center', paddingVertical: 6, borderRadius: 10 }}>Confirm</Text>
-				</View>
+				</Pressable>
 			</ScrollView>
 		</GestureHandlerRootView>
 	)

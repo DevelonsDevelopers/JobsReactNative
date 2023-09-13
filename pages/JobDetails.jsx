@@ -52,7 +52,7 @@ const JobDetails = ({route, navigation}) => {
 
     const ApplyJob = (intro, body) => {
         const date = moment().format("YYYY-MM-DD")
-        navigation.push('CoverLetter', { role: job?.role, intro: intro, body: body })
+        navigation.push('CoverLetter', { job: job.id, role: job?.role, intro: intro, body: body })
         // applyJob(job.id, USERID, date, body).then(res => {
         //     const {data: {data}} = res;
         //     if (data.affectedRows === 1) {
