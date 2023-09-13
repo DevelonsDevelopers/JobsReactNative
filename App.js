@@ -54,6 +54,7 @@ import CoverLetter from './pages/CoverLetter';
 import CoverLetterForm from './pages/CoverLetterForm';
 import JobResponse from "./pages/JobResponse";
 import ProviderProfileInfo from './pages/ProviderProfileInfo';
+import ProviderAccountManage from './pages/ProviderAccountManage';
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
@@ -132,6 +133,7 @@ function App() {
                     <Stack.Screen name="CoverLetter" component={CoverLetter} options={{title: "CoverLetter", headerShown: false}}/>
                     <Stack.Screen name="CoverLetterForm" component={CoverLetterForm} options={{title: "CoverLetterForm", headerShown: false}}/>
                     <Stack.Screen name="ProviderProfileInfo" component={ProviderProfileInfo} options={{title: "ProviderProfileInfo", headerShown: false}}/>
+                    <Stack.Screen name="ProviderAccountManage" component={ProviderAccountManage} options={{title: "ProviderAccountManage", headerShown: false}}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </Provider>

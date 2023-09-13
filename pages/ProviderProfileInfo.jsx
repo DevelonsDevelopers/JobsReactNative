@@ -45,7 +45,7 @@ const ProviderProfileInfo = ({navigation }) => {
                         marginTop: 10,
                         marginHorizontal: 20,
                         paddingBottom: 20
-                    }}>name</Text>
+                    }}>Develons</Text>
                 </View>
                 <View style={{
                     backgroundColor: '#fff',
@@ -62,21 +62,21 @@ const ProviderProfileInfo = ({navigation }) => {
                         fontFamily: 'poppins_medium',
                         width: '100%',
                         textAlign: 'center'
-                    }}>phone</Text>
+                    }}>111-222-333-444</Text>
                     <Text style={{
                         color: '#000',
                         fontSize: 15,
                         fontFamily: 'poppins_semibold',
                         width: '100%',
                         textAlign: 'center'
-                    }}>email</Text>
+                    }}>develonsdeveloper@gmail.com</Text>
                     <Text style={{
                         color: '#000',
                         fontSize: 14,
                         fontFamily: 'poppins_light',
                         width: '100%',
                         textAlign: 'center'
-                    }}>address</Text>
+                    }}>Lahore,pakistan</Text>
                 </View>
                 <View style={{
                     flexDirection: 'row',
@@ -86,7 +86,7 @@ const ProviderProfileInfo = ({navigation }) => {
                     marginRight: 30,
                     marginLeft: 30,
                     borderRadius: 30,
-                    marginTop: 20
+                    marginTop: 30
                 }}>
                     <Pressable onPress={() => navigation.push('AppliedSaved', {screen: 0})} style={{flex: 1, paddingVertical: 20}}>
                         <Text style={{
@@ -103,7 +103,7 @@ const ProviderProfileInfo = ({navigation }) => {
                             width: '100%',
                             textAlign: 'center',
                             marginTop: 20
-                        }}>saved</Text>
+                        }}>5</Text>
                     </Pressable>
                     <View style={{backgroundColor: '#fff', width: 3}}/>
                     <Pressable onPress={() => navigation.push('AppliedSaved', {screen: 1})} style={{flex: 1, paddingVertical: 20}}>
@@ -121,7 +121,7 @@ const ProviderProfileInfo = ({navigation }) => {
                             width: '100%',
                             textAlign: 'center',
                             marginTop: 20
-                        }}>applied</Text>
+                        }}>0</Text>
                     </Pressable>
                 </View>
                 
@@ -133,9 +133,9 @@ const ProviderProfileInfo = ({navigation }) => {
                     marginRight: 30,
                     marginLeft: 30,
                     borderRadius: 30,
-                    marginTop: 20,
+                    marginTop: 90,
                 }}>
-                    <Pressable onPress={() => navigation.push('PersonalInfo')}><View
+                    <Pressable onPress={() => navigation.push('ProviderAccountManage')}><View
                         style={{flexDirection: 'row', flex: 1, marginTop: 20, alignItems: 'center'}}>
                         <Image style={{width: 20, height: 20}}
                                source={require('../assets/manageaccounticon.png')}/>
