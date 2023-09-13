@@ -72,6 +72,7 @@ function Home({ navigation }) {
     const Logout = async () => {
         await AsyncStorage.setItem("LOGIN", 'false')
         await AsyncStorage.setItem("ID", '')
+        await AsyncStorage.setItem("USER", '')
         await AsyncStorage.setItem("NAME", '')
         await AsyncStorage.setItem("EMAIL", '')
         await AsyncStorage.setItem("USERNAME", '')
