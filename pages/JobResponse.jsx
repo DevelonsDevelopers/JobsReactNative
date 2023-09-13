@@ -12,6 +12,7 @@ import ApplyModal from "../Components/ApplyModal";
 const JobResponse = ({route, navigation}) => {
 
     const {ID} = route.params
+    const {response} = route.params
 
     const job = useSelector(state => state.job.job)
     const loading = useSelector(state => state.job.isLoading)
@@ -245,17 +246,18 @@ const JobResponse = ({route, navigation}) => {
                                     </View>
                                 </View>
                                 <Text style={{
-                                    fontSize: 18,
-                                    fontFamily: 'poppins_medium',
-                                    marginLeft: 15,
-                                    marginTop: 10
-                                }}>Description: </Text>
+                                    fontSize: 20,
+                                    fontFamily: 'poppins_bold',
+                                    marginTop: 20,
+                                    width: '100%',
+                                    textAlign: 'center'
+                                }}>Response </Text>
                                 <Text style={{
                                     marginHorizontal: 25,
                                     fontSize: 12,
                                     fontFamily: 'poppins_medium',
                                     minHeight: 250
-                                }}>{job?.description}</Text>
+                                }}>{response ? response : 'No Response'}</Text>
                                 <View style={{
                                     flexDirection: 'row',
                                     justifyContent: "center",
@@ -263,59 +265,58 @@ const JobResponse = ({route, navigation}) => {
                                     marginTop: 10,
                                     fontFamily: 'poppins_medium'
                                 }}>
-                                    {bookmark === 0 ?
-                                        <Pressable onPress={() => BookmarkJob()}><Text style={{
-                                            justifyContent: 'center',
-                                            height: 50,
-                                            fontSize: 15,
-                                            fontFamily: 'poppins_bold',
-                                            backgroundColor: '#143D59',
-                                            color: 'white',
-                                            width: 150,
-                                            textAlign: "center",
-                                            paddingVertical: 10,
-                                            borderRadius: 25,
-                                        }}>SAVE</Text></Pressable>
-                                        :
-                                        <Pressable onPress={() => RemoveBookmark()}><Text style={{
-                                            justifyContent: 'center',
-                                            height: 50,
-                                            fontSize: 15,
-                                            fontFamily: 'poppins_bold',
-                                            backgroundColor: '#143D59',
-                                            color: 'white',
-                                            width: 150,
-                                            textAlign: "center",
-                                            paddingVertical: 10,
-                                            borderRadius: 25,
-                                        }}>SAVED</Text></Pressable>
-                                    }
-                                    {applied === 0 ?
-                                        <Pressable onPress={() => toggleApplyVisibility()}><Text style={{
-                                            justifyContent: 'center',
-                                            height: 50,
-                                            fontSize: 15,
-                                            fontFamily: 'poppins_bold',
-                                            backgroundColor: '#13A3E1',
-                                            color: 'white',
-                                            width: 150,
-                                            textAlign: "center",
-                                            paddingVertical: 10,
-                                            borderRadius: 25,
-                                        }}>APPLY NOW</Text></Pressable>
-                                        : <Text style={{
-                                            justifyContent: 'center',
-                                            height: 50,
-                                            fontSize: 15,
-                                            fontFamily: 'poppins_bold',
-                                            backgroundColor: '#13A3E1',
-                                            color: 'white',
-                                            width: 150,
-                                            textAlign: "center",
-                                            paddingVertical: 10,
-                                            borderRadius: 25,
-                                        }}>APPLIED</Text>}
-
+                                    {/*{bookmark === 0 ?*/}
+                                    {/*    <Pressable onPress={() => BookmarkJob()}><Text style={{*/}
+                                    {/*        justifyContent: 'center',*/}
+                                    {/*        height: 50,*/}
+                                    {/*        fontSize: 15,*/}
+                                    {/*        fontFamily: 'poppins_bold',*/}
+                                    {/*        backgroundColor: '#143D59',*/}
+                                    {/*        color: 'white',*/}
+                                    {/*        width: 150,*/}
+                                    {/*        textAlign: "center",*/}
+                                    {/*        paddingVertical: 10,*/}
+                                    {/*        borderRadius: 25,*/}
+                                    {/*    }}>SAVE</Text></Pressable>*/}
+                                    {/*    :*/}
+                                    {/*    <Pressable onPress={() => RemoveBookmark()}><Text style={{*/}
+                                    {/*        justifyContent: 'center',*/}
+                                    {/*        height: 50,*/}
+                                    {/*        fontSize: 15,*/}
+                                    {/*        fontFamily: 'poppins_bold',*/}
+                                    {/*        backgroundColor: '#143D59',*/}
+                                    {/*        color: 'white',*/}
+                                    {/*        width: 150,*/}
+                                    {/*        textAlign: "center",*/}
+                                    {/*        paddingVertical: 10,*/}
+                                    {/*        borderRadius: 25,*/}
+                                    {/*    }}>SAVED</Text></Pressable>*/}
+                                    {/*}*/}
+                                    {/*{applied === 0 ?*/}
+                                    {/*    <Pressable onPress={() => toggleApplyVisibility()}><Text style={{*/}
+                                    {/*        justifyContent: 'center',*/}
+                                    {/*        height: 50,*/}
+                                    {/*        fontSize: 15,*/}
+                                    {/*        fontFamily: 'poppins_bold',*/}
+                                    {/*        backgroundColor: '#13A3E1',*/}
+                                    {/*        color: 'white',*/}
+                                    {/*        width: 150,*/}
+                                    {/*        textAlign: "center",*/}
+                                    {/*        paddingVertical: 10,*/}
+                                    {/*        borderRadius: 25,*/}
+                                    {/*    }}>APPLY NOW</Text></Pressable>*/}
+                                    {/*    : <Text style={{*/}
+                                    {/*        justifyContent: 'center',*/}
+                                    {/*        height: 50,*/}
+                                    {/*        fontSize: 15,*/}
+                                    {/*        fontFamily: 'poppins_bold',*/}
+                                    {/*        backgroundColor: '#13A3E1',*/}
+                                    {/*        color: 'white',*/}
+                                    {/*        width: 150,*/}
+                                    {/*        textAlign: "center",*/}
+                                    {/*        paddingVertical: 10,*/}
+                                    {/*        borderRadius: 25,*/}
+                                    {/*    }}>APPLIED</Text>}*/}
                                 </View>
 
                             </View>

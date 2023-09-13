@@ -62,6 +62,7 @@ export const applyJob = (job, user, date, proposal) => API.post('/applied/create
     proposal: proposal
 })
 export const appliedJobs = (user) => API.post('/applied/user', { user: user })
+export const appliedJob = (user, job) => API.post('/applied/job', { user: user, job: job })
 
 //CATEGORIES API CALL ============================
 export const fetchAllCategories = () => API.get(`/categories/all`)

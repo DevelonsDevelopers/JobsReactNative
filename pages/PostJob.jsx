@@ -1,18 +1,19 @@
-import { FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AllCategories } from "../API/actions/categoryActions";
-import { CompanyJobs } from "../API/actions/jobActions";
+import {FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View} from "react-native";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {AllCategories} from "../API/actions/categoryActions";
+import {CompanyJobs} from "../API/actions/jobActions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function PostJob({ navigation }) {
+function PostJob({navigation}) {
 
-  const dispatch = useDispatch();
-  const [login, isLogin] = useState(false);
-  const categories = useSelector(state => state.category.categories)
-  const loading = useSelector(state => state.category.isLoading)
+    const dispatch = useDispatch();
+    const [login, isLogin] = useState(false);
+    const categories = useSelector(state => state.category.categories)
+    const loading = useSelector(state => state.category.isLoading)
 
-  // companyjob dispatch==========
-  const [ID, setID] = useState()
+    // companyjob dispatch==========
+    const [ID, setID] = useState()
 
     useEffect(() => {
         GetData()
@@ -22,176 +23,364 @@ function PostJob({ navigation }) {
         setID(value);
     }
 
-  const companyJobs = useSelector(state => state.job.companyJobs)
+    const companyJobs = useSelector(state => state.job.companyJobs)
 
-  useEffect(() => {
-    if(ID){    
-      if (!companyJobs) {
-        dispatch(CompanyJobs(ID))
-       
-    }
-  }
-}, [dispatch,  companyJobs,ID]);
+    useEffect(() => {
+        if (ID) {
+            if (!companyJobs) {
+                dispatch(CompanyJobs(ID))
 
-
-useEffect(()=>{
-  console.log(companyJobs)
-}, [companyJobs])
+            }
+        }
+    }, [dispatch, companyJobs, ID]);
 
 
-  const [visible, setVisible] = useState(false)
-  const toggleVisibility = () => setVisible(!visible)
+    useEffect(() => {
+        console.log(companyJobs)
+    }, [companyJobs])
 
 
+    const [visible, setVisible] = useState(false)
+    const toggleVisibility = () => setVisible(!visible)
 
 
-  const data = [
-    { 'name': 'Social media marketing ', 'department': 'IT communication' },
-    { 'name': 'Web Developer', 'department': 'IT communication' },
-    { 'name': 'Engineer ', 'department': 'IT communication' },
-    { 'name': 'Software Developer ', 'department': 'IT communication' },
-    { 'name': 'Web Developer', 'department': 'IT communication' },
+    const data = [
+        {'name': 'Social media marketing ', 'department': 'IT communication'},
+        {'name': 'Web Developer', 'department': 'IT communication'},
+        {'name': 'Engineer ', 'department': 'IT communication'},
+        {'name': 'Software Developer ', 'department': 'IT communication'},
+        {'name': 'Web Developer', 'department': 'IT communication'},
 
-  ]
+    ]
 
 
-  return (
-    <View style={{ flex: 1 }}>
-      <Modal visible={visible} animationType={"fade"} transparent={true}>
-        <View onTouchStart={() => toggleVisibility()} style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.6)' }}>
-          <View style={{ width: '100%', maxWidth: 300, margin: 48, elevation: 24, borderRadius: 15, backgroundColor: '#fff', opacity: 1, padding: 20 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center' }}>Menu</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto' }} source={require('../assets/close.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 10 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Profile</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Applied Jobs</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Saved Jobs</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>History</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Privacy Policy</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Terms & Conditions</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Share</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Rate</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Contact</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#13A3E1', padding: 15, borderRadius: 10, marginTop: 4 }}>
-              <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Sign Out</Text>
-              <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }} source={require('../assets/arrowRight.png')} />
-            </View>
-          </View>
-        </View>
-      </Modal>
-      <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
-        <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
-          <View style={{ flexDirection: 'row', height: 130 }}>
-            <Pressable onPress={() => toggleVisibility()}><Image style={{
-              width: 22,
-              height: 20,
-              marginTop: 70,
-              marginLeft: 30,
-              marginBottom: 250,
-              tintColor: '#fff'
-            }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
-            <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-              <Pressable onPress={() => navigation.push('JobPosted')}><Image style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
-                source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
-            </View>
-          </View>
-          <Text style={{ textAlign: "center", color: 'white', marginTop: -10, marginBottom: 10, fontSize: 20, }}>Provider</Text>
-          <Text style={{ color: '#fff', fontSize: 23, fontWeight: '500', width: '100%', textAlign: 'center' }}>Good
-            Morning!</Text>
-
-        </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', marginTop: 30 }}>
-          <Pressable onPress={() => navigation.push('AppliedUsers')}>
-            <View style={{ backgroundColor: '#F0A51E', paddingHorizontal: 35, paddingVertical: 20, borderRadius: 20 }}>
-              <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center" }}>Applid </Text>
-              <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center", marginTop: -5, marginLeft: -4 }}>Users</Text>
-            </View>
-          </Pressable>
-          <View style={{ backgroundColor: '#F0A51E', paddingHorizontal: 45, paddingVertical: 20, borderRadius: 20 }}>
-            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center" }}>Sent </Text>
-            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'poppins_medium', textAlign: "center", marginTop: -5, marginLeft: -4 }}>Offers</Text>
-          </View>
-        </View>
-        <View style={{ backgroundColor: '#a6d6ec', paddingVertical: 20, marginTop: 20, marginHorizontal: 30, borderRadius: 20 }}>
-          <Text style={{ textAlign: 'center', color: '#0D25B2', fontSize: 20, fontFamily: 'poppins_bold' }}>  Post job</Text>
-          <Text style={{ textAlign: 'center', fontSize: 14, fontFamily: 'poppins_medium', }}>You can see reports about your </Text>
-          <Text style={{ textAlign: 'center', fontSize: 14, fontFamily: 'poppins_medium', }}>job posts and detailed data  on your Portal</Text>
-          <Text style={{ textAlign: 'center', color: 'white', fontSize: 20, fontFamily: 'poppins_bold', paddingVertical: 10 }}>Post Jobs using your portal</Text>
-          <View style={{ paddingHorizontal: 60 }}>
-            <Text style={{ textAlign: 'center', backgroundColor: 'white', paddingVertical: 8, borderRadius: 20, color: '#0038FF', fontSize: 14, fontFamily: 'poppins_medium' }}>https://www.example.com</Text>
-          </View>
-          <Text style={{ textAlign: 'center', color: '#4E4E4E', fontSize: 13, fontFamily: 'poppins_medium', marginTop: 10 }}>Login to your portal using app credentials </Text>
-          <Text style={{ textAlign: 'center', color: '#4E4E4E', fontSize: 13, fontFamily: 'poppins_medium', }}>(email and password)</Text>
-
-        </View>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 47, marginTop: 30 }}>
-          <Text style={{ fontSize: 17, fontFamily: 'poppins_bold' }}>posted jobs</Text>
-          <Text style={{ backgroundColor: '#CBCBCB', paddingHorizontal: 16, paddingVertical: 6, fontSize: 13, fontFamily: 'poppins_medium', borderRadius: 20, color: 'rgba(0, 0, 0, 0.81)' }}>Show All</Text>
-        </View>
-        <SafeAreaView style={{ flex: 1 }}>
-          <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-            style={{ marginHorizontal: 30, marginTop: 10 }} data={companyJobs} renderItem={({ item }) => (
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  margin: 5,
-                  backgroundColor: '#fff',
-                  borderColor: '#c2c2c2',
-                  borderWidth: 1,
-                  height: 50,
-                  borderRadius: 25,
-                  elevation: 5,
-                  alignItems: 'center',
-                  paddingHorizontal: 20
+    return (
+        <View style={{flex: 1}}>
+            <Modal visible={visible} animationType={"fade"} transparent={true}>
+                <View onTouchStart={() => toggleVisibility()} style={{
+                    flex: 1,
+                    alignContent: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: 'rgba(0,0,0,0.6)'
                 }}>
-                <Text ellipsizeMode={'tail'} numberOfLines={1}
-                  style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.title}</Text>
-                <Text numberOfLines={1} style={{
-                  fontFamily: 'poppins_light',
-                  fontSize: 9,
-                  marginLeft: 'auto',
-                  width: 110
-                }}>{item.qualification}</Text>
-              </View>
-            )}
-          />
-        </SafeAreaView>
+                    <View style={{
+                        width: '100%',
+                        maxWidth: 300,
+                        margin: 48,
+                        elevation: 24,
+                        borderRadius: 15,
+                        backgroundColor: '#fff',
+                        opacity: 1,
+                        padding: 20
+                    }}>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text
+                                style={{width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center'}}>Menu</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto'}}
+                                   source={require('../assets/close.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 10
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Profile</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 4
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Applied
+                                Jobs</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 4
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Saved
+                                Jobs</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 4
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>History</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 4
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Privacy
+                                Policy</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 4
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Terms &
+                                Conditions</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 4
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Share</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 4
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Rate</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 4
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Contact</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            backgroundColor: '#13A3E1',
+                            padding: 15,
+                            borderRadius: 10,
+                            marginTop: 4
+                        }}>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Sign Out</Text>
+                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
+                                   source={require('../assets/arrowRight.png')}/>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+            <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75}}>
+                <View style={{flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1'}}>
+                    <View style={{flexDirection: 'row', height: 130}}>
+                        <Pressable onPress={() => toggleVisibility()}><Image style={{
+                            width: 22,
+                            height: 20,
+                            marginTop: 70,
+                            marginLeft: 30,
+                            marginBottom: 250,
+                            tintColor: '#fff'
+                        }} source={require('../assets/menu.png')} alt={'Okay'}/></Pressable>
+                        <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                            <Pressable onPress={() => navigation.push('JobPosted')}><Image
+                                style={{width: 200, height: 40, marginTop: 60, alignSelf: 'center'}}
+                                source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
+                        </View>
+                    </View>
+                    <Text style={{
+                        textAlign: "center",
+                        color: 'white',
+                        marginTop: -10,
+                        marginBottom: 10,
+                        fontSize: 20,
+                    }}>Provider</Text>
+                    <Text style={{color: '#fff', fontSize: 23, fontWeight: '500', width: '100%', textAlign: 'center'}}>Good
+                        Morning!</Text>
+
+                </View>
+                <View style={{flexDirection: 'row', flex: 1, marginTop: 30}}>
+                    <Pressable onPress={() => navigation.push('AppliedUsers')} style={{
+                        flex: 0.5,
+                        backgroundColor: '#F0A51E',
+                        paddingHorizontal: 35,
+                        paddingVertical: 20,
+                        borderRadius: 20,
+                        marginLeft: 30,
+                        marginRight: 5
+                    }}>
+                        <Text style={{
+                            color: 'white',
+                            fontSize: 20,
+                            fontFamily: 'poppins_medium',
+                            textAlign: "center"
+                        }}>Applied</Text>
+                        <Text style={{
+                            color: 'white',
+                            fontSize: 20,
+                            fontFamily: 'poppins_medium',
+                            textAlign: "center",
+                            marginTop: -5,
+                            marginLeft: -4
+                        }}>Users</Text>
+                    </Pressable>
+                    <Pressable onPress={() => navigation.push('AppliedUsers')} style={{
+                        flex: 0.5,
+                        backgroundColor: '#F0A51E',
+                        paddingHorizontal: 45,
+                        paddingVertical: 20,
+                        borderRadius: 20,
+                        marginRight: 30,
+                        marginLeft: 5
+                    }}>
+                        <Text style={{
+                            color: 'white',
+                            fontSize: 20,
+                            fontFamily: 'poppins_medium',
+                            textAlign: "center"
+                        }}>Sent </Text>
+                        <Text style={{
+                            color: 'white',
+                            fontSize: 20,
+                            fontFamily: 'poppins_medium',
+                            textAlign: "center",
+                            marginTop: -5,
+                            marginLeft: -4
+                        }}>Offers</Text>
+                    </Pressable>
+                </View>
+                <View style={{
+                    backgroundColor: '#a6d6ec',
+                    paddingVertical: 20,
+                    paddingHorizontal: 10,
+                    marginTop: 20,
+                    marginHorizontal: 30,
+                    borderRadius: 20
+                }}>
+                    <Text
+                        style={{textAlign: 'center', color: '#0D25B2', fontSize: 20, fontFamily: 'poppins_bold'}}> Post
+                        job</Text>
+                    <Text style={{textAlign: 'center', fontSize: 14, fontFamily: 'poppins_medium',}}>You can see reports
+                        about your </Text>
+                    <Text style={{textAlign: 'center', fontSize: 14, fontFamily: 'poppins_medium',}}>job posts and
+                        detailed data on your Portal</Text>
+                    <Text style={{
+                        textAlign: 'center',
+                        color: 'white',
+                        fontSize: 20,
+                        fontFamily: 'poppins_bold',
+                        paddingVertical: 10
+                    }}>Post Jobs using your portal</Text>
+                    <View style={{paddingHorizontal: 60}}>
+                        <Text style={{
+                            textAlign: 'center',
+                            backgroundColor: 'white',
+                            paddingVertical: 8,
+                            borderRadius: 20,
+                            color: '#0038FF',
+                            fontSize: 12,
+                            fontFamily: 'poppins_medium'
+                        }}>https://www.example.com</Text>
+                    </View>
+                    <Text style={{
+                        textAlign: 'center',
+                        color: '#4E4E4E',
+                        fontSize: 13,
+                        fontFamily: 'poppins_medium',
+                        marginTop: 10
+                    }}>Login to your portal using app credentials </Text>
+                    <Text style={{textAlign: 'center', color: '#4E4E4E', fontSize: 13, fontFamily: 'poppins_medium',}}>(email
+                        and password)</Text>
+
+                </View>
+                <View style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginHorizontal: 47,
+                    marginTop: 30
+                }}>
+                    <Text style={{fontSize: 17, fontFamily: 'poppins_bold'}}>Posted Jobs</Text>
+                    <Text style={{
+                        backgroundColor: '#CBCBCB',
+                        paddingHorizontal: 16,
+                        paddingVertical: 6,
+                        fontSize: 13,
+                        fontFamily: 'poppins_medium',
+                        borderRadius: 20,
+                        color: 'rgba(0, 0, 0, 0.81)'
+                    }}>Show All</Text>
+                </View>
+                <SafeAreaView style={{flex: 1}}>
+                    <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                              style={{marginHorizontal: 30, marginTop: 10}} data={companyJobs} renderItem={({item}) => (
+                        <View
+                            style={{
+                                flex: 1,
+                                flexDirection: 'row',
+                                margin: 5,
+                                backgroundColor: '#fff',
+                                borderColor: '#c2c2c2',
+                                borderWidth: 1,
+                                height: 50,
+                                borderRadius: 25,
+                                elevation: 5,
+                                alignItems: 'center',
+                                paddingHorizontal: 20
+                            }}>
+                            <Text ellipsizeMode={'tail'} numberOfLines={1}
+                                  style={{width: '60%', fontFamily: 'poppins_bold', fontSize: 12}}>{item.title}</Text>
+                            <Text numberOfLines={1} style={{
+                                fontFamily: 'poppins_light',
+                                fontSize: 9,
+                                marginLeft: 'auto',
+                                width: 110
+                            }}>{item.qualification}</Text>
+                        </View>
+                    )}
+                    />
+                </SafeAreaView>
 
 
-        <View style={{ height: 90 }} />
-      </ScrollView>
+                <View style={{height: 90}}/>
+            </ScrollView>
 
-    </View>
-  )
+        </View>
+    )
 }
 
 export default PostJob
