@@ -50,15 +50,15 @@ const JobDetails = ({route, navigation}) => {
         }
     }, [job]);
 
-    const ApplyJob = (proposal) => {
+    const ApplyJob = (intro, body) => {
         const date = moment().format("YYYY-MM-DD")
-        console.log(date)
-        applyJob(job.id, USERID, date, proposal).then(res => {
-            const {data: {data}} = res;
-            if (data.affectedRows === 1) {
-                setApplied(data.insertId)
-            }
-        })
+        navigation.push('CoverLetter', { role: job?.role, intro: intro, body: body })
+        // applyJob(job.id, USERID, date, body).then(res => {
+        //     const {data: {data}} = res;
+        //     if (data.affectedRows === 1) {
+        //         setApplied(data.insertId)
+        //     }
+        // })
     }
 
     const BookmarkJob = () => {

@@ -1,8 +1,11 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Image, Pressable, Text, View } from 'react-native'
 import { FlatList, GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import moment from "moment/moment";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {CVByUser} from "../API/actions/cvActions";
 
 const data = [
 	{ 'data': 'Enhanced domestic helicopter transfer sales by 60% in 2018/2019 via business-to-business concept ' },
@@ -11,8 +14,34 @@ const data = [
 ]
 
 
-const CoverLetter = ({navigation}) => {
+const CoverLetter = ({ route, navigation}) => {
+
+	const { role } = route.params;
+	const { intro } = route.params;
+	const { body } = route.params;
+
+	const dispatch = useDispatch();
+
 	const cv = useSelector((state) => state.cv.cv);
+	const date = moment().format("DD MMM YYYY")
+
+	const [ID, setID] = useState()
+
+	useEffect(() => {
+		GetData();
+	}, []);
+
+	const GetData = async () => {
+		const value = await AsyncStorage.getItem('ID');
+		setID(value);
+	};
+
+	useEffect(() => {
+		if (ID) {
+			dispatch(CVByUser(ID));
+		}
+	}, [dispatch, ID]);
+
 	return (
 		<GestureHandlerRootView style={{ paddingBottom: 40 }}>
 			<ScrollView>
@@ -43,25 +72,18 @@ const CoverLetter = ({navigation}) => {
 				</View>
 				<Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, marginHorizontal: 20 }}>-</Text>
 				<View>
-					<Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>5 May 2019</Text>
-					<Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Name of employer or advertiser</Text>
+					<Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>{date}</Text>
+					<Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>{cv?.name}</Text>
 				</View>
-				<Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: SALES AND MARKETING COORDINATOR / ACCOUNT MANAGER roles</Text>
-				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>I wish to express interest in sales and marketing coordinator or account manager roles with your organisation</Text>
-				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>My resume/CV is supplied.</Text>
-				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>I have more than ten years’ experience in sales, marketing, strategy development and customer care. </Text>
-				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>My most recent roles include business development executive, customer and key accounts manager, and head of sales. I have
-					considerable experience in the telecommunication, FMCG, banking and finance, IT and aviation sectors. I have demonstrated
-					to employers that I am a strong team player with good personal skills. I am enthusiastic and have a positive attitude towards
-					challenges in business.  </Text>
-				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>I bring exceptional ability in customer care, and have the ability to deliver sales strategies and marketing training including sales
-					planning & implementations. For example, in the role </Text>
+				<Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: {role}</Text>
+				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{intro}</Text>
+				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{body}</Text>
 				<GestureHandlerRootView style={{ backgroundColor: '#D3D3D3', marginHorizontal: 40, marginVertical: 10, paddingBottom: 20, }}>
 					<SafeAreaView>
 						<FlatList scrollEnabled={false} nestedScrollEnabled={true}
-							data={data} renderItem={({ item }) => (
+							data={cv?.careers} renderItem={({ item }) => (
 								<Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', flex: 1, paddingVertical: 2, color: 'black', marginLeft: 20 }}>
-									{`\u2022 ${item.data}`}
+									{`\u2022 I was working as a ${item.job} in ${item.company} from ${item.timeperiod}`}
 								</Text>
 							)} />
 					</SafeAreaView>
