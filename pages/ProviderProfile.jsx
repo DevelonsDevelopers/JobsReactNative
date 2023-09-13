@@ -20,6 +20,7 @@ const ProviderProfile = ({navigation}) => {
     const cities = useSelector(state => state.city.cities)
     const countries = useSelector(state => state.country.countries)
 
+    
     useEffect(() => {
         if (!cities) {
             dispatch(AllCities())
