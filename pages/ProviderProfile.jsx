@@ -105,25 +105,7 @@ const ProviderProfile = ({navigation}) => {
                     color: '#626262',
                     elevation: 10
                 }} placeholder={'Enter your Phone'}/>
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    marginTop: 15,
-                    backgroundColor: '#fff',
-                    elevation: 10,
-                    borderRadius: 25,
-                    width: '85%',
-                    paddingRight: 20
-                }}>
-                    <TextInput style={{
-                        height: 50,
-                        paddingHorizontal: 20,
-                        color: '#626262',
-                        flex: 1
-                    }} placeholder={'Enter your Address'}/>
-                    <Pressable style={{marginLeft: 'auto'}}><Image style={{width: 25, height: 25}}/></Pressable>
-
-                </View>
+              
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
