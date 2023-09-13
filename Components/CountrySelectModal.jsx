@@ -23,7 +23,7 @@ const CountrySelectModal = ({ visible, click, list, toggleVisibility }) => {
                           textAlign: 'center',
                           color: '#13A3E1'
                       }}>Select</Text>
-                      <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
+                      <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto',padding:10}}><Image
                           style={{width: 15, height: 15, marginLeft: 'auto'}}
                           source={require('../assets/close.png')}/></Pressable>
                   </View>
