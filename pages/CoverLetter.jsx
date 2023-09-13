@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, Pressable, Text, View } from 'react-native'
 import { FlatList, GestureHandlerRootView, ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from "moment/moment";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {CVByUser} from "../API/actions/cvActions";
+import { CVByUser } from "../API/actions/cvActions";
 
 const data = [
 	{ 'data': 'Enhanced domestic helicopter transfer sales by 60% in 2018/2019 via business-to-business concept ' },
@@ -14,7 +14,7 @@ const data = [
 ]
 
 
-const CoverLetter = ({ route, navigation}) => {
+const CoverLetter = ({ route, navigation }) => {
 
 	const { role } = route.params;
 	const { intro } = route.params;
@@ -88,11 +88,20 @@ const CoverLetter = ({ route, navigation}) => {
 							)} />
 					</SafeAreaView>
 				</GestureHandlerRootView>
-				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 3, marginHorizontal: 30 }}>I hold a Bachelor of Business Administration (Marketing and Social Science) degree completed at the University of Aldersgate in
-					the United Kingdom in March 2016</Text>
-				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>I am available at short notice to attend an interview, and I look forward to hearing further on my application. </Text>
-				<Text style={{ fontSize: 12, fontFamily: 'poppins_medium', marginTop: 11, marginHorizontal: 30 }}>Sincerly</Text>
-				<Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 10, marginHorizontal: 30, marginLeft: 'auto' }}>Shankar Doe</Text>
+				<GestureHandlerRootView style={{ paddingBottom: 20, }}>
+					<SafeAreaView>
+						<FlatList scrollEnabled={false} nestedScrollEnabled={true}
+							data={cv?.educations} renderItem={({ item }) => (
+								<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 3, marginHorizontal: 30 }}>I hold a {item.qualification}  degree completed in {item.institute} at {item.timeperiod}</Text>
+							)} />
+					</SafeAreaView>
+				</GestureHandlerRootView>
+				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: -3, marginHorizontal: 30 }}>I am available at short notice to attend an interview, and I look forward to hearing further on my application. </Text>
+				<Text style={{ fontSize: 12, fontFamily: 'poppins_medium', marginTop: 11, marginHorizontal: 30 }}>Your's Sincerly</Text>
+				<Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 10, marginHorizontal: 30, marginLeft: 'auto' }}>{cv?.name}</Text>
+				<View style={{ marginHorizontal:120,paddingVertical:20 }}>
+					<Text style={{ backgroundColor:'#13A3E1',color:'white',fontSize:16,fontFamily:'poppins_medium',textAlign:'center',paddingVertical:4,borderRadius:10 }}>Confirm</Text>
+				</View>
 			</ScrollView>
 		</GestureHandlerRootView>
 	)
