@@ -197,8 +197,7 @@ function Login({route, navigation}) {
                         alignItems: 'center',
                         marginHorizontal: 100
                     }}>
-                        <Text style={{paddingBottom: 16, fontSize: 14, fontFamily: 'poppins_medium'}}>Please Wait
-                            ...</Text>
+                        <Text style={{paddingBottom: 16, fontSize: 14, fontFamily: 'poppins_medium'}}>Please Wait ...</Text>
                         <ActivityIndicator size={60} color="#13A3E1"/>
                     </View>
                 </View>

@@ -30,6 +30,9 @@ const ApplyModal = ({visible, toggleVisible, apply}) => {
                     alignItems: 'center',
                     height: 500
                 }}>
+                     <Pressable style={{ width: 15, height: 15, marginLeft: 'auto' }} onPress={() => toggleVisible()}>
+                        <Image style={{ width: 15, height: 15, marginLeft: 'auto' }} source={require('../assets/close.png')} />
+                    </Pressable>
                     <Text style={{fontSize: 16, fontFamily: 'poppins_bold', marginBottom: 'auto', marginTop: 'auto'}}>Proposal</Text>
                     <TextInput onChangeText={text => setProposal(text)} multiline numberOfLines={17} placeholder={'Proposal'} style={{
                         width: '100%',

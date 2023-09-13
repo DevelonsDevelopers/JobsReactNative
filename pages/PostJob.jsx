@@ -4,6 +4,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {AllCategories} from "../API/actions/categoryActions";
 import {CompanyJobs} from "../API/actions/jobActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Ripple from "react-native-material-ripple";
+import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
 
 function PostJob({navigation}) {
 
@@ -52,12 +54,25 @@ function PostJob({navigation}) {
         {'name': 'Web Developer', 'department': 'IT communication'},
 
     ]
-
+    const Logout = async () => {
+        await AsyncStorage.setItem("LOGIN", 'false')
+        await AsyncStorage.setItem("ID", '')
+        await AsyncStorage.setItem("USER", '')
+        await AsyncStorage.setItem("NAME", '')
+        await AsyncStorage.setItem("EMAIL", '')
+        navigation.popToTop()
+        navigation.push('UserType')
+        toggleLoadingVisibility()
+    }
+   // log out===================
+   const [loadingVisible, setLoadingVisible] = useState(false)
+   const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
 
     return (
         <View style={{flex: 1}}>
+            <LogoutConfirmationModal  toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
             <Modal visible={visible} animationType={"fade"} transparent={true}>
-                <View onTouchStart={() => toggleVisibility()} style={{
+                <View style={{
                     flex: 1,
                     alignContent: 'center',
                     justifyContent: 'center',
@@ -73,12 +88,16 @@ function PostJob({navigation}) {
                         opacity: 1,
                         padding: 20
                     }}>
-                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+
+                        <Pressable onPress={() => toggleVisibility()} style={{flexDirection: 'row', alignItems: 'center'}}>
                             <Text
                                 style={{width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center'}}>Menu</Text>
-                            <Image style={{width: 15, height: 15, marginLeft: 'auto'}}
+                                <View style={{ padding:20,marginLeft: 'auto', }}>
+                            <Image style={{width: 15, height: 15, }}
                                    source={require('../assets/close.png')}/>
-                        </View>
+                                   </View>
+                        </Pressable>
+<Pressable onPress={() => navigation.push('ProviderProfileInfo')}>
                         <View style={{
                             flexDirection: 'row',
                             alignItems: 'center',
@@ -91,6 +110,7 @@ function PostJob({navigation}) {
                             <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
                                    source={require('../assets/arrowRight.png')}/>
                         </View>
+                        </Pressable>
                         <View style={{
                             flexDirection: 'row',
                             alignItems: 'center',
@@ -100,7 +120,7 @@ function PostJob({navigation}) {
                             marginTop: 4
                         }}>
                             <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Applied
-                                Jobs</Text>
+                                Users</Text>
                             <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
                                    source={require('../assets/arrowRight.png')}/>
                         </View>
@@ -112,74 +132,14 @@ function PostJob({navigation}) {
                             borderRadius: 10,
                             marginTop: 4
                         }}>
-                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Saved
-                                Jobs</Text>
+                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Offer Send</Text>
                             <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
                                    source={require('../assets/arrowRight.png')}/>
                         </View>
-                        <View style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            backgroundColor: '#13A3E1',
-                            padding: 15,
-                            borderRadius: 10,
-                            marginTop: 4
-                        }}>
-                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>History</Text>
-                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
-                                   source={require('../assets/arrowRight.png')}/>
-                        </View>
-                        <View style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            backgroundColor: '#13A3E1',
-                            padding: 15,
-                            borderRadius: 10,
-                            marginTop: 4
-                        }}>
-                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Privacy
-                                Policy</Text>
-                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
-                                   source={require('../assets/arrowRight.png')}/>
-                        </View>
-                        <View style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            backgroundColor: '#13A3E1',
-                            padding: 15,
-                            borderRadius: 10,
-                            marginTop: 4
-                        }}>
-                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Terms &
-                                Conditions</Text>
-                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
-                                   source={require('../assets/arrowRight.png')}/>
-                        </View>
-                        <View style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            backgroundColor: '#13A3E1',
-                            padding: 15,
-                            borderRadius: 10,
-                            marginTop: 4
-                        }}>
-                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Share</Text>
-                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
-                                   source={require('../assets/arrowRight.png')}/>
-                        </View>
-                        <View style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            backgroundColor: '#13A3E1',
-                            padding: 15,
-                            borderRadius: 10,
-                            marginTop: 4
-                        }}>
-                            <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Rate</Text>
-                            <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
-                                   source={require('../assets/arrowRight.png')}/>
-                        </View>
-                        <View style={{
+                    
+                  
+                        <Ripple rippleColor="#01579B" rippleOpacity={0.5} rippleDuration={800} rippleSize={500} 
+                        style={{
                             flexDirection: 'row',
                             alignItems: 'center',
                             backgroundColor: '#13A3E1',
@@ -190,8 +150,9 @@ function PostJob({navigation}) {
                             <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Contact</Text>
                             <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
                                    source={require('../assets/arrowRight.png')}/>
-                        </View>
-                        <View style={{
+                        </Ripple>
+                        <Ripple rippleColor="#01579B" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
+                         onPress={ async () => toggleLoadingVisibility()} style={{
                             flexDirection: 'row',
                             alignItems: 'center',
                             backgroundColor: '#13A3E1',
@@ -199,13 +160,16 @@ function PostJob({navigation}) {
                             borderRadius: 10,
                             marginTop: 4
                         }}>
+                        
                             <Text style={{width: '100%', fontFamily: 'poppins_semibold', color: '#fff'}}>Sign Out</Text>
                             <Image style={{width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff'}}
                                    source={require('../assets/arrowRight.png')}/>
-                        </View>
+                        
+                                   </Ripple>
                     </View>
                 </View>
             </Modal>
+
             <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75}}>
                 <View style={{flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1'}}>
                     <View style={{flexDirection: 'row', height: 130}}>
@@ -235,7 +199,8 @@ function PostJob({navigation}) {
 
                 </View>
                 <View style={{flexDirection: 'row', flex: 1, marginTop: 30}}>
-                    <Pressable onPress={() => navigation.push('AppliedUsers')} style={{
+                    <Ripple  rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
+                    onPress={() => navigation.push('AppliedUsers')} style={{
                         flex: 0.5,
                         backgroundColor: '#F0A51E',
                         paddingHorizontal: 35,
@@ -258,8 +223,9 @@ function PostJob({navigation}) {
                             marginTop: -5,
                             marginLeft: -4
                         }}>Users</Text>
-                    </Pressable>
-                    <Pressable onPress={() => navigation.push('AppliedUsers')} style={{
+                    </Ripple>
+                    <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
+                    onPress={() => navigation.push('AppliedUsers')} style={{
                         flex: 0.5,
                         backgroundColor: '#F0A51E',
                         paddingHorizontal: 45,
@@ -282,7 +248,7 @@ function PostJob({navigation}) {
                             marginTop: -5,
                             marginLeft: -4
                         }}>Offers</Text>
-                    </Pressable>
+                    </Ripple>
                 </View>
                 <View style={{
                     backgroundColor: '#a6d6ec',
