@@ -1,17 +1,17 @@
-import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator} from "react-native";
-import React, {useEffect, useState} from 'react'
-import {View} from 'react-native'
-import {useDispatch, useSelector} from "react-redux";
-import {JobByID} from "../API/actions/jobActions";
+import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
+import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
+import { useDispatch, useSelector } from "react-redux";
+import { JobByID } from "../API/actions/jobActions";
 import moment from "moment";
-import {BOOKMARK_JOB, RESET} from "../Utils/Constants";
-import {applyJob, bookmarkJob, removeBookmark} from "../API";
+import { BOOKMARK_JOB, RESET } from "../Utils/Constants";
+import { applyJob, bookmarkJob, removeBookmark } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ApplyModal from "../Components/ApplyModal";
 
-const JobDetails = ({route, navigation}) => {
+const JobDetails = ({ route, navigation }) => {
 
-    const {ID} = route.params
+    const { ID } = route.params
 
     const job = useSelector(state => state.job.job)
     const loading = useSelector(state => state.job.isLoading)
@@ -39,7 +39,7 @@ const JobDetails = ({route, navigation}) => {
     useEffect(() => {
         if (success) {
             setIsLoading(false)
-            dispatch({type: RESET})
+            dispatch({ type: RESET })
         }
     }, [success]);
 
@@ -63,48 +63,45 @@ const JobDetails = ({route, navigation}) => {
 
     const BookmarkJob = () => {
         bookmarkJob(job.id, USERID).then(res => {
-            const {data: {data}} = res;
+            const { data: { data } } = res;
             if (data.affectedRows === 1) {
                 setBookmark(data.insertId)
-                dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: data.insertId}})
+                dispatch({ type: BOOKMARK_JOB, payload: { job: job.id, bookmark: data.insertId } })
             }
         })
     }
 
     const RemoveBookmark = () => {
         removeBookmark(bookmark).then(res => {
-            const {data: {data}} = res;
+            const { data: { data } } = res;
             if (data.affectedRows === 1) {
                 setBookmark(0)
-                dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: 0}})
+                dispatch({ type: BOOKMARK_JOB, payload: { job: job.id, bookmark: 0 } })
             }
         })
     }
 
-// Apply Modal ============
-const [applyVisible,setApplyVisible] = useState(false)
-const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
-
-
-
+    // Apply Modal ============
+    const [applyVisible, setApplyVisible] = useState(false)
+    const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
 
 
     return (
-        <ScrollView style={{backgroundColor: '#F1F1F1'}}>
-            <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob}/>
-            <View style={{backgroundColor: '#EAEAEA'}}>
-                <View style={{flexDirection: 'row', height: 90}}>
-                    <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
+        <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
+            <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
+            <View style={{ backgroundColor: '#EAEAEA' }}>
+                <View style={{ flexDirection: 'row', height: 90 }}>
+                    <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
                         width: 22,
                         height: 20,
                         marginTop: 70,
                         marginLeft: 30,
                         tintColor: '#000'
-                    }} source={require('../assets/back_arrow.png')} alt={''}/></Pressable>
-                    <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                    }} source={require('../assets/back_arrow.png')} alt={''} /></Pressable>
+                    <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
                         <Pressable onPress={() => null}><Image
-                            style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
-                            source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
+                            style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+                            source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                     </View>
                 </View>
                 <View>
@@ -119,10 +116,10 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                     }}>{job?.title}</Text>
                 </View>
                 {isloading ?
-                    <View style={{marginTop: 300}}>
-                        <ActivityIndicator size={60} color="#13A3E1"/></View>
+                    <View style={{ marginTop: 300 }}>
+                        <ActivityIndicator size={60} color="#13A3E1" /></View>
                     : <>
-                        <SafeAreaView style={{marginTop: 30}}>
+                        <SafeAreaView style={{ marginTop: 30 }}>
 
 
                             <View style={{
@@ -136,7 +133,7 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                 flexDirection: "column",
                                 backgroundColor: '#fff'
                             }}>
-                                <View style={{flexDirection: 'row', flex: 1}}>
+                                <View style={{ flexDirection: 'row', flex: 1 }}>
                                     <Text style={{
 
                                         paddingHorizontal: 10,
@@ -154,7 +151,7 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                         marginRight: 25
                                     }}>{moment(job?.date).fromNow()}</Text>
                                 </View>
-                                <View style={{paddingHorizontal: 100,}}>
+                                <View style={{ paddingHorizontal: 100, }}>
                                     <Text style={{
                                         fontFamily: 'poppins_medium',
                                         fontSize: 15,
@@ -164,14 +161,14 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                         color: "white",
                                         borderRadius: 20,
                                         margin: 'auto',
-                                        paddingTop:5,
-                                        paddingBottom:2,
+                                        paddingTop: 5,
+                                        paddingBottom: 2,
                                     }}>
                                         Salary {job?.salary}
                                     </Text>
                                 </View>
-                                <View style={{flex: 1, flexDirection: 'row'}}>
-                                    <View style={{flex: 1}}>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}>
                                         <Text numberOfLines={1} style={{
                                             fontFamily: 'poppins_bold',
                                             marginTop: 15,
@@ -202,8 +199,8 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                         borderTopRightRadius: 40,
                                         borderBottomRightRadius: 40
                                     }}>
-                                        <View style={{flexDirection: 'column'}}>
-                                            <View style={{paddingHorizontal: 10}}>
+                                        <View style={{ flexDirection: 'column' }}>
+                                            <View style={{ paddingHorizontal: 10 }}>
                                                 <Text style={{
                                                     color: 'white',
                                                     backgroundColor: '#13a3e1',
@@ -227,8 +224,8 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                             }}>{job?.worktime}</Text>
                                         </View>
                                     </View>
-                                    <View style={{flex: 0.6}}>
-                                        <View style={{flexDirection: 'column', paddingVertical: 25,}}>
+                                    <View style={{ flex: 0.6 }}>
+                                        <View style={{ flexDirection: 'column', paddingVertical: 25, }}>
                                             <Text style={{
                                                 textAlign: "center",
                                                 fontSize: 15,
@@ -279,7 +276,7 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                             textAlign: "center",
                                             paddingVertical: 10,
                                             borderRadius: 25,
-                                            paddingTop:13,
+                                            paddingTop: 13,
                                         }}>SAVE</Text></Pressable>
                                         :
                                         <Pressable onPress={() => RemoveBookmark()}><Text style={{
@@ -293,24 +290,24 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                             textAlign: "center",
                                             paddingVertical: 10,
                                             borderRadius: 25,
-                                            
+
                                         }}>SAVED</Text></Pressable>
                                     }
                                     {applied === 0 ?
                                         <Pressable onPress={() => toggleApplyVisibility()}>
                                             <Text style={{
-                                            justifyContent: 'center',
-                                            height: 50,
-                                            fontSize: 15,
-                                            fontFamily: 'poppins_bold',
-                                            backgroundColor: '#13A3E1',
-                                            color: 'white',
-                                            width: 150,
-                                            textAlign: "center",
-                                            paddingVertical: 10,
-                                            borderRadius: 25,
-                                            paddingTop:13,
-                                        }}>APPLY NOW</Text>
+                                                justifyContent: 'center',
+                                                height: 50,
+                                                fontSize: 15,
+                                                fontFamily: 'poppins_bold',
+                                                backgroundColor: '#13A3E1',
+                                                color: 'white',
+                                                width: 150,
+                                                textAlign: "center",
+                                                paddingVertical: 10,
+                                                borderRadius: 25,
+                                                paddingTop: 13,
+                                            }}>APPLY NOW</Text>
                                         </Pressable>
                                         : <Text style={{
                                             justifyContent: 'center',
