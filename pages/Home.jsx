@@ -8,6 +8,7 @@ import NavigationDrawer from "../Components/NavigationDrawer";
 import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
 import { RESET } from "../Utils/Constants";
 import Ripple from "react-native-material-ripple";
+import LoginRequireModal from "../Components/LoginRequireModal";
 
 function Home({ navigation }) {
 
@@ -84,6 +85,8 @@ function Home({ navigation }) {
     const [loadingVisible, setLoadingVisible] = useState(false)
     const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
 
+    const [requireVisible, setRequireVisible] = useState(false)
+    const toggleRequireVisible = () => setRequireVisible(!requireVisible)
     return (
         <View style={{ flex: 1 }}>
             {isloading ?
@@ -94,7 +97,7 @@ function Home({ navigation }) {
                 <>
                     <NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={login} toggleLoadingVisibility={toggleLoadingVisibility} />
                     <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
-
+                    <LoginRequireModal visible={requireVisible} toggleRequireVisible={toggleRequireVisible} />
                     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled">
                         <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                             <View style={{ flexDirection: 'row', height: 130 }}>
@@ -134,22 +137,22 @@ function Home({ navigation }) {
 
                         {login ?
                             <Ripple rippleColor="#F0A51E" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
-                             onPress={() => navigation.push('Recommendedjobs')} aria-hidden={true} style={{
-                                backgroundColor: '#F0A51E',
-                                borderRadius: 25,
-                                height: 100,
-                                padding: 15,
-                                marginTop: 15,
-                                marginHorizontal: 25,
-                                alignItems: 'center',
-                                flexDirection: 'row'
-                            }}><Text style={{
-                                color: '#000',
-                                fontFamily: 'poppins_medium',
-                                fontSize: 18,
-                                width: 170,
-                                textAlign: 'center'
-                            }}>Recommended Jobs</Text>
+                                onPress={() => navigation.push('Recommendedjobs')} aria-hidden={true} style={{
+                                    backgroundColor: '#F0A51E',
+                                    borderRadius: 25,
+                                    height: 100,
+                                    padding: 15,
+                                    marginTop: 15,
+                                    marginHorizontal: 25,
+                                    alignItems: 'center',
+                                    flexDirection: 'row'
+                                }}><Text style={{
+                                    color: '#000',
+                                    fontFamily: 'poppins_medium',
+                                    fontSize: 18,
+                                    width: 170,
+                                    textAlign: 'center'
+                                }}>Recommended Jobs</Text>
                                 <Image style={{
                                     width: 70,
                                     height: 70,
@@ -180,15 +183,15 @@ function Home({ navigation }) {
                             <Text ellipsizeMode={'tail'} numberOfLines={1}
                                 style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Categories</Text>
                             <Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
-                             style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Categories')}><Text numberOfLines={1} style={{
-                                fontFamily: 'poppins_light',
-                                fontSize: 12,
-                                marginLeft: 'auto',
-                                backgroundColor: '#d7d7d7',
-                                paddingHorizontal: 10,
-                                paddingVertical: 1,
-                                borderRadius: 10
-                            }}>Show All</Text></Ripple>
+                                style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Categories')}><Text numberOfLines={1} style={{
+                                    fontFamily: 'poppins_light',
+                                    fontSize: 12,
+                                    marginLeft: 'auto',
+                                    backgroundColor: '#d7d7d7',
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 1,
+                                    borderRadius: 10
+                                }}>Show All</Text></Ripple>
                         </View>
                         <SafeAreaView style={{ flex: 1 }}>
                             {error ?
@@ -200,7 +203,7 @@ function Home({ navigation }) {
                                     style={{ marginHorizontal: 30, marginTop: 10 }} data={categories} renderItem={({ item }) => (
 
                                         <Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={200}
-                                         onPress={() => navigation.push('JobsByCategory', { CATID: item.id })}
+                                            onPress={() => navigation.push('JobsByCategory', { CATID: item.id })}
                                             style={{
                                                 flex: 1,
                                                 flexDirection: 'column',
@@ -235,16 +238,16 @@ function Home({ navigation }) {
                             }}>
                             <Text ellipsizeMode={'tail'} numberOfLines={1}
                                 style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Recent Jobs</Text>
-                            <Ripple  rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
-                             style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Jobs')}><Text numberOfLines={1} style={{
-                                fontFamily: 'poppins_light',
-                                fontSize: 12,
-                                marginLeft: 'auto',
-                                backgroundColor: '#d7d7d7',
-                                paddingHorizontal: 10,
-                                paddingVertical: 1,
-                                borderRadius: 10
-                            }}>Show All</Text></Ripple>
+                            <Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
+                                style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Jobs')}><Text numberOfLines={1} style={{
+                                    fontFamily: 'poppins_light',
+                                    fontSize: 12,
+                                    marginLeft: 'auto',
+                                    backgroundColor: '#d7d7d7',
+                                    paddingHorizontal: 10,
+                                    paddingVertical: 1,
+                                    borderRadius: 10
+                                }}>Show All</Text></Ripple>
                         </View>
                         {error ?
                             <View>
@@ -256,7 +259,7 @@ function Home({ navigation }) {
                                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                         style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
                                             <Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={300}
-                                             onPress={() => navigation.push('JobDetails', { ID: item.id })}
+                                                onPress={() => navigation.push('JobDetails', { ID: item.id })}
                                                 style={{
                                                     flex: 1,
                                                     flexDirection: 'row',
@@ -290,7 +293,7 @@ function Home({ navigation }) {
                             marginHorizontal: 35
                         }}>
                             <Ripple rippleColor="#13A3E1" rippleOpacity={0.3} rippleDuration={300} rippleSize={200}
-                             onPress={() => navigation.push('Cities')}
+                                onPress={() => navigation.push('Cities')}
                                 style={{
                                     flex: 0.5,
                                     flexDirection: 'column',
@@ -307,7 +310,7 @@ function Home({ navigation }) {
                                 <Text style={{ fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCities"}</Text>
                             </Ripple>
                             <Ripple rippleColor="#13A3E1" rippleOpacity={0.3} rippleDuration={300} rippleSize={200}
-                             onPress={() => navigation.push('Companies')}
+                                onPress={() => navigation.push('Companies')}
                                 style={{
                                     flex: 0.5,
                                     flexDirection: 'column',
@@ -336,14 +339,24 @@ function Home({ navigation }) {
                         marginBottom: 15,
                         paddingHorizontal: 20
                     }}>
-                        <Pressable onPress={() => navigation.push('AppliedSaved', {screen: 0})} style={{
-                            height: '100%',
-                            flex: 1,
-                            flexDirection: 'column',
-                            justifyContent: 'center',
+                        <Pressable
+                            onPress={() => {
+                                if (login) {
+                                    navigation.push('AppliedSaved', { screen: 0 })
+                                } else {
+                                    // navigation.push('Login', { USER: "SEEKER" })
+                                    toggleRequireVisible()
+                                }
+                            }}
+                            //  onPress={() => navigation.push('AppliedSaved', {screen: 0})}
+                            style={{
+                                height: '100%',
+                                flex: 1,
+                                flexDirection: 'column',
+                                justifyContent: 'center',
 
-                            marginLeft: -6,
-                        }} >
+                                marginLeft: -6,
+                            }} >
                             <View >
                                 <Image style={{
                                     width: 15,
@@ -356,13 +369,23 @@ function Home({ navigation }) {
                                     Jobs</Text>
                             </View>
                         </Pressable>
-                        <Pressable onPress={() => navigation.push('Resume')} style={{
-                            height: '100%',
-                            flex: 1,
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            marginLeft: -6,
-                        }}>
+                        <Pressable
+                            onPress={() => {
+                                if (login) {
+                                    navigation.push('Resume')
+                                } else {
+
+                                    toggleRequireVisible()
+                                }
+                            }}
+                            //  onPress={() => navigation.push('Resume')} 
+                            style={{
+                                height: '100%',
+                                flex: 1,
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                marginLeft: -6,
+                            }}>
                             <View >
                                 <Image style={{
                                     width: 25,
@@ -386,35 +409,46 @@ function Home({ navigation }) {
                                 tintColor: '#fff'
                             }} source={require('../assets/homeIcon.png')} alt={'Okay'} />
                             <Text numberOfLines={1}
-                                style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Home</Text>
+                                style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Offers</Text>
                             <View style={{ height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E', marginLeft: -4 }} />
                         </View>
-                        <Pressable onPress={() => navigation.push('Search', { query: '' })} style={{
-                            height: '100%',
-                            flex: 1,
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            marginLeft: -4,
-                        }}>
+                        <Pressable
+                            onPress={() => {
+                                if (login) {
+                                    navigation.push('History')
+                                } else {
+
+                                    toggleRequireVisible()
+                                }
+                            }}
+                            // onPress={() => navigation.push('History')}
+                            style={{
+                                height: '100%',
+                                flex: 1,
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                marginLeft: -4,
+                            }}>
                             <Image style={{
                                 width: 20,
                                 height: 20,
                                 tintColor: '#fff',
-                                marginLeft: 10
+                                marginLeft: 6
                             }} source={require('../assets/searchIcon.png')} alt={'Okay'} />
                             <Text numberOfLines={1} style={{
                                 fontFamily: 'poppins_medium',
                                 fontSize: 9,
                                 color: '#fff',
                                 marginTop: 2
-                            }}>Advance</Text>
+                            }}>History</Text>
                         </Pressable>
                         <Pressable
                             onPress={() => {
                                 if (login) {
                                     navigation.push('Profile')
                                 } else {
-                                    navigation.push('Login', { USER: "SEEKER" })
+                                    // navigation.push('Login', { USER: "SEEKER" })
+                                    toggleRequireVisible()
                                 }
                             }}
                         ><View style={{

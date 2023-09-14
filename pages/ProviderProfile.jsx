@@ -85,14 +85,7 @@ const ProviderProfile = ({ navigation }) => {
         }
 
     }
-    useEffect(() => {
-     if (updateData) {
-        
-     } else {
-        navigation.push('PostJob')
-     }
     
-    }, [updateData])
     const [type, setType] = useState(false)
     const toggleType = () => setType(!type)
 

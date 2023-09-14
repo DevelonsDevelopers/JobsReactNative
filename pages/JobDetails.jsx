@@ -153,15 +153,15 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                 <View style={{paddingHorizontal: 100,}}>
                                     <Text style={{
                                         fontFamily: 'poppins_medium',
-                                        fontSize: 13,
+                                        fontSize: 15,
                                         textAlign: 'center',
-                                        marginTop: 4,
+                                        marginTop: 19,
                                         backgroundColor: '#00A224',
                                         color: "white",
-                                        paddingHorizontal: 10,
-                                        paddingVertical: 2,
                                         borderRadius: 20,
                                         margin: 'auto',
+                                        paddingTop:5,
+                                        paddingBottom:2,
                                     }}>
                                         Salary {job?.salary}
                                     </Text>
@@ -275,6 +275,7 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                             textAlign: "center",
                                             paddingVertical: 10,
                                             borderRadius: 25,
+                                            paddingTop:13,
                                         }}>SAVE</Text></Pressable>
                                         :
                                         <Pressable onPress={() => RemoveBookmark()}><Text style={{
@@ -288,10 +289,12 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                             textAlign: "center",
                                             paddingVertical: 10,
                                             borderRadius: 25,
+                                            
                                         }}>SAVED</Text></Pressable>
                                     }
                                     {applied === 0 ?
-                                        <Pressable onPress={() => toggleApplyVisibility()}><Text style={{
+                                        <Pressable onPress={() => toggleApplyVisibility()}>
+                                            <Text style={{
                                             justifyContent: 'center',
                                             height: 50,
                                             fontSize: 15,
@@ -302,7 +305,9 @@ const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
                                             textAlign: "center",
                                             paddingVertical: 10,
                                             borderRadius: 25,
-                                        }}>APPLY NOW</Text></Pressable>
+                                            paddingTop:13,
+                                        }}>APPLY NOW</Text>
+                                        </Pressable>
                                         : <Text style={{
                                             justifyContent: 'center',
                                             height: 50,
