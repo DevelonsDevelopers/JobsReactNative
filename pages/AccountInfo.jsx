@@ -34,6 +34,7 @@ import CourseModal from "../Components/CourseModal";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { cvStatement } from "../API";
 import PersonalStatementModal from "../Components/PersonalStatementModal";
+import RoleModal from "../Components/RoleModal";
 
 function AccountInfo({ navigation }) {
 
@@ -148,6 +149,11 @@ function AccountInfo({ navigation }) {
 	const [infoVisible, setInfoVisible] = useState(false)
 	const toggleInfoVisibility = () => setInfoVisible(!infoVisible)
 
+
+	// Role Modal ===========
+
+	const [roleVisible, setRoleVisible] = useState(false)
+	const toggleRoleVisibility = () => setRoleVisible(!roleVisible)
 	return (
 		<View style={{ flex: 1 }}>
 			{isloading ?
@@ -197,6 +203,9 @@ function AccountInfo({ navigation }) {
 									<PersonalStatementModal visible={infoVisible}
 										toggleInfoVisibility={toggleInfoVisibility}
 										add={addPersonalInfo} />
+									<RoleModal visible={roleVisible}
+										toggleRoleVisibility={toggleRoleVisibility}
+									/>
 
 									<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 										<View style={{
@@ -249,6 +258,42 @@ function AccountInfo({ navigation }) {
 											</View>
 											:
 											<>
+												<View style={{
+													flexDirection: 'column',
+													borderColor: '#b2b2b2',
+													backgroundColor: '#fff',
+													padding: 20,
+													marginHorizontal: 10,
+													marginRight: 30,
+													marginLeft: 30,
+													borderRadius: 30,
+													marginTop: 20
+												}}>
+
+													<View style={{ flexDirection: 'row' }}>
+														<Text style={{
+															fontFamily: 'poppins_bold',
+															fontSize: 16
+														}}>Role</Text>
+														<Pressable onPress={() => toggleRoleVisibility()} style={{
+															backgroundColor: '#e7e7e7',
+															borderRadius: 25,
+															alignItems: 'center',
+															paddingVertical: 5,
+															paddingHorizontal: 15,
+															marginLeft: 'auto'
+														}}>
+															<View><Text
+																style={{
+																	color: '#000',
+																	fontFamily: 'poppins_medium',
+																	fontSize: 12
+																}}>Update</Text>
+															</View></Pressable>
+													</View>
+													<Text style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{cv?.statement}</Text>
+
+												</View>
 												<View style={{
 													flexDirection: 'column',
 													borderColor: '#b2b2b2',
