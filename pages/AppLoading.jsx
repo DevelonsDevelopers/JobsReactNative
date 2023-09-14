@@ -5,7 +5,7 @@ function AppLoading() {
 
     return (
         <View style={{flex: 1, backgroundColor: '#fff', justifyContent: 'center'}}>
-            <Image style={{width: 300, height: 190, alignSelf: 'center'}} source={require('../assets/logo.png')}
+            <Image style={{width: 340, height: 190, alignSelf: 'center'}} source={require('../assets/logo.png')}
                    alt={'Okay'}/>
         </View>
     );

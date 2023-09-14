@@ -25,6 +25,9 @@ const NavigationDrawer = ({visible, toggleVisibility, navigation, isLogin, toggl
                             source={require('../assets/close.png')}/></Pressable>
                     </View>
 
+
+{isLogin ? 
+<>
                     <Ripple onPress={() => {
                         if (isLogin) {
                             navigation.push('Profile')
@@ -106,6 +109,10 @@ const NavigationDrawer = ({visible, toggleVisibility, navigation, isLogin, toggl
                                    source={require('../assets/arrowRight.png')}/>
                         </View>
                     </Ripple>
+                    </>
+                    :
+<Text></Text>
+                    }
 
                     <Ripple rippleColor="#01579B" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
                             onPress={() => {
