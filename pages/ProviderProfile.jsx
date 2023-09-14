@@ -14,13 +14,24 @@ const ProviderProfile = ({navigation}) => {
     const dispatch = useDispatch();
     const [cityVisible, setCityVisible] = useState(false)
     const [countryVisible, setCountryVisible] = useState(false)
+
+    const [nameCity, setNameCity] = useState()
+    const [countryName, setCountryName] = useState()
+
+    const [updateData, setUpdateData] = useState({
+        city: '',
+        country: '',
+        phone: '',
+        headquater: '',
+        type: ''
+    })
     const toggleVisibility = () => setCityVisible(!cityVisible)
     const toggleCountryVisibility = () => setCountryVisible(!countryVisible)
 
     const cities = useSelector(state => state.city.cities)
     const countries = useSelector(state => state.country.countries)
 
-    
+
     useEffect(() => {
         if (!cities) {
             dispatch(AllCities())
@@ -34,16 +45,20 @@ const ProviderProfile = ({navigation}) => {
     }, [dispatch, countries]);
 
     const cityClick = (item) => {
-        setSeekerData({...seekerData, city: item.id})
+        setUpdateData({...updateData, city: item.id})
         toggleVisibility()
         setNameCity(item.name)
     }
 
     const countryClick = (item) => {
-        setSeekerData({...seekerData, country: item.id})
+        setUpdateData({...updateData, country: item.id})
         toggleCountryVisibility()
         setCountryName(item.name)
     }
+
+    const typeClick = (value) => [
+        setUpdateData({...updateData, type: value})
+    ]
 
     const [type, setType] = useState(false)
     const toggleType = () => setType(!type)
@@ -55,7 +70,7 @@ const ProviderProfile = ({navigation}) => {
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick}/>
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                                 click={countryClick}/>
-            <ProviderTypeModal visible={type} toggleVisibility={toggleType}/>
+            <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick}/>
 
 
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -80,7 +95,7 @@ const ProviderProfile = ({navigation}) => {
                     color: '#626262',
                     elevation: 10
                 }}>
-                    <TextInput onFocus={() => toggleCountryVisibility()} placeholder='Enter your Country'
+                    <TextInput value={nameCity} onFocus={() => toggleCountryVisibility()} placeholder='Enter your Country'
                                inputMode={'text'}/>
                 </Pressable>
                 <Pressable onPress={() => toggleVisibility()} style={{
@@ -93,10 +108,10 @@ const ProviderProfile = ({navigation}) => {
                     color: '#626262',
                     elevation: 10
                 }}>
-                    <TextInput onFocus={() => toggleVisibility()} placeholder={'Enter your City'}/>
+                    <TextInput value={countryName} onFocus={() => toggleVisibility()} placeholder={'Enter your City'}/>
                 </Pressable>
 
-                <TextInput style={{
+                <TextInput onChangeText={text => setUpdateData({...updateData, phone: text})} style={{
                     height: 50,
                     backgroundColor: '#fff',
                     width: '85%',
@@ -106,7 +121,7 @@ const ProviderProfile = ({navigation}) => {
                     color: '#626262',
                     elevation: 10
                 }} placeholder={'Enter your Phone'}/>
-              
+
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -117,7 +132,7 @@ const ProviderProfile = ({navigation}) => {
                     width: '85%',
                     paddingRight: 20
                 }}>
-                    <TextInput style={{
+                    <TextInput onChangeText={text => setUpdateData({...updateData, headquater: text})} style={{
                         height: 50,
                         paddingHorizontal: 20,
                         color: '#626262',
@@ -137,7 +152,7 @@ const ProviderProfile = ({navigation}) => {
                         paddingRight: 20
                     }}>
 
-                        <TextInput onFocus={() => toggleType()} style={{
+                        <TextInput value={updateData.type} onChangeText={text => setUpdateData({...updateData, type: text})} onFocus={() => toggleType()} style={{
                             height: 50,
                             paddingHorizontal: 20,
                             color: '#626262',

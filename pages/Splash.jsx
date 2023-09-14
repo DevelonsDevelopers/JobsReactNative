@@ -22,10 +22,10 @@ function Splash({navigation}) {
     useEffect(() => {
 
         sleep(3000).then(() => {
-            if (user === "SEEKER") {
-                navigation.replace('Home')
-            } else {
+            if (user === "PROVIDER") {
                 navigation.replace('PostJob')
+            } else {
+                navigation.replace('Home')
             }
         });
     });
