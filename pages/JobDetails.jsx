@@ -85,6 +85,10 @@ const JobDetails = ({route, navigation}) => {
 const [applyVisible,setApplyVisible] = useState(false)
 const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
 
+
+
+
+
     return (
         <ScrollView style={{backgroundColor: '#F1F1F1'}}>
             <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob}/>

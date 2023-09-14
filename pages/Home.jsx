@@ -126,12 +126,15 @@ function Home({ navigation }) {
                                 height: 50,
                                 borderRadius: 25,
                                 paddingHorizontal: 20,
-                                marginTop: 10
+                                marginTop: 10,
+
                             }}>
                                 <TextInput onChangeText={text => setSearch(text)} style={{
-                                    height: 50,
+                                    height: 50, width: '90%'
                                 }} placeholder={'Start your Job Search'} />
-                                <Pressable onPress={() => navigation.push('Search', { query: search })} style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} source={require('../assets/search-interface-symbol.png')} /></Pressable>
+                                <Pressable onPress={() => navigation.push('Search', { query: search })} style={{ marginLeft: 'auto', }}>
+                                    <Image style={{ width: 25, height: 25 }} source={require('../assets/search-interface-symbol.png')} />
+                                </Pressable>
                             </View>
                         </View>
 
@@ -339,7 +342,7 @@ function Home({ navigation }) {
                         marginBottom: 15,
                         paddingHorizontal: 20
                     }}>
-                        <Pressable
+                        <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
                             onPress={() => {
                                 if (login) {
                                     navigation.push('AppliedSaved', { screen: 0 })
@@ -359,17 +362,17 @@ function Home({ navigation }) {
                             }} >
                             <View >
                                 <Image style={{
-                                    width: 15,
-                                    height: 20,
+                                    width: 29,
+                                    height: 25,
                                     tintColor: '#fff',
-                                    marginLeft: 20,
-                                }} source={require('../assets/saveIcon.png')} alt={'Okay'} />
+                                    marginLeft: 14,
+                                }} source={require('../assets/saved.png')} alt={'Okay'} />
                                 <Text numberOfLines={1}
                                     style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Saved
                                     Jobs</Text>
                             </View>
-                        </Pressable>
-                        <Pressable
+                        </Ripple>
+                        <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
                             onPress={() => {
                                 if (login) {
                                     navigation.push('Resume')
@@ -388,31 +391,34 @@ function Home({ navigation }) {
                             }}>
                             <View >
                                 <Image style={{
-                                    width: 25,
+                                    width: 35,
                                     height: 20,
-                                    tintColor: '#fff', marginLeft: 13,
-                                }} source={require('../assets/cvBuilderIcon.png')} alt={'Okay'} />
+                                    tintColor: '#fff', marginLeft: 3,
+                                }} source={require('../assets/cv.png')} alt={'Okay'} />
                                 <Text numberOfLines={1}
                                     style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>CV
                                     Builder</Text>
                             </View>
-                        </Pressable>
-                        <View style={{
+                        </Ripple>
+                        <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200} style={{
                             height: '100%',
                             flex: 1,
                             flexDirection: 'column',
                             justifyContent: 'center',
                         }}>
-                            <Image style={{
-                                width: 40,
-                                height: 25,
-                                tintColor: '#fff'
-                            }} source={require('../assets/homeIcon.png')} alt={'Okay'} />
-                            <Text numberOfLines={1}
-                                style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Offers</Text>
-                            <View style={{ height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E', marginLeft: -4 }} />
-                        </View>
-                        <Pressable
+                            <View >
+                                <Image style={{
+                                    width: 32,
+                                    height: 28,
+                                    tintColor: '#fff',
+                                    marginLeft: 5
+                                }} source={require('../assets/offersss.png')} alt={'Okay'} />
+                                <Text numberOfLines={1}
+                                    style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Offers</Text>
+                                <View style={{ height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E', marginLeft: -4 }} />
+                            </View>
+                        </Ripple>
+                        <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
                             onPress={() => {
                                 if (login) {
                                     navigation.push('History')
@@ -430,19 +436,19 @@ function Home({ navigation }) {
                                 marginLeft: -4,
                             }}>
                             <Image style={{
-                                width: 20,
-                                height: 20,
+                                width: 27,
+                                height: 25,
                                 tintColor: '#fff',
-                                marginLeft: 6
-                            }} source={require('../assets/searchIcon.png')} alt={'Okay'} />
+                                marginLeft: 3
+                            }} source={require('../assets/history.png')} alt={'Okay'} />
                             <Text numberOfLines={1} style={{
                                 fontFamily: 'poppins_medium',
                                 fontSize: 9,
                                 color: '#fff',
                                 marginTop: 2
                             }}>History</Text>
-                        </Pressable>
-                        <Pressable
+                        </Ripple>
+                        <Ripple  rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
                             onPress={() => {
                                 if (login) {
                                     navigation.push('Profile')
@@ -463,14 +469,14 @@ function Home({ navigation }) {
                                     height: 25,
                                     tintColor: '#fff',
                                     marginLeft: 3
-                                }} source={require('../assets/profileIcon.png')} alt={'Okay'} />
+                                }} source={require('../assets/profile.png')} alt={'Okay'} />
                                 <Text numberOfLines={1} style={{
                                     fontFamily: 'poppins_medium',
                                     fontSize: 10,
                                     color: '#fff',
                                     marginTop: 2
                                 }}>Profile</Text>
-                            </View></Pressable>
+                            </View></Ripple>
 
                     </View>
                 </>}
