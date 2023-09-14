@@ -393,7 +393,7 @@ function Home({ navigation }) {
 								flexDirection: 'column',
 								justifyContent: 'center',
 	// backgroundColor:'violet',							
-								marginLeft: -6,
+								// marginLeft: -6,
 								alignItems:'center',
 								width:'22%',
 								marginTop:3
