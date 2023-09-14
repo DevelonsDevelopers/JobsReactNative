@@ -21,11 +21,14 @@ function Splash({navigation}) {
 
     useEffect(() => {
 
-        sleep(3000).then(() => {
+        sleep(3000).then( async () => {
             if (user === "PROVIDER") {
                 navigation.replace('PostJob')
+            } else if (user === "SEEKER") {
+                navigation.replace('Home')
             } else {
                 navigation.replace('Home')
+                await AsyncStorage.setItem("ID", "0")
             }
         });
     });
