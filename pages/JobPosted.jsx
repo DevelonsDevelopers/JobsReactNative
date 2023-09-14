@@ -2,29 +2,17 @@ import { FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, Text
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
+import moment from "moment";
 
 function JobPosted({ navigation }) {
 
   const dispatch = useDispatch();
   const [login, isLogin] = useState(false);
-  const categories = useSelector(state => state.category.categories)
-  const loading = useSelector(state => state.category.isLoading)
+  const companyJobs = useSelector(state => state.job.companyJobs)
 
   const [visible, setVisible] = useState(false)
   const toggleVisibility = () => setVisible(!visible)
 
-  useEffect(() => {
-    dispatch(AllCategories())
-  }, [dispatch, navigation]);
-  const data = [
-    { 'name': 'Today', 'department': 'React Native ','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
-    { 'name': 'Today', 'department': 'React  Developer','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
-    { 'name': 'Today', 'department': 'React Native Developer','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
-    { 'name': 'Today', 'department': ' Native Developer','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
-    { 'name': 'Today', 'department': 'React Native Developer','salary':'5000','category':'Market','b1':'Recommended Users','b2':'Applied Users','b3':'Sent Offers' },
-
-
-  ]
   return (
 
     <View style={{ flex: 1 }}>
@@ -104,7 +92,7 @@ function JobPosted({ navigation }) {
 
         <SafeAreaView style={{ flex: 1 }}>
           <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-            style={{ marginHorizontal: 26, marginTop: 10 }} data={data} renderItem={({ item }) => (
+            style={{ marginHorizontal: 26, marginTop: 10 }} data={companyJobs} renderItem={({ item }) => (
               <View
                 style={{
                   margin: 5,
@@ -115,14 +103,14 @@ function JobPosted({ navigation }) {
                   paddingVertical:20,
                   paddingHorizontal:20
                 }}>
-                <Text style={{ fontFamily: 'poppins_medium', fontSize: 14, marginLeft: 'auto'}}>{item.name}</Text>
-                <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', fontSize: 16, textAlign: 'center', color:'#F0A51E' }}>{item.department}</Text>
-              <Text style={{ textAlign:"center",fontSize:14,fontFamily:'poppins_medium',paddingVertical:5 }}>{item.category}</Text>
+                <Text style={{ fontFamily: 'poppins_medium', fontSize: 14, marginLeft: 'auto'}}>{moment(item.date).fromNow()}</Text>
+                <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', fontSize: 16, textAlign: 'center', color:'#F0A51E' }}>{item.title}</Text>
+              <Text style={{ textAlign:"center",fontSize:14,fontFamily:'poppins_medium',paddingVertical:5 }}>{item.category_name}</Text>
               <View style={{paddingHorizontal:50}}><Text style={{ backgroundColor:'#D9D9D9',textAlign:"center",paddingVertical:6,borderRadius:20,fontSize:12,fontFamily:'poppins_medium' }}>Salary {item.salary}/month</Text></View>
               <View style={{ paddingHorizontal:30,marginTop:14 }}>
-                <Text style={{ backgroundColor:'#143D59',textAlign:"center",borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b1}</Text>
-                <Text style={{ backgroundColor:'#207A00',textAlign:"center",borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b2}</Text>
-                <Text style={{ backgroundColor:'#0098FF',textAlign:"center",borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>{item.b3}</Text>
+                <Pressable onPress={() => navigation.push('RecommendedUser', { job: item.id })}><Text style={{ backgroundColor:'#143D59',textAlign:"center",borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>Recommended Users</Text></Pressable>
+                <Text style={{ backgroundColor:'#207A00',textAlign:"center",borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>Applied Users</Text>
+                <Text style={{ backgroundColor:'#0098FF',textAlign:"center",borderRadius:20,fontSize:14,fontFamily:'poppins_bold',color:'white',marginVertical:4,paddingVertical:11 }}>Sent Offers</Text>
               </View>
               </View>
 

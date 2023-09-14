@@ -15,23 +15,23 @@ function Splash({navigation}) {
     const GetData = async () => {
         sleep(1000).then( async () => {
             const value = await AsyncStorage.getItem('USER')
-            setUser(value);
-        })
-    }
-
-    useEffect(() => {
-
-        sleep(3000).then( async () => {
-            if (user === "PROVIDER") {
+            if (value === "PROVIDER") {
                 navigation.replace('PostJob')
-            } else if (user === "SEEKER") {
+            } else if (value === "SEEKER") {
                 navigation.replace('Home')
             } else {
                 navigation.replace('Home')
                 await AsyncStorage.setItem("ID", "0")
             }
-        });
-    });
+        })
+    }
+
+    // useEffect(() => {
+    //
+    //     sleep(3000).then( async () => {
+    //
+    //     });
+    // });
 
     return (
         <View style={{flex: 1, backgroundColor: '#fff'}}>
