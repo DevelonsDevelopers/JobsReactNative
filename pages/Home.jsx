@@ -111,7 +111,6 @@ function Home({ navigation }) {
 								}} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
 								<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
 									<Pressable
-									// onPress={() => navigation.push('Home')}
 									><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 										source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
 								</View>
@@ -303,7 +302,6 @@ function Home({ navigation }) {
 									marginRight: 7,
 									backgroundColor: 'white',
 									borderColor: '#c2c2c2',
-									// borderWidth: 0.30,
 									elevation: 5,
 									paddingVertical: 19,
 									justifyContent: 'center',
@@ -317,11 +315,9 @@ function Home({ navigation }) {
 								style={{
 									flex: 0.5,
 									flexDirection: 'column',
-									// marginLeft: 7,
 									backgroundColor: 'white',
 									borderColor: '#c2c2c2',
 									elevation: 5,
-									// borderWidth: 0.30,
 									paddingVertical: 19,
 									justifyContent: 'center',
 									alignItems: 'center',
@@ -349,17 +345,15 @@ function Home({ navigation }) {
 								if (login) {
 									navigation.push('AppliedSaved', { screen: 0 })
 								} else {
-									// navigation.push('Login', { USER: "SEEKER" })
 									toggleRequireVisible()
 								}
 							}}
-							//  onPress={() => navigation.push('AppliedSaved', {screen: 0})}
 							style={{
 								height: '100%',
 								flex: 1,
 								flexDirection: 'column',
 								justifyContent: 'center',
-// backgroundColor:'black',
+
 								marginLeft: -6,
 								alignItems:'center',
 								width:'20%'
@@ -386,14 +380,11 @@ function Home({ navigation }) {
 									toggleRequireVisible()
 								}
 							}}
-							//  onPress={() => navigation.push('Resume')} 
 							style={{
 								height: '100%',
 								flex: 1,
 								flexDirection: 'column',
 								justifyContent: 'center',
-	// backgroundColor:'violet',							
-								// marginLeft: -6,
 								alignItems:'center',
 								width:'22%',
 								marginTop:2
@@ -414,7 +405,6 @@ function Home({ navigation }) {
 							flex: 1,
 							flexDirection: 'column',
 							justifyContent: 'center',
-							// backgroundColor:'blue',
 							alignItems:'center',
 							width:'20%'
 						}}>
@@ -439,14 +429,12 @@ function Home({ navigation }) {
 									toggleRequireVisible()
 								}
 							}}
-							// onPress={() => navigation.push('History')}
 							style={{
 								height: '100%',
 								flex: 1,
 								flexDirection: 'column',
 								justifyContent: 'center',
 								marginLeft: -4,
-								// backgroundColor:'black',
 								alignItems:'center',
 								width:'20%'
 							}}>
@@ -472,14 +460,12 @@ function Home({ navigation }) {
 									toggleRequireVisible()
 								}
 							}}
-							// onPress={() => navigation.push('History')}
 							style={{
 								height: '100%',
 								flex: 1,
 								flexDirection: 'column',
 								justifyContent: 'center',
 								marginLeft: -4,
-								// backgroundColor:'violet',
 								alignItems:'center',
 								width:'20%'
 							}}>
@@ -496,39 +482,6 @@ function Home({ navigation }) {
 								marginTop: 2
 							}}>Profile</Text>
 						</Ripple>
-
-						{/* <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
-							onPress={() => {
-								if (login) {
-									navigation.push('Profile')
-								} else {
-									// navigation.push('Login', { USER: "SEEKER" })
-									toggleRequireVisible()
-								}
-							}}
-						><View style={{
-							height: '100%',
-							flex: 1,
-							flexDirection: 'column',
-							justifyContent: 'center',
-							backgroundColor:'violet',
-							alignItems:'center',
-							width:'90%',
-						}}>
-								<Image style={{
-									width: 25,
-									height: 25,
-									tintColor: '#fff',
-									marginLeft: 3
-								}} source={require('../assets/profile.png')} alt={'Okay'} />
-								<Text numberOfLines={1} style={{
-									fontFamily: 'poppins_medium',
-									fontSize: 10,
-									color: '#fff',
-									marginTop: 2
-								}}>Profile</Text>
-							</View></Ripple> */}
-
 					</View>
 				</>}
 		</View>
