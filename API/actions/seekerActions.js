@@ -1,5 +1,23 @@
 import * as api from '../../API/index'
-import {ERROR, GET_SEEKER, LOADING, SUCCESS, UPDATE_SEEKER} from "../../Utils/Constants";
+import {ERROR, GET_SEEKER, LOADING, NODATA, RECOMMENDED_SEEKER, SUCCESS, UPDATE_SEEKER} from "../../Utils/Constants";
+
+export const RecommendedSeekers = (job) => async (dispatch) => {
+    try {
+        dispatch ({ type: LOADING })
+        const { data: { data } } = await api.fetchRecommendedUsers(job);
+        if (data.length !== 0) {
+            dispatch({type: RECOMMENDED_SEEKER, payload: {data: data}})
+            dispatch({type: SUCCESS})
+        } else {
+            dispatch({type: RECOMMENDED_SEEKER, payload: {data: data}})
+            dispatch({type: NODATA})
+            dispatch({type: SUCCESS})
+        }
+    } catch (error) {
+        console.log(error)
+        dispatch ({ type: ERROR })
+    }
+}
 
 export const fetchSeeker = (ID) => async (dispatch) => {
     try {

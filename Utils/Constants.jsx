@@ -72,6 +72,7 @@ export const ALL_SEEKERS = "ALL_SEEKERS";
 export const GET_SEEKER = "GET_SEEKER";
 export const UPDATE_SEEKER = "UPDATE_SEEKER";
 export const RESET_SEEKER = "RESET_SEEKER";
+export const RECOMMENDED_SEEKER = "RECOMMENDED_SEEKER";
 
 
 //Tags:=========

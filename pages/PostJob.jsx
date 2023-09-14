@@ -301,6 +301,7 @@ function PostJob({ navigation }) {
                     marginTop: 30
                 }}>
                     <Text style={{ fontSize: 17, fontFamily: 'poppins_bold' }}>Posted Jobs</Text>
+                    <Pressable onPress={() => navigation.push('JobPosted')}>
                     <Text style={{
                         backgroundColor: '#CBCBCB',
                         paddingHorizontal: 16,
@@ -309,7 +310,7 @@ function PostJob({ navigation }) {
                         fontFamily: 'poppins_medium',
                         borderRadius: 20,
                         color: 'rgba(0, 0, 0, 0.81)'
-                    }}>Show All</Text>
+                    }}>Show All</Text></Pressable>
                 </View>
                 <SafeAreaView style={{ flex: 1 }}>
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
