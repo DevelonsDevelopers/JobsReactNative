@@ -40,7 +40,7 @@ function Splash({navigation}) {
             </ImageBackground>
             <Image style={{width: 250, height: 150, marginTop: 0, alignSelf: 'center'}}
                    source={require('../assets/splash_icon.png')} alt={'Okay'}/>
-            <Image style={{width: 250, height: 50, marginTop: 30, alignSelf: 'center', padding: 10}}
+            <Image style={{width: 250, height: 50, marginTop: 10, alignSelf: 'center', padding: 10}}
                    source={require('../assets/logo.png')} alt={'Okay'}/>
             <ImageBackground style={{width: 270, height: 287, marginTop: 'auto', marginLeft: 'auto', paddingTop: 30}}
                              source={require('../assets/circle_yellow.png')}>
