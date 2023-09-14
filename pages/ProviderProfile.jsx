@@ -8,6 +8,8 @@ import { AllCountries } from '../API/actions/countryActions'
 import CountrySelectModal from '../Components/CountrySelectModal'
 import ProviderTypeModal from '../Components/ProviderTypeModal'
 import Toast from 'react-native-toast-message'
+import {completeCompany} from "../API";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const ProviderProfile = ({ navigation }) => {
 
@@ -18,6 +20,15 @@ const ProviderProfile = ({ navigation }) => {
 
     const [nameCity, setNameCity] = useState()
     const [countryName, setCountryName] = useState()
+    const [ID, setID] = useState()
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
 
     const [updateData, setUpdateData] = useState({
         city: '',
@@ -67,7 +78,17 @@ const ProviderProfile = ({ navigation }) => {
                 if (updateData.phone !== '') {
                     if (updateData.headquater !== '') {
                         if (updateData.type !== '') {
+                            completeCompany(updateData.country, updateData.city, updateData.phone, updateData.headquater, updateData.type, ID).then(res => {
+                                const { data: { data } } = res;
+                                const { data: { responseCode } } = res;
+                                const { data: { message } } = res;
+                                console.log(message)
+                                if (responseCode === 200) {
+                                    navigation.push('PostJob')
+                                } else {
 
+                                }
+                            })
                         } else {
                             Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Your Company Type' })
                         }
@@ -85,7 +106,7 @@ const ProviderProfile = ({ navigation }) => {
         }
 
     }
-    
+
     const [type, setType] = useState(false)
     const toggleType = () => setType(!type)
 
