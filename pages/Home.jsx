@@ -366,8 +366,8 @@ function Home({ navigation }) {
 							}} >
 							<View >
 								<Image style={{
-									width: 29,
-									height: 25,
+									width: 20,
+									height: 17,
 									tintColor: '#fff',
 									marginLeft: 14,
 									
@@ -396,13 +396,13 @@ function Home({ navigation }) {
 								// marginLeft: -6,
 								alignItems:'center',
 								width:'22%',
-								marginTop:3
+								marginTop:2
 							}}>
 							<View >
 								<Image style={{
-									width: 35,
-									height: 20,
-									tintColor: '#fff', marginLeft: 3,
+									width: 27,
+									height: 17,
+									tintColor: '#fff', marginLeft: 5,
 								}} source={require('../assets/cv.png')} alt={'Okay'} />
 								<Text numberOfLines={1}
 									style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>CV
@@ -451,8 +451,8 @@ function Home({ navigation }) {
 								width:'20%'
 							}}>
 							<Image style={{
-								width: 27,
-								height: 25,
+								width: 20,
+								height: 19,
 								tintColor: '#fff',
 								marginLeft: 3
 							}} source={require('../assets/history.png')} alt={'Okay'} />
@@ -484,8 +484,8 @@ function Home({ navigation }) {
 								width:'20%'
 							}}>
 							<Image style={{
-								width: 27,
-								height: 25,
+								width: 20,
+								height: 18,
 								tintColor: '#fff',
 								marginLeft: 3
 							}} source={require('../assets/profile.png')} alt={'Okay'} />
