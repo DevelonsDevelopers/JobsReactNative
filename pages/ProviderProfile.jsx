@@ -60,6 +60,14 @@ const ProviderProfile = ({navigation}) => {
         setUpdateData({...updateData, type: value})
     ]
 
+    const updateProfile = () => {
+        if (updateData.country !== ''){
+
+        } else {
+
+        }
+    }
+
     const [type, setType] = useState(false)
     const toggleType = () => setType(!type)
 
