@@ -88,7 +88,6 @@ function PostJob({ navigation }) {
                         opacity: 1,
                         padding: 20
                     }}>
-
                         <Pressable onPress={() => toggleVisibility()} style={{ flexDirection: 'row', alignItems: 'center' }}>
                             <Text
                                 style={{ width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center' }}>Menu</Text>
@@ -124,7 +123,9 @@ function PostJob({ navigation }) {
                             <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }}
                                 source={require('../assets/arrowRight.png')} />
                         </View>
-                        <View style={{
+                        <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={600} rippleSize={800}
+                        onPress={() => navigation.push('OfferSend')}
+                        style={{
                             flexDirection: 'row',
                             alignItems: 'center',
                             backgroundColor: '#13A3E1',
@@ -132,10 +133,11 @@ function PostJob({ navigation }) {
                             borderRadius: 10,
                             marginTop: 4
                         }}>
+
                             <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Offer Send</Text>
                             <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }}
                                 source={require('../assets/arrowRight.png')} />
-                        </View>
+                        </Ripple>
 
 
                         <Ripple rippleColor="#01579B" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
