@@ -6,6 +6,7 @@ import Ripple from "react-native-material-ripple";
 import {AppliedByCompany} from "../API/actions/appliedActions";
 import company from "../API/reducers/company";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import moment from "moment/moment";
 
 function AppliedUsers({navigation}) {
 
@@ -105,8 +106,7 @@ function AppliedUsers({navigation}) {
                             marginLeft: 30,
                             marginBottom: 20,
                             tintColor: 'gray'
-                        }} source={require('../assets/back_arrow.png')}
-                                                                    alt={'Okay'}/>
+                        }} source={require('../assets/back_arrow.png')}  alt={'Okay'}/>
                         </Pressable>
                         <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
                             <Image style={{
@@ -115,14 +115,14 @@ function AppliedUsers({navigation}) {
                                 marginTop: 60,
                                 alignSelf: 'center'
                             }}
-                                   source={require('../assets/logo.png')} alt={'Okay'}/>
+                            source={require('../assets/logo.png')} alt={'Okay'}/>
                         </View>
                     </View>
                 </View>
 
                 <SafeAreaView style={{flex: 1}}>
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                              style={{marginHorizontal: 26, marginTop: 10}} data={data} renderItem={({item}) => (
+                              style={{marginHorizontal: 26, marginTop: 10}} data={companyApplied} renderItem={({item}) => (
                         <View
                             style={{
                                 margin: 5,
@@ -148,23 +148,23 @@ function AppliedUsers({navigation}) {
                                     textAlign: 'right',
                                     fontFamily: 'poppins_medium',
                                     fontSize: 12
-                                }}>Today</Text>
+                                }}>{moment().startOf('day').fromNow(item.date)}</Text>
                             </View>
-                            <Text style={{fontSize: 17, fontFamily: 'poppins_medium', marginTop: 10}}>John Doe</Text>
-                            <Text>Lahore</Text>
+                            <Text style={{fontSize: 17, fontFamily: 'poppins_medium', marginTop: 10}}>{item.name}</Text>
+                            <Text>{item.address}</Text>
                             <Text
                                 style={{fontSize: 17, fontFamily: 'poppins_medium', marginBottom: 10}}>Bachelors</Text>
-                            <View style={{paddingHorizontal: 50}}><Text style={{
+                            {/* <View style={{paddingHorizontal: 50}}><Text style={{
                                 backgroundColor: '#D9D9D9',
                                 textAlign: "center",
                                 paddingVertical: 6,
                                 borderRadius: 20,
                                 fontSize: 12,
                                 fontFamily: 'poppins_medium'
-                            }}>Demand 5000/month</Text></View>
+                            }}>Demand 5000/month</Text></View> */}
                             <View style={{paddingHorizontal: 36, marginTop: 4}}>
                                 <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={600} rippleSize={800}
-                                        onPress={() => navigation.push('ViewResume')}>
+                                        onPress={() => navigation.push('ViewResume', { ID: item.user })}>
                                     <Text style={{
                                         backgroundColor: '#143D59',
                                         textAlign: "center",
