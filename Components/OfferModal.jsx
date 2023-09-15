@@ -21,17 +21,18 @@ const OfferModal = ({visible,toggleVisibility}) => {
             alignItems: 'center',
             marginHorizontal: 30
         }}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{flexDirection: 'row',width:'100%'}}>
                 <Text style={{
                     paddingVertical: 7,
                     fontSize: 16,
                     fontFamily: 'poppins_medium',
                     marginTop: 10,
-                    marginLeft: 40
-                }}>Select Your Offer Type </Text>
-                <View style={{marginLeft: 20}}>
+                    textAlign:'center',
+                    width:'100%'
+                }}>Offer Type </Text>
+                <View style={{marginLeft:'auto'}}>
                     <Pressable onPress={() => toggleVisibility()} style={{paddingLeft: 10}}>
-                        <Image style={{width: 15, height: 15, marginLeft: 'auto'}}
+                        <Image style={{width: 15, height: 15,marginTop:10}}
                                source={require('../assets/close.png')}/></Pressable>
                 </View>
             </View>

@@ -44,7 +44,7 @@ function AppliedUsers({navigation}) {
             'department': 'React Native ',
             'salary': '5000',
             'category': 'Market',
-            'b1': 'Recommended Users',
+            'b1': ' Users',
             'b2': 'Applied Users',
             'b3': 'Sent Offers'
         },
@@ -53,7 +53,7 @@ function AppliedUsers({navigation}) {
             'department': 'React  Developer',
             'salary': '5000',
             'category': 'Market',
-            'b1': 'Recommended Users',
+            'b1': ' Users',
             'b2': 'Applied Users',
             'b3': 'Sent Offers'
         },
@@ -62,7 +62,7 @@ function AppliedUsers({navigation}) {
             'department': 'React Native Developer',
             'salary': '5000',
             'category': 'Market',
-            'b1': 'Recommended Users',
+            'b1': ' Users',
             'b2': 'Applied Users',
             'b3': 'Sent Offers'
         },
@@ -71,7 +71,7 @@ function AppliedUsers({navigation}) {
             'department': ' Native Developer',
             'salary': '5000',
             'category': 'Market',
-            'b1': 'Recommended Users',
+            'b1': ' Users',
             'b2': 'Applied Users',
             'b3': 'Sent Offers'
         },
@@ -80,7 +80,7 @@ function AppliedUsers({navigation}) {
             'department': 'React Native Developer',
             'salary': '5000',
             'category': 'Market',
-            'b1': 'Recommended Users',
+            'b1': ' Users',
             'b2': 'Applied Users',
             'b3': 'Sent Offers'
         },
