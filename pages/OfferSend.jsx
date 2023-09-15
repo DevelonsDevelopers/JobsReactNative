@@ -81,7 +81,7 @@ const OfferSend = ({ navigation }) => {
                     <Text style={{
                         fontFamily: 'poppins_bold',
                         fontSize: 16
-                    }}>Proposel</Text>
+                    }}>Proposal</Text>
                 </View>
                 <View >
                     <TextInput style={{ textAlign: 'center', borderWidth: 0.2, borderColor: 'gray', borderRadius: 18, marginTop: 15 }} placeholder='write Your proposal' numberOfLines={17} />
