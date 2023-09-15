@@ -96,7 +96,7 @@ function PostJob({ navigation }) {
                   source={require('../assets/close.png')} />
               </View>
             </Pressable>
-            <Pressable onPress={() => navigation.push('ProviderProfileInfo')}>
+            <Ripple rippleColor="white" onPress={() => navigation.push('ProviderProfileInfo')}>
               <View style={{
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -109,7 +109,21 @@ function PostJob({ navigation }) {
                 <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }}
                   source={require('../assets/arrowRight.png')} />
               </View>
-            </Pressable>
+            </Ripple>
+            <Ripple rippleColor="white" onPress={() => navigation.push('JobPosted')}>
+              <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: '#13A3E1',
+                padding: 15,
+                borderRadius: 10,
+                marginTop: 5
+              }}>
+                <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Posted Jobs</Text>
+                <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }}
+                  source={require('../assets/arrowRight.png')} />
+              </View>
+            </Ripple>
             <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={600} rippleSize={800}
               onPress={() => navigation.push('AppliedUsers')}
               style={{
@@ -177,16 +191,22 @@ function PostJob({ navigation }) {
       <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
         <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
           <View style={{ flexDirection: 'row', height: 130 }}>
-            <Pressable onPress={() => toggleVisibility()}><Image style={{
+            <Pressable onPress={() => toggleVisibility()} style={{
+              marginTop: 60,
+              paddingLeft: 30,
+              paddingRight:30,
+              paddingTop:10
+            }}>
+              <Image style={{
               width: 22,
               height: 20,
-              marginTop: 70,
-              marginLeft: 30,
-              marginBottom: 250,
-              tintColor: '#fff'
+
+
+              tintColor: '#fff',
+              // backgroundColor:'violet',
             }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
-            <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-              <Pressable onPress={() => navigation.push('JobPosted')}><Image
+            <View style={{ width: '100%',  paddingEnd: 160 }}>
+              <Pressable ><Image
                 style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
             </View>
