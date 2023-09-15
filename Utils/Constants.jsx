@@ -84,6 +84,7 @@ export const GET_TOP_TAGS = "GET_TOP_TAGS";
 export const ALL_APPLIED = "ALL_APPLIED";
 export const GET_APPLIED_BY_ID = "GET_APPLIED_BY_ID";
 export const GET_APPLIED_BY_JOB = "GET_APPLIED_BY_JOB";
+export const GET_APPLIED_BY_COMPANY = "GET_APPLIED_BY_COMPANY";
 
 
 //CV:=======
