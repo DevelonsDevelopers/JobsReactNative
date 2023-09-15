@@ -28,8 +28,10 @@ function AppliedUsers({navigation}) {
     }
 
     useEffect(() => {
-        dispatch(AppliedByCompany(ID))
-    }, [dispatch, navigation]);
+        if (ID) {
+            dispatch(AppliedByCompany(ID))
+        }
+    }, [dispatch, navigation, ID]);
 
     useEffect(() => {
         console.log(companyApplied)
