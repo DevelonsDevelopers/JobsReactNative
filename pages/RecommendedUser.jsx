@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {AllCategories} from "../API/actions/categoryActions";
 import {RecommendedSeekers} from "../API/actions/seekerActions";
+import Ripple from "react-native-material-ripple";
 
 function RecommendedUser({route, navigation}) {
 
@@ -27,7 +28,7 @@ function RecommendedUser({route, navigation}) {
     return (
         <View style={{flex: 1}}>
 
-          
+
 
             <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75}}>
             <View style={{
@@ -106,7 +107,7 @@ function RecommendedUser({route, navigation}) {
                                 fontSize: 12,
                                 fontFamily: 'poppins_medium'
                             }}>Demand 5000/month</Text></View>
-                            <View style={{paddingHorizontal: 36, marginTop: 4}}>
+                            <Ripple onPress={() => navigation.push('ViewResume', { ID: item.id })} style={{paddingHorizontal: 36, marginTop: 4}}>
                                 <Text style={{
                                     backgroundColor: '#143D59',
                                     textAlign: "center",
@@ -117,7 +118,7 @@ function RecommendedUser({route, navigation}) {
                                     marginVertical: 4,
                                     paddingVertical: 7
                                 }}>View Resume</Text>
-                            </View>
+                            </Ripple>
                         </View>
 
                     )}

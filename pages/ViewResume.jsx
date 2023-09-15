@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import Resume from './Resume'
+import {useDispatch, useSelector} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {CVByUser} from "../API/actions/cvActions";
+import Ripple from "react-native-material-ripple";
 
 const skills = [
     { 'skill': 'react' },
@@ -24,7 +28,29 @@ const educations = [
 ]
 
 
-const ViewResume = () => {
+const ViewResume = ({ route, navigation }) => {
+
+    const { ID } = route.params
+
+    const dispatch = useDispatch();
+    const cv = useSelector((state) => state.cv.cv);
+    const loading = useSelector((state) => state.cv.isLoading);
+    const success = useSelector((state) => state.cv.success);
+
+    useEffect(() => {
+        if (ID) {
+            dispatch(CVByUser(ID));
+        }
+    }, [dispatch, ID]);
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        if (success) {
+            setIsLoading(false);
+        }
+    }, [success]);
+
     return (
         <ScrollView>
             <View style={{
@@ -163,9 +189,9 @@ const ViewResume = () => {
                         )} />
                 </SafeAreaView>
             </View>
-            <View style={{ width:'50%',marginLeft:'auto',marginRight:'auto',marginTop:20,marginBottom:6 }}>
+            <Ripple onPress={() => navigation.push('OfferSend')} style={{ width:'50%',marginLeft:'auto',marginRight:'auto',marginTop:20,marginBottom:6 }}>
                 <Text style={{ backgroundColor: '#13A3E1', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20,textAlign:'center' }}>Send Hire Offer</Text>
-            </View>
+            </Ripple>
 
 
         </ScrollView>
