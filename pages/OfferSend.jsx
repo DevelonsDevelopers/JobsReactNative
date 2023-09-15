@@ -2,8 +2,16 @@ import React, { useState } from 'react'
 import { Image, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
 import OfferModal from '../Components/OfferModal'
 import ProposelModal from '../Components/ProposelModal'
+import {sendOffer} from "../API";
+import moment from "moment";
 
-const OfferSend = ({ navigation }) => {
+const OfferSend = ({ route, navigation }) => {
+
+    const { job } = route.params;
+    const { user } = route.params;
+
+    const [type, setType] = useState()
+    const [proposal, setProposal] = useState()
 
     const [typeVisible, setTypeVisible] = useState(false)
     const toggleVisibility = () => setTypeVisible(!typeVisible)
@@ -11,11 +19,20 @@ const OfferSend = ({ navigation }) => {
     const [proposalVisible, setProposalVisible] = useState(false)
     const toggleProposelVisibility = () => setProposalVisible(!proposalVisible)
 
+    const SendOffer = (job, user, offerType, offer) => {
+        const date = moment().format("YYYY-MM-DD")
+        sendOffer(job, user, offerType, offer, '',date).then(res => {
+            const {data: {data}} = res;
+            if (data.affectedRows === 1) {
+                navigation.push('PostJob')
+            }
+        })
+    }
+
     return (
 
         <ScrollView>
-            <OfferModal visible={typeVisible} toggleVisibility={toggleVisibility} />
-            <ProposelModal visible={proposalVisible} toggleProposelVisibility={toggleProposelVisibility} />
+            <OfferModal visible={typeVisible} toggleVisibility={toggleVisibility} set={setType}/>
             <View style={{
                 flexDirection: 'column',
                 width: '100%',
@@ -63,7 +80,7 @@ const OfferSend = ({ navigation }) => {
                     }}>Offer Type</Text>
 
                 </View>
-                <TextInput onTouchStart={() => toggleVisibility()} style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>Offer Type</TextInput>
+                <Pressable onPress={() => toggleVisibility()}><TextInput editable={false} style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{type}</TextInput></Pressable>
             </View>
             <View style={{
                 flexDirection: 'column',
@@ -83,11 +100,9 @@ const OfferSend = ({ navigation }) => {
                         fontSize: 16
                     }}>Proposal</Text>
                 </View>
-                <View >
-                    <TextInput style={{ textAlign: 'center', borderWidth: 0.2, borderColor: 'gray', borderRadius: 18, marginTop: 15 }} placeholder='write Your proposal' numberOfLines={17} />
-                </View>
+                    <TextInput onChangeText={text => setProposal(text)} multiline={true} style={{ textAlign: 'center', borderWidth: 0.2, borderColor: 'gray', borderRadius: 18, marginTop: 15 }} placeholder='write Your proposal' numberOfLines={17} />
             </View>
-            <Pressable onPress={() => navigation.push('Resume')} style={{
+            <Pressable onPress={() => SendOffer(job, user, type, proposal)} style={{
                 backgroundColor: '#13A3E1',
                 borderRadius: 25,
                 alignItems: 'center',

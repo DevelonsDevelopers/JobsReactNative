@@ -210,3 +210,13 @@ export const fetchtopTags = (user) => API.post('/tags/top', {
 export const fetchBookmarks = (user) => API.post('/bookmarks/all', { user: user })
 export const bookmarkJob = (job, user) => API.post('/bookmarks/add', { job: job, user: user })
 export const removeBookmark = (id) => API.delete('/bookmarks/remove', { data: { id: id }})
+
+//OFFERS API CALL
+export const sendOffer = (job, user, offerType, offer, offerStatus, date) => API.post('/offers/create', {
+    job: job,
+    user: user,
+    offerType: offerType,
+    offer: offer,
+    offerStatus: offerStatus,
+    date: date
+})

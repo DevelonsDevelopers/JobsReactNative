@@ -31,6 +31,7 @@ const educations = [
 const ViewResume = ({ route, navigation }) => {
 
     const { ID } = route.params
+    const { job } = route.params;
 
     const dispatch = useDispatch();
     const cv = useSelector((state) => state.cv.cv);
@@ -189,7 +190,7 @@ const ViewResume = ({ route, navigation }) => {
                         )} />
                 </SafeAreaView>
             </View>
-            <Ripple onPress={() => navigation.push('OfferSend')} style={{ width:'50%',marginLeft:'auto',marginRight:'auto',marginTop:20,marginBottom:6 }}>
+            <Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })} style={{ width:'50%',marginLeft:'auto',marginRight:'auto',marginTop:20,marginBottom:6 }}>
                 <Text style={{ backgroundColor: '#13A3E1', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20,textAlign:'center' }}>Send Hire Offer</Text>
             </Ripple>
 
