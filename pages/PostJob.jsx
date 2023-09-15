@@ -339,7 +339,8 @@ function PostJob({ navigation }) {
         <SafeAreaView style={{ flex: 1 }}>
           <FlatList scrollEnabled={false} nestedScrollEnabled={true}
             style={{ marginHorizontal: 30, marginTop: 10 }} data={companyJobs} renderItem={({ item }) => (
-              <View
+              <Ripple rippleColor="gray" rippleOpacity={0.2} rippleDuration={800} rippleSize={400}
+              onPress={() => navigation.push('OfferAccepted',{ID:item.id})}
                 style={{
                   flex: 1,
                   flexDirection: 'row',
@@ -361,7 +362,7 @@ function PostJob({ navigation }) {
                   marginLeft: 'auto',
                   width: 110
                 }}>{item.qualification}</Text>
-              </View>
+              </Ripple>
             )}
           />
         </SafeAreaView>
