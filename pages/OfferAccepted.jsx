@@ -118,7 +118,7 @@ const OfferAccepted = ({ route, navigation }) => {
               <ScrollView scrollEnabled={true}
                 nestedScrollEnabled={true} >
                 <Text style={{ marginHorizontal: 25, fontSize: 14, fontFamily: 'poppins_medium', overflow: 'scroll', padding: 10 }}>{job?.description}</Text>
-                    </ScrollView>
+              </ScrollView>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: "center", gap: 20, marginTop: 10 }}>
               <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#143D59', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Hire</Text>
