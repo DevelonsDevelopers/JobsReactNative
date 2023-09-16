@@ -17,7 +17,7 @@ const Offers = ({navigation}) => {
 
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
-    const offers = useSelector(state => state.offers.sentOffers)
+    const offers = useSelector(state => state.offers.offers)
 
     const [ID, setID] = useState()
 
