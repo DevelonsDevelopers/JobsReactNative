@@ -10,12 +10,8 @@ import moment from "moment";
 const OfferAccepted = ({ route, navigation }) => {
 
   const { ID } = route.params
-
   const dispatch = useDispatch()
-
   const job = useSelector(state => state.job.job)
-
-
 
   useEffect(() => {
     if (ID) {
