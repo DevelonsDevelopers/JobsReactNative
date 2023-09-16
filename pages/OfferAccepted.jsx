@@ -32,7 +32,7 @@ const OfferAccepted = ({ route, navigation }) => {
 
   return (
     <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
-      <View style={{ backgroundColor: '#EAEAEA' }}>
+      <View style={{ backgroundColor: '#EAEAEA', }}>
         <View style={{ flexDirection: 'row', height: 90 }}>
           <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
             width: 22,
@@ -51,7 +51,7 @@ const OfferAccepted = ({ route, navigation }) => {
         <View style={{ paddingHorizontal: 106, marginTop: 4 }}>
           <Text style={{ backgroundColor: '#0EB000', textAlign: "center", borderRadius: 20, fontSize: 16, fontFamily: 'poppins_bold', color: 'white', marginVertical: 4, paddingVertical: 7 }}>{job?.address}</Text>
         </View>
-        <SafeAreaView style={{ marginTop: 10 }}>
+        <View style={{ marginTop: 10 }}>
 
 
           <View style={{
@@ -113,17 +113,19 @@ const OfferAccepted = ({ route, navigation }) => {
                 </View>
               </View>
             </View>
-            <Text style={{ fontSize: 18, fontFamily: 'poppins_bold', marginLeft: 15, marginTop: 10 }}>About Me: </Text>
-            <Text style={{ marginHorizontal: 25, fontSize: 15, fontFamily: 'poppins_medium', }}>{job?.description}</Text>
+            <View style={{ height: 500, }} >
+              <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>About Me: </Text>
+              <ScrollView scrollEnabled={true}
+                nestedScrollEnabled={true} >
+                <Text style={{ marginHorizontal: 25, fontSize: 14, fontFamily: 'poppins_medium', overflow: 'scroll', padding: 10 }}>{job?.description}</Text>
+                    </ScrollView>
+            </View>
             <View style={{ flexDirection: 'row', justifyContent: "center", gap: 20, marginTop: 10 }}>
               <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#143D59', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Hire</Text>
               <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Ignore</Text>
-
             </View>
-
           </View>
-
-        </SafeAreaView>
+        </View>
       </View>
     </ScrollView>
   )
