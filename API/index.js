@@ -220,3 +220,6 @@ export const sendOffer = (job, user, offerType, offer, offerStatus, date) => API
     offerStatus: offerStatus,
     date: date
 })
+export const sentOffers = (id) => API.post('/offers/company', {
+    company: id
+})

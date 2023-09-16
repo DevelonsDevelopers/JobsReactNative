@@ -103,3 +103,7 @@ export const CREATE_CV_COURSE = "CREATE_CV_COURSE"
 //BOOKMARK: ========
 export const ALL_BOOKMARKS = "ALL_BOOKMARK";
 export const BOOKMARK_JOB = "BOOKMARK_JOB";
+
+
+//OFFERS: ============
+export const SENT_OFFERS = "SENT_OFFERS";

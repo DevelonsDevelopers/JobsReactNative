@@ -254,7 +254,7 @@ function PostJob({ navigation }) {
             }}>Users</Text>
           </Ripple>
           <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
-            onPress={() => navigation.push('AppliedUsers')} style={{
+            onPress={() => navigation.push('SentOffers')} style={{
               flex: 0.5,
               backgroundColor: '#F0A51E',
               paddingHorizontal: 45,
