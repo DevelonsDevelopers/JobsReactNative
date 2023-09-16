@@ -211,7 +211,7 @@ function PostJob({ navigation }) {
                 // backgroundColor:'violet',
               }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
             <View style={{ width: '100%', paddingEnd: 160 }}>
-              <Pressable ><Image
+              <Pressable onPress={() => navigation.push('Payment')} ><Image
                 style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
             </View>
@@ -254,7 +254,7 @@ function PostJob({ navigation }) {
             }}>Users</Text>
           </Ripple>
           <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
-            onPress={() => navigation.push('AppliedUsers')} style={{
+            onPress={() => navigation.push('SentOffers')} style={{
               flex: 0.5,
               backgroundColor: '#F0A51E',
               paddingHorizontal: 45,

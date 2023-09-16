@@ -100,7 +100,7 @@ const OfferSend = ({ route, navigation }) => {
                         fontSize: 16
                     }}>Proposal</Text>
                 </View>
-                    <TextInput onChangeText={text => setProposal(text)} multiline={true} style={{ textAlign: 'center', borderWidth: 0.2, borderColor: 'gray', borderRadius: 18, marginTop: 15 }} placeholder='write Your proposal' numberOfLines={17} />
+                    <TextInput onChangeText={text => setProposal(text)} multiline={true} style={{ textAlign: 'center', borderWidth: 0.2, borderColor: 'gray', borderRadius: 18, marginTop: 15 ,padding:30,fontSize:11,fontFamily:'poppins_medium',lineHeight:45}} placeholder='write Your proposal' numberOfLines={17} />
             </View>
             <Pressable onPress={() => SendOffer(job, user, type, proposal)} style={{
                 backgroundColor: '#13A3E1',
