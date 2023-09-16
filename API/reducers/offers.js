@@ -1,4 +1,4 @@
-import {SENT_OFFERS, ERROR, LOADING, NODATA, SUCCESS, SENT_OFFERS_BY_JOB} from "../../Utils/Constants";
+import {SENT_OFFERS, ERROR, LOADING, NODATA, SUCCESS, SENT_OFFERS_BY_JOB, OFFERS} from "../../Utils/Constants";
 
 const offers = (state = {isLoading: true, success: false, error: false, nodata: false}, action) => {
     switch (action.type) {
@@ -14,6 +14,8 @@ const offers = (state = {isLoading: true, success: false, error: false, nodata: 
             return {...state, sentOffers: action.payload.sentOffers}
         case SENT_OFFERS_BY_JOB:
             return {...state, jobOffers: action.payload.jobOffers}
+        case OFFERS:
+            return {...state, offers: action.payload.offers}
         default:
             return state
     }

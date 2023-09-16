@@ -1,8 +1,11 @@
 import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView} from "react-native";
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {View} from 'react-native'
 import {useNavigation} from "@react-navigation/native";
 import Resume from "./Resume";
+import {useDispatch, useSelector} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {FetchOffers, FetchSentOffers} from "../API/actions/offersActions";
 
 const data = [
     {"name": "Facebook"},
@@ -11,6 +14,41 @@ const data = [
     {"name": "Youtube"}
 ]
 const Offers = ({navigation}) => {
+
+    const dispatch = useDispatch();
+    const [login, isLogin] = useState(false);
+    const offers = useSelector(state => state.offers.sentOffers)
+
+    const [ID, setID] = useState()
+
+
+
+    useEffect(() => {
+        console.log(ID)
+    }, [ID])
+
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
+
+    const [visible, setVisible] = useState(false)
+    const toggleVisibility = () => setVisible(!visible)
+
+    useEffect(() => {
+        if (ID) {
+            dispatch(FetchOffers(ID))
+        }
+    }, [dispatch, ID]);
+
+    useEffect(() => {
+        console.log(offers)
+    }, [offers]);
+
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
 
@@ -42,7 +80,7 @@ const Offers = ({navigation}) => {
                 </View>
                 <SafeAreaView>
                     <FlatList nestedScrollEnabled={false} scrollEnabled={false}
-                              style={{marginHorizontal: 0, marginTop: 10}} data={data} renderItem={({item}) => (
+                              style={{marginHorizontal: 0, marginTop: 10}} data={offers} renderItem={({item}) => (
                         <View style={{
                             marginLeft: 25,
                             marginRight: 25,

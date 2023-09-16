@@ -108,3 +108,4 @@ export const BOOKMARK_JOB = "BOOKMARK_JOB";
 //OFFERS: ============
 export const SENT_OFFERS = "SENT_OFFERS";
 export const SENT_OFFERS_BY_JOB = "SENT_OFFERS_BY_JOB"
+export const OFFERS = "OFFERS"

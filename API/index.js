@@ -226,3 +226,6 @@ export const sentOffers = (id) => API.post('/offers/company', {
 export const sentOffersByJob = (id) => API.post('/offers/job', {
     job: id
 })
+export const offers = (user) => API.post('/offers/user', {
+    user: user
+})
