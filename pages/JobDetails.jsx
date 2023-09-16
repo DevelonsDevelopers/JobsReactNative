@@ -8,6 +8,7 @@ import { BOOKMARK_JOB, RESET } from "../Utils/Constants";
 import { applyJob, bookmarkJob, removeBookmark } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ApplyModal from "../Components/ApplyModal";
+import WebView from "react-native-webview";
 
 const JobDetails = ({ route, navigation }) => {
 
@@ -251,12 +252,11 @@ const JobDetails = ({ route, navigation }) => {
                                     marginLeft: 15,
                                     marginTop: 10
                                 }}>Description: </Text>
-                                <Text style={{
+                                <WebView source={{ html: job?.description}} style={{
                                     marginHorizontal: 25,
-                                    fontSize: 12,
                                     fontFamily: 'poppins_medium',
                                     minHeight: 250
-                                }}>{job?.description}</Text>
+                                }}></WebView>
                                 <View style={{
                                     flexDirection: 'row',
                                     justifyContent: "center",

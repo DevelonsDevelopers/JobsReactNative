@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
 
-function Response({ navigation }) {
+function SentOffers({ navigation }) {
 
   const dispatch = useDispatch();
   const [login, isLogin] = useState(false);
@@ -151,4 +151,4 @@ function Response({ navigation }) {
   )
 }
 
-export default Response
+export default SentOffers

@@ -206,7 +206,7 @@ function PostJob({ navigation }) {
               // backgroundColor:'violet',
             }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
             <View style={{ width: '100%',  paddingEnd: 160 }}>
-              <Pressable ><Image
+              <Pressable onPress={() => navigation.push("Payment")}><Image
                 style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
             </View>
