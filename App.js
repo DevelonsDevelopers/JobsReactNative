@@ -60,6 +60,8 @@ import ViewResume from './pages/ViewResume';
 import {StripeProvider} from "@stripe/stripe-react-native";
 import StripeTest from "./pages/StripeTest";
 import PaymentScreen from "./pages/PaymentScreen";
+import OffersByJob from "./pages/OffersByJob";
+import AppliedByJob from "./pages/AppliedByJob";
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
@@ -179,6 +181,10 @@ function App() {
                                       options={{title: "Stripe", headerShown: false}}/>
                         <Stack.Screen name="Payment" component={PaymentScreen}
                                       options={{title: "Payment", headerShown: false}}/>
+                        <Stack.Screen name="OffersByJob" component={OffersByJob}
+                                      options={{title: "OffersByJob", headerShown: false}}/>
+                        <Stack.Screen name="AppliedByJob" component={AppliedByJob}
+                                      options={{title: "AppliedByJob", headerShown: false}}/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </Provider>

@@ -19,8 +19,8 @@ function JobPosted({ navigation }) {
     <View style={{ flex: 1 }}>
 
       <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
-      
-          
+
+
         <View style={{
           flexDirection: 'column',
           width: '100%',
@@ -70,10 +70,10 @@ function JobPosted({ navigation }) {
                 <View style={{ paddingHorizontal: 50 }}><Text style={{ backgroundColor: '#D9D9D9', textAlign: "center", paddingVertical: 6, borderRadius: 20, fontSize: 12, fontFamily: 'poppins_medium' }}>Salary {item.salary}/month</Text></View>
                 <View style={{ paddingHorizontal: 30, marginTop: 14 }}>
                   <Ripple rippleColor="white" onPress={() => navigation.push('RecommendedUser', { job: item.id })}><Text style={{ backgroundColor: '#143D59', textAlign: "center", borderRadius: 20, fontSize: 14, fontFamily: 'poppins_bold', color: 'white', marginVertical: 4, paddingVertical: 11 }}>Recommended Users</Text></Ripple>
-                  <Ripple rippleColor="white" onPress={() => navigation.push('AppliedUsers')} > 
+                  <Ripple rippleColor="white" onPress={() => navigation.push('AppliedByJob', { job: item.id })} >
                   <Text style={{ backgroundColor: '#207A00', textAlign: "center", borderRadius: 20, fontSize: 14, fontFamily: 'poppins_bold', color: 'white', marginVertical: 4, paddingVertical: 11 }}> Applied Users </Text>
                   </Ripple>
-                  <Ripple rippleColor="white" onPress={() => navigation.push('OfferSend')} > 
+                  <Ripple rippleColor="white" onPress={() => navigation.push('OffersByJob', { job: item.id })} >
                   <Text style={{ backgroundColor: '#0098FF', textAlign: "center", borderRadius: 20, fontSize: 14, fontFamily: 'poppins_bold', color: 'white', marginVertical: 4, paddingVertical: 11 }}> Sent Offers </Text>
                   </Ripple>
                   </View>

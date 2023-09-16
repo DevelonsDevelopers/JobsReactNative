@@ -16,10 +16,10 @@ function OffersByJob({ route, navigation}) {
     const toggleVisibility = () => setVisible(!visible)
 
     useEffect(() => {
-        if (ID) {
+        if (job) {
             dispatch(FetchSentOffersByJob(job))
         }
-    }, [dispatch, ID]);
+    }, [dispatch, job]);
 
     useEffect(() => {
         console.log(offers)

@@ -2,7 +2,7 @@ import {
     ALL_APPLIED,
     ALL_BOOKMARKS,
     ERROR,
-    GET_APPLIED_BY_COMPANY,
+    GET_APPLIED_BY_COMPANY, GET_APPLIED_BY_JOB,
     LOADING,
     NODATA,
     SUCCESS
@@ -36,6 +36,24 @@ export const AppliedByCompany = (company) => async (dispatch) => {
             dispatch({type: SUCCESS})
         } else {
             dispatch({type: GET_APPLIED_BY_COMPANY, payload: {companyApplied: data}})
+            dispatch({type: SUCCESS})
+            dispatch({type: NODATA})
+        }
+    } catch (error) {
+        console.log(error)
+        dispatch({type: ERROR})
+    }
+}
+
+export const FetchAppliedByJob = (job) => async (dispatch) => {
+    try {
+        dispatch ({ type: LOADING })
+        const { data: { data } } = await api.appliedByJob(job);
+        if (data.length > 0) {
+            dispatch({type: GET_APPLIED_BY_JOB, payload: {appliedUsers: data}})
+            dispatch({type: SUCCESS})
+        } else {
+            dispatch({type: GET_APPLIED_BY_JOB, payload: {appliedUsers: data}})
             dispatch({type: SUCCESS})
             dispatch({type: NODATA})
         }

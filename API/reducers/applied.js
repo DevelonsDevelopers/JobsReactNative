@@ -1,4 +1,12 @@
-import {ALL_APPLIED, ERROR, GET_APPLIED_BY_COMPANY, LOADING, NODATA, SUCCESS} from "../../Utils/Constants";
+import {
+    ALL_APPLIED,
+    ERROR,
+    GET_APPLIED_BY_COMPANY,
+    GET_APPLIED_BY_JOB,
+    LOADING,
+    NODATA,
+    SUCCESS
+} from "../../Utils/Constants";
 
 const applied = (state = {isLoading: true, success: false, error: false, nodata: false}, action) => {
     switch (action.type){
@@ -14,6 +22,8 @@ const applied = (state = {isLoading: true, success: false, error: false, nodata:
             return {...state, appliedJobs: action.payload.appliedJobs}
         case GET_APPLIED_BY_COMPANY:
             return {...state, companyApplied: action.payload.companyApplied}
+        case GET_APPLIED_BY_JOB:
+            return {...state, appliedUsers: action.payload.appliedUsers}
         default:
             return state
     }

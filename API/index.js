@@ -62,7 +62,7 @@ export const applyJob = (job, user, date, proposal) => API.post('/applied/create
     proposal: proposal
 })
 export const appliedJobs = (user) => API.post('/applied/user', { user: user })
-export const appliedJob = (user, job) => API.post('/applied/job', { user: user, job: job })
+export const appliedByJob = (job) => API.post('/applied/job', { job: job })
 export const appliedByCompany = (company) => API.post('/applied/company', { company: company })
 
 
