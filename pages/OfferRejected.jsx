@@ -1,15 +1,36 @@
 import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView } from "react-native";
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Resume from "./Resume";
+import { useDispatch, useSelector } from "react-redux";
+import { JobByID } from "../API/actions/jobActions";
 
-const OfferRejected = ({ navigation }) => {
+
+const OfferRejected = ({ route, navigation }) => {
+
+  const { ID } = route.params
+
+  const dispatch = useDispatch()
+
+  const job = useSelector(state => state.job.job)
+
+  useEffect(() => {
+    if (ID) {
+      dispatch(JobByID(0,ID))
+    }
+  }, [dispatch, ID]);
+
+  useEffect(() => {
+    console.log(job)
+  }, [job])
+
+
   return (
     <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
       <View style={{ backgroundColor: '#EAEAEA' }}>
         <View style={{ flexDirection: 'row', height: 90 }}>
-          <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
+          <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
             width: 22,
             height: 20,
             marginTop: 70,
@@ -22,7 +43,7 @@ const OfferRejected = ({ navigation }) => {
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
           </View>
         </View>
-        <Text style={{ fontSize: 22, fontFamily: 'poppins_bold', textAlign: "center", marginTop: 40 }}>Social Media Marketing</Text>
+        <Text style={{ fontSize: 22, fontFamily: 'poppins_bold', textAlign: "center", marginTop: 40 }}>{job?.title}</Text>
         <View style={{ paddingHorizontal: 106, marginTop: 4 }}>
           <Text style={{ backgroundColor: '#FF3131', textAlign: "center", borderRadius: 20, fontSize: 16, fontFamily: 'poppins_bold', color: 'white', marginVertical: 4, paddingVertical: 7 }}>OFFER REJECTED</Text>
         </View>
