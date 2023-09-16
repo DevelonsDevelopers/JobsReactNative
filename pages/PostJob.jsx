@@ -1,4 +1,4 @@
-import { FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
+import { FlatList, Image, Linking, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
@@ -6,6 +6,7 @@ import { CompanyJobs } from "../API/actions/jobActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ripple from "react-native-material-ripple";
 import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
+import WebsiteModal from "../Components/WebsiteModal";
 
 function PostJob({ navigation }) {
 
@@ -68,8 +69,14 @@ function PostJob({ navigation }) {
   const [loadingVisible, setLoadingVisible] = useState(false)
   const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
 
+
+
+  const [webVisible,setWebVisible ] = useState(false)
+  const toggWebVisibility = () => setWebVisible(!webVisible)
+
   return (
     <View style={{ flex: 1 }}>
+      <WebsiteModal visible={webVisible} toggleRequireVisible={toggWebVisibility} />
       <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
       <Modal visible={visible} animationType={"fade"} transparent={true}>
         <View style={{
@@ -194,18 +201,18 @@ function PostJob({ navigation }) {
             <Pressable onPress={() => toggleVisibility()} style={{
               marginTop: 60,
               paddingLeft: 30,
-              paddingRight:30,
-              paddingTop:10
+              paddingRight: 30,
+              paddingTop: 10
             }}>
               <Image style={{
-              width: 22,
-              height: 20,
+                width: 22,
+                height: 20,
 
 
-              tintColor: '#fff',
-              // backgroundColor:'violet',
-            }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
-            <View style={{ width: '100%',  paddingEnd: 160 }}>
+                tintColor: '#fff',
+                // backgroundColor:'violet',
+              }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
+            <View style={{ width: '100%', paddingEnd: 160 }}>
               <Pressable ><Image
                 style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
@@ -297,15 +304,17 @@ function PostJob({ navigation }) {
             paddingVertical: 10
           }}>Post Jobs using your portal</Text>
           <View style={{ paddingHorizontal: 60 }}>
-            <Text style={{
-              textAlign: 'center',
-              backgroundColor: 'white',
-              paddingVertical: 8,
-              borderRadius: 20,
-              color: '#0038FF',
-              fontSize: 12,
-              fontFamily: 'poppins_medium'
-            }}>https://www.example.com</Text>
+            <Ripple rippleColor="blue" rippleOpacity={0.1} rippleDuration={400} rippleSize={300}
+             onPress={() => toggWebVisibility()}
+                style={{
+                textAlign: 'center',
+                backgroundColor: 'white',
+                paddingVertical: 8,
+                borderRadius: 20,
+                color: '#0038FF',
+                fontSize: 12,
+                fontFamily: 'poppins_medium'
+              }}><Text style={{textAlign:'center',color: '#0038FF', }} >https://www.example.com </Text></Ripple>
           </View>
           <Text style={{
             textAlign: 'center',
@@ -340,7 +349,7 @@ function PostJob({ navigation }) {
           <FlatList scrollEnabled={false} nestedScrollEnabled={true}
             style={{ marginHorizontal: 30, marginTop: 10 }} data={companyJobs} renderItem={({ item }) => (
               <Ripple rippleColor="gray" rippleOpacity={0.2} rippleDuration={800} rippleSize={400}
-              onPress={() => navigation.push('OfferAccepted',{ID:item.id})}
+                onPress={() => navigation.push('OfferAccepted', { ID: item.id })}
                 style={{
                   flex: 1,
                   flexDirection: 'row',
