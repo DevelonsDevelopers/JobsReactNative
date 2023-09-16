@@ -223,3 +223,6 @@ export const sendOffer = (job, user, offerType, offer, offerStatus, date) => API
 export const sentOffers = (id) => API.post('/offers/company', {
     company: id
 })
+export const sentOffersByJob = (id) => API.post('/offers/job', {
+    job: id
+})
