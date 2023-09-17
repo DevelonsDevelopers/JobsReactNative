@@ -21,12 +21,12 @@ export const CompanyData = (id) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
         const { data: { data } } = await api.fetchCompany(id);
-        if (data.length > 0) {
+        // if (data.length !== undefined) {
             dispatch({type: GET_COMPANY, payload: {company: data}})
             dispatch({type: SUCCESS})
-        } else {
-            dispatch({type: NODATA})
-        }
+        // } else {
+        //     dispatch({type: NODATA})
+        // }
     } catch (error) {
         console.log(error)
         dispatch({type: ERROR})

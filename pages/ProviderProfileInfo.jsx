@@ -40,8 +40,8 @@ const ProviderProfileInfo = ({ navigation }) => {
 
 
     useEffect(() => {
-        console.log(companies)
-    }, [companies])
+        console.log(company)
+    }, [company])
 
 
 
@@ -79,7 +79,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                         marginTop: 10,
                         marginHorizontal: 20,
                         paddingBottom: 20
-                    }}>{companies?.company_name}</Text>
+                    }}>{company?.name}</Text>
                 </View>
                 <View style={{
                     backgroundColor: '#fff',
