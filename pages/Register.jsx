@@ -98,11 +98,8 @@ function Register({ route, navigation }) {
                     </View>
                 </View>
             </Modal>
-            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
-                <Image style={{tintColor: '#000', width: 40, height: 40}}
-                       source={require('../assets/back_arrow.png')}/>
-            </View>
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center',marginTop:60}}>
                 <Text style={{color: '#000', fontWeight: 700, fontSize: 18, marginTop: 90}}>Welcome</Text>
                 <Text style={{color: '#000', fontFamily: 'poppins_light', width: 250, textAlign: 'center', marginBottom: 20}}>Let's
                     help you meet up
