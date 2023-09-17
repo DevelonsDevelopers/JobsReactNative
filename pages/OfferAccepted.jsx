@@ -6,6 +6,7 @@ import Resume from "./Resume";
 import { useDispatch, useSelector } from "react-redux";
 import { JobByID } from "../API/actions/jobActions";
 import moment from "moment";
+import WebView from "react-native-webview";
 
 const OfferAccepted = ({ route, navigation }) => {
 
@@ -109,11 +110,16 @@ const OfferAccepted = ({ route, navigation }) => {
                 </View>
               </View>
             </View>
-            <View style={{ height: 500, }} >
+            <View  >
               <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>About Me: </Text>
-              <ScrollView scrollEnabled={true}
-                nestedScrollEnabled={true} >
-                <Text style={{ marginHorizontal: 25, fontSize: 14, fontFamily: 'poppins_medium', overflow: 'scroll', padding: 10 }}>{job?.description}</Text>
+              <ScrollView >
+                <WebView source={{ html: job?.description }} style={{marginTop: 20, flex: 1,minHeight:800 }}
+                  javaScriptEnabled={false}
+                  domStorageEnabled={false}
+                  startInLoadingState={true}
+                  scalesPageToFit={false}
+                  scrollEnabled={true}
+                ></WebView>
               </ScrollView>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: "center", gap: 20, marginTop: 10 }}>
