@@ -24,9 +24,6 @@ export const CompanyData = (id) => async (dispatch) => {
         // if (data.length !== undefined) {
             dispatch({type: GET_COMPANY, payload: {company: data}})
             dispatch({type: SUCCESS})
-        // } else {
-        //     dispatch({type: NODATA})
-        // }
     } catch (error) {
         console.log(error)
         dispatch({type: ERROR})
