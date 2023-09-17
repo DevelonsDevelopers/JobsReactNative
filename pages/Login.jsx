@@ -5,7 +5,7 @@ import { LoginAuthentication, ProviderLoginAuthentication } from "../API/actions
 import Toast from "react-native-toast-message";
 import { RESET_SEEKER } from "../Utils/Constants";
 import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
-import { google } from "../API";
+import {google, googleProvider} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // import {GoogleSignin, statusCodes} from "@react-native-google-signin/google-signin";
@@ -60,7 +60,6 @@ function Login({ route, navigation }) {
         webClientId: '404623696003-doe1cpjrlljj8om770ha3ri9s9vatoc8.apps.googleusercontent.com', // Replace with your actual Web Client ID
     });
 
-
     const handleGoogleSignIn = async () => {
         try {
             await GoogleSignin.hasPlayServices();
@@ -73,13 +72,17 @@ function Login({ route, navigation }) {
                 const { data: { message } } = res;
                 console.log(message)
                 if (responseCode === 200) {
-                    var ID = (data.id).toString()
+                    if (data.affectedRows === 1){
+                        var ID = (data.insertId).toString()
+                    } else {
+                        var ID = (data.id).toString()
+                    }
                     await AsyncStorage.setItem("LOGIN", 'true')
                     await AsyncStorage.setItem("ID", ID)
                     await AsyncStorage.setItem("USER", "SEEKER")
-                    await AsyncStorage.setItem("NAME", data.name)
-                    await AsyncStorage.setItem("EMAIL", data.email)
-                    await AsyncStorage.setItem("USERNAME", data.username)
+                    await AsyncStorage.setItem("NAME", user.name)
+                    await AsyncStorage.setItem("EMAIL", user.email)
+                    await AsyncStorage.setItem("USERNAME", user.givenName + (user.id).substring((user.id).length - 6))
                     navigation.popToTop()
                     navigation.replace('Home')
                 } else {
@@ -99,83 +102,47 @@ function Login({ route, navigation }) {
         }
     };
 
+    const handleProviderGoogleSignIn = async () => {
+        try {
+            await GoogleSignin.hasPlayServices();
+            const userInfo = await GoogleSignin.signIn();
+            const { idToken } = userInfo;
+            const { user } = userInfo;
+            await googleProvider(user.name, '', 0, 0, user.email, '', '', '', '', user.id).then(async res => {
+                console.log(res)
+                const { data: { data } } = res;
+                const { data: { responseCode } } = res;
+                const { data: { message } } = res;
+                console.log(data)
+                if (responseCode === 200) {
+                    if (data.affectedRows === 1){
+                        var ID = (data.insertId).toString()
+                    } else {
+                        var ID = (data.id).toString()
+                    }
+                    await AsyncStorage.setItem("LOGIN", 'true')
+                    await AsyncStorage.setItem("ID", ID)
+                    await AsyncStorage.setItem("USER", "PROVIDER")
+                    await AsyncStorage.setItem("NAME", user.name)
+                    await AsyncStorage.setItem("EMAIL", user.email)
+                    navigation.popToTop()
+                    navigation.replace('PostJob')
+                } else {
 
-    // const isUserEqual = (googleUser, firebaseUser) => {
-    //     if (firebaseUser) {
-    //         var providerData = firebaseUser.providerData;
-    //         for (var i = 0; i < providerData.length; i++) {
-    //             if (providerData[i].providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
-    //                 providerData[i].uid === googleUser.getBasicProfile().getId()) {
-    //                 // We don't need to reauth the Firebase connection.
-    //                 return true;
-    //             }
-    //         }
-    //     }
-    //     return false;
-    // }
-    //
-    // const onSignIn = (googleUser)  => {
-    //     console.log('Google Auth Response', googleUser);
-    //     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-    //     var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
-    //         unsubscribe();
-    //         // Check if we are already signed-in Firebase with the correct user.
-    //         if (!isUserEqual(googleUser, firebaseUser)) {
-    //             // Build Firebase credential with the Google ID token.
-    //             var credential = firebase.auth.GoogleAuthProvider.credential(
-    //                 googleUser.idToken,
-    //                 googleUser.accessToken);
-    //             // Sign in with credential from the Google user.
-    //             firebase.auth().signInAndRetrieveDataWithCredential(credential).then(function(result){
-    //
-    //                 console.log("user sign in");
-    //                 firebase
-    //                     .database()
-    //                     .ref('/users'+result.user.uid)
-    //                     .set({
-    //                         gmail:result.user.email,
-    //                         profile_picture:result.additionalUserInfo.profile.profile_picture,
-    //                         locale:result.additionalUserInfo.profile_picture.locale,
-    //                         first_name:result.additionalUserInfo.given_name,
-    //                         last_name:result.additionalUserInfo.first_name
-    //                     })
-    //                     .then(function(snapshot){
-    //
-    //                     });
-    //             }).catch(function(error) {
-    //                 // Handle Errors here.
-    //                 var errorCode = error.code;
-    //                 var errorMessage = error.message;
-    //                 // The email of the user's account used.
-    //                 var email = error.email;
-    //                 // The firebase.auth.AuthCredential type that was used.
-    //                 var credential = error.credential;
-    //                 // ...
-    //             });
-    //         } else {
-    //             console.log('User already signed-in Firebase.');
-    //         }
-    //     }.bind(this));
-    // }
-    // const signInWithGoogleAsync = async () => {
-    //     try {
-    //         const result = await Google.logInAsync({
-    //             androidClientId: '404623696003-ige6pbsc79139f0rl6846n33df3kenfo.apps.googleusercontent.com',
-    //             behavior: 'web',
-    //             iosClientId: '404623696003-tsj6kofl9jsis8jro1o68l4ohp09t1i1.apps.googleusercontent.com', //enter ios client id
-    //             scopes: ['profile', 'email']
-    //         });
-    //
-    //         if (result.type === 'success') {
-    //             onSignIn(result);
-    //             return result.accessToken;
-    //         } else {
-    //             return { cancelled: true };
-    //         }
-    //     } catch (e) {
-    //         return { error: true };
-    //     }
-    // };
+                }
+            }).catch(error => console.log(error))
+        } catch (error) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // User canceled the sign-in process
+                console.log('Google sign-in canceled');
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                // Another sign-in process is already in progress
+                console.log('Google sign-in in progress');
+            } else {
+                console.error('Google sign-in error:', error);
+            }
+        }
+    };
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#F0A51E' }}>
@@ -262,7 +229,14 @@ function Login({ route, navigation }) {
                     paddingVertical: 15
                 }}><Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Log In</Text></Pressable>
                 <View style={{ flexDirection: 'row' }}>
-                    <Pressable onPress={() => handleGoogleSignIn()} style={{
+                    <Pressable onPress={() => {
+                        if (USER==="SEEKER") {
+                            handleGoogleSignIn()
+                        } else {
+                            handleProviderGoogleSignIn()
+                        }
+                    }
+                    } style={{
                         width: '41%',
                         backgroundColor: '#fff',
                         alignItems: 'center',

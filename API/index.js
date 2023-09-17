@@ -54,6 +54,19 @@ export const loginProvider = (email, password) => API.post('/providerAuth/login'
     password: password
 })
 
+export const googleProvider = (name, size, city, country, email, phone, address, headquater, type, password) => API.post('/providerAuth/google', {
+    name: name,
+    size: size,
+    city: city,
+    country: country,
+    email: email,
+    phone: phone,
+    address: address,
+    headquater: headquater,
+    type: type,
+    password: password
+})
+
 //APPLIED API CALL ==============================
 export const applyJob = (job, user, date, proposal) => API.post('/applied/create', {
     job: job,
