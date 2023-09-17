@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     ActivityIndicator,
     BackHandler,
@@ -12,7 +12,40 @@ import {
     TextInput,
     View
 } from "react-native";
+import { useDispatch, useSelector } from 'react-redux';
+import { CompanyData } from '../API/actions/companyActions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const ProviderAccountManage = ({navigation}) => {
+
+    const dispatch = useDispatch();
+
+    const [ID, setID] = useState()
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
+
+    const company = useSelector(state => state.company.company)
+
+    useEffect(() => {
+        if (ID) {
+            dispatch(CompanyData(ID))
+        }
+    }, [dispatch, ID]);
+
+
+    useEffect(() => {
+        console.log(company)
+    }, [company])
+
+
+
+
+
     return (
         <View style={{ flex: 1 }}>
 
@@ -125,7 +158,7 @@ const ProviderAccountManage = ({navigation}) => {
                                     fontFamily: 'poppins_medium',
                                     width: '100%',
                                     textAlign: 'left'
-                                }}></TextInput>
+                                }}> {company?.name} </TextInput>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
@@ -160,7 +193,7 @@ const ProviderAccountManage = ({navigation}) => {
                                     fontFamily: 'poppins_medium',
                                     width: '100%',
                                     textAlign: 'left'
-                                }}></TextInput>
+                                }}>{company?.email}</TextInput>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
@@ -179,7 +212,7 @@ const ProviderAccountManage = ({navigation}) => {
                                 fontFamily: 'poppins_light',
                                 width: '100%',
                                 textAlign: 'left'
-                            }}>Address</Text>
+                            }}>Headquater</Text>
                         </View>
                         <Pressable 
                             style={{
@@ -199,7 +232,7 @@ const ProviderAccountManage = ({navigation}) => {
                                         fontFamily: 'poppins_medium',
                                         width: '100%',
                                         textAlign: 'left'
-                                    }}></TextInput>
+                                    }}>{company?.headquater}</TextInput>
                             </View>
                         </Pressable>
                     </View>
@@ -246,7 +279,7 @@ const ProviderAccountManage = ({navigation}) => {
                                 fontFamily: 'poppins_medium',
                                 width: '100%',
                                 textAlign: 'left'
-                            }}></TextInput>
+                            }}>{company?.type}</TextInput>
                         </View>
                     </View>
                     <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
@@ -281,7 +314,7 @@ const ProviderAccountManage = ({navigation}) => {
                                         fontSize: 14,
                                         fontFamily: 'poppins_medium',
                                         textAlign: 'left'
-                                    }}></TextInput>
+                                    }}>{company?.phone}</TextInput>
                              
                                     <Image style={{ width: 14, height: 14, marginLeft: 'auto' }}
                                         source={require('../assets/verified.png')} />
@@ -325,7 +358,7 @@ const ProviderAccountManage = ({navigation}) => {
                                     fontFamily: 'poppins_medium',
                                     width: '100%',
                                     textAlign: 'left'
-                                }}></TextInput>
+                                }}>{company?.size}</TextInput>
                         </View>
                     </View>
                 </View>
@@ -374,44 +407,10 @@ const ProviderAccountManage = ({navigation}) => {
                                     fontFamily: 'poppins_medium',
                                     width: '100%',
                                     textAlign: 'left'
-                                }}></TextInput></Pressable>
+                                }}> {company?.city_name} </TextInput></Pressable>
                         </View>
                     </View>
-                    <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
-                        <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>HeadQuater Address</Text>
-                        </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <TextInput 
-                               
-                                placeholder={'Missing!!!'} style={{
-                                    color: '#000',
-                                    fontSize: 14,
-                                    fontFamily: 'poppins_medium',
-                                    width: '100%',
-                                    textAlign: 'left'
-                                }}></TextInput>
-                        </View>
-                    </View>
+                   
                     <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
                         <View style={{
                             flex: 0.7,
@@ -447,7 +446,7 @@ const ProviderAccountManage = ({navigation}) => {
                                     fontFamily: 'poppins_medium',
                                     width: '100%',
                                     textAlign: 'left'
-                                }}></TextInput></Pressable>
+                                }}> {company?.country_name} </TextInput></Pressable>
                         </View>
                     </View>
                 </View>
