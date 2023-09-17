@@ -96,21 +96,21 @@ const ProviderProfileInfo = ({ navigation }) => {
                         fontFamily: 'poppins_medium',
                         width: '100%',
                         textAlign: 'center'
-                    }}>{company?.type}</Text>
+                    }}>{company?.phone}</Text>
                     <Text style={{
                         color: '#000',
                         fontSize: 15,
                         fontFamily: 'poppins_semibold',
                         width: '100%',
                         textAlign: 'center'
-                    }}>develonsdeveloper@gmail.com</Text>
+                    }}>{company?.email}</Text>
                     <Text style={{
                         color: '#000',
                         fontSize: 14,
                         fontFamily: 'poppins_light',
                         width: '100%',
                         textAlign: 'center'
-                    }}>Lahore,pakistan</Text>
+                    }}>{company?.headquater}</Text>
                 </View>
                 <View style={{
                     flexDirection: 'row',
@@ -122,7 +122,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                     borderRadius: 30,
                     marginTop: 30
                 }}>
-                    <Pressable onPress={() => navigation.push('AppliedSaved', { screen: 0 })} style={{ flex: 1, paddingVertical: 20 }}>
+                    <Pressable onPress={() => navigation.push('AppliedUsers', { screen: 0 })} style={{ flex: 1, paddingVertical: 20 }}>
                         <Text style={{
                             color: '#fff',
                             fontSize: 14,
@@ -140,7 +140,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                         }}>5</Text>
                     </Pressable>
                     <View style={{ backgroundColor: '#fff', width: 3 }} />
-                    <Pressable onPress={() => navigation.push('AppliedSaved', { screen: 1 })} style={{ flex: 1, paddingVertical: 20 }}>
+                    <Pressable onPress={() => navigation.push('SentOffers', { screen: 1 })} style={{ flex: 1, paddingVertical: 20 }}>
                         <Text style={{
                             color: '#fff',
                             fontSize: 14,
