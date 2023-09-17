@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FetchSentOffers, FetchSentOffersByJob } from "../API/actions/offersActions";
+import moment from "moment";
 
 function OffersByJob({ route, navigation }) {
 
@@ -90,7 +91,7 @@ function OffersByJob({ route, navigation }) {
                                         textAlign: 'right',
                                         fontFamily: 'poppins_medium',
                                         fontSize: 13
-                                    }}>{item.date}</Text>
+                                    }}>{moment(item.date).format("MMM Do YY")}</Text>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
                                     <View style={{ flex: 1 }}>
@@ -100,22 +101,22 @@ function OffersByJob({ route, navigation }) {
                                             fontSize: 15,
                                             textAlign: "center",
                                             color: '#0044a9',
-                                        }}>{item.type}</Text>
+                                        }}>{item.offerType}</Text>
                                         <Text style={{
                                             fontFamily: 'poppins_medium',
                                             marginTop: 0,
                                             fontSize: 14,
                                             textAlign: "center"
-                                        }}>{item.name}</Text>
+                                        }}>{item.seeker_name}</Text>
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: 'row', flex: 1 }}>
                                     <Text style={{
                                         fontFamily: 'poppins_bold',
                                         fontSize: 16,
-                                    }}>React Native Developer</Text>
+                                    }}>{item.role}</Text>
                                 </View>
-                                <View style={{ paddingHorizontal: 64, }}>
+                                <View style={{ width:'60%',marginLeft:'auto',marginRight:'auto' }}>
                                     <Text style={{
                                         fontFamily: 'poppins_medium',
                                         fontSize: 13,
@@ -127,7 +128,7 @@ function OffersByJob({ route, navigation }) {
                                         borderRadius: 10,
                                         margin: 'auto',
                                     }}>
-                                        Salary $5000/month
+                                        Salary ${item.salary}
                                     </Text>
                                 </View>
                                 <View style={{ paddingHorizontal: 36, marginTop: 4 }}>

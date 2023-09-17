@@ -63,6 +63,7 @@ import PaymentScreen from "./pages/PaymentScreen";
 import OffersByJob from "./pages/OffersByJob";
 import AppliedByJob from "./pages/AppliedByJob";
 import PaymentSuccessful from './pages/PaymentSuccessful';
+import GoogleRegister from './pages/GoogleRegister';
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
@@ -188,6 +189,8 @@ function App() {
                                       options={{title: "AppliedByJob", headerShown: false}}/>
                         <Stack.Screen name="PaymentSuccesful" component={PaymentSuccessful}
                                       options={{title: "PaymentSuccessful", headerShown: false}}/>
+                        <Stack.Screen name="GoogleRegister" component={GoogleRegister}
+                                      options={{title: "GoogleRegister", headerShown: false}}/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </Provider>

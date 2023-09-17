@@ -81,6 +81,7 @@ function PostJob({ navigation }) {
     <View style={{ flex: 1 }}>
       <WebsiteModal visible={webVisible} toggleRequireVisible={toggWebVisibility} />
       <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
+    
       <Modal visible={visible} animationType={"fade"} transparent={true}>
         <View style={{
           flex: 1,
@@ -214,7 +215,7 @@ function PostJob({ navigation }) {
                 // backgroundColor:'violet',
               }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
             <View style={{ width: '100%', paddingEnd: 160 }}>
-              <Pressable onPress={() => navigation.push('Payment')} ><Image
+              <Pressable onPress={() => navigation.push('GoogleRegister')} ><Image
                 style={{ width: 200, height: 40, marginTop: 60, alignSelf: 'center' }}
                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
             </View>
