@@ -19,6 +19,11 @@ function PostJob({ navigation }) {
   const [ID, setID] = useState()
 
   useEffect(() => {
+    console.log(ID)
+}, [ID])
+
+
+  useEffect(() => {
     GetData()
   }, []);
   const GetData = async () => {
@@ -68,8 +73,6 @@ function PostJob({ navigation }) {
   // log out===================
   const [loadingVisible, setLoadingVisible] = useState(false)
   const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
-
-
 
   const [webVisible,setWebVisible ] = useState(false)
   const toggWebVisibility = () => setWebVisible(!webVisible)
