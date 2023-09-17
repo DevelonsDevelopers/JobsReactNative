@@ -213,6 +213,7 @@ export const fetchBookmarks = (user) => API.post('/bookmarks/all', { user: user 
 export const bookmarkJob = (job, user) => API.post('/bookmarks/add', { job: job, user: user })
 export const removeBookmark = (id) => API.delete('/bookmarks/remove', { data: { id: id }})
 
+
 //OFFERS API CALL
 export const sendOffer = (job, user, offerType, offer, offerStatus, date) => API.post('/offers/create', {
     job: job,
@@ -230,4 +231,10 @@ export const sentOffersByJob = (id) => API.post('/offers/job', {
 })
 export const offers = (user) => API.post('/offers/user', {
     user: user
+})
+export const offerResponse = (status, response, responseDate, id) => API.post('/offers/update', {
+    status: status,
+    response: response,
+    responseDate: responseDate,
+    id: id
 })

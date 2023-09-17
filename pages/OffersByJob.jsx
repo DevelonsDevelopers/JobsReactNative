@@ -7,10 +7,11 @@ import {FetchSentOffers, FetchSentOffersByJob} from "../API/actions/offersAction
 function OffersByJob({ route, navigation}) {
 
     const { job } = route.params;
+    console.log(job)
 
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
-    const offers = useSelector(state => state.offers.sentOffers)
+    const offers = useSelector(state => state.offers.jobOffers)
 
     const [visible, setVisible] = useState(false)
     const toggleVisibility = () => setVisible(!visible)
