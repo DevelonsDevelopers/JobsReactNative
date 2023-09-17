@@ -337,7 +337,7 @@ function Home({ navigation }) {
 						marginHorizontal: 20,
 						marginBottom: 15,
 						paddingHorizontal: 20,
-						
+
 						width:'92%'
 					}}>
 						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
@@ -364,7 +364,7 @@ function Home({ navigation }) {
 									height: 17,
 									tintColor: '#fff',
 									marginLeft: 14,
-									
+
 								}} source={require('../assets/saved.png')} alt={'Okay'} />
 								<Text numberOfLines={1}
 									style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Saved
@@ -400,7 +400,16 @@ function Home({ navigation }) {
 									Builder</Text>
 							</View>
 						</Ripple>
-						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200} style={{
+						<Ripple  rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
+								 onPress={() => {
+									 if (login) {
+										 navigation.push('Offers')
+									 } else {
+
+										 toggleRequireVisible()
+									 }
+								 }}
+								 style={{
 							height: '100%',
 							flex: 1,
 							flexDirection: 'column',
