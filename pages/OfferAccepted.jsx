@@ -64,7 +64,6 @@ const OfferAccepted = ({ route, navigation }) => {
           }}>
             <View style={{ flexDirection: 'row', flex: 1 }}>
               <Text style={{
-
                 paddingHorizontal: 10,
                 paddingTop: 4,
                 fontSize: 14,
