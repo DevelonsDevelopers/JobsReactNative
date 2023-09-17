@@ -79,7 +79,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                         marginTop: 10,
                         marginHorizontal: 20,
                         paddingBottom: 20
-                    }}>{company?.company_name}</Text>
+                    }}>{company?.name}</Text>
                 </View>
                 <View style={{
                     backgroundColor: '#fff',
