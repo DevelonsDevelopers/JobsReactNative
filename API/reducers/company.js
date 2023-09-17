@@ -1,4 +1,4 @@
-import {ALL_COMPANIES, ERROR, LOADING, NODATA, SUCCESS} from "../../Utils/Constants";
+import {ALL_COMPANIES, ERROR, GET_COMPANY, LOADING, NODATA, SUCCESS} from "../../Utils/Constants";
 
 const company = (state = {isLoading: true, success: false, error: false, nodata: false}, action) => {
     switch (action.type){
@@ -12,6 +12,8 @@ const company = (state = {isLoading: true, success: false, error: false, nodata:
             return {...state, isLoading: false, success: false, error: false, nodata: true}
         case ALL_COMPANIES:
             return {...state, companies: action.payload.companies}
+        case GET_COMPANY:
+            return {...state, company: action.payload.company}
         default:
             return state
     }

@@ -102,7 +102,9 @@ export const fetchAllCountries = () => API.get('/countries/all')
 
 //COMPANIES API CALL
 export const fetchAllCompanies = () => API.get('/companies/all')
-
+export const fetchCompany = (id) => API.post('/companies/get', {
+    id: id
+})
 export const completeCompany = (country, city, phone, headquater, type, id) => API.put('/companies/complete', {
     country: country,
     city: city,

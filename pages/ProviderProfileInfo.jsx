@@ -11,7 +11,7 @@ import {
     View
 } from "react-native";
 
-import { AllCompanies } from '../API/actions/companyActions';
+import {AllCompanies, CompanyData} from '../API/actions/companyActions';
 
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -30,11 +30,11 @@ const ProviderProfileInfo = ({ navigation }) => {
         setID(value);
     }
 
-    const companies = useSelector(state => state.company.companies)
+    const company = useSelector(state => state.company.company)
 
     useEffect(() => {
         if (ID) {
-            dispatch(AllCompanies(ID))
+            dispatch(CompanyData(ID))
         }
     }, [dispatch, ID]);
 
