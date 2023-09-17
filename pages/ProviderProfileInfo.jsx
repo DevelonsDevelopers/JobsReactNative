@@ -40,8 +40,8 @@ const ProviderProfileInfo = ({ navigation }) => {
 
 
     useEffect(() => {
-        console.log(companies)
-    }, [companies])
+        console.log(company)
+    }, [company])
 
 
 
@@ -79,7 +79,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                         marginTop: 10,
                         marginHorizontal: 20,
                         paddingBottom: 20
-                    }}>{companies?.company_name}</Text>
+                    }}>{company?.company_name}</Text>
                 </View>
                 <View style={{
                     backgroundColor: '#fff',
@@ -96,7 +96,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                         fontFamily: 'poppins_medium',
                         width: '100%',
                         textAlign: 'center'
-                    }}>111-222-333-444</Text>
+                    }}>{company?.type}</Text>
                     <Text style={{
                         color: '#000',
                         fontSize: 15,
