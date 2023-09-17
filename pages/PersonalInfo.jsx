@@ -375,7 +375,7 @@ function PersonalInfo({navigation}) {
                                            }}>
                                     <View>
                                         <TextInput
-
+                                            editable={false}
                                             onTouchStart={() => toggleGenderVisibility()}
                                             placeholder={'Missing!!!'} style={{
                                             color: '#000',
@@ -461,10 +461,10 @@ function PersonalInfo({navigation}) {
                                         <TextInput
                                             onChangeText={(text) => setSeekerData({...seekerData, phone: text})}
                                             placeholder={'Missing!!!'} style={{
-                                            color: '#000',
                                             fontSize: 14,
                                             fontFamily: 'poppins_medium',
-                                            textAlign: 'left'
+                                            textAlign: 'left',
+                                            width:'90%'
                                         }}>{seeker?.phone}</TextInput>
                                         {verified ?
                                             <Image style={{width: 14, height: 14, marginLeft: 'auto'}}

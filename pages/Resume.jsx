@@ -62,12 +62,12 @@ function Resume({ navigation }) {
                 tintColor: '#000'
               }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
             <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-              <Pressable onPress={() => navigation.push('CoverLetter')}><Image
+              <Pressable ><Image
                 style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
             </View>
           </View>
-          <View style={{ backgroundColor: '#D3D3D3', marginTop: 40, paddingVertical: 10, marginHorizontal: 40 }}>
+          <View style={{  marginTop: 40, paddingTop: 30, marginHorizontal: 40,paddingBottom:10 }}>
             <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.name}</Text>
             <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.address}</Text>
             <View style={{ flexDirection: "row", justifyContent: 'center', gap: 20, marginTop: 5 }}>
@@ -78,12 +78,12 @@ function Resume({ navigation }) {
           <View style={{ paddingHorizontal: 20 }}>
             <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
             <Text style={{ textAlign: 'center', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 10 }}>SALES AND MARKETING COORDINATOR / ACCOUNT MANAGER</Text>
-            <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
+            <Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
 
-            <Text style={{ fontSize: 11, fontFamily: 'poppins_semibold', marginVertical: 10 }}>{cv?.statement}</Text>
-            <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginVertical: 10,paddingHorizontal:10,paddingVertical:10 }}>{cv?.statement}</Text>
+            <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
             <Text style={{ fontSize: 14, fontFamily: 'poppins_semibold', marginVertical: 10, textAlign: 'center' }}>Key Skills</Text>
-            <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
+            <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
 
             <SafeAreaView style={{ marginHorizontal: 20, marginVertical: 10 }}>
               <FlatList scrollEnabled={false} nestedScrollEnabled={true}
@@ -94,16 +94,16 @@ function Resume({ navigation }) {
                 )} />
             </SafeAreaView>
             <Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', textAlign: 'center' }}>EMPLOYMENT HISTORY</Text>
-            <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
+            <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
             <ScrollView style={{ marginHorizontal: 20, marginVertical: 10 }}>
               <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                 data={cv?.careers} renderItem={({ item }) => (
                   <View>
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={{ flexDirection: 'row',gap:4 }}>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
                         {item.job}
                       </Text>
-                      <Text>|</Text>
+                      <Text style={{height:15,marginTop:-2 }} >|</Text>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', }}>
                         {item.timeperiod}
                       </Text>
@@ -119,22 +119,22 @@ function Resume({ navigation }) {
                     <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft: 'auto', marginTop: 6, marginBottom: 6 }}>
                       Phone : {item.phone}
                     </Text>
-                    <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
+                    <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
                   </View>
                 )} />
 
             </ScrollView>
             <Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', textAlign: 'center' }}>QUALIFICATIONS</Text>
-            <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
+            <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
             <SafeAreaView style={{ marginHorizontal: 20, marginVertical: 10 }}>
               <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                 data={cv?.educations} renderItem={({ item }) => (
                   <View >
-                    <View style={{ flexDirection: 'row', }}>
+                    <View style={{ flexDirection: 'row',gap:4 }}>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', }}>
                         {item.qualification}
                       </Text>
-                      <Text>|</Text>
+                      <Text style={{height:15,marginTop:-2 }} >|</Text>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
                         {item.institute}
                       </Text>
@@ -149,16 +149,16 @@ function Resume({ navigation }) {
                 )} />
             </SafeAreaView>
             <Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', textAlign: 'center' }}>TRAINING COURSES</Text>
-            <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
+            <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
             <SafeAreaView style={{ marginHorizontal: 20, marginVertical: 10 }}>
               <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                 data={cv?.courses} renderItem={({ item }) => (
                   <View >
-                    <View style={{ flexDirection: 'row', }}>
+                    <View style={{ flexDirection: 'row',gap:4 }}>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', }}>
                         {item.timeperiod}
                       </Text>
-                      <Text>|</Text>
+                      <Text style={{height:15,marginTop:-2 }}>|</Text>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
                         {item.course}
                       </Text>
