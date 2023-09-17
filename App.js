@@ -37,7 +37,7 @@ import JobPosted from './pages/JobPosted';
 import AppliedUsers from './pages/AppliedUsers';
 import SentOffers from './pages/SentOffers';
 import OfferAccepted from './pages/OfferAccepted';
-import OfferRejected from './pages/OfferRejected';
+// import OfferRejected from './pages/OfferRejected';
 import Recommendedjobs from './pages/Recommendedjobs';
 // import AppliedJobs from './pages/AppliedJobs';
 // import SavedJobs from './pages/SavedJobs';
@@ -62,6 +62,7 @@ import StripeTest from "./pages/StripeTest";
 import PaymentScreen from "./pages/PaymentScreen";
 import OffersByJob from "./pages/OffersByJob";
 import AppliedByJob from "./pages/AppliedByJob";
+import PaymentSuccessful from './pages/PaymentSuccessful';
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
@@ -149,8 +150,8 @@ function App() {
                                       options={{title: "SentOffers", headerShown: false}}/>
                         <Stack.Screen name="OfferAccepted" component={OfferAccepted}
                                       options={{title: "OfferAccepted", headerShown: false}}/>
-                        <Stack.Screen name="OfferRejected" component={OfferRejected}
-                                      options={{title: "OfferRejected", headerShown: false}}/>
+                        {/* <Stack.Screen name="OfferRejected" component={OfferRejected}
+                                      options={{title: "OfferRejected", headerShown: false}}/> */}
                         <Stack.Screen name="Recommendedjobs" component={Recommendedjobs}
                                       options={{title: "Recommendedjobs", headerShown: false}}/>
                         {/* <Stack.Screen name="SavedJobs" component={SavedJobs} options={{title: "SavedJobs", headerShown: false}}/> */}
@@ -185,6 +186,8 @@ function App() {
                                       options={{title: "OffersByJob", headerShown: false}}/>
                         <Stack.Screen name="AppliedByJob" component={AppliedByJob}
                                       options={{title: "AppliedByJob", headerShown: false}}/>
+                        <Stack.Screen name="PaymentSuccesful" component={PaymentSuccessful}
+                                      options={{title: "PaymentSuccessful", headerShown: false}}/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </Provider>

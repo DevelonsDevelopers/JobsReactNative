@@ -63,15 +63,17 @@ function SentOffers({ navigation }) {
                             }} source={require('../assets/back_arrow.png')}
                                 alt={'Okay'} />
                         </Pressable>
-                        <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                            <Image style={{
+                        <Pressable  onPress={() => navigation.push('PaymentSuccesful') }  style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
+                            <Image 
+                           
+                            style={{
                                 width: 150,
                                 height: 40,
                                 marginTop: 60,
                                 alignSelf: 'center'
                             }}
                                 source={require('../assets/logo.png')} alt={'Okay'} />
-                        </View>
+                        </Pressable>
                     </View>
                 </View>
                 <Text style={{ textAlign: 'center', fontSize: 19, fontFamily: 'poppins_semibold', marginBottom: 10 }}>Sent Offers</Text>
@@ -141,7 +143,7 @@ function SentOffers({ navigation }) {
                                 </View>
                                 <View style={{ paddingHorizontal: 36, marginTop: 4 }}>
                                     <Text
-                                        onPress={() => navigation.push('OfferRejected', { ID: item.job })}
+                                        onPress={() => navigation.push('OfferAccepted', { ID: item.job })}
                                         style={{
                                             backgroundColor: '#143D59',
                                             textAlign: "center",
