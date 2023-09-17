@@ -22,12 +22,12 @@ export const FetchSentOffersByJob = (job) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
         const { data: { data } } = await api.sentOffersByJob(job);
-        if (data.length > 0) {
+        // if (data.length > 0) {
             dispatch({type: SENT_OFFERS_BY_JOB, payload: {jobOffers: data}})
             dispatch({type: SUCCESS})
-        } else {
-            dispatch({type: NODATA})
-        }
+        // } else {
+        //     dispatch({type: NODATA})
+        // }
     } catch (error) {
         console.log(error)
         dispatch ({ type: ERROR })
