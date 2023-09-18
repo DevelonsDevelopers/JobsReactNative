@@ -104,7 +104,7 @@ function JobsByCity({route, navigation}) {
                     }}>Jobs</Text>
                 </View>
                 {loading ?
-                    <View style={{marginTop: 400}}>
+                    <View style={{marginTop: 200}}>
                         <ActivityIndicator size={60} color="#13A3E1"/>
                     </View>
                     :

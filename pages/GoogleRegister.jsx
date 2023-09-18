@@ -1,19 +1,23 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { Pressable, Text, TextInput, View } from 'react-native'
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {completeRegistration} from "../API";
+import { completeRegistration } from "../API";
+import Toast from 'react-native-toast-message';
 
 const GoogleRegister = ({ route, navigation }) => {
 
     const { id, email } = route.params
 
-    const [name, setName] = useState()
-    const [size, setSize] = useState()
+    const [name, setName] = useState('')
+    const [size, setSize] = useState('')
 
     const GoogleRegister = async () => {
+
+
+
         await completeRegistration(name, size, id).then(async res => {
             const { data: { responseCode } } = res;
-            if (responseCode === 200){
+            if (responseCode === 200) {
                 await AsyncStorage.setItem("LOGIN", 'true')
                 await AsyncStorage.setItem("ID", id)
                 await AsyncStorage.setItem("USER", "PROVIDER")
@@ -23,6 +27,18 @@ const GoogleRegister = ({ route, navigation }) => {
             }
         })
     }
+
+    // const Register = () => {
+    //     if (name = '' ) {
+    //         if (size = '' ) {
+    //             Toast.show({ type: 'error', position: 'top', text1: 'Please Enter your company size' })
+    //         }
+    //     } else {
+    //         Toast.show({ type: 'error', position: 'top', text1: 'Please Enter your company name' })
+
+    //     }
+    // }
+
 
     return (
         <View style={{ flex: 1, backgroundColor: '#F0A51E' }}>
@@ -79,6 +95,11 @@ const GoogleRegister = ({ route, navigation }) => {
                 }}><Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Continue</Text></Pressable>
 
             </View>
+            <Toast
+                position='top'
+                bottomOffset={20}
+            />
+
         </View>
     )
 }

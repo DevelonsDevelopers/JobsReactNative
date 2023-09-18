@@ -45,8 +45,8 @@ function Login({ route, navigation }) {
             Toast.show({
                 type: 'error',
                 position: 'top',
-                text1: 'Failed to Login',
-                text2: 'Invalid Username or Password'
+                text1: 'Failed to Register',
+                text2: 'Invalid email or Password'
             })
         }
     }, [error]);
@@ -128,7 +128,7 @@ function Login({ route, navigation }) {
                         navigation.replace('GoogleRegister', { id: ID, name: user.name, email: user.email })
                     } else {
                         navigation.popToTop()
-                        navigation.replace('PostJob')
+                        navigation.replace('GoogleRegister', { id: ID, name: user.name, email: user.email })
                     }
                 } else {
 

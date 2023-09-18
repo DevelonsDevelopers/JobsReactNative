@@ -22,9 +22,9 @@ function Register({ route, navigation }) {
     const toggleVisibility = () => setShow(!show);
 
     const RegisterUser = () => {
-        if (name.length >= 4) {
+        if (name.length >= 2) {
             if (USER === "SEEKER") {
-                if (username.length >= 6) {
+                if (username.length >= 3) {
                     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
                         Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address'})
                     } else {
@@ -36,11 +36,11 @@ function Register({ route, navigation }) {
                                 Toast.show({type: 'error', position: 'top', text1: 'Password Not Match'})
                             }
                         } else {
-                            Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Strong Password', text2: 'Password must be greater than 8 letters and contain numbers, capital and lower letters'})
+                            Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Strong Password',text2: 'password must be more than 9 Letters'})
                         }
                     }
                 } else {
-                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter a Valid UserName', text2: 'Username must be more than 6 Letters'})
+                    Toast.show({type: 'error', position: '', text1: 'Please Enter a Valid UserName', text2: 'Username must be more than 6 Letters'})
                 }
             } else {
                 if (size.length >= 1) {
