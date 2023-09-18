@@ -103,6 +103,10 @@ export const verifySeeker = (verify, phone, id) => API.put('/seekers/verify', {
     phone: phone,
     id: id,
 })
+export const roleUpdate = (role, id) => API.put('/seekers/role', {
+    role: role,
+    id: id
+})
 
 
 //CITIES API CALL

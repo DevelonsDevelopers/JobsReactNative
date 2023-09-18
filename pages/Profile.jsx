@@ -214,7 +214,7 @@ function Profile({navigation}) {
                             borderRadius: 30,
                             marginTop: 20
                         }}>
-                            <Pressable onPress={() => navigation.push('AccountInfo')}><View
+                            <Pressable onPress={() => navigation.push('AccountInfo', { role: seeker?.role })}><View
                                 style={{flex: 1, paddingVertical: 10, marginTop: 10}}>
                                 <Text style={{
                                     color: '#000',
@@ -260,7 +260,7 @@ function Profile({navigation}) {
                                     marginLeft: 20
                                 }}>Manage Your Account</Text>
                             </View></Pressable>
-                           
+
                             <Pressable onPress={async () => toggleLoadingVisibility()}><View style={{
                                 flexDirection: 'row',
                                 flex: 1,

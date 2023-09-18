@@ -4,7 +4,12 @@ import React, { useState } from "react";
 
 const RoleModal = ({ visible, toggleRoleVisibility, add }) => {
 
+    const [role, setRole] = useState()
 
+    const AddRole = () => {
+        add(role)
+        toggleRoleVisibility()
+    }
 
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true}>
@@ -33,20 +38,20 @@ const RoleModal = ({ visible, toggleRoleVisibility, add }) => {
                                 source={require('../assets/close.png')} />
                                 </Pressable>
                     </View>
-                    <TextInput multiline numberOfLines={5}
-                        placeholder={'About Me'} style={{
+                    <TextInput onChangeText={text => setRole(role)} numberOfLines={1}
+                        placeholder={'Your Role Here'} style={{
                             width: '100%',
                             marginTop: 40,
                             borderColor: '#adadad',
                             borderRadius: 20,
                             borderWidth: 0.5,
-                            textAlign: 'center',
+                            textAlign: 'left',
                             fontSize: 13,
                             fontFamily: 'poppins_medium',
                             padding: 20,
-                            
+
                         }}></TextInput>
-                    <Pressable onPress={() => toggleRoleVisibility()} style={{
+                    <Pressable onPress={() => AddRole()} style={{
                         paddingHorizontal: 60,
                         paddingVertical: 13,
                         backgroundColor: '#13A3E1',
