@@ -28,6 +28,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                     {isLogin ?
                         <>
                             <Ripple onPress={() => {
+                                toggleVisibility()
                                 if (isLogin) {
                                     navigation.push('Profile')
                                 } else {
