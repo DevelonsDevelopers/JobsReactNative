@@ -1,22 +1,25 @@
-import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView} from "react-native";
-import React, {useEffect, useState} from 'react'
-import {View} from 'react-native'
-import {useNavigation} from "@react-navigation/native";
+import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView } from "react-native";
+import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
+import { useNavigation } from "@react-navigation/native";
 import Resume from "./Resume";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {FetchOffers, FetchSentOffers} from "../API/actions/offersActions";
+import { FetchOffers, FetchSentOffers } from "../API/actions/offersActions";
+import moment from "moment/moment";
 
 const data = [
-    {"name": "Facebook"},
-    {"name": "Google"},
-    {"name": "Netflix"},
-    {"name": "Youtube"}
+    { "name": "Facebook" },
+    { "name": "Google" },
+    { "name": "Netflix" },
+    { "name": "Youtube" }
 ]
-const Offers = ({navigation}) => {
+const Offers = ({ navigation }) => {
 
     const dispatch = useDispatch();
+
     const [login, isLogin] = useState(false);
+
     const offers = useSelector(state => state.offers.offers)
 
     const [ID, setID] = useState()
@@ -46,25 +49,27 @@ const Offers = ({navigation}) => {
     }, [dispatch, ID]);
 
     useEffect(() => {
+
         console.log(offers)
+
     }, [offers]);
 
     return (
-        <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
+        <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 
-            <View style={{backgroundColor: '#EAEAEA'}}>
-                <View style={{flexDirection: 'row', height: 90}}>
-                    <Pressable onPress={() => navigation.goBack()} style={{padiingRight: 5}}><Image style={{
+            <View style={{ backgroundColor: '#EAEAEA' }}>
+                <View style={{ flexDirection: 'row', height: 90 }}>
+                    <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
                         width: 22,
                         height: 20,
                         marginTop: 70,
                         marginLeft: 30,
                         tintColor: '#000'
-                    }} source={require('../assets/back_arrow.png')} alt={''}/></Pressable>
-                    <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                    }} source={require('../assets/back_arrow.png')} alt={''} /></Pressable>
+                    <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
                         <Pressable onPress={() => navigation.push('SocialMarketing')}><Image
-                            style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
-                            source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
+                            style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+                            source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                     </View>
                 </View>
                 <View>
@@ -80,95 +85,73 @@ const Offers = ({navigation}) => {
                 </View>
                 <SafeAreaView>
                     <FlatList nestedScrollEnabled={false} scrollEnabled={false}
-                              style={{marginHorizontal: 0, marginTop: 10}} data={offers} renderItem={({item}) => (
-                        <View style={{
-                            marginLeft: 25,
-                            marginRight: 25,
-                            marginBottom: 8,
-                            borderColor: '#4C4C4C',
-                            borderRadius: 15,
-                            paddingHorizontal: 25,
-                            paddingVertical: 15,
-                            display: "flex",
-                            flexDirection: "column",
-                            backgroundColor: '#fff'
-                        }}>
-                            <View style={{flex: 1}}>
+                        style={{ marginHorizontal: 0, marginTop: 10 }} data={offers} renderItem={({ item }) => (
+                            <View style={{
+                                marginLeft: 25,
+                                marginRight: 25,
+                                marginBottom: 8,
+                                borderColor: '#4C4C4C',
+                                borderRadius: 15,
+                                paddingHorizontal: 25,
+                                paddingVertical: 15,
+                                display: "flex",
+                                flexDirection: "column",
+                                backgroundColor: '#fff'
+                            }}>
+                                <View style={{ flex: 1 }}>
 
-                                <Text style={{
-                                    marginLeft: 'auto',
-                                    textAlign: 'right',
-                                    fontFamily: 'poppins_medium',
-                                    fontSize: 13
-                                }}>Today</Text>
-                            </View>
-                            <View style={{flex: 1, flexDirection: 'row'}}>
-                                <View style={{flex: 1}}>
-                                    <Text numberOfLines={1} style={{
+                                    <Text style={{
+                                        marginLeft: 'auto',
+                                        textAlign: 'right',
+                                        fontFamily: 'poppins_medium',
+                                        fontSize: 13
+                                    }}>{moment(item.date).format('ll')}</Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}>
+                                        <Text numberOfLines={1} style={{
+                                            fontFamily: 'poppins_bold',
+                                            marginTop: 5,
+                                            fontSize: 15,
+                                            textAlign: "center",
+                                            color: '#0044a9',
+                                        }}>{item.offerType}</Text>
+                                        <Text style={{
+                                            fontFamily: 'poppins_medium',
+                                            marginTop: 0,
+                                            fontSize: 14,
+                                            textAlign: "center"
+                                        }}>{item.company_name}</Text>
+                                    </View>
+                                </View>
+                                <View style={{ flexDirection: 'row', flex: 1 }}>
+                                    <Text style={{
                                         fontFamily: 'poppins_bold',
-                                        marginTop: 5,
-                                        fontSize: 15,
-                                        textAlign: "center",
-                                        color: '#0044a9',
-                                    }}>Invitation for Interview</Text>
+                                        fontSize: 16,
+                                    }}>{item.role}</Text>
+                                </View>
+                                <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                                     <Text style={{
                                         fontFamily: 'poppins_medium',
-                                        marginTop: 0,
-                                        fontSize: 14,
-                                        textAlign: "center"
-                                    }}>Facebook</Text>
+                                        fontSize: 13,
+                                        textAlign: 'center',
+                                        marginTop: 4,
+                                        backgroundColor: '#d9d9d9',
+                                        paddingHorizontal: 10,
+                                        paddingVertical: 2,
+                                        borderRadius: 10,
+                                        margin: 'auto',
+                                    }}>
+                                        Salary ${item.salary}
+                                    </Text>
+                                </View>
+                                <View style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 15 }}>
+
+                                    <Text  onPress={() => navigation.push('SeekerOfferResponse',{ID:item.company})} style={{ color: 'white', backgroundColor: '#13A3E1', paddingHorizontal: 25, fontSize: 15, fontFamily: 'poppins_bold', borderRadius: 10, paddingVertical: 5 }}
+                                    >Send Response</Text>
                                 </View>
                             </View>
-                            <View style={{flexDirection: 'row', flex: 1}}>
-                                <Text style={{
-                                    fontFamily: 'poppins_bold',
-                                    fontSize: 16,
-                                }}>React Native Developer</Text>
-                            </View>
-                            <View style={{paddingHorizontal: 64,}}>
-                                <Text style={{
-                                    fontFamily: 'poppins_medium',
-                                    fontSize: 13,
-                                    textAlign: 'center',
-                                    marginTop: 4,
-                                    backgroundColor: '#d9d9d9',
-                                    paddingHorizontal: 10,
-                                    paddingVertical: 2,
-                                    borderRadius: 10,
-                                    margin: 'auto',
-                                }}>
-                                    Salary $5000/month
-                                </Text>
-                            </View>
-                            <View style={{
-                                flexDirection: 'row',
-                                flex: 1,
-                                marginTop: 15,
-                                justifyContent: "center",
-                                gap: 10
-                            }}>
-                                <Text style={{
-                                    color: 'white',
-                                    backgroundColor: '#ff3131',
-                                    padding: 10,
-                                    paddingHorizontal: 25,
-                                    fontSize: 15,
-                                    fontFamily: 'poppins_bold',
-                                    borderRadius: 30
-                                }}>REJECT</Text>
-                                <Text style={{
-                                    textAlign: 'right',
-                                    fontFamily: 'poppins_bold',
-                                    fontSize: 15,
-                                    padding: 10,
-                                    color: 'white',
-                                    backgroundColor: '#0eb000',
-                                    paddingHorizontal: 25,
-                                    borderRadius: 30,
-                                }}>ACCEPT</Text>
-                            </View>
-                        </View>
-                    )}/>
+                        )} />
                 </SafeAreaView>
             </View>
         </ScrollView>
