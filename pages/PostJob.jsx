@@ -86,7 +86,7 @@ function PostJob({ navigation }) {
     <View style={{ flex: 1 }}>
       <WebsiteModal visible={webVisible} toggleRequireVisible={toggWebVisibility} />
       <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
-    <ProviderDrawerModal visible={drawerVisible} toggleVisibility={toggleVisibility} toggleLoadingVisibility={toggleLoadingVisibility}  />
+    <ProviderDrawerModal visible={drawerVisible} toggleVisibility={toggleVisibility} toggleLoadingVisibility={toggleLoadingVisibility} navigation={navigation}/>
       <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
         <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
           <View style={{ flexDirection: 'row', height: 130 }}>
