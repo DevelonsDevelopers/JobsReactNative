@@ -108,7 +108,7 @@ function Login({ route, navigation }) {
             const userInfo = await GoogleSignin.signIn();
             const { idToken } = userInfo;
             const { user } = userInfo;
-            await googleProvider(user.name, '', 0, 0, user.email, '', '', '', '', user.id).then(async res => {
+            await googleProvider('', '', 0, 0, user.email, '', '', '', '', user.id).then(async res => {
                 console.log(res)
                 const { data: { data } } = res;
                 const { data: { responseCode } } = res;
@@ -120,13 +120,16 @@ function Login({ route, navigation }) {
                     } else {
                         var ID = (data.id).toString()
                     }
-                    await AsyncStorage.setItem("LOGIN", 'true')
-                    await AsyncStorage.setItem("ID", ID)
-                    await AsyncStorage.setItem("USER", "PROVIDER")
-                    await AsyncStorage.setItem("NAME", user.name)
-                    await AsyncStorage.setItem("EMAIL", user.email)
-                    navigation.popToTop()
-                    navigation.replace('PostJob')
+                    if (data.affectedRows === 1) {
+                        navigation.popToTop()
+                        navigation.replace('GoogleRegister', { id: ID, name: user.name, email: user.email })
+                    } else if (data.name === "") {
+                        navigation.popToTop()
+                        navigation.replace('GoogleRegister', { id: ID, name: user.name, email: user.email })
+                    } else {
+                        navigation.popToTop()
+                        navigation.replace('PostJob')
+                    }
                 } else {
 
                 }

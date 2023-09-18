@@ -126,6 +126,11 @@ export const completeCompany = (country, city, phone, headquater, type, id) => A
     type: type,
     id: id
 })
+export const completeRegistration = (name, size, id) => API.put('/companies/registration', {
+    name: name,
+    size: size,
+    id: id
+})
 
 //JOBS API CALL
 export const fetchAllJobs = (user) => API.post('/jobs/all', { user: user })
