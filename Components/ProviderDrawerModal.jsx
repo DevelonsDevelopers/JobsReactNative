@@ -24,10 +24,10 @@ const ProviderDrawerModal = ({visible,toggleVisibility,toggleLoadingVisibility})
             <Pressable onPress={() => toggleVisibility()} style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Text
                 style={{ width: '100%', fontFamily: 'poppins_semibold', textAlign: 'center' }}>Menu</Text>
-              <View style={{ padding: 20, marginLeft: 'auto', }}>
-                <Image style={{ width: 15, height: 15, }}
+              <Pressable onPress={() => toggleVisibility()}  style={{ padding: 20, marginLeft: 'auto', }}>
+                <Image  style={{ width: 15, height: 15, }}
                   source={require('../assets/close.png')} />
-              </View>
+              </Pressable>
             </Pressable>
             <Ripple rippleColor="white" onPress={() => navigation.push('ProviderProfileInfo')}>
               <View style={{
