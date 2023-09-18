@@ -32,22 +32,17 @@ import {
 import CareerModal from "../Components/CareerModal";
 import CourseModal from "../Components/CourseModal";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { cvStatement } from "../API";
+import {cvStatement, roleUpdate} from "../API";
 import PersonalStatementModal from "../Components/PersonalStatementModal";
 import RoleModal from "../Components/RoleModal";
 
-function AccountInfo({ navigation }) {
+function AccountInfo({ route, navigation }) {
+
+	const { role } = route.params
 
 	const dispatch = useDispatch()
 
-	const [login, isLogin] = useState(false);
-	const [education, setEducation] = useState([]);
-	const [career, setCareer] = useState([]);
-	const [course, setCourse] = useState([]);
-	const [skill, setSkill] = useState([]);
-	const [language, setLanguage] = useState([]);
-	const [interest, setInterest] = useState([]);
-	const [resume, setResume] = useState([]);
+	const [roleData, setRoleData] = useState(role)
 
 	const [educationVisible, setEducationVisible] = useState(false)
 	const [careerVisible, setCareerVisible] = useState(false)
@@ -86,6 +81,12 @@ function AccountInfo({ navigation }) {
 	useEffect(() => {
 		console.log(cv)
 	}, [cv]);
+
+	const addRole = async (role) => {
+		await roleUpdate(role, ID).then(res => {
+			setRoleData(data)
+		})
+	}
 
 	const addPersonalInfo = async (statement) => {
 		await cvStatement(cv.id, statement).then(res => {
@@ -204,7 +205,7 @@ function AccountInfo({ navigation }) {
 										toggleInfoVisibility={toggleInfoVisibility}
 										add={addPersonalInfo} />
 									<RoleModal visible={roleVisible}
-										toggleRoleVisibility={toggleRoleVisibility}
+										toggleRoleVisibility={toggleRoleVisibility} add={addRole}
 									/>
 
 									<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
@@ -291,7 +292,7 @@ function AccountInfo({ navigation }) {
 																}}>Update</Text>
 															</View></Pressable>
 													</View>
-													<Text style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{cv?.statement}</Text>
+													<Text style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{roleData}</Text>
 
 												</View>
 												<View style={{
