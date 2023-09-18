@@ -64,6 +64,8 @@ import OffersByJob from "./pages/OffersByJob";
 import AppliedByJob from "./pages/AppliedByJob";
 import PaymentSuccessful from './pages/PaymentSuccessful';
 import GoogleRegister from './pages/GoogleRegister';
+import SeekerOfferResponse from './pages/SeekerOfferResponse';
+import AcceptResponse from './pages/AcceptResponse';
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
@@ -191,6 +193,10 @@ function App() {
                                       options={{title: "PaymentSuccessful", headerShown: false}}/>
                         <Stack.Screen name="GoogleRegister" component={GoogleRegister}
                                       options={{title: "GoogleRegister", headerShown: false}}/>
+                        <Stack.Screen name="SeekerOfferResponse" component={SeekerOfferResponse}
+                                      options={{title: "SeekerOfferResponse", headerShown: false}}/>
+                        <Stack.Screen name="AcceptResponse" component={AcceptResponse}
+                                      options={{title: "AcceptResponse", headerShown: false}}/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </Provider>
