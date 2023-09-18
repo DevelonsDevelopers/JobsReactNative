@@ -21,7 +21,7 @@ function PostJob({ navigation }) {
 
   useEffect(() => {
     console.log(ID)
-}, [ID])
+  }, [ID])
 
 
   useEffect(() => {
@@ -75,10 +75,10 @@ function PostJob({ navigation }) {
   const [loadingVisible, setLoadingVisible] = useState(false)
   const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
 
-  const [webVisible,setWebVisible ] = useState(false)
+  const [webVisible, setWebVisible] = useState(false)
   const toggWebVisibility = () => setWebVisible(!webVisible)
 
-  const [drawerVisible,setDrawerVisible] = useState (false)
+  const [drawerVisible, setDrawerVisible] = useState(false)
   const toggleDrawerVisibility = () => setDrawerVisible(!drawerVisible)
 
 
@@ -86,7 +86,7 @@ function PostJob({ navigation }) {
     <View style={{ flex: 1 }}>
       <WebsiteModal visible={webVisible} toggleRequireVisible={toggWebVisibility} />
       <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
-    <ProviderDrawerModal visible={drawerVisible} toggleVisibility={toggleVisibility} toggleLoadingVisibility={toggleLoadingVisibility} navigation={navigation}/>
+      <ProviderDrawerModal visible={drawerVisible} toggleVisibility={toggleVisibility} toggleLoadingVisibility={toggleLoadingVisibility} navigation={navigation} toggleDrawerVisibility={toggleDrawerVisibility} />
       <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
         <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
           <View style={{ flexDirection: 'row', height: 130 }}>
@@ -195,8 +195,8 @@ function PostJob({ navigation }) {
           }}>Post Jobs using your portal</Text>
           <View style={{ paddingHorizontal: 60 }}>
             <Ripple rippleColor="blue" rippleOpacity={0.1} rippleDuration={400} rippleSize={300}
-             onPress={() => toggWebVisibility()}
-                style={{
+              onPress={() => toggWebVisibility()}
+              style={{
                 textAlign: 'center',
                 backgroundColor: 'white',
                 paddingVertical: 8,
@@ -204,7 +204,7 @@ function PostJob({ navigation }) {
                 color: '#0038FF',
                 fontSize: 12,
                 fontFamily: 'poppins_medium'
-              }}><Text style={{textAlign:'center',color: '#0038FF', }} >https://www.example.com </Text></Ripple>
+              }}><Text style={{ textAlign: 'center', color: '#0038FF', }} >https://www.example.com </Text></Ripple>
           </View>
           <Text style={{
             textAlign: 'center',
