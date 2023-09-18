@@ -26,22 +26,23 @@ function ChangePassword({ route, navigation }) {
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
-            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
-                <Image style={{tintColor: '#000', width: 40, height: 40}}
+            <Pressable onPress={() => navigation.goBack()} style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
+                <Image style={{tintColor: 'gray', width: 24, height: 10}}
                        source={require('../assets/back_arrow.png')}/>
-            </View>
+            </Pressable>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                <Image style={{ height: 200, width: 200, marginTop: 100 }} source={require('../assets/change_password.png')}/>
-                <Text style={{color: '#000', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center'}}>Change Password</Text>
+                <Image style={{ height: 200, width: 300, marginTop: 80 }} source={require('../assets/passwordchange.png')}/>
+                <Text style={{color: '#4041B0', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 0, alignSelf: 'center'}}>Change Password</Text>
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                    marginTop: 15,
+                    marginTop: 45,
                     backgroundColor: '#fff',
                     elevation: 10,
                     borderRadius: 25,
                     width: '85%',
-                    paddingRight: 20
+                    paddingRight: 20,
+                    
                 }}>
                     <TextInput onChangeText={(text) => setPassword(text)} style={{
                         height: 50,

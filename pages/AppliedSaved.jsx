@@ -71,7 +71,7 @@ const FirstRoute = ({ navigation }) => {
                                        marginBottom: -20,
                                        marginTop: 40
                                    }}/>
-                            <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
+                            <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Saved Found</Text>
                         </View> :
                         <>
                             {error ?
@@ -235,7 +235,7 @@ const SecondRoute = ({ navigation }) => {
                                        marginRight: 'auto',
                                        marginBottom: -20,
                                    }}/>
-                            <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
+                            <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Applied Found</Text>
                         </View> :
                         <>
                             {error ?

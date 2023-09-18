@@ -43,6 +43,7 @@ const CoverLetter = ({ route, navigation }) => {
 			dispatch(CVByUser(ID));
 		}
 	}, [dispatch, ID]);
+	
 
 	const ApplyJob = () => {
 		const postDate = moment().format("YYYY-MM-DD")
@@ -83,7 +84,7 @@ const CoverLetter = ({ route, navigation }) => {
 				</View>
 
 
-				<View style={{ backgroundColor: '#D3D3D3', marginTop: 40, paddingVertical: 10, marginHorizontal: 40, borderRadius: 20 }}>
+				<View style={{  marginTop: 40, paddingVertical: 10, borderRadius: 20 }}>
 					<Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.name}</Text>
 					<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.address}</Text>
 					<View style={{ flexDirection: "row", justifyContent: 'center', gap: 20, marginTop: 5 }}>
@@ -94,8 +95,7 @@ const CoverLetter = ({ route, navigation }) => {
 				<Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, marginHorizontal: 20 }}>-</Text>
 				<View>
 					<Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>{date}</Text>
-					<Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>{cv?.name}</Text>
-				</View>
+						</View>
 				<Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: {role}</Text>
 				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{intro}</Text>
 				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{body}</Text>

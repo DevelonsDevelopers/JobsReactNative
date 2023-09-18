@@ -256,7 +256,13 @@ const JobDetails = ({ route, navigation }) => {
                                     marginHorizontal: 25,
                                     fontFamily: 'poppins_medium',
                                     minHeight: 250
-                                }}></WebView>
+                                }}
+                                javaScriptEnabled={false}
+                                domStorageEnabled={false}
+                                startInLoadingState={true}
+                                scalesPageToFit={false}
+                                scrollEnabled={true}
+                                ></WebView>
                                 <View style={{
                                     flexDirection: 'row',
                                     justifyContent: "center",

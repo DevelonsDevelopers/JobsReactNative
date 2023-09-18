@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import Resume from './Resume'
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {CVByUser} from "../API/actions/cvActions";
+import { CVByUser } from "../API/actions/cvActions";
 import Ripple from "react-native-material-ripple";
 
 const skills = [
@@ -52,6 +52,14 @@ const ViewResume = ({ route, navigation }) => {
         }
     }, [success]);
 
+    useEffect(() => {
+        console.log(cv)
+    }, [cv])
+    
+    useEffect(() => {
+        console.log(ID)
+    }, [ID])
+
     return (
         <ScrollView>
             <View style={{
@@ -92,7 +100,7 @@ const ViewResume = ({ route, navigation }) => {
                     <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black' }}>{cv?.email}</Text>
                 </View>
             </View>
-            <View style={{ paddingHorizontal: 20, backgroundColor: 'white', width: '95%', marginLeft: 'auto', marginRight: 'auto',  }}>
+            <View style={{ paddingHorizontal: 20, backgroundColor: 'white', width: '95%', marginLeft: 'auto', marginRight: 'auto', }}>
                 <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
                 <Text style={{ textAlign: 'center', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 10 }}>SALES AND MARKETING COORDINATOR / ACCOUNT MANAGER</Text>
                 <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
@@ -116,11 +124,11 @@ const ViewResume = ({ route, navigation }) => {
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                         data={cv?.careers} renderItem={({ item }) => (
                             <View>
-                                <View style={{ flexDirection: 'row',gap:5 }}>
+                                <View style={{ flexDirection: 'row', gap: 5 }}>
                                     <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
                                         {item.job}
                                     </Text>
-                                    <Text style={{ color:'gray' }}>|</Text>
+                                    <Text style={{ color: 'gray' }}>|</Text>
                                     <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', }}>
                                         {item.timeperiod}
                                     </Text>
@@ -147,11 +155,11 @@ const ViewResume = ({ route, navigation }) => {
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                         data={cv?.educations} renderItem={({ item }) => (
                             <View >
-                                <View style={{ flexDirection: 'row',gap:2 }}>
+                                <View style={{ flexDirection: 'row', gap: 2 }}>
                                     <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', }}>
                                         {item.qualification}
                                     </Text>
-                                    <Text style={{ color:'gray' }}>|</Text>
+                                    <Text style={{ color: 'gray' }}>|</Text>
                                     <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
                                         {item.institute}
                                     </Text>
@@ -171,11 +179,11 @@ const ViewResume = ({ route, navigation }) => {
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                         data={cv?.courses} renderItem={({ item }) => (
                             <View >
-                                <View style={{ flexDirection: 'row',gap:5 }}>
+                                <View style={{ flexDirection: 'row', gap: 5 }}>
                                     <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', }}>
                                         {item.institute}
                                     </Text>
-                                    <Text style={{ color:'gray' }}>|</Text>
+                                    <Text style={{ color: 'gray' }}>|</Text>
                                     <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
                                         {item.course}
                                     </Text>
@@ -190,8 +198,8 @@ const ViewResume = ({ route, navigation }) => {
                         )} />
                 </SafeAreaView>
             </View>
-            <Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })} style={{ width:'50%',marginLeft:'auto',marginRight:'auto',marginTop:20,marginBottom:6 }}>
-                <Text style={{ backgroundColor: '#13A3E1', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20,textAlign:'center' }}>Send Hire Offer</Text>
+            <Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })} style={{ width: '50%', marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6 }}>
+                <Text style={{ backgroundColor: '#13A3E1', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center' }}>Send Hire Offer</Text>
             </Ripple>
 
 

@@ -43,6 +43,8 @@ function Resume({ navigation }) {
     }
   }, [success]);
 
+
+
   return (
     <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
 
@@ -67,17 +69,20 @@ function Resume({ navigation }) {
                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
             </View>
           </View>
-          <View style={{  marginTop: 40, paddingTop: 30, marginHorizontal: 40,paddingBottom:10 }}>
+          <View style={{  marginTop: 20, paddingTop: 30, marginHorizontal: 0,paddingBottom:10 }}>
             <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.name}</Text>
             <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.address}</Text>
-            <View style={{ flexDirection: "row", justifyContent: 'center', gap: 20, marginTop: 5 }}>
-              <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black' }}>{cv?.phone}</Text>
-              <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black' }}>{cv?.email}</Text>
+            <View style={{ flexDirection: 'row',gap:10,marginLeft:'auto',marginRight:'auto',  marginTop: 5 }}>
+              <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black',textAlign:'center',}}>{cv?.phone}</Text>
+              <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black',textAlign:'center',}}>{cv?.email}</Text>
             </View>
           </View>
+
+     
+
           <View style={{ paddingHorizontal: 20 }}>
             <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
-            <Text style={{ textAlign: 'center', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 10 }}>SALES AND MARKETING COORDINATOR / ACCOUNT MANAGER</Text>
+            <Text style={{ textAlign: 'center', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 10 }}>{cv?.role}</Text>
             <Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
 
             <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginVertical: 10,paddingHorizontal:10,paddingVertical:10 }}>{cv?.statement}</Text>
@@ -117,9 +122,9 @@ function Resume({ navigation }) {
                       </Text>
                     </View>
                     <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft: 'auto', marginTop: 6, marginBottom: 6 }}>
-                      Phone : {item.phone}
+                       {item.phone}
                     </Text>
-                    <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
+                    {/* <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text> */}
                   </View>
                 )} />
 
@@ -156,11 +161,11 @@ function Resume({ navigation }) {
                   <View >
                     <View style={{ flexDirection: 'row',gap:4 }}>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', }}>
-                        {item.timeperiod}
+                        {item.course}
                       </Text>
                       <Text style={{height:15,marginTop:-2 }}>|</Text>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
-                        {item.course}
+                        {item.timeperiod}
                       </Text>
                     </View>
                     <View style={{ display: 'flex', flexDirection: 'row', }}>
