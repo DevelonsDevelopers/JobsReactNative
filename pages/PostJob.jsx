@@ -217,6 +217,63 @@ function PostJob({ navigation }) {
             and password)</Text>
 
         </View>
+
+        <View style={{
+          backgroundColor: '#a6d6ec',
+          paddingVertical: 20,
+          paddingHorizontal: 10,
+          marginTop: 20,
+          marginHorizontal: 30,
+          borderRadius: 20,
+          borderWidth: 1,
+          borderColor: 'white',}}>
+          <Text style={{ textAlign: 'center', fontSize: 20, fontFamily: 'poppins_bold',color:'blue' }}>To Post your job  </Text>
+
+          <View style={{ flexDirection: 'row',gap:4,padding:10 }}>
+            <Text style={{
+              textAlign: 'center',
+              color: 'black',
+              fontSize: 16,
+              fontFamily: 'poppins_bold',
+            }}>1)</Text>
+            <Text style={{
+              textAlign: 'center',
+              color: 'black',
+              fontSize: 16,
+              fontFamily: 'poppins_bold',
+            }}>Complete your profile</Text>
+          </View>
+          <View style={{ flexDirection: 'row',gap:4,padding:10 }}>
+            <Text style={{
+              textAlign: 'center',
+              color: 'black',
+              fontSize: 16,
+              fontFamily: 'poppins_bold',
+            }}>2)</Text>
+            <Text style={{
+              textAlign: 'center',
+              color: 'black',
+              fontSize: 16,
+              fontFamily: 'poppins_bold',
+            }}>Verify your account</Text>
+          </View>
+          <View style={{ flexDirection: 'row',gap:4,padding:10 }}>
+            <Text style={{
+              textAlign: 'center',
+              color: 'black',
+              fontSize: 16,
+              fontFamily: 'poppins_bold',
+            }}>3)</Text>
+            <Text style={{
+              textAlign: 'center',
+              color: 'black',
+              fontSize: 16,
+              fontFamily: 'poppins_bold',
+            }}>Buy a Plan</Text>
+          </View>
+
+        </View>
+
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
