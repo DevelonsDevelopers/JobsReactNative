@@ -208,27 +208,63 @@ export const addCVCareer = (cv, company, job, timeperiod, address, phone) => API
     address: address,
     phone: phone
 })
+export const updateCVCareer = (cv, company, job, timeperiod, address, phone, id) => API.put('/cvCareer/update', {
+    cv: cv,
+    company: company,
+    job: job,
+    timeperiod: timeperiod,
+    address: address,
+    phone: phone,
+    id: id
+})
 export const addCVCourse = (cv, course, timeperiod, institute) => API.post('/cvCourse/create', {
     cv: cv,
     course: course,
     timeperiod: timeperiod,
     institute: institute
 })
+export const updateCVCourse = (cv, course, timeperiod, institute, id) => API.put('/cvCourse/update', {
+    cv: cv,
+    course: course,
+    timeperiod: timeperiod,
+    institute: institute,
+    id: id
+})
 export const addCVInterest = (cv, interest) => API.post('/cvInterest/create', {
     cv: cv,
     interest: interest
+})
+export const updateCVInterest = (cv, interest, id) => API.put('/cvInterest/update', {
+    cv: cv,
+    interest: interest,
+    id: id
 })
 export const addCVLanguage = (cv, language) => API.post('/cvLanguage/create', {
     cv: cv,
     language: language
 })
+export const updateCVLanguage = (cv, language, id) => API.put('/cvLanguage/update', {
+    cv: cv,
+    language: language,
+    id: id
+})
 export const addCVResume = (cv, resume) => API.post('/cvResume/create', {
     cv: cv,
     resume: resume
 })
+export const updateCVResume = (cv, resume, id) => API.put('/cvResume/update', {
+    cv: cv,
+    resume: resume,
+    id: id
+})
 export const addCVSkill = (cv, skill) => API.post('/cvSkill/create', {
     cv: cv,
     skill: skill
+})
+export const updateCVSkill = (cv, skill, id) => API.put('/cvSkill/update', {
+    cv: cv,
+    skill: skill,
+    id: id
 })
 
 

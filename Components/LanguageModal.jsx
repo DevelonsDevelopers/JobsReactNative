@@ -1,13 +1,23 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Image, Modal, Pressable, Text, View} from 'react-native'
 import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler'
 
-const LanguageModal = ({visible, toggleLanguageVisibility, add}) => {
+const LanguageModal = ({visible, toggleLanguageVisibility, add, edit, data}) => {
 
     const [language, setLanguage] = useState();
 
+    useEffect(() => {
+        if (data!==null){
+            setLanguage(data.language)
+        }
+    }, [data]);
+
     const Add = () => {
-        add(language)
+        if (data!==null){
+            edit(language, data.id)
+        } else {
+            add(language)
+        }
         toggleLanguageVisibility()
     }
 
@@ -42,7 +52,7 @@ const LanguageModal = ({visible, toggleLanguageVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.language}</TextInput>
                     <Pressable onPress={() => Add()} style={{
                         paddingHorizontal: 60,
                         paddingVertical: 13,
