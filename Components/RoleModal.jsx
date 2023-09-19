@@ -38,7 +38,7 @@ const RoleModal = ({ visible, toggleRoleVisibility, add }) => {
                                 source={require('../assets/close.png')} />
                                 </Pressable>
                     </View>
-                    <TextInput onChangeText={text => setRole(role)} numberOfLines={1}
+                    <TextInput onChangeText={text => setRole(text)} numberOfLines={1}
                         placeholder={'Your Role Here'} style={{
                             width: '100%',
                             marginTop: 40,

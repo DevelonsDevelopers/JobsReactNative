@@ -32,7 +32,7 @@ import {
 import CareerModal from "../Components/CareerModal";
 import CourseModal from "../Components/CourseModal";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import {cvStatement, roleUpdate} from "../API";
+import {cvStatement, roleUpdate, updateCVEducation} from "../API";
 import PersonalStatementModal from "../Components/PersonalStatementModal";
 import RoleModal from "../Components/RoleModal";
 
@@ -51,6 +51,9 @@ function AccountInfo({ route, navigation }) {
 	const [interestVisible, setInterestVisible] = useState(false)
 	const [languageVisible, setLanguageVisible] = useState(false)
 	const [resumeVisible, setResumeVisible] = useState(false)
+
+	const [edData, setEdData] = useState(null)
+	const [carData, setCarData] = useState(null)
 
 	const [trigger, setTrigger] = useState(false)
 
@@ -82,9 +85,18 @@ function AccountInfo({ route, navigation }) {
 		console.log(cv)
 	}, [cv]);
 
+	const editEducation = (d) => {
+		// setEdEdit(true)
+		setEdData(d)
+		toggleEducationVisibility()
+	}
+
 	const addRole = async (role) => {
+		console.log(role)
 		await roleUpdate(role, ID).then(res => {
-			setRoleData(data)
+			setRoleData(role)
+		}).catch(err => {
+			console.log(err)
 		})
 	}
 
@@ -97,6 +109,13 @@ function AccountInfo({ route, navigation }) {
 	const addEducation = (qualification, timeperiod, institute) => {
 		dispatch(CVEducation(cv.id, qualification, timeperiod, institute))
 		setTrigger(!trigger)
+	}
+
+	const updateEducation = async (qualification, timeperiod, institute, id) => {
+		await updateCVEducation(cv.id, qualification, timeperiod, institute, id).then(res => {
+			console.log(res)
+			setTrigger(!trigger)
+		})
 	}
 
 	const addCareer = (company, job, timeperiod, address, phone) => {
@@ -186,7 +205,7 @@ function AccountInfo({ route, navigation }) {
 
 									<EducationModal visible={educationVisible}
 										toggleEducationVisibility={toggleEducationVisibility}
-										add={addEducation} />
+										add={addEducation} edit={updateEducation} data={edData}/>
 									<CareerModal visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility}
 										add={addCareer} />
 									<CourseModal visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility}
@@ -397,12 +416,12 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.qualification}</Text>
-																		<Image style={{
+																		<Pressable style={{ marginLeft: 'auto' }} onPress={() => editEducation({ id: item.id, degree: item.qualification, institute: item.institute, timeperiod: item.timeperiod })}><Image style={{
 																			width: 15,
-																			height: 15,
-																			marginLeft: 'auto'
+																			height: 15
 																		}}
 																			source={require('../assets/editIcon.png')} />
+																		</Pressable>
 																	</View>
 																)}
 															/>

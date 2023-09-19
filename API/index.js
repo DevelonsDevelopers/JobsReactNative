@@ -193,6 +193,13 @@ export const addCVEducation = (cv, qualification, timeperiod, institute) => API.
     timeperiod: timeperiod,
     institute: institute
 })
+export const updateCVEducation = (cv, qualification, timeperiod, institute, id) => API.put('/cvEducation/update', {
+    cv: cv,
+    qualification: qualification,
+    timeperiod: timeperiod,
+    institute: institute,
+    id: id
+})
 export const addCVCareer = (cv, company, job, timeperiod, address, phone) => API.post('/cvCareer/create', {
     cv: cv,
     company: company,
