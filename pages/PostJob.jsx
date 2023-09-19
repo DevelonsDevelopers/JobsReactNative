@@ -249,7 +249,12 @@ function PostJob({ navigation }) {
               fontFamily: 'poppins_bold',
             }}>Complete your profile</Text>
           </View>
-          <Text style={{ paddingLeft: 20 }} >Open profile and fill the required data </Text>
+
+          <Text style={{ paddingLeft: 20 }} >Open profile and fill the required data  </Text>
+          <View style={{ flexDirection: 'row',gap:40,marginVertical:10 }}>
+            <Text style={{ color: 'blue', fontSize: 14, marginLeft: 20,fontFamily:'poppins_light'  }} onPress={() => navigation.push('ProviderAccountManage')}>(Complete Now)</Text>
+            <Image style={{ width: 14, height: 14,marginTop:5  }} source={require('../assets/verified.png')} />
+          </View>
           <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, padding: 2 }}>
             <Text style={{
               textAlign: 'center',
@@ -265,8 +270,10 @@ function PostJob({ navigation }) {
             }}>Verify your account</Text>
           </View>
           <Text style={{ paddingLeft: 20 }} >Enter your phone number to verify that you are real </Text>
-
-
+          <View style={{ flexDirection: 'row',gap:40,marginVertical:10 }}>
+            <Text style={{ color: 'blue', fontSize: 14, marginLeft: 20,fontFamily:'poppins_light'  }} onPress={() => navigation.push('Verify')}>(Verify Now)</Text>
+            <Image style={{ width: 14, height: 14,marginTop:5  }} source={require('../assets/verified.png')} />
+          </View>
           <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, padding: 2 }}>
             <Text style={{
               textAlign: 'center',
@@ -282,6 +289,10 @@ function PostJob({ navigation }) {
             }}>Buy a Plan</Text>
           </View>
           <Text style={{ paddingLeft: 20 }} >Buy a plan to post your jobs</Text>
+          <View style={{ flexDirection: 'row',gap:40,marginTop:10 }}>
+            <Text style={{ color: 'blue', fontSize: 14, marginLeft: 20,fontFamily:'poppins_light'  }} onPress={() => navigation.push('Plans')}>(Buy Plan)</Text>
+            <Image style={{ width: 14, height: 14,marginTop:5  }} source={require('../assets/verified.png')} />
+          </View>
         </View>
         <View style={{
           flexDirection: 'row',

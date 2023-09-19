@@ -6,13 +6,13 @@ import Ripple from 'react-native-material-ripple'
 
 const Plans = ({ navigation }) => {
 
-const [plan,setPlan] = useState()
-const [price,setPrice] = useState()
+    const [plan, setPlan] = useState()
+    const [price, setPrice] = useState()
 
     return (
         <ScrollView>
-
-<View style={{
+            
+            <View style={{
                 flexDirection: 'column',
                 width: '100%',
                 height: 90,
@@ -40,7 +40,7 @@ const [price,setPrice] = useState()
                 </View>
             </View>
 
-            <Ripple onPress={() => navigation.push('Payment', {plan:'Basic',price:'8'})} style={{ backgroundColor: 'white', padding: 20, marginTop: 10, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
+            <Ripple onPress={() => navigation.push('Payment', { plan: 'Basic', price: '8' })} style={{ backgroundColor: 'white', padding: 20, marginTop: 10, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
                 <Text style={{ color: '#194666', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Basic</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
                     <Text style={{ color: '#194666', textAlign: 'center', fontSize: 14 }}>$ </Text>
@@ -50,7 +50,7 @@ const [price,setPrice] = useState()
                 <Text style={{ color: '#194666', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 20 jobs</Text>
             </Ripple>
 
-            <Ripple onPress={() => navigation.push('Payment', {plan:'Essential',price:'14'})} rippleColor='white' style={{ backgroundColor: '#00C1E4', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
+            <Ripple onPress={() => navigation.push('Payment', { plan: 'Essential', price: '14' })} rippleColor='white' style={{ backgroundColor: '#00C1E4', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
                 <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Essential</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
                     <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>$ </Text>
@@ -60,7 +60,7 @@ const [price,setPrice] = useState()
                 <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 50 jobs</Text>
             </Ripple>
 
-            <Ripple onPress={() => navigation.push('Payment', {plan:'Premium',price:'20'})}  rippleColor='white' style={{ backgroundColor: '#004BFF', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10, marginBottom: 20 }}>
+            <Ripple onPress={() => navigation.push('Payment', { plan: 'Premium', price: '20' })} rippleColor='white' style={{ backgroundColor: '#004BFF', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10, marginBottom: 20 }}>
                 <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Premium</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
                     <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>$ </Text>
