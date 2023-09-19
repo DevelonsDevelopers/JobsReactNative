@@ -1,15 +1,27 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Image, Modal, Pressable, Text, View} from 'react-native'
 import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler'
 
-const CourseModal = ({visible, toggleCourseVisibility, add}) => {
+const CourseModal = ({visible, toggleCourseVisibility, add, edit, data}) => {
 
     const [course, setCourse] = useState()
     const [timeperiod, setTimePeriod] = useState()
     const [institute, setInstitute] = useState()
 
+    useEffect(() => {
+        if (data!==null){
+            setCourse(data.course)
+            setTimePeriod(data.timeperiod)
+            setInstitute(data.institute)
+        }
+    }, [data]);
+
     const Add = () => {
-        add(course, timeperiod, institute)
+        if (data!==null){
+            edit(course, timeperiod, institute, data.id)
+        } else {
+            add(course, timeperiod, institute)
+        }
         toggleCourseVisibility()
     }
 
@@ -44,7 +56,7 @@ const CourseModal = ({visible, toggleCourseVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.course}</TextInput>
                     <TextInput onChangeText={text => setInstitute(text)} placeholder={'Institute'} style={{
                         width: '80%',
                         marginTop: 8,
@@ -53,7 +65,7 @@ const CourseModal = ({visible, toggleCourseVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.institute}</TextInput>
                     <TextInput onChangeText={text => setTimePeriod(text)} placeholder={'Time Period'} style={{
                         width: '80%',
                         marginTop: 8,
@@ -62,7 +74,7 @@ const CourseModal = ({visible, toggleCourseVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.timeperiod}</TextInput>
                     <Pressable onPress={() => Add()} style={{
                         paddingHorizontal: 60,
                         paddingVertical: 13,

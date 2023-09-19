@@ -32,7 +32,15 @@ import {
 import CareerModal from "../Components/CareerModal";
 import CourseModal from "../Components/CourseModal";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import {cvStatement, roleUpdate, updateCVEducation} from "../API";
+import {
+	cvStatement,
+	roleUpdate,
+	updateCVCareer,
+	updateCVCourse,
+	updateCVEducation,
+	updateCVInterest,
+	updateCVLanguage, updateCVResume, updateCVSkill
+} from "../API";
 import PersonalStatementModal from "../Components/PersonalStatementModal";
 import RoleModal from "../Components/RoleModal";
 
@@ -54,6 +62,11 @@ function AccountInfo({ route, navigation }) {
 
 	const [edData, setEdData] = useState(null)
 	const [carData, setCarData] = useState(null)
+	const [couData, setCouData] = useState(null)
+	const [inData, setInData] = useState(null)
+	const [lanData, setLanData] = useState(null)
+	const [resData, setResData] = useState(null)
+	const [skData, setSkData] = useState(null)
 
 	const [trigger, setTrigger] = useState(false)
 
@@ -91,6 +104,36 @@ function AccountInfo({ route, navigation }) {
 		toggleEducationVisibility()
 	}
 
+	const editCareer = (d) => {
+		setCarData(d)
+		toggleCareerVisibility()
+	}
+
+	const editCourse = (d) => {
+		setCouData(d)
+		toggleCourseVisibility()
+	}
+
+	const editInterest = (d) => {
+		setInData(d)
+		toggleInterestVisibility()
+	}
+
+	const editLanguage = (d) => {
+		setLanData(d)
+		toggleLanguageVisibility()
+	}
+
+	const editResume = (d) => {
+		setResData(d)
+		toggleResumeVisibility()
+	}
+
+	const editSkill = (d) => {
+		setSkData(d)
+		toggleSkillVisibility()
+	}
+
 	const addRole = async (role) => {
 		console.log(role)
 		await roleUpdate(role, ID).then(res => {
@@ -113,8 +156,8 @@ function AccountInfo({ route, navigation }) {
 
 	const updateEducation = async (qualification, timeperiod, institute, id) => {
 		await updateCVEducation(cv.id, qualification, timeperiod, institute, id).then(res => {
-			console.log(res)
 			setTrigger(!trigger)
+			setEdData(null)
 		})
 	}
 
@@ -123,9 +166,23 @@ function AccountInfo({ route, navigation }) {
 		setTrigger(!trigger)
 	}
 
+	const updateCareer = async (company, job, timeperiod, address, phone, id) => {
+		await updateCVCareer(cv.id, company, job, timeperiod, address, phone, id).then(res => {
+			setTrigger(!trigger)
+			setCarData(null)
+		})
+	}
+
 	const addCourse = (course, timeperiod, institute) => {
 		dispatch(CVCourse(cv.id, course, timeperiod, institute))
 		setTrigger(!trigger)
+	}
+
+	const updateCourse = async (course, timeperiod, institute, id) => {
+		await updateCVCourse(cv.id, course, timeperiod, institute, id).then(res => {
+			setTrigger(!trigger)
+			setCouData(null)
+		})
 	}
 
 	const addInterest = (interest) => {
@@ -133,9 +190,23 @@ function AccountInfo({ route, navigation }) {
 		setTrigger(!trigger)
 	}
 
+	const updateInterest = async (interest, id) => {
+		await updateCVInterest(cv.id, interest, id).then(res => {
+			setTrigger(!trigger)
+			setInData(null)
+		})
+	}
+
 	const addLanguage = (language) => {
 		dispatch(CVLanguage(cv.id, language))
 		setTrigger(!trigger)
+	}
+
+	const updateLanguage = async (language, id) => {
+		await updateCVLanguage(cv.id, language, id).then(res => {
+			setTrigger(!trigger)
+			setLanData(null)
+		})
 	}
 
 	const addResume = (resume) => {
@@ -143,9 +214,23 @@ function AccountInfo({ route, navigation }) {
 		setTrigger(!trigger)
 	}
 
+	const updateResume = async (resume, id) => {
+		updateCVResume(cv.id, resume, id).then(res => {
+			setTrigger(!trigger)
+			setResData(null)
+		})
+	}
+
 	const addSkill = (skill) => {
 		dispatch(CVSkill(cv.id, skill))
 		setTrigger(!trigger)
+	}
+
+	const updateSkill = (skill, id) => {
+		updateCVSkill(cv.id, skill, id).then(res => {
+			setTrigger(!trigger)
+			setSkData(null)
+		})
 	}
 
 	const toggleEducationVisibility = () => setEducationVisible(!educationVisible);
@@ -207,19 +292,19 @@ function AccountInfo({ route, navigation }) {
 										toggleEducationVisibility={toggleEducationVisibility}
 										add={addEducation} edit={updateEducation} data={edData}/>
 									<CareerModal visible={careerVisible} toggleCareerVisibility={toggleCareerVisibility}
-										add={addCareer} />
+										add={addCareer} edit={updateCareer} data={carData}/>
 									<CourseModal visible={courseVisible} toggleCourseVisibility={toggleCourseVisibility}
-										add={addCourse} />
+										add={addCourse} edit={updateCourse} data={couData}/>
 									<SkillModal visible={skillVisible} toggleSkillVisibility={toggleSkillVisibility}
-										add={addSkill} />
+										add={addSkill} edit={updateSkill} data={skData}/>
 									<InterestModal visible={interestVisible}
 										toggleInterestVisibility={toggleInterestVisibility}
-										add={addInterest} />
+										add={addInterest} edit={updateInterest} data={inData}/>
 									<LanguageModal visible={languageVisible}
 										toggleLanguageVisibility={toggleLanguageVisibility}
-										add={addLanguage} />
+										add={addLanguage} edit={updateLanguage} data={lanData}/>
 									<ResumeModal visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility}
-										add={addResume} />
+										add={addResume} edit={updateResume} data={resData}/>
 									<PersonalStatementModal visible={infoVisible}
 										toggleInfoVisibility={toggleInfoVisibility}
 										add={addPersonalInfo} />
@@ -495,12 +580,11 @@ function AccountInfo({ route, navigation }) {
 																			fontSize: 12,
 
 																		}}>{item.company}</Text>
-																		<Image style={{
+																		<Pressable style={{ marginLeft: 'auto' }} onPress={() => editCareer({ company: item.company, job: item.job, timeperiod: item.timeperiod, address: item.address, phone: item.phone, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
-																			marginLeft: 'auto'
 																		}}
-																			source={require('../assets/editIcon.png')} />
+																			source={require('../assets/editIcon.png')} /></Pressable>
 																	</View>
 																)}
 															/>
@@ -572,12 +656,11 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.course}</Text>
-																		<Image style={{
+																		<Pressable style={{ marginLeft: 'auto' }} onPress={() => editCourse({ course: item.course, timeperiod: item.timeperiod, institute: item.institute, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
-																			marginLeft: 'auto'
 																		}}
-																			source={require('../assets/editIcon.png')} />
+																			source={require('../assets/editIcon.png')} /></Pressable>
 																	</View>
 																)}
 															/>
@@ -649,12 +732,11 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.skill}</Text>
-																		<Image style={{
+																		<Pressable style={{ marginLeft: 'auto' }} onPress={() => editSkill({ skill: item.skill, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
-																			marginLeft: 'auto'
 																		}}
-																			source={require('../assets/editIcon.png')} />
+																			source={require('../assets/editIcon.png')} /></Pressable>
 																	</View>
 																)}
 															/>
@@ -726,12 +808,11 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.interest}</Text>
-																		<Image style={{
+																		<Pressable style={{ marginLeft: 'auto' }} onPress={() => editInterest({ interest: item.interest, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
-																			marginLeft: 'auto'
 																		}}
-																			source={require('../assets/editIcon.png')} />
+																			source={require('../assets/editIcon.png')} /></Pressable>
 																	</View>
 																)}
 															/>
@@ -803,12 +884,11 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.language}</Text>
-																		<Image style={{
+																		<Pressable style={{ marginLeft: 'auto' }} onPress={() => editLanguage({ language: item.language, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
-																			marginLeft: 'auto'
 																		}}
-																			source={require('../assets/editIcon.png')} />
+																			source={require('../assets/editIcon.png')} /></Pressable>
 																	</View>
 																)}
 															/>
@@ -881,12 +961,11 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.resume}</Text>
-																		<Image style={{
+																		<Pressable style={{ marginLeft: 'auto' }} onPress={() => editResume({ resume: item.resume, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
-																			marginLeft: 'auto'
 																		}}
-																			source={require('../assets/editIcon.png')} />
+																			source={require('../assets/editIcon.png')} /></Pressable>
 																	</View>
 																)}
 															/>

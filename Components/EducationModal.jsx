@@ -18,10 +18,6 @@ const EducationModal = ({visible, toggleEducationVisibility, add, data, edit}) =
 
     const Add = () => {
         if (data !== null){
-            console.log(data)
-            console.log(degree)
-            console.log(timeperiod)
-            console.log(university)
             edit(degree, timeperiod, university, data.id)
         } else {
             add(degree, timeperiod, university)

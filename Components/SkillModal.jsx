@@ -1,13 +1,23 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Image, Modal, Pressable, Text, View} from 'react-native'
 import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler'
 
-const SkillModal = ({visible, toggleSkillVisibility, add}) => {
+const SkillModal = ({visible, toggleSkillVisibility, add, edit, data}) => {
 
     const [skill, setSkill] = useState();
 
+    useEffect(() => {
+        if (data!==null){
+            setSkill(data.skill)
+        }
+    }, [data]);
+
     const Add = () => {
-        add(skill)
+        if (data!==null){
+            edit(skill, data.id)
+        } else {
+            add(skill)
+        }
         toggleSkillVisibility()
     }
 
@@ -42,7 +52,7 @@ const SkillModal = ({visible, toggleSkillVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.skill}</TextInput>
                     <Pressable onPress={() => Add()} style={{
                         paddingHorizontal: 60,
                         paddingVertical: 13,

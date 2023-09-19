@@ -1,13 +1,23 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Image, Modal, Pressable, Text, View} from 'react-native'
 import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler'
 
-const InterestModal = ({visible, toggleInterestVisibility, add}) => {
+const InterestModal = ({visible, toggleInterestVisibility, add, edit, data}) => {
 
     const [interest, setInterest] = useState();
 
+    useEffect(() => {
+        if (data!==null){
+            setInterest(data.interest)
+        }
+    }, [data]);
+
     const Add = () => {
-        add(interest)
+        if (data!==null){
+            edit(interest, data.id)
+        } else {
+            add(interest)
+        }
         toggleInterestVisibility()
     }
 
@@ -42,7 +52,7 @@ const InterestModal = ({visible, toggleInterestVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.interest}</TextInput>
                     <Pressable onPress={() => Add()} style={{
                         paddingHorizontal: 60,
                         paddingVertical: 13,

@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Image, Modal, Pressable, Text, View} from 'react-native'
 import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler'
 import company from "../API/reducers/company";
 
-const CareerModal = ({visible, toggleCareerVisibility, add}) => {
+const CareerModal = ({visible, toggleCareerVisibility, add, edit, data}) => {
 
     const [company, setCompany] = useState()
     const [job, setJob] = useState()
@@ -11,8 +11,22 @@ const CareerModal = ({visible, toggleCareerVisibility, add}) => {
     const [address, setAddress] = useState()
     const [phone, setPhone] = useState()
 
+    useEffect(() => {
+        if (data!==null){
+            setCompany(data.company)
+            setJob(data.job)
+            setTimePeriod(data.timeperiod)
+            setAddress(data.address)
+            setPhone(data.phone)
+        }
+    }, [data]);
+
     const Add = () => {
-        add(company, job, timeperiod, address, phone)
+        if (data!==null){
+            edit(company, job, timeperiod, address, phone, data.id)
+        } else {
+            add(company, job, timeperiod, address, phone)
+        }
         toggleCareerVisibility()
     }
 
@@ -47,7 +61,7 @@ const CareerModal = ({visible, toggleCareerVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.company}</TextInput>
                     <TextInput onChangeText={text => setJob(text)} placeholder={'Job'} style={{
                         width: '80%',
                         marginTop: 8,
@@ -56,7 +70,7 @@ const CareerModal = ({visible, toggleCareerVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.job}</TextInput>
                     <TextInput onChangeText={text => setTimePeriod(text)} placeholder={'Time Period'} style={{
                         width: '80%',
                         marginTop: 8,
@@ -65,7 +79,7 @@ const CareerModal = ({visible, toggleCareerVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.timeperiod}</TextInput>
                     <TextInput onChangeText={text => setAddress(text)} placeholder={'Address'} style={{
                         width: '80%',
                         marginTop: 8,
@@ -74,7 +88,7 @@ const CareerModal = ({visible, toggleCareerVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.address}</TextInput>
                     <TextInput onChangeText={text => setPhone(text)} placeholder={'Phone'} style={{
                         width: '80%',
                         marginTop: 8,
@@ -83,7 +97,7 @@ const CareerModal = ({visible, toggleCareerVisibility, add}) => {
                         borderWidth: 0.5,
                         height: 50,
                         textAlign: 'center'
-                    }}></TextInput>
+                    }}>{data?.phone}</TextInput>
                     <Pressable onPress={() => Add()} style={{
                         paddingHorizontal: 60,
                         paddingVertical: 13,
