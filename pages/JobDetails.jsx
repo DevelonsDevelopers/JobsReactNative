@@ -152,7 +152,7 @@ const JobDetails = ({ route, navigation }) => {
                                         marginRight: 25
                                     }}>{moment(job?.date).fromNow()}</Text>
                                 </View>
-                                <View style={{ paddingHorizontal: 100, }}>
+                                <View style={{ marginLeft:'auto',marginRight:'auto' }}>
                                     <Text style={{
                                         fontFamily: 'poppins_medium',
                                         fontSize: 15,
@@ -164,6 +164,7 @@ const JobDetails = ({ route, navigation }) => {
                                         margin: 'auto',
                                         paddingTop: 5,
                                         paddingBottom: 2,
+                                        paddingHorizontal:20
                                     }}>
                                         Salary {job?.salary}
                                     </Text>
@@ -215,7 +216,7 @@ const JobDetails = ({ route, navigation }) => {
                                             </View>
                                             <Text style={{
                                                 fontSize: 16,
-                                                fontFamily: 'poppins_bold',
+                                                fontFamily: 'poppins_medium',
                                                 textAlign: "center"
                                             }}>{job?.workdays}</Text>
                                             <Text style={{
@@ -235,7 +236,7 @@ const JobDetails = ({ route, navigation }) => {
                                             <Text style={{
                                                 textAlign: "center",
                                                 fontSize: 20,
-                                                fontFamily: 'poppins_bold'
+                                                fontFamily: 'poppins_medium'
                                             }}>{job?.qualification}</Text>
                                             <Text style={{
                                                 textAlign: "center",

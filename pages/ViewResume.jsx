@@ -142,9 +142,9 @@ const ViewResume = ({ route, navigation }) => {
                                     </Text>
                                 </View>
                                 <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft: 'auto', marginTop: 6, marginBottom: 6 }}>
-                                    Phone : {item.phone}
+                                   {item.phone}
                                 </Text>
-                                <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
+                                {/* <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text> */}
                             </View>
                         )} />
 

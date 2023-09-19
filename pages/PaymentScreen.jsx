@@ -6,8 +6,13 @@ import queryString from 'query-string';
 import { CardField } from "@stripe/stripe-react-native";
 import ButtonComp from "../Components/ButtonComp";
 import paypalApi from "../API/paypal"
+import { useEffect } from 'react';
 
-const PaymentScreen = () => {
+const PaymentScreen = ({ route, navigation }) => {
+
+    const { plan } = route.params
+    const { price } = route.params
+
 
     const [isLoading, setLoading] = useState(false)
     const [paypalUrl, setPaypalUrl] = useState(null)
@@ -102,8 +107,8 @@ const PaymentScreen = () => {
             </View>
 
             <View style={{ marginHorizontal: 30, marginBottom: 40, marginTop: 40, borderWidth: 1, borderColor: 'green', padding: 10, borderRadius: 10 }}>
-                <Text style={{ color: '#205397', fontSize: 13, fontFamily: 'poppins_medium', textAlign: 'left' }}>Resume Distribution plan</Text>
-                <Text style={{ color: 'green', fontSize: 30, fontFamily: 'poppins_medium', textAlign: 'left' }}>$5</Text>
+                <Text style={{ color: '#205397', fontSize: 13, fontFamily: 'poppins_medium', textAlign: 'left' }}>{plan} plan</Text>
+                <Text style={{ color: 'green', fontSize: 30, fontFamily: 'poppins_medium', textAlign: 'left' }}>${price}</Text>
                 <Text style={{ color: 'gray', fontSize: 15, fontFamily: 'poppins_medium', textAlign: 'left' }}>Boost your chance of getting job by 300%</Text>
             </View>
 

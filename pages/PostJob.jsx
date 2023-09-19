@@ -121,6 +121,7 @@ function PostJob({ navigation }) {
             Morning!</Text>
 
         </View>
+
         <View style={{ flexDirection: 'row', flex: 1, marginTop: 30 }}>
           <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
             onPress={() => navigation.push('AppliedUsers')} style={{
@@ -173,6 +174,7 @@ function PostJob({ navigation }) {
             }}>Offers</Text>
           </Ripple>
         </View>
+
         <View style={{
           backgroundColor: '#a6d6ec',
           paddingVertical: 20,

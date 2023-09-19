@@ -23,6 +23,7 @@ import CitySelectModal from "../Components/CitySelectModal";
 import CountrySelectModal from "../Components/CountrySelectModal";
 import GenderModal from "../Components/GenderModal";
 import DatePicker from "react-native-date-picker";
+import Ripple from "react-native-material-ripple";
 
 function PersonalInfo({ navigation }) {
 
@@ -655,6 +656,23 @@ function PersonalInfo({ navigation }) {
                             :
                             ''
                         }
+
+                        <Ripple rippleColor="white"
+                        onPress={() => navigation.push('Plans')}
+                        style={{
+                            backgroundColor: 'green',
+                            borderRadius: 25,
+                            alignItems: 'center',
+                            padding: 15,
+                            marginTop: 15,
+                            marginHorizontal: 25,
+                            marginBottom:25
+                        }}>
+                            <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
+                            >Update Your Account
+                            </Text>
+                        </Ripple>
+
                     </>}
             </ScrollView>
         </View>

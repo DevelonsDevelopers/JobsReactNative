@@ -1,22 +1,22 @@
 import * as React from 'react';
-import {View, Text, Image} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { View, Text, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Splash from "./pages/Splash";
 import Login from "./pages/Login";
 import UserType from "./pages/UserType";
 import Register from "./pages/Register";
 import OnBoarding from "./pages/OnBoarding";
 import Home from "./pages/Home";
-import {useFonts} from "expo-font";
+import { useFonts } from "expo-font";
 import AppLoading from "./pages/AppLoading";
 import ChangePassword from "./pages/ChangePassword";
 import Verify from "./pages/Verify";
 import VerificationCode from "./pages/VerificationCode";
-import {applyMiddleware, compose, legacy_createStore as createStore} from "redux";
+import { applyMiddleware, compose, legacy_createStore as createStore } from "redux";
 import reducers from "./API/reducers/";
 import thunk from "redux-thunk";
-import {Provider} from "react-redux";
+import { Provider } from "react-redux";
 import Profile from "./pages/Profile";
 import PersonalInfo from "./pages/PersonalInfo";
 import AccountInfo from "./pages/AccountInfo";
@@ -57,7 +57,7 @@ import ProviderProfileInfo from './pages/ProviderProfileInfo';
 import ProviderAccountManage from './pages/ProviderAccountManage';
 import OfferSend from './pages/OfferSend';
 import ViewResume from './pages/ViewResume';
-import {StripeProvider} from "@stripe/stripe-react-native";
+import { StripeProvider } from "@stripe/stripe-react-native";
 import StripeTest from "./pages/StripeTest";
 import PaymentScreen from "./pages/PaymentScreen";
 import OffersByJob from "./pages/OffersByJob";
@@ -66,6 +66,8 @@ import PaymentSuccessful from './pages/PaymentSuccessful';
 import GoogleRegister from './pages/GoogleRegister';
 import SeekerOfferResponse from './pages/SeekerOfferResponse';
 import AcceptResponse from './pages/AcceptResponse';
+import AppliedSuccessful from './pages/AppliedSuccessful';
+import Plans from './pages/Plans';
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
@@ -87,7 +89,7 @@ function App() {
     });
 
     if (!fontLoad) {
-        return <AppLoading/>
+        return <AppLoading />
     }
 
     return (
@@ -95,108 +97,112 @@ function App() {
             <Provider store={store}>
                 <NavigationContainer>
                     <Stack.Navigator>
-                        <Stack.Screen name="Splash" component={Splash} options={{title: "Splash", headerShown: false}}/>
+                        <Stack.Screen name="Splash" component={Splash} options={{ title: "Splash", headerShown: false }} />
                         <Stack.Screen name="UserType" component={UserType}
-                                      options={{title: "UserType", headerShown: false}}/>
-                        <Stack.Screen name="Login" component={Login} options={{title: "Login", headerShown: false}}/>
+                            options={{ title: "UserType", headerShown: false }} />
+                        <Stack.Screen name="Login" component={Login} options={{ title: "Login", headerShown: false }} />
                         <Stack.Screen name="Register" component={Register}
-                                      options={{title: "Register", headerShown: false}}/>
+                            options={{ title: "Register", headerShown: false }} />
                         <Stack.Screen name="Onboarding" component={OnBoarding}
-                                      options={{title: "Onboarding", headerShown: false}}/>
+                            options={{ title: "Onboarding", headerShown: false }} />
                         <Stack.Screen name="ChangePassword" component={ChangePassword}
-                                      options={{title: "ChangePassword", headerShown: false}}/>
-                        <Stack.Screen name="Verify" component={Verify} options={{title: "Verify", headerShown: false}}/>
+                            options={{ title: "ChangePassword", headerShown: false }} />
+                        <Stack.Screen name="Verify" component={Verify} options={{ title: "Verify", headerShown: false }} />
                         <Stack.Screen name="VerificationCode" component={VerificationCode}
-                                      options={{title: "VerificationCode", headerShown: false}}/>
-                        <Stack.Screen name="Home" component={Home} options={{title: "Home", headerShown: false}}/>
+                            options={{ title: "VerificationCode", headerShown: false }} />
+                        <Stack.Screen name="Home" component={Home} options={{ title: "Home", headerShown: false }} />
                         <Stack.Screen name="Profile" component={Profile}
-                                      options={{title: "Profile", headerShown: false}}/>
+                            options={{ title: "Profile", headerShown: false }} />
                         <Stack.Screen name="PersonalInfo" component={PersonalInfo}
-                                      options={{title: "PersonalInfo", headerShown: false}}/>
+                            options={{ title: "PersonalInfo", headerShown: false }} />
                         <Stack.Screen name="AccountInfo" component={AccountInfo}
-                                      options={{title: "AccountInfo", headerShown: false}}/>
+                            options={{ title: "AccountInfo", headerShown: false }} />
                         <Stack.Screen name="Companies" component={Companies}
-                                      options={{title: "Companies", headerShown: false}}/>
-                        <Stack.Screen name="Cities" component={Cities} options={{title: "Cities", headerShown: false}}/>
+                            options={{ title: "Companies", headerShown: false }} />
+                        <Stack.Screen name="Cities" component={Cities} options={{ title: "Cities", headerShown: false }} />
                         <Stack.Screen name="Categories" component={Categories}
-                                      options={{title: "Categories", headerShown: false}}/>
+                            options={{ title: "Categories", headerShown: false }} />
                         <Stack.Screen name="Termsandconditions" component={Termsandconditions}
-                                      options={{title: "Termsandconditions", headerShown: false}}/>
+                            options={{ title: "Termsandconditions", headerShown: false }} />
                         <Stack.Screen name="Privacypolicy" component={Privacypolicy}
-                                      options={{title: "Privacypolicy", headerShown: false}}/>
+                            options={{ title: "Privacypolicy", headerShown: false }} />
                         <Stack.Screen name="Contactus" component={Contactus}
-                                      options={{title: "Contactus", headerShown: false}}/>
+                            options={{ title: "Contactus", headerShown: false }} />
                         <Stack.Screen name="History" component={History}
-                                      options={{title: "History", headerShown: false}}/>
-                        <Stack.Screen name="Jobs" component={Jobs} options={{title: "Jobs", headerShown: false}}/>
+                            options={{ title: "History", headerShown: false }} />
+                        <Stack.Screen name="Jobs" component={Jobs} options={{ title: "Jobs", headerShown: false }} />
                         <Stack.Screen name="JobsByCity" component={JobsByCity}
-                                      options={{title: "JobsByCity", headerShown: false}}/>
+                            options={{ title: "JobsByCity", headerShown: false }} />
                         <Stack.Screen name="JobsByCategory" component={JobsByCategory}
-                                      options={{title: "JobsByCategory", headerShown: false}}/>
+                            options={{ title: "JobsByCategory", headerShown: false }} />
                         <Stack.Screen name="JobsByCompany" component={JobsByCompany}
-                                      options={{title: "JobsByCompany", headerShown: false}}/>
-                        <Stack.Screen name="Resume" component={Resume} options={{title: "Resume", headerShown: false}}/>
-                        <Stack.Screen name="Offers" component={Offers} options={{title: "Offers", headerShown: false}}/>
+                            options={{ title: "JobsByCompany", headerShown: false }} />
+                        <Stack.Screen name="Resume" component={Resume} options={{ title: "Resume", headerShown: false }} />
+                        <Stack.Screen name="Offers" component={Offers} options={{ title: "Offers", headerShown: false }} />
                         <Stack.Screen name="JobDetails" component={JobDetails}
-                                      options={{title: "JobDetails", headerShown: false}}/>
+                            options={{ title: "JobDetails", headerShown: false }} />
                         <Stack.Screen name="JobResponse" component={JobResponse}
-                                      options={{title: "JobResponse", headerShown: false}}/>
+                            options={{ title: "JobResponse", headerShown: false }} />
                         <Stack.Screen name="AdvanceSearch" component={AdvanceSearch}
-                                      options={{title: "AdvanceSearch", headerShown: false}}/>
+                            options={{ title: "AdvanceSearch", headerShown: false }} />
                         <Stack.Screen name="PostJob" component={PostJob}
-                                      options={{title: "PostJob", headerShown: false}}/>
+                            options={{ title: "PostJob", headerShown: false }} />
                         <Stack.Screen name="JobPosted" component={JobPosted}
-                                      options={{title: "JobPosted", headerShown: false}}/>
+                            options={{ title: "JobPosted", headerShown: false }} />
                         <Stack.Screen name="AppliedUsers" component={AppliedUsers}
-                                      options={{title: "AppliedUsers", headerShown: false}}/>
+                            options={{ title: "AppliedUsers", headerShown: false }} />
                         <Stack.Screen name="SentOffers" component={SentOffers}
-                                      options={{title: "SentOffers", headerShown: false}}/>
+                            options={{ title: "SentOffers", headerShown: false }} />
                         <Stack.Screen name="OfferAccepted" component={OfferAccepted}
-                                      options={{title: "OfferAccepted", headerShown: false}}/>
+                            options={{ title: "OfferAccepted", headerShown: false }} />
                         {/* <Stack.Screen name="OfferRejected" component={OfferRejected}
                                       options={{title: "OfferRejected", headerShown: false}}/> */}
                         <Stack.Screen name="Recommendedjobs" component={Recommendedjobs}
-                                      options={{title: "Recommendedjobs", headerShown: false}}/>
+                            options={{ title: "Recommendedjobs", headerShown: false }} />
                         {/* <Stack.Screen name="SavedJobs" component={SavedJobs} options={{title: "SavedJobs", headerShown: false}}/> */}
-                        <Stack.Screen name="Search" component={Search} options={{title: "Search", headerShown: false}}/>
+                        <Stack.Screen name="Search" component={Search} options={{ title: "Search", headerShown: false }} />
                         <Stack.Screen name="RecommendedUser" component={RecommendedUser}
-                                      options={{title: "RecommendedUser", headerShown: false}}/>
+                            options={{ title: "RecommendedUser", headerShown: false }} />
                         <Stack.Screen name="AppliedSaved" component={AppliedSaved}
-                                      options={{title: "AppliedSaved", headerShown: false}}/>
+                            options={{ title: "AppliedSaved", headerShown: false }} />
                         <Stack.Screen name="ProviderProfile" component={ProviderProfile}
-                                      options={{title: "ProviderProfile", headerShown: false}}/>
+                            options={{ title: "ProviderProfile", headerShown: false }} />
                         <Stack.Screen name="ProviderTypeModal" component={ProviderTypeModal}
-                                      options={{title: "ProviderTypeModal", headerShown: false}}/>
+                            options={{ title: "ProviderTypeModal", headerShown: false }} />
                         <Stack.Screen name="ApplyModal" component={ApplyModal}
-                                      options={{title: "ApplyModal", headerShown: false}}/>
+                            options={{ title: "ApplyModal", headerShown: false }} />
                         <Stack.Screen name="CoverLetter" component={CoverLetter}
-                                      options={{title: "CoverLetter", headerShown: false}}/>
+                            options={{ title: "CoverLetter", headerShown: false }} />
                         <Stack.Screen name="CoverLetterForm" component={CoverLetterForm}
-                                      options={{title: "CoverLetterForm", headerShown: false}}/>
+                            options={{ title: "CoverLetterForm", headerShown: false }} />
                         <Stack.Screen name="ProviderProfileInfo" component={ProviderProfileInfo}
-                                      options={{title: "ProviderProfileInfo", headerShown: false}}/>
+                            options={{ title: "ProviderProfileInfo", headerShown: false }} />
                         <Stack.Screen name="ProviderAccountManage" component={ProviderAccountManage}
-                                      options={{title: "ProviderAccountManage", headerShown: false}}/>
+                            options={{ title: "ProviderAccountManage", headerShown: false }} />
                         <Stack.Screen name="OfferSend" component={OfferSend}
-                                      options={{title: "OfferSend", headerShown: false}}/>
+                            options={{ title: "OfferSend", headerShown: false }} />
                         <Stack.Screen name="ViewResume" component={ViewResume}
-                                      options={{title: "ViewResume", headerShown: false}}/>
+                            options={{ title: "ViewResume", headerShown: false }} />
                         <Stack.Screen name="Stripe" component={StripeTest}
-                                      options={{title: "Stripe", headerShown: false}}/>
+                            options={{ title: "Stripe", headerShown: false }} />
                         <Stack.Screen name="Payment" component={PaymentScreen}
-                                      options={{title: "Payment", headerShown: false}}/>
+                            options={{ title: "Payment", headerShown: false }} />
                         <Stack.Screen name="OffersByJob" component={OffersByJob}
-                                      options={{title: "OffersByJob", headerShown: false}}/>
+                            options={{ title: "OffersByJob", headerShown: false }} />
                         <Stack.Screen name="AppliedByJob" component={AppliedByJob}
-                                      options={{title: "AppliedByJob", headerShown: false}}/>
+                            options={{ title: "AppliedByJob", headerShown: false }} />
                         <Stack.Screen name="PaymentSuccesful" component={PaymentSuccessful}
-                                      options={{title: "PaymentSuccessful", headerShown: false}}/>
+                            options={{ title: "PaymentSuccessful", headerShown: false }} />
                         <Stack.Screen name="GoogleRegister" component={GoogleRegister}
-                                      options={{title: "GoogleRegister", headerShown: false}}/>
+                            options={{ title: "GoogleRegister", headerShown: false }} />
                         <Stack.Screen name="SeekerOfferResponse" component={SeekerOfferResponse}
-                                      options={{title: "SeekerOfferResponse", headerShown: false}}/>
+                            options={{ title: "SeekerOfferResponse", headerShown: false }} />
                         <Stack.Screen name="AcceptResponse" component={AcceptResponse}
-                                      options={{title: "AcceptResponse", headerShown: false}}/>
+                            options={{ title: "AcceptResponse", headerShown: false }} />
+                        <Stack.Screen name="AppliedSuccessful" component={AppliedSuccessful}
+                            options={{ title: "AppliedSuccessful", headerShown: false }} />
+                        <Stack.Screen name="Plans" component={Plans}
+                            options={{ title: "Plans", headerShown: false }} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </Provider>
