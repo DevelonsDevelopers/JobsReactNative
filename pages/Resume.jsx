@@ -82,7 +82,7 @@ function Resume({ navigation }) {
 
           <View style={{ paddingHorizontal: 20 }}>
             <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
-            <Text style={{ textAlign: 'center', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 10 }}>{cv?.role}</Text>
+            <Text style={{ textAlign: 'center', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 10 }}>{cv?.job}</Text>
             <Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
 
             <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginVertical: 10,paddingHorizontal:10,paddingVertical:10 }}>{cv?.statement}</Text>
