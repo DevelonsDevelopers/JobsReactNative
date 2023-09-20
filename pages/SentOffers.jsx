@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FetchSentOffers } from "../API/actions/offersActions";
+import moment from "moment/moment";
 
 function SentOffers({ navigation }) {
 
@@ -101,7 +102,7 @@ function SentOffers({ navigation }) {
                                         textAlign: 'right',
                                         fontFamily: 'poppins_medium',
                                         fontSize: 13
-                                    }}>Today</Text>
+                                    }}>{moment(item.date).format('ll')}</Text>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row' }}>
                                     <View style={{ flex: 1 }}>
@@ -143,7 +144,7 @@ function SentOffers({ navigation }) {
                                 </View>
                                 <View style={{ paddingHorizontal: 36, marginTop: 4 }}>
                                     <Text
-                                        onPress={() => navigation.push('OfferAccepted', { ID: item.job })}
+                                        onPress={() => navigation.push('AcceptResponse')}
                                         style={{
                                             backgroundColor: '#143D59',
                                             textAlign: "center",

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FetchSentOffers, FetchSentOffersByJob } from "../API/actions/offersActions";
 import moment from "moment";
+import Ripple from "react-native-material-ripple";
 
 function OffersByJob({ route, navigation }) {
 
@@ -131,7 +132,9 @@ function OffersByJob({ route, navigation }) {
                                         Salary ${item.salary}
                                     </Text>
                                 </View>
-                                <View style={{ paddingHorizontal: 36, marginTop: 4 }}>
+                                <Ripple  
+                                onPress={() => navigation.push('ViewResume',{ID:item.user})}
+                                rippleColor="white" style={{ paddingHorizontal: 36, marginTop: 4 }}>
                                     <Text style={{
                                         backgroundColor: '#143D59',
                                         textAlign: "center",
@@ -142,7 +145,7 @@ function OffersByJob({ route, navigation }) {
                                         marginVertical: 4,
                                         paddingVertical: 7
                                     }}>View Response</Text>
-                                </View>
+                                </Ripple>
                             </View>
                         )} />
                 </SafeAreaView>

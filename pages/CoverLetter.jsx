@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import moment from "moment/moment";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CVByUser } from "../API/actions/cvActions";
-import {applyJob, createCover} from "../API";
+import { applyJob, createCover } from "../API";
 
 const data = [
 	{ 'data': 'Enhanced domestic helicopter transfer sales by 60% in 2018/2019 via business-to-business concept ' },
@@ -22,12 +22,22 @@ const CoverLetter = ({ route, navigation }) => {
 	const { body } = route.params;
 	const { job } = route.params;
 
+	const { user } = route.params;
+
+	useEffect(() => {
+		console.log(user)
+	}, [user])
+
+	
+
+
 	const dispatch = useDispatch();
 
 	const cv = useSelector((state) => state.cv.cv);
 	const date = moment().format("DD MMM YYYY")
 
 	const [ID, setID] = useState()
+
 
 	useEffect(() => {
 		GetData();
@@ -43,18 +53,18 @@ const CoverLetter = ({ route, navigation }) => {
 			dispatch(CVByUser(ID));
 		}
 	}, [dispatch, ID]);
-	
+
 
 	const ApplyJob = () => {
 		const postDate = moment().format("YYYY-MM-DD")
 		createCover(ID, job, postDate, role, intro, body).then(res => {
 			console.log(res)
-			const {data: {data}} = res;
+			const { data: { data } } = res;
 			if (data.affectedRows === 1) {
 				const cover = data.insertId;
 				applyJob(job, ID, postDate, cover).then(res => {
 					console.log(res)
-					const {data: {data}} = res;
+					const { data: { data } } = res;
 					if (data.affectedRows === 1) {
 						navigation.push('Home')
 					}
@@ -84,7 +94,7 @@ const CoverLetter = ({ route, navigation }) => {
 				</View>
 
 
-				<View style={{  marginTop: 40, paddingVertical: 10, borderRadius: 20 }}>
+				<View style={{ marginTop: 40, paddingVertical: 10, borderRadius: 20 }}>
 					<Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.name}</Text>
 					<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.address}</Text>
 					<View style={{ flexDirection: "row", justifyContent: 'center', gap: 20, marginTop: 5 }}>
@@ -95,7 +105,7 @@ const CoverLetter = ({ route, navigation }) => {
 				<Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, marginHorizontal: 20 }}>-</Text>
 				<View>
 					<Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>{date}</Text>
-						</View>
+				</View>
 				<Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: {role}</Text>
 				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{intro}</Text>
 				<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{body}</Text>

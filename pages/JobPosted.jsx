@@ -14,6 +14,11 @@ function JobPosted({ navigation }) {
   const [visible, setVisible] = useState(false)
   const toggleVisibility = () => setVisible(!visible)
 
+
+  useEffect(()=>{
+   console.log(companyJobs) 
+  },[companyJobs])
+
   return (
 
     <View style={{ flex: 1 }}>
@@ -64,7 +69,7 @@ function JobPosted({ navigation }) {
                   paddingVertical: 20,
                   paddingHorizontal: 20
                 }}>
-                <Text style={{ fontFamily: 'poppins_medium', fontSize: 14, marginLeft: 'auto' }}>{moment(item.date).format("MMM Do YY") }</Text>
+                <Text style={{ fontFamily: 'poppins_medium', fontSize: 14, marginLeft: 'auto' }}>{moment(item.created).format('ll')}</Text>
                 <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', fontSize: 16, textAlign: 'center', color: '#F0A51E' }}>{item.title}</Text>
                 <Text style={{ textAlign: "center", fontSize: 14, fontFamily: 'poppins_medium', paddingVertical: 5 }}>{item.category_name}</Text>
                 <View style={{ paddingHorizontal: 50 }}><Text style={{ backgroundColor: '#D9D9D9', textAlign: "center", paddingVertical: 6, borderRadius: 20, fontSize: 12, fontFamily: 'poppins_medium' }}>Salary {item.salary}/month</Text></View>

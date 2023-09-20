@@ -33,6 +33,10 @@ const ViewResume = ({ route, navigation }) => {
     const { ID } = route.params
     const { job } = route.params;
 
+    // const { seeker } = route.params;
+
+
+
     const dispatch = useDispatch();
     const cv = useSelector((state) => state.cv.cv);
     const loading = useSelector((state) => state.cv.isLoading);
@@ -43,6 +47,14 @@ const ViewResume = ({ route, navigation }) => {
             dispatch(CVByUser(ID));
         }
     }, [dispatch, ID]);
+
+    // useEffect(() => {
+    //     if (seeker) {
+    //         dispatch(CVByUser(seeker));
+    //     }
+    // }, [dispatch, seeker]);
+
+    
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -55,10 +67,9 @@ const ViewResume = ({ route, navigation }) => {
     useEffect(() => {
         console.log(cv)
     }, [cv])
+
     
-    useEffect(() => {
-        console.log(ID)
-    }, [ID])
+
 
     return (
         <ScrollView>
@@ -142,7 +153,7 @@ const ViewResume = ({ route, navigation }) => {
                                     </Text>
                                 </View>
                                 <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft: 'auto', marginTop: 6, marginBottom: 6 }}>
-                                   {item.phone}
+                                    {item.phone}
                                 </Text>
                                 {/* <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text> */}
                             </View>
@@ -198,10 +209,14 @@ const ViewResume = ({ route, navigation }) => {
                         )} />
                 </SafeAreaView>
             </View>
-            <Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })} style={{ width: '50%', marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6 }}>
-                <Text style={{ backgroundColor: '#13A3E1', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center' }}>Send Hire Offer</Text>
-            </Ripple>
-
+            <View style={{ flexDirection: "row", justifyContent: 'center',marginHorizontal:40 }}>
+                <Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
+                    <Text style={{ backgroundColor: 'green', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Send Offer</Text>
+                </Ripple>
+                <Ripple onPress={() => navigation.push('AppliedUsers')} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
+                    <Text style={{ backgroundColor: 'red', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 40 }}>Ignore</Text>
+                </Ripple>
+            </View>
 
         </ScrollView>
     )

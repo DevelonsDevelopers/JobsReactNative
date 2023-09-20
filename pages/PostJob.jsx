@@ -19,9 +19,9 @@ function PostJob({ navigation }) {
   // companyjob dispatch==========
   const [ID, setID] = useState()
 
-  useEffect(() => {
-    console.log(ID)
-  }, [ID])
+  // useEffect(() => {
+  //   console.log(ID)
+  // }, [ID])
 
 
   useEffect(() => {
@@ -46,9 +46,9 @@ function PostJob({ navigation }) {
   }, [dispatch, companyJobs, ID]);
 
 
-  useEffect(() => {
-    console.log(companyJobs)
-  }, [companyJobs])
+  // useEffect(() => {
+  //   console.log(companyJobs)
+  // }, [companyJobs])
 
 
   const [visible, setVisible] = useState(false)

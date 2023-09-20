@@ -68,6 +68,7 @@ import SeekerOfferResponse from './pages/SeekerOfferResponse';
 import AcceptResponse from './pages/AcceptResponse';
 import AppliedSuccessful from './pages/AppliedSuccessful';
 import Plans from './pages/Plans';
+import ViewCoverLetter from './pages/ViewCoverLetter';
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
@@ -203,6 +204,8 @@ function App() {
                             options={{ title: "AppliedSuccessful", headerShown: false }} />
                         <Stack.Screen name="Plans" component={Plans}
                             options={{ title: "Plans", headerShown: false }} />
+                        <Stack.Screen name="ViewCoverLetter" component={ViewCoverLetter}
+                            options={{ title: "ViewCoverLetter", headerShown: false }} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </Provider>
