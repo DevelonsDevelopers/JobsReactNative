@@ -11,10 +11,11 @@ import {
     View
 } from "react-native";
 
-import {AllCompanies, CompanyData} from '../API/actions/companyActions';
+import { AllCompanies, CompanyData } from '../API/actions/companyActions';
 
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Ripple from 'react-native-material-ripple';
 
 const ProviderProfileInfo = ({ navigation }) => {
 
@@ -158,6 +159,16 @@ const ProviderProfileInfo = ({ navigation }) => {
                         }}>0</Text>
                     </Pressable>
                 </View>
+                <Text style={{ marginLeft: 40, fontSize: 16, fontFamily: 'poppins_medium', marginTop: 10 }}>Current Plan:</Text>
+                <Ripple onPress={() => navigation.push('Plans')} style={{ backgroundColor: 'white', padding: 20, marginTop: 10, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
+                    <Text style={{ color: '#194666', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Basic</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
+                        <Text style={{ color: '#194666', textAlign: 'center', fontSize: 14 }}>$ </Text>
+                        <Text style={{ fontSize: 40, color: '#194666', marginTop: -5 }}>8</Text>
+                    </View>
+                    <Text style={{ color: '#194666', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  Get 3 months listing</Text>
+                    <Text style={{ color: '#194666', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 20 jobs</Text>
+                </Ripple>
 
                 <View style={{
                     flexDirection: 'column',
@@ -167,7 +178,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                     marginRight: 30,
                     marginLeft: 30,
                     borderRadius: 30,
-                    marginTop: 90,
+                    marginTop: 40,
                 }}>
                     <Pressable onPress={() => navigation.push('ProviderAccountManage')}><View
                         style={{ flexDirection: 'row', flex: 1, marginTop: 20, alignItems: 'center' }}>
@@ -181,26 +192,27 @@ const ProviderProfileInfo = ({ navigation }) => {
                             textAlign: 'left',
                             marginLeft: 20
                         }}>Manage Your Account</Text>
-                    </View></Pressable>
-
-                    <Pressable ><View style={{
-                        flexDirection: 'row',
-                        flex: 1,
-                        marginBottom: 20,
-                        alignItems: 'center',
-                        marginTop: 5
-                    }}>
+                    </View>
+                    </Pressable>
+               
+                    <Pressable onPress={() => navigation.push('Plans')}><View
+                        style={{ flexDirection: 'row', flex: 1, marginTop: 10, alignItems: 'center',marginBottom:20 }}>
                         <Image style={{ width: 20, height: 20 }}
-                            source={require('../assets/logouticon.png')} />
+                            source={require('../assets/manageaccounticon.png')} />
                         <Text style={{
                             color: '#000',
                             fontSize: 16,
                             fontFamily: 'poppins_regular',
                             width: '100%',
                             textAlign: 'left',
-                            marginLeft: 20
-                        }}>Log out</Text>
-                    </View></Pressable>
+                            marginLeft: 20,
+                            
+                        }}>Log out </Text>
+                    </View>
+                    </Pressable>
+
+                    
+
                 </View>
             </ScrollView>
 
