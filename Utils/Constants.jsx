@@ -30,6 +30,7 @@ export const GET_CITIES_BY_COUNTRY = "GET_CITIES_BY_COUNTRY"
 //COMPANIES:======
 export const ALL_COMPANIES = "ALL_COMPANIES";
 export const GET_COMPANY = "GET_COMPANY";
+export const NO_COMPANY = "NO_COMPANY";
 export const CREATE_COMPANY = "CREATE_COMPANY";
 
 
