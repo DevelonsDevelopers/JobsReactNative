@@ -4,7 +4,13 @@ import {
     ALL_JOBS,
     ERROR,
     GET_JOB,
-    GET_JOBS_BY_CATEGORY, GET_JOBS_BY_CITY, GET_JOBS_BY_COMPANY, GET_RECOMMENDED_JOBS, JOB_SEARCH,
+    GET_JOBS_BY_CATEGORY,
+    GET_JOBS_BY_CITY,
+    GET_JOBS_BY_COMPANY,
+    GET_JOBS_BY_PROVIDER,
+    GET_JOBS_BY_PROVIDER_FEATURED,
+    GET_RECOMMENDED_JOBS,
+    JOB_SEARCH,
     LOADING,
     NODATA,
     RECENT_JOBS,
@@ -119,6 +125,42 @@ export const CompanyJobs = (id) => async (dispatch) => {
             dispatch({type: SUCCESS})
         } else {
             dispatch({type: GET_JOBS_BY_COMPANY, payload: {companyJobs: data}})
+            dispatch({type: NODATA})
+            dispatch({type: SUCCESS})
+        }
+    } catch (error) {
+        console.log(error)
+        dispatch({type: ERROR})
+    }
+}
+
+export const ProviderJobs = (id) => async (dispatch) => {
+    try {
+        dispatch ({ type: LOADING })
+        const { data: { data } } = await api.fetchJobsByProvider(id)
+        if (data.length > 0) {
+            dispatch({type: GET_JOBS_BY_PROVIDER, payload: {providerJobs: data}})
+            dispatch({type: SUCCESS})
+        } else {
+            dispatch({type: GET_JOBS_BY_PROVIDER, payload: {providerJobs: data}})
+            dispatch({type: NODATA})
+            dispatch({type: SUCCESS})
+        }
+    } catch (error) {
+        console.log(error)
+        dispatch({type: ERROR})
+    }
+}
+
+export const FeaturedProviderJobs = (id) => async (dispatch) => {
+    try {
+        dispatch ({ type: LOADING })
+        const { data: { data } } = await api.fetchJobsByProviderFeatured(id)
+        if (data.length > 0) {
+            dispatch({type: GET_JOBS_BY_PROVIDER_FEATURED, payload: {providerJobsFeatured: data}})
+            dispatch({type: SUCCESS})
+        } else {
+            dispatch({type: GET_JOBS_BY_PROVIDER_FEATURED, payload: {providerJobsFeatured: data}})
             dispatch({type: NODATA})
             dispatch({type: SUCCESS})
         }
