@@ -122,7 +122,7 @@ function AppliedUsers({ route, navigation }) {
                 <View style={{ paddingHorizontal: 36, marginTop: 4 }}>
                   <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={600} rippleSize={800}
                     onPress={() => navigation.push('ViewResume', { ID: item.user })}
-                    >
+                  >
                     <Text style={{
                       backgroundColor: '#1885F2',
                       textAlign: "center",
@@ -145,7 +145,7 @@ function AppliedUsers({ route, navigation }) {
                       color: 'black',
                       marginVertical: 4,
                       paddingVertical: 7,
-                      borderWidth:1,
+                      borderWidth: 1,
                     }}>View Cover Letter</Text>
                   </Ripple>
                 </View>
