@@ -1,12 +1,19 @@
 import {
-    ALL_JOBS, BOOKMARK_JOB,
+    ALL_JOBS,
+    BOOKMARK_JOB,
     ERROR,
     GET_JOB,
     GET_JOBS_BY_CATEGORY,
-    GET_JOBS_BY_CITY, GET_JOBS_BY_COMPANY, GET_RECOMMENDED_JOBS, JOB_SEARCH,
+    GET_JOBS_BY_CITY,
+    GET_JOBS_BY_COMPANY,
+    GET_JOBS_BY_PROVIDER,
+    GET_JOBS_BY_PROVIDER_FEATURED,
+    GET_RECOMMENDED_JOBS,
+    JOB_SEARCH,
     LOADING,
     NODATA,
-    RECENT_JOBS, RESET,
+    RECENT_JOBS,
+    RESET,
     SUCCESS
 } from "../../Utils/Constants";
 
@@ -32,6 +39,10 @@ const job = (state = {isLoading: true, success: false, error: false, nodata: fal
             return {...state, categoryJobs: action.payload.categoryJobs}
         case GET_JOBS_BY_COMPANY:
             return {...state, companyJobs: action.payload.companyJobs}
+        case GET_JOBS_BY_PROVIDER:
+            return {...state, providerJobs: action.payload.providerJobs}
+        case GET_JOBS_BY_PROVIDER_FEATURED:
+            return {...state, providerJobsFeatured: action.payload.providerJobsFeatured}
         case GET_RECOMMENDED_JOBS:
             return {...state, recommendedJobs: action.payload.recommendedJobs}
         case JOB_SEARCH:

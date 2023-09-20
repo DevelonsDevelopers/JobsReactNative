@@ -127,8 +127,12 @@ function Login({ route, navigation }) {
                         navigation.popToTop()
                         navigation.replace('GoogleRegister', { id: ID, name: user.name, email: user.email })
                     } else {
-                        navigation.popToTop()
-                        navigation.replace('GoogleRegister', { id: ID, name: user.name, email: user.email })
+                        await AsyncStorage.setItem("LOGIN", 'true')
+                        await AsyncStorage.setItem("ID", ID)
+                        await AsyncStorage.setItem("USER", "PROVIDER")
+                        await AsyncStorage.setItem("NAME", user.name)
+                        await AsyncStorage.setItem("EMAIL", user.email)
+                        navigation.replace('PostJob')
                     }
                 } else {
 

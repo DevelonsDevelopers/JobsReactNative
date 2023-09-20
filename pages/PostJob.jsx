@@ -2,7 +2,7 @@ import { FlatList, Image, Linking, Modal, Pressable, SafeAreaView, ScrollView, T
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
-import { CompanyJobs } from "../API/actions/jobActions";
+import {CompanyJobs, FeaturedProviderJobs} from "../API/actions/jobActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ripple from "react-native-material-ripple";
 import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
@@ -13,8 +13,6 @@ function PostJob({ navigation }) {
 
   const dispatch = useDispatch();
   const [login, isLogin] = useState(false);
-  const categories = useSelector(state => state.category.categories)
-  const loading = useSelector(state => state.category.isLoading)
 
   // companyjob dispatch==========
   const [ID, setID] = useState()
@@ -32,14 +30,14 @@ function PostJob({ navigation }) {
     setID(value);
   }
 
-  const companyJobs = useSelector(state => state.job.companyJobs)
+  const companyJobs = useSelector(state => state.job.providerJobsFeatured)
   const nodata = useSelector(state => state.job.nodata)
   const error = useSelector(state => state.job.error)
 
   useEffect(() => {
     if (ID) {
       if (!companyJobs) {
-        dispatch(CompanyJobs(ID))
+        dispatch(FeaturedProviderJobs(ID))
 
       }
     }

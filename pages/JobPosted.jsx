@@ -4,12 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
 import moment from "moment";
 import Ripple from "react-native-material-ripple";
+import {ProviderJobs} from "../API/actions/jobActions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function JobPosted({ navigation }) {
 
   const dispatch = useDispatch();
   const [login, isLogin] = useState(false);
-  const companyJobs = useSelector(state => state.job.companyJobs)
+  const companyJobs = useSelector(state => state.job.providerJobs)
+
+    const [ID, setID] = useState()
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
 
   const [visible, setVisible] = useState(false)
   const toggleVisibility = () => setVisible(!visible)
@@ -18,6 +30,11 @@ function JobPosted({ navigation }) {
   useEffect(()=>{
    console.log(companyJobs) 
   },[companyJobs])
+    useEffect(() => {
+        if (ID) {
+            dispatch(ProviderJobs(ID))
+        }
+    }, [dispatch, ID]);
 
   return (
 
