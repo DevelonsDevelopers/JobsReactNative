@@ -24,6 +24,7 @@ import CountrySelectModal from "../Components/CountrySelectModal";
 import GenderModal from "../Components/GenderModal";
 import DatePicker from "react-native-date-picker";
 import Ripple from "react-native-material-ripple";
+import PhoneInput from "react-native-phone-number-input";
 
 function PersonalInfo({ navigation }) {
 
@@ -434,7 +435,8 @@ function PersonalInfo({ navigation }) {
                                     }}>{seeker?.email}</TextInput>
                                 </View>
                             </View>
-                            <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+
+                            {/* <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
                                 <View style={{
                                     flex: 0.7,
                                     backgroundColor: '#E6E6E6',
@@ -476,12 +478,12 @@ function PersonalInfo({ navigation }) {
                                         }
                                     </View>
                                 </View>
-                            </View>
+                            </View> */}
+
                             <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
                                 <View style={{
                                     flex: 0.7,
                                     backgroundColor: '#E6E6E6',
-                                    borderBottomLeftRadius: 30,
                                     borderColor: '#b2b2b2',
                                     borderWidth: 1,
                                     paddingHorizontal: 20,
@@ -497,7 +499,6 @@ function PersonalInfo({ navigation }) {
                                 </View>
                                 <View style={{
                                     flex: 1.3,
-                                    borderBottomRightRadius: 30,
                                     borderColor: '#b2b2b2',
                                     borderWidth: 1,
                                     paddingHorizontal: 20,
@@ -513,94 +514,110 @@ function PersonalInfo({ navigation }) {
                                         }}>{seeker?.address}</TextInput>
                                 </View>
                             </View>
-                        </View>
-                        <View style={{
-                            flexDirection: 'column',
-                            borderColor: '#b2b2b2',
-                            backgroundColor: '#fff',
-                            marginHorizontal: 10,
-                            marginRight: 30,
-                            marginLeft: 30,
-                            borderRadius: 30,
-                            marginTop: 20
-                        }}>
-                            <View style={{ flexDirection: 'row', flex: 1 }}>
-                                <View style={{
-                                    flex: 0.7,
-                                    backgroundColor: '#E6E6E6',
-                                    borderTopLeftRadius: 30,
-                                    borderColor: '#b2b2b2',
-                                    borderWidth: 1,
-                                    paddingHorizontal: 20,
-                                    paddingVertical: 5
-                                }}>
-                                    <Text style={{
-                                        color: '#000',
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_light',
-                                        width: '100%',
-                                        textAlign: 'left'
-                                    }}>City</Text>
-                                </View>
-                                <View style={{
-                                    flex: 1.3,
-                                    borderTopRightRadius: 30,
-                                    borderColor: '#b2b2b2',
-                                    borderWidth: 1,
-                                    paddingHorizontal: 20,
-                                    paddingVertical: 5
-                                }}>
-                                    <Pressable onPress={() => toggleVisibility()}><TextInput editable={false}
-                                        onFocus={() => toggleVisibility()}
-                                        placeholder={'Missing!!!'}
-                                        style={{
+
+
+                            <View style={{
+                                flexDirection: 'column',
+                                borderColor: '#b2b2b2',
+                                backgroundColor: '#fff',
+                                borderRadius: 30,
+                            }}>
+                                <View style={{ flexDirection: 'row', flex: 1 }}>
+                                    <View style={{
+                                        flex: 0.7,
+                                        backgroundColor: '#E6E6E6',
+
+                                        borderColor: '#b2b2b2',
+                                        borderWidth: 1,
+                                        paddingHorizontal: 20,
+                                        paddingVertical: 5
+                                    }}>
+                                        <Text style={{
                                             color: '#000',
                                             fontSize: 14,
-                                            fontFamily: 'poppins_medium',
+                                            fontFamily: 'poppins_light',
                                             width: '100%',
                                             textAlign: 'left'
-                                        }}>{cityName}</TextInput></Pressable>
+                                        }}>City</Text>
+                                    </View>
+                                    <View style={{
+                                        flex: 1.3,
+
+                                        borderColor: '#b2b2b2',
+                                        borderWidth: 1,
+                                        paddingHorizontal: 20,
+                                        paddingVertical: 5
+                                    }}>
+                                        <Pressable onPress={() => toggleVisibility()}><TextInput editable={false}
+                                            onFocus={() => toggleVisibility()}
+                                            placeholder={'Missing!!!'}
+                                            style={{
+                                                color: '#000',
+                                                fontSize: 14,
+                                                fontFamily: 'poppins_medium',
+                                                width: '100%',
+                                                textAlign: 'left'
+                                            }}>{cityName}</TextInput></Pressable>
+                                    </View>
                                 </View>
-                            </View>
-                            <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
-                                <View style={{
-                                    flex: 0.7,
-                                    backgroundColor: '#E6E6E6',
-                                    borderBottomLeftRadius: 30,
-                                    borderColor: '#b2b2b2',
-                                    borderWidth: 1,
-                                    paddingHorizontal: 20,
-                                    paddingVertical: 5
-                                }}>
-                                    <Text style={{
-                                        color: '#000',
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_light',
-                                        width: '100%',
-                                        textAlign: 'left'
-                                    }}>Country</Text>
-                                </View>
-                                <View style={{
-                                    flex: 1.3,
-                                    borderBottomRightRadius: 30,
-                                    borderColor: '#b2b2b2',
-                                    borderWidth: 1,
-                                    paddingHorizontal: 20,
-                                    paddingVertical: 5
-                                }}>
-                                    <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
-                                        onFocus={() => toggleCountryVisibility()}
-                                        placeholder={'Missing!!!'}
-                                        style={{
+
+
+
+                                <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                                    <View style={{
+                                        flex: 0.7,
+                                        backgroundColor: '#E6E6E6',
+                                        borderBottomLeftRadius: 30,
+                                        borderColor: '#b2b2b2',
+                                        borderWidth: 1,
+                                        paddingHorizontal: 20,
+                                        paddingVertical: 5
+                                    }}>
+                                        <Text style={{
                                             color: '#000',
                                             fontSize: 14,
-                                            fontFamily: 'poppins_medium',
+                                            fontFamily: 'poppins_light',
                                             width: '100%',
                                             textAlign: 'left'
-                                        }}>{countryName}</TextInput></Pressable>
+                                        }}>Country</Text>
+                                    </View>
+                                    <View style={{
+                                        flex: 1.3,
+                                        borderBottomRightRadius: 30,
+                                        borderColor: '#b2b2b2',
+                                        borderWidth: 1,
+                                        paddingHorizontal: 20,
+                                        paddingVertical: 5
+                                    }}>
+                                        <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
+                                            onFocus={() => toggleCountryVisibility()}
+                                            placeholder={'Missing!!!'}
+                                            style={{
+                                                color: '#000',
+                                                fontSize: 14,
+                                                fontFamily: 'poppins_medium',
+                                                width: '100%',
+                                                textAlign: 'left'
+                                            }}>{countryName}</TextInput></Pressable>
+                                    </View>
                                 </View>
                             </View>
                         </View>
+
+                        <View style={{ flexDirection: 'column', marginTop: 20, marginHorizontal: 30 }}>
+                            <View style={{ height: 60, borderColor: '#b2b2b2', borderWidth: 1, borderRadius: 10, padding: 4, backgroundColor: 'white' }}>
+                                <PhoneInput
+                                    layout='first'
+                                    defaultCode='PK'
+                                />
+                            </View>
+                            <Image style={{ width: 14, height: 14, marginLeft: 'auto', position: 'absolute', top: 22, left: '92%' }}
+                                source={require('../assets/verified.png')} />
+                        </View>
+
+
+
+
 
                         <Pressable onPress={() => update()} style={{
                             backgroundColor: '#13A3E1',
@@ -658,16 +675,16 @@ function PersonalInfo({ navigation }) {
                         }
 
                         <Ripple rippleColor="white"
-                        onPress={() => navigation.push('Plans')}
-                        style={{
-                            backgroundColor: 'green',
-                            borderRadius: 25,
-                            alignItems: 'center',
-                            padding: 15,
-                            marginTop: 15,
-                            marginHorizontal: 25,
-                            marginBottom:25
-                        }}>
+                            onPress={() => navigation.push('Plans')}
+                            style={{
+                                backgroundColor: 'green',
+                                borderRadius: 25,
+                                alignItems: 'center',
+                                padding: 15,
+                                marginTop: 15,
+                                marginHorizontal: 25,
+                                marginBottom: 25
+                            }}>
                             <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
                             >Update Your Account
                             </Text>
