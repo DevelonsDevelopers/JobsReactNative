@@ -28,7 +28,7 @@ function PostJob({ navigation }) {
 
     const [isComplete, setIsComplete] = useState(false)
     const [isVerified, setIsVerified] = useState(false)
-    const [isPaid, setIsPaid] = useState(false)
+    const [isPaid, setIsPaid] = useState(true)
 
     // companyjob dispatch==========
     const [ID, setID] = useState()
@@ -118,7 +118,7 @@ function PostJob({ navigation }) {
                 Logout={Logout} />
             <ProviderDrawerModal visible={drawerVisible} toggleVisibility={toggleVisibility}
                 toggleLoadingVisibility={toggleLoadingVisibility} navigation={navigation}
-                toggleDrawerVisibility={toggleDrawerVisibility} />
+                toggleDrawerVisibility={toggleDrawerVisibility} isPaid={isPaid} />
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>

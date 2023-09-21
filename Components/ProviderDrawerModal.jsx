@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, Modal, Pressable, Text, View } from 'react-native'
 import Ripple from 'react-native-material-ripple'
 
-const ProviderDrawerModal = ({ visible, toggleVisibility, toggleLoadingVisibility, navigation, toggleDrawerVisibility }) => {
+const ProviderDrawerModal = ({ visible, toggleVisibility, toggleLoadingVisibility, navigation, toggleDrawerVisibility,isPaid }) => {
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true}>
             <View style={{
@@ -46,6 +46,9 @@ const ProviderDrawerModal = ({ visible, toggleVisibility, toggleLoadingVisibilit
                                 source={require('../assets/arrowRight.png')} />
                         </View>
                     </Ripple>
+{isPaid ? 
+<>
+
                     <Ripple rippleColor="white" onPress={() => {
                         toggleDrawerVisibility()
                         navigation.push('JobPosted')
@@ -100,24 +103,11 @@ const ProviderDrawerModal = ({ visible, toggleVisibility, toggleLoadingVisibilit
                         <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }}
                             source={require('../assets/arrowRight.png')} />
                     </Ripple>
+                    </>
+                    : 
+                    ''
+                    }
 
-                    <Ripple rippleColor="white" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
-                        onPress={() => {
-                            toggleDrawerVisibility()
-                            navigation.push('Contactus')
-                        }}
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            backgroundColor: '#13A3E1',
-                            padding: 15,
-                            borderRadius: 10,
-                            marginTop: 4
-                        }}>
-                        <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>Contact</Text>
-                        <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }}
-                            source={require('../assets/arrowRight.png')} />
-                    </Ripple>
                     <Ripple rippleColor="#01579B" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
                         onPress={async () => {
                             toggleDrawerVisibility()

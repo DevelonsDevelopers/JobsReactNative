@@ -148,7 +148,7 @@ const Offers = ({ navigation }) => {
                                 <View style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 15 }}>
 
                                     <Text  onPress={() => navigation.push('SeekerOfferResponse',{ID:item.company})} style={{ color: 'white', backgroundColor: '#13A3E1', paddingHorizontal: 25, fontSize: 15, fontFamily: 'poppins_bold', borderRadius: 10, paddingVertical: 5 }}
-                                    >Send Response</Text>
+                                    >View Details</Text>
                                 </View>
                             </View>
                         )} />
