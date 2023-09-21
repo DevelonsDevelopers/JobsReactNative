@@ -28,7 +28,7 @@ function PostJob({ navigation }) {
 
     const [isComplete, setIsComplete] = useState(false)
     const [isVerified, setIsVerified] = useState(false)
-    const [isPaid, setIsPaid] = useState(true)
+    const [isPaid, setIsPaid] = useState(false)
 
     // companyjob dispatch==========
     const [ID, setID] = useState()
@@ -62,18 +62,18 @@ function PostJob({ navigation }) {
     }, [dispatch, companyJobs, ID]);
 
     useEffect(() => {
-        console.log(noCompany)
-        console.log(company)
-        if (noCompany === "YES") {
-            setIsComplete(false)
-            setIsPaid(false)
-            setIsVerified(false)
-        } else {
-            setIsComplete(true)
-            if (company.verified === "true"){
-                setIsVerified(true)
-            } else {
+        if (company) {
+            if (noCompany === "YES") {
+                setIsComplete(false)
+                setIsPaid(false)
                 setIsVerified(false)
+            } else {
+                setIsComplete(true)
+                if (company?.verified === "true") {
+                    setIsVerified(true)
+                } else {
+                    setIsVerified(false)
+                }
             }
         }
     }, [company, noCompany]);
@@ -157,7 +157,7 @@ function PostJob({ navigation }) {
 
                 </View>
                 {isPaid ?
-                    <>              
+                    <>
                       <View style={{ flexDirection: 'row', flex: 1, marginTop: 30 }}>
 
                         <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
@@ -348,7 +348,7 @@ function PostJob({ navigation }) {
                                 :
                                 <View style={{ flexDirection: 'row', gap: 40, marginVertical: 10 }}>
                                     <Text style={{ color: 'blue', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_light' }}
-                                        onPress={() => navigation.push('Verify')}>(Verify Now)</Text>
+                                        onPress={() => navigation.push('Verify', { verifyPhone: company?.phone })}>(Verify Now)</Text>
                                     <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                         source={require('../assets/unverified.png')} />
                                 </View>
