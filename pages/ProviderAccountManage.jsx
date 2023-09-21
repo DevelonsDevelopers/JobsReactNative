@@ -404,7 +404,7 @@ const ProviderAccountManage = ({ navigation }) => {
                                             width: '100%',
                                             textAlign: 'left'
                                         }}> {company?.city_name} </TextInput>
-                                        </Pressable>
+                                </Pressable>
                             </View>
                         </View>
 
@@ -454,8 +454,8 @@ const ProviderAccountManage = ({ navigation }) => {
                 </View>
 
 
-                <View style={{ flexDirection: 'column',marginTop:20,marginHorizontal:30  }}>
-                    <View style={{ height: 60, borderColor: '#b2b2b2', borderWidth:1,borderRadius:10,padding:4 }}>
+                <View style={{ flexDirection: 'column', marginTop: 20, marginHorizontal: 30 }}>
+                    <View style={{ height: 60, borderColor: '#b2b2b2', borderWidth: 1, borderRadius: 10, padding: 4,backgroundColor:'white' }}>
                         <PhoneInput
                             layout='first'
                             defaultCode='PK'
