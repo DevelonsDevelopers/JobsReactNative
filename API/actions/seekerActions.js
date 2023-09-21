@@ -1,5 +1,14 @@
 import * as api from '../../API/index'
-import {ERROR, GET_SEEKER, LOADING, NODATA, RECOMMENDED_SEEKER, SUCCESS, UPDATE_SEEKER} from "../../Utils/Constants";
+import {
+    CHECK_SEEKER,
+    ERROR,
+    GET_SEEKER,
+    LOADING,
+    NODATA,
+    RECOMMENDED_SEEKER,
+    SUCCESS,
+    UPDATE_SEEKER
+} from "../../Utils/Constants";
 
 export const RecommendedSeekers = (job) => async (dispatch) => {
     try {
@@ -24,6 +33,18 @@ export const fetchSeeker = (ID) => async (dispatch) => {
         dispatch ({ type: LOADING })
         const { data: { data } } = await api.fetchSeeker(ID);
         dispatch ({ type: GET_SEEKER, payload: { data: data } })
+        dispatch ({ type: SUCCESS })
+    } catch (error) {
+        console.log(error)
+        dispatch ({ type: ERROR })
+    }
+}
+
+export const CheckSeeker = (ID) => async (dispatch) => {
+    try {
+        dispatch ({ type: LOADING })
+        const { data: { data } } = await api.checkSeeker(ID);
+        dispatch ({ type: CHECK_SEEKER, payload: { data: data } })
         dispatch ({ type: SUCCESS })
     } catch (error) {
         console.log(error)
