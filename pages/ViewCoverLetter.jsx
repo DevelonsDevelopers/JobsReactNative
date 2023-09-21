@@ -66,12 +66,12 @@ const ViewCoverLetter = ({navigation, route}) => {
             </View>
             <Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, marginHorizontal: 20 }}>-</Text>
             <View>
-                <Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>{moment(coverLetter[0]?.date).format("DD MMM YYYY")}</Text>
+                <Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>{moment(coverLetter?.date).format("DD MMM YYYY")}</Text>
             </View>
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: {coverLetter[0]?.role}</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: {coverLetter?.role}</Text>
             {/* <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>intro</Text> */}
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter[0]?.intro}</Text>
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter[0]?.body}</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter?.intro}</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter?.body}</Text>
 
             <SafeAreaView style={{ backgroundColor: '#D3D3D3', marginHorizontal: 40, marginVertical: 10, paddingBottom: 20, }}>
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
