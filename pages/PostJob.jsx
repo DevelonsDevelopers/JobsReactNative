@@ -69,7 +69,12 @@ function PostJob({ navigation }) {
             setIsPaid(false)
             setIsVerified(false)
         } else {
-
+            setIsComplete(true)
+            if (company.verified === "true"){
+                setIsVerified(true)
+            } else {
+                setIsVerified(false)
+            }
         }
     }, [company, noCompany]);
 

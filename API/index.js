@@ -122,6 +122,16 @@ export const fetchAllCompanies = () => API.get('/companies/all')
 export const fetchCompany = (id) => API.post('/companies/get', {
     id: id
 })
+export const updateCompany = (size, country, city, phone, headquater, email, type, id) => API.put('/companies/complete', {
+    size: size,
+    country: country,
+    city: city,
+    phone: phone,
+    headquater: headquater,
+    type: type,
+    id: id,
+    email: email
+})
 export const completeCompany = (country, city, phone, headquater, type, id) => API.put('/companies/complete', {
     country: country,
     city: city,
