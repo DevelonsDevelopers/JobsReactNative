@@ -326,14 +326,14 @@ const ProviderAccountManage = ({ navigation }) => {
                             }}>{company?.type}</TextInput>
                         </View>
                     </View>
-                    
+
 
 
                     <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
                         <View style={{
                             flex: 0.7,
                             backgroundColor: '#E6E6E6',
-                          
+
                             borderColor: '#b2b2b2',
                             borderWidth: 1,
                             paddingHorizontal: 20,
@@ -366,105 +366,105 @@ const ProviderAccountManage = ({ navigation }) => {
                     </View>
 
                     <View style={{
-                    flexDirection: 'column',
-                    borderColor: '#b2b2b2',
-                    backgroundColor: '#fff',
-                   
-                }}>
-                    <View style={{ flexDirection: 'row', flex: 1 }}>
-                        <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>City</Text>
-                        </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Pressable><TextInput editable={false}
-
-                                placeholder={'Missing!!!'}
-                                style={{
+                        flexDirection: 'column',
+                        borderColor: '#b2b2b2',
+                       
+                    }}>
+                        <View style={{ flexDirection: 'row', flex: 1 }}>
+                            <View style={{
+                                flex: 0.7,
+                                backgroundColor: '#E6E6E6',
+                                borderColor: '#b2b2b2',
+                                borderWidth: 1,
+                                paddingHorizontal: 20,
+                                paddingVertical: 5
+                            }}>
+                                <Text style={{
                                     color: '#000',
                                     fontSize: 14,
-                                    fontFamily: 'poppins_medium',
+                                    fontFamily: 'poppins_light',
                                     width: '100%',
                                     textAlign: 'left'
-                                }}> {company?.city_name} </TextInput></Pressable>
+                                }}>City</Text>
+                            </View>
+                            <View style={{
+                                flex: 1.3,
+                                borderColor: '#b2b2b2',
+                                borderWidth: 1,
+                                paddingHorizontal: 20,
+                                paddingVertical: 5
+                            }}>
+                                <Pressable>
+                                    <TextInput editable={false}
+                                        placeholder={'Missing!!!'}
+                                        style={{
+                                            color: '#000',
+                                            fontSize: 14,
+                                            fontFamily: 'poppins_medium',
+                                            width: '100%',
+                                            textAlign: 'left'
+                                        }}> {company?.city_name} </TextInput>
+                                </Pressable>
+                            </View>
+                        </View>
+
+                        <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                            <View style={{
+                                flex: 0.7,
+                                backgroundColor: '#E6E6E6',
+                                borderBottomLeftRadius: 30,
+                                borderColor: '#b2b2b2',
+                                borderWidth: 1,
+                                paddingHorizontal: 20,
+                                paddingVertical: 5
+                            }}>
+                                <Text style={{
+                                    color: '#000',
+                                    fontSize: 14,
+                                    fontFamily: 'poppins_light',
+                                    width: '100%',
+                                    textAlign: 'left'
+                                }}>Country</Text>
+                            </View>
+                            <View style={{
+                                flex: 1.3,
+                                borderBottomRightRadius: 30,
+                                borderColor: '#b2b2b2',
+                                borderWidth: 1,
+                                paddingHorizontal: 20,
+                                paddingVertical: 5
+                            }}>
+                                <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
+
+                                    placeholder={'Missing!!!'}
+                                    style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_medium',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}> {company?.country_name} </TextInput></Pressable>
+                            </View>
                         </View>
                     </View>
 
-                    <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
-                        <View style={{
-                            flex: 0.7,
-                            backgroundColor: '#E6E6E6',
-                            borderBottomLeftRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Text style={{
-                                color: '#000',
-                                fontSize: 14,
-                                fontFamily: 'poppins_light',
-                                width: '100%',
-                                textAlign: 'left'
-                            }}>Country</Text>
-                        </View>
-                        <View style={{
-                            flex: 1.3,
-                            borderBottomRightRadius: 30,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
 
-                                placeholder={'Missing!!!'}
-                                style={{
-                                    color: '#000',
-                                    fontSize: 14,
-                                    fontFamily: 'poppins_medium',
-                                    width: '100%',
-                                    textAlign: 'left'
-                                }}> {company?.country_name} </TextInput></Pressable>
-                        </View>
-                    </View>
+
+
                 </View>
 
 
-
-
-                </View>
-              
-
-                <View style={{ flexDirection: 'column', marginTop: -1 }}>
-                        <View style={{ height: 50, borderColor: '#b2b2b2', borderLeftWidth: 1, borderRightWidth: 1, borderTopWidth: 1 }}>
-                            <PhoneInput
-                                layout='first'
-                                defaultCode='PK'
-                            />
-                        </View>
-                        <Image style={{ width: 14, height: 14, marginLeft: 'auto', position: 'absolute', top: 16, left: '92%' }}
-                            source={require('../assets/verified.png')} />
+                <View style={{ flexDirection: 'column', marginTop: 20, marginHorizontal: 30 }}>
+                    <View style={{ height: 60, borderColor: '#b2b2b2', borderWidth: 1, borderRadius: 10, padding: 4, backgroundColor: 'white' }}>
+                        <PhoneInput
+                            layout='first'
+                            defaultCode='PK'
+                        />
                     </View>
-                    {/* <View style={{
+                    <Image style={{ width: 14, height: 14, marginLeft: 'auto', position: 'absolute', top: 22, left: '92%' }}
+                        source={require('../assets/verified.png')} />
+                </View>
+                {/* <View style={{
                             flex: 1.3,
                             borderColor: '#b2b2b2',
                             borderWidth: 1,

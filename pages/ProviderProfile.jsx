@@ -8,8 +8,9 @@ import { AllCountries } from '../API/actions/countryActions'
 import CountrySelectModal from '../Components/CountrySelectModal'
 import ProviderTypeModal from '../Components/ProviderTypeModal'
 import Toast from 'react-native-toast-message'
-import {completeCompany} from "../API";
+import { completeCompany } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import PhoneInput from 'react-native-phone-number-input'
 
 const ProviderProfile = ({ navigation }) => {
 
@@ -132,12 +133,24 @@ const ProviderProfile = ({ navigation }) => {
                 }}>
                     Please Complete Your Profile !!!
                 </Text>
+
+                    <View style={{ marginTop:50,paddingVertical:5 }}>
+                        <PhoneInput
+                            layout='first'
+                            defaultCode='PK'
+                            containerStyle={{borderRadius:60,width:350,paddingRight:20,height:50 }}
+                            placeholder='Enter Your Number'
+                            onChangeText={text => setUpdateData({ ...updateData, phone: text })}
+                               />
+                    </View>
+
+              
                 <Pressable style={{
                     paddingVertical: 10,
                     backgroundColor: '#fff',
                     width: '85%',
                     borderRadius: 25,
-                    marginTop: 50,
+                    marginTop: 10,
                     paddingHorizontal: 20,
                     color: '#626262',
                     elevation: 10
@@ -158,7 +171,7 @@ const ProviderProfile = ({ navigation }) => {
                     <TextInput value={nameCity} onTouchStart={() => toggleVisibility()} placeholder={'Enter your City'} />
                 </Pressable>
 
-                <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })} style={{
+                {/* <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })} style={{
                     height: 50,
                     backgroundColor: '#fff',
                     width: '85%',
@@ -167,7 +180,10 @@ const ProviderProfile = ({ navigation }) => {
                     paddingHorizontal: 20,
                     color: '#626262',
                     elevation: 10
-                }} placeholder={'Enter your Phone'} />
+                }} placeholder={'Enter your Phone'} /> */}
+
+
+
 
                 <View style={{
                     flexDirection: 'row',
