@@ -26,15 +26,9 @@ function PostJob({ navigation }) {
   const dispatch = useDispatch();
   const [login, isLogin] = useState(false);
 
-<<<<<<< HEAD
-    const [isComplete, setIsComplete] = useState(true)
-    const [isVerified, setIsVerified] = useState(true)
-    const [isPaid, setIsPaid] = useState(true)
-=======
   const [isComplete, setIsComplete] = useState(false)
   const [isVerified, setIsVerified] = useState(false)
   const [isPaid, setIsPaid] = useState(false)
->>>>>>> 7ee49b635b6b23a6f99a373a633e9b9bf271c6d7
 
   // companyjob dispatch==========
   const [ID, setID] = useState()
