@@ -14,5 +14,6 @@ import interactions from "./interactions";
 import bookmark from './bookmark';
 import applied from "./applied";
 import offers from "./offers"
+import coverLetter from "./coverLetter"
 
-export default combineReducers({ category, register, login, seeker, city, country, company, job, cv, tag, interactions, bookmark, applied, offers })
+export default combineReducers({ category, register, login, seeker, city, country, company, job, cv, tag, interactions, bookmark, applied, offers, coverLetter })

@@ -135,7 +135,7 @@ function AppliedUsers({ route, navigation }) {
                     }}>View Resume</Text>
                   </Ripple>
                   <Ripple rippleColor="gray" rippleOpacity={0.3} rippleDuration={300} rippleSize={150}
-                    onPress={() => navigation.push('ViewCoverLetter')}>
+                    onPress={() => navigation.push('ViewCoverLetter', { ID: item.job, User: item.user })}>
                     <Text style={{
                       backgroundColor: 'white',
                       textAlign: "center",

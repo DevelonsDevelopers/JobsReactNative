@@ -1,6 +1,10 @@
 import React from 'react'
+import { useEffect } from 'react'
 import { FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import Ripple from 'react-native-material-ripple'
+import { useDispatch, useSelector } from 'react-redux'
+import { CoverLetterByUser } from '../API/actions/coverLetterActions'
+import { CVByUser } from '../API/actions/cvActions'
 
 const data = [
 	{ 'data': 'Enhanced domestic helicopter transfer sales by 60% in 2018/2019 via business-to-business concept ' },
@@ -9,7 +13,29 @@ const data = [
 ]
 
 
-const ViewCoverLetter = ({navigation}) => {
+const ViewCoverLetter = ({navigation, route}) => {
+
+    const { ID } = route.params
+    console.log(ID)
+    const { User } = route.params
+    console.log(User)
+
+    const dispatch = useDispatch();
+
+    const coverLetter = useSelector(state => state.coverLetter.coverLetter)
+    useEffect(() => {
+        dispatch(CoverLetterByUser(User, ID))
+    }, [dispatch, User , ID])
+
+	const cv = useSelector(state => state.cv.cv);
+
+    useEffect(() => {
+        console.log(cv)
+    }, [cv])
+    useEffect(() => {
+			dispatch(CVByUser(User));
+	}, [dispatch, User]);
+
     return (
         <ScrollView>
             <View style={{ flexDirection: 'row', height: 90 }}>
@@ -31,7 +57,7 @@ const ViewCoverLetter = ({navigation}) => {
 
             <View style={{ marginTop: 40, paddingVertical: 10, borderRadius: 20 }}>
                 <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}> name</Text>
-                <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}> address</Text>
+                <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}> {cv?.address}</Text>
                 <View style={{ flexDirection: "row", justifyContent: 'center', gap: 20, marginTop: 5 }}>
                     <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black' }}> phone</Text>
                     <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black' }}> email</Text>
@@ -41,9 +67,10 @@ const ViewCoverLetter = ({navigation}) => {
             <View>
                 <Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>date</Text>
             </View>
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: role</Text>
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>intro</Text>
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>body</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: {coverLetter[0]?.role}</Text>
+            {/* <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>intro</Text> */}
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter[0]?.intro}</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter[0]?.body}</Text>
 
             <SafeAreaView style={{ backgroundColor: '#D3D3D3', marginHorizontal: 40, marginVertical: 10, paddingBottom: 20, }}>
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
@@ -58,7 +85,7 @@ const ViewCoverLetter = ({navigation}) => {
             <SafeAreaView style={{ paddingBottom: 20, }}>
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                     data={data} renderItem={({ item }) => (
-                        <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 3, marginHorizontal: 30 }}>I hold a   degree completed in  at </Text>
+                        <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 3, marginHorizontal: 30 }}>{cv?.statement}</Text>
                     )} />
             </SafeAreaView>
 

@@ -93,6 +93,7 @@ export const GET_APPLIED_BY_COMPANY = "GET_APPLIED_BY_COMPANY";
 //CV:=======
 export const ALL_CV = "ALL_CV";
 export const GET_CV_BY_ID = "GET_CV_BY_ID";
+export const GET_COVER_BY_USER = "GET_COVER_BY_USER";
 export const GET_CV_BY_USER = "GET_CV_BY_USER";
 export const CREATE_CV_EDUCATION = "CREATE_CV_EDUCATION"
 export const CREATE_CV_INTEREST = "CREATE_CV_INTEREST"
