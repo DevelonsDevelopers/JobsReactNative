@@ -1,30 +1,61 @@
 import {Button, Image, ImageBackground, Text, View} from "react-native";
 import {useEffect, useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useDispatch, useSelector} from "react-redux";
+import {CheckSeeker} from "../API/actions/seekerActions";
 
 function Splash({navigation}) {
+
+    const dispatch = useDispatch()
+
+    const check = useSelector(state => state.seeker.check)
 
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     const [user, setUser] = useState()
+    const [ID, setID] = useState()
 
     useEffect(() => {
         GetData()
     }, []);
 
     const GetData = async () => {
-        sleep(1000).then( async () => {
-            const value = await AsyncStorage.getItem('USER')
-            if (value === "PROVIDER") {
-                navigation.replace('PostJob')
-            } else if (value === "SEEKER") {
-                navigation.replace('Home')
-            } else {
+        const id = await AsyncStorage.getItem('ID')
+        const value = await AsyncStorage.getItem('USER')
+        console.log(id)
+        if (id && id !== "0"){
+            setUser(value)
+            setID(id)
+        } else {
+            sleep(1000).then( async () => {
                 navigation.replace('Home')
                 await AsyncStorage.setItem("ID", "0")
-            }
-        })
+            })
+        }
     }
+
+    useEffect(() => {
+        if (ID){
+            if (user === "SEEKER") {
+                dispatch(CheckSeeker(ID))
+            }
+        }
+    }, [ID]);
+
+    useEffect(() => {
+        if (check){
+            sleep(1000).then( async () => {
+                if (user === "PROVIDER") {
+                    navigation.replace('PostJob')
+                } else if (user === "SEEKER") {
+                    navigation.replace('Home')
+                } else {
+                    navigation.replace('Home')
+                    await AsyncStorage.setItem("ID", "0")
+                }
+            })
+        }
+    }, [check]);
 
     // useEffect(() => {
     //

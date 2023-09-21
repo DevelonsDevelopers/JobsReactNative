@@ -91,6 +91,7 @@ export const fetchFeaturedCategories = () => API.get(`/categories/featured`)
 
 //SEEKERS API CALL ===============================
 export const fetchSeeker = (id) => API.post('/seekers/get', { id: id })
+export const checkSeeker = (id) => API.post('/seekers/check', { id: id })
 export const fetchRecommendedUsers = (job) => API.post('/seekers/recommended', { job: job })
 export const updateSeeker = (name, city, country, username, phone, address, dob, gender, id) => API.put('/seekers/update',  {
     name: name,
