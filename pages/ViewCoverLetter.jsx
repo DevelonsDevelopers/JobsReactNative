@@ -5,6 +5,7 @@ import Ripple from 'react-native-material-ripple'
 import { useDispatch, useSelector } from 'react-redux'
 import { CoverLetterByUser } from '../API/actions/coverLetterActions'
 import { CVByUser } from '../API/actions/cvActions'
+import moment from 'moment'
 
 const data = [
 	{ 'data': 'Enhanced domestic helicopter transfer sales by 60% in 2018/2019 via business-to-business concept ' },
@@ -56,27 +57,27 @@ const ViewCoverLetter = ({navigation, route}) => {
 
 
             <View style={{ marginTop: 40, paddingVertical: 10, borderRadius: 20 }}>
-                <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}> name</Text>
+                <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}> {cv?.name}</Text>
                 <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}> {cv?.address}</Text>
                 <View style={{ flexDirection: "row", justifyContent: 'center', gap: 20, marginTop: 5 }}>
-                    <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black' }}> phone</Text>
-                    <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black' }}> email</Text>
+                    <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black' }}> {cv?.phone}</Text>
+                    <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', color: 'black' }}> {cv?.email}</Text>
                 </View>
             </View>
             <Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, marginHorizontal: 20 }}>-</Text>
             <View>
-                <Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>date</Text>
+                <Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>{moment(coverLetter?.date).format("DD MMM YYYY")}</Text>
             </View>
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: {coverLetter[0]?.role}</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: {coverLetter?.role}</Text>
             {/* <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>intro</Text> */}
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter[0]?.intro}</Text>
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter[0]?.body}</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter?.intro}</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter?.body}</Text>
 
             <SafeAreaView style={{ backgroundColor: '#D3D3D3', marginHorizontal: 40, marginVertical: 10, paddingBottom: 20, }}>
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                    data={data} renderItem={({ item }) => (
+                    data={cv?.careers} renderItem={({ item }) => (
                         <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', flex: 1, paddingVertical: 2, color: 'black', marginLeft: 20 }}>
-                            {`\u2022 I was working as a  in  from `}
+                            {`\u2022 I was working as a ${item.job} in ${item.company} from ${item.timeperiod},  `}
                         </Text>
                     )} />
             </SafeAreaView>
@@ -84,14 +85,14 @@ const ViewCoverLetter = ({navigation, route}) => {
 
             <SafeAreaView style={{ paddingBottom: 20, }}>
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                    data={data} renderItem={({ item }) => (
-                        <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 3, marginHorizontal: 30 }}>{cv?.statement}</Text>
+                    data={cv?.educations} renderItem={({ item }) => (
+                        <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 3, marginHorizontal: 30 }}>I hold a {item.qualification}  degree completed in {item.timeperiod} at {item.institute}</Text>
                     )} />
             </SafeAreaView>
 
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: -3, marginHorizontal: 30 }}>I am available at short notice to attend an interview, and I look forward to hearing further on my application. </Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: -3, marginHorizontal: 30 }}>{cv?.statement}</Text>
             <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', marginTop: 11, marginHorizontal: 30 }}>Your's Sincerly</Text>
-            <Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 10, marginHorizontal: 30, marginLeft: 'auto' }}> name</Text>
+            <Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 10, marginHorizontal: 30, marginLeft: 'auto' }}>  {cv?.name}</Text>
             <View style={{ flexDirection: "row", justifyContent: 'center',marginHorizontal:40 }}>
                 <Ripple onPress={() => navigation.push('OfferSend')} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
                     <Text style={{ backgroundColor: 'green', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Send Offer</Text>

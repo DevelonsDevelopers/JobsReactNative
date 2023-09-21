@@ -69,6 +69,7 @@ import AcceptResponse from './pages/AcceptResponse';
 import AppliedSuccessful from './pages/AppliedSuccessful';
 import Plans from './pages/Plans';
 import ViewCoverLetter from './pages/ViewCoverLetter';
+import CompleteProfileSeekerModal from './Components/CompleteProfileSeekerModal';
 
 
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
@@ -206,6 +207,8 @@ function App() {
                             options={{ title: "Plans", headerShown: false }} />
                         <Stack.Screen name="ViewCoverLetter" component={ViewCoverLetter}
                             options={{ title: "ViewCoverLetter", headerShown: false }} />
+                        <Stack.Screen name="CompleteProfileSeekerModal" component={CompleteProfileSeekerModal}
+                            options={{ title: "CompleteProfileSeekerModal", headerShown: false }} />
                     </Stack.Navigator>
                 </NavigationContainer>
             </Provider>
