@@ -72,6 +72,7 @@ import ViewCoverLetter from './pages/ViewCoverLetter';
 import CompleteProfileSeekerModal from './Components/CompleteProfileSeekerModal';
 
 
+
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
 const Stack = createNativeStackNavigator();
@@ -209,6 +210,7 @@ function App() {
                             options={{ title: "ViewCoverLetter", headerShown: false }} />
                         <Stack.Screen name="CompleteProfileSeekerModal" component={CompleteProfileSeekerModal}
                             options={{ title: "CompleteProfileSeekerModal", headerShown: false }} />
+
                     </Stack.Navigator>
                 </NavigationContainer>
             </Provider>
