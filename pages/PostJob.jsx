@@ -306,7 +306,7 @@ function PostJob({ navigation }) {
                                 {isComplete ?
                                     <>
                                         <Text style={{ color: 'green', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_bold' }}
-                                            onPress={() => navigation.push('ProviderProfile')}>(Completed)</Text>
+                                           >(Completed)</Text>
                                         <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                             source={require('../assets/verified.png')} />
                                     </>
@@ -341,7 +341,7 @@ function PostJob({ navigation }) {
 
                                 <View style={{ flexDirection: 'row', gap: 40, marginVertical: 10 }}>
                                     <Text style={{ color: 'green', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_bold' }}
-                                        onPress={() => navigation.push('Verify')}>(Verified)</Text>
+                                       >(Verified)</Text>
                                     <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                         source={require('../assets/verified.png')} />
                                 </View>
@@ -374,7 +374,7 @@ function PostJob({ navigation }) {
 
                                 <View style={{ flexDirection: 'row', gap: 40, marginTop: 10 }}>
                                     <Text style={{ color: 'green', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_bold' }}
-                                        onPress={() => navigation.push('Plans')}>Purchased</Text>
+                                     >Purchased</Text>
                                     <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                         source={require('../assets/verified.png')} />
 
