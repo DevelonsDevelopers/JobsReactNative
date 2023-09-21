@@ -64,8 +64,8 @@ const SeekerOfferResponse = ({ route, navigation }) => {
                             <Text style={{ marginHorizontal: 20, fontSize: 14, fontFamily: 'poppins_medium', minHeight: 420, marginTop: 20 }}>{offers[0]?.offer}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: "center", gap: 20, marginTop: 10 }}>
-                            <Text  onPress={() => navigation.push('AcceptResponse',{ID:offers[0]?.company})} style={{ fontSize: 16, fontFamily: 'poppins_semibold', backgroundColor: '#143D59', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Accept</Text>
-                            <Text style={{ fontSize: 16, fontFamily: 'poppins_semibold', backgroundColor: '#13A3E1', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Negotiate</Text>
+                            <Text onPress={() => navigation.push('AcceptResponse', { ID: offers[0]?.company })} style={{ fontSize: 16, fontFamily: 'poppins_semibold', backgroundColor: '#143D59', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Accept</Text>
+                            <Text onPress={() => navigation.push('SeekerNegotiate', { ID: offers[0]?.company })} style={{ fontSize: 16, fontFamily: 'poppins_semibold', backgroundColor: '#13A3E1', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Negotiate</Text>
                         </View>
                     </View>
                 </View>

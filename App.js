@@ -70,6 +70,7 @@ import AppliedSuccessful from './pages/AppliedSuccessful';
 import Plans from './pages/Plans';
 import ViewCoverLetter from './pages/ViewCoverLetter';
 import CompleteProfileSeekerModal from './Components/CompleteProfileSeekerModal';
+import SeeekerNegotiate from './pages/SeeekerNegotiate';
 
 
 
@@ -210,6 +211,8 @@ function App() {
                             options={{ title: "ViewCoverLetter", headerShown: false }} />
                         <Stack.Screen name="CompleteProfileSeekerModal" component={CompleteProfileSeekerModal}
                             options={{ title: "CompleteProfileSeekerModal", headerShown: false }} />
+                        <Stack.Screen name="SeekerNegotiate" component={SeeekerNegotiate}
+                            options={{ title: "SeekerNegotiate", headerShown: false }} />
 
                     </Stack.Navigator>
                 </NavigationContainer>

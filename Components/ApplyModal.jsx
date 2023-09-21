@@ -30,7 +30,7 @@ const ApplyModal = ({ visible, toggleVisible, apply }) => {
                     padding: 20,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: 500
+                    height: 550
                 }}>
                     <Pressable style={{ width: 15, height: 15, marginLeft: 'auto' }} onPress={() => toggleVisible()}>
                         <Image style={{ width: 15, height: 15, marginLeft: 'auto' }} source={require('../assets/close.png')} />
