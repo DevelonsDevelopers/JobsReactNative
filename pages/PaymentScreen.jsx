@@ -1,14 +1,95 @@
 import { useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Modal, TouchableOpacity, Text, Image, Pressable, TextInput, ScrollView, Button } from 'react-native';
+import {
+    SafeAreaView,
+    StyleSheet,
+    View,
+    Modal,
+    TouchableOpacity,
+    Text,
+    Image,
+    Pressable,
+    TextInput,
+    ScrollView,
+    Button,
+    Alert
+} from 'react-native';
 
 import WebView from 'react-native-webview';
 import queryString from 'query-string';
-import { CardField } from "@stripe/stripe-react-native";
+import {CardField, useConfirmPayment} from "@stripe/stripe-react-native";
 import ButtonComp from "../Components/ButtonComp";
 import paypalApi from "../API/paypal"
 import { useEffect } from 'react';
+import {createUserPlan} from "../API";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import moment from "moment";
+
+const API_URL = "http://192.168.1.25:5001";
 
 const PaymentScreen = ({ route, navigation }) => {
+    const [email, setEmail] = useState();
+    const [cardDetails, setCardDetails] = useState();
+    const { confirmPayment, loading } = useConfirmPayment();
+
+    const [ID, setID] = useState()
+
+    // useEffect(() => {
+    //   console.log(ID)
+    // }, [ID])
+
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
+
+    const fetchPaymentIntentClientSecret = async () => {
+        const response = await fetch(`${API_URL}/create-payment-intent`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        const { clientSecret, error } = await response.json();
+        return { clientSecret, error };
+    };
+
+    const handlePayPress = async () => {
+        //1.Gather the customer's billing information (e.g., email)
+        if (!cardDetails?.complete || !email) {
+            Alert.alert("Please enter Complete card details and Email");
+            return;
+        }
+        const billingDetails = {
+            email: email,
+        };
+        //2.Fetch the intent client secret from the backend
+        try {
+            const {clientSecret, error} = await fetchPaymentIntentClientSecret();
+            //2. confirm the payment
+            if (error) {
+                console.log(error)
+                console.log("Unable to process payment");
+            } else {
+                const {paymentIntent, error} = await confirmPayment(clientSecret, {
+                    paymentMethodType: "Card",
+                    billingDetails: billingDetails,
+                });
+                if (error) {
+                    alert(`Payment Confirmation Error ${error.message}`);
+                } else if (paymentIntent) {
+                    alert("Payment Successful");
+                    subscribePlan()
+                    console.log("Payment successful ", paymentIntent);
+                }
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     const { plan } = route.params
     const { price } = route.params
@@ -64,6 +145,7 @@ const PaymentScreen = ({ route, navigation }) => {
             const res = paypalApi.capturePayment(id, accessToken)
             console.log("capturePayment res++++", res)
             alert("Payment sucessfull...!!!")
+            subscribePlan()
             clearPaypalState()
         } catch (error) {
             console.log("error raised in payment capture", error)
@@ -74,6 +156,13 @@ const PaymentScreen = ({ route, navigation }) => {
     const clearPaypalState = () => {
         setPaypalUrl(null)
         setAccessToken(null)
+    }
+
+    const subscribePlan = () => {
+        const postDate = moment().format("YYYY-MM-DD")
+        createUserPlan(ID, 0, postDate, 'PROVIDER').then(res => {
+            console.log(res)
+        })
     }
 
     return (
@@ -130,7 +219,7 @@ const PaymentScreen = ({ route, navigation }) => {
                         cardStyle={{ textColor: 'gray', borderWidth: 1, borderColor: 'gray', borderRadius: 10 }}
                         style={{ height: 47, marginTop: 20, borderWidth: 1, borderColor: 'gray', marginHorizontal: 10 }}
                         onCardChange={cardDetails => {
-                            // setCardDetails(cardDetails);
+                            setCardDetails(cardDetails);
                         }}
                     />
 
@@ -159,22 +248,21 @@ const PaymentScreen = ({ route, navigation }) => {
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={{ width: '70%', marginLeft: 'auto', marginRight: 'auto' }}>
                     <ButtonComp
-                        onPress={onPressPaypal}
+                        onPress={handlePayPress}
                         disabled={false}
-                        btnStyle={{ backgroundColor: 'green', marginVertical: 16 }}
-                        text="Pay using paypal"
+                        btnStyle={{ backgroundColor: '#0f4fa3', marginVertical: 16, }}
+                        text="Pay using Stripe"
                         isLoading={isLoading} />
                     <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 10 }}>
                         <Text style={{ backgroundColor: 'gray', height: 1, width: 70, marginTop: 8 }}>-</Text>
                         <Text>OR</Text>
                         <Text style={{ backgroundColor: 'gray', height: 1, width: 70, marginTop: 8 }}>-</Text>
                     </View>
-
                     <ButtonComp
                         onPress={onPressPaypal}
                         disabled={false}
-                        btnStyle={{ backgroundColor: '#0f4fa3', marginVertical: 16, }}
-                        text="Pay using Stripe"
+                        btnStyle={{ backgroundColor: 'green', marginVertical: 16 }}
+                        text="Pay using paypal"
                         isLoading={isLoading} />
 
                     <Modal visible={!!paypalUrl} >

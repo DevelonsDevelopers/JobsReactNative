@@ -299,6 +299,7 @@ export const fetchtopTags = (user) => API.post('/tags/top', {
     user: user
 })
 
+
 //BOOKMARKS API CALL
 export const fetchBookmarks = (user) => API.post('/bookmarks/all', { user: user })
 export const bookmarkJob = (job, user) => API.post('/bookmarks/add', { job: job, user: user })
@@ -328,4 +329,18 @@ export const offerResponse = (status, response, responseDate, id) => API.post('/
     response: response,
     responseDate: responseDate,
     id: id
+})
+
+
+//PLANS API
+export const fetchPlansByType = (type) => API.post('/plans/type', {
+    type: type
+})
+
+
+export const createUserPlan = (user, plan, activation_date, user_type) => API.post('/userPlans/create', {
+    user: user,
+    plan: plan,
+    activation_date: activation_date,
+    user_type: user_type
 })
