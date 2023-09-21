@@ -124,7 +124,6 @@ const JobDetails = ({ route, navigation }) => {
 
 
                             <View style={{
-
                                 marginBottom: 8,
                                 borderColor: '#4C4C4C',
                                 borderTopLeftRadius: 50,
@@ -152,7 +151,7 @@ const JobDetails = ({ route, navigation }) => {
                                         marginRight: 25
                                     }}>{moment(job?.date).fromNow()}</Text>
                                 </View>
-                                <View style={{ marginLeft:'auto',marginRight:'auto' }}>
+                                <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                                     <Text style={{
                                         fontFamily: 'poppins_medium',
                                         fontSize: 15,
@@ -164,7 +163,7 @@ const JobDetails = ({ route, navigation }) => {
                                         margin: 'auto',
                                         paddingTop: 5,
                                         paddingBottom: 2,
-                                        paddingHorizontal:20
+                                        paddingHorizontal: 20
                                     }}>
                                         Salary {job?.salary}
                                     </Text>
@@ -253,17 +252,19 @@ const JobDetails = ({ route, navigation }) => {
                                     marginLeft: 15,
                                     marginTop: 10
                                 }}>Description: </Text>
-                                <WebView source={{ html: job?.description}} style={{
-                                    marginHorizontal: 25,
-                                    fontFamily: 'poppins_medium',
-                                    minHeight: 250
-                                }}
-                                javaScriptEnabled={false}
-                                domStorageEnabled={false}
-                                startInLoadingState={true}
-                                scalesPageToFit={false}
-                                scrollEnabled={true}
-                                ></WebView>
+
+                                <View style={{ minHeight: 350 }}>
+                                    <WebView source={{ html: job?.description }} style={{
+                                        marginHorizontal: 25,
+                                        fontFamily: 'poppins_medium',  }}
+                                        javaScriptEnabled={false}
+                                        domStorageEnabled={false}
+                                        startInLoadingState={true}
+                                        scalesPageToFit={false}
+                                       automaticallyAdjustsScrollIndicatorInsets={true}
+                                    />
+                                </View>
+
                                 <View style={{
                                     flexDirection: 'row',
                                     justifyContent: "center",
