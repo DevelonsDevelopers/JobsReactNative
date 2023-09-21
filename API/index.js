@@ -137,6 +137,11 @@ export const updateCompany = (size, country, city, phone, headquater, email, typ
     id: id,
     email: email
 })
+export const verifyCompany = (verify, phone, id) => API.post('/companies/verify', {
+    verify: verify,
+    phone: phone,
+    id: id,
+})
 export const completeCompany = (country, city, phone, headquater, type, id) => API.put('/companies/complete', {
     country: country,
     city: city,
