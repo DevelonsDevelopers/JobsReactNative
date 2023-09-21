@@ -16,6 +16,7 @@ import { AllCompanies, CompanyData } from '../API/actions/companyActions';
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Ripple from 'react-native-material-ripple';
+import LogoutConfirmationModal from '../Components/LogoutConfirmationModal';
 
 const ProviderProfileInfo = ({ navigation }) => {
 
@@ -44,12 +45,27 @@ const ProviderProfileInfo = ({ navigation }) => {
         console.log(company)
     }, [company])
 
-
+    const Logout = async () => {
+        await AsyncStorage.setItem("LOGIN", 'false')
+        await AsyncStorage.setItem("ID", '')
+        await AsyncStorage.setItem("NAME", '')
+        await AsyncStorage.setItem("EMAIL", '')
+        await AsyncStorage.setItem("USERNAME", '')
+        setLoginVal('false')
+        toggleLoadingVisibility()
+        navigation.popToTop()
+        navigation.replace('Home')
+    }
+    // log out===================
+    const [loadingVisible, setLoadingVisible] = useState(false)
+    const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
+    const [loginVal, setLoginVal] = useState()
 
 
     return (
         <View style={{ flex: 1 }}>
-
+            <LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible}
+                Logout={Logout} />
 
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 <View style={{
@@ -113,7 +129,8 @@ const ProviderProfileInfo = ({ navigation }) => {
                         textAlign: 'center'
                     }}>{company?.headquater}</Text>
                 </View>
-                <View style={{
+
+                {/* <View style={{
                     flexDirection: 'row',
                     backgroundColor: '#13A3E1',
                     paddingVertical: 20,
@@ -158,7 +175,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                             marginTop: 20
                         }}>0</Text>
                     </Pressable>
-                </View>
+                </View> */}
                 <Text style={{ marginLeft: 40, fontSize: 16, fontFamily: 'poppins_medium', marginTop: 10 }}>Current Plan:</Text>
                 <Ripple onPress={() => navigation.push('Plans')} style={{ backgroundColor: 'white', padding: 20, marginTop: 10, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
                     <Text style={{ color: '#194666', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Basic</Text>
@@ -194,11 +211,11 @@ const ProviderProfileInfo = ({ navigation }) => {
                         }}>Manage Your Account</Text>
                     </View>
                     </Pressable>
-               
-                    <Pressable onPress={() => navigation.push('Plans')}><View
-                        style={{ flexDirection: 'row', flex: 1, marginTop: 10, alignItems: 'center',marginBottom:20 }}>
+
+                    <Pressable onPress={() => toggleLoadingVisibility()}><View
+                        style={{ flexDirection: 'row', flex: 1, marginTop: 10, alignItems: 'center', marginBottom: 20 }}>
                         <Image style={{ width: 20, height: 20 }}
-                            source={require('../assets/manageaccounticon.png')} />
+                            source={require('../assets/logouticon.png')} />
                         <Text style={{
                             color: '#000',
                             fontSize: 16,
@@ -206,12 +223,12 @@ const ProviderProfileInfo = ({ navigation }) => {
                             width: '100%',
                             textAlign: 'left',
                             marginLeft: 20,
-                            
+
                         }}>Log out </Text>
                     </View>
                     </Pressable>
 
-                    
+
 
                 </View>
             </ScrollView>

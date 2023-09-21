@@ -134,17 +134,17 @@ const ProviderProfile = ({ navigation }) => {
                     Please Complete Your Profile !!!
                 </Text>
 
-                    <View style={{ marginTop:50,paddingVertical:5 }}>
-                        <PhoneInput
-                            layout='first'
-                            defaultCode='PK'
-                            containerStyle={{borderRadius:60,width:350,paddingRight:20,height:50 }}
-                            placeholder='Enter Your Number'
-                            onChangeText={text => setUpdateData({ ...updateData, phone: text })}
-                               />
-                    </View>
+                <View style={{ marginTop: 50, paddingVertical: 5 }}>
+                    <PhoneInput
+                        layout='first'
+                        defaultCode='PK'
+                        containerStyle={{ borderRadius: 60, width: 350, paddingRight: 20, height: 50 }}
+                        placeholder='Enter Your Number'
+                        onChangeText={text => setUpdateData({ ...updateData, phone: text })}
+                    />
+                </View>
 
-              
+
                 <Pressable style={{
                     paddingVertical: 10,
                     backgroundColor: '#fff',
