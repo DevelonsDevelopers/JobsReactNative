@@ -22,6 +22,11 @@ const JobDetails = ({ route, navigation }) => {
     const [USERID, setUSERID] = useState()
     const [applied, setApplied] = useState(0)
     const [bookmark, setBookmark] = useState(0)
+    const [webHeight, setWebHeight] = useState(0)
+
+    const onWebHeight = (e) => {
+        setWebHeight(Number(e.nativeEvent.data))
+    }
 
     useEffect(() => {
         GetData()
@@ -253,17 +258,14 @@ const JobDetails = ({ route, navigation }) => {
                                     marginTop: 10
                                 }}>Description: </Text>
 
-                                <View style={{ minHeight: 350 }}>
                                     <WebView source={{ html: job?.description }} style={{
+                                        height: webHeight,
                                         marginHorizontal: 25,
                                         fontFamily: 'poppins_medium',  }}
-                                        javaScriptEnabled={false}
-                                        domStorageEnabled={false}
-                                        startInLoadingState={true}
-                                        scalesPageToFit={false}
-                                       automaticallyAdjustsScrollIndicatorInsets={true}
+                                         scalesPageToFit={false}
+                                         onMessage={e => onWebHeight(e)}
+                                         injectedJavaScript='window.ReactNativeWebView.postMessage(document.body.scrollHeight)'
                                     />
-                                </View>
 
                                 <View style={{
                                     flexDirection: 'row',
