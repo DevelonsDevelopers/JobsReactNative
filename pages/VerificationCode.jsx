@@ -2,7 +2,7 @@ import { Button, Image, Pressable, ScrollView, Text, TextInput, View, StyleSheet
 import { CodeField, useBlurOnFulfill, useClearByFocusCell, Cursor } from "react-native-confirmation-code-field";
 import { useEffect, useState } from "react";
 import { firebase } from "@react-native-firebase/auth";
-import { changePassword, verifySeeker } from "../API";
+import {changePassword, changePasswordProvider, verifyCompany, verifySeeker} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
 
@@ -32,6 +32,9 @@ function VerificationCode({ route, navigation }) {
 
 	const { phone } = route.params
 	const { password } = route.params
+	const { type } = route.params
+
+	console.log(type)
 
 	const [confirm, setConfirm] = useState()
 	const [code, setCode] = useState('');
@@ -64,22 +67,51 @@ function VerificationCode({ route, navigation }) {
 	async function confirmCode() {
 		try {
 			await confirm.confirm(value).then(res => {
-				verifySeeker("true", phone, ID).then(res => {
-					const { data: { data } } = res;
-					const { data: { responseCode } } = res;
-					const { data: { message } } = res;
-					if (responseCode === 200) {
-						if (password) {
-							changePassword(password, ID).then(res => {
-								navigation.push('Home')
-							})
+				if (type === "PROVIDER") {
+					verifyCompany("true", phone, ID).then(res => {
+						const {data: {data}} = res;
+						const {data: {responseCode}} = res;
+						const {data: {message}} = res;
+						if (responseCode === 200) {
+							if (password) {
+								changePassword(password, ID).then(res => {
+									navigation.push('PostJob')
+								})
+							} else {
+								navigation.push('PostJob')
+							}
 						} else {
-							navigation.push('Home')
+							Toast.show({
+								type: 'error',
+								position: 'top',
+								text1: 'Error',
+								text2: 'Unknown error occurred'
+							})
 						}
-					} else {
-						Toast.show({ type: 'error', position: 'top', text1: 'Error', text2: 'Unknown error occurred' })
-					}
-				})
+					})
+				} else {
+					verifySeeker("true", phone, ID).then(res => {
+						const {data: {data}} = res;
+						const {data: {responseCode}} = res;
+						const {data: {message}} = res;
+						if (responseCode === 200) {
+							if (password) {
+								changePassword(password, ID).then(res => {
+									navigation.push('Home')
+								})
+							} else {
+								navigation.push('Home')
+							}
+						} else {
+							Toast.show({
+								type: 'error',
+								position: 'top',
+								text1: 'Error',
+								text2: 'Unknown error occurred'
+							})
+						}
+					})
+				}
 			})
 		} catch (error) {
 			Toast.show({ type: 'error', position: 'top', text1: 'Error', text2: 'The code you entered is not valid' })

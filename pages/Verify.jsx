@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 
 function ChangePassword({ route, navigation }) {
 
-    const { verifyPhone } = route.params
+    const { verifyPhone } = route.params;
+    const { type } = route.params;
     const { password } = route.params;
 
     const [phone, setPhone] = useState(verifyPhone)
@@ -38,7 +39,7 @@ function ChangePassword({ route, navigation }) {
                 {/*    color: '#626262',*/}
                 {/*    elevation: 10*/}
                 {/*}} placeholder={'Email'} secureTextEntry={true}/>*/}
-                <Pressable onPress={() => navigation.push('VerificationCode', { phone: phone, password: password })} style={{
+                <Pressable onPress={() => navigation.push('VerificationCode', { phone: phone, password: password, type: type })} style={{
                     width: '50%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',
