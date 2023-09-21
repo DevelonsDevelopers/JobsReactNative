@@ -308,7 +308,7 @@ function PostJob({ navigation }) {
                   <>
                     <Image style={{ width: 20, height: 20, marginTop: 5 }}
                       source={require('../assets/verified.png')} />
-                    <Text style={{ color: 'green', fontSize: 14, fontFamily: 'poppins_bold', marginLeft: -32,marginTop:4 }}
+                    <Text style={{ color: 'green', fontSize: 14, fontFamily: 'poppins_bold', marginLeft: -32, marginTop: 4 }}
                     >Completed</Text>
 
                   </>
@@ -316,7 +316,7 @@ function PostJob({ navigation }) {
                   <>
                     <Image style={{ width: 20, height: 20, marginTop: 5 }}
                       source={require('../assets/unverified.png')} />
-                    <Text style={{ color: 'green', fontSize: 14, fontFamily: 'poppins_bold', marginLeft: -32,marginTop:4  }}
+                    <Text onPress={() => navigation.push('ProviderProfile')} style={{ color: 'green', fontSize: 14, fontFamily: 'poppins_bold', marginLeft: -32, marginTop: 4 }}
                     >(Complete Now)</Text>
 
                   </>
@@ -345,20 +345,18 @@ function PostJob({ navigation }) {
                 <View style={{ flexDirection: 'row', gap: 40, marginVertical: 10 }}>
                   <Image style={{ width: 20, height: 20, marginTop: 5 }}
                     source={require('../assets/verified.png')} />
-                  <Text style={{ color: 'green', fontSize: 14, marginLeft: -32, fontFamily: 'poppins_bold',marginTop:4 }}
-                   
-                    >Verified</Text>
+                  <Text style={{ color: 'green', fontSize: 14, marginLeft: -32, fontFamily: 'poppins_bold', marginTop: 4 }}
+
+                  >Verified</Text>
 
                 </View>
                 :
                 <View style={{ flexDirection: 'row', gap: 40, marginVertical: 10 }}>
                   <Image style={{ width: 20, height: 20, marginTop: 5 }}
                     source={require('../assets/unverified.png')} />
-                  <Text style={{ color: 'blue', fontSize: 14, marginLeft: -32, fontFamily: 'poppins_light',marginTop:4 }}
+                  <Text style={{ color: 'blue', fontSize: 14, marginLeft: -32, fontFamily: 'poppins_light', marginTop: 4 }}
                     onPress={() => navigation.push('Verify', { verifyPhone: company?.phone, type: 'PROVIDER' })}>(Verify Now)</Text>
-
                 </View>
-
               }
 
               <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, padding: 2 }}>
@@ -381,30 +379,21 @@ function PostJob({ navigation }) {
                 <View style={{ flexDirection: 'row', gap: 40, marginTop: 10 }}>
                   <Image style={{ width: 20, height: 20, marginTop: 5 }}
                     source={require('../assets/verified.png')} />
-                  <Text style={{ color: 'green', fontSize: 14, marginLeft: -32, fontFamily: 'poppins_bold',marginTop:4 }}
-                  >Purchased</Text>
-
-
+                  <Text style={{ color: 'green', fontSize: 14, marginLeft: -32, fontFamily: 'poppins_bold', marginTop: 4 }}>Purchased</Text>
                 </View>
                 :
                 <View style={{ flexDirection: 'row', gap: 40, marginTop: 10 }}>
                   <Image style={{ width: 20, height: 20, marginTop: 5 }}
                     source={require('../assets/unverified.png')} />
-                  <Text style={{ color: 'blue', fontSize: 14, marginLeft: -32, fontFamily: 'poppins_light',marginTop:4 }}
+                  <Text style={{ color: 'blue', fontSize: 14, marginLeft: -32, fontFamily: 'poppins_light', marginTop: 4 }}
                     onPress={() => navigation.push('Plans')}>(Buy Plan)</Text>
-
-
                 </View>
               }
-
             </View>
           </View>
         }
 
-
-
         {isPaid ?
-
           <View>
             <View style={{
               flexDirection: 'row',
@@ -483,11 +472,8 @@ function PostJob({ navigation }) {
                   </>}
               </>}
           </View> :
-          <Text> hi</Text>}
-
-
-
-
+          ''
+        }
         <View style={{ height: 90 }} />
       </ScrollView>
 
