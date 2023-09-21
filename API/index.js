@@ -67,6 +67,11 @@ export const googleProvider = (name, size, city, country, email, phone, address,
     password: password
 })
 
+export const changePasswordProvider = (password, id) => API.post('/providerAuth/password', {
+    password: password,
+    id: id
+})
+
 //APPLIED API CALL ==============================
 export const applyJob = (job, user, date, proposal) => API.post('/applied/create', {
     job: job,
@@ -194,6 +199,10 @@ export const createCover = (user, job, date, role, intro, body) => API.post('/co
     role: role,
     intro: intro,
     body: body
+})
+export const fetchCoverByUser = (user, job) => API.post('cover/user', {
+    user: user,
+    job: job
 })
 export const cvStatement = (id, statement) => API.post('/cv/statement', {
     id: id,
