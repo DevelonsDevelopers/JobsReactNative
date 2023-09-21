@@ -16,11 +16,11 @@ import {
 
 import WebView from 'react-native-webview';
 import queryString from 'query-string';
-import {CardField, useConfirmPayment} from "@stripe/stripe-react-native";
+import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 import ButtonComp from "../Components/ButtonComp";
 import paypalApi from "../API/paypal"
 import { useEffect } from 'react';
-import {createUserPlan} from "../API";
+import { createUserPlan } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 
@@ -68,13 +68,13 @@ const PaymentScreen = ({ route, navigation }) => {
         };
         //2.Fetch the intent client secret from the backend
         try {
-            const {clientSecret, error} = await fetchPaymentIntentClientSecret();
+            const { clientSecret, error } = await fetchPaymentIntentClientSecret();
             //2. confirm the payment
             if (error) {
                 console.log(error)
                 console.log("Unable to process payment");
             } else {
-                const {paymentIntent, error} = await confirmPayment(clientSecret, {
+                const { paymentIntent, error } = await confirmPayment(clientSecret, {
                     paymentMethodType: "Card",
                     billingDetails: billingDetails,
                 });
@@ -195,15 +195,14 @@ const PaymentScreen = ({ route, navigation }) => {
                 </View>
             </View>
 
-            <View style={{ marginHorizontal: 30, marginBottom: 40, marginTop: 40, borderWidth: 1, borderColor: 'green', padding: 10, borderRadius: 10 }}>
-                <Text style={{ color: '#205397', fontSize: 13, fontFamily: 'poppins_medium', textAlign: 'left' }}>{plan} plan</Text>
-                <Text style={{ color: 'green', fontSize: 30, fontFamily: 'poppins_medium', textAlign: 'left' }}>${price}</Text>
-                <Text style={{ color: 'gray', fontSize: 15, fontFamily: 'poppins_medium', textAlign: 'left' }}>Boost your chance of getting job by 300%</Text>
-            </View>
+            <Text style={{ color: '#002E81', fontSize: 50, fontFamily: 'poppins_medium', textAlign: 'center', marginTop: 40 }}>${price}</Text>
+            <Text style={{ color: 'gray', fontSize: 13, fontFamily: 'poppins_medium', textAlign: 'center', marginBottom: 40 }}>{plan} plan</Text>
 
-            <View>
+
+
 
                 <View style={styles.container}>
+                    <Text style={{ fontFamily:'poppins_medium',fontSize:14,marginLeft:13, }}>Enter Your Email:</Text>
                     <TextInput
                         autoCapitalize="none"
                         placeholder="E-mail"
@@ -211,6 +210,7 @@ const PaymentScreen = ({ route, navigation }) => {
                         onChange={value => setEmail(value.nativeEvent.text)}
                         style={{ backgroundColor: 'white', height: 47, borderWidth: 1, borderColor: 'gray', marginHorizontal: 10, borderRadius: 10, paddingLeft: 10 }}
                     />
+                     <Text style={{ fontFamily:'poppins_medium',fontSize:14,marginLeft:13,marginTop:30,marginBottom:-25 }}>Enter Your Card details:</Text>
                     <CardField
                         postalCodeEnabled={true}
                         placeholder={{
@@ -225,7 +225,7 @@ const PaymentScreen = ({ route, navigation }) => {
 
                 </View>
 
-                <View>
+                {/* <View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 70, width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
                         <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: 'gray' }}>Amount</Text>
                         <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: 'green' }}>$5</Text>
@@ -241,29 +241,23 @@ const PaymentScreen = ({ route, navigation }) => {
                     </View>
 
 
-                </View>
+                </View> */}
 
-            </View>
-
-            <SafeAreaView style={{ flex: 1 }}>
-                <View style={{ width: '70%', marginLeft: 'auto', marginRight: 'auto' }}>
+            <SafeAreaView style={{ flex: 1 ,marginTop:50}}>
+                <View style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
                     <ButtonComp
                         onPress={handlePayPress}
                         disabled={false}
-                        btnStyle={{ backgroundColor: '#0f4fa3', marginVertical: 16, }}
+                        btnStyle={{ backgroundColor: '#F7BE38', }}
                         text="Pay using Stripe"
-                        isLoading={isLoading} />
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 10 }}>
-                        <Text style={{ backgroundColor: 'gray', height: 1, width: 70, marginTop: 8 }}>-</Text>
-                        <Text>OR</Text>
-                        <Text style={{ backgroundColor: 'gray', height: 1, width: 70, marginTop: 8 }}>-</Text>
-                    </View>
+                        isLoading={isLoading} />  
                     <ButtonComp
                         onPress={onPressPaypal}
                         disabled={false}
-                        btnStyle={{ backgroundColor: 'green', marginVertical: 16 }}
+                        btnStyle={{ backgroundColor: '#002E81', marginVertical: 16 }}
                         text="Pay using paypal"
-                        isLoading={isLoading} />
+                        isLoading={isLoading}
+                         />
 
                     <Modal visible={!!paypalUrl} >
                         <TouchableOpacity onPress={clearPaypalState} style={{ margin: 24 }} >

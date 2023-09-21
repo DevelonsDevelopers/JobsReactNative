@@ -30,16 +30,18 @@ const ButtonComp = ({
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        height: 42,
-        borderRadius: 8,
+        height: 52,
+        borderRadius:18,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderWidth:1,
+        
     },
 
     textStyle: {
-        fontWeight: 'bold',
-        fontSize: 16,
-        color: 'white'
+        fontSize: 15,
+        fontFamily:'poppins_bold',
+        color:'white'
     }
 });
 
