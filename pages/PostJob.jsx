@@ -26,9 +26,9 @@ function PostJob({ navigation }) {
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
 
-    const [isComplete, setIsComplete] = useState(true)
-    const [isVerified, setIsVerified] = useState(true)
-    const [isPaid, setIsPaid] = useState(true)
+    const [isComplete, setIsComplete] = useState(false)
+    const [isVerified, setIsVerified] = useState(false)
+    const [isPaid, setIsPaid] = useState(false)
 
     // companyjob dispatch==========
     const [ID, setID] = useState()
@@ -159,61 +159,61 @@ function PostJob({ navigation }) {
                 </View>
                 {isPaid ?
                     <>
-                      <View style={{ flexDirection: 'row', flex: 1, marginTop: 30 }}>
+                        <View style={{ flexDirection: 'row', flex: 1, marginTop: 30 }}>
 
-                        <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
-                            onPress={() => navigation.push('AppliedUsers')} style={{
-                                flex: 0.5,
-                                backgroundColor: '#F0A51E',
-                                paddingHorizontal: 35,
-                                paddingVertical: 20,
-                                borderRadius: 20,
-                                marginLeft: 30,
-                                marginRight: 5
-                            }}>
-                            <Text style={{
-                                color: 'white',
-                                fontSize: 20,
-                                fontFamily: 'poppins_medium',
-                                textAlign: "center"
-                            }}>Applied</Text>
-                            <Text style={{
-                                color: 'white',
-                                fontSize: 20,
-                                fontFamily: 'poppins_medium',
-                                textAlign: "center",
-                                marginTop: -5,
-                                marginLeft: -4
-                            }}>Users</Text>
-                        </Ripple>
+                            <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
+                                onPress={() => navigation.push('AppliedUsers')} style={{
+                                    flex: 0.5,
+                                    backgroundColor: '#F0A51E',
+                                    paddingHorizontal: 35,
+                                    paddingVertical: 20,
+                                    borderRadius: 20,
+                                    marginLeft: 30,
+                                    marginRight: 5
+                                }}>
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 20,
+                                    fontFamily: 'poppins_medium',
+                                    textAlign: "center"
+                                }}>Applied</Text>
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 20,
+                                    fontFamily: 'poppins_medium',
+                                    textAlign: "center",
+                                    marginTop: -5,
+                                    marginLeft: -4
+                                }}>Users</Text>
+                            </Ripple>
 
-                        <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
-                            onPress={() => navigation.push('SentOffers')} style={{
-                                flex: 0.5,
-                                backgroundColor: '#F0A51E',
-                                paddingHorizontal: 45,
-                                paddingVertical: 20,
-                                borderRadius: 20,
-                                marginRight: 30,
-                                marginLeft: 5
-                            }}>
-                            <Text style={{
-                                color: 'white',
-                                fontSize: 20,
-                                fontFamily: 'poppins_medium',
-                                textAlign: "center"
-                            }}>Sent </Text>
-                            <Text style={{
-                                color: 'white',
-                                fontSize: 20,
-                                fontFamily: 'poppins_medium',
-                                textAlign: "center",
-                                marginTop: -5,
-                                marginLeft: -4
-                            }}>Offers</Text>
-                        </Ripple>
+                            <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
+                                onPress={() => navigation.push('SentOffers')} style={{
+                                    flex: 0.5,
+                                    backgroundColor: '#F0A51E',
+                                    paddingHorizontal: 45,
+                                    paddingVertical: 20,
+                                    borderRadius: 20,
+                                    marginRight: 30,
+                                    marginLeft: 5
+                                }}>
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 20,
+                                    fontFamily: 'poppins_medium',
+                                    textAlign: "center"
+                                }}>Sent </Text>
+                                <Text style={{
+                                    color: 'white',
+                                    fontSize: 20,
+                                    fontFamily: 'poppins_medium',
+                                    textAlign: "center",
+                                    marginTop: -5,
+                                    marginLeft: -4
+                                }}>Offers</Text>
+                            </Ripple>
 
-                    </View>
+                        </View>
 
                         <View style={{
                             backgroundColor: '#a6d6ec',
@@ -306,17 +306,19 @@ function PostJob({ navigation }) {
 
                                 {isComplete ?
                                     <>
-                                        <Text style={{ color: 'green', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_bold' }}
-                                           >(Completed)</Text>
                                         <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                             source={require('../assets/verified.png')} />
+                                        <Text style={{ color: 'green', fontSize: 14, fontFamily: 'poppins_bold', marginLeft: -28 }}
+                                        >(Completed)</Text>
+
                                     </>
                                     :
                                     <>
-                                        <Text style={{ color: 'blue', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_light' }}
-                                            onPress={() => navigation.push('ProviderProfile')}>(Complete Now)</Text>
                                         <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                             source={require('../assets/unverified.png')} />
+                                        <Text style={{ color: 'green', fontSize: 14, fontFamily: 'poppins_bold', marginLeft: -28 }}
+                                        >(Complete Now)</Text>
+
                                     </>
                                 }
 
@@ -341,17 +343,19 @@ function PostJob({ navigation }) {
                             {isVerified ?
 
                                 <View style={{ flexDirection: 'row', gap: 40, marginVertical: 10 }}>
-                                    <Text style={{ color: 'green', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_bold' }}
-                                       >(Verified)</Text>
                                     <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                         source={require('../assets/verified.png')} />
+                                    <Text style={{ color: 'green', fontSize: 14, marginLeft: -20, fontFamily: 'poppins_bold' }}
+                                        onPress={() => navigation.push('Verify', { verifyPhone: company?.phone, type: 'PROVIDER' })}>Verified</Text>
+
                                 </View>
                                 :
                                 <View style={{ flexDirection: 'row', gap: 40, marginVertical: 10 }}>
-                                    <Text style={{ color: 'blue', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_light' }}
-                                        onPress={() => navigation.push('Verify', { verifyPhone: company?.phone, type: 'PROVIDER' })}>(Verify Now)</Text>
                                     <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                         source={require('../assets/unverified.png')} />
+                                    <Text style={{ color: 'blue', fontSize: 14, marginLeft: -20, fontFamily: 'poppins_light' }}
+                                        onPress={() => navigation.push('Verify', { verifyPhone: company?.phone, type: 'PROVIDER' })}>(Verify Now)</Text>
+
                                 </View>
 
                             }
@@ -374,18 +378,20 @@ function PostJob({ navigation }) {
                             {isPaid ?
 
                                 <View style={{ flexDirection: 'row', gap: 40, marginTop: 10 }}>
-                                    <Text style={{ color: 'green', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_bold' }}
-                                     >Purchased</Text>
-                                    <Image style={{ width: 14, height: 14, marginTop: 5 }}
+                                     <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                         source={require('../assets/verified.png')} />
+                                    <Text style={{ color: 'green', fontSize: 14, marginLeft: -20, fontFamily: 'poppins_bold' }}
+                                    >Purchased</Text>
+                                   
 
                                 </View>
                                 :
                                 <View style={{ flexDirection: 'row', gap: 40, marginTop: 10 }}>
-                                    <Text style={{ color: 'blue', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_light' }}
-                                        onPress={() => navigation.push('Plans')}>(Buy Plan)</Text>
-                                    <Image style={{ width: 14, height: 14, marginTop: 5 }}
+                                       <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                         source={require('../assets/unverified.png')} />
+                                    <Text style={{ color: 'blue', fontSize: 14, marginLeft: -20, fontFamily: 'poppins_light' }}
+                                        onPress={() => navigation.push('Plans')}>(Buy Plan)</Text>
+                                 
 
                                 </View>
                             }
