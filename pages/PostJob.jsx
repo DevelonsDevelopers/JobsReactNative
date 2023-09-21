@@ -56,12 +56,13 @@ function PostJob({ navigation }) {
         if (ID) {
             if (!companyJobs) {
                 dispatch(FeaturedProviderJobs(ID))
-                dispatch(CompanyData(ID))
             }
+            dispatch(CompanyData(ID))
         }
     }, [dispatch, companyJobs, ID]);
 
     useEffect(() => {
+        console.log(company)
         if (company) {
             if (noCompany === "YES") {
                 setIsComplete(false)
