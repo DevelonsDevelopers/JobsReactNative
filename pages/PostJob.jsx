@@ -348,7 +348,7 @@ function PostJob({ navigation }) {
                                 :
                                 <View style={{ flexDirection: 'row', gap: 40, marginVertical: 10 }}>
                                     <Text style={{ color: 'blue', fontSize: 14, marginLeft: 20, fontFamily: 'poppins_light' }}
-                                        onPress={() => navigation.push('Verify', { verifyPhone: company?.phone })}>(Verify Now)</Text>
+                                        onPress={() => navigation.push('Verify', { verifyPhone: company?.phone, type: 'PROVIDER' })}>(Verify Now)</Text>
                                     <Image style={{ width: 14, height: 14, marginTop: 5 }}
                                         source={require('../assets/unverified.png')} />
                                 </View>
