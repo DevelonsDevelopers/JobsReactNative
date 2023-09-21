@@ -9,6 +9,7 @@ import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
 import { RESET } from "../Utils/Constants";
 import Ripple from "react-native-material-ripple";
 import LoginRequireModal from "../Components/LoginRequireModal";
+import CompleteProfileSeekerModal from "../Components/CompleteProfileSeekerModal";
 
 function Home({ navigation }) {
 
@@ -87,6 +88,17 @@ function Home({ navigation }) {
 
 	const [requireVisible, setRequireVisible] = useState(false)
 	const toggleRequireVisible = () => setRequireVisible(!requireVisible)
+
+
+	const [completeVisible, setCompleteVisible] = useState(true)
+	const toggleCompleteVisible = () => setCompleteVisible(!completeVisible)
+
+
+	const [isComplete, setIsComplete] = useState(false)
+	const [plan, setPlan] = useState(false)
+	const [cv, setCv] = useState(false)
+	const [cover, setCover] = useState(true)
+
 	return (
 		<View style={{ flex: 1 }}>
 			{isloading ?
@@ -95,6 +107,7 @@ function Home({ navigation }) {
 				</View>
 				:
 				<>
+					<CompleteProfileSeekerModal visible={completeVisible} toggleCompleteVisible={toggleCompleteVisible} isComplete={isComplete} plan={plan} cv={cv} cover={cover} />
 					<NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={login} toggleLoadingVisibility={toggleLoadingVisibility} />
 					<LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
 					<LoginRequireModal visible={requireVisible} toggleRequireVisible={toggleRequireVisible} />
@@ -338,7 +351,7 @@ function Home({ navigation }) {
 						marginBottom: 15,
 						paddingHorizontal: 20,
 
-						width:'92%'
+						width: '92%'
 					}}>
 						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 							onPress={() => {
@@ -355,8 +368,8 @@ function Home({ navigation }) {
 								justifyContent: 'center',
 
 								marginLeft: -6,
-								alignItems:'center',
-								width:'20%'
+								alignItems: 'center',
+								width: '20%'
 							}} >
 							<View >
 								<Image style={{
@@ -385,9 +398,9 @@ function Home({ navigation }) {
 								flex: 1,
 								flexDirection: 'column',
 								justifyContent: 'center',
-								alignItems:'center',
-								width:'22%',
-								marginTop:2
+								alignItems: 'center',
+								width: '22%',
+								marginTop: 2
 							}}>
 							<View >
 								<Image style={{
@@ -400,23 +413,23 @@ function Home({ navigation }) {
 									Builder</Text>
 							</View>
 						</Ripple>
-						<Ripple  rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
-								 onPress={() => {
-									 if (login) {
-										 navigation.push('Offers')
-									 } else {
+						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
+							onPress={() => {
+								if (login) {
+									navigation.push('Offers')
+								} else {
 
-										 toggleRequireVisible()
-									 }
-								 }}
-								 style={{
-							height: '100%',
-							flex: 1,
-							flexDirection: 'column',
-							justifyContent: 'center',
-							alignItems:'center',
-							width:'20%'
-						}}>
+									toggleRequireVisible()
+								}
+							}}
+							style={{
+								height: '100%',
+								flex: 1,
+								flexDirection: 'column',
+								justifyContent: 'center',
+								alignItems: 'center',
+								width: '20%'
+							}}>
 							<View >
 								<Image style={{
 									width: 32,
@@ -444,8 +457,8 @@ function Home({ navigation }) {
 								flexDirection: 'column',
 								justifyContent: 'center',
 								marginLeft: -4,
-								alignItems:'center',
-								width:'20%'
+								alignItems: 'center',
+								width: '20%'
 							}}>
 							<Image style={{
 								width: 20,
@@ -475,8 +488,8 @@ function Home({ navigation }) {
 								flexDirection: 'column',
 								justifyContent: 'center',
 								marginLeft: -4,
-								alignItems:'center',
-								width:'20%'
+								alignItems: 'center',
+								width: '20%'
 							}}>
 							<Image style={{
 								width: 20,
