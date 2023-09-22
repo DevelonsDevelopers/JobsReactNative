@@ -1,4 +1,4 @@
-import {ALL_CATEGORIES, ALL_CITIES, ERROR, LOADING, NODATA, SUCCESS} from "../../Utils/Constants";
+import { ALL_CITIES, CITIES_ERROR, CITIES_LOADING, CITIES_NODATA, CITIES_SUCCESS, ERROR, LOADING, NODATA, SUCCESS} from "../../Utils/Constants";
 import * as api from "../index";
 
 export const AllCities = () => async (dispatch) => {

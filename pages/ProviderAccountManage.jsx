@@ -368,7 +368,7 @@ const ProviderAccountManage = ({ navigation }) => {
                     <View style={{
                         flexDirection: 'column',
                         borderColor: '#b2b2b2',
-                       
+
                     }}>
                         <View style={{ flexDirection: 'row', flex: 1 }}>
                             <View style={{
@@ -456,7 +456,7 @@ const ProviderAccountManage = ({ navigation }) => {
 
                 <View style={{ flexDirection: 'column', marginTop: 20, marginHorizontal: 30 }}>
                     <View style={{ height: 60, borderColor: '#b2b2b2', borderWidth: 1, borderRadius: 10, padding: 4, backgroundColor: 'white' }}>
-                        <PhoneInput
+                        <PhoneInput onChangeText={text => console.log(text)}
                             layout='first'
                             defaultCode='PK'
                         />

@@ -73,11 +73,9 @@ function Search({route, navigation}) {
 
     useEffect(() => {
         if (loading) {
-            if (!searchJobs) {
                 dispatch(SearchJobs(search, countryID, categoryID, cityID, companyID, startSalary, salaryEnd, type, isCountry, isCategory, isCity, isCompany, isSalary, isType))
-            }
         }
-    }, [dispatch, searchJobs]);
+    }, [dispatch, loading]);
 
     useEffect(() => {
         if (success) {
@@ -154,7 +152,7 @@ function Search({route, navigation}) {
                                  list={categories} click={categoryClick}/>
             <CompanySelectModal visible={companyVisibility} toggleVisibility={toggleCompanyVisibility} list={companies}
                                 click={companyClick}/>
-                                  {isloading ?
+                                  {loading ?
                <View style={{ marginTop:'auto',marginBottom:'auto' }}>
                <ActivityIndicator size={60} color="#13A3E1" />
                </View>
