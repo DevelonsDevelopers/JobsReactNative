@@ -337,7 +337,7 @@ function PersonalInfo({ navigation }) {
                                     paddingHorizontal: 20,
                                     paddingVertical: 5
                                 }}>
-                                    <TextInput editable={false}
+                                    <TextInput 
                                         onChangeText={(text) => setSeekerData({ ...seekerData, dob: text })}
                                         placeholder={'Missing!!!'} style={{
                                             color: '#000',
