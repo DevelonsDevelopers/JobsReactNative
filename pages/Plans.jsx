@@ -58,13 +58,13 @@ const Plans = ({ navigation }) => {
                           style={{marginHorizontal: 20}} data={plans}
                           renderItem={({item}) => (
                               <Ripple onPress={() => navigation.push('Payment', { plan: 'Premium', price: '20' })} rippleColor='white' style={{ backgroundColor: '#004BFF', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 10, borderRadius: 10, marginBottom: 20 ,flexDirection:'column'}}>
-                                  <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Premium</Text>
+                                  <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>{item.name}</Text>
                                   <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
                                       <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>$ </Text>
-                                      <Text style={{ fontSize: 40, color: 'white', marginTop: -5 }}>20</Text>
+                                      <Text style={{ fontSize: 40, color: 'white', marginTop: -5 }}>{item.amount}</Text>
                                   </View>
-                                  <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  Our most popular package</Text>
-                                  <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 200 jobs</Text>
+                                  <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  {item.purpose}</Text>
+                                  {/* <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 200 jobs</Text> */}
                               </Ripple>
                           )}
                          />
