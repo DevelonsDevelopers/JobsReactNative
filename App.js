@@ -72,6 +72,7 @@ import ViewCoverLetter from './pages/ViewCoverLetter';
 import CompleteProfileSeekerModal from './Components/CompleteProfileSeekerModal';
 import SeeekerNegotiate from './pages/SeeekerNegotiate';
 import VerificationProfile from './pages/VerificationProfile';
+import ManageCoverLetter from './pages/ManageCoverLetter';
 
 
 
@@ -216,6 +217,8 @@ function App() {
                             options={{ title: "SeekerNegotiate", headerShown: false }} />
                         <Stack.Screen name="VerificationProfile" component={VerificationProfile}
                             options={{ title: "VerificationProfile", headerShown: false }} />
+                        <Stack.Screen name="ManageCoverLetter" component={ManageCoverLetter}
+                            options={{ title: "ManageCoverLetter", headerShown: false }} />
 
                     </Stack.Navigator>
                 </NavigationContainer>

@@ -82,12 +82,10 @@ function Resume({ navigation }) {
           </View>
 
           <View style={{ paddingHorizontal: 20 }}>
-            <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
             <Text style={{ textAlign: 'center', fontSize: 15, fontFamily: 'poppins_medium', marginTop: 10 }}>{cv?.role}</Text>
             <Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
 
             <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginVertical: 10, paddingHorizontal: 10, paddingVertical: 10 }}>{cv?.statement}</Text>
-            <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
             <Text style={{ fontSize: 14, fontFamily: 'poppins_semibold', marginVertical: 10, textAlign: 'center' }}>Key Skills</Text>
             <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
 
@@ -180,6 +178,17 @@ function Resume({ navigation }) {
             </SafeAreaView>
 
 
+            <Text style={{ fontSize: 14, fontFamily: 'poppins_semibold', marginVertical: 10, textAlign: 'center' }}>Interest</Text>
+            <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
+
+            <SafeAreaView style={{ marginHorizontal: 20, marginVertical: 10 }}>
+              <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                data={cv?.interests} numColumns={3} renderItem={({ item }) => (
+                  <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', flex: 1, paddingVertical: 2, color: 'black', marginLeft: 20 }}>
+                    {`\u2022 ${item.interest}`}
+                  </Text>
+                )} />
+            </SafeAreaView>
 
           </View>
 

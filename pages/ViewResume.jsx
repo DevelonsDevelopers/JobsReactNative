@@ -113,14 +113,12 @@ const ViewResume = ({ route, navigation }) => {
             </View>
             <View style={{ paddingHorizontal: 20, backgroundColor: 'white', width: '95%', marginLeft: 'auto', marginRight: 'auto', }}>
                 <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
-                <Text style={{ textAlign: 'center', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 10 }}>SALES AND MARKETING COORDINATOR / ACCOUNT MANAGER</Text>
+                <Text style={{ textAlign: 'center', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 10 }}>{cv?.role}</Text>
                 <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
 
                 <Text style={{ fontSize: 11, fontFamily: 'poppins_semibold', marginVertical: 10 }}>{cv?.statement}</Text>
-                <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
                 <Text style={{ fontSize: 14, fontFamily: 'poppins_semibold', marginVertical: 10, textAlign: 'center' }}>Key Skills</Text>
                 <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
-
                 <SafeAreaView style={{ marginHorizontal: 20, marginVertical: 10 }}>
                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                         data={cv?.skills} numColumns={3} renderItem={({ item }) => (
@@ -208,6 +206,20 @@ const ViewResume = ({ route, navigation }) => {
                             </View>
                         )} />
                 </SafeAreaView>
+                <Text style={{ fontSize: 14, fontFamily: 'poppins_semibold', marginVertical: 10, textAlign: 'center' }}>Interests</Text>
+                <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text>
+
+                <SafeAreaView style={{ marginHorizontal: 20, marginVertical: 10 }}>
+                    <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                        data={cv?.interests} numColumns={3} renderItem={({ item }) => (
+                            <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', flex: 1, paddingVertical: 2, color: 'black', marginLeft: 20 }}>
+                                {`\u2022 ${item.interest}`}
+                            </Text>
+                        )} />
+                </SafeAreaView>
+
+
+
             </View>
             <View style={{ flexDirection: "row", justifyContent: 'center',marginHorizontal:40 }}>
                 <Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
@@ -217,6 +229,10 @@ const ViewResume = ({ route, navigation }) => {
                     <Text style={{ backgroundColor: 'red', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 40 }}>Ignore</Text>
                 </Ripple>
             </View>
+
+  
+                
+
 
         </ScrollView>
     )

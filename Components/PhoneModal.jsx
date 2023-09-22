@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList, Image, Modal, Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
 import { PhoneData } from '../Utils/Constants';
 
-const PhoneModal = ({ visible, click, toggleVisibility }) => {
+const PhoneModal = ({ visible, click, togglePhoneVisible }) => {
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true}>
             <View style={{
@@ -38,7 +38,7 @@ const PhoneModal = ({ visible, click, toggleVisibility }) => {
 									<Image style={{ width: 25, height: 25 }} source={require('../assets/search-interface-symbol.png')} />
 								</Pressable>
 							</View>
-                        <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto', padding: 5 }}><Image
+                        <Pressable onPress={() => togglePhoneVisible()} style={{ marginLeft: 'auto', padding: 5 }}><Image
                             style={{ width: 15, height: 15, marginLeft: 'auto' }}
                             source={require('../assets/close.png')} /></Pressable>
                     </View>

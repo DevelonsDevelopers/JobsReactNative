@@ -80,7 +80,7 @@ const OfferSend = ({ route, navigation }) => {
                     }}>Offer Type</Text>
 
                 </View>
-                <Pressable onPress={() => toggleVisibility()}><TextInput editable={false} style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{type}</TextInput></Pressable>
+                <Pressable onPress={() => toggleVisibility()}><TextInput editable={false} style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}  >{type}</TextInput></Pressable>
             </View>
             <View style={{
                 flexDirection: 'column',

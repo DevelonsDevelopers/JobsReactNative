@@ -304,7 +304,8 @@ const JobDetails = ({ route, navigation }) => {
                                         }}>SAVED</Text></Pressable>
                                     }
                                     {applied === 0 ?
-                                        <Pressable onPress={() => toggleApplyVisibility()}>
+
+                                        <Pressable onPress={() => navigation.push('VerificationProfile')}>
                                             <Text style={{
                                                 justifyContent: 'center',
                                                 height: 50,
