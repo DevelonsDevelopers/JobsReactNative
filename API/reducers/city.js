@@ -1,4 +1,4 @@
-import {ALL_CITIES, ERROR, LOADING, NODATA, RESET, SUCCESS} from "../../Utils/Constants";
+import {ALL_CITIES, CITIES_ERROR, CITIES_LOADING, CITIES_NODATA, CITIES_RESET, CITIES_SUCCESS, ERROR, LOADING, NODATA, RESET, SUCCESS} from "../../Utils/Constants";
 
 const city = (state = {isLoading: true, success: false, error: false, nodata: false}, action) => {
     switch (action.type){
