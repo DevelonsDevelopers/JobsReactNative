@@ -10,6 +10,7 @@ import moment from "moment";
 const SeeekerNegotiate = ({route, navigation}) => {
 
     const {ID} = route.params
+    console.log(ID)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -59,7 +60,7 @@ const SeeekerNegotiate = ({route, navigation}) => {
                     <Image style={{width: 22, height: 20, marginTop: 70, marginLeft: 30, tintColor: '#000'}}
                            source={require('../assets/back_arrow.png')} alt={''}/></Pressable>
                 <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
-                    <Pressable onPress={() => navigation.push('')}><Image
+                    <Pressable onPress={() => navigation.push('AcceptResponse')}><Image
                         style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
                         source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
                 </View>
