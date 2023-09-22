@@ -1,5 +1,5 @@
 import * as api from '../../API/index'
-import {ERROR, LOADING, NODATA, OFFERS, SENT_OFFERS, SENT_OFFERS_BY_JOB, SUCCESS} from "../../Utils/Constants";
+import {ERROR, LOADING, NODATA, OFFER, OFFERS, SENT_OFFERS, SENT_OFFERS_BY_JOB, SUCCESS} from "../../Utils/Constants";
 import {sentOffersByJob} from "../../API/index";
 
 export const FetchSentOffers = (company) => async (dispatch) => {
@@ -25,6 +25,22 @@ export const FetchSentOffersByJob = (job) => async (dispatch) => {
         // if (data.length > 0) {
             dispatch({type: SENT_OFFERS_BY_JOB, payload: {jobOffers: data}})
             dispatch({type: SUCCESS})
+        // } else {
+        //     dispatch({type: NODATA})
+        // }
+    } catch (error) {
+        console.log(error)
+        dispatch ({ type: ERROR })
+    }
+}
+
+export const FetchOffer = (id) => async (dispatch) => {
+    try {
+        dispatch ({ type: LOADING })
+        const { data: { data } } = await api.offer(id);
+        // if (data.length > 0) {
+        dispatch({type: OFFER, payload: {offer: data}})
+        dispatch({type: SUCCESS})
         // } else {
         //     dispatch({type: NODATA})
         // }

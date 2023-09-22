@@ -325,6 +325,9 @@ export const sentOffersByJob = (id) => API.post('/offers/job', {
 export const offers = (user) => API.post('/offers/user', {
     user: user
 })
+export const offer = (id) => API.post('/offers/id', {
+    id: id
+})
 export const offerResponse = (status, response, responseDate, id) => API.post('/offers/update', {
     status: status,
     response: response,

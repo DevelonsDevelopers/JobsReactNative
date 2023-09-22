@@ -195,6 +195,7 @@ export const BOOKMARK_JOB = "BOOKMARK_JOB";
 
 
 //OFFERS: ============
+export const OFFER = "OFFER"
 export const SENT_OFFERS_LOADING = "SENT_OFFERS_LOADING"
 export const SENT_OFFERS = "SENT_OFFERS";
 export const SENT_OFFERS_BY_JOB_LOADING = "SENT_OFFERS_BY_JOB_LOADING"
