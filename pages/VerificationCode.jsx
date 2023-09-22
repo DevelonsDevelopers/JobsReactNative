@@ -30,6 +30,7 @@ const CELL_COUNT = 6;
 
 function VerificationCode({ route, navigation }) {
 
+	const { code } = route.params
 	const { phone } = route.params
 	const { password } = route.params
 	const { type } = route.params
@@ -37,7 +38,6 @@ function VerificationCode({ route, navigation }) {
 	console.log(type)
 
 	const [confirm, setConfirm] = useState()
-	const [code, setCode] = useState('');
 	const [ID, setID] = useState()
 
 	function onAuthStateChanged(user) {
@@ -60,7 +60,7 @@ function VerificationCode({ route, navigation }) {
 	}, []);
 
 	async function signInWithPhoneNumber(phoneNumber) {
-		const confirmation = await firebase.auth().signInWithPhoneNumber(phoneNumber);
+		const confirmation = await firebase.auth().signInWithPhoneNumber(code + phoneNumber);
 		setConfirm(confirmation)
 	}
 
@@ -90,7 +90,7 @@ function VerificationCode({ route, navigation }) {
 						}
 					})
 				} else {
-					verifySeeker("true", phone, ID).then(res => {
+					verifySeeker("true", code, phone, ID).then(res => {
 						const {data: {data}} = res;
 						const {data: {responseCode}} = res;
 						const {data: {message}} = res;
