@@ -43,6 +43,7 @@ function Splash({navigation}) {
     }, [ID]);
 
     useEffect(() => {
+        console.log(check)
         if (check){
             sleep(1000).then( async () => {
                 if (user === "PROVIDER") {

@@ -43,8 +43,8 @@ export const fetchSeeker = (ID) => async (dispatch) => {
 export const CheckSeeker = (ID) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { data } } = await api.checkSeeker(ID);
-        dispatch ({ type: CHECK_SEEKER, payload: { data: data } })
+        const { data: { status } } = await api.checkSeeker(ID);
+        dispatch ({ type: CHECK_SEEKER, payload: { data: status } })
         dispatch ({ type: SUCCESS })
     } catch (error) {
         console.log(error)
