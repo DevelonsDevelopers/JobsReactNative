@@ -169,12 +169,12 @@ function Cities({ navigation }) {
                                                                 fontFamily: 'poppins_light'
                                                             }}>{item.country_name}</Text>
                                                         </View>
-                                                        <View style={{
-                                                            backgroundColor: '#777777',
-                                                            height: 0.5,
-                                                            marginHorizontal: 10,
-                                                            marginVertical: 5
-                                                        }}></View>
+                                                        <Text style={{
+                                                           backgroundColor:'gray',
+                                                           height:1.2,
+                                                           marginVertical:4,
+                                                           color:'gray'
+                                                        }}>-</Text>
                                                     </Pressable>
                                                 )} />
                                         </SafeAreaView>
