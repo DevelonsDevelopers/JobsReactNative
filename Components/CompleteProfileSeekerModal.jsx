@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image, Modal, Pressable, Text, View } from 'react-native'
 
-const CompleteProfileSeekerModal = ({ visible, toggleCompleteVisible, isComplete, plan, cover, cv }) => {
+const CompleteProfileSeekerModal = ({ visible, toggleCompleteVisible, isComplete, plan, cover, cv, navigation }) => {
 	return (
 
 		<Modal visible={visible} animationType={"fade"} transparent={true}>
