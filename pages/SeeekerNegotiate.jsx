@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useEffect} from 'react';
 import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, View} from "react-native";
 import {useDispatch, useSelector} from 'react-redux';
-import {FetchOffers} from '../API/actions/offersActions';
+import {FetchOffer, FetchOffers} from '../API/actions/offersActions';
 import Toast from 'react-native-toast-message';
 import {offerResponse} from "../API";
 import moment from "moment";
@@ -16,18 +16,13 @@ const SeeekerNegotiate = ({route, navigation}) => {
         console.log(ID)
     }, [ID])
 
-    const offers = useSelector(state => state.offers.offers)
+    const offer = useSelector(state => state.offers.offer)
 
     useEffect(() => {
         if (ID) {
-            dispatch(FetchOffers(ID))
+            dispatch(FetchOffer(ID))
         }
     }, [dispatch, ID])
-
-    useEffect(() => {
-        console.log(offers)
-    }, [offers])
-
 
     const [thank, setThank] = useState()
     const [issue, setIssue] = useState()
@@ -40,7 +35,7 @@ const SeeekerNegotiate = ({route, navigation}) => {
             if (issue.length >= 20) {
                 if (great.length >= 20) {
                     const jsonString = `{ "text1": "${thank}", "text2": "${issue}", "text3": "${great}"`;
-                    offerResponse("Negotiate", jsonString, postDate, offers[0].id).then((res) => {
+                    offerResponse("Negotiate", jsonString, postDate, offer.id).then((res) => {
                         navigation.push('Home')
                     })
                 } else {
@@ -79,9 +74,9 @@ const SeeekerNegotiate = ({route, navigation}) => {
                 <TextInput onChangeText={(text) => setThank(text)} multiline={true}
                            style={{fontSize: 14, fontFamily: 'poppins_medium', marginHorizontal: 20, marginTop: 60}}>Thank
                     you for offering me an opportunity to work at <Text
-                        style={{color: 'green', fontSize: 17}}> {offers[0]?.company_name} </Text>. I very much
+                        style={{color: 'green', fontSize: 17}}> {offer?.company_name} </Text>. I very much
                     appreciate the time and effort your team has spent to review my application and interview me for the
-                    position of <Text style={{color: 'green', fontSize: 17}}> {offers[0]?.role} </Text> </TextInput>
+                    position of <Text style={{color: 'green', fontSize: 17}}> {offer?.role} </Text> </TextInput>
                 <Text style={{
                     fontSize: 16,
                     fontFamily: 'poppins_bold',
@@ -108,21 +103,21 @@ const SeeekerNegotiate = ({route, navigation}) => {
                     fontFamily: 'poppins_medium',
                     marginHorizontal: 20,
                     textAlign: 'right'
-                }}>{offers[0]?.seeker_name}</Text>
+                }}>{offer?.seeker_name}</Text>
                 <Text style={{
                     marginTop: 5,
                     fontSize: 14,
                     fontFamily: 'poppins_medium',
                     marginHorizontal: 20,
                     textAlign: 'right'
-                }}>{offers[0]?.email}</Text>
+                }}>{offer?.email}</Text>
                 <Text style={{
                     marginTop: 5,
                     fontSize: 14,
                     fontFamily: 'poppins_medium',
                     marginHorizontal: 20,
                     textAlign: 'right'
-                }}>{offers[0]?.phone}</Text>
+                }}>{offer?.phone}</Text>
             </View>
             <Text style={{fontSize: 15, fontFamily: 'poppins_medium', marginLeft: 20}}>Note:</Text>
             <Text style={{fontSize: 15, fontFamily: 'poppins_medium', marginLeft: 20}}>Text is editable</Text>

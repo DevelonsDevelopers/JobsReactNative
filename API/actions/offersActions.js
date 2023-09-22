@@ -38,6 +38,7 @@ export const FetchOffer = (id) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
         const { data: { data } } = await api.offer(id);
+        console.log(data)
         // if (data.length > 0) {
         dispatch({type: OFFER, payload: {offer: data}})
         dispatch({type: SUCCESS})
