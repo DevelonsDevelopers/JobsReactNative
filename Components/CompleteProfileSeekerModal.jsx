@@ -13,12 +13,12 @@ const CompleteProfileSeekerModal = ({ visible, toggleCompleteVisible, isComplete
 					</Pressable>
 					{/* <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium', fontSize: 26 }}>Welcome</Text> */}
 					<Image source={require('../assets/welcome.png')} style={{ width: 240, height: 180, marginLeft: '17%' }} />
-
 					<Text style={{ textAlign: 'center', fontFamily: 'poppins_semibold', fontSize: 16, marginLeft: 10, }}>Please complete your profile.</Text>
 					<Text style={{  fontFamily: 'poppins_medium', fontSize: 11, color: 'gray',textAlign:'center' }}>Companies prefer to look at profiles that are complete.A complete profile help us make accurate company recommendations for you</Text>
-					<View style={{ flexDirection:'row',justifyContent:'space-between' }}>
-						<Text style={{ fontSize:14,fontFamily:'poppins_medium',marginLeft:20,color:'#1877F2' }}>I'll do it later</Text>
-						<Text style={{ fontSize:14,fontFamily:'poppins_medium', }}>Let's do it</Text>
+					<View style={{ flexDirection:'row',justifyContent:'space-between',marginTop:'auto',marginBottom:40 }}>
+						<Text onPress={() => toggleCompleteVisible()} style={{ fontSize:14,fontFamily:'poppins_medium',marginLeft:20,color:'#1877F2' }}>I'll do it later</Text>
+						<Text onPress={() => {toggleCompleteVisible()  
+							navigation.push('VerificationProfile')}} style={{ fontSize:14,fontFamily:'poppins_medium',backgroundColor:'#3CB043',color:'white',marginRight:20,paddingHorizontal:20,paddingVertical:6,borderRadius:20 }}>Let's do it</Text>
 					</View>
 				</View>
 			</View>

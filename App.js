@@ -71,6 +71,7 @@ import Plans from './pages/Plans';
 import ViewCoverLetter from './pages/ViewCoverLetter';
 import CompleteProfileSeekerModal from './Components/CompleteProfileSeekerModal';
 import SeeekerNegotiate from './pages/SeeekerNegotiate';
+import VerificationProfile from './pages/VerificationProfile';
 
 
 
@@ -213,6 +214,8 @@ function App() {
                             options={{ title: "CompleteProfileSeekerModal", headerShown: false }} />
                         <Stack.Screen name="SeekerNegotiate" component={SeeekerNegotiate}
                             options={{ title: "SeekerNegotiate", headerShown: false }} />
+                        <Stack.Screen name="VerificationProfile" component={VerificationProfile}
+                            options={{ title: "VerificationProfile", headerShown: false }} />
 
                     </Stack.Navigator>
                 </NavigationContainer>
