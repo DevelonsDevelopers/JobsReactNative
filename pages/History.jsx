@@ -118,11 +118,12 @@ const History = ({ navigation }) => {
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginHorizontal: 0, marginTop: 10 }} data={interactions} renderItem={({ item }) => (
                                     <View>
-                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                            <Text style={{
+                                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                                            <Text numberOfLines={1} ellipsizeMode={"tail"} style={{
                                                 fontSize: 15,
                                                 fontWeight: 600,
-                                                fontFamily: 'poppins_semibold'
+                                                fontFamily: 'poppins_semibold',
+                                                width: '70%'
                                             }}>{item.title}</Text>
 
                                             <Text style={{
