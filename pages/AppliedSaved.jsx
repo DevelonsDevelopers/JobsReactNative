@@ -10,6 +10,7 @@ import { AllBookmarks } from "../API/actions/bookmarkActions";
 import moment from "moment";
 import { AllApplied } from "../API/actions/appliedActions";
 import { useNavigation } from "@react-navigation/native";
+import Ripple from 'react-native-material-ripple';
 
 const data1 = [
     { "name": "Facebook" },
@@ -101,7 +102,7 @@ const FirstRoute = ({ navigation }) => {
                                     <FlatList nestedScrollEnabled={true} scrollEnabled={true}
                                         style={{ marginHorizontal: 0, marginTop: 20 }} data={bookmarks}
                                         renderItem={({ item }) => (
-                                            <Pressable onPress={() => navigation.push('JobDetails', { ID: item.job })} style={{
+                                            <Ripple onPress={() => navigation.push('JobDetails', { ID: item.job })} style={{
                                                 marginLeft: 25,
                                                 marginRight: 25,
                                                 marginBottom: 8,
@@ -192,7 +193,7 @@ const FirstRoute = ({ navigation }) => {
                                                 </View>
 
 
-                                            </Pressable>
+                                            </Ripple>
                                         )} />
                                 </>
                             }
