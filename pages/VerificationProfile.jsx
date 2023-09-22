@@ -127,21 +127,21 @@ const Verification = ({ navigation }) => {
 							color: 'black',
 							fontSize: 14,
 							fontFamily: 'poppins_bold',
-						}}>Create Your Cover Letter</Text>
+						}}>Verify your phone number</Text>
 					</View>
 					{cover ?
 						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/verified.png')} />
 							<Text style={{ color: 'green', fontSize: 14, fontFamily: 'poppins_bold', marginTop: 4 }}
-							>Created</Text>
+							>Verified</Text>
 						</View>
 						:
 						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_medium', marginTop: 4 }}
-							>(Create cover letter)</Text>
+							>(Verify now)</Text>
 						</View>
 
 					}
