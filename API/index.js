@@ -164,7 +164,7 @@ export const fetchRecommendedJobs = (user, tag) => API.post('/jobs/recommended',
 export const fetchJobByID = (user, id) => API.post('/jobs/get', { user: user, id: id })
 export const fetchJobByCategory = (user, id) => API.post('/jobs/category', { user: user, category: id })
 export const fetchJobByCity = (user, id) => API.post('/jobs/city', { user: user, city: id })
-export const fetchJobByCompany = (id) => API.post('/jobs/company', {company: id })
+export const fetchJobByCompany = (user, id) => API.post('/jobs/company', { user: user, company: id })
 export const fetchJobsByProvider = (id) => API.post('/jobs/provider', {company: id })
 export const fetchJobsByProviderFeatured = (id) => API.post('/jobs/providerFeatured', {company: id })
 export const fetchSearchJob = (search, country, category, city, company, salaryStart, salaryEnd, type, isCountry, isCategory, isCity, isCompany, isSalary, isType) => API.post('/jobs/search', {

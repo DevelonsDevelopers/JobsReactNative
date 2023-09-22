@@ -5,7 +5,7 @@ import {useNavigation} from "@react-navigation/native";
 import Resume from "./Resume";
 import {useDispatch, useSelector} from "react-redux";
 import {AllCities} from "../API/actions/cityActions";
-import {AllJobs, CompanyJobs} from "../API/actions/jobActions";
+import {AllJobs, CityJobs, CompanyJobs} from "../API/actions/jobActions";
 import moment from "moment";
 import {recordInteraction} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -47,18 +47,18 @@ function JobsByCompany({route, navigation}) {
     }, [dispatch, jobs, ID]);
 
     useEffect(() => {
-        if (jobs){
-            setData(jobs)
-        }
-    }, [jobs]);
-
-    useEffect(() => {
         if (success) {
             setData(jobs)
             setLoading(false)
             dispatch({ type: RESET })
         }
     }, [success]);
+
+    useEffect(() => {
+        if (jobs){
+            setData(jobs)
+        }
+    }, [jobs]);
 
     const JobClick = (id) => {
         recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
