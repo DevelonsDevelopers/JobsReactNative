@@ -1,15 +1,24 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { useState } from 'react'
 import { Pressable, View, Text, Image } from 'react-native'
+import {useSelector} from "react-redux";
 
 const Verification = ({ navigation }) => {
+
+	const check = useSelector(state => state.seeker.check)
 
 	const [isComplete, setIsComplete] = useState(false)
 	const [cv, setCv] = useState(false)
 	const [cover, setCover] = useState(false)
 	const [plan, setPlan] = useState(false)
 
-
+	useEffect(() => {
+		if (check === "complete"){
+			setIsComplete(true)
+		} else {
+			setIsComplete(false)
+		}
+	}, [check]);
 
 	return (
 		<View style={{}}>
@@ -66,12 +75,12 @@ const Verification = ({ navigation }) => {
 							>Completed</Text>
 						</View>
 						:
-						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+						<Pressable onPress={() => navigation.push('PersonalInfo')} style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_medium', marginTop: 4 }}
-							>(complet now)</Text>
-						</View>
+							>(complete now)</Text>
+						</Pressable>
 					}
 					{/* <View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 								<Image style={{ width: 20, height: 20, marginTop: 5 }}

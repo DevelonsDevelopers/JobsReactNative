@@ -93,19 +93,21 @@ export const fetchFeaturedCategories = () => API.get(`/categories/featured`)
 export const fetchSeeker = (id) => API.post('/seekers/get', { id: id })
 export const checkSeeker = (id) => API.post('/seekers/check', { id: id })
 export const fetchRecommendedUsers = (job) => API.post('/seekers/recommended', { job: job })
-export const updateSeeker = (name, city, country, username, phone, address, dob, gender, id) => API.put('/seekers/update',  {
+export const updateSeeker = (name, city, country, username, code, phone, address, dob, gender, id) => API.put('/seekers/update',  {
     name: name,
     city: city,
     country: country,
     username: username,
+    code: code,
     phone: phone,
     address: address,
     dob: dob,
     gender: gender,
     id: id
 })
-export const verifySeeker = (verify, phone, id) => API.put('/seekers/verify', {
+export const verifySeeker = (verify, code, phone, id) => API.put('/seekers/verify', {
     verify: verify,
+    code: code,
     phone: phone,
     id: id,
 })

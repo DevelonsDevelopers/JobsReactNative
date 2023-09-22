@@ -63,6 +63,7 @@ function PersonalInfo({ navigation }) {
 
     const [cityName, setNameCity] = useState('')
     const [countryName, setCountryName] = useState('')
+    const [phoneCode, setPhoneCode] = useState('')
     const [gen, setGen] = useState('')
     const [trigger, setTrigger] = useState(false)
 
@@ -100,17 +101,19 @@ function PersonalInfo({ navigation }) {
                 city: seeker?.city,
                 country: seeker?.country,
                 username: seeker?.username,
+                code: seeker?.code,
                 phone: seeker?.phone,
                 address: seeker?.address,
                 dob: seeker?.dob,
                 gender: seeker?.gender,
                 id: seeker?.id
             })
+            setPhoneCode(seeker?.code)
             setGen(seeker?.gender)
             setNameCity(seeker?.city_name)
             setCountryName(seeker?.country_name)
         }
-        if (seeker?.address && seeker?.city && seeker?.country && seeker?.dob && seeker?.email && seeker?.gender && seeker?.id && seeker?.name && seeker?.password && seeker?.phone && seeker?.username) {
+        if (seeker?.address && seeker?.city && seeker?.country && seeker?.dob && seeker?.email && seeker?.gender && seeker?.id && seeker?.name && seeker?.password && seeker?.code && seeker?.phone && seeker?.username) {
             setCompleted(true)
         } else {
             setCompleted(false)
@@ -133,7 +136,7 @@ function PersonalInfo({ navigation }) {
 
     const update = () => {
         console.log(seekerData)
-        dispatch(updateSeeker(seekerData.name, seekerData.city, seekerData.country, seekerData.username, seekerData.phone, seekerData.address, seekerData.dob, seekerData.gender, seekerData.id))
+        dispatch(updateSeeker(seekerData.name, seekerData.city, seekerData.country, seekerData.username, seekerData.code, seekerData.phone, seekerData.address, seekerData.dob, seekerData.gender, seekerData.id))
         toggleLoadingVisibility()
         dispatch({ type: RESET })
         setTrigger(!trigger)
@@ -183,6 +186,10 @@ function PersonalInfo({ navigation }) {
     const [phoneVisible, setPhoneVisible] = useState(false)
     const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
+    const setCode = (code) => {
+        setSeekerData({ ...seekerData, code: code })
+        togglePhoneVisible()
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -199,7 +206,7 @@ function PersonalInfo({ navigation }) {
                 }}
             />
 
-            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} />
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode}/>
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
@@ -613,8 +620,8 @@ function PersonalInfo({ navigation }) {
 
 
                         <View style={{ flexDirection: 'row', marginLeft: 40 ,marginTop:20}}>
-                            <Text onPress={() => togglePhoneVisible()} style={{ borderWidth:1,paddingVertical:6,width:'30%' }}>92+</Text>
-                            <TextInput placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }}  />
+                            <Text onPress={() => togglePhoneVisible()} style={{ borderWidth:1,paddingVertical:6,width:'30%' }}>{seeker?.code}</Text>
+                            <TextInput onChangeText={text => setSeekerData({...seekerData, phone: text})} placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }}  >{seeker?.phone}</TextInput>
                         </View>
 
 
@@ -645,7 +652,7 @@ function PersonalInfo({ navigation }) {
                                 }}><Text style={{ color: '#000', fontWeight: '800', fontSize: 15 }}>Logged In using
                                     Google</Text></Pressable>
                             :
-                            <Pressable onPress={() => navigation.push('ChangePassword', { verifyPhone: seeker?.phone })}
+                            <Pressable onPress={() => navigation.push('ChangePassword', { code: seeker?.code, verifyPhone: seeker?.phone })}
                                 style={{
                                     borderColor: '#000',
                                     borderWidth: 1,
@@ -658,12 +665,13 @@ function PersonalInfo({ navigation }) {
                                     Password</Text></Pressable>
                         }
                         {!verified ?
-                            <Pressable onPress={() => navigation.push('Verify', { verifyPhone: seeker?.phone })}
+                            <Pressable onPress={() => navigation.push('Verify', { code: seeker?.code, verifyPhone: seeker?.phone })}
                                 style={{
                                     borderColor: '#000',
                                     backgroundColor: '#000',
                                     borderWidth: 1,
                                     borderRadius: 25,
+
                                     alignItems: 'center',
                                     padding: 15,
                                     marginTop: 15,
