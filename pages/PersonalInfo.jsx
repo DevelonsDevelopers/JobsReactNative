@@ -25,6 +25,7 @@ import GenderModal from "../Components/GenderModal";
 import DatePicker from "react-native-date-picker";
 import Ripple from "react-native-material-ripple";
 import PhoneInput from "react-native-phone-number-input";
+import PhoneModal from "../Components/PhoneModal";
 
 function PersonalInfo({ navigation }) {
 
@@ -179,6 +180,10 @@ function PersonalInfo({ navigation }) {
     const [gender, setGender] = useState(false)
     const toggleGenderVisibility = () => setGender(!gender)
 
+    const [phoneVisible, setPhoneVisible] = useState(false)
+    const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
+
+
     return (
         <View style={{ flex: 1 }}>
             <DatePicker
@@ -193,6 +198,8 @@ function PersonalInfo({ navigation }) {
                     setOpen(false)
                 }}
             />
+
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} />
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
@@ -337,7 +344,7 @@ function PersonalInfo({ navigation }) {
                                     paddingHorizontal: 20,
                                     paddingVertical: 5
                                 }}>
-                                    <TextInput 
+                                    <TextInput
                                         onChangeText={(text) => setSeekerData({ ...seekerData, dob: text })}
                                         placeholder={'Missing!!!'} style={{
                                             color: '#000',
@@ -604,20 +611,11 @@ function PersonalInfo({ navigation }) {
                             </View>
                         </View>
 
-                        <View style={{ flexDirection: 'column', marginTop: 20, marginHorizontal: 30 }}>
-                            <View style={{ height: 60, borderColor: '#b2b2b2', borderWidth: 1, borderRadius: 10, padding: 4, backgroundColor: 'white' }}>
-                                <PhoneInput
-                                    layout='first'
-                                    defaultCode='PK'
-                                    textContainerStyle={{ backgroundColor: 'white', paddingLeft: -5 }}
-                                    textInputStyle={{ paddingLeft: 10 }}
 
-                                />
-                            </View>
-                            <Image style={{ width: 14, height: 14, marginLeft: 'auto', position: 'absolute', top: 22, left: '92%' }}
-                                source={require('../assets/verified.png')} />
+                        <View style={{ flexDirection: 'row', marginLeft: 40 ,marginTop:20}}>
+                            <Text onPress={() => togglePhoneVisible()} style={{ borderWidth:1,paddingVertical:6,width:'30%' }}>92+</Text>
+                            <TextInput placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }} />
                         </View>
-
 
 
 

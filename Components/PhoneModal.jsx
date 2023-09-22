@@ -2,7 +2,7 @@ import React from 'react'
 import { FlatList, Image, Modal, Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
 import { PhoneData } from '../Utils/Constants';
 
-const PhoneModal = ({ visible, click, togglePhoneVisible }) => {
+const PhoneModal = ({ visible,  togglePhoneVisible }) => {
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true}>
             <View style={{
@@ -52,7 +52,7 @@ const PhoneModal = ({ visible, click, togglePhoneVisible }) => {
                     <FlatList scrollEnabled={true} nestedScrollEnabled={false}
                         style={{ marginHorizontal: 0, marginTop: 20, height: 500 }} data={PhoneData}
                         renderItem={({ item }) => (
-                            <Pressable onPress={() => click(item)}><View>
+                            <Pressable><View>
                                 <View style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
