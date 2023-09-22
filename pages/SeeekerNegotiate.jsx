@@ -40,7 +40,7 @@ const SeeekerNegotiate = ({ route, navigation }) => {
             <View>
                 <Text style={{ textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium', marginTop: 60 }}>Negotiate</Text>
 
-                <TextInput multiline={true} style={{ marginTop: 20, fontSize: 14, fontFamily: 'poppins_medium', marginHorizontal: 20, marginTop: 60 }}>Thank you for offering me an opportunity to work at <Text style={{ color: 'green', fontSize: 17 }}> {offers[0]?.company_name} </Text>. I very much appreciate the time and effort your team has spent to review my application and interview me for the position of <Text style={{ color: 'green', fontSize: 17 }}> {offers[0]?.role} </Text> </TextInput>
+                <TextInput multiline={true} style={{ fontSize: 14, fontFamily: 'poppins_medium', marginHorizontal: 20, marginTop: 60 }}>Thank you for offering me an opportunity to work at <Text style={{ color: 'green', fontSize: 17 }}> {offers[0]?.company_name} </Text>. I very much appreciate the time and effort your team has spent to review my application and interview me for the position of <Text style={{ color: 'green', fontSize: 17 }}> {offers[0]?.role} </Text> </TextInput>
                 <Text style={{ fontSize: 16, fontFamily: 'poppins_bold', marginLeft: 20, marginBottom: -20, marginTop: 10, color: 'gray' }}>ISSUES:</Text>
                 <TextInput multiline={true} style={{ marginTop: 20, fontSize: 14, fontFamily: 'poppins_medium', marginHorizontal: 20 }} >(Enter Your Issues like salary) </TextInput>
                 <TextInput multiline={true} style={{ marginTop: 10, fontSize: 14, fontFamily: 'poppins_medium', marginHorizontal: 20 }}>Once again, thank you for the great opportunity.</TextInput>

@@ -609,6 +609,9 @@ function PersonalInfo({ navigation }) {
                                 <PhoneInput
                                     layout='first'
                                     defaultCode='PK'
+                                    textContainerStyle={{ backgroundColor: 'white',paddingLeft:-5 }}
+                                    textInputStyle={{ paddingLeft:10 }}
+                                   
                                 />
                             </View>
                             <Image style={{ width: 14, height: 14, marginLeft: 'auto', position: 'absolute', top: 22, left: '92%' }}
