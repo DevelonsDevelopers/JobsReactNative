@@ -30,7 +30,18 @@ const FirstRoute = ({ navigation }) => {
     const loading = useSelector(state => state.bookmark.bookmarkIsLoading)
     const error = useSelector(state => state.bookmark.bookmarkError)
     const noData = useSelector(state => state.bookmark.bookmarkNoData)
+    const success = useSelector(state => state.bookmark.bookmarkSuccess)
+
     const [ID, setID] = useState()
+
+    const [isLoading, setIsLoading] = useState(true)
+    useEffect(() => {
+        if (success) {
+            setIsLoading(false)
+        }
+    }, [success])
+
+
 
     useEffect(() => {
         if (ID) {
@@ -55,7 +66,7 @@ const FirstRoute = ({ navigation }) => {
 
     return (
         <GestureHandlerRootView>
-            {loading ?
+            {isLoading ?
                 <View style={{ marginTop: 200 }}>
                     <ActivityIndicator size={60} color="#13A3E1" />
                 </View>
@@ -90,7 +101,7 @@ const FirstRoute = ({ navigation }) => {
                                     <FlatList nestedScrollEnabled={true} scrollEnabled={true}
                                         style={{ marginHorizontal: 0, marginTop: 20 }} data={bookmarks}
                                         renderItem={({ item }) => (
-                                            <Pressable onPress={() => { }} style={{
+                                            <Pressable onPress={() => navigation.push('JobDetails', { ID: item.job })} style={{
                                                 marginLeft: 25,
                                                 marginRight: 25,
                                                 marginBottom: 8,
@@ -145,7 +156,7 @@ const FirstRoute = ({ navigation }) => {
                                                         fontSize: 13
                                                     }}>{item.qualification}</Text>
                                                 </View>
-                                                <View style={{ marginLeft:'auto',marginRight:'auto' }}>
+                                                <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                                                     <Text style={{
                                                         fontFamily: 'poppins_medium',
                                                         fontSize: 13,
@@ -198,6 +209,16 @@ const SecondRoute = ({ navigation }) => {
     const loading = useSelector(state => state.applied.isLoading)
     const error = useSelector(state => state.applied.error)
     const noData = useSelector(state => state.applied.nodata)
+    const success = useSelector(state => state.applied.success)
+
+    const [isLoading, setIsLoading] = useState(true)
+    useEffect(() => {
+        if (success) {
+            setIsLoading(false)
+        }
+    }, [success])
+
+
     const [ID, setID] = useState()
 
     useEffect(() => {
@@ -220,7 +241,7 @@ const SecondRoute = ({ navigation }) => {
 
     return (
         <GestureHandlerRootView>
-            {loading ?
+            {isLoading ?
                 <View style={{ marginTop: 200 }}>
                     <ActivityIndicator size={60} color="#13A3E1" />
                 </View>
