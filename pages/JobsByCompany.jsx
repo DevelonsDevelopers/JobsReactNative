@@ -85,7 +85,9 @@ function JobsByCompany({route, navigation}) {
                         tintColor: '#000'
                     }} source={require('../assets/back_arrow.png')} alt={'Okay'}/></Pressable>
                     <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
-                        <Pressable onPress={() => navigation.push('Recommendedjobs')}><Image
+                        <Pressable 
+                        // onPress={() => navigation.push('Recommendedjobs')}
+                        ><Image
                             style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
                             source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
                     </View>

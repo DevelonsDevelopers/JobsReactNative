@@ -29,7 +29,7 @@ const data = [
 const History = ({ navigation }) => {
 
     const dispatch = useDispatch();
-    const interactions = useSelector(state => state.interactions.interactions)
+    const history = useSelector(state => state.interactions.interactions)
     const loading = useSelector(state => state.interactions.isLoading)
     const success = useSelector(state => state.interactions.success)
 
@@ -44,15 +44,14 @@ const History = ({ navigation }) => {
     }
 
     useEffect(() => {
-        console.log()
         if (ID) {
             dispatch(AllInteractions(ID))
         }
     }, [ID])
 
     useEffect(() => {
-        console.log(interactions)
-    }, [interactions]);
+        console.log(history)
+    }, [history]);
 
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
@@ -60,6 +59,27 @@ const History = ({ navigation }) => {
             setIsLoading(false)
         }
     }, [success])
+
+
+    const [data, setData] = useState()
+
+
+    useEffect(() => {
+        if (history) {
+            setData(history)
+        }
+    }, [history]);
+
+    const search = (query) => {
+        const searched = history.filter((interactions) => {
+            return (interactions.name).toLowerCase().includes(query.toLowerCase());
+        })
+        setData(searched)
+    }
+
+    useEffect(() => {
+        console.log(search)
+    }, [search])
 
 
     return (
@@ -81,7 +101,7 @@ const History = ({ navigation }) => {
                     </View>
                 </View>
                 <View>
-                    <TextInput style={{
+                    <TextInput onChangeText={text => search(text)} style={{
                         backgroundColor: '#fff',
                         marginHorizontal: 30,
                         height: 50,
@@ -116,7 +136,7 @@ const History = ({ navigation }) => {
                             marginTop: 9
                         }}>
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                                style={{ marginHorizontal: 0, marginTop: 10 }} data={interactions} renderItem={({ item }) => (
+                                style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
                                     <View>
                                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                             <Text numberOfLines={1} ellipsizeMode={"tail"} style={{
