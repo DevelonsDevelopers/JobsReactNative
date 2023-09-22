@@ -72,14 +72,10 @@ const History = ({ navigation }) => {
 
     const search = (query) => {
         const searched = history.filter((interactions) => {
-            return (interactions.name).toLowerCase().includes(query.toLowerCase());
+            return (interactions.title).toLowerCase().includes(query.toLowerCase());
         })
         setData(searched)
     }
-
-    useEffect(() => {
-        console.log(search)
-    }, [search])
 
 
     return (

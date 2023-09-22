@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, View } from "react-native";
 import WebView from 'react-native-webview';
 import { useDispatch, useSelector } from 'react-redux';
-import { FetchOffers } from '../API/actions/offersActions';
+import {FetchOffer, FetchOffers} from '../API/actions/offersActions';
 
 const SeekerOfferResponse = ({ route, navigation }) => {
 
@@ -17,20 +17,14 @@ const SeekerOfferResponse = ({ route, navigation }) => {
 
     const dispatch = useDispatch();
 
-    const offers = useSelector(state => state.offers.offers)
+    const offer = useSelector(state => state.offers.offer)
 
 
     useEffect(() => {
         if (ID) {
-            dispatch(FetchOffers(ID))
+            dispatch(FetchOffer(ID))
         }
     }, [dispatch, ID]);
-
-    useEffect(() => {
-
-        console.log(offers)
-
-    }, [offers]);
 
     return (
         <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
@@ -49,23 +43,23 @@ const SeekerOfferResponse = ({ route, navigation }) => {
                     <View style={{ marginBottom: 8, borderColor: '#4C4C4C', borderTopLeftRadius: 50, borderTopRightRadius: 50, paddingVertical: 15, display: "flex", flexDirection: "column", backgroundColor: '#fff', marginTop: 40 }}>
                         <View style={{ flexDirection: 'row', flex: 1 }}>
                             <Text style={{ paddingHorizontal: 10, paddingTop: 4, fontSize: 14, fontFamily: 'poppins_bold', borderRadius: 5, marginLeft: 25, }}>
-                                {offers[0]?.company_name}
+                                {offer?.company_name}
                             </Text>
-                            <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13, marginRight: 25 }}>{moment(offers[0]?.date).add(0, 'days').calendar()}</Text>
+                            <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13, marginRight: 25 }}>{moment(offer?.date).add(0, 'days').calendar()}</Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
                             <View style={{ flex: 1 }}>
-                                <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', marginTop: 15, fontSize: 20, textAlign: "center", }}>{offers[0]?.seeker_name}</Text>
-                                <Text style={{ fontFamily: 'poppins_medium', marginTop: 0, fontSize: 14, textAlign: "center" }}>{offers[0]?.email}</Text>
+                                <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', marginTop: 15, fontSize: 20, textAlign: "center", }}>{offer?.seeker_name}</Text>
+                                <Text style={{ fontFamily: 'poppins_medium', marginTop: 0, fontSize: 14, textAlign: "center" }}>{offer?.email}</Text>
                             </View>
                         </View>
                         <View >
                             <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>Proposal: </Text>
-                            <Text style={{ marginHorizontal: 20, fontSize: 14, fontFamily: 'poppins_medium', minHeight: 420, marginTop: 20 }}>{offers[0]?.offer}</Text>
+                            <Text style={{ marginHorizontal: 20, fontSize: 14, fontFamily: 'poppins_medium', minHeight: 420, marginTop: 20 }}>{offer?.offer}</Text>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: "center", gap: 20, marginTop: 10 }}>
-                            <Text onPress={() => navigation.push('AcceptResponse', { ID: offers[0]?.company })} style={{ fontSize: 16, fontFamily: 'poppins_semibold', backgroundColor: '#143D59', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Accept</Text>
-                            <Text onPress={() => navigation.push('SeekerNegotiate', { ID: offers[0]?.company })} style={{ fontSize: 16, fontFamily: 'poppins_semibold', backgroundColor: '#13A3E1', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Negotiate</Text>
+                            <Text onPress={() => navigation.push('AcceptResponse', { ID: offer?.id })} style={{ fontSize: 16, fontFamily: 'poppins_semibold', backgroundColor: '#143D59', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Accept</Text>
+                            <Text onPress={() => navigation.push('SeekerNegotiate', { ID: offer?.id })} style={{ fontSize: 16, fontFamily: 'poppins_semibold', backgroundColor: '#13A3E1', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Negotiate</Text>
                         </View>
                     </View>
                 </View>
