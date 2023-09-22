@@ -1,9 +1,19 @@
-import React from 'react'
-import { Image, Pressable, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import { Image, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
 
-const ManageCoverLetter = () => {
+const ManageCoverLetter = ({ navigation }) => {
+
+    const [proposal, setProposal] = useState()
+    const [intro, setIntro] = useState()
+
+    // const Apply = () => {
+    //      apply(intro, proposal)
+    // }
+
+     
+
     return (
-        <View>
+        <ScrollView>
             <View style={{
                 flexDirection: 'column',
                 width: '100%',
@@ -33,11 +43,44 @@ const ManageCoverLetter = () => {
             </View>
 
             <View>
-                <Image source={require('../assets/coverletter2.png')} style={{ marginLeft: 'auto', marginRight: 'auto', width: 250, height: 150, marginTop: 50 }} />
+                <Image source={require('../assets/coverletter2.png')} style={{ marginLeft: 'auto', marginRight: 'auto', width: 350, height: 250, marginTop: 20 }} />
             </View>
-
-
-        </View>
+            <View style={{ marginHorizontal: 20, borderWidth: 1, padding: 16, borderRadius: 20, backgroundColor: 'white' }}>
+                <View style={{ width: '100%', fontSize: 13, fontFamily: 'poppins_medium', }}>
+                    <Text style={{ marginTop: 10, fontSize: 16, fontFamily: 'poppins_semibold' }}>Intro</Text>
+                    <TextInput onChangeText={text => setIntro(text)} style={{ width: '100%', borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, textAlign: 'center', fontSize: 13, fontFamily: 'poppins_medium', padding: 20, backgroundColor: 'white' }}
+                        multiline numberOfLines={5} placeholder={'Introduce Yourself'} >
+                    </TextInput>
+                </View>
+                <View style={{
+                    width: '100%',
+                    fontSize: 13,
+                    fontFamily: 'poppins_medium',
+                }}>
+                    <Text style={{ marginTop: 10, fontSize: 16, fontFamily: 'poppins_semibold' }}>Body</Text>
+                    <TextInput onChangeText={text => setProposal(text)} multiline numberOfLines={9} placeholder={'Proposal'} style={{
+                        width: '100%',
+                        borderColor: '#adadad',
+                        borderRadius: 20,
+                        borderWidth: 0.5,
+                        textAlign: 'center',
+                        fontSize: 13,
+                        fontFamily: 'poppins_medium',
+                        padding: 20,
+                        marginBottom: 'auto',
+                        backgroundColor: 'white'
+                    }}></TextInput>
+                </View>
+            </View>
+            <Pressable onPress={() => Apply()} style={{
+                marginHorizontal: 60,
+                paddingVertical: 13,
+                backgroundColor: '#13A3E1',
+                borderRadius: 25,
+                marginTop: 10,
+                marginBottom: 40
+            }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold', textAlign: 'center' }}>Create Now</Text></Pressable>
+        </ScrollView>
     )
 }
 
