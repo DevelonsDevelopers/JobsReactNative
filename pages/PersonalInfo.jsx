@@ -614,7 +614,7 @@ function PersonalInfo({ navigation }) {
 
                         <View style={{ flexDirection: 'row', marginLeft: 40 ,marginTop:20}}>
                             <Text onPress={() => togglePhoneVisible()} style={{ borderWidth:1,paddingVertical:6,width:'30%' }}>92+</Text>
-                            <TextInput placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }} />
+                            <TextInput placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }}  />
                         </View>
 
 
