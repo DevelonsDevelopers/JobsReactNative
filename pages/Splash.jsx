@@ -23,7 +23,11 @@ function Splash({navigation}) {
         const id = await AsyncStorage.getItem('ID')
         const value = await AsyncStorage.getItem('USER')
         console.log(id)
-        if (id && id !== "0"){
+        if (value === "PROVIDER"){
+            sleep(1000).then( async () => {
+                navigation.replace('PostJob')
+            })
+        } else if (id && id !== "0"){
             setUser(value)
             setID(id)
         } else {

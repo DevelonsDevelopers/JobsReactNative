@@ -21,6 +21,7 @@ function Home({ navigation }) {
 	const loading = useSelector(state => state.category.isLoading)
 	const jobLoading = useSelector(state => state.job.isLoading)
 	const error = useSelector(state => state.category.error)
+	const check = useSelector(state => state.seeker.check)
 
 
 	const [loginval, setLoginVal] = useState('')
@@ -43,7 +44,6 @@ function Home({ navigation }) {
 			dispatch({ type: RESET })
 		}
 	}, [loading, jobLoading])
-
 
 
 
@@ -90,9 +90,16 @@ function Home({ navigation }) {
 	const toggleRequireVisible = () => setRequireVisible(!requireVisible)
 
 
-	const [completeVisible, setCompleteVisible] = useState(true)
+	const [completeVisible, setCompleteVisible] = useState(false)
 	const toggleCompleteVisible = () => setCompleteVisible(!completeVisible)
 
+	useEffect(() => {
+		if (check==="complete"){
+			setCompleteVisible(false)
+		} else {
+			setCompleteVisible(true)
+		}
+	}, [check]);
 
 	const [isComplete, setIsComplete] = useState(false)
 	const [plan, setPlan] = useState(false)
