@@ -62,30 +62,31 @@ function Resume({ navigation }) {
                 marginTop: 70,
                 marginLeft: 30,
                 tintColor: '#000'
-              }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
+              }} source={require('../assets/back_arrow.png')} alt={'Okay'} />
+            </Pressable>
             <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-              <Pressable ><Image
-                style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
+              <Pressable >
+                <Image
+                  style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+                  source={require('../assets/logo.png')} alt={'Okay'} />
+              </Pressable>
             </View>
           </View>
-          <View style={{  marginTop: 20, paddingTop: 30, marginHorizontal: 0,paddingBottom:10 }}>
+          <View style={{ marginTop: 20, paddingTop: 30, marginHorizontal: 0, paddingBottom: 10 }}>
             <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.name}</Text>
             <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.address}</Text>
-            <View style={{ flexDirection: 'row',gap:10,marginLeft:'auto',marginRight:'auto',  marginTop: 5 }}>
-              <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black',textAlign:'center',}}>{cv?.phone}</Text>
-              <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black',textAlign:'center',}}>{cv?.email}</Text>
+            <View style={{ flexDirection: 'row', gap: 10, marginLeft: 'auto', marginRight: 'auto', marginTop: 5 }}>
+              <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center', }}>{cv?.phone}</Text>
+              <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center', }}>{cv?.email}</Text>
             </View>
           </View>
-
-     
 
           <View style={{ paddingHorizontal: 20 }}>
             <Text style={{ backgroundColor: 'black', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
-            <Text style={{ textAlign: 'center', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 10 }}>{cv?.job}</Text>
+            <Text style={{ textAlign: 'center', fontSize: 15, fontFamily: 'poppins_medium', marginTop: 10 }}>{cv?.role}</Text>
             <Text style={{ backgroundColor: 'gray', height: 1, marginTop: 10, paddingHorizontal: 20 }}>-</Text>
 
-            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginVertical: 10,paddingHorizontal:10,paddingVertical:10 }}>{cv?.statement}</Text>
+            <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginVertical: 10, paddingHorizontal: 10, paddingVertical: 10 }}>{cv?.statement}</Text>
             <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
             <Text style={{ fontSize: 14, fontFamily: 'poppins_semibold', marginVertical: 10, textAlign: 'center' }}>Key Skills</Text>
             <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text>
@@ -104,11 +105,11 @@ function Resume({ navigation }) {
               <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                 data={cv?.careers} renderItem={({ item }) => (
                   <View>
-                    <View style={{ flexDirection: 'row',gap:4 }}>
+                    <View style={{ flexDirection: 'row', gap: 4 }}>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
                         {item.job}
                       </Text>
-                      <Text style={{height:15,marginTop:-2 }} >|</Text>
+                      <Text style={{ height: 15, marginTop: -2 }} >|</Text>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', }}>
                         {item.timeperiod}
                       </Text>
@@ -122,7 +123,7 @@ function Resume({ navigation }) {
                       </Text>
                     </View>
                     <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft: 'auto', marginTop: 6, marginBottom: 6 }}>
-                       {item.phone}
+                      {item.phone}
                     </Text>
                     {/* <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text> */}
                   </View>
@@ -135,11 +136,11 @@ function Resume({ navigation }) {
               <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                 data={cv?.educations} renderItem={({ item }) => (
                   <View >
-                    <View style={{ flexDirection: 'row',gap:4 }}>
+                    <View style={{ flexDirection: 'row', gap: 4 }}>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', }}>
                         {item.qualification}
                       </Text>
-                      <Text style={{height:15,marginTop:-2 }} >|</Text>
+                      <Text style={{ height: 15, marginTop: -2 }} >|</Text>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
                         {item.institute}
                       </Text>
@@ -159,11 +160,11 @@ function Resume({ navigation }) {
               <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                 data={cv?.courses} renderItem={({ item }) => (
                   <View >
-                    <View style={{ flexDirection: 'row',gap:4 }}>
+                    <View style={{ flexDirection: 'row', gap: 4 }}>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_regular', }}>
                         {item.course}
                       </Text>
-                      <Text style={{height:15,marginTop:-2 }}>|</Text>
+                      <Text style={{ height: 15, marginTop: -2 }}>|</Text>
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', }}>
                         {item.timeperiod}
                       </Text>
