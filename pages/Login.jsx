@@ -153,7 +153,7 @@ function Login({ route, navigation }) {
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#F0A51E' }}>
-            <KeyboardAvoidingView enabled={true} behavior='height' >
+          
                 <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                     <View style={{
                         flex: 1,
@@ -176,27 +176,26 @@ function Login({ route, navigation }) {
                             <ActivityIndicator size={60} color="#13A3E1" />
                         </View>
                     </View>
-                </Modal>
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30 }}>
-                    {/* <Image style={{tintColor: '#000', width: 40, height: 40}}
+            </Modal>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30 }}>
+                {/* <Image style={{tintColor: '#000', width: 40, height: 40}}
                        source={require('../assets/back_arrow.png')}/> */}
-                    <Pressable onPress={() => navigation.replace('Home')} style={{
-                        marginLeft: 'auto',
-                        marginRight: 20,
-                        paddingHorizontal: 30,
-                        paddingVertical: 15,
-                        backgroundColor: '#13A3E1',
-                        borderRadius: 30
-                    }}><Text style={{ color: '#fff', fontWeight: '600' }}>Skip</Text></Pressable>
-                </View>
-                <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
-                    <Text style={{ color: '#000', fontWeight: 700, fontSize: 18 }}>Welcome Back!</Text>
-                    <Text style={{ color: '#000', fontWeight: 200, width: 130, textAlign: 'center', marginBottom: 20 }}>Let's
-                        help you meet up
-                        your task</Text>
-                    <Image style={{ height: 150, width: 150 }} source={require('../assets/login_icon.png')} />
-
-                    <TextInput
+                <Pressable onPress={() => navigation.replace('Home')} style={{
+                    marginLeft: 'auto',
+                    marginRight: 20,
+                    paddingHorizontal: 30,
+                    paddingVertical: 15,
+                    backgroundColor: '#13A3E1',
+                    borderRadius: 30
+                }}><Text style={{ color: '#fff', fontWeight: '600' }}>Skip</Text></Pressable>
+            </View>
+            <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 10 }}>
+                <Text style={{ color: '#000', fontWeight: 700, fontSize: 18 }}>Welcome Back!</Text>
+                <Text style={{ color: '#000', fontWeight: 200, width: 130, textAlign: 'center', marginBottom: 20 }}>Let's
+                    help you meet up
+                    your task</Text>
+                <Image style={{ height: 150, width: 150 }} source={require('../assets/login_icon.png')} />
+                <TextInput
                         autoCapitalize="none"
                         placeholder="Enter Your Email"
                         keyboardType="email-address"
@@ -211,86 +210,86 @@ function Login({ route, navigation }) {
                             color: '#626262',
                             elevation: 10
                         }}      />
-
-
-
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        marginTop: 15,
-                        backgroundColor: '#fff',
-                        elevation: 10,
-                        borderRadius: 25,
-                        width: '85%',
-                        paddingRight: 20
-                    }}>
-                        <TextInput onChangeText={(text) => setPassword(text)} style={{
-                            height: 50,
-                            paddingHorizontal: 20,
-                            color: '#626262',
-                            flex: 1
-                        }} placeholder={'Enter your Password'} secureTextEntry={!show} />
-                        {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
-                            style={{ width: 25, height: 25 }} source={require('../assets/hide.png')} /></Pressable>
-                            : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
-                                style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>}
-                    </View>
-                    <Text style={{ color: '#000', fontWeight: 400, width: '85%', textAlign: 'right', marginTop: 20 }}>Forgot
-                        Password?</Text>
-                    <Pressable onPress={() => LoginUser()} style={{
-                        width: '85%',
-                        backgroundColor: '#13A3E1',
-                        alignItems: 'center',
-                        borderRadius: 25,
-                        marginTop: 20,
-                        paddingVertical: 15
-                    }}><Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Log In</Text></Pressable>
-                    <View style={{ flexDirection: 'row' }}>
-                        <Pressable onPress={() => {
-                            if (USER === "SEEKER") {
-                                handleGoogleSignIn()
-                            } else {
-                                handleProviderGoogleSignIn()
-                            }
-                        }
-                        } style={{
-                            width: '41%',
-                            backgroundColor: '#fff',
-                            alignItems: 'center',
-                            borderRadius: 25,
-                            marginTop: 15,
-                            paddingVertical: 15,
-                            marginRight: 5,
-                            flexDirection: 'row',
-                            justifyContent: 'center'
-                        }}><Image style={{ width: 25, height: 25, marginRight: 10 }}
-                            source={require('../assets/google.png')} /><Text
-                                style={{ color: '#000', fontWeight: '900', fontSize: 15 }}>Google</Text></Pressable>
-                        <Pressable style={{
-                            width: '41%',
-                            backgroundColor: '#fff',
-                            alignItems: 'center',
-                            borderRadius: 25,
-                            marginTop: 15,
-                            paddingVertical: 15,
-                            marginLeft: 5,
-                            flexDirection: 'row',
-                            justifyContent: 'center'
-                        }}><Image style={{ width: 25, height: 25, marginRight: 10 }}
-                            source={require('../assets/facebook.png')} /><Text
-                                style={{ color: '#000', fontWeight: '900', fontSize: 15 }}>Facebook</Text></Pressable>
-                    </View>
-                    <View style={{ flexDirection: 'row', marginTop: 25 }}>
-                        <Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Don't have an account?</Text>
-                        <Pressable onPress={() => navigation.replace('Register', { USER: USER })}><Text
-                            style={{ color: '#000', fontWeight: '900', fontSize: 15 }}> Register</Text></Pressable>
-                    </View>
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    marginTop: 15,
+                    backgroundColor: '#fff',
+                    elevation: 10,
+                    borderRadius: 25,
+                    width: '85%',
+                    paddingRight: 20
+                }}>
+                    <TextInput onChangeText={(text) => setPassword(text)} style={{
+                        height: 50,
+                        paddingHorizontal: 20,
+                        color: '#626262',
+                        flex: 1
+                    }} placeholder={'Enter your Password'} secureTextEntry={!show} />
+                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
+                        style={{ width: 25, height: 25 }} source={require('../assets/hide.png')} /></Pressable>
+                        : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
+                            style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>}
                 </View>
-                <Toast
-                    position='top'
-                    bottomOffset={20}
-                />
-            </KeyboardAvoidingView>
+                <Pressable onPress={() => navigation.push('ForgotPassword')} style={{
+                    width: '100%',
+                }}
+                    >
+                <Text style={{ color: '#000', fontWeight: 400, width: '85%', textAlign: 'right', marginTop: 20 }}>Forgot
+                    Password?</Text></Pressable>
+                <Pressable onPress={() => LoginUser()} style={{
+                    width: '85%',
+                    backgroundColor: '#13A3E1',
+                    alignItems: 'center',
+                    borderRadius: 25,
+                    marginTop: 20,
+                    paddingVertical: 15
+                }}><Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Log In</Text></Pressable>
+                <View style={{ flexDirection: 'row' }}>
+                    <Pressable onPress={() => {
+                        if (USER==="SEEKER") {
+                            handleGoogleSignIn()
+                        } else {
+                            handleProviderGoogleSignIn()
+                        }
+                    }
+                    } style={{
+                        width: '41%',
+                        backgroundColor: '#fff',
+                        alignItems: 'center',
+                        borderRadius: 25,
+                        marginTop: 15,
+                        paddingVertical: 15,
+                        marginRight: 5,
+                        flexDirection: 'row',
+                        justifyContent: 'center'
+                    }}><Image style={{ width: 25, height: 25, marginRight: 10 }}
+                        source={require('../assets/google.png')} /><Text
+                            style={{ color: '#000', fontWeight: '900', fontSize: 15 }}>Google</Text></Pressable>
+                    <Pressable style={{
+                        width: '41%',
+                        backgroundColor: '#fff',
+                        alignItems: 'center',
+                        borderRadius: 25,
+                        marginTop: 15,
+                        paddingVertical: 15,
+                        marginLeft: 5,
+                        flexDirection: 'row',
+                        justifyContent: 'center'
+                    }}><Image style={{ width: 25, height: 25, marginRight: 10 }}
+                        source={require('../assets/facebook.png')} /><Text
+                            style={{ color: '#000', fontWeight: '900', fontSize: 15 }}>Facebook</Text></Pressable>
+                </View>
+                <View style={{ flexDirection: 'row', marginTop: 25 }}>
+                    <Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Don't have an account?</Text>
+                    <Pressable onPress={() => navigation.replace('Register', { USER: USER })}><Text
+                        style={{ color: '#000', fontWeight: '900', fontSize: 15 }}> Register</Text></Pressable>
+                </View>
+            </View>
+            <Toast
+                position='top'
+                bottomOffset={20}
+            />
         </ScrollView>
     );
 }
