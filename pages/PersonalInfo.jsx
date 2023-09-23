@@ -630,8 +630,8 @@ function PersonalInfo({ navigation }) {
                             marginTop: 15,
                             marginHorizontal: 25
                         }}>
-                            <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
-                            >Update
+                            <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>
+                                Update
                             </Text>
                         </Pressable>
                         {seeker?.type === "GOOGLE" ?
