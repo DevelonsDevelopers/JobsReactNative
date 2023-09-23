@@ -1,11 +1,11 @@
-import { ActivityIndicator, Button, Image, Modal, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Button, Image, KeyboardAvoidingView, Modal, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginAuthentication, ProviderLoginAuthentication } from "../API/actions/loginActions";
 import Toast from "react-native-toast-message";
 import { RESET_SEEKER } from "../Utils/Constants";
 import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
-import {google, googleProvider} from "../API";
+import { google, googleProvider } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // import {GoogleSignin, statusCodes} from "@react-native-google-signin/google-signin";
@@ -72,7 +72,7 @@ function Login({ route, navigation }) {
                 const { data: { message } } = res;
                 console.log(message)
                 if (responseCode === 200) {
-                    if (data.affectedRows === 1){
+                    if (data.affectedRows === 1) {
                         var ID = (data.insertId).toString()
                     } else {
                         var ID = (data.id).toString()
@@ -115,7 +115,7 @@ function Login({ route, navigation }) {
                 const { data: { message } } = res;
                 console.log(data)
                 if (responseCode === 200) {
-                    if (data.affectedRows === 1){
+                    if (data.affectedRows === 1) {
                         var ID = (data.insertId).toString()
                     } else {
                         var ID = (data.id).toString()
@@ -153,28 +153,29 @@ function Login({ route, navigation }) {
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#F0A51E' }}>
-            <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
-                <View style={{
-                    flex: 1,
-                    alignContent: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: 'rgba(66, 66, 66, 0.4)'
-                }}>
+          
+                <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                     <View style={{
-                        margin: 35,
-                        elevation: 24,
-                        borderRadius: 25,
-                        backgroundColor: '#fff',
-                        opacity: 1,
-                        padding: 20,
+                        flex: 1,
+                        alignContent: 'center',
                         justifyContent: 'center',
-                        alignItems: 'center',
-                        marginHorizontal: 100
+                        backgroundColor: 'rgba(66, 66, 66, 0.4)'
                     }}>
-                        <Text style={{ paddingBottom: 16, fontSize: 14, fontFamily: 'poppins_medium' }}>Please Wait ...</Text>
-                        <ActivityIndicator size={60} color="#13A3E1" />
+                        <View style={{
+                            margin: 35,
+                            elevation: 24,
+                            borderRadius: 25,
+                            backgroundColor: '#fff',
+                            opacity: 1,
+                            padding: 20,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginHorizontal: 100
+                        }}>
+                            <Text style={{ paddingBottom: 16, fontSize: 14, fontFamily: 'poppins_medium' }}>Please Wait ...</Text>
+                            <ActivityIndicator size={60} color="#13A3E1" />
+                        </View>
                     </View>
-                </View>
             </Modal>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30 }}>
                 {/* <Image style={{tintColor: '#000', width: 40, height: 40}}
@@ -194,16 +195,21 @@ function Login({ route, navigation }) {
                     help you meet up
                     your task</Text>
                 <Image style={{ height: 150, width: 150 }} source={require('../assets/login_icon.png')} />
-                <TextInput onChangeText={(text) => setEmail(text)} style={{
-                    height: 50,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 25,
-                    marginTop: 25,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }} placeholder={'Enter your Email'} inputMode={'text'} />
+                <TextInput
+                        autoCapitalize="none"
+                        placeholder="Enter Your Email"
+                        keyboardType="email-address"
+                        onChangeText={(text) => setEmail(text)}
+                        style={{
+                            height: 50,
+                            backgroundColor: '#fff',
+                            width: '85%',
+                            borderRadius: 25,
+                            marginTop: 25,
+                            paddingHorizontal: 20,
+                            color: '#626262',
+                            elevation: 10
+                        }}      />
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -225,8 +231,12 @@ function Login({ route, navigation }) {
                         : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
                             style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>}
                 </View>
+                <Pressable onPress={() => navigation.push('ForgotPassword')} style={{
+                    width: '100%',
+                }}
+                    >
                 <Text style={{ color: '#000', fontWeight: 400, width: '85%', textAlign: 'right', marginTop: 20 }}>Forgot
-                    Password?</Text>
+                    Password?</Text></Pressable>
                 <Pressable onPress={() => LoginUser()} style={{
                     width: '85%',
                     backgroundColor: '#13A3E1',

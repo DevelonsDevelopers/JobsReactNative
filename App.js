@@ -74,6 +74,7 @@ import SeeekerNegotiate from './pages/SeeekerNegotiate';
 import VerificationProfile from './pages/VerificationProfile';
 import ManageCoverLetter from './pages/ManageCoverLetter';
 import SeekerPlans from "./pages/SeekerPlans";
+import ForgotPassword from './pages/ForgotPassword';
 
 
 
@@ -222,6 +223,8 @@ function App() {
                             options={{ title: "VerificationProfile", headerShown: false }} />
                         <Stack.Screen name="ManageCoverLetter" component={ManageCoverLetter}
                             options={{ title: "ManageCoverLetter", headerShown: false }} />
+                        <Stack.Screen name="ForgotPassword" component={ForgotPassword}
+                            options={{ title: "ForgotPassword", headerShown: false }} />
 
                     </Stack.Navigator>
                 </NavigationContainer>
