@@ -11,6 +11,7 @@ function Verify({ route, navigation }) {
     const { verifyPhone } = route.params;
     const { type } = route.params;
     const { ID } = route.params;
+    const { verify } = route.params;
 
     const [changeable, setChangeable] = useState()
 
@@ -111,7 +112,7 @@ function Verify({ route, navigation }) {
                 {/*    elevation: 10*/}
                 {/*}} placeholder={'Email'} secureTextEntry={true}/>*/}
 
-                <Pressable onPress={() => navigation.push('VerificationCode', { code: code, phone: phone, type: type, ID: ID })} style={{
+                <Pressable onPress={() => navigation.push('VerificationCode', { code: code, phone: phone, type: type, ID: ID, verify: verify })} style={{
                     width: '50%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',

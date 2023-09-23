@@ -94,14 +94,14 @@ function Home({ navigation }) {
 	const toggleCompleteVisible = () => setCompleteVisible(!completeVisible)
 
 	useEffect(() => {
-		if (loginval) {
+		if (login) {
 			if (check === "complete") {
 				setCompleteVisible(false)
 			} else {
 				setCompleteVisible(true)
 			}
 		}
-	}, [check]);
+	}, [check, login]);
 
 	const [isComplete, setIsComplete] = useState(false)
 	const [plan, setPlan] = useState(false)
@@ -132,7 +132,7 @@ function Home({ navigation }) {
 									tintColor: '#fff'
 								}} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
 								<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-									<Pressable 
+									<Pressable
 									><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 										source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
 								</View>
