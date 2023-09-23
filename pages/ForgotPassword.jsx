@@ -34,7 +34,7 @@ function ForgotPassword({ route, navigation }) {
                 onChangeText={(text) => setEmail(text)} 
                 style={{
                     height: 50,
-                    backgroundColor: '#fff',
+                    backgroundColor: '#fff',     
                     width: '85%',
                     borderRadius: 25,
                     marginTop: 25,

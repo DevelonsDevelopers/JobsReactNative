@@ -77,9 +77,9 @@ export const RecommendedJobs = (user, tag) => async (dispatch) => {
             dispatch({type: GET_RECOMMENDED_JOBS, payload: {recommendedJobs: data}})
             dispatch({type: SUCCESS})
         } else {
-            dispatch({type: GET_RECOMMENDED_JOBS, payload: {recommendedJobs: data}})
+            // dispatch({type: GET_RECOMMENDED_JOBS, payload: {recommendedJobs: data}})
             dispatch({type: NODATA})
-            dispatch({type: SUCCESS})
+            // dispatch({type: SUCCESS})
         }
     } catch (error) {
         console.log(error)
