@@ -94,7 +94,7 @@ function Home({ navigation }) {
 	const toggleCompleteVisible = () => setCompleteVisible(!completeVisible)
 
 	useEffect(() => {
-		if (check==="complete"){
+		if (check === "complete") {
 			setCompleteVisible(false)
 		} else {
 			setCompleteVisible(true)
@@ -114,7 +114,7 @@ function Home({ navigation }) {
 				</View>
 				:
 				<>
-					<CompleteProfileSeekerModal visible={completeVisible} toggleCompleteVisible={toggleCompleteVisible} isComplete={isComplete} plan={plan} cv={cv} cover={cover} navigation={navigation}/>
+					<CompleteProfileSeekerModal visible={completeVisible} toggleCompleteVisible={toggleCompleteVisible} isComplete={isComplete} plan={plan} cv={cv} cover={cover} navigation={navigation} />
 					<NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={login} toggleLoadingVisibility={toggleLoadingVisibility} />
 					<LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
 					<LoginRequireModal visible={requireVisible} toggleRequireVisible={toggleRequireVisible} navigation={navigation} />
@@ -148,9 +148,12 @@ function Home({ navigation }) {
 								marginTop: 10,
 
 							}}>
-								<TextInput onChangeText={text => setSearch(text)} style={{
-									height: 50, width: '90%'
-								}} placeholder={'Start your Job Search'} />
+								<TextInput onChangeText={text => setSearch(text)}
+									onSubmitEditing={() => navigation.push('Search', { query: search })}
+									keyboardType="email-address"
+									style={{
+										height: 50, width: '90%'
+									}} placeholder={'Start your Job Search'} />
 								<Pressable onPress={() => navigation.push('Search', { query: search })} style={{ marginLeft: 'auto', }}>
 									<Image style={{ width: 25, height: 25 }} source={require('../assets/search-interface-symbol.png')} />
 								</Pressable>

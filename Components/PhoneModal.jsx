@@ -1,52 +1,42 @@
 import React from 'react'
-import { FlatList, Image, Modal, Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
+import { FlatList, Image, KeyboardAvoidingView, Modal, Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
 import { PhoneData } from '../Utils/Constants';
 
-const PhoneModal = ({ visible,  togglePhoneVisible, set }) => {
+const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
 
     const add = (code) => {
         set(code)
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
-            <View style={{
-                flex: 1,
-                alignContent: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(0,0,0,0.6)'
-            }}>
-                <SafeAreaView style={{
-                    backgroundColor: '#fff',
-                    borderRadius: 40,
-                    padding: 23,
-                    margin: 20
-                }}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <View style={{
-								flexDirection: 'row',
-								alignItems: 'center',
-								backgroundColor: 'lightgray',
-								marginRight: 50,
-								marginLeft: 10,
-								height: 50,
-								borderRadius: 25,
-								paddingHorizontal: 20,
-								marginVertical: 10,
 
+        <Modal visible={visible} animationType={"fade"} >
+            <View style={{  }}>
+                <SafeAreaView style={{ }}>
+                    <View style={{ flexDirection: 'row',marginVertical:30,marginHorizontal:20 }}>
+                        <View style={{  padding: 6 }}>
+                            <Pressable onPress={() => togglePhoneVisible()} style={{ marginLeft: 'auto', padding: 5 }}><Image
+                                style={{ width: 25, height: 15,tintColor:'gray' }}
+                                source={require('../assets/back_arrow.png')} /></Pressable>
+                        </View>
+                        <Text style={{ textAlign: 'center', width: '80%', fontFamily: 'poppins_medium', marginTop: 6 }}>Select Country Code</Text>
 
-							}}>
-								<TextInput onChangeText={text => setSearch(text)} style={{
-									height: 50, width: '90%'
-								}} placeholder={'Start your Job Search'} />
-								<Pressable onPress={() => navigation.push('Search', { query: search })} style={{ marginLeft: 'auto', }}>
-									<Image style={{ width: 25, height: 25 }} source={require('../assets/search-interface-symbol.png')} />
-								</Pressable>
-							</View>
-                        <Pressable onPress={() => togglePhoneVisible()} style={{ marginLeft: 'auto', padding: 5 }}><Image
-                            style={{ width: 15, height: 15, marginLeft: 'auto' }}
-                            source={require('../assets/close.png')} /></Pressable>
                     </View>
+
+                        <TextInput
+                            style={{
+                                borderRadius: 25,
+                                paddingHorizontal: 20,
+                                marginVertical: 8,
+                                borderColor: 'gray',
+                                borderWidth: 1,
+                                paddingVertical: 6,
+                                marginHorizontal: 10,
+                                marginTop:-10,
+                                marginBottom:20
+                            }} placeholder={'Search Country'} />
+
+
                     <View style={{
                         backgroundColor: '#000',
                         height: 3,
@@ -55,8 +45,9 @@ const PhoneModal = ({ visible,  togglePhoneVisible, set }) => {
                         borderRadius: 3
                     }}></View>
                     <FlatList scrollEnabled={true} nestedScrollEnabled={false}
-                        style={{ marginHorizontal: 0, marginTop: 20, height: 500 }} data={PhoneData}
+                        style={{ marginHorizontal: 0, marginTop: 20, }} data={PhoneData}
                         renderItem={({ item }) => (
+                            
                             <Pressable onPress={() => add(item.dial_code)}><View>
                                 <View style={{
                                     flexDirection: 'row',
@@ -92,6 +83,7 @@ const PhoneModal = ({ visible,  togglePhoneVisible, set }) => {
                 </SafeAreaView>
             </View>
         </Modal>
+
     )
 }
 

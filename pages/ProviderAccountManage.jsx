@@ -21,6 +21,7 @@ import ProviderTypeModal from "../Components/ProviderTypeModal";
 import { AllCities } from "../API/actions/cityActions";
 import { AllCountries } from "../API/actions/countryActions";
 import PhoneInput from 'react-native-phone-number-input';
+import PhoneModal from '../Components/PhoneModal';
 
 const ProviderAccountManage = ({ navigation }) => {
 
@@ -113,11 +114,20 @@ const ProviderAccountManage = ({ navigation }) => {
         setData({ ...data, type: value })
     ]
 
+    const [phoneVisible, setPhoneVisible] = useState(false)
+    const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
+
+
+
+
     return (
         <View style={{ flex: 1 }}>
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
+
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} />
+
             <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick} />
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', }}>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
@@ -454,7 +464,53 @@ const ProviderAccountManage = ({ navigation }) => {
                 </View>
 
 
-                <View style={{ flexDirection: 'column', marginTop: 20, marginHorizontal: 30 }}>
+
+                <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
+                    <TextInput editable={false} style={{
+                        textAlign: 'center',
+                        paddingHorizontal: 10,
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 8,
+                        borderRightWidth: 1,
+                        width: '20%',
+                        color: 'black',
+                        fontFamily: 'poppins_regular',
+                        borderColor: '#b2b2b2',
+                        borderTopLeftRadius: 30,
+                        borderWidth: 1,
+                        borderBottomLeftRadius: 30,
+                        backgroundColor: '#E6E6E6',
+                    }}>Phone</TextInput>
+                    <TextInput onTouchStart={() => togglePhoneVisible()} style={{
+                        textAlign: 'center',
+                        paddingHorizontal: 6,
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 8,
+                        borderColor: '#b2b2b2',
+                        borderTopWidth: 1,
+                        borderBottomWidth: 1,
+                        borderRightWidth: 1
+                    }} placeholder="country code" ></TextInput>
+                    <TextInput placeholder="Enter Your Number" style={{
+                        textAlign: 'left',
+                        paddingHorizontal: 10,
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 8,
+                        width: '46%',
+                        borderColor: '#b2b2b2',
+                        borderTopRightRadius: 20,
+                        borderBottomRightRadius: 20,
+                        borderTopWidth: 1,
+                        borderBottomWidth: 1,
+                        borderRightWidth: 1
+                    }}  >verifyPhone</TextInput>
+                </View>
+
+
+                {/* <View style={{ flexDirection: 'column', marginTop: 20, marginHorizontal: 30 }}>
                     <View style={{ height: 60, borderColor: '#b2b2b2', borderWidth: 1, borderRadius: 10, padding: 4, backgroundColor: 'white' }}>
                         <PhoneInput onChangeText={text => console.log(text)}
                             layout='first'
@@ -463,7 +519,7 @@ const ProviderAccountManage = ({ navigation }) => {
                     </View>
                     <Image style={{ width: 14, height: 14, marginLeft: 'auto', position: 'absolute', top: 22, left: '92%' }}
                         source={require('../assets/verified.png')} />
-                </View>
+                </View> */}
                 {/* <View style={{
                             flex: 1.3,
                             borderColor: '#b2b2b2',
@@ -486,10 +542,6 @@ const ProviderAccountManage = ({ navigation }) => {
 
                             </View>
                         </View> */}
-
-
-
-
 
                 <Pressable style={{
                     backgroundColor: '#13A3E1',

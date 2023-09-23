@@ -25,7 +25,7 @@ function Verify({ route, navigation }) {
     }
 
     useEffect(() => {
-        if (forgot){
+        if (forgot) {
             setChangeable(false)
         } else {
             setChangeable(true)
@@ -34,7 +34,7 @@ function Verify({ route, navigation }) {
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
-            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode}/>
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
 
 
             <Pressable onPress={() => navigation.goBack()}><Image style={{ width: 22, height: 20, marginTop: 70, marginLeft: 30, tintColor: 'gray', }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
@@ -54,9 +54,48 @@ function Verify({ route, navigation }) {
                     elevation: 10
                 }} placeholder={'Phone Number'} inputMode={'text'} /> */}
 
-                <View style={{ flexDirection: 'row', marginLeft: 40 ,marginTop:20}}>
-                    <Text onPress={() => { if (changeable) { togglePhoneVisible() } }} style={{ borderWidth:1,paddingVertical:6,width:'30%' }}>{code}</Text>
-                    <TextInput onChangeText={text => setPhone(phone)} editable={changeable} placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }}  >{verifyPhone}</TextInput>
+                <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
+                    <TextInput editable={false} style={{
+                        textAlign: 'center',
+                        paddingHorizontal: 10,
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 8,
+                        borderRightWidth: 1,
+                        width: '20%',
+                        color: 'black',
+                        fontFamily: 'poppins_regular',
+                        borderColor: '#b2b2b2',
+                        borderTopLeftRadius: 30,
+                        borderWidth: 1,
+                        borderBottomLeftRadius: 30,
+                        backgroundColor: '#E6E6E6',
+                    }}>Phone</TextInput>
+                    <TextInput  onTouchStart={() => { if (changeable) { togglePhoneVisible() } }} style={{
+                        textAlign: 'center',
+                        paddingHorizontal: 6,
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 8,
+                        borderColor: '#b2b2b2',
+                        borderTopWidth: 1,
+                        borderBottomWidth: 1,
+                        borderRightWidth: 1
+                    }} placeholder="country code" >{code}</TextInput>
+                    <TextInput onChangeText={text => setPhone(phone)} editable={changeable} placeholder="Enter Your Number" style={{
+                        textAlign: 'left',
+                        paddingHorizontal: 10,
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 8,
+                        width: '46%',
+                        borderColor: '#b2b2b2',
+                        borderTopRightRadius: 20,
+                        borderBottomRightRadius: 20,
+                        borderTopWidth: 1,
+                        borderBottomWidth: 1,
+                        borderRightWidth: 1
+                    }}  >{verifyPhone}</TextInput>
                 </View>
 
 
