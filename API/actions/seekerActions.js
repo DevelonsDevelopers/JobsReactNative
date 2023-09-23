@@ -52,10 +52,10 @@ export const CheckSeeker = (ID) => async (dispatch) => {
     }
 }
 
-export const updateSeeker = (name, city, country, username, phone, address, dob, gender, id) => async (dispatch) => {
+export const updateSeeker = (name, city, country, username, code, phone, address, dob, gender, id) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { data } } = await api.updateSeeker(name, city, country, username, phone, address, dob, gender, id);
+        const { data: { data } } = await api.updateSeeker(name, city, country, username, code, phone, address, dob, gender, id);
         dispatch ({ type: UPDATE_SEEKER, payload: { data: data } })
         dispatch ({ type: SUCCESS })
     } catch (error) {
