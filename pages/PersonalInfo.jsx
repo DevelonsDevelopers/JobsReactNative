@@ -206,7 +206,7 @@ function PersonalInfo({ navigation }) {
                 }}
             />
 
-            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode}/>
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
@@ -619,9 +619,10 @@ function PersonalInfo({ navigation }) {
                         </View>
 
 
-                        <View style={{ flexDirection: 'row', marginLeft: 40 ,marginTop:20}}>
-                            <Text onPress={() => togglePhoneVisible()} style={{ borderWidth:1,paddingVertical:6,width:'30%' }}>{seeker?.code}</Text>
-                            <TextInput onChangeText={text => setSeekerData({...seekerData, phone: text})} placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }}  >{seeker?.phone}</TextInput>
+                        <View style={{ flexDirection: 'row', marginTop: 20,borderWidth:1,borderRadius:60,marginLeft:'auto',marginRight:'auto' }}>
+                            <TextInput editable={false} style={{  textAlign: 'center', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 7,paddingRight:50,paddingLeft:20,borderRightWidth:1 }}>Phone</TextInput>
+                            <TextInput placeholder="country code" onTouchStart={() => togglePhoneVisible()} style={{  textAlign: 'center', paddingHorizontal: 6, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 7, }}>{seeker?.code}</TextInput>
+                            <TextInput onChangeText={text => setSeekerData({ ...seekerData, phone: text })} placeholder="Enter Your Number" style={{  textAlign: 'center', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 7, }}  >{seeker?.phone}</TextInput>
                         </View>
 
 

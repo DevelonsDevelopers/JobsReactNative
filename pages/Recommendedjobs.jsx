@@ -58,6 +58,7 @@ function Recommendedjobs({navigation}) {
             }
         }
     }, [dispatch, topTags, navigation, ID]);
+    
 
     useEffect(() => {
         console.log(recommendedJobs)
@@ -94,7 +95,7 @@ function Recommendedjobs({navigation}) {
                     {noData ? <View style={{marginTop: 200}}>
                             <Image source={require('../assets/nodata.png')}
                                    style={{width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40}}/>
-                            <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Data Found</Text>
+                            <Text style={{textAlign: 'center', fontFamily: 'poppins_medium'}}>No Recommended jobs Found</Text>
                         </View> :
                         <>
                             {error ?
