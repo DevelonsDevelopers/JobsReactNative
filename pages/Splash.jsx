@@ -3,12 +3,14 @@ import {useEffect, useState} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {useDispatch, useSelector} from "react-redux";
 import {CheckSeeker} from "../API/actions/seekerActions";
+import {CheckCV} from "../API/actions/cvActions";
 
 function Splash({navigation}) {
 
     const dispatch = useDispatch()
 
     const check = useSelector(state => state.seeker.check)
+    const checkCV = useSelector(state => state.cv.check)
 
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -41,6 +43,7 @@ function Splash({navigation}) {
     useEffect(() => {
         if (ID){
             if (user === "SEEKER") {
+                dispatch(CheckCV(ID))
                 dispatch(CheckSeeker(ID))
             }
         }

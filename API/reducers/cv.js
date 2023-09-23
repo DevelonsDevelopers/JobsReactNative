@@ -1,7 +1,7 @@
 import {
     CREATE_CV_CAREER,
     CREATE_CV_COURSE,
-    CREATE_CV_EDUCATION, CREATE_CV_INTEREST, CREATE_CV_LANGUAGE, CREATE_CV_RESUME, CREATE_CV_SKILL,
+    CREATE_CV_EDUCATION, CREATE_CV_INTEREST, CREATE_CV_LANGUAGE, CREATE_CV_RESUME, CREATE_CV_SKILL, CV_CHECK,
     ERROR,
     GET_COVER_BY_USER,
     GET_CV_BY_USER,
@@ -35,6 +35,8 @@ const cv = (state = {isLoading: true, success: false, error: false}, action) => 
             return {...state, resume: action.payload.data}
         case CREATE_CV_SKILL:
             return {...state, skill: action.payload.data}
+        case CV_CHECK:
+            return {...state, check: action.payload.check}
         case RESET:
             return {...state, isLoading: true, success: false, error: false}
         default:

@@ -16,7 +16,7 @@ const Plans = ({ navigation }) => {
     const [price, setPrice] = useState()
 
     useEffect(() => {
-        dispatch(getPlans('Provider'))
+        dispatch(getPlans('Seeker'))
     }, [dispatch]);
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const Plans = ({ navigation }) => {
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                           style={{marginHorizontal: 20}} data={plans}
                           renderItem={({item}) => (
-                              <Ripple onPress={() => navigation.push('Payment', { plan: item.name, price: item.amount, type: 'Provider' })} rippleColor='white' style={{ backgroundColor: '#004BFF', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 10, borderRadius: 10, marginBottom: 20 ,flexDirection:'column'}}>
+                              <Ripple onPress={() => navigation.push('Payment', { plan: item.name, price: item.amount, type: 'Seeker' })} rippleColor='white' style={{ backgroundColor: '#004BFF', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 10, borderRadius: 10, marginBottom: 20 ,flexDirection:'column'}}>
                                   <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>{item.name}</Text>
                                   <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
                                       <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>$ </Text>

@@ -1,7 +1,7 @@
 import {
     CREATE_CV_CAREER,
     CREATE_CV_COURSE,
-    CREATE_CV_EDUCATION, CREATE_CV_INTEREST, CREATE_CV_LANGUAGE, CREATE_CV_RESUME, CREATE_CV_SKILL,
+    CREATE_CV_EDUCATION, CREATE_CV_INTEREST, CREATE_CV_LANGUAGE, CREATE_CV_RESUME, CREATE_CV_SKILL, CV_CHECK,
     GET_COVER_BY_USER,
     GET_CV_BY_USER,
     LOADING,
@@ -14,6 +14,17 @@ export const CVByUser = (user) => async (dispatch) => {
         dispatch ({ type: LOADING })
         const { data: { data } } = await api.fetchCVByUser(user);
         dispatch ({ type: GET_CV_BY_USER, payload: { cv: data } })
+        dispatch ({ type: SUCCESS })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const CheckCV = (user) => async (dispatch) => {
+    try {
+        dispatch ({ type: LOADING })
+        const { data: { status } } = await api.checkCV(user);
+        dispatch ({ type: CV_CHECK, payload: { check: status } })
         dispatch ({ type: SUCCESS })
     } catch (error) {
         console.log(error)

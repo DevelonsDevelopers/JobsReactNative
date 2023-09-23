@@ -73,6 +73,7 @@ import CompleteProfileSeekerModal from './Components/CompleteProfileSeekerModal'
 import SeeekerNegotiate from './pages/SeeekerNegotiate';
 import VerificationProfile from './pages/VerificationProfile';
 import ManageCoverLetter from './pages/ManageCoverLetter';
+import SeekerPlans from "./pages/SeekerPlans";
 
 
 
@@ -209,6 +210,8 @@ function App() {
                             options={{ title: "AppliedSuccessful", headerShown: false }} />
                         <Stack.Screen name="Plans" component={Plans}
                             options={{ title: "Plans", headerShown: false }} />
+                        <Stack.Screen name="SeekerPlans" component={SeekerPlans}
+                                      options={{ title: "SeekerPlans", headerShown: false }} />
                         <Stack.Screen name="ViewCoverLetter" component={ViewCoverLetter}
                             options={{ title: "ViewCoverLetter", headerShown: false }} />
                         <Stack.Screen name="CompleteProfileSeekerModal" component={CompleteProfileSeekerModal}

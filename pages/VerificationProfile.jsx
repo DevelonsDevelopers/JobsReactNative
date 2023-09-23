@@ -1,16 +1,56 @@
 import React, {useEffect} from 'react'
 import { useState } from 'react'
 import { Pressable, View, Text, Image } from 'react-native'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {fetchSeeker} from "../API/actions/seekerActions";
 
 const Verification = ({ navigation }) => {
 
+	const dispatch = useDispatch();
+
 	const check = useSelector(state => state.seeker.check)
+	const checkCV = useSelector(state => state.cv.check)
+	const seeker = useSelector(state => state.seeker.seeker)
 
 	const [isComplete, setIsComplete] = useState(false)
 	const [cv, setCv] = useState(false)
-	const [cover, setCover] = useState(false)
+	const [verify, setVerify] = useState(false)
 	const [plan, setPlan] = useState(false)
+
+	const [ID, setID] = useState()
+
+	useEffect(() => {
+		GetData()
+	}, []);
+	const GetData = async () => {
+		const value = await AsyncStorage.getItem('ID')
+		setID(value);
+	}
+
+	useEffect(() => {
+		if (ID) {
+			if (!seeker) {
+				dispatch(fetchSeeker(ID))
+			} else if ((seeker.id).toString() !== ID) {
+				dispatch(fetchSeeker(ID))
+			}
+		}
+	}, [dispatch, seeker, ID, navigation]);
+
+	useEffect(() => {
+		console.log(seeker)
+		if (seeker?.verified === "true"){
+			setVerify(true)
+		} else {
+			setVerify(false)
+		}
+		if (seeker?.plan !== "0"){
+			setPlan(true)
+		} else {
+			setPlan(false)
+		}
+	}, [seeker]);
 
 	useEffect(() => {
 		if (check === "complete"){
@@ -19,6 +59,15 @@ const Verification = ({ navigation }) => {
 			setIsComplete(false)
 		}
 	}, [check]);
+
+	useEffect(() => {
+		if (checkCV === "complete"){
+			setCv(true)
+		} else {
+			setCv(false)
+		}
+	}, [checkCV]);
+
 
 	return (
 		<View style={{}}>
@@ -138,7 +187,7 @@ const Verification = ({ navigation }) => {
 							fontFamily: 'poppins_bold',
 						}}>Verify your phone number</Text>
 					</View>
-					{cover ?
+					{verify ?
 						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/verified.png')} />
@@ -146,12 +195,12 @@ const Verification = ({ navigation }) => {
 							>Verified</Text>
 						</View>
 						:
-						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+						<Pressable onPress={() => navigation.push('PersonalInfo')} style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_medium', marginTop: 4 }}
 							>(Verify now)</Text>
-						</View>
+						</Pressable>
 
 					}
 
@@ -178,12 +227,12 @@ const Verification = ({ navigation }) => {
 							>Purchased</Text>
 						</View>
 						:
-						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+						<Pressable onPress={() => navigation.push('SeekerPlans')} style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_regular', marginTop: 4 }}
 							>(Choose Plan)</Text>
-						</View>
+						</Pressable>
 					}
 
 				</View>

@@ -93,6 +93,7 @@ const PaymentScreen = ({ route, navigation }) => {
 
     const { plan } = route.params
     const { price } = route.params
+    const { type } = route.params
 
 
     const [isLoading, setLoading] = useState(false)
@@ -160,7 +161,7 @@ const PaymentScreen = ({ route, navigation }) => {
 
     const subscribePlan = () => {
         const postDate = moment().format("YYYY-MM-DD")
-        createUserPlan(ID, 0, postDate, 'PROVIDER').then(res => {
+        createUserPlan(ID, 0, postDate, type).then(res => {
             console.log(res)
         })
     }
@@ -250,7 +251,7 @@ const PaymentScreen = ({ route, navigation }) => {
                         disabled={false}
                         btnStyle={{ backgroundColor: '#F7BE38', }}
                         text="Pay using Stripe"
-                        isLoading={isLoading} />  
+                        isLoading={isLoading} />
                     <ButtonComp
                         onPress={onPressPaypal}
                         disabled={false}

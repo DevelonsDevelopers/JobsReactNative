@@ -200,6 +200,7 @@ export const fetchInteractionsByUser = (user) => API.post('/interactions/user', 
 
 //CV API CALL
 export const fetchCVByUser = (user) => API.post('/cv/user', { user: user })
+export const checkCV = (user) => API.post('/cv/check', { user: user })
 export const createCover = (user, job, date, role, intro, body) => API.post('/cover/create', {
     user: user,
     job: job,
