@@ -225,8 +225,12 @@ function Login({ route, navigation }) {
                         : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
                             style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>}
                 </View>
+                <Pressable onPress={() => navigation.push('ForgotPassword')} style={{
+                    width: '100%',
+                }}
+                    >
                 <Text style={{ color: '#000', fontWeight: 400, width: '85%', textAlign: 'right', marginTop: 20 }}>Forgot
-                    Password?</Text>
+                    Password?</Text></Pressable>
                 <Pressable onPress={() => LoginUser()} style={{
                     width: '85%',
                     backgroundColor: '#13A3E1',
