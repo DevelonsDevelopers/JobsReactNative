@@ -5,7 +5,7 @@ export const AllCities = () => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
         const { data: { data } } = await api.fetchAllCities();
-        if (data.length <= 0) {
+        if (data.length >= 0) {
             dispatch({type: ALL_CITIES, payload: {cities: data}})
             dispatch({type: SUCCESS})
         } else {
