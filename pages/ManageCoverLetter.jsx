@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
-import { Image, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
+import { Image, Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
 
-const ManageCoverLetter = ({ navigation }) => {
+const ManageCoverLetter = ({ navigation,apply,visible,toggleVisible }) => {
 
     const [proposal, setProposal] = useState()
     const [intro, setIntro] = useState()
 
-    // const Apply = () => {
-    //      apply(intro, proposal)
-    // }
+    const Apply = () => {
+         apply(intro, proposal)
+    }
 
      
 
     return (
+            <Modal visible={visible} animationType='fade' >
         <ScrollView>
             <View style={{
                 flexDirection: 'column',
@@ -21,7 +22,7 @@ const ManageCoverLetter = ({ navigation }) => {
                 marginBottom: 20
             }}>
                 <View style={{ flexDirection: 'row', height: 130 }}>
-                    <Pressable onPress={() => navigation.goBack()}
+                    <Pressable onPress={() => toggleVisible()}
                         style={{ paddingRight: 5 }}><Image style={{
                             width: 22,
                             height: 20,
@@ -81,6 +82,7 @@ const ManageCoverLetter = ({ navigation }) => {
                 marginBottom: 40
             }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold', textAlign: 'center' }}>Create Now</Text></Pressable>
         </ScrollView>
+       </Modal>
     )
 }
 

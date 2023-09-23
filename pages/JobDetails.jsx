@@ -11,6 +11,7 @@ import ApplyModal from "../Components/ApplyModal";
 import WebView from "react-native-webview";
 import { fetchSeeker } from "../API/actions/seekerActions";
 import LoginRequireModal from "../Components/LoginRequireModal";
+import ManageCoverLetter from "./ManageCoverLetter";
 
 const JobDetails = ({ route, navigation }) => {
 
@@ -134,7 +135,7 @@ const JobDetails = ({ route, navigation }) => {
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
                 <LoginRequireModal visible={loginVisible} toggleLoginVisible={toggleLoginVisible} navigation={navigation} />
-                <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
+                <ManageCoverLetter visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
                 <View style={{ backgroundColor: '#EAEAEA' }}>
                     <View style={{ flexDirection: 'row', height: 90 }}>
                         <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
@@ -352,7 +353,7 @@ const JobDetails = ({ route, navigation }) => {
                     }}>SAVED</Text></Pressable>
                 }
                 {applied === 0 ?
-                    <Pressable onPress={() => { if (login) { if (plan) { navigation.push('ManageCoverLetter') } else { navigation.push('VerificationProfile') } } else { toggleLoginVisible() } }}>
+                    <Pressable onPress={() => { if (login) { if (plan) { toggleApplyVisibility() } else { navigation.push('VerificationProfile') } } else { toggleLoginVisible() } }}>
                         <Text style={{
                             justifyContent: 'center',
                             height: 50,
