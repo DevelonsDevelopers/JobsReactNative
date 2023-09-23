@@ -7,6 +7,8 @@ import { RESET_SEEKER } from "../Utils/Constants";
 import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
 import { google, googleProvider } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {CheckCV} from "../API/actions/cvActions";
+import {CheckSeeker} from "../API/actions/seekerActions";
 
 // import {GoogleSignin, statusCodes} from "@react-native-google-signin/google-signin";
 
@@ -77,6 +79,9 @@ function Login({ route, navigation }) {
                     } else {
                         var ID = (data.id).toString()
                     }
+
+                    dispatch(CheckCV(ID))
+                    dispatch(CheckSeeker(ID))
                     await AsyncStorage.setItem("LOGIN", 'true')
                     await AsyncStorage.setItem("ID", ID)
                     await AsyncStorage.setItem("USER", "SEEKER")
@@ -153,7 +158,7 @@ function Login({ route, navigation }) {
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#F0A51E' }}>
-          
+
                 <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                     <View style={{
                         flex: 1,
