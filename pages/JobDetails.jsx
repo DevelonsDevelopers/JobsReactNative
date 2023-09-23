@@ -9,6 +9,7 @@ import { applyJob, bookmarkJob, removeBookmark } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ApplyModal from "../Components/ApplyModal";
 import WebView from "react-native-webview";
+import {fetchSeeker} from "../API/actions/seekerActions";
 
 const JobDetails = ({ route, navigation }) => {
 
@@ -24,6 +25,9 @@ const JobDetails = ({ route, navigation }) => {
     const [bookmark, setBookmark] = useState(0)
     const [webHeight, setWebHeight] = useState(0)
     const [login, setLogin] = useState()
+    const [plan, setPlan] = useState()
+
+    const seeker = useSelector(state => state.seeker.seeker)
 
     const onWebHeight = (e) => {
         setWebHeight(Number(e.nativeEvent.data))
@@ -38,6 +42,24 @@ const JobDetails = ({ route, navigation }) => {
         setUSERID(value);
         setLogin(loginval)
     }
+
+    useEffect(() => {
+        if (USERID) {
+            if (!seeker) {
+                dispatch(fetchSeeker(USERID))
+            } else if ((seeker.id).toString() !== USERID) {
+                dispatch(fetchSeeker(USERID))
+            }
+        }
+    }, [dispatch, seeker, USERID, navigation]);
+
+    useEffect(() => {
+            if (seeker?.plan !== "0"){
+                setPlan(true)
+            } else {
+                setPlan(false)
+            }
+    }, [seeker]);
 
     useEffect(() => {
         if (USERID) {
@@ -315,7 +337,7 @@ const JobDetails = ({ route, navigation }) => {
                     }}>SAVED</Text></Pressable>
                 }
                 {applied === 0 ?
-                    <Pressable onPress={() => { if (login) { navigation.push('VerificationProfile') } else { toggleApplyVisibility() }}}>
+                    <Pressable onPress={() => { if (login) { if (plan) { navigation.push('CoverLetterForm') } else { navigation.push('VerificationProfile') } } else { toggleApplyVisibility() }}}>
                         <Text style={{
                             justifyContent: 'center',
                             height: 50,
