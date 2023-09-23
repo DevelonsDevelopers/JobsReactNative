@@ -187,6 +187,7 @@ function PersonalInfo({ navigation }) {
     const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
     const setCode = (code) => {
+        setPhoneCode(code)
         setSeekerData({ ...seekerData, code: code })
         togglePhoneVisible()
     }
@@ -643,7 +644,7 @@ function PersonalInfo({ navigation }) {
                                 borderTopWidth: 1,
                                 borderBottomWidth: 1,
                                 borderRightWidth: 1
-                            }}>{seeker?.code}</TextInput>
+                            }}>{phoneCode}</TextInput>
                             <TextInput onChangeText={text => setSeekerData({ ...seekerData, phone: text })}
                                 placeholder="Enter Your Number" style={{
                                     textAlign: 'left',

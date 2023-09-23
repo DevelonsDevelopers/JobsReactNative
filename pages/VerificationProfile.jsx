@@ -42,13 +42,13 @@ const Verification = ({ navigation }) => {
 		console.log(seeker)
 		if (seeker?.verified === "true"){
 			setVerify(true)
+			if (seeker?.plan !== "0"){
+				setPlan(true)
+			} else {
+				setPlan(false)
+			}
 		} else {
 			setVerify(false)
-		}
-		if (seeker?.plan !== "0"){
-			setPlan(true)
-		} else {
-			setPlan(false)
 		}
 	}, [seeker]);
 

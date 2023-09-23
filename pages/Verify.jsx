@@ -71,7 +71,7 @@ function Verify({ route, navigation }) {
                         borderBottomLeftRadius: 30,
                         backgroundColor: '#E6E6E6',
                     }}>Phone</TextInput>
-                    <TextInput  onTouchStart={() => { if (changeable) { togglePhoneVisible() } }} style={{
+                    <Pressable onPress={() => { if (changeable) { togglePhoneVisible() } }}><TextInput editable={changeable} style={{
                         textAlign: 'center',
                         paddingHorizontal: 6,
                         marginTop: 'auto',
@@ -81,7 +81,7 @@ function Verify({ route, navigation }) {
                         borderTopWidth: 1,
                         borderBottomWidth: 1,
                         borderRightWidth: 1
-                    }} placeholder="country code" >{code}</TextInput>
+                    }} placeholder="country code" >{code}</TextInput></Pressable>
                     <TextInput onChangeText={text => setPhone(phone)} editable={changeable} placeholder="Enter Your Number" style={{
                         textAlign: 'left',
                         paddingHorizontal: 10,
