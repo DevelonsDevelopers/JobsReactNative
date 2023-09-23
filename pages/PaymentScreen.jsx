@@ -199,34 +199,31 @@ const PaymentScreen = ({ route, navigation }) => {
             <Text style={{ color: '#002E81', fontSize: 50, fontFamily: 'poppins_medium', textAlign: 'center', marginTop: 40 }}>${price}</Text>
             <Text style={{ color: 'gray', fontSize: 13, fontFamily: 'poppins_medium', textAlign: 'center', marginBottom: 40 }}>{plan} plan</Text>
 
+            <View style={styles.container}>
+                <Text style={{ fontFamily: 'poppins_medium', fontSize: 14, marginLeft: 13, }}>Enter Your Email:</Text>
+                <TextInput
+                    autoCapitalize="none"
+                    placeholder="E-mail"
+                    keyboardType="email-address"
+                    onChange={value => setEmail(value.nativeEvent.text)}
+                    style={{ backgroundColor: 'white', height: 47, borderWidth: 1, borderColor: 'gray', marginHorizontal: 10, borderRadius: 10, paddingLeft: 10 }}
+                />
+                <Text style={{ fontFamily: 'poppins_medium', fontSize: 14, marginLeft: 13, marginTop: 30, marginBottom: -25 }}>Enter Your Card details:</Text>
+                <CardField
+                    postalCodeEnabled={true}
+                    placeholder={{
+                        number: "4242 4242 4242 4242",
+                    }}
+                    cardStyle={{ textColor: 'gray', borderWidth: 1, borderColor: 'gray', borderRadius: 10 }}
+                    style={{ height: 47, marginTop: 20, borderWidth: 1, borderColor: 'gray', marginHorizontal: 10 }}
+                    onCardChange={cardDetails => {
+                        setCardDetails(cardDetails);
+                    }}
+                />
 
+            </View>
 
-
-                <View style={styles.container}>
-                    <Text style={{ fontFamily:'poppins_medium',fontSize:14,marginLeft:13, }}>Enter Your Email:</Text>
-                    <TextInput
-                        autoCapitalize="none"
-                        placeholder="E-mail"
-                        keyboardType="email-address"
-                        onChange={value => setEmail(value.nativeEvent.text)}
-                        style={{ backgroundColor: 'white', height: 47, borderWidth: 1, borderColor: 'gray', marginHorizontal: 10, borderRadius: 10, paddingLeft: 10 }}
-                    />
-                     <Text style={{ fontFamily:'poppins_medium',fontSize:14,marginLeft:13,marginTop:30,marginBottom:-25 }}>Enter Your Card details:</Text>
-                    <CardField
-                        postalCodeEnabled={true}
-                        placeholder={{
-                            number: "4242 4242 4242 4242",
-                        }}
-                        cardStyle={{ textColor: 'gray', borderWidth: 1, borderColor: 'gray', borderRadius: 10 }}
-                        style={{ height: 47, marginTop: 20, borderWidth: 1, borderColor: 'gray', marginHorizontal: 10 }}
-                        onCardChange={cardDetails => {
-                            setCardDetails(cardDetails);
-                        }}
-                    />
-
-                </View>
-
-                {/* <View>
+            {/* <View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 70, width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
                         <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: 'gray' }}>Amount</Text>
                         <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: 'green' }}>$5</Text>
@@ -244,7 +241,7 @@ const PaymentScreen = ({ route, navigation }) => {
 
                 </View> */}
 
-            <SafeAreaView style={{ flex: 1 ,marginTop:50}}>
+            <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
                 <View style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
                     <ButtonComp
                         onPress={handlePayPress}
@@ -252,24 +249,30 @@ const PaymentScreen = ({ route, navigation }) => {
                         btnStyle={{ backgroundColor: '#F7BE38', }}
                         text="Pay using Stripe"
                         isLoading={isLoading} />
+                </View>
+                <View style={{ flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto', marginVertical: 30, gap: 10, }}>
+                    <Text style={{ backgroundColor: 'gray', height: 1.5, width: 100, marginTop: 6 }}>-</Text>
+                    <Text>OR</Text>
+                    <Text style={{ backgroundColor: 'gray', height: 1.5, width: 100, marginTop: 6 }}>-</Text>
+                </View>
+                <View style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
                     <ButtonComp
                         onPress={onPressPaypal}
                         disabled={false}
-                        btnStyle={{ backgroundColor: '#002E81', marginVertical: 16 }}
+                        btnStyle={{ backgroundColor: '#002E81', }}
                         text="Pay using paypal"
                         isLoading={isLoading}
-                         />
-
-                    <Modal visible={!!paypalUrl} >
-                        <TouchableOpacity onPress={clearPaypalState} style={{ margin: 24 }} >
-                            <Text >Closed</Text>
-                        </TouchableOpacity>
-                        <View style={{ flex: 1 }}>
-                            <WebView source={{ uri: paypalUrl }} onNavigationStateChange={onUrlChange} />
-                        </View>
-
-                    </Modal>
+                    />
                 </View>
+                <Modal visible={!!paypalUrl} >
+                    <TouchableOpacity onPress={clearPaypalState} style={{ margin: 24 }} >
+                        <Text >Closed</Text>
+                    </TouchableOpacity>
+                    <View style={{ flex: 1 }}>
+                        <WebView source={{ uri: paypalUrl }} onNavigationStateChange={onUrlChange} />
+                    </View>
+
+                </Modal>
             </SafeAreaView>
         </ScrollView>
     );

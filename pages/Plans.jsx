@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import {FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, View} from 'react-native'
+import { FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import Ripple from 'react-native-material-ripple'
-import {useDispatch, useSelector} from "react-redux";
-import {getPlans} from "../API/actions/plansActions";
+import { useDispatch, useSelector } from "react-redux";
+import { getPlans } from "../API/actions/plansActions";
 
 
 const Plans = ({ navigation }) => {
@@ -55,19 +55,20 @@ const Plans = ({ navigation }) => {
             </View>
             <SafeAreaView >
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                          style={{marginHorizontal: 20}} data={plans}
-                          renderItem={({item}) => (
-                              <Ripple onPress={() => navigation.push('Payment', { plan: item.name, price: item.amount, type: 'Provider' })} rippleColor='white' style={{ backgroundColor: '#004BFF', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 10, borderRadius: 10, marginBottom: 20 ,flexDirection:'column'}}>
-                                  <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>{item.name}</Text>
-                                  <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
-                                      <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>$ </Text>
-                                      <Text style={{ fontSize: 40, color: 'white', marginTop: -5 }}>{item.amount}</Text>
-                                  </View>
-                                  <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  {item.purpose}</Text>
-                                  {/* <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 200 jobs</Text> */}
-                              </Ripple>
-                          )}
-                         />
+                    style={{ marginHorizontal: 20 }} data={plans}
+                    renderItem={({ item }) => (
+                        <Ripple onPress={() => navigation.push('Payment', { plan: item.name, price: item.amount, type: 'Provider' })} rippleColor='gray'
+                            style={{ backgroundColor: 'white', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 10, borderRadius: 20, marginBottom: 20, flexDirection: 'column', borderWidth: 1, elevation: 10, borderColor: 'gray' }}>
+                            <Text style={{ color: '#002E81', textAlign: 'center', fontSize: 29, fontFamily: 'poppins_medium' }}>{item.name}</Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20, marginTop: -10 }}>
+                                <Text style={{ color: 'green', textAlign: 'center', fontSize: 14, }}>$</Text>
+                                <Text style={{ fontSize: 40, color: 'black', marginTop: -5, color: 'green' }}>{item.amount}</Text>
+                            </View>
+                            <Text style={{ color: 'black',opacity:0.6, fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center' }}>{item.purpose}</Text>
+                            {/* <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 200 jobs</Text> */}
+                        </Ripple>
+                    )}
+                />
             </SafeAreaView>
             {/* <Ripple onPress={() => navigation.push('Payment', { plan: 'Basic', price: '8' })} style={{ backgroundColor: 'white', padding: 20, marginTop: 10, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
                 <Text style={{ color: '#194666', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Basic</Text>
