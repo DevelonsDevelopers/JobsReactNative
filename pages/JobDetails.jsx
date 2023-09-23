@@ -9,7 +9,8 @@ import { applyJob, bookmarkJob, removeBookmark } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ApplyModal from "../Components/ApplyModal";
 import WebView from "react-native-webview";
-import {fetchSeeker} from "../API/actions/seekerActions";
+import { fetchSeeker } from "../API/actions/seekerActions";
+import LoginRequireModal from "../Components/LoginRequireModal";
 
 const JobDetails = ({ route, navigation }) => {
 
@@ -54,11 +55,11 @@ const JobDetails = ({ route, navigation }) => {
     }, [dispatch, seeker, USERID, navigation]);
 
     useEffect(() => {
-            if (seeker?.plan !== "0"){
-                setPlan(true)
-            } else {
-                setPlan(false)
-            }
+        if (seeker?.plan !== "0") {
+            setPlan(true)
+        } else {
+            setPlan(false)
+        }
     }, [seeker]);
 
     useEffect(() => {
@@ -117,188 +118,193 @@ const JobDetails = ({ route, navigation }) => {
     const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
 
 
+    const [loginVisible, setLoginVisible] = useState(false)
+    const toggleLoginVisible = () => setLoginVisible(!loginVisible)
+
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
-            <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
-            <View style={{ backgroundColor: '#EAEAEA' }}>
-                <View style={{ flexDirection: 'row', height: 90 }}>
-                    <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
-                        width: 22,
-                        height: 20,
-                        marginTop: 70,
-                        marginLeft: 30,
-                        tintColor: '#000'
-                    }} source={require('../assets/back_arrow.png')} alt={''} /></Pressable>
-                    <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                        <Pressable onPress={() => null}><Image
-                            style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                            source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
+            <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
+                <LoginRequireModal visible={loginVisible} toggleLoginVisible={toggleLoginVisible} navigation={navigation} />
+                <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
+                <View style={{ backgroundColor: '#EAEAEA' }}>
+                    <View style={{ flexDirection: 'row', height: 90 }}>
+                        <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
+                            width: 22,
+                            height: 20,
+                            marginTop: 70,
+                            marginLeft: 30,
+                            tintColor: '#000'
+                        }} source={require('../assets/back_arrow.png')} alt={''} /></Pressable>
+                        <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
+                            <Pressable onPress={() => null}><Image
+                                style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+                                source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
+                        </View>
                     </View>
-                </View>
-                <View>
-                    <Text style={{
-                        fontSize: 18,
-                        fontFamily: 'poppins_bold',
-                        width: '100%',
-                        paddingHorizontal: 30,
-                        textAlign: 'center',
-                        marginTop: 30,
-                        padding: 0
-                    }}>{job?.title}</Text>
-                </View>
-                {isloading ?
-                    <View style={{ marginTop: 300 }}>
-                        <ActivityIndicator size={60} color="#13A3E1" /></View>
-                    : <>
-                        <SafeAreaView style={{ marginTop: 30 }}>
+                    <View>
+                        <Text style={{
+                            fontSize: 18,
+                            fontFamily: 'poppins_bold',
+                            width: '100%',
+                            paddingHorizontal: 30,
+                            textAlign: 'center',
+                            marginTop: 30,
+                            padding: 0
+                        }}>{job?.title}</Text>
+                    </View>
+                    {isloading ?
+                        <View style={{ marginTop: 300 }}>
+                            <ActivityIndicator size={60} color="#13A3E1" /></View>
+                        : <>
+                            <SafeAreaView style={{ marginTop: 30 }}>
 
 
-                            <View style={{
-                                marginBottom: 8,
-                                borderColor: '#4C4C4C',
-                                borderTopLeftRadius: 50,
-                                borderTopRightRadius: 50,
-                                paddingVertical: 15,
-                                display: "flex",
-                                flexDirection: "column",
-                                backgroundColor: '#fff'
-                            }}>
-                                <View style={{ flexDirection: 'row', flex: 1 }}>
-                                    <Text style={{
+                                <View style={{
+                                    marginBottom: 8,
+                                    borderColor: '#4C4C4C',
+                                    borderTopLeftRadius: 50,
+                                    borderTopRightRadius: 50,
+                                    paddingVertical: 15,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    backgroundColor: '#fff'
+                                }}>
+                                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                                        <Text style={{
 
-                                        paddingHorizontal: 10,
-                                        paddingTop: 4,
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_bold',
-                                        borderRadius: 5,
-                                        marginLeft: 25,
-                                    }}>{job?.company_name}</Text>
-                                    <Text style={{
-                                        marginLeft: 'auto',
-                                        textAlign: 'right',
-                                        fontFamily: 'poppins_medium',
-                                        fontSize: 13,
-                                        marginRight: 25
-                                    }}>{moment(job?.date).fromNow()}</Text>
-                                </View>
-                                <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-                                    <Text style={{
-                                        fontFamily: 'poppins_medium',
-                                        fontSize: 15,
-                                        textAlign: 'center',
-                                        marginTop: 19,
-                                        backgroundColor: '#00A224',
-                                        color: "white",
-                                        borderRadius: 20,
-                                        margin: 'auto',
-                                        paddingTop: 5,
-                                        paddingBottom: 2,
-                                        paddingHorizontal: 20
-                                    }}>
-                                        Salary {job?.salary}
-                                    </Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}>
-                                        <Text numberOfLines={1} style={{
+                                            paddingHorizontal: 10,
+                                            paddingTop: 4,
+                                            fontSize: 14,
                                             fontFamily: 'poppins_bold',
-                                            marginTop: 15,
-                                            fontSize: 17,
-                                            textAlign: "center",
-                                        }}>{job?.category_name}</Text>
+                                            borderRadius: 5,
+                                            marginLeft: 25,
+                                        }}>{job?.company_name}</Text>
+                                        <Text style={{
+                                            marginLeft: 'auto',
+                                            textAlign: 'right',
+                                            fontFamily: 'poppins_medium',
+                                            fontSize: 13,
+                                            marginRight: 25
+                                        }}>{moment(job?.date).fromNow()}</Text>
+                                    </View>
+                                    <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                                         <Text style={{
                                             fontFamily: 'poppins_medium',
-                                            marginTop: 0,
-                                            fontSize: 13,
-                                            textAlign: "center"
-                                        }}>{job?.city_name}</Text>
+                                            fontSize: 15,
+                                            textAlign: 'center',
+                                            marginTop: 19,
+                                            backgroundColor: '#00A224',
+                                            color: "white",
+                                            borderRadius: 20,
+                                            margin: 'auto',
+                                            paddingTop: 5,
+                                            paddingBottom: 2,
+                                            paddingHorizontal: 20
+                                        }}>
+                                            Salary {job?.salary}
+                                        </Text>
                                     </View>
-                                </View>
-                                <View style={{
-                                    flex: 1,
-                                    flexDirection: "row",
-                                    marginTop: 20,
-                                    backgroundColor: 'white',
-                                    gap: 10
-                                }}>
-                                    <View style={{
-                                        flex: 0.4,
-                                        backgroundColor: 'rgba(19, 163, 225, 0.20)',
-                                        paddingHorizontal: 30,
-                                        width: '50%',
-                                        paddingVertical: 25,
-                                        borderTopRightRadius: 40,
-                                        borderBottomRightRadius: 40
-                                    }}>
-                                        <View style={{ flexDirection: 'column' }}>
-                                            <View style={{ paddingHorizontal: 10 }}>
-                                                <Text style={{
-                                                    color: 'white',
-                                                    backgroundColor: '#13a3e1',
-                                                    paddingHorizontal: 6,
-                                                    paddingVertical: 8,
-                                                    fontSize: 14,
-                                                    fontFamily: 'poppins_medium',
-                                                    borderRadius: 14,
-                                                    textAlign: "center",
-                                                }}>{job?.type}</Text>
-                                            </View>
+                                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                                        <View style={{ flex: 1 }}>
+                                            <Text numberOfLines={1} style={{
+                                                fontFamily: 'poppins_bold',
+                                                marginTop: 15,
+                                                fontSize: 17,
+                                                textAlign: "center",
+                                            }}>{job?.category_name}</Text>
                                             <Text style={{
-                                                fontSize: 16,
                                                 fontFamily: 'poppins_medium',
-                                                textAlign: "center"
-                                            }}>{job?.workdays}</Text>
-                                            <Text style={{
+                                                marginTop: 0,
                                                 fontSize: 13,
-                                                fontFamily: 'poppins_medium',
                                                 textAlign: "center"
-                                            }}>{job?.worktime}</Text>
+                                            }}>{job?.city_name}</Text>
                                         </View>
                                     </View>
-                                    <View style={{ flex: 0.6 }}>
-                                        <View style={{ flexDirection: 'column', paddingVertical: 25, }}>
-                                            <Text style={{
-                                                textAlign: "center",
-                                                fontSize: 15,
-                                                fontFamily: 'poppins_medium'
-                                            }}>{job?.experience}</Text>
-                                            <Text style={{
-                                                textAlign: "center",
-                                                fontSize: 20,
-                                                fontFamily: 'poppins_medium'
-                                            }}>{job?.qualification}</Text>
-                                            <Text style={{
-                                                textAlign: "center",
-                                                fontSize: 12,
-                                                fontFamily: 'poppins_medium'
-                                            }}>{job?.skills}</Text>
+                                    <View style={{
+                                        flex: 1,
+                                        flexDirection: "row",
+                                        marginTop: 20,
+                                        backgroundColor: 'white',
+                                        gap: 10
+                                    }}>
+                                        <View style={{
+                                            flex: 0.4,
+                                            backgroundColor: 'rgba(19, 163, 225, 0.20)',
+                                            paddingHorizontal: 30,
+                                            width: '50%',
+                                            paddingVertical: 25,
+                                            borderTopRightRadius: 40,
+                                            borderBottomRightRadius: 40
+                                        }}>
+                                            <View style={{ flexDirection: 'column' }}>
+                                                <View style={{ paddingHorizontal: 10 }}>
+                                                    <Text style={{
+                                                        color: 'white',
+                                                        backgroundColor: '#13a3e1',
+                                                        paddingHorizontal: 6,
+                                                        paddingVertical: 8,
+                                                        fontSize: 14,
+                                                        fontFamily: 'poppins_medium',
+                                                        borderRadius: 14,
+                                                        textAlign: "center",
+                                                    }}>{job?.type}</Text>
+                                                </View>
+                                                <Text style={{
+                                                    fontSize: 16,
+                                                    fontFamily: 'poppins_medium',
+                                                    textAlign: "center"
+                                                }}>{job?.workdays}</Text>
+                                                <Text style={{
+                                                    fontSize: 13,
+                                                    fontFamily: 'poppins_medium',
+                                                    textAlign: "center"
+                                                }}>{job?.worktime}</Text>
+                                            </View>
+                                        </View>
+                                        <View style={{ flex: 0.6 }}>
+                                            <View style={{ flexDirection: 'column', paddingVertical: 25, }}>
+                                                <Text style={{
+                                                    textAlign: "center",
+                                                    fontSize: 15,
+                                                    fontFamily: 'poppins_medium'
+                                                }}>{job?.experience}</Text>
+                                                <Text style={{
+                                                    textAlign: "center",
+                                                    fontSize: 20,
+                                                    fontFamily: 'poppins_medium'
+                                                }}>{job?.qualification}</Text>
+                                                <Text style={{
+                                                    textAlign: "center",
+                                                    fontSize: 12,
+                                                    fontFamily: 'poppins_medium'
+                                                }}>{job?.skills}</Text>
 
+                                            </View>
                                         </View>
                                     </View>
-                                </View>
-                                <Text style={{
-                                    fontSize: 18,
-                                    fontFamily: 'poppins_medium',
-                                    marginLeft: 15,
-                                    marginTop: 10
-                                }}>Description: </Text>
+                                    <Text style={{
+                                        fontSize: 18,
+                                        fontFamily: 'poppins_medium',
+                                        marginLeft: 15,
+                                        marginTop: 10
+                                    }}>Description: </Text>
 
                                     <WebView source={{ html: job?.description }} style={{
                                         height: webHeight,
                                         marginHorizontal: 25,
-                                        fontFamily: 'poppins_medium',  }}
-                                         scalesPageToFit={false}
-                                         onMessage={e => onWebHeight(e)}
-                                         injectedJavaScript='window.ReactNativeWebView.postMessage(document.body.scrollHeight)'
+                                        fontFamily: 'poppins_medium',
+                                    }}
+                                        scalesPageToFit={false}
+                                        onMessage={e => onWebHeight(e)}
+                                        injectedJavaScript='window.ReactNativeWebView.postMessage(document.body.scrollHeight)'
                                     />
 
-                            </View>
+                                </View>
 
-                        </SafeAreaView>
-                    </>}
-            </View>
-        </ScrollView>
+                            </SafeAreaView>
+                        </>}
+                </View>
+            </ScrollView>
             <View style={{
                 flexDirection: 'row',
                 justifyContent: "center",
@@ -337,7 +343,7 @@ const JobDetails = ({ route, navigation }) => {
                     }}>SAVED</Text></Pressable>
                 }
                 {applied === 0 ?
-                    <Pressable onPress={() => { if (login) { if (plan) { navigation.push('CoverLetterForm') } else { navigation.push('VerificationProfile') } } else { toggleApplyVisibility() }}}>
+                    <Pressable onPress={() => { if (login) { if (plan) { navigation.push('ManageCoverLetter') } else { navigation.push('VerificationProfile') } } else { toggleLoginVisible() } }}>
                         <Text style={{
                             justifyContent: 'center',
                             height: 50,
