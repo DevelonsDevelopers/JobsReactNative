@@ -206,7 +206,7 @@ function PersonalInfo({ navigation }) {
                 }}
             />
 
-            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode}/>
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
@@ -617,16 +617,11 @@ function PersonalInfo({ navigation }) {
                                 </View>
                             </View>
                         </View>
-
-
-                        <View style={{ flexDirection: 'row', marginLeft: 40 ,marginTop:20}}>
-                            <Text onPress={() => togglePhoneVisible()} style={{ borderWidth:1,paddingVertical:6,width:'30%' }}>{seeker?.code}</Text>
-                            <TextInput onChangeText={text => setSeekerData({...seekerData, phone: text})} placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }}  >{seeker?.phone}</TextInput>
+                        <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
+                            <TextInput editable={false} style={{ textAlign: 'center', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 8, borderRightWidth: 1, width: '20%', color: 'black', fontFamily: 'poppins_regular', borderColor: '#b2b2b2', borderTopLeftRadius: 30, borderWidth: 1, borderBottomLeftRadius: 30, backgroundColor: '#E6E6E6', }}>Phone</TextInput>
+                            <TextInput placeholder="country code" onTouchStart={() => togglePhoneVisible()} style={{ textAlign: 'center', paddingHorizontal: 6, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 8, borderColor: '#b2b2b2', borderTopWidth: 1, borderBottomWidth: 1, borderRightWidth: 1 }}>{seeker?.code}</TextInput>
+                            <TextInput onChangeText={text => setSeekerData({ ...seekerData, phone: text })} placeholder="Enter Your Number" style={{ textAlign: 'left', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 8, width: '46%', borderColor: '#b2b2b2', borderTopRightRadius: 20, borderBottomRightRadius: 20, borderTopWidth: 1, borderBottomWidth: 1, borderRightWidth: 1 }}>{seeker?.phone}</TextInput>
                         </View>
-
-
-
-
                         <Pressable onPress={() => update()} style={{
                             backgroundColor: '#13A3E1',
                             borderRadius: 25,
@@ -635,8 +630,8 @@ function PersonalInfo({ navigation }) {
                             marginTop: 15,
                             marginHorizontal: 25
                         }}>
-                            <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
-                            >Update
+                            <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>
+                                Update
                             </Text>
                         </Pressable>
                         {seeker?.type === "GOOGLE" ?
