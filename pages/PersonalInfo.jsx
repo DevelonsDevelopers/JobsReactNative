@@ -692,7 +692,7 @@ function PersonalInfo({ navigation }) {
                                         code: seeker?.code,
                                         verifyPhone: seeker?.phone,
                                         type: "SEEKER",
-                                        verify: true,
+                                        verify: false,
                                         forgot: true,
                                         ID: ID
                                     })
@@ -701,7 +701,7 @@ function PersonalInfo({ navigation }) {
                                         code: seeker?.code,
                                         verifyPhone: seeker?.phone,
                                         type: "SEEKER",
-                                        verify: true,
+                                        verify: false,
                                         ID: ID
                                     })
                                 }
@@ -722,7 +722,7 @@ function PersonalInfo({ navigation }) {
                                 code: seeker?.code,
                                 verifyPhone: seeker?.phone,
                                 type: "SEEKER",
-                                verify: false,
+                                verify: true,
                                 ID: ID
                             })}
                                 style={{

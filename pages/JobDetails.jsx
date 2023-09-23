@@ -27,6 +27,7 @@ const JobDetails = ({ route, navigation }) => {
     const [webHeight, setWebHeight] = useState(0)
     const [login, setLogin] = useState()
     const [plan, setPlan] = useState()
+    const [loginVal, setLoginVal] = useState()
 
     const seeker = useSelector(state => state.seeker.seeker)
 
@@ -39,10 +40,18 @@ const JobDetails = ({ route, navigation }) => {
     }, []);
     const GetData = async () => {
         const value = await AsyncStorage.getItem('ID')
-        const loginval = await AsyncStorage.getItem('LOGIN')
+        const loginvalue = await AsyncStorage.getItem('LOGIN')
         setUSERID(value);
-        setLogin(loginval)
+        setLoginVal(loginvalue)
     }
+
+    useEffect(() => {
+        if (loginVal === 'true') {
+            setLogin(true)
+        } else {
+            setLogin(false)
+        }
+    }, [loginVal])
 
     useEffect(() => {
         if (USERID) {

@@ -136,8 +136,8 @@ const History = ({ navigation }) => {
                         }}>
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
-                                    <Ripple 
-                                    onPress={() => navigation.push('JobDetails', { ID: item.id })}>
+                                    <Ripple
+                                    onPress={() => navigation.push('JobDetails', { ID: item.job })}>
                                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                             <Text numberOfLines={1} ellipsizeMode={"tail"} style={{
                                                 fontSize: 15,

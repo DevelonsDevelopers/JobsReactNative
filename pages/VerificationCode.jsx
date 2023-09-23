@@ -34,6 +34,7 @@ function VerificationCode({ route, navigation }) {
 	const { phone } = route.params
 	const { type } = route.params
 	const { ID } = route.params
+	const { verify } = route.params
 
 	console.log(type)
 
@@ -64,7 +65,11 @@ function VerificationCode({ route, navigation }) {
 						const {data: {responseCode}} = res;
 						const {data: {message}} = res;
 						if (responseCode === 200) {
-							navigation.push('ChangePassword', { type: 'PROVIDER', ID: ID })
+							if (verify){
+								navigation.push('Home')
+							} else {
+								navigation.push('ChangePassword', { type: 'PROVIDER', ID: ID })
+							}
 						} else {
 							Toast.show({
 								type: 'error',
@@ -80,7 +85,11 @@ function VerificationCode({ route, navigation }) {
 						const {data: {responseCode}} = res;
 						const {data: {message}} = res;
 						if (responseCode === 200) {
-							navigation.push('ChangePassword', { type: 'SEEKER', ID: ID })
+							if (verify){
+								navigation.push('Home')
+							} else {
+								navigation.push('ChangePassword', {type: 'SEEKER', ID: ID})
+							}
 						} else {
 							Toast.show({
 								type: 'error',
