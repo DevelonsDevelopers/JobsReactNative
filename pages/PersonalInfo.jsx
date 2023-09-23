@@ -617,17 +617,11 @@ function PersonalInfo({ navigation }) {
                                 </View>
                             </View>
                         </View>
-
-
-                        <View style={{ flexDirection: 'row', marginTop: 20,borderWidth:1,borderRadius:60,marginLeft:'auto',marginRight:'auto' }}>
-                            <TextInput editable={false} style={{  textAlign: 'center', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 7,paddingRight:50,paddingLeft:20,borderRightWidth:1 }}>Phone</TextInput>
-                            <TextInput placeholder="country code" onTouchStart={() => togglePhoneVisible()} style={{  textAlign: 'center', paddingHorizontal: 6, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 7, }}>{seeker?.code}</TextInput>
-                            <TextInput onChangeText={text => setSeekerData({ ...seekerData, phone: text })} placeholder="Enter Your Number" style={{  textAlign: 'center', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 7, }}  >{seeker?.phone}</TextInput>
+                        <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
+                            <TextInput editable={false} style={{ textAlign: 'center', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 8, borderRightWidth: 1, width: '20%', color: 'black', fontFamily: 'poppins_regular', borderColor: '#b2b2b2', borderTopLeftRadius: 30, borderWidth: 1, borderBottomLeftRadius: 30, backgroundColor: '#E6E6E6', }}>Phone</TextInput>
+                            <TextInput placeholder="country code" onTouchStart={() => togglePhoneVisible()} style={{ textAlign: 'center', paddingHorizontal: 6, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 8, borderColor: '#b2b2b2', borderTopWidth: 1, borderBottomWidth: 1, borderRightWidth: 1 }}>{seeker?.code}</TextInput>
+                            <TextInput onChangeText={text => setSeekerData({ ...seekerData, phone: text })} placeholder="Enter Your Number" style={{ textAlign: 'left', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 8, width: '46%', borderColor: '#b2b2b2', borderTopRightRadius: 20, borderBottomRightRadius: 20, borderTopWidth: 1, borderBottomWidth: 1, borderRightWidth: 1 }}>{seeker?.phone}</TextInput>
                         </View>
-
-
-
-
                         <Pressable onPress={() => update()} style={{
                             backgroundColor: '#13A3E1',
                             borderRadius: 25,
