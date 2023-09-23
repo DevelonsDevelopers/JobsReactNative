@@ -36,6 +36,7 @@ function Splash({navigation}) {
             sleep(1000).then( async () => {
                 navigation.replace('Home')
                 await AsyncStorage.setItem("ID", "0")
+                await AsyncStorage.setItem("LOGIN", 'false')
             })
         }
     }
@@ -60,6 +61,7 @@ function Splash({navigation}) {
                 } else {
                     navigation.replace('Home')
                     await AsyncStorage.setItem("ID", "0")
+                    await AsyncStorage.setItem("LOGIN", 'false')
                 }
             })
         }
