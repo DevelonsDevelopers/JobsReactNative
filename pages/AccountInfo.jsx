@@ -47,6 +47,7 @@ import RoleModal from "../Components/RoleModal";
 function AccountInfo({ route, navigation }) {
 
 	const { role } = route.params
+	// const [role,setRole] = useState()
 
 	const dispatch = useDispatch()
 

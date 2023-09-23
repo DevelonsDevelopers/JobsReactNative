@@ -79,7 +79,7 @@ function Home({ navigation }) {
 		await AsyncStorage.setItem("EMAIL", '')
 		await AsyncStorage.setItem("USERNAME", '')
 		setLoginVal('false')
-		toggleVisibility()
+		// toggleVisibility()
 		toggleLoadingVisibility()
 	}
 	// log out===================
@@ -227,7 +227,7 @@ function Home({ navigation }) {
 								<FlatList scrollEnabled={false} nestedScrollEnabled={true}
 									style={{ marginHorizontal: 30, marginTop: 10 }} data={categories} renderItem={({ item }) => (
 
-										<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={200}
+										<Ripple rippleColor="#13A3E1" rippleOpacity={0.2} rippleDuration={300} rippleSize={200}
 											onPress={() => navigation.push('JobsByCategory', { CATID: item.id })}
 											style={{
 												flex: 1,
@@ -283,7 +283,7 @@ function Home({ navigation }) {
 
 									<FlatList scrollEnabled={false} nestedScrollEnabled={true}
 										style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
-											<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={300}
+											<Ripple rippleColor="#13A3E1" rippleOpacity={0.5} rippleDuration={300} rippleSize={200}
 												onPress={() => navigation.push('JobDetails', { ID: item.id })}
 												style={{
 													flex: 1,

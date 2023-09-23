@@ -164,59 +164,56 @@ function PostJob({navigation}) {
                 </View>
                 {isPaid ?
                     <>
-                        <View style={{flexDirection: 'row', flex: 1, marginTop: 30}}>
+                        <View style={{flexDirection: 'row', marginTop: 30, marginLeft:'auto',marginRight:'auto',gap:10}}>
 
                             <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
-                                    onPress={() => navigation.push('AppliedUsers')} style={{
-                                flex: 0.5,
+                                onPress={() => navigation.push('AppliedUsers')} style={{
+                                width:'45%',
                                 backgroundColor: '#F0A51E',
-                                paddingHorizontal: 35,
-                                paddingVertical: 20,
                                 borderRadius: 20,
-                                marginLeft: 30,
-                                marginRight: 5
+                                paddingVertical:20
                             }}>
+                             {/* <Image  source={require('../assets/coverLetter.png')} style={{ width:60,height:60 ,}} /> */}
+                               
                                 <Text style={{
                                     color: 'white',
                                     fontSize: 20,
                                     fontFamily: 'poppins_medium',
-                                    textAlign: "center"
+                                    marginTop: -5,textAlign:'center'
                                 }}>Applied</Text>
                                 <Text style={{
                                     color: 'white',
                                     fontSize: 20,
                                     fontFamily: 'poppins_medium',
-                                    textAlign: "center",
-                                    marginTop: -5,
-                                    marginLeft: -4
+                                    marginTop: -5,textAlign:'center'
                                 }}>Users</Text>
                             </Ripple>
 
+                          
                             <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
-                                    onPress={() => navigation.push('SentOffers')} style={{
-                                flex: 0.5,
+                                onPress={() => navigation.push('SentOffers')} style={{
+                                width:'45%',
                                 backgroundColor: '#F0A51E',
-                                paddingHorizontal: 45,
-                                paddingVertical: 20,
                                 borderRadius: 20,
-                                marginRight: 30,
-                                marginLeft: 5
+                                paddingVertical:20
                             }}>
+                             {/* <Image  source={require('../assets/coverLetter.png')} style={{ width:60,height:60 ,}} /> */}
+                               
                                 <Text style={{
                                     color: 'white',
                                     fontSize: 20,
                                     fontFamily: 'poppins_medium',
-                                    textAlign: "center"
-                                }}>Sent </Text>
+                                    marginTop: -5,textAlign:'center'
+                                }}>Sent</Text>
                                 <Text style={{
                                     color: 'white',
                                     fontSize: 20,
                                     fontFamily: 'poppins_medium',
-                                    textAlign: "center",
-                                    marginTop: -5,
-                                    marginLeft: -4
+                                    marginTop: -5,textAlign:'center'
                                 }}>Offers</Text>
                             </Ripple>
+
+                          
 
                         </View>
 

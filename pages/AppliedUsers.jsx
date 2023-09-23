@@ -124,7 +124,7 @@ function AppliedUsers({ route, navigation }) {
                     onPress={() => navigation.push('ViewResume', { ID: item.user })}
                   >
                     <Text style={{
-                      backgroundColor: '#1885F2',
+                      backgroundColor: '#13A3E1',
                       textAlign: "center",
                       borderRadius: 20,
                       fontSize: 16,
@@ -146,6 +146,7 @@ function AppliedUsers({ route, navigation }) {
                       marginVertical: 4,
                       paddingVertical: 7,
                       borderWidth: 1,
+                      borderColor:'gray'
                     }}>View Cover Letter</Text>
                   </Ripple>
                 </View>

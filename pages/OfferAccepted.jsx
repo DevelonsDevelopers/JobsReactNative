@@ -1,5 +1,5 @@
 import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView } from "react-native";
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import Resume from "./Resume";
@@ -27,6 +27,13 @@ const OfferAccepted = ({ route, navigation }) => {
   }, [job])
 
 
+
+  const [webHeight, setWebHeight] = useState(0)
+  const onWebHeight = (e) => {
+    setWebHeight(Number(e.nativeEvent.data))
+}
+
+
   return (
     <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
       <View style={{ backgroundColor: '#EAEAEA', }}>
@@ -44,10 +51,10 @@ const OfferAccepted = ({ route, navigation }) => {
               source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
           </View>
         </View>
-        <Text style={{ fontSize: 22, fontFamily: 'poppins_bold', textAlign: "center", marginTop: 40 }}>{job?.role}</Text>
-        <View style={{ paddingHorizontal: 106, marginTop: 4 }}>
+        <Text style={{ fontSize: 22, fontFamily: 'poppins_bold', textAlign: "center", marginTop: 90 }}>{job?.role}</Text>
+        {/* <View style={{ paddingHorizontal: 106, marginTop: 4 }}>
           <Text style={{ backgroundColor: '#0EB000', textAlign: "center", borderRadius: 20, fontSize: 16, fontFamily: 'poppins_bold', color: 'white', marginVertical: 4, paddingVertical: 7 }}>{job?.address}</Text>
-        </View>
+        </View> */}
         <View style={{ marginTop: 10 }}>
 
 
@@ -71,9 +78,9 @@ const OfferAccepted = ({ route, navigation }) => {
                 borderRadius: 5,
                 marginLeft: 25,
               }}>{job?.company_name}</Text>
-              <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13, marginRight: 25 }}>{moment(job?.date).add(10, 'days').calendar()}</Text>
+              <Text style={{ marginLeft: 'auto', textAlign: 'right', fontFamily: 'poppins_medium', fontSize: 13, marginRight: 25 }}>{moment(job?.created).format("MMM Do YY")}</Text>
             </View>
-            <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+            <View style={{ marginLeft: 'auto', marginRight: 'auto' ,marginTop:20}}>
               <Text style={{ fontFamily: 'poppins_medium', fontSize: 15, textAlign: 'center', marginTop: 4, backgroundColor: '#00A224', color: "white", borderRadius: 20, paddingLeft: 20, paddingRight: 20, paddingTop: 6, paddingBottom: 5 }} >
                 Salary ${job?.salary}
               </Text>
@@ -86,44 +93,44 @@ const OfferAccepted = ({ route, navigation }) => {
             </View>
             <View style={{ flexDirection: "row", marginTop: 20, backgroundColor: '#F6F6F6', }}>
               <View style={{ backgroundColor: 'rgba(19, 163, 225, 0.20)', paddingHorizontal: 30, width: '50%', paddingVertical: 25, borderTopRightRadius: 40, borderBottomRightRadius: 40 }}>
-                <View style={{ flexDirection: 'column' }}>
+                <View style={{  }}>
                   <Text style={{
                     color: 'white',
                     backgroundColor: '#13a3e1',
-                    paddingHorizontal: 10,
-                    paddingVertical: 8,
+                    paddingHorizontal: 12,
+                    paddingVertical: 6,
                     fontSize: 15,
                     fontFamily: 'poppins_bold',
-                    borderRadius: 14, textAlign: "center"
+                    borderRadius: 14,
+                     textAlign: "center",
+                     marginLeft:'auto',marginRight:'auto'
                   }}>{job?.type}</Text>
-                  <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', textAlign: "center" }}> {job?.workdays} </Text>
-                  <Text style={{ fontSize: 13, fontFamily: 'poppins_medium', textAlign: "center" }}>  {job?.worktime}</Text>
+                  <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', textAlign: "center",marginTop:5 }}> {job?.workdays} </Text>
+                  <Text style={{ fontSize: 13, fontFamily: 'poppins_regular', textAlign: "center",marginTop:5 }}>  {job?.worktime}</Text>
                 </View>
               </View>
               <View style={{ width: '50%' }}>
                 <View style={{ flexDirection: 'column', paddingVertical: 25, }}>
                   <Text style={{ textAlign: "center", fontSize: 19, fontFamily: 'poppins_medium' }}>{job?.experience}</Text>
                   <Text style={{ textAlign: "center", fontSize: 25, fontFamily: 'poppins_medium' }}>{job?.qualification}</Text>
-                  <Text style={{ textAlign: "center", width: '80%', marginLeft: 15, fontSize: 12, fontFamily: 'poppins_medium' }}>{job?.skills}</Text>
+                  <Text style={{ textAlign: "center", width: '80%', marginLeft: 15, fontSize: 12, fontFamily: 'poppins_regular' }}>{job?.skills}</Text>
 
                 </View>
               </View>
             </View>
             <View  >
-              <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>About Me: </Text>
+              <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>Job Details: </Text>
               <ScrollView >
-                <WebView source={{ html: job?.description }} style={{marginTop: 20, flex: 1,minHeight:800 }}
-                  javaScriptEnabled={false}
-                  domStorageEnabled={false}
-                  startInLoadingState={true}
+                <WebView source={{ html: job?.description }} style={{ marginTop: 20, flex: 1, minHeight: 300,height:webHeight,marginHorizontal:20 }}
                   scalesPageToFit={false}
-                  scrollEnabled={true}
-                ></WebView>
+                  onMessage={e => onWebHeight(e)}
+                  injectedJavaScript='window.ReactNativeWebView.postMessage(document.body.scrollHeight)'
+                />
               </ScrollView>
             </View>
             <View style={{ flexDirection: 'row', justifyContent: "center", gap: 20, marginTop: 10 }}>
-              <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#143D59', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Hire</Text>
-              <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Ignore</Text>
+              <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>View Applied</Text>
+              {/* <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', width: 150, textAlign: "center", paddingVertical: 5, borderRadius: 20, }}>Ignore</Text> */}
             </View>
           </View>
         </View>

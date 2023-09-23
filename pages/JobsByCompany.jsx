@@ -10,6 +10,7 @@ import moment from "moment";
 import {recordInteraction} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {RESET} from "../Utils/Constants";
+import Ripple from "react-native-material-ripple";
 
 const data = [
     {"name": "Facebook"},
@@ -73,6 +74,10 @@ function JobsByCompany({route, navigation}) {
         setID(id);
     }
 
+    // useEffect(()=>{
+    //     console.log(jobs)
+    // },[jobs])
+
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
             <View style={{backgroundColor: '#EAEAEA'}}>
@@ -111,7 +116,7 @@ function JobsByCompany({route, navigation}) {
                 <SafeAreaView>
                     <FlatList nestedScrollEnabled={false} scrollEnabled={false}
                               style={{marginHorizontal: 0, marginTop: 10}} data={data} renderItem={({item}) => (
-                        <Pressable onPress={() => JobClick(item.id)}><View style={{
+                        <Ripple rippleColor="#13A3E1" rippleOpacity={0.2} onPress={() => JobClick(item.id)}><View style={{
                             marginLeft: 25,
                             marginRight: 25,
                             marginBottom: 8,
@@ -138,7 +143,7 @@ function JobsByCompany({route, navigation}) {
                                     textAlign: 'right',
                                     fontFamily: 'poppins_medium',
                                     fontSize: 13
-                                }}>{moment(item.date).fromNow()}</Text>
+                                }}>{moment(item.created).format("MMM Do YY")}</Text>
                             </View>
                             <View style={{flex: 1, flexDirection: 'row'}}>
                                 <View style={{flex: 0.8}}>
@@ -153,7 +158,7 @@ function JobsByCompany({route, navigation}) {
                                         fontSize: 12
                                     }}>{item.company_name}</Text>
                                 </View>
-                                {item.bookmark === 0 ?
+                                {/* {item.bookmark === 0 ?
                                     <Image style={{
                                         width: 20,
                                         height: 20,
@@ -167,7 +172,7 @@ function JobsByCompany({route, navigation}) {
                                         marginLeft: 'auto',
                                         marginTop: 10
                                     }} source={require('../assets/bookmark.png')}/>
-                                }
+                                } */}
                             </View>
                             <View style={{flexDirection: 'row', flex: 1}}>
                                 <Text style={{
@@ -218,7 +223,7 @@ function JobsByCompany({route, navigation}) {
                             </View>
 
 
-                        </View></Pressable>
+                        </View></Ripple>
                     )}/>
                 </SafeAreaView>
                 }

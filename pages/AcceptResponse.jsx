@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Image, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
 import { FetchOffer, FetchOffers } from '../API/actions/offersActions'
 import { useDispatch, useSelector } from 'react-redux'
+import moment from 'moment/moment'
 
 const AcceptResponse = ({ route, navigation }) => {
 

@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AllCities} from "../API/actions/cityActions";
 import {AllCompanies} from "../API/actions/companyActions";
 import {ActivityIndicator} from "react-native";
+import Ripple from "react-native-material-ripple";
 
 const data = [
     {"name": "Facebook"},
@@ -112,7 +113,7 @@ function Companies({navigation}) {
                                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                                       style={{marginHorizontal: 0, marginTop: 10}} data={data}
                                                       renderItem={({item}) => (
-                                                          <Pressable
+                                                          <Ripple rippleColor="#13A3E1" rippleOpacity={0.2}
                                                               onPress={() => navigation.push('JobsByCompany', {COMID: item.id})}
                                                               style={{
                                                                   marginLeft: 25,
@@ -134,7 +135,7 @@ function Companies({navigation}) {
                                                                   fontFamily: 'poppins_semibold',
                                                                   marginLeft: 20
                                                               }}>{item.name}</Text>
-                                                          </Pressable>
+                                                          </Ripple>
                                                       )}/>
                                         </SafeAreaView>
                                     </View>

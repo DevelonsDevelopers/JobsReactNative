@@ -135,27 +135,29 @@ function SentOffers({ navigation }) {
                                         marginTop: 4,
                                         backgroundColor: '#d9d9d9',
                                         paddingHorizontal: 10,
-                                        paddingVertical: 2,
+                                        paddingVertical: 5,
                                         borderRadius: 10,
                                         margin: 'auto',
                                     }}>
                                         Salary ${item.salary}
                                     </Text>
                                 </View>
-                                <View style={{ paddingHorizontal: 36, marginTop: 4 }}>
+                                
                                     <Text
                                         onPress={() => navigation.push('AcceptResponse')}
                                         style={{
-                                            backgroundColor: '#143D59',
+                                            backgroundColor: '#13A3E1',
                                             textAlign: "center",
-                                            borderRadius: 20,
+                                            borderRadius: 10,
                                             fontSize: 16,
                                             fontFamily: 'poppins_bold',
                                             color: 'white',
-                                            marginVertical: 4,
-                                            paddingVertical: 7
+                                            marginTop: 9,
+                                            paddingVertical: 5,
+                                            paddingHorizontal:30,
+                                            marginLeft:'auto',marginRight:'auto'
                                         }}>View Response</Text>
-                                </View>
+                               
                             </View>
                         )} />
                 </SafeAreaView>

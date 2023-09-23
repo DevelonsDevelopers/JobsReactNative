@@ -164,12 +164,12 @@ const Verification = ({ navigation }) => {
 							>Created</Text>
 						</View>
 						:
-						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+						<Pressable onPress={() => navigation.push('AccountInfo')} style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_regular', marginTop: 4 }}
 							>(Create CV)</Text>
-						</View>
+						</Pressable>
 					}
 
 					<View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, marginTop: 10, padding: 2 }}>
