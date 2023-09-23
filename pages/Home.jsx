@@ -94,10 +94,12 @@ function Home({ navigation }) {
 	const toggleCompleteVisible = () => setCompleteVisible(!completeVisible)
 
 	useEffect(() => {
-		if (check === "complete") {
-			setCompleteVisible(false)
-		} else {
-			setCompleteVisible(true)
+		if (loginval) {
+			if (check === "complete") {
+				setCompleteVisible(false)
+			} else {
+				setCompleteVisible(true)
+			}
 		}
 	}, [check]);
 
