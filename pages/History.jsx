@@ -8,6 +8,7 @@ import { AllCities } from "../API/actions/cityActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AllInteractions } from "../API/actions/interactionsActions";
 import moment from "moment";
+import Ripple from 'react-native-material-ripple'
 
 const data = [
     { "city": "Lahore", "country": 'Pakistan' },
@@ -62,8 +63,6 @@ const History = ({ navigation }) => {
 
 
     const [data, setData] = useState()
-
-
     useEffect(() => {
         if (history) {
             setData(history)
@@ -76,6 +75,10 @@ const History = ({ navigation }) => {
         })
         setData(searched)
     }
+
+    useEffect(() => {
+        console.log(history)
+    }, [history])
 
 
     return (
@@ -133,7 +136,8 @@ const History = ({ navigation }) => {
                         }}>
                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                 style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
-                                    <View>
+                                    <Ripple 
+                                    onPress={() => navigation.push('JobDetails', { ID: item.id })}>
                                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                             <Text numberOfLines={1} ellipsizeMode={"tail"} style={{
                                                 fontSize: 15,
@@ -156,7 +160,7 @@ const History = ({ navigation }) => {
                                             marginHorizontal: 10,
                                             marginVertical: 5
                                         }}></View>
-                                    </View>
+                                    </Ripple>
                                 )} />
                         </SafeAreaView>
                     </>}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FlatList, Image, KeyboardAvoidingView, Modal, Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
 import { PhoneData } from '../Utils/Constants';
 
@@ -7,6 +7,16 @@ const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
     const add = (code) => {
         set(code)
     }
+
+
+    const [data, setData] = useState()
+    const search = (query) => {
+        const searched = PhoneData.filter((PhoneData) => {
+            return (PhoneData.name).toLowerCase().includes(query.toLowerCase());
+        })
+        setData(searched)
+    }
+
 
     return (
 
@@ -24,6 +34,7 @@ const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
                     </View>
 
                         <TextInput
+                        onChangeText={text => search(text)}
                             style={{
                                 borderRadius: 25,
                                 paddingHorizontal: 20,
@@ -45,7 +56,7 @@ const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
                         borderRadius: 3
                     }}></View>
                     <FlatList scrollEnabled={true} nestedScrollEnabled={false}
-                        style={{ marginHorizontal: 0, marginTop: 20, }} data={PhoneData}
+                        style={{ marginHorizontal: 0, marginTop: 20, }} data={data}
                         renderItem={({ item }) => (
                             
                             <Pressable onPress={() => add(item.dial_code)}><View>
