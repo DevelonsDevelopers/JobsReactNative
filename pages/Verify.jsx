@@ -4,12 +4,15 @@ import React, { useEffect, useState } from "react";
 import PhoneInput from "react-native-phone-number-input";
 import PhoneModal from "../Components/PhoneModal";
 
-function ChangePassword({ route, navigation }) {
+function Verify({ route, navigation }) {
 
+    const { forgot } = route.params;
     const { code } = route.params;
     const { verifyPhone } = route.params;
     const { type } = route.params;
-    const { password } = route.params;
+    const { ID } = route.params;
+
+    const [changeable, setChangeable] = useState()
 
     const [phone, setPhone] = useState(verifyPhone)
 
@@ -20,6 +23,14 @@ function ChangePassword({ route, navigation }) {
     const setCode = (code) => {
         togglePhoneVisible()
     }
+
+    useEffect(() => {
+        if (forgot){
+            setChangeable(false)
+        } else {
+            setChangeable(true)
+        }
+    }, [forgot]);
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -44,8 +55,8 @@ function ChangePassword({ route, navigation }) {
                 }} placeholder={'Phone Number'} inputMode={'text'} /> */}
 
                 <View style={{ flexDirection: 'row', marginLeft: 40 ,marginTop:20}}>
-                    <Text onPress={() => togglePhoneVisible()} style={{ borderWidth:1,paddingVertical:6,width:'30%' }}>{code}</Text>
-                    <TextInput  placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }}  >{phone}</TextInput>
+                    <Text onPress={() => { if (changeable) { togglePhoneVisible() } }} style={{ borderWidth:1,paddingVertical:6,width:'30%' }}>{code}</Text>
+                    <TextInput onChangeText={text => setPhone(phone)} editable={changeable} placeholder="Enter Your Number" style={{ borderWidth:1,paddingVertical:6,width:'60%' }}  >{verifyPhone}</TextInput>
                 </View>
 
 
@@ -61,7 +72,7 @@ function ChangePassword({ route, navigation }) {
                 {/*    elevation: 10*/}
                 {/*}} placeholder={'Email'} secureTextEntry={true}/>*/}
 
-                <Pressable onPress={() => navigation.push('VerificationCode', { code: code, phone: phone, password: password, type: type })} style={{
+                <Pressable onPress={() => navigation.push('VerificationCode', { code: code, phone: phone, type: type, ID: ID })} style={{
                     width: '50%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',
@@ -74,4 +85,4 @@ function ChangePassword({ route, navigation }) {
     );
 }
 
-export default ChangePassword
+export default Verify

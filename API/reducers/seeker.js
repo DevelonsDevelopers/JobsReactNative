@@ -1,7 +1,7 @@
 import {
     CHECK_SEEKER,
     ERROR,
-    GET_SEEKER,
+    GET_SEEKER, GET_SEEKER_BY_EMAIL,
     LOADING,
     NODATA,
     RECOMMENDED_SEEKER,
@@ -23,6 +23,8 @@ const seeker = (state = {isLoading: true, success: false, error: false, nodata: 
             return {...state, isLoading: false, success: false, error: false, nodata: true}
         case GET_SEEKER:
             return {...state, seeker: action.payload.data}
+        case GET_SEEKER_BY_EMAIL:
+            return {...state, seekerEmail: action.payload.data}
         case CHECK_SEEKER:
             return {...state, check: action.payload.data}
         case UPDATE_SEEKER:

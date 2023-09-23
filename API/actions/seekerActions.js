@@ -2,7 +2,7 @@ import * as api from '../../API/index'
 import {
     CHECK_SEEKER,
     ERROR,
-    GET_SEEKER,
+    GET_SEEKER, GET_SEEKER_BY_EMAIL,
     LOADING,
     NODATA,
     RECOMMENDED_SEEKER,
@@ -33,6 +33,18 @@ export const fetchSeeker = (ID) => async (dispatch) => {
         dispatch ({ type: LOADING })
         const { data: { data } } = await api.fetchSeeker(ID);
         dispatch ({ type: GET_SEEKER, payload: { data: data } })
+        dispatch ({ type: SUCCESS })
+    } catch (error) {
+        console.log(error)
+        dispatch ({ type: ERROR })
+    }
+}
+
+export const SeekerByEmail = (email) => async (dispatch) => {
+    try {
+        dispatch ({ type: LOADING })
+        const { data: { data } } = await api.fetchSeekerByEmail(email);
+        dispatch ({ type: GET_SEEKER_BY_EMAIL, payload: { data: data } })
         dispatch ({ type: SUCCESS })
     } catch (error) {
         console.log(error)

@@ -11,13 +11,13 @@ import {
     TextInput,
     View
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { fetchSeeker, updateSeeker } from "../API/actions/seekerActions";
-import { AllCities } from "../API/actions/cityActions";
-import { AllCountries } from "../API/actions/countryActions";
-import { RESET, RESET_SEEKER } from "../Utils/Constants";
+import {fetchSeeker, updateSeeker} from "../API/actions/seekerActions";
+import {AllCities} from "../API/actions/cityActions";
+import {AllCountries} from "../API/actions/countryActions";
+import {RESET, RESET_SEEKER} from "../Utils/Constants";
 import city from "../API/reducers/city";
 import CitySelectModal from "../Components/CitySelectModal";
 import CountrySelectModal from "../Components/CountrySelectModal";
@@ -27,7 +27,7 @@ import Ripple from "react-native-material-ripple";
 import PhoneInput from "react-native-phone-number-input";
 import PhoneModal from "../Components/PhoneModal";
 
-function PersonalInfo({ navigation }) {
+function PersonalInfo({navigation}) {
 
     const [stateCheck, setStateCheck] = useState(false)
     const seeker = useSelector(state => state.seeker.seeker)
@@ -126,7 +126,7 @@ function PersonalInfo({ navigation }) {
     }, [seeker])
 
     const updateGender = (gender) => {
-        setSeekerData({ ...seekerData, gender: gender })
+        setSeekerData({...seekerData, gender: gender})
         setGen(gender)
     }
 
@@ -138,7 +138,7 @@ function PersonalInfo({ navigation }) {
         console.log(seekerData)
         dispatch(updateSeeker(seekerData.name, seekerData.city, seekerData.country, seekerData.username, seekerData.code, seekerData.phone, seekerData.address, seekerData.dob, seekerData.gender, seekerData.id))
         toggleLoadingVisibility()
-        dispatch({ type: RESET })
+        dispatch({type: RESET})
         setTrigger(!trigger)
     }
 
@@ -164,13 +164,13 @@ function PersonalInfo({ navigation }) {
     }, [dispatch, countries]);
 
     const cityClick = (item) => {
-        setSeekerData({ ...seekerData, city: item.id })
+        setSeekerData({...seekerData, city: item.id})
         toggleVisibility()
         setNameCity(item.name)
     }
 
     const countryClick = (item) => {
-        setSeekerData({ ...seekerData, country: item.id })
+        setSeekerData({...seekerData, country: item.id})
         toggleCountryVisibility()
         setCountryName(item.name)
     }
@@ -187,12 +187,12 @@ function PersonalInfo({ navigation }) {
     const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
     const setCode = (code) => {
-        setSeekerData({ ...seekerData, code: code })
+        setSeekerData({...seekerData, code: code})
         togglePhoneVisible()
     }
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{flex: 1}}>
             <DatePicker
                 modal
                 open={open}
@@ -206,11 +206,11 @@ function PersonalInfo({ navigation }) {
                 }}
             />
 
-            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
-            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode}/>
+            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick}/>
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
-                click={countryClick} />
-            <GenderModal visible={gender} toggleVisibility={toggleGenderVisibility} set={updateGender} />
+                                click={countryClick}/>
+            <GenderModal visible={gender} toggleVisibility={toggleGenderVisibility} set={updateGender}/>
             <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                 <View style={{
                     flex: 1,
@@ -229,27 +229,27 @@ function PersonalInfo({ navigation }) {
                         alignItems: 'center',
                         marginHorizontal: 100
                     }}>
-                        <Text style={{ paddingBottom: 16, fontSize: 14, fontFamily: 'poppins_medium' }}>Please Wait
+                        <Text style={{paddingBottom: 16, fontSize: 14, fontFamily: 'poppins_medium'}}>Please Wait
                             ...</Text>
-                        <ActivityIndicator size={60} color="#13A3E1" />
+                        <ActivityIndicator size={60} color="#13A3E1"/>
                     </View>
                 </View>
             </Modal>
 
-            <ScrollView style={{ flex: 1, backgroundColor: 'white', }}>
-                <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
-                    <View style={{ flexDirection: 'row', height: 130 }}>
-                        <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
+            <ScrollView style={{flex: 1, backgroundColor: 'white',}}>
+                <View style={{flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1'}}>
+                    <View style={{flexDirection: 'row', height: 130}}>
+                        <Pressable onPress={() => navigation.goBack()} style={{padiingRight: 5}}><Image style={{
                             width: 22,
                             height: 20,
                             marginTop: 70,
                             marginLeft: 30,
                             marginBottom: 250,
                             tintColor: '#fff'
-                        }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
-                        <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                            <Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                                source={require('../assets/logo.png')} alt={'Okay'} />
+                        }} source={require('../assets/back_arrow.png')} alt={'Okay'}/></Pressable>
+                        <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                            <Image style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
+                                   source={require('../assets/logo.png')} alt={'Okay'}/>
                         </View>
                     </View>
                     <Text style={{
@@ -276,8 +276,8 @@ function PersonalInfo({ navigation }) {
                         : ''}
                 </View>
                 {loading ?
-                    <View style={{ marginTop: 200 }}>
-                        <ActivityIndicator size={60} color="#13A3E1" />
+                    <View style={{marginTop: 200}}>
+                        <ActivityIndicator size={60} color="#13A3E1"/>
                     </View>
                     :
                     <>
@@ -291,7 +291,7 @@ function PersonalInfo({ navigation }) {
                             borderRadius: 30,
                             marginTop: 20
                         }}>
-                            <View style={{ flexDirection: 'row', flex: 1 }}>
+                            <View style={{flexDirection: 'row', flex: 1}}>
                                 <View style={{
                                     flex: 0.7,
                                     backgroundColor: '#E6E6E6',
@@ -317,17 +317,17 @@ function PersonalInfo({ navigation }) {
                                     paddingHorizontal: 20,
                                     paddingVertical: 5
                                 }}>
-                                    <TextInput onChangeText={(text) => setSeekerData({ ...seekerData, name: text })}
-                                        placeholder={'Missing!!!'} style={{
-                                            color: '#000',
-                                            fontSize: 14,
-                                            fontFamily: 'poppins_medium',
-                                            width: '100%',
-                                            textAlign: 'left'
-                                        }}>{seeker?.name}</TextInput>
+                                    <TextInput onChangeText={(text) => setSeekerData({...seekerData, name: text})}
+                                               placeholder={'Missing!!!'} style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_medium',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>{seeker?.name}</TextInput>
                                 </View>
                             </View>
-                            <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                            <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
                                 <View style={{
                                     flex: 0.7,
                                     backgroundColor: '#E6E6E6',
@@ -352,17 +352,17 @@ function PersonalInfo({ navigation }) {
                                     paddingVertical: 5
                                 }}>
                                     <TextInput
-                                        onChangeText={(text) => setSeekerData({ ...seekerData, dob: text })}
+                                        onChangeText={(text) => setSeekerData({...seekerData, dob: text})}
                                         placeholder={'Missing!!!'} style={{
-                                            color: '#000',
-                                            fontSize: 14,
-                                            fontFamily: 'poppins_medium',
-                                            width: '100%',
-                                            textAlign: 'left'
-                                        }}>{seeker?.dob}</TextInput>
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_medium',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>{seeker?.dob}</TextInput>
                                 </View>
                             </View>
-                            <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                            <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
                                 <View style={{
                                     flex: 0.7,
                                     backgroundColor: '#E6E6E6',
@@ -381,25 +381,25 @@ function PersonalInfo({ navigation }) {
                                     }}>Gender</Text>
                                 </View>
                                 <Pressable onPress={() => toggleGenderVisibility()}
-                                    style={{
-                                        flex: 1.3,
-                                        borderBottomRightRadius: 30,
-                                        borderColor: '#b2b2b2',
-                                        borderWidth: 1,
-                                        paddingHorizontal: 20,
-                                        paddingVertical: 5
-                                    }}>
+                                           style={{
+                                               flex: 1.3,
+                                               borderBottomRightRadius: 30,
+                                               borderColor: '#b2b2b2',
+                                               borderWidth: 1,
+                                               paddingHorizontal: 20,
+                                               paddingVertical: 5
+                                           }}>
                                     <View>
                                         <TextInput
                                             editable={false}
                                             onTouchStart={() => toggleGenderVisibility()}
                                             placeholder={'Missing!!!'} style={{
-                                                color: '#000',
-                                                fontSize: 14,
-                                                fontFamily: 'poppins_medium',
-                                                width: '100%',
-                                                textAlign: 'left'
-                                            }}>{gen}</TextInput>
+                                            color: '#000',
+                                            fontSize: 14,
+                                            fontFamily: 'poppins_medium',
+                                            width: '100%',
+                                            textAlign: 'left'
+                                        }}>{gen}</TextInput>
                                     </View>
                                 </Pressable>
                             </View>
@@ -414,7 +414,7 @@ function PersonalInfo({ navigation }) {
                             borderRadius: 30,
                             marginTop: 20
                         }}>
-                            <View style={{ flexDirection: 'row', flex: 1 }}>
+                            <View style={{flexDirection: 'row', flex: 1}}>
                                 <View style={{
                                     flex: 0.7,
                                     backgroundColor: '#E6E6E6',
@@ -494,7 +494,7 @@ function PersonalInfo({ navigation }) {
                                 </View>
                             </View> */}
 
-                            <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                            <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
                                 <View style={{
                                     flex: 0.7,
                                     backgroundColor: '#E6E6E6',
@@ -518,14 +518,14 @@ function PersonalInfo({ navigation }) {
                                     paddingHorizontal: 20,
                                     paddingVertical: 5
                                 }}>
-                                    <TextInput onChangeText={(text) => setSeekerData({ ...seekerData, address: text })}
-                                        placeholder={'Missing!!!'} style={{
-                                            color: '#000',
-                                            fontSize: 14,
-                                            fontFamily: 'poppins_medium',
-                                            width: '100%',
-                                            textAlign: 'left'
-                                        }}>{seeker?.address}</TextInput>
+                                    <TextInput onChangeText={(text) => setSeekerData({...seekerData, address: text})}
+                                               placeholder={'Missing!!!'} style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_medium',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}>{seeker?.address}</TextInput>
                                 </View>
                             </View>
 
@@ -536,7 +536,7 @@ function PersonalInfo({ navigation }) {
                                 backgroundColor: '#fff',
                                 borderRadius: 30,
                             }}>
-                                <View style={{ flexDirection: 'row', flex: 1 }}>
+                                <View style={{flexDirection: 'row', flex: 1}}>
                                     <View style={{
                                         flex: 0.7,
                                         backgroundColor: '#E6E6E6',
@@ -563,21 +563,20 @@ function PersonalInfo({ navigation }) {
                                         paddingVertical: 5
                                     }}>
                                         <Pressable onPress={() => toggleVisibility()}><TextInput editable={false}
-                                            onFocus={() => toggleVisibility()}
-                                            placeholder={'Missing!!!'}
-                                            style={{
-                                                color: '#000',
-                                                fontSize: 14,
-                                                fontFamily: 'poppins_medium',
-                                                width: '100%',
-                                                textAlign: 'left'
-                                            }}>{cityName}</TextInput></Pressable>
+                                                                                                 onFocus={() => toggleVisibility()}
+                                                                                                 placeholder={'Missing!!!'}
+                                                                                                 style={{
+                                                                                                     color: '#000',
+                                                                                                     fontSize: 14,
+                                                                                                     fontFamily: 'poppins_medium',
+                                                                                                     width: '100%',
+                                                                                                     textAlign: 'left'
+                                                                                                 }}>{cityName}</TextInput></Pressable>
                                     </View>
                                 </View>
 
 
-
-                                <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                                <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
                                     <View style={{
                                         flex: 0.7,
                                         backgroundColor: '#E6E6E6',
@@ -604,23 +603,62 @@ function PersonalInfo({ navigation }) {
                                         paddingVertical: 5
                                     }}>
                                         <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
-                                            onFocus={() => toggleCountryVisibility()}
-                                            placeholder={'Missing!!!'}
-                                            style={{
-                                                color: '#000',
-                                                fontSize: 14,
-                                                fontFamily: 'poppins_medium',
-                                                width: '100%',
-                                                textAlign: 'left'
-                                            }}>{countryName}</TextInput></Pressable>
+                                                                                                        onFocus={() => toggleCountryVisibility()}
+                                                                                                        placeholder={'Missing!!!'}
+                                                                                                        style={{
+                                                                                                            color: '#000',
+                                                                                                            fontSize: 14,
+                                                                                                            fontFamily: 'poppins_medium',
+                                                                                                            width: '100%',
+                                                                                                            textAlign: 'left'
+                                                                                                        }}>{countryName}</TextInput></Pressable>
                                     </View>
                                 </View>
                             </View>
                         </View>
-                        <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
-                            <TextInput editable={false} style={{ textAlign: 'center', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 8, borderRightWidth: 1, width: '20%', color: 'black', fontFamily: 'poppins_regular', borderColor: '#b2b2b2', borderTopLeftRadius: 30, borderWidth: 1, borderBottomLeftRadius: 30, backgroundColor: '#E6E6E6', }}>Phone</TextInput>
-                            <TextInput placeholder="country code" onTouchStart={() => togglePhoneVisible()} style={{ textAlign: 'center', paddingHorizontal: 6, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 8, borderColor: '#b2b2b2', borderTopWidth: 1, borderBottomWidth: 1, borderRightWidth: 1 }}>{seeker?.code}</TextInput>
-                            <TextInput onChangeText={text => setSeekerData({ ...seekerData, phone: text })} placeholder="Enter Your Number" style={{ textAlign: 'left', paddingHorizontal: 10, marginTop: 'auto', marginBottom: 'auto', paddingVertical: 8, width: '46%', borderColor: '#b2b2b2', borderTopRightRadius: 20, borderBottomRightRadius: 20, borderTopWidth: 1, borderBottomWidth: 1, borderRightWidth: 1 }}>{seeker?.phone}</TextInput>
+                        <View style={{flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto',}}>
+                            <TextInput editable={false} style={{
+                                textAlign: 'center',
+                                paddingHorizontal: 10,
+                                marginTop: 'auto',
+                                marginBottom: 'auto',
+                                paddingVertical: 8,
+                                borderRightWidth: 1,
+                                width: '20%',
+                                color: 'black',
+                                fontFamily: 'poppins_regular',
+                                borderColor: '#b2b2b2',
+                                borderTopLeftRadius: 30,
+                                borderWidth: 1,
+                                borderBottomLeftRadius: 30,
+                                backgroundColor: '#E6E6E6',
+                            }}>Phone</TextInput>
+                            <TextInput placeholder="country code" onTouchStart={() => togglePhoneVisible()} style={{
+                                textAlign: 'center',
+                                paddingHorizontal: 6,
+                                marginTop: 'auto',
+                                marginBottom: 'auto',
+                                paddingVertical: 8,
+                                borderColor: '#b2b2b2',
+                                borderTopWidth: 1,
+                                borderBottomWidth: 1,
+                                borderRightWidth: 1
+                            }}>{seeker?.code}</TextInput>
+                            <TextInput onChangeText={text => setSeekerData({...seekerData, phone: text})}
+                                       placeholder="Enter Your Number" style={{
+                                textAlign: 'left',
+                                paddingHorizontal: 10,
+                                marginTop: 'auto',
+                                marginBottom: 'auto',
+                                paddingVertical: 8,
+                                width: '46%',
+                                borderColor: '#b2b2b2',
+                                borderTopRightRadius: 20,
+                                borderBottomRightRadius: 20,
+                                borderTopWidth: 1,
+                                borderBottomWidth: 1,
+                                borderRightWidth: 1
+                            }}>{seeker?.phone}</TextInput>
                         </View>
                         <Pressable onPress={() => update()} style={{
                             backgroundColor: '#13A3E1',
@@ -630,66 +668,91 @@ function PersonalInfo({ navigation }) {
                             marginTop: 15,
                             marginHorizontal: 25
                         }}>
-                            <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>
+                            <Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}>
                                 Update
                             </Text>
                         </Pressable>
                         {seeker?.type === "GOOGLE" ?
                             <Pressable onPress={() => null}
-                                style={{
-                                    borderColor: '#000',
-                                    borderWidth: 1,
-                                    borderRadius: 25,
-                                    alignItems: 'center',
-                                    padding: 15,
-                                    marginTop: 15,
-                                    marginHorizontal: 25
-                                }}><Text style={{ color: '#000', fontWeight: '800', fontSize: 15 }}>Logged In using
-                                    Google</Text></Pressable>
+                                       style={{
+                                           borderColor: '#000',
+                                           borderWidth: 1,
+                                           borderRadius: 25,
+                                           alignItems: 'center',
+                                           padding: 15,
+                                           marginTop: 15,
+                                           marginHorizontal: 25
+                                       }}><Text style={{color: '#000', fontWeight: '800', fontSize: 15}}>Logged In using
+                                Google</Text></Pressable>
                             :
-                            <Pressable onPress={() => navigation.push('ChangePassword', { code: seeker?.code, verifyPhone: seeker?.phone })}
-                                style={{
-                                    borderColor: '#000',
-                                    borderWidth: 1,
-                                    borderRadius: 25,
-                                    alignItems: 'center',
-                                    padding: 15,
-                                    marginTop: 15,
-                                    marginHorizontal: 25
-                                }}><Text style={{ color: '#000', fontWeight: '800', fontSize: 15 }}>Change
-                                    Password</Text></Pressable>
+                            <Pressable onPress={() => {
+                                if (verified) {
+                                    navigation.push('Verify', {
+                                        code: seeker?.code,
+                                        verifyPhone: seeker?.phone,
+                                        type: "SEEKER",
+                                        verify: true,
+                                        forgot: true,
+                                        ID: ID
+                                    })
+                                } else {
+                                    navigation.push('Verify', {
+                                        code: seeker?.code,
+                                        verifyPhone: seeker?.phone,
+                                        type: "SEEKER",
+                                        verify: true,
+                                        ID: ID
+                                    })
+                                }
+                            }}
+                                       style={{
+                                           borderColor: '#000',
+                                           borderWidth: 1,
+                                           borderRadius: 25,
+                                           alignItems: 'center',
+                                           padding: 15,
+                                           marginTop: 15,
+                                           marginHorizontal: 25
+                                       }}><Text style={{color: '#000', fontWeight: '800', fontSize: 15}}>Change
+                                Password</Text></Pressable>
                         }
                         {!verified ?
-                            <Pressable onPress={() => navigation.push('Verify', { code: seeker?.code, verifyPhone: seeker?.phone })}
-                                style={{
-                                    borderColor: '#000',
-                                    backgroundColor: '#000',
-                                    borderWidth: 1,
-                                    borderRadius: 25,
+                            <Pressable onPress={() => navigation.push('Verify', {
+                                code: seeker?.code,
+                                verifyPhone: seeker?.phone,
+                                type: "SEEKER",
+                                verify: false,
+                                ID: ID
+                            })}
+                                       style={{
+                                           borderColor: '#000',
+                                           backgroundColor: '#000',
+                                           borderWidth: 1,
+                                           borderRadius: 25,
 
-                                    alignItems: 'center',
-                                    padding: 15,
-                                    marginTop: 15,
-                                    marginHorizontal: 25,
-                                    marginBottom: 20
-                                }}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Verify
-                                    Phone</Text></Pressable>
+                                           alignItems: 'center',
+                                           padding: 15,
+                                           marginTop: 15,
+                                           marginHorizontal: 25,
+                                           marginBottom: 20
+                                       }}><Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}>Verify
+                                Phone</Text></Pressable>
                             :
                             ''
                         }
 
                         <Ripple rippleColor="white"
-                            onPress={() => navigation.push('Plans')}
-                            style={{
-                                backgroundColor: 'green',
-                                borderRadius: 25,
-                                alignItems: 'center',
-                                padding: 15,
-                                marginTop: 15,
-                                marginHorizontal: 25,
-                                marginBottom: 25
-                            }}>
-                            <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
+                                onPress={() => navigation.push('Plans')}
+                                style={{
+                                    backgroundColor: 'green',
+                                    borderRadius: 25,
+                                    alignItems: 'center',
+                                    padding: 15,
+                                    marginTop: 15,
+                                    marginHorizontal: 25,
+                                    marginBottom: 25
+                                }}>
+                            <Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}
                             >Update Your Account
                             </Text>
                         </Ripple>

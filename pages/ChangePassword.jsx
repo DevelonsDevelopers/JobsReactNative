@@ -1,10 +1,15 @@
 import {Button, Image, Pressable, ScrollView, Text, TextInput, View} from "react-native";
 import {useState} from "react";
 import Toast from "react-native-toast-message";
+import {changePassword, verifyCompany, verifySeeker} from "../API";
 
-function ChangePassword({ route, navigation }) {
+function ChangePassword({route, navigation}) {
 
-    const { verifyPhone } = route.params
+    // const { verifyPhone } = route.params
+    // const { code } = route.params
+    // const { phone } = route.params
+    const {type} = route.params
+    const { ID } = route.params
 
     const [password, setPassword] = useState()
     const [cPassword, setCPassword] = useState()
@@ -15,24 +20,65 @@ function ChangePassword({ route, navigation }) {
     const changePassword = () => {
         if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password)) {
             if (password === cPassword) {
-                navigation.navigate('Verify', { verifyPhone: verifyPhone, password: password})
+                // navigation.navigate('Verify', { verifyPhone: verifyPhone, password: password})
+                if (type === "PROVIDER") {
+
+                    if (password) {
+                        changePassword(password, ID).then(res => {
+                            navigation.replace('Login')
+                        })
+                    } else {
+                        navigation.replace('Login')
+                    }
+
+                } else {
+
+                    if (password) {
+                        changePassword(password, ID).then(res => {
+                            navigation.replace('Login')
+                        })
+                    } else {
+                        navigation.replace('Login')
+                    }
+
+                }
             } else {
-                Toast.show({type: 'error', position: 'top', text1: 'Password Mismatch', text2: 'Please confirm your password by writing your password again.'})
+                Toast.show({
+                    type: 'error',
+                    position: 'top',
+                    text1: 'Password Mismatch',
+                    text2: 'Please confirm your password by writing your password again.'
+                })
             }
         } else {
-            Toast.show({type: 'error', position: 'top', text1: 'Weak Password', text2: 'Password must be greater than 7 Letters and contains numeric letters'})
+            Toast.show({
+                type: 'error',
+                position: 'top',
+                text1: 'Weak Password',
+                text2: 'Password must be greater than 7 Letters and contains numeric letters'
+            })
         }
     }
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
-            <Pressable onPress={() => navigation.goBack()} style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
+            <Pressable onPress={() => navigation.goBack()}
+                       style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
                 <Image style={{tintColor: 'gray', width: 24, height: 10}}
                        source={require('../assets/back_arrow.png')}/>
             </Pressable>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                <Image style={{ height: 200, width: 300, marginTop: 80 }} source={require('../assets/passwordchange.png')}/>
-                <Text style={{color: '#4041B0', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 0, alignSelf: 'center'}}>Change Password</Text>
+                <Image style={{height: 200, width: 300, marginTop: 80}}
+                       source={require('../assets/passwordchange.png')}/>
+                <Text style={{
+                    color: '#4041B0',
+                    fontFamily: 'poppins_semibold',
+                    fontSize: 18,
+                    width: '85%',
+                    textAlign: 'center',
+                    marginTop: 0,
+                    alignSelf: 'center'
+                }}>Change Password</Text>
                 <View style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -42,7 +88,7 @@ function ChangePassword({ route, navigation }) {
                     borderRadius: 25,
                     width: '85%',
                     paddingRight: 20,
-                    
+
                 }}>
                     <TextInput onChangeText={(text) => setPassword(text)} style={{
                         height: 50,
@@ -83,7 +129,8 @@ function ChangePassword({ route, navigation }) {
                     borderRadius: 25,
                     marginTop: 80,
                     paddingVertical: 15,
-                }}><Text style={{color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15}}>Change Password</Text></Pressable>
+                }}><Text style={{color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15}}>Change
+                    Password</Text></Pressable>
             </View>
             <Toast
                 position='top'

@@ -32,26 +32,17 @@ function VerificationCode({ route, navigation }) {
 
 	const { code } = route.params
 	const { phone } = route.params
-	const { password } = route.params
 	const { type } = route.params
+	const { ID } = route.params
 
 	console.log(type)
 
 	const [confirm, setConfirm] = useState()
-	const [ID, setID] = useState()
 
 	function onAuthStateChanged(user) {
 		if (user) {
 			console.log(user)
 		}
-	}
-
-	useEffect(() => {
-		GetData()
-	}, []);
-	const GetData = async () => {
-		const value = await AsyncStorage.getItem('ID')
-		setID(value);
 	}
 
 	useEffect(() => {
@@ -67,19 +58,13 @@ function VerificationCode({ route, navigation }) {
 	async function confirmCode() {
 		try {
 			await confirm.confirm(value).then(res => {
-				if (type === "PROVIDER") {
-					verifyCompany("true", phone, ID).then(res => {
+				if (type === "PROVIDER"){
+					verifyCompany("true", code, phone, ID).then(res => {
 						const {data: {data}} = res;
 						const {data: {responseCode}} = res;
 						const {data: {message}} = res;
 						if (responseCode === 200) {
-							if (password) {
-								changePassword(password, ID).then(res => {
-									navigation.push('PostJob')
-								})
-							} else {
-								navigation.push('PostJob')
-							}
+							navigation.push('ChangePassword', { type: 'PROVIDER', ID: ID })
 						} else {
 							Toast.show({
 								type: 'error',
@@ -95,13 +80,7 @@ function VerificationCode({ route, navigation }) {
 						const {data: {responseCode}} = res;
 						const {data: {message}} = res;
 						if (responseCode === 200) {
-							if (password) {
-								changePassword(password, ID).then(res => {
-									navigation.push('Home')
-								})
-							} else {
-								navigation.push('Home')
-							}
+							navigation.push('ChangePassword', { type: 'SEEKER', ID: ID })
 						} else {
 							Toast.show({
 								type: 'error',
