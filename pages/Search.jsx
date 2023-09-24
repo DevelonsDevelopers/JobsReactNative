@@ -78,8 +78,6 @@ function Search({route, navigation}) {
     }, [dispatch, loading]);
 
     useEffect(() => {
-        console.log(success)
-        console.log(nodata)
         if (success) {
             setData(searchJobs)
             setLoading(false)
