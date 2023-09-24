@@ -91,7 +91,7 @@ function AppliedByJob({ route, navigation }) {
                                         textAlign: 'right',
                                         fontFamily: 'poppins_medium',
                                         fontSize: 12
-                                    }}>{moment().startOf('day').fromNow(item.date)}</Text>
+                                    }}>{moment(item.date).startOf('day').fromNow()}</Text>
                                 </View>
                                 <Text style={{ fontSize: 17, fontFamily: 'poppins_medium', marginTop: 10 }}>{item.name}</Text>
                                 <Text>{item.address}</Text>

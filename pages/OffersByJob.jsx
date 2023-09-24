@@ -94,9 +94,9 @@ function OffersByJob({ route, navigation }) {
                                         fontSize: 13
                                     }}>{moment(item.date).format("MMM Do YY")}</Text>
                                 </View>
-                                <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}>
-                                        <Text numberOfLines={1} style={{
+                                <View>
+                                    <View style={{}}>
+                                        <Text style={{
                                             fontFamily: 'poppins_bold',
                                             marginTop: 5,
                                             fontSize: 15,
@@ -105,9 +105,8 @@ function OffersByJob({ route, navigation }) {
                                         }}>{item.offerType}</Text>
                                         <Text style={{
                                             fontFamily: 'poppins_medium',
-                                            marginTop: 0,
-                                            fontSize: 14,
-                                            textAlign: "center"
+                                            marginTop: 6,
+                                            fontSize: 16,
                                         }}>{item.seeker_name}</Text>
                                     </View>
                                 </View>
@@ -115,9 +114,11 @@ function OffersByJob({ route, navigation }) {
                                     <Text style={{
                                         fontFamily: 'poppins_bold',
                                         fontSize: 16,
+                                        marginVertical: 5,
+                                        textTransform:'capitalize'
                                     }}>{item.role}</Text>
                                 </View>
-                                <View style={{ width:'60%',marginLeft:'auto',marginRight:'auto' }}>
+                                <View style={{ width: '60%', marginLeft: 'auto', marginRight: 'auto' }}>
                                     <Text style={{
                                         fontFamily: 'poppins_medium',
                                         fontSize: 13,
@@ -125,25 +126,25 @@ function OffersByJob({ route, navigation }) {
                                         marginTop: 4,
                                         backgroundColor: '#d9d9d9',
                                         paddingHorizontal: 10,
-                                        paddingVertical: 2,
+                                        paddingVertical: 6,
                                         borderRadius: 10,
-                                        margin: 'auto',
                                     }}>
                                         Salary ${item.salary}
                                     </Text>
                                 </View>
-                                <Ripple  
-                                onPress={() => navigation.push('ViewResume',{ID:item.user})}
-                                rippleColor="white" style={{ paddingHorizontal: 36, marginTop: 4 }}>
+                                <Ripple
+                                    onPress={() => navigation.push('ViewResume', { ID: item.user })}
+                                    rippleColor="white" style={{ marginTop: 4, marginLeft: 'auto', marginRight: 'auto' }}>
                                     <Text style={{
-                                        backgroundColor: '#143D59',
+                                        backgroundColor: '#13A3E1',
                                         textAlign: "center",
-                                        borderRadius: 20,
+                                        borderRadius: 10,
                                         fontSize: 16,
                                         fontFamily: 'poppins_bold',
                                         color: 'white',
                                         marginVertical: 4,
-                                        paddingVertical: 7
+                                        paddingVertical: 4,
+                                        paddingHorizontal: 34
                                     }}>View Response</Text>
                                 </Ripple>
                             </View>
