@@ -10,9 +10,9 @@ import { RESET } from "../Utils/Constants";
 import Ripple from "react-native-material-ripple";
 import LoginRequireModal from "../Components/LoginRequireModal";
 import CompleteProfileSeekerModal from "../Components/CompleteProfileSeekerModal";
-import {recordInteraction} from "../API";
-import {CheckSeeker, fetchSeeker} from "../API/actions/seekerActions";
-import {CheckCV} from "../API/actions/cvActions";
+import { recordInteraction } from "../API";
+import { CheckSeeker, fetchSeeker } from "../API/actions/seekerActions";
+import { CheckCV } from "../API/actions/cvActions";
 
 function Home({ route, navigation }) {
 
@@ -115,8 +115,10 @@ function Home({ route, navigation }) {
 
 	const JobClick = (id) => {
 		recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
-		navigation.push('JobDetails', {ID: id})
+		navigation.push('JobDetails', { ID: id })
 	}
+
+
 
 	return (
 		<View style={{ flex: 1 }}>
@@ -142,7 +144,7 @@ function Home({ route, navigation }) {
 									tintColor: '#fff'
 								}} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
 								<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-									<Pressable onPress={()=> navigation.push('ProfileVerifiedSuccessful')}
+									<Pressable onPress={() => navigation.push('ProfileVerifiedSuccessful')}
 									><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 										source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
 								</View>
@@ -411,7 +413,6 @@ function Home({ route, navigation }) {
 								if (login) {
 									navigation.push('AccountInfo')
 								} else {
-
 									toggleRequireVisible()
 								}
 							}}
