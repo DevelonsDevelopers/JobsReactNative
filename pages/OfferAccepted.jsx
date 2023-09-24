@@ -35,7 +35,7 @@ const OfferAccepted = ({ route, navigation }) => {
 
 
   return (
-    <View style={{ flex:1,}}>
+    <View style={{ flex: 1, }}>
       <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
         <View style={{ backgroundColor: '#EAEAEA', }}>
           <View style={{ flexDirection: 'row', height: 90 }}>
@@ -134,8 +134,8 @@ const OfferAccepted = ({ route, navigation }) => {
           </View>
         </View>
       </ScrollView>
-      <View style={{ marginLeft:'auto',marginRight:'auto' }}>
-        <Text onPress={() => navigation.push('AppliedByJob', { job: job?.id })} style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', textAlign: "center", paddingVertical: 7, borderRadius: 20,paddingHorizontal:50 }}>View Applied</Text>
+      <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+        <Text onPress={() => navigation.push('AppliedByJob', { job: job?.id })} style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', textAlign: "center", paddingVertical: 7, borderRadius: 20, paddingHorizontal: 50 }}>View Applied</Text>
       </View>
     </View>
   )
