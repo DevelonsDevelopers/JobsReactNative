@@ -147,13 +147,13 @@ const ProviderProfile = ({ navigation }) => {
                         textAlign: 'center',
                         marginTop: 'auto',
                         marginBottom: 'auto',
-                        paddingVertical: 8,
+                        paddingVertical: 10,
                         borderColor: '#b2b2b2',
                         backgroundColor:'white',
                         borderWidth:1,
                         width:'20%',
-                        borderTopLeftRadius:20,
-                        borderBottomLeftRadius:20
+                        borderTopLeftRadius:25,
+                        borderBottomLeftRadius:25
                     }}></TextInput>
                     <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })}
                         placeholder="Enter Your Number" style={{
@@ -161,11 +161,11 @@ const ProviderProfile = ({ navigation }) => {
                             paddingHorizontal: 8,
                             marginTop: 'auto',
                             marginBottom: 'auto',
-                            paddingVertical: 8,
-                            width: '70%',
+                            paddingVertical: 10,
+                            width: '72%',
                             borderColor: '#b2b2b2',
-                            borderTopRightRadius: 20,
-                            borderBottomRightRadius: 20,
+                            borderTopRightRadius: 25,
+                            borderBottomRightRadius: 25,
                             borderTopWidth: 1,
                             borderBottomWidth: 1,
                             borderRightWidth: 1,
