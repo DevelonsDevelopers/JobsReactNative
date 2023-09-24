@@ -17,7 +17,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { fetchSeeker, updateSeeker } from "../API/actions/seekerActions";
 import { AllCities } from "../API/actions/cityActions";
 import { AllCountries } from "../API/actions/countryActions";
-import { RESET, RESET_SEEKER } from "../Utils/Constants";
+import {PhoneData, RESET, RESET_SEEKER} from "../Utils/Constants";
 import city from "../API/reducers/city";
 import CitySelectModal from "../Components/CitySelectModal";
 import CountrySelectModal from "../Components/CountrySelectModal";
@@ -36,15 +36,18 @@ function PersonalInfo({ navigation }) {
     const success = useSelector(state => state.seeker.success)
     const [completed, setCompleted] = useState(false)
     const [verified, setVerified] = useState(false)
+    const [country, setCountry] = useState()
+    const [citiesData, setCitiesData] = useState()
 
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (seeker && cities && countries && success == 'false') {
+        if (seeker && cities && countries && success == "false") {
             setLoading(true)
         } else {
             setLoading(false)
         }
+        setCitiesData(cities)
     }, [seeker, cities, countries, success])
 
     const dispatch = useDispatch();
@@ -108,6 +111,7 @@ function PersonalInfo({ navigation }) {
                 gender: seeker?.gender,
                 id: seeker?.id
             })
+            setCountry(seeker?.country)
             setPhoneCode(seeker?.code)
             setGen(seeker?.gender)
             setNameCity(seeker?.city_name)
@@ -171,6 +175,7 @@ function PersonalInfo({ navigation }) {
 
     const countryClick = (item) => {
         setSeekerData({ ...seekerData, country: item.id })
+        setCountry(item.id)
         toggleCountryVisibility()
         setCountryName(item.name)
     }
@@ -192,6 +197,13 @@ function PersonalInfo({ navigation }) {
         togglePhoneVisible()
     }
 
+    useEffect(() => {
+        const searched = cities?.filter((data) => {
+            return data.country === country
+        })
+        setCitiesData(searched)
+    }, [country]);
+
     return (
         <View style={{ flex: 1 }}>
             <DatePicker
@@ -208,7 +220,7 @@ function PersonalInfo({ navigation }) {
             />
 
             <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
-            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
+            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={citiesData} click={cityClick} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
             <GenderModal visible={gender} toggleVisibility={toggleGenderVisibility} set={updateGender} />
@@ -615,7 +627,7 @@ function PersonalInfo({ navigation }) {
                                 </View>
 
 
-                              
+
 
                             </View>
                         </View>
