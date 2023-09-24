@@ -110,7 +110,7 @@ function AppliedUsers({ route, navigation }) {
                 <Text style={{ fontSize: 17, fontFamily: 'poppins_medium', marginTop: 10 }}>{item.name}</Text>
                 <Text>{item.address}</Text>
                 <Text
-                  style={{ fontSize: 17, fontFamily: 'poppins_medium', marginBottom: 10 }}>Bachelors</Text>
+                  style={{ fontSize: 17, fontFamily: 'poppins_medium', marginBottom: 10 }}>{item.title}</Text>
                 {/* <View style={{paddingHorizontal: 50}}><Text style={{
                                 backgroundColor: '#D9D9D9',
                                 textAlign: "center",

@@ -141,7 +141,7 @@ const ProviderProfile = ({ navigation }) => {
 
 
 
-                <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto' }}>
+                <View style={{ flexDirection: 'row', marginTop: 20,marginHorizontal:10,elevation:10 }}>
                     <TextInput editable={false} style={{
                         textAlign: 'center',
                         paddingHorizontal: 10,
@@ -173,7 +173,7 @@ const ProviderProfile = ({ navigation }) => {
                     <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })}
                         placeholder="Enter Your Number" style={{
                             textAlign: 'left',
-                            paddingHorizontal: 10,
+                            paddingHorizontal: 8,
                             marginTop: 'auto',
                             marginBottom: 'auto',
                             paddingVertical: 8,

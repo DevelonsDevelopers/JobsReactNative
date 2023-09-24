@@ -537,10 +537,47 @@ function PersonalInfo({ navigation }) {
                                 backgroundColor: '#fff',
                                 borderRadius: 30,
                             }}>
+                                  <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                                    <View style={{
+                                        flex: 0.7,
+                                        backgroundColor: '#E6E6E6',
+                                        borderColor: '#b2b2b2',
+                                        borderWidth: 1,
+                                        paddingHorizontal: 20,
+                                        paddingVertical: 5
+                                    }}>
+                                        <Text style={{
+                                            color: '#000',
+                                            fontSize: 14,
+                                            fontFamily: 'poppins_light',
+                                            width: '100%',
+                                            textAlign: 'left'
+                                        }}>Country</Text>
+                                    </View>
+                                    <View style={{
+                                        flex: 1.3,
+                                        borderColor: '#b2b2b2',
+                                        borderWidth: 1,
+                                        paddingHorizontal: 20,
+                                        paddingVertical: 5
+                                    }}>
+                                        <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
+                                            onFocus={() => toggleCountryVisibility()}
+                                            placeholder={'Missing!!!'}
+                                            style={{
+                                                color: '#000',
+                                                fontSize: 14,
+                                                fontFamily: 'poppins_medium',
+                                                width: '100%',
+                                                textAlign: 'left'
+                                            }}>{countryName}</TextInput></Pressable>
+                                    </View>
+                                </View>
                                 <View style={{ flexDirection: 'row', flex: 1 }}>
                                     <View style={{
                                         flex: 0.7,
                                         backgroundColor: '#E6E6E6',
+                                        borderBottomLeftRadius: 30,
 
                                         borderColor: '#b2b2b2',
                                         borderWidth: 1,
@@ -557,6 +594,7 @@ function PersonalInfo({ navigation }) {
                                     </View>
                                     <View style={{
                                         flex: 1.3,
+                                        borderBottomRightRadius: 30,
 
                                         borderColor: '#b2b2b2',
                                         borderWidth: 1,
@@ -577,44 +615,8 @@ function PersonalInfo({ navigation }) {
                                 </View>
 
 
-                                <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
-                                    <View style={{
-                                        flex: 0.7,
-                                        backgroundColor: '#E6E6E6',
-                                        borderBottomLeftRadius: 30,
-                                        borderColor: '#b2b2b2',
-                                        borderWidth: 1,
-                                        paddingHorizontal: 20,
-                                        paddingVertical: 5
-                                    }}>
-                                        <Text style={{
-                                            color: '#000',
-                                            fontSize: 14,
-                                            fontFamily: 'poppins_light',
-                                            width: '100%',
-                                            textAlign: 'left'
-                                        }}>Country</Text>
-                                    </View>
-                                    <View style={{
-                                        flex: 1.3,
-                                        borderBottomRightRadius: 30,
-                                        borderColor: '#b2b2b2',
-                                        borderWidth: 1,
-                                        paddingHorizontal: 20,
-                                        paddingVertical: 5
-                                    }}>
-                                        <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
-                                            onFocus={() => toggleCountryVisibility()}
-                                            placeholder={'Missing!!!'}
-                                            style={{
-                                                color: '#000',
-                                                fontSize: 14,
-                                                fontFamily: 'poppins_medium',
-                                                width: '100%',
-                                                textAlign: 'left'
-                                            }}>{countryName}</TextInput></Pressable>
-                                    </View>
-                                </View>
+                              
+
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
