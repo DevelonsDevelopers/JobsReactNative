@@ -742,7 +742,7 @@ function PersonalInfo({ navigation }) {
                         }
 
                         <Ripple rippleColor="white"
-                            onPress={() => navigation.push('Plans')}
+                            onPress={() => navigation.push('SeekerPlans')}
                             style={{
                                 backgroundColor: 'green',
                                 borderRadius: 25,

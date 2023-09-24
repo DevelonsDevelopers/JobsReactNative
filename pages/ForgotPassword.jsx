@@ -22,7 +22,7 @@ function ForgotPassword({ route, navigation }) {
     useEffect(() => {
         console.log(seekerEmail)
         if (seekerEmail){
-            navigation.push('Verify', { code: seekerEmail?.code, verifyPhone: seekerEmail?.phone, forgot: true, type: "SEEKER", verify: true, ID: seekerEmail?.id })
+            navigation.push('Verify', { code: seekerEmail?.code, verifyPhone: seekerEmail?.phone, forgot: true, type: "SEEKER", verify: false, ID: seekerEmail?.id })
         }
     }, [seekerEmail]);
 
