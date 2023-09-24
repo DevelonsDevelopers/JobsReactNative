@@ -78,6 +78,8 @@ function Search({route, navigation}) {
     }, [dispatch, loading]);
 
     useEffect(() => {
+        console.log(success)
+        console.log(nodata)
         if (success) {
             setData(searchJobs)
             setLoading(false)
@@ -158,6 +160,9 @@ function Search({route, navigation}) {
                </View>
                     :
                     <>
+                        {nodata ?
+                        '' :
+
             <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}} keyboardShouldPersistTaps="handled">
                 <View style={{backgroundColor: '#EAEAEA'}}>
                     <View style={{flexDirection: 'row', height: 90}}>
@@ -308,6 +313,7 @@ function Search({route, navigation}) {
                     </SafeAreaView>
                 </View>
             </ScrollView>
+                        }
        </>}
         </View>
     )

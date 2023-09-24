@@ -634,7 +634,7 @@ function PersonalInfo({ navigation }) {
                                 borderBottomLeftRadius: 30,
                                 backgroundColor: '#E6E6E6',
                             }}>Phone</TextInput>
-                            <TextInput placeholder="country code" onTouchStart={() => togglePhoneVisible()} style={{
+                            <TextInput editable={!verified} placeholder="country code" onTouchStart={() => { if (!verified) { togglePhoneVisible() } }} style={{
                                 textAlign: 'center',
                                 paddingHorizontal: 6,
                                 marginTop: 'auto',
@@ -645,7 +645,7 @@ function PersonalInfo({ navigation }) {
                                 borderBottomWidth: 1,
                                 borderRightWidth: 1
                             }}>{phoneCode}</TextInput>
-                            <TextInput onChangeText={text => setSeekerData({ ...seekerData, phone: text })}
+                            <TextInput editable={!verified} onChangeText={text => setSeekerData({ ...seekerData, phone: text })}
                                 placeholder="Enter Your Number" style={{
                                     textAlign: 'left',
                                     paddingHorizontal: 10,
