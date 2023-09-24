@@ -13,7 +13,7 @@ const ApplyModal = ({ visible, toggleVisible, apply }) => {
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}  >
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleVisible} >
             <GestureHandlerRootView style={{
                 flex: 1,
                 alignContent: 'center',

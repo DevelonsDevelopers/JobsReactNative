@@ -4,7 +4,7 @@ import { GestureHandlerRootView, NativeViewGestureHandler, TextInput } from 'rea
 
 const CoverLetterRole = ({toggleRoleVisibility,visible}) => {
   return (
-    <Modal visible={visible} animationType={"fade"} transparent={true}>
+    <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleRoleVisibility}>
     <GestureHandlerRootView style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
         <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center' }}>
             <Pressable style={{ width:15,height:15,marginLeft:'auto' }} onPress={() => toggleRoleVisibility()}>

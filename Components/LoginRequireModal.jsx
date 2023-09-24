@@ -3,7 +3,7 @@ import { Image, Modal, Pressable, Text, View } from "react-native";
 
 function LoginRequireModal({ toggleRequireVisible, visible, navigation }) {
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleRequireVisible}>
             <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
                 <View style={{ margin: 35, elevation: 24, borderRadius: 15, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center', marginHorizontal: 30 }}>
                     <Image style={{ width: 160, height: 150 }} source={require('../assets/login.png')} />

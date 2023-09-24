@@ -12,7 +12,7 @@ const RoleModal = ({ visible, toggleRoleVisibility, add }) => {
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleRoleVisibility}>
             <GestureHandlerRootView style={{
                 flex: 1,
                 alignContent: 'center',

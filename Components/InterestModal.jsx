@@ -22,7 +22,7 @@ const InterestModal = ({visible, toggleInterestVisibility, add, edit, data}) => 
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleInterestVisibility}>
             <GestureHandlerRootView style={{
                 flex: 1,
                 alignContent: 'center',

@@ -4,7 +4,7 @@ import Ripple from 'react-native-material-ripple'
 
 const ProviderDrawerModal = ({ visible, toggleVisibility, toggleLoadingVisibility, navigation, toggleDrawerVisibility,isPaid }) => {
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleDrawerVisibility} >
             <View style={{
                 flex: 1,
                 alignContent: 'center',

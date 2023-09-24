@@ -4,7 +4,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const ProposelModal = ({visible,toggleProposelVisibility}) => {
   return (
-    <Modal visible={visible} animationType={"fade"} transparent={true}>
+    <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleProposelVisibility}>
     <GestureHandlerRootView style={{
         flex: 1,
         alignContent: 'center',
