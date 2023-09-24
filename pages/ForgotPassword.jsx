@@ -2,8 +2,8 @@ import { Button, Image, Pressable, ScrollView, Text, TextInput, View } from "rea
 import { firebase } from "@react-native-firebase/auth";
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-native-phone-number-input";
-import {useDispatch, useSelector} from "react-redux";
-import {SeekerByEmail} from "../API/actions/seekerActions";
+import { useDispatch, useSelector } from "react-redux";
+import { SeekerByEmail } from "../API/actions/seekerActions";
 
 function ForgotPassword({ route, navigation }) {
 
@@ -46,17 +46,19 @@ function ForgotPassword({ route, navigation }) {
                     elevation: 10
                 }} placeholder={'Phone Number'} inputMode={'text'} /> */}
                 <TextInput
-                onChangeText={(text) => setEmail(text)}
-                style={{
-                    height: 50,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 25,
-                    marginTop: 25,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }} placeholder={'Enter your Email'} inputMode={'text'} />
+                    onChangeText={(text) => setEmail(text)}
+                    keyboardType='email-address'
+                    autoCapitalize="none"
+                    style={{
+                        height: 50,
+                        backgroundColor: '#fff',
+                        width: '85%',
+                        borderRadius: 25,
+                        marginTop: 25,
+                        paddingHorizontal: 20,
+                        color: '#626262',
+                        elevation: 10
+                    }} placeholder={'Enter your Email'}  />
 
 
                 {/*<Text style={{color: '#000', fontFamily: 'poppins_regular', fontSize: 15, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center'}}>OR</Text>*/}
