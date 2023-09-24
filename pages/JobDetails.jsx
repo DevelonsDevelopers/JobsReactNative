@@ -326,7 +326,7 @@ const JobDetails = ({ route, navigation }) => {
                 backgroundColor: '#e8e8e8'
             }}>
                 {bookmark === 0 ?
-                    <Pressable onPress={() => BookmarkJob()}><Text style={{
+                    <Pressable onPress={() => { if (login) { BookmarkJob() } else { toggleLoginVisible() } }}><Text style={{
                         justifyContent: 'center',
                         height: 50,
                         fontSize: 15,

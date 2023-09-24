@@ -11,8 +11,10 @@ import Ripple from "react-native-material-ripple";
 import LoginRequireModal from "../Components/LoginRequireModal";
 import CompleteProfileSeekerModal from "../Components/CompleteProfileSeekerModal";
 import {recordInteraction} from "../API";
+import {CheckSeeker, fetchSeeker} from "../API/actions/seekerActions";
+import {CheckCV} from "../API/actions/cvActions";
 
-function Home({ navigation }) {
+function Home({ route, navigation }) {
 
 	const dispatch = useDispatch();
 	const [login, isLogin] = useState(false);
@@ -23,7 +25,7 @@ function Home({ navigation }) {
 	const jobLoading = useSelector(state => state.job.isLoading)
 	const error = useSelector(state => state.category.error)
 	const check = useSelector(state => state.seeker.check)
-
+	const [ID, setID] = useState()
 
 	const [loginval, setLoginVal] = useState('')
 
