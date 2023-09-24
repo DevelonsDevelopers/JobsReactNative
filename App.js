@@ -200,7 +200,7 @@ function App() {
                             options={{ title: "OffersByJob", headerShown: false }} />
                         <Stack.Screen name="AppliedByJob" component={AppliedByJob}
                             options={{ title: "AppliedByJob", headerShown: false }} />
-                        <Stack.Screen name="PaymentSuccesful" component={PaymentSuccessful}
+                        <Stack.Screen name="PaymentSuccessful" component={PaymentSuccessful}
                             options={{ title: "PaymentSuccessful", headerShown: false }} />
                         <Stack.Screen name="GoogleRegister" component={GoogleRegister}
                             options={{ title: "GoogleRegister", headerShown: false }} />

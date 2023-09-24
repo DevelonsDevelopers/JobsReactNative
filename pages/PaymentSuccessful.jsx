@@ -1,7 +1,36 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Image, Text, View } from 'react-native'
+import {CheckSeeker, fetchSeeker} from "../API/actions/seekerActions";
+import {CheckCV} from "../API/actions/cvActions";
+import {useDispatch} from "react-redux";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const PaymentSuccessful = () => {
+const PaymentSuccessful = ({ navigation }) => {
+
+    const dispatch = useDispatch()
+    const [ID, setID] = useState()
+
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+    useEffect(() => {
+        GetData()
+    }, []);
+    const GetData = async () => {
+        const value = await AsyncStorage.getItem('ID')
+        setID(value);
+    }
+
+    useEffect(() => {
+        if (ID) {
+            dispatch(fetchSeeker(ID))
+            dispatch(CheckCV(ID))
+            dispatch(CheckSeeker(ID))
+            sleep(1000).then( async () => {
+                navigation.replace('Home')
+            })
+        }
+    }, [ID]);
+
   return (
     <View>
         <View style={{ flexDirection:'column',justifyContent:'center',marginLeft:'auto',marginRight:'auto',marginTop:150 }}>

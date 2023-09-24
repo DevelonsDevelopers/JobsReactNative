@@ -89,7 +89,6 @@ const PaymentScreen = ({ route, navigation }) => {
                 if (error) {
                     alert(`Payment Confirmation Error ${error.message}`);
                 } else if (paymentIntent) {
-                    alert("Payment Successful");
                     subscribePlan()
                     console.log("Payment successful ", paymentIntent);
                 }
@@ -148,7 +147,6 @@ const PaymentScreen = ({ route, navigation }) => {
         try {
             const res = paypalApi.capturePayment(id, accessToken)
             console.log("capturePayment res++++", res)
-            alert("Payment sucessfull...!!!")
             subscribePlan()
             clearPaypalState()
         } catch (error) {
@@ -168,7 +166,7 @@ const PaymentScreen = ({ route, navigation }) => {
             const {data: {responseCode}} = res;
             if (responseCode === 200) {
                 navigation.popToTop()
-                navigation.replace('Home')
+                navigation.replace('PaymentSuccessful')
             } else {
 
             }

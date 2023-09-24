@@ -1,9 +1,8 @@
-import { ActivityIndicator, Button, Image, KeyboardAvoidingView, Modal, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Image, Modal, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginAuthentication, ProviderLoginAuthentication } from "../API/actions/loginActions";
 import Toast from "react-native-toast-message";
-import { RESET_SEEKER } from "../Utils/Constants";
 import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
 import { google, googleProvider } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -20,6 +19,8 @@ function Login({ route, navigation }) {
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     const dispatch = useDispatch()
 
@@ -54,7 +55,6 @@ function Login({ route, navigation }) {
     }, [error]);
 
     // loadingModal================
-    const [loading, setLoading] = useState([]);
     const [loadingVisible, setLoadingVisible] = useState(false)
     const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
 
@@ -66,7 +66,6 @@ function Login({ route, navigation }) {
         try {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
-            const { idToken } = userInfo;
             const { user } = userInfo;
             await google(user.name, user.givenName + (user.id).substring((user.id).length - 6), user.email, '', '', '', '', user.id).then(async res => {
                 const { data: { data } } = res;
@@ -74,22 +73,25 @@ function Login({ route, navigation }) {
                 const { data: { message } } = res;
                 console.log(message)
                 if (responseCode === 200) {
+                    let ID
                     if (data.affectedRows === 1) {
-                        var ID = (data.insertId).toString()
+                        ID = (data.insertId).toString()
                     } else {
-                        var ID = (data.id).toString()
+                        ID = (data.id).toString()
                     }
 
                     dispatch(CheckCV(ID))
                     dispatch(CheckSeeker(ID))
-                    await AsyncStorage.setItem("LOGIN", 'true')
-                    await AsyncStorage.setItem("ID", ID)
-                    await AsyncStorage.setItem("USER", "SEEKER")
-                    await AsyncStorage.setItem("NAME", user.name)
-                    await AsyncStorage.setItem("EMAIL", user.email)
-                    await AsyncStorage.setItem("USERNAME", user.givenName + (user.id).substring((user.id).length - 6))
-                    navigation.popToTop()
-                    navigation.replace('Home')
+                    sleep(2000).then( async () => {
+                        await AsyncStorage.setItem("LOGIN", 'true')
+                        await AsyncStorage.setItem("ID", ID)
+                        await AsyncStorage.setItem("USER", "SEEKER")
+                        await AsyncStorage.setItem("NAME", user.name)
+                        await AsyncStorage.setItem("EMAIL", user.email)
+                        await AsyncStorage.setItem("USERNAME", user.givenName + (user.id).substring((user.id).length - 6))
+                        navigation.popToTop()
+                        navigation.replace('Home')
+                    })
                 } else {
 
                 }
@@ -111,7 +113,6 @@ function Login({ route, navigation }) {
         try {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
-            const { idToken } = userInfo;
             const { user } = userInfo;
             await googleProvider('', '', 0, 0, user.email, '', '', '', '', user.id).then(async res => {
                 console.log(res)

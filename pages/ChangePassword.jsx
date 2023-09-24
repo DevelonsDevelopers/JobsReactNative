@@ -17,29 +17,25 @@ function ChangePassword({route, navigation}) {
 
     const toggleVisibility = () => setShow(!show)
 
-    const changePassword = () => {
+    const passwordUpdate = () => {
         if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password)) {
             if (password === cPassword) {
                 // navigation.navigate('Verify', { verifyPhone: verifyPhone, password: password})
                 if (type === "PROVIDER") {
 
-                    if (password) {
                         changePassword(password, ID).then(res => {
-                            navigation.replace('Login')
+                            navigation.replace('Login', { USER: 'PROVIDER' })
+                        }).catch(err => {
+                            console.log(err)
                         })
-                    } else {
-                        navigation.replace('Login')
-                    }
 
                 } else {
 
-                    if (password) {
                         changePassword(password, ID).then(res => {
-                            navigation.replace('Login')
+                            navigation.replace('Login', { USER: 'SEEKER' })
+                        }).catch(err => {
+                            console.log(err)
                         })
-                    } else {
-                        navigation.replace('Login')
-                    }
 
                 }
             } else {
@@ -122,7 +118,7 @@ function ChangePassword({route, navigation}) {
                         : <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
                             style={{width: 25, height: 25}} source={require('../assets/show.png')}/></Pressable>}
                 </View>
-                <Pressable onPress={() => changePassword()} style={{
+                <Pressable onPress={() => passwordUpdate()} style={{
                     width: '85%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',
