@@ -132,7 +132,7 @@ function Home({ navigation }) {
 									tintColor: '#fff'
 								}} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
 								<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-									<Pressable
+									<Pressable onPress={()=> navigation.push('ProfileVerifiedSuccessful')}
 									><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 										source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
 								</View>

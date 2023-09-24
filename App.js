@@ -75,6 +75,7 @@ import VerificationProfile from './pages/VerificationProfile';
 import ManageCoverLetter from './pages/ManageCoverLetter';
 import SeekerPlans from "./pages/SeekerPlans";
 import ForgotPassword from './pages/ForgotPassword';
+import ProfileVerifiedSuccessful from './pages/ProfileVerifiedSuccessful';
 
 
 
@@ -225,6 +226,8 @@ function App() {
                             options={{ title: "ManageCoverLetter", headerShown: false }} />
                         <Stack.Screen name="ForgotPassword" component={ForgotPassword}
                             options={{ title: "ForgotPassword", headerShown: false }} />
+                        <Stack.Screen name="ProfileVerifiedSuccessful" component={ProfileVerifiedSuccessful}
+                            options={{ title: "ProfileVerifiedSuccessful", headerShown: false }} />
 
                     </Stack.Navigator>
                 </NavigationContainer>
