@@ -11,6 +11,7 @@ import Toast from 'react-native-toast-message'
 import { completeCompany } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import PhoneInput from 'react-native-phone-number-input'
+import PhoneModal from '../Components/PhoneModal'
 
 const ProviderProfile = ({ navigation }) => {
 
@@ -111,11 +112,15 @@ const ProviderProfile = ({ navigation }) => {
     const [type, setType] = useState(false)
     const toggleType = () => setType(!type)
 
+    const [phoneVisible, setPhoneVisible] = useState(false)
+    const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
+
     return (
 
         <View style={{ flex: 1, backgroundColor: '#F0A51E' }}>
 
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
             <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick} />
@@ -134,7 +139,55 @@ const ProviderProfile = ({ navigation }) => {
                     Please Complete Your Profile !!!
                 </Text>
 
-                <View style={{ marginTop: 50, paddingVertical: 5 }}>
+
+
+                <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto' }}>
+                    <TextInput editable={false} style={{
+                        textAlign: 'center',
+                        paddingHorizontal: 10,
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 8,
+                        borderRightWidth: 1,
+                        width: '20%',
+                        color: 'black',
+                        fontFamily: 'poppins_regular',
+                        borderColor: '#b2b2b2',
+                        borderTopLeftRadius: 30,
+                        borderWidth: 1,
+                        borderBottomLeftRadius: 30,
+                        backgroundColor: 'white',
+                    }}>Phone</TextInput>
+                    <TextInput  placeholder="country code" onTouchStart={() =>  togglePhoneVisible() } style={{
+                        textAlign: 'center',
+                        paddingHorizontal: 6,
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 8,
+                        borderColor: '#b2b2b2',
+                        borderTopWidth: 1,
+                        borderBottomWidth: 1,
+                        borderRightWidth: 1,
+                        backgroundColor:'white'
+                    }}></TextInput>
+                    <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })}
+                        placeholder="Enter Your Number" style={{
+                            textAlign: 'left',
+                            paddingHorizontal: 10,
+                            marginTop: 'auto',
+                            marginBottom: 'auto',
+                            paddingVertical: 8,
+                            width: '46%',
+                            borderColor: '#b2b2b2',
+                            borderTopRightRadius: 20,
+                            borderBottomRightRadius: 20,
+                            borderTopWidth: 1,
+                            borderBottomWidth: 1,
+                            borderRightWidth: 1,
+                            backgroundColor:'white'
+                        }}></TextInput>
+                </View>
+                {/* <View style={{ marginTop: 50, paddingVertical: 5 }}>
                     <PhoneInput
                         layout='first'
                         defaultCode='PK'
@@ -142,7 +195,7 @@ const ProviderProfile = ({ navigation }) => {
                         placeholder='Enter Your Number'
                         onChangeText={text => setUpdateData({ ...updateData, phone: text })}
                     />
-                </View>
+                </View> */}
 
 
                 <Pressable style={{

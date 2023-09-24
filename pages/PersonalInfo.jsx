@@ -354,7 +354,7 @@ function PersonalInfo({ navigation }) {
                                 }}>
                                     <TextInput
                                         onChangeText={(text) => setSeekerData({ ...seekerData, dob: text })}
-                                        placeholder={'Missing!!!'} style={{
+                                        placeholder={'MM/DD/YYYY'} style={{
                                             color: '#000',
                                             fontSize: 14,
                                             fontFamily: 'poppins_medium',

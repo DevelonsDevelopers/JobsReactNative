@@ -163,7 +163,7 @@ function Search({route, navigation}) {
 
             <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}} keyboardShouldPersistTaps="handled">
                 <View style={{backgroundColor: '#EAEAEA'}}>
-                    <View style={{flexDirection: 'row', height: 90}}>
+                    <View style={{flexDirection: 'row', height: 90,marginBottom:20}}>
                         <Pressable onPress={() => navigation.goBack()} style={{padiingRight: 5}}><Image style={{
                             width: 22,
                             height: 20,
@@ -173,7 +173,7 @@ function Search({route, navigation}) {
                         }} source={require('../assets/back_arrow.png')} alt={'Okay'}/></Pressable>
                         <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
                             <Pressable onPress={() => navigation.push('AdvanceSearch')}><Image
-                                style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
+                             style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
                                 source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
                         </View>
                     </View>
@@ -222,7 +222,7 @@ function Search({route, navigation}) {
                                         textAlign: 'right',
                                         fontFamily: 'poppins_medium',
                                         fontSize: 13
-                                    }}>{moment(item.date).fromNow()}</Text>
+                                    }}>{moment(item.created).format("MMM Do YY")}</Text>
                                 </View>
                                 <View style={{flex: 1, flexDirection: 'row'}}>
                                     <View style={{flex: 0.8}}>
