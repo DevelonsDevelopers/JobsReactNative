@@ -26,7 +26,7 @@ const EducationModal = ({visible, toggleEducationVisibility, add, data, edit}) =
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleEducationVisibility}>
             <GestureHandlerRootView style={{
                 flex: 1,
                 alignContent: 'center',

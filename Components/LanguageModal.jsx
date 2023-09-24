@@ -22,7 +22,7 @@ const LanguageModal = ({visible, toggleLanguageVisibility, add, edit, data}) => 
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleLanguageVisibility}>
             <GestureHandlerRootView style={{
                 flex: 1,
                 alignContent: 'center',

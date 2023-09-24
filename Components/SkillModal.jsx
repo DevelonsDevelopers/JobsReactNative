@@ -22,7 +22,7 @@ const SkillModal = ({visible, toggleSkillVisibility, add, edit, data}) => {
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleSkillVisibility}>
             <GestureHandlerRootView style={{
                 flex: 1,
                 alignContent: 'center',

@@ -20,7 +20,7 @@ const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
 
     return (
 
-        <Modal visible={visible} animationType={"fade"} >
+        <Modal visible={visible} animationType={"fade"} onRequestClose={togglePhoneVisible}>
             <View style={{  }}>
                 <SafeAreaView style={{ }}>
                     <View style={{ flexDirection: 'row',marginVertical:30,marginHorizontal:20 }}>

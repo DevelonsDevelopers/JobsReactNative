@@ -12,7 +12,7 @@ const PersonalStatementModal = ({visible, toggleInfoVisibility, add}) => {
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleInfoVisibility}>
             <GestureHandlerRootView style={{
                 flex: 1,
                 alignContent: 'center',

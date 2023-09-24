@@ -31,7 +31,7 @@ const CareerModal = ({visible, toggleCareerVisibility, add, edit, data}) => {
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleCareerVisibility}>
             <GestureHandlerRootView style={{
                 flex: 1,
                 alignContent: 'center',

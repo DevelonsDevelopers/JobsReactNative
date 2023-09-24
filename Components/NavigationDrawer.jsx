@@ -4,7 +4,7 @@ import Ripple from "react-native-material-ripple";
 
 const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, toggleLoadingVisibility }) => {
     return (
-        <Modal visible={visible} animationType={"slide"} transparent={true}>
+        <Modal visible={visible} animationType={"slide"} transparent={true}  onRequestClose={toggleVisibility} >
 
             <View
                 style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.2)' }}>

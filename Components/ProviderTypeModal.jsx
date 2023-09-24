@@ -9,7 +9,7 @@ const ProviderTypeModal = ({visible, toggleVisibility, click}) => {
     }
 
     return (
-        <Modal visible={visible} animationType={"fade"} transparent={true}>
+        <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleVisibility}>
             <View style={{
                 flex: 1,
                 alignContent: 'center',

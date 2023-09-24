@@ -4,7 +4,7 @@ import { Image, Modal, Pressable, Text, View } from 'react-native'
 const CompleteProfileSeekerModal = ({ visible, toggleCompleteVisible, isComplete, plan, cover, cv, navigation }) => {
 	return (
 
-		<Modal visible={visible} animationType={"fade"} transparent={true}>
+		<Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleCompleteVisible}>
 			<View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
 				<View style={{ marginHorizontal: 20, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, height: 450, }}>
 
