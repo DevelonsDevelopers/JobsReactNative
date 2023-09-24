@@ -5,36 +5,38 @@ let clientId = 'AVcvSafKzE6p3y31oCZ1l3U6QMyIFgIN4_flQRW18t41NGqUyE0rcgYeafhBDLf3
 let secretKey = 'EEXhhpblChd-PBdIrQVHuRtVlvGesmFKiACxtPvhRIhW7_bkKM7xh2mh_52FuldPLqVDRDq3qNkj1n9O';
 
 
-let orderDetail = {
-    "intent": "CAPTURE",
-    "purchase_units": [
-        {
-            "items": [
-                {
-                    "name": "Seeker Plan",
-                    "description": "Seeker Plan for JOB",
-                    "quantity": "1",
-                    "unit_amount": {
-                        "currency_code": "USD",
-                        "value": "5.00"
+let orderDetail = (price) => {
+    return {
+        "intent": "CAPTURE",
+        "purchase_units": [
+            {
+                "items": [
+                    {
+                        "name": "Seeker Plan",
+                        "description": "Seeker Plan for JOB",
+                        "quantity": "1",
+                        "unit_amount": {
+                            "currency_code": "USD",
+                            "value": `${price}`
+                        }
                     }
-                }
-            ],
-            "amount": {
-                "currency_code": "USD",
-                "value": "5.00",
-                "breakdown": {
-                    "item_total": {
-                        "currency_code": "USD",
-                        "value": "5.00"
+                ],
+                "amount": {
+                    "currency_code": "USD",
+                    "value": `${price}`,
+                    "breakdown": {
+                        "item_total": {
+                            "currency_code": "USD",
+                            "value": `${price}`
+                        }
                     }
                 }
             }
+        ],
+        "application_context": {
+            "return_url": "http://192.168.1.25:5001/return",
+            "cancel_url": "http://192.168.1.25:5001/cancel"
         }
-    ],
-    "application_context": {
-        "return_url": "http://192.168.1.25:5001/return",
-        "cancel_url": "http://192.168.1.25:5001/cancel"
     }
 }
 
@@ -62,7 +64,7 @@ const generateToken = () => {
     })
 }
 
-const createOrder = (token = '') => {
+const createOrder = (token = '', price) => {
     var requestOptions = {
         method: 'POST',
         headers: {
@@ -70,7 +72,7 @@ const createOrder = (token = '') => {
             'Authorization': `Bearer ${token}`
 
         },
-        body: JSON.stringify(orderDetail)
+        body: JSON.stringify(orderDetail(price))
     };
 
     return new Promise((resolve, reject) => {

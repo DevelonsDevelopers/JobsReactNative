@@ -10,6 +10,7 @@ import { RESET } from "../Utils/Constants";
 import Ripple from "react-native-material-ripple";
 import LoginRequireModal from "../Components/LoginRequireModal";
 import CompleteProfileSeekerModal from "../Components/CompleteProfileSeekerModal";
+import {recordInteraction} from "../API";
 
 function Home({ navigation }) {
 
@@ -107,6 +108,11 @@ function Home({ navigation }) {
 	const [plan, setPlan] = useState(false)
 	const [cv, setCv] = useState(false)
 	const [cover, setCover] = useState(true)
+
+	const JobClick = (id) => {
+		recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
+		navigation.push('JobDetails', {ID: id})
+	}
 
 	return (
 		<View style={{ flex: 1 }}>
@@ -286,7 +292,7 @@ function Home({ navigation }) {
 									<FlatList scrollEnabled={false} nestedScrollEnabled={true}
 										style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
 											<Ripple rippleColor="#13A3E1" rippleOpacity={0.5} rippleDuration={300} rippleSize={200}
-												onPress={() => navigation.push('JobDetails', { ID: item.id })}
+												onPress={() => JobClick(item.id)}
 												style={{
 													flex: 1,
 													flexDirection: 'row',

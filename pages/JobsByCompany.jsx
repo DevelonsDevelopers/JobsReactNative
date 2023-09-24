@@ -80,7 +80,7 @@ function JobsByCompany({route, navigation}) {
 
     return (
         <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1'}}>
-            <View style={{backgroundColor: '#EAEAEA'}}>
+            <View style={{backgroundColor: '#F1F1F1'}}>
                 <View style={{flexDirection: 'row', height: 90}}>
                     <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
                         width: 22,
@@ -90,7 +90,7 @@ function JobsByCompany({route, navigation}) {
                         tintColor: '#000'
                     }} source={require('../assets/back_arrow.png')} alt={'Okay'}/></Pressable>
                     <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
-                        <Pressable 
+                        <Pressable
                         // onPress={() => navigation.push('Recommendedjobs')}
                         ><Image
                             style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}

@@ -49,7 +49,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
 
                             </Ripple>
 
-                            <Ripple rippleColor="white" 
+                            <Ripple rippleColor="white"
                                 onPress={() => {
                                     toggleVisibility()
                                     navigation.push('AppliedSaved', { screen: 1 })
@@ -71,7 +71,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                                 </View>
                             </Ripple>
 
-                            <Ripple rippleColor="white" 
+                            <Ripple rippleColor="white"
                                 onPress={() => {
                                     toggleVisibility()
                                     navigation.push('AppliedSaved', { screen: 0 })
@@ -91,7 +91,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                                 </View>
                             </Ripple>
 
-                            <Ripple rippleColor="white" 
+                            <Ripple rippleColor="white"
                                 onPress={() => {
                                     toggleVisibility()
                                     navigation.push('History')
@@ -114,7 +114,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                         <Text></Text>
                     }
 
-                    <Ripple rippleColor="white" 
+                    <Ripple rippleColor="white"
                         onPress={() => {
                             toggleVisibility()
                             navigation.push('Privacypolicy')
@@ -134,7 +134,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                         </View>
                     </Ripple>
 
-                    <Ripple rippleColor="white" 
+                    <Ripple rippleColor="white"
                         onPress={() => {
                             toggleVisibility()
                             navigation.push('Termsandconditions')
@@ -155,7 +155,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                     </Ripple>
 
 
-                    <Ripple rippleColor="white" 
+                    <Ripple rippleColor="white"
                         onPress={() => {
                             toggleVisibility()
                             navigation.push('Contactus')
@@ -173,7 +173,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                     </Ripple>
 
                     {isLogin ?
-                        <Ripple rippleColor="white" 
+                        <Ripple rippleColor="white"
                             onPress={async () => {toggleVisibility() ,toggleLoadingVisibility()}}><View style={{
                                 flexDirection: 'row',
                                 alignItems: 'center',
@@ -188,8 +188,10 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                             </View>
                         </Ripple>
                         :
-                        <Ripple rippleColor="white" 
-                            onPress={async () => navigation.push('UserType')}><View style={{
+                        <Ripple rippleColor="white"
+                            onPress={async () => {
+                                toggleVisibility()
+                                navigation.push('UserType')}}><View style={{
                                 flexDirection: 'row',
                                 alignItems: 'center',
                                 backgroundColor: '#13A3E1',

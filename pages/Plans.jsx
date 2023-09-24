@@ -57,12 +57,12 @@ const Plans = ({ navigation }) => {
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                     style={{ marginHorizontal: 20 }} data={plans}
                     renderItem={({ item }) => (
-                        <Ripple onPress={() => navigation.push('Payment', { plan: item.name, price: item.amount, type: 'Provider' })} rippleColor='gray'
+                        <Ripple onPress={() => navigation.push('Payment', { plan: item.id, price: item.amount, type: 'Provider' })} rippleColor='gray'
                             style={{ backgroundColor: 'white', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 10, borderRadius: 20, marginBottom: 20, flexDirection: 'column', borderWidth: 1, elevation: 10, borderColor: 'gray' }}>
                             <Text style={{ color: '#002E81', textAlign: 'center', fontSize: 29, fontFamily: 'poppins_medium' }}>{item.name}</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20, marginTop: -10 }}>
                                 <Text style={{ color: 'green', textAlign: 'center', fontSize: 14, }}>$</Text>
-                                <Text style={{ fontSize: 40, color: 'black', marginTop: -5, color: 'green' }}>{item.amount}</Text>
+                                <Text style={{ fontSize: 40, marginTop: -5, color: 'green' }}>{item.amount}</Text>
                             </View>
                             <Text style={{ color: 'black',opacity:0.6, fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center' }}>{item.purpose}</Text>
                             {/* <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 200 jobs</Text> */}

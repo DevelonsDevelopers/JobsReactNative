@@ -33,6 +33,10 @@ const PaymentScreen = ({ route, navigation }) => {
 
     const [ID, setID] = useState()
 
+    const { plan } = route.params
+    const { price } = route.params
+    const { type } = route.params
+
     // useEffect(() => {
     //   console.log(ID)
     // }, [ID])
@@ -49,9 +53,13 @@ const PaymentScreen = ({ route, navigation }) => {
     const fetchPaymentIntentClientSecret = async () => {
         const response = await fetch(`${API_URL}/create-payment-intent`, {
             method: "POST",
+            credentials: 'include',
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json'
             },
+            body: JSON.stringify({
+                price: Number(price)*100,
+            })
         });
         const { clientSecret, error } = await response.json();
         return { clientSecret, error };
@@ -91,11 +99,6 @@ const PaymentScreen = ({ route, navigation }) => {
         }
     }
 
-    const { plan } = route.params
-    const { price } = route.params
-    const { type } = route.params
-
-
     const [isLoading, setLoading] = useState(false)
     const [paypalUrl, setPaypalUrl] = useState(null)
     const [accessToken, setAccessToken] = useState(null)
@@ -105,7 +108,7 @@ const PaymentScreen = ({ route, navigation }) => {
         setLoading(true)
         try {
             const token = await paypalApi.generateToken()
-            const res = await paypalApi.createOrder(token)
+            const res = await paypalApi.createOrder(token, Number(price))
             setAccessToken(token)
             console.log("res++++++", res)
             setLoading(false)
@@ -161,8 +164,14 @@ const PaymentScreen = ({ route, navigation }) => {
 
     const subscribePlan = () => {
         const postDate = moment().format("YYYY-MM-DD")
-        createUserPlan(ID, 0, postDate, type).then(res => {
-            console.log(res)
+        createUserPlan(ID, plan, postDate, type).then(res => {
+            const {data: {responseCode}} = res;
+            if (responseCode === 200) {
+                navigation.popToTop()
+                navigation.replace('Home')
+            } else {
+
+            }
         })
     }
 
@@ -248,7 +257,7 @@ const PaymentScreen = ({ route, navigation }) => {
                         disabled={false}
                         btnStyle={{ backgroundColor: '#F7BE38', }}
                         text="Pay using Stripe"
-                        isLoading={isLoading} />
+                        isLoading={false} />
                 </View>
                 <View style={{ flexDirection: 'row', marginLeft: 'auto', marginRight: 'auto', marginVertical: 30, gap: 10, }}>
                     <Text style={{ backgroundColor: 'gray', height: 1.5, width: 100, marginTop: 6 }}>-</Text>

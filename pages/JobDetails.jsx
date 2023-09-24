@@ -65,10 +65,11 @@ const JobDetails = ({ route, navigation }) => {
     }, [dispatch, seeker, USERID, navigation]);
 
     useEffect(() => {
-        if (seeker?.plan !== "0") {
-            setPlan(true)
-        } else {
+        console.log(seeker)
+        if (seeker?.plan === 0) {
             setPlan(false)
+        } else {
+            setPlan(true)
         }
     }, [seeker]);
 
@@ -134,7 +135,7 @@ const JobDetails = ({ route, navigation }) => {
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
-                <LoginRequireModal visible={loginVisible} toggleLoginVisible={toggleLoginVisible} navigation={navigation} />
+                <LoginRequireModal visible={loginVisible} toggleRequireVisible={toggleLoginVisible} navigation={navigation} />
                 <ManageCoverLetter visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
                 <View style={{ backgroundColor: '#EAEAEA' }}>
                     <View style={{ flexDirection: 'row', height: 90 }}>
@@ -151,6 +152,10 @@ const JobDetails = ({ route, navigation }) => {
                                 source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                         </View>
                     </View>
+                    {isloading ?
+                        <View style={{ marginTop: 300 }}>
+                            <ActivityIndicator size={60} color="#13A3E1" /></View>
+                        : <>
                     <View>
                         <Text style={{
                             fontSize: 18,
@@ -162,10 +167,6 @@ const JobDetails = ({ route, navigation }) => {
                             padding: 0
                         }}>{job?.title}</Text>
                     </View>
-                    {isloading ?
-                        <View style={{ marginTop: 300 }}>
-                            <ActivityIndicator size={60} color="#13A3E1" /></View>
-                        : <>
                             <SafeAreaView style={{ marginTop: 30 }}>
 
 
@@ -315,6 +316,7 @@ const JobDetails = ({ route, navigation }) => {
                         </>}
                 </View>
             </ScrollView>
+            {!isloading ?
             <View style={{
                 flexDirection: 'row',
                 justifyContent: "center",
@@ -382,6 +384,7 @@ const JobDetails = ({ route, navigation }) => {
                     }}>APPLIED</Text>}
 
             </View>
+                : '' }
         </View>
     )
 }
