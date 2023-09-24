@@ -146,9 +146,10 @@ export const verifyCompany = (verify, phone, id) => API.put('/companies/verify',
     phone: phone,
     id: id,
 })
-export const completeCompany = (country, city, phone, headquater, type, id) => API.put('/companies/complete', {
+export const completeCompany = (country, city, code, phone, headquater, type, id) => API.put('/companies/complete', {
     country: country,
     city: city,
+    code: code,
     phone: phone,
     headquater: headquater,
     type: type,

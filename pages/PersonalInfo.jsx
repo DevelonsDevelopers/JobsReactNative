@@ -14,7 +14,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { fetchSeeker, updateSeeker } from "../API/actions/seekerActions";
+import {CheckSeeker, fetchSeeker, updateSeeker} from "../API/actions/seekerActions";
 import { AllCities } from "../API/actions/cityActions";
 import { AllCountries } from "../API/actions/countryActions";
 import {PhoneData, RESET, RESET_SEEKER} from "../Utils/Constants";
@@ -117,6 +117,7 @@ function PersonalInfo({ navigation }) {
             setNameCity(seeker?.city_name)
             setCountryName(seeker?.country_name)
         }
+        dispatch(CheckSeeker(ID))
         if (seeker?.address && seeker?.city && seeker?.country && seeker?.dob && seeker?.email && seeker?.gender && seeker?.id && seeker?.name && seeker?.password && seeker?.code && seeker?.phone && seeker?.username) {
             setCompleted(true)
         } else {

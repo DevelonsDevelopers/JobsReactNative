@@ -26,9 +26,9 @@ function PostJob({navigation}) {
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
 
-    const [isComplete, setIsComplete] = useState(true)
-    const [isVerified, setIsVerified] = useState(true)
-    const [isPaid, setIsPaid] = useState(true)
+    const [isComplete, setIsComplete] = useState(false)
+    const [isVerified, setIsVerified] = useState(false)
+    const [isPaid, setIsPaid] = useState(false)
 
     // companyjob dispatch==========
     const [ID, setID] = useState()
@@ -174,7 +174,7 @@ function PostJob({navigation}) {
                                 paddingVertical:20
                             }}>
                              {/* <Image  source={require('../assets/coverLetter.png')} style={{ width:60,height:60 ,}} /> */}
-                               
+
                                 <Text style={{
                                     color: 'white',
                                     fontSize: 20,
@@ -189,7 +189,7 @@ function PostJob({navigation}) {
                                 }}>Users</Text>
                             </Ripple>
 
-                          
+
                             <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
                                 onPress={() => navigation.push('SentOffers')} style={{
                                 width:'45%',
@@ -198,7 +198,7 @@ function PostJob({navigation}) {
                                 paddingVertical:20
                             }}>
                              {/* <Image  source={require('../assets/coverLetter.png')} style={{ width:60,height:60 ,}} /> */}
-                               
+
                                 <Text style={{
                                     color: 'white',
                                     fontSize: 20,
@@ -213,7 +213,7 @@ function PostJob({navigation}) {
                                 }}>Offers</Text>
                             </Ripple>
 
-                          
+
 
                         </View>
 
@@ -342,7 +342,7 @@ function PostJob({navigation}) {
                                         <Image style={{width: 20, height: 20, marginTop: 5}}
                                                source={require('../assets/unverified.png')}/>
                                         <Text onPress={() => navigation.push('ProviderProfile')} style={{
-                                            color: 'green',
+                                            color: 'blue',
                                             fontSize: 14,
                                             fontFamily: 'poppins_bold',
                                             marginLeft: -32,

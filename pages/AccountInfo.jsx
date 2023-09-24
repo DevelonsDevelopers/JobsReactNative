@@ -20,6 +20,7 @@ import ResumeModal from "../Components/ResumeModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch, useSelector } from "react-redux";
 import {
+	CheckCV,
 	CVByUser,
 	CVCareer,
 	CVCourse,
@@ -97,6 +98,7 @@ function AccountInfo({ route, navigation }) {
 
 	useEffect(() => {
 		console.log(cv)
+		dispatch(CheckCV(ID))
 	}, [cv]);
 
 	const editEducation = (d) => {

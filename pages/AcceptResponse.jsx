@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Image, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
 import { FetchOffer, FetchOffers } from '../API/actions/offersActions'
 import { useDispatch, useSelector } from 'react-redux'
+import Toast from "react-native-toast-message";
+import moment from "moment";
+import {offerResponse} from "../API";
 
 const AcceptResponse = ({ route, navigation }) => {
 
@@ -25,6 +28,13 @@ const AcceptResponse = ({ route, navigation }) => {
     const [issue, setIssue] = useState()
     const [great, setGreat] = useState()
 
+    useEffect(() => {
+        if (offer) {
+            setThank(`Thank you for offering me an opportunity to work at ${offer?.company_name}  I very much appreciate the time and effort your team has spent to review my application and interview me for the position of  ${offer?.role} `)
+            setIssue(`I'm happy to inform you that I accept the offer and can't wait to start the journy with the team`)
+            setGreat(`Once again, thank you for the great opportunity.`)
+        }
+    }, [offer]);
 
     const sendNow = () => {
         const postDate = moment().format("YYYY-MM-DD")
@@ -36,13 +46,13 @@ const AcceptResponse = ({ route, navigation }) => {
                         navigation.push('Home')
                     })
                 } else {
-                    Toast.show({ type: 'error', position: 'top', text1: 'Please Enter a  Address' })
+                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter thanksgiving'})
                 }
             } else {
-                Toast.show({ type: 'error', position: 'top', text1: ' a Valid Email Address' })
+                Toast.show({type: 'error', position: 'top', text1: 'Please Enter your issues'})
             }
         } else {
-            Toast.show({ type: 'error', position: 'top', text1: 'Please ' })
+            Toast.show({type: 'error', position: 'top', text1: 'Please Enter some info'})
         }
 
 
