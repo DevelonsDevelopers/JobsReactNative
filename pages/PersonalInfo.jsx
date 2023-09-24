@@ -735,7 +735,6 @@ function PersonalInfo({ navigation }) {
                                     padding: 15,
                                     marginTop: 15,
                                     marginHorizontal: 25,
-                                    marginBottom: 20
                                 }}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Verify
                                     Phone</Text></Pressable>
                             :
@@ -754,7 +753,7 @@ function PersonalInfo({ navigation }) {
                                 marginBottom: 25
                             }}>
                             <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
-                            >Update Your Account
+                            >Activate Account
                             </Text>
                         </Ripple>
 
