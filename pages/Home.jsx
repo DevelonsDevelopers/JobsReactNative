@@ -63,7 +63,9 @@ function Home({ route, navigation }) {
 
 	const GetData = async () => {
 		const value = await AsyncStorage.getItem('LOGIN')
+		const userID = await AsyncStorage.getItem("ID")
 		setLoginVal(value);
+		setID(userID)
 	}
 
 	useEffect(() => {
