@@ -13,7 +13,7 @@ const ManageCoverLetter = ({ navigation,apply,visible,toggleVisible }) => {
      
 
     return (
-            <Modal visible={visible} animationType='fade' >
+            <Modal visible={visible} animationType='fade' onRequestClose={toggleVisible} >
         <ScrollView>
             <View style={{
                 flexDirection: 'column',
