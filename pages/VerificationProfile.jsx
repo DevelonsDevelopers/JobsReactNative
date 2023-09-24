@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { Pressable, View, Text, Image } from 'react-native'
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {fetchSeeker} from "../API/actions/seekerActions";
+import { fetchSeeker } from "../API/actions/seekerActions";
+import VerificationStatusModal from '../Components/VerificationStatusModal';
 
 const Verification = ({ navigation }) => {
 
@@ -13,10 +14,12 @@ const Verification = ({ navigation }) => {
 	const checkCV = useSelector(state => state.cv.check)
 	const seeker = useSelector(state => state.seeker.seeker)
 
+
 	const [isComplete, setIsComplete] = useState(false)
 	const [cv, setCv] = useState(false)
 	const [verify, setVerify] = useState(false)
 	const [plan, setPlan] = useState(false)
+	const [text, setText] = useState('Please Complete your Profile First')
 
 	const [ID, setID] = useState()
 
@@ -40,9 +43,9 @@ const Verification = ({ navigation }) => {
 
 	useEffect(() => {
 		console.log(seeker)
-		if (seeker?.verified === "true"){
+		if (seeker?.verified === "true") {
 			setVerify(true)
-			if (seeker?.plan !== 0){
+			if (seeker?.plan !== 0) {
 				setPlan(true)
 			} else {
 				setPlan(false)
@@ -53,7 +56,7 @@ const Verification = ({ navigation }) => {
 	}, [seeker]);
 
 	useEffect(() => {
-		if (check === "complete"){
+		if (check === "complete") {
 			setIsComplete(true)
 		} else {
 			setIsComplete(false)
@@ -61,16 +64,25 @@ const Verification = ({ navigation }) => {
 	}, [check]);
 
 	useEffect(() => {
-		if (checkCV === "complete"){
+		if (checkCV === "complete") {
 			setCv(true)
 		} else {
 			setCv(false)
 		}
 	}, [checkCV]);
 
+	const click = (t) => {
+		toggleVisibility();
+		setText(t)
+	}
+
+	const [visible, setVisible] = useState(false)
+	const toggleVisibility = () => setVisible(!visible)
 
 	return (
 		<View style={{}}>
+
+			<VerificationStatusModal visible={visible} toggleVisibility={toggleVisibility} line={text} />
 			<View style={{}}>
 				<View style={{
 					flexDirection: 'column',
@@ -164,7 +176,14 @@ const Verification = ({ navigation }) => {
 							>Created</Text>
 						</View>
 						:
-						<Pressable onPress={() => navigation.push('AccountInfo')} style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+						<Pressable onPress={() => {
+							if (isComplete) {
+								navigation.push('AccountInfo')
+							} else {
+								click('Please Complete Your Profile First')
+							}
+						}}
+							style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_regular', marginTop: 4 }}
@@ -195,7 +214,14 @@ const Verification = ({ navigation }) => {
 							>Verified</Text>
 						</View>
 						:
-						<Pressable onPress={() => navigation.push('PersonalInfo')} style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+						<Pressable onPress={() => {
+							if (verify) {
+								navigation.push('PersonalInfo')
+							} else {
+								click('Complete your cv first')
+							}
+						}}
+							 style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_medium', marginTop: 4 }}
@@ -227,7 +253,15 @@ const Verification = ({ navigation }) => {
 							>Purchased</Text>
 						</View>
 						:
-						<Pressable onPress={() => navigation.push('SeekerPlans')} style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+						<Pressable onPress={() =>
+						 {
+							if (plan) {
+								navigation.push('SeekerPlans')
+							} else {
+								click('Verify your phone first')
+							}
+						}} 
+						 style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_regular', marginTop: 4 }}

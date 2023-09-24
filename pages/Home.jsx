@@ -409,7 +409,7 @@ function Home({ route, navigation }) {
 						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 							onPress={() => {
 								if (login) {
-									navigation.push('Resume')
+									navigation.push('AccountInfo')
 								} else {
 
 									toggleRequireVisible()
