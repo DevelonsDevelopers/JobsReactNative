@@ -8,11 +8,10 @@ const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
         set(code)
     }
 
-
     const [data, setData] = useState()
     const search = (query) => {
-        const searched = PhoneData.filter((PhoneData) => {
-            return (PhoneData.name).toLowerCase().includes(query.toLowerCase());
+        const searched = PhoneData.filter((data) => {
+            return (data.name).toLowerCase().includes(query.toLowerCase());
         })
         setData(searched)
     }
@@ -21,31 +20,31 @@ const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
     return (
 
         <Modal visible={visible} animationType={"fade"} onRequestClose={togglePhoneVisible}>
-            <View style={{  }}>
-                <SafeAreaView style={{ }}>
-                    <View style={{ flexDirection: 'row',marginVertical:30,marginHorizontal:20 }}>
-                        <View style={{  padding: 6 }}>
+            <View style={{}}>
+                <SafeAreaView style={{}}>
+                    <View style={{ flexDirection: 'row', marginVertical: 30, marginHorizontal: 20 }}>
+                        <View style={{ padding: 6 }}>
                             <Pressable onPress={() => togglePhoneVisible()} style={{ marginLeft: 'auto', padding: 5 }}><Image
-                                style={{ width: 25, height: 15,tintColor:'gray' }}
+                                style={{ width: 25, height: 15, tintColor: 'gray' }}
                                 source={require('../assets/back_arrow.png')} /></Pressable>
                         </View>
                         <Text style={{ textAlign: 'center', width: '80%', fontFamily: 'poppins_medium', marginTop: 6 }}>Select Country Code</Text>
 
                     </View>
 
-                        <TextInput
+                    <TextInput
                         onChangeText={text => search(text)}
-                            style={{
-                                borderRadius: 25,
-                                paddingHorizontal: 20,
-                                marginVertical: 8,
-                                borderColor: 'gray',
-                                borderWidth: 1,
-                                paddingVertical: 6,
-                                marginHorizontal: 10,
-                                marginTop:-10,
-                                marginBottom:20
-                            }} placeholder={'Search Country'} />
+                        style={{
+                            borderRadius: 25,
+                            paddingHorizontal: 20,
+                            marginVertical: 8,
+                            borderColor: 'gray',
+                            borderWidth: 1,
+                            paddingVertical: 6,
+                            marginHorizontal: 10,
+                            marginTop: -10,
+                            marginBottom: 20
+                        }} placeholder={'Search Country'} />
 
 
                     <View style={{
@@ -58,7 +57,7 @@ const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
                     <FlatList scrollEnabled={true} nestedScrollEnabled={false}
                         style={{ marginHorizontal: 0, marginTop: 20, }} data={data}
                         renderItem={({ item }) => (
-                            
+
                             <Pressable onPress={() => add(item.dial_code)}><View>
                                 <View style={{
                                     flexDirection: 'row',

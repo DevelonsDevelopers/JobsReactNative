@@ -237,7 +237,7 @@ function PersonalInfo({ navigation }) {
                 </View>
             </Modal>
 
-            <ScrollView style={{ flex: 1, backgroundColor: 'white', }}>
+            <ScrollView style={{ flex: 1, backgroundColor: 'white', }} keyboardShouldPersistTaps='handled'>
                 <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>
                         <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{

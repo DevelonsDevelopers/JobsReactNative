@@ -157,7 +157,7 @@ function Login({ route, navigation }) {
     };
 
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: '#F0A51E' }}>
+        <ScrollView style={{ flex: 1, backgroundColor: '#F0A51E' }} keyboardShouldPersistTaps='handled'>
 
                 <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                     <View style={{
