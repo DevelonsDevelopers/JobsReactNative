@@ -53,22 +53,27 @@ const Plans = ({ navigation }) => {
                     </View>
                 </View>
             </View>
+
             <SafeAreaView >
                 <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                          style={{marginHorizontal: 20}} data={plans}
-                          renderItem={({item}) => (
-                              <Ripple onPress={() => navigation.push('Payment', { plan: item.id, price: item.amount, type: 'Seeker' })} rippleColor='white' style={{ backgroundColor: '#004BFF', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 10, borderRadius: 10, marginBottom: 20 ,flexDirection:'column'}}>
-                                  <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>{item.name}</Text>
-                                  <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
-                                      <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>$ </Text>
-                                      <Text style={{ fontSize: 40, color: 'white', marginTop: -5 }}>{item.amount}</Text>
-                                  </View>
-                                  <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  {item.purpose}</Text>
-                                  {/* <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 200 jobs</Text> */}
-                              </Ripple>
-                          )}
-                         />
+                    style={{ marginHorizontal: 20 }} data={plans}
+                    renderItem={({ item }) => (
+                        <Ripple onPress={() => navigation.push('Payment', { plan: item.id, price: item.amount, type: 'Seeker' })} rippleColor='gray'
+                            style={{ backgroundColor: 'white', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 10, borderRadius: 20, marginBottom: 20, flexDirection: 'column', borderWidth: 1, elevation: 10, borderColor: 'gray' }}>
+                            <Text style={{ color: '#002E81', textAlign: 'center', fontSize: 29, fontFamily: 'poppins_medium' }}>{item.name}</Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20, marginTop: -10 }}>
+                                <Text style={{ color: 'green', textAlign: 'center', fontSize: 14, }}>$</Text>
+                                <Text style={{ fontSize: 40, marginTop: -5, color: 'green' }}>{item.amount}</Text>
+                            </View>
+                            <Text style={{ color: 'black',opacity:0.6, fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center' }}>{item.purpose}</Text>
+                        </Ripple>
+                    )}
+                />
             </SafeAreaView>
+
+
+
+
             {/* <Ripple onPress={() => navigation.push('Payment', { plan: 'Basic', price: '8' })} style={{ backgroundColor: 'white', padding: 20, marginTop: 10, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
                 <Text style={{ color: '#194666', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Basic</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>

@@ -177,7 +177,10 @@ function Search({route, navigation}) {
                                 source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
                         </View>
                     </View>
-                    <View style={{
+
+<Text style={{ fontSize:16,fontFamily:'poppins_medium',marginLeft:20,marginTop:20 }}>Searched Job</Text>
+
+                    {/* <View style={{
                         flexDirection: 'row',
                         alignItems: 'center',
                         backgroundColor: '#fff',
@@ -191,7 +194,7 @@ function Search({route, navigation}) {
                             height: 50,
                         }} placeholder={'Start your Job Search'} />
                         <Pressable onPress={() => SearchQuery()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/search-interface-symbol.png')}/></Pressable>
-                    </View>
+                    </View> */}
                     <SafeAreaView>
                         <FlatList nestedScrollEnabled={false} scrollEnabled={false}
                                   style={{marginHorizontal: 0, marginTop: 20}} data={data} renderItem={({item}) => (
