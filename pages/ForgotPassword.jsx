@@ -21,13 +21,8 @@ function ForgotPassword({ route, navigation }) {
 
     useEffect(() => {
         console.log(seekerEmail)
-<<<<<<< HEAD
-        if (seekerEmail) {
-            navigation.push('Verify', { code: seekerEmail?.code, verifyPhone: seekerEmail?.phone, forgot: true, type: "SEEKER", verify: true, ID: seekerEmail?.id })
-=======
         if (seekerEmail){
             navigation.push('Verify', { code: seekerEmail?.code, verifyPhone: seekerEmail?.phone, forgot: true, type: "SEEKER", verify: false, ID: seekerEmail?.id })
->>>>>>> d70a6aa2efe78192ce09be44761f473bee6fe139
         }
     }, [seekerEmail]);
 
