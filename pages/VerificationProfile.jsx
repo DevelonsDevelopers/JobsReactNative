@@ -221,7 +221,7 @@ const Verification = ({ navigation }) => {
 								click('Complete your cv first')
 							}
 						}}
-							 style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+							style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_medium', marginTop: 4 }}
@@ -253,15 +253,14 @@ const Verification = ({ navigation }) => {
 							>Purchased</Text>
 						</View>
 						:
-						<Pressable onPress={() =>
-						 {
+						<Pressable onPress={() => {
 							if (plan) {
 								navigation.push('SeekerPlans')
 							} else {
 								click('Verify your phone first')
 							}
-						}} 
-						 style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+						}}
+							style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_regular', marginTop: 4 }}

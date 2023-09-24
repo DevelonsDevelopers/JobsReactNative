@@ -141,34 +141,19 @@ const ProviderProfile = ({ navigation }) => {
 
 
 
-                <View style={{ flexDirection: 'row', marginTop: 20,marginHorizontal:10,elevation:10 }}>
-                    <TextInput editable={false} style={{
+                <View style={{ flexDirection: 'row', marginTop: 20,marginHorizontal:15,elevation:10, }}>
+
+                    <TextInput  placeholder="+92" onTouchStart={() =>  togglePhoneVisible() } style={{
                         textAlign: 'center',
-                        paddingHorizontal: 10,
-                        marginTop: 'auto',
-                        marginBottom: 'auto',
-                        paddingVertical: 8,
-                        borderRightWidth: 1,
-                        width: '20%',
-                        color: 'black',
-                        fontFamily: 'poppins_regular',
-                        borderColor: '#b2b2b2',
-                        borderTopLeftRadius: 30,
-                        borderWidth: 1,
-                        borderBottomLeftRadius: 30,
-                        backgroundColor: 'white',
-                    }}>Phone</TextInput>
-                    <TextInput  placeholder="country code" onTouchStart={() =>  togglePhoneVisible() } style={{
-                        textAlign: 'center',
-                        paddingHorizontal: 6,
                         marginTop: 'auto',
                         marginBottom: 'auto',
                         paddingVertical: 8,
                         borderColor: '#b2b2b2',
-                        borderTopWidth: 1,
-                        borderBottomWidth: 1,
-                        borderRightWidth: 1,
-                        backgroundColor:'white'
+                        backgroundColor:'white',
+                        borderWidth:1,
+                        width:'20%',
+                        borderTopLeftRadius:20,
+                        borderBottomLeftRadius:20
                     }}></TextInput>
                     <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })}
                         placeholder="Enter Your Number" style={{
@@ -177,7 +162,7 @@ const ProviderProfile = ({ navigation }) => {
                             marginTop: 'auto',
                             marginBottom: 'auto',
                             paddingVertical: 8,
-                            width: '46%',
+                            width: '70%',
                             borderColor: '#b2b2b2',
                             borderTopRightRadius: 20,
                             borderBottomRightRadius: 20,
