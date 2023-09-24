@@ -1,6 +1,10 @@
 import * as api from '../../API/index'
 import {ERROR, LOADING, SUCCESS} from "../../Utils/Constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {CheckCV} from "./cvActions";
+import {CheckSeeker} from "./seekerActions";
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const LoginAuthentication = (navigation, email, password) => async (dispatch) => {
     try {
@@ -12,6 +16,8 @@ export const LoginAuthentication = (navigation, email, password) => async (dispa
         console.log(responseCode)
         var ID = (data.id).toString()
         console.log(ID)
+        dispatch(CheckCV(ID))
+        dispatch(CheckSeeker(ID))
         await AsyncStorage.setItem("LOGIN", 'true')
         await AsyncStorage.setItem("ID", ID)
         await AsyncStorage.setItem("USER", "SEEKER")
@@ -19,8 +25,10 @@ export const LoginAuthentication = (navigation, email, password) => async (dispa
         await AsyncStorage.setItem("EMAIL", data.email)
         await AsyncStorage.setItem("USERNAME", data.username)
         if (responseCode === 200){
-            navigation.replace('Onboarding')
-            dispatch ({ type: SUCCESS })
+            sleep(2000).then( async () => {
+                navigation.replace('Onboarding')
+                dispatch({type: SUCCESS})
+            })
         } else {
             dispatch ({ type: ERROR })
         }

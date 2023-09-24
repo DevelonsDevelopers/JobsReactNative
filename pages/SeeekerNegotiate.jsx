@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-import {useEffect} from 'react';
+import React, {useEffect, useState} from 'react'
 import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, View} from "react-native";
 import {useDispatch, useSelector} from 'react-redux';
 import {FetchOffer, FetchOffers} from '../API/actions/offersActions';
@@ -26,9 +25,15 @@ const SeeekerNegotiate = ({route, navigation}) => {
     }, [dispatch, ID])
 
     const [thank, setThank] = useState()
-    const [issue, setIssue] = useState()
+    const [issue, setIssue] = useState('')
     const [great, setGreat] = useState()
 
+    useEffect(() => {
+        if (offer) {
+            setThank(`Thank you for offering me an opportunity to work at ${offer?.company_name}  I very much appreciate the time and effort your team has spent to review my application and interview me for the position of  ${offer?.role} `)
+            setGreat(`Once again, thank you for the great opportunity.`)
+        }
+    }, [offer]);
 
     const sendNow = () => {
         const postDate = moment().format("YYYY-MM-DD")
@@ -40,13 +45,13 @@ const SeeekerNegotiate = ({route, navigation}) => {
                         navigation.push('Home')
                     })
                 } else {
-                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter a  Address'})
+                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter thanksgiving'})
                 }
             } else {
-                Toast.show({type: 'error', position: 'top', text1: ' a Valid Email Address'})
+                Toast.show({type: 'error', position: 'top', text1: 'Please Enter your issues'})
             }
         } else {
-            Toast.show({type: 'error', position: 'top', text1: 'Please '})
+            Toast.show({type: 'error', position: 'top', text1: 'Please Enter some info'})
         }
 
 
