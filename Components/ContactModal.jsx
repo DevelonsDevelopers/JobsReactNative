@@ -1,7 +1,8 @@
 import React from "react";
-import {Image, Modal, Pressable, Text, View} from "react-native";
+import { Image, Linking, Modal, Pressable, Text, View } from "react-native";
+import Ripple from "react-native-material-ripple";
 
-const ContactModal = ({visible,toggleVisibility ,name,phone,email}) => {
+const ContactModal = ({ visible, toggleVisibility, name, phone, email }) => {
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleVisibility}>
             <View style={{
@@ -19,25 +20,25 @@ const ContactModal = ({visible,toggleVisibility ,name,phone,email}) => {
                     padding: 20,
                     marginHorizontal: 30
                 }}>
-                    <Text style={{fontFamily:'poppins_medium' , textAlign:'center' ,marginVertical:20,fontSize:19}}>Contact Info </Text>
+                    <Image source={require('../assets/contact.png')} style={{ width: 225, height: 190, marginLeft: 'auto', marginRight: 'auto' }} />
+                    {/* <Text style={{ fontFamily: 'poppins_medium', textAlign: 'center', marginVertical: 20, fontSize: 19 }}>Contact Info </Text> */}
 
-                    <View style={{ flexDirection:'row',borderWidth:1,padding:10,borderRadius:10 }}>
-                        <Image source={require('../assets/profile.png')} style={{height:25,width:25 }}  />
-                        <Text style={{ fontFamily:'poppins_medium',textAlign:'right',width:'90%' }}>{name}</Text>
-                    </View>
+                    <Ripple style={{ flexDirection: 'row', borderWidth: 1, padding: 10, borderRadius: 10, borderColor: '#13A3E1' }}>
+                        <Image source={require('../assets/profile.png')} style={{ height: 25, width: 25, tintColor: '#13A3E1' }} />
+                        <Text style={{ fontFamily: 'poppins_medium', textAlign: 'right', width: '90%', color: '#13A3E1' }}>{name}</Text>
+                    </Ripple>
 
-                    <View style={{ flexDirection:'row',borderWidth:1,padding:10,marginVertical:20,borderRadius:10 }}>
-                        <Image source={require('../assets/call.png')} style={{height:25,width:25,tintColor:'black' }}  />
-                        <Text style={{ fontFamily:'poppins_medium',textAlign:'right',width:'90%' }}>{phone}</Text>
-                    </View>
+                    <Ripple onPress={() => Linking.openURL(`tel:${phone}`)} rippleDuration={600} style={{ flexDirection: 'row', borderWidth: 1, padding: 10, marginVertical: 20, borderRadius: 10, borderColor: '#13A3E1' }}>
+                        <Image source={require('../assets/call.png')} style={{ height: 25, width: 25, tintColor: '#13A3E1' }} />
+                        <Text style={{ fontFamily: 'poppins_medium', textAlign: 'right', width: '90%', color: '#13A3E1' }}>{phone}</Text>
+                    </Ripple>
 
-                    <View style={{ flexDirection:'row',borderWidth:1,padding:10,borderRadius:10 }}>
-                        <Image source={require('../assets/mail.png')} style={{height:25,width:25,tintColor:'black' }}  />
-                        <Text style={{ fontFamily:'poppins_medium',textAlign:'right',width:'90%' }}>{email}</Text>
-                    </View>
+                    <Ripple onPress={() => Linking.openURL(`mailto:${email}`)} style={{ flexDirection: 'row', borderWidth: 1, padding: 10, borderRadius: 10, borderColor: '#13A3E1' }}>
+                        <Image source={require('../assets/mail.png')} style={{ height: 25, width: 25, tintColor: '#13A3E1' }} />
+                        <Text style={{ fontFamily: 'poppins_medium', textAlign: 'right', width: '90%', color: '#13A3E1' }}>{email}</Text>
+                    </Ripple>
 
-
-                    <Text style={{fontFamily:'poppins_bold', textAlign:'center',borderWidth:1,marginLeft:'auto',marginRight:'auto',marginTop:20,paddingHorizontal:30,paddingVertical:5,borderRadius:20,backgroundColor:'#13A3E1',color:'white' }}>Cancel</Text>
+                    <Text onPress={() => toggleVisibility()} style={{ fontFamily: 'poppins_bold', textAlign: 'center', marginLeft: 'auto', marginRight: 'auto', marginTop: 20, paddingHorizontal: 50, paddingVertical: 9, borderRadius: 20, backgroundColor: '#13A3E1', color: 'white' }}>Cancel</Text>
 
                 </View>
             </View>
