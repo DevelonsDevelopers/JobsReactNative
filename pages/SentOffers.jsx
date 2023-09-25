@@ -144,7 +144,7 @@ function SentOffers({ navigation }) {
                                 </View>
                                 
                                     <Text
-                                        onPress={() => navigation.push('AcceptResponse')}
+                                        onPress={() => navigation.push('OfferResponse',{ID:item.id})}
                                         style={{
                                             backgroundColor: '#13A3E1',
                                             textAlign: "center",
