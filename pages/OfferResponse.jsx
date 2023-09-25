@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView,View } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchOffer } from '../API/actions/offersActions';
+import ContactModal from "../Components/ContactModal";
 
 
 const OfferResponse = ({route,navigation}) => {
@@ -26,18 +27,22 @@ useEffect(()=>{
   if (offer) {
     setRespons(JSON.stringify(offer?.response))
   }
-  console.log(offer) 
+  console.log(offer)
 },[offer])
 
 const [respons,setRespons] = useState()
+
+  const [visible, setVisible] = useState(false)
+const toggleVisible = () => setVisible(!visible)
 
 
   return (
     <View style={{ flex: 1, }}>
     <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
+      <ContactModal visible={visible} toggleVisibility={toggleVisible} name={offer?.seeker_name} phone={offer?.phone } email={offer?.email}  />
       <View style={{ backgroundColor: '#EAEAEA', }}>
         <View style={{ flexDirection: 'row', height: 90 }}>
-          <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
+          <Pressable onPress={() => navigation.goBack()} style={{ paddingRight: 5 }}><Image style={{
             width: 22,
             height: 20,
             marginTop: 70,
@@ -85,15 +90,15 @@ const [respons,setRespons] = useState()
               </View>
             </View>
             <View  >
-              <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>Details: </Text> 
-              <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>{respons?.text3} </Text> 
+              <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>Details: </Text>
+              <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>{respons?.text3} </Text>
             </View>
           </View>
         </View>
       </View>
     </ScrollView>
     <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-      <Text onPress={() => navigation.push('AppliedByJob')} style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', textAlign: "center", paddingVertical: 7, borderRadius: 20, paddingHorizontal: 50 }}>Contact</Text>
+      <Text onPress={() =>toggleVisible()} style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', textAlign: "center", paddingVertical: 7, borderRadius: 20, paddingHorizontal: 50 }}>Contact</Text>
     </View>
   </View>
   )

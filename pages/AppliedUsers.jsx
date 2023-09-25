@@ -125,7 +125,7 @@ function AppliedUsers({ route, navigation }) {
                             }}>Demand 5000/month</Text></View> */}
                 <View style={{ paddingHorizontal: 36, marginTop: 4 }}>
                   <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={600} rippleSize={800}
-                    onPress={() => navigation.push('ViewResume', { ID: item.user, offer: item.offer })}
+                    onPress={() => navigation.push('ViewResume', { ID: item.user, job: item.job, offer: item.offer })}
                   >
                     <Text style={{
                       backgroundColor: '#13A3E1',
@@ -139,7 +139,7 @@ function AppliedUsers({ route, navigation }) {
                     }}>View Resume</Text>
                   </Ripple>
                   <Ripple rippleColor="gray" rippleOpacity={0.3} rippleDuration={300} rippleSize={150}
-                    onPress={() => navigation.push('ViewCoverLetter', { ID: item.job, User: item.user })}>
+                    onPress={() => navigation.push('ViewCoverLetter', { ID: item.user, job: item.job, offer: item.offer })}>
                     <Text style={{
                       backgroundColor: 'white',
                       textAlign: "center",

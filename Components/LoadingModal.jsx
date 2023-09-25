@@ -1,7 +1,7 @@
 import React from 'react'
 import { ActivityIndicator, Modal, Text, View } from 'react-native'
 
-const LoadingModal = ({visible , toggleVisible}) => {
+const LoadingModal = ({visible}) => {
   return (
     <Modal visible={visible} animationType={"fade"} transparent={true} >
     <View style={{

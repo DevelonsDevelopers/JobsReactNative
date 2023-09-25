@@ -18,7 +18,8 @@ const data = [
 const ViewCoverLetter = ({ navigation, route }) => {
 
     const { ID } = route.params
-    const { User } = route.params
+    const { job } = route.params
+    const { offer } = route.params
 
     const dispatch = useDispatch();
 
@@ -27,8 +28,8 @@ const ViewCoverLetter = ({ navigation, route }) => {
     const coverLetter = useSelector(state => state.coverLetter.coverLetter)
     const isloading = useSelector(state => state.coverLetter.isLoading)
     useEffect(() => {
-        dispatch(CoverLetterByUser(User, ID))
-    }, [dispatch, User, ID])
+        dispatch(CoverLetterByUser(ID, job))
+    }, [dispatch, ID, job])
 
     const cv = useSelector(state => state.cv.cv);
     const cvLoading = useSelector(state => state.cv.isLoading);
@@ -54,9 +55,9 @@ const ViewCoverLetter = ({ navigation, route }) => {
     // }, [cv])
 
     useEffect(() => {
-        dispatch(CVByUser(User));
-    }, [dispatch, User]);
-    
+        dispatch(CVByUser(ID));
+    }, [dispatch, ID]);
+
 
     return (
         <ScrollView>
@@ -121,9 +122,15 @@ const ViewCoverLetter = ({ navigation, route }) => {
                     <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', marginTop: 11, marginHorizontal: 30 }}>Your's Sincerly</Text>
                     <Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 10, marginHorizontal: 30, marginLeft: 'auto' }}>  {cv?.name}</Text>
                     <View style={{ flexDirection: "row", justifyContent: 'center', marginHorizontal: 40 }}>
-                        <Ripple onPress={() => navigation.push('OfferSend')} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
-                            <Text style={{ backgroundColor: 'green', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Send Offer</Text>
+                        {cv?.offer === 0 ?
+                        <Ripple onPress={() => navigation.push('OfferSend',{  job: job, user: ID })} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
+                            <Text style={{ backgroundColor: 'green', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Already sent </Text>
                         </Ripple>
+                            :
+                            <Ripple onPress={() => navigation.push('OfferSend',{  job: job, user: ID })} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
+                                <Text style={{ backgroundColor: 'green', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Send Offer</Text>
+                            </Ripple>
+                        }
                         <Ripple onPress={() => navigation.push('AppliedUsers')} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
                             <Text style={{ backgroundColor: 'red', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 40 }}>Ignore</Text>
                         </Ripple>

@@ -25,12 +25,12 @@ const OfferSend = ({ route, navigation }) => {
         const date = moment().format("YYYY-MM-DD")
         if (type.length >= 5) {
             if (proposal.length >= 5) {
+                toggleVisible(true)
                 sendOffer(job, user, offerType, offer, '', date).then(res => {
-                    toggleVisible()
                     const { data: { data } } = res;
                     if (data.affectedRows === 1) {
-                        navigation.push('PostJob')
-                        toggleVisible()
+                        navigation.replace('PostJob')
+                        toggleVisible(false)
                     }
                 })
             } else {
@@ -44,13 +44,13 @@ const OfferSend = ({ route, navigation }) => {
 
 
     const [loadingVisible, setLoadingVisible] = useState(false)
-    const toggleVisible = () => setLoadingVisible(!loadingVisible)
+    const toggleVisible = (val) => setLoadingVisible(val)
 
     return (
 
         <ScrollView>
             <OfferModal visible={typeVisible} toggleVisibility={toggleVisibility} set={setType} />
-            <LoadingModal visible={loadingVisible} toggleVisible={toggleVisible} />
+            <LoadingModal visible={loadingVisible} />
             <View style={{
                 flexDirection: 'column',
                 width: '100%',
