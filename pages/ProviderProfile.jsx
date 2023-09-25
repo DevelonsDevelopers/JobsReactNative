@@ -162,7 +162,6 @@ const ProviderProfile = ({ navigation }) => {
 
 
                 <View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
-
                     <Pressable onPress={() => togglePhoneVisible()} style={{
                         textAlign: 'center',
                         marginTop: 'auto',

@@ -271,9 +271,10 @@ const PaymentScreen = ({ route, navigation }) => {
                         isLoading={isLoading}
                     />
                 </View>
-                <Modal visible={!!paypalUrl} >
+                <Modal visible={!!paypalUrl} onRequestClose={clearPaypalState} >
                     <TouchableOpacity onPress={clearPaypalState} style={{ margin: 24 }} >
-                        <Text >Closed</Text>
+                        <Image source={require('../assets/back_arrow.png')} style={{ width:24,height:24,tintColor:'gray' }}  />
+
                     </TouchableOpacity>
                     <View style={{ flex: 1 }}>
                         <WebView source={{ uri: paypalUrl }} onNavigationStateChange={onUrlChange} />
