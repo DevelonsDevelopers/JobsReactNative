@@ -234,7 +234,7 @@ const ViewResume = ({ route, navigation }) => {
 
 			</ScrollView>
 
-			<View style={{ flexDirection: "row", justifyContent: 'center', marginHorizontal: 40 }}>
+			<View style={{ flexDirection: "row", justifyContent: 'center', }}>
 				<Ripple onPress={() => navigation.push('AppliedUsers')} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
 					<Text style={{ backgroundColor: 'white', color: '#143D59', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 40, borderColor: '#143D59', borderWidth: 1 }}>Ignore</Text>
 				</Ripple>
@@ -244,7 +244,7 @@ const ViewResume = ({ route, navigation }) => {
 					</Ripple>
 					:
 					<Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
-						<Text style={{ backgroundColor: 'green', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Send Offer</Text>
+						<Text style={{ backgroundColor: '#143D59', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Send Offer</Text>
 					</Ripple>
 				}
 			</View>

@@ -4,6 +4,8 @@ import OfferModal from '../Components/OfferModal'
 import ProposelModal from '../Components/ProposelModal'
 import { sendOffer } from "../API";
 import moment from "moment";
+import LoadingModal from '../Components/LoadingModal';
+import Toast from 'react-native-toast-message';
 
 const OfferSend = ({ route, navigation }) => {
 
@@ -21,18 +23,34 @@ const OfferSend = ({ route, navigation }) => {
 
     const SendOffer = (job, user, offerType, offer) => {
         const date = moment().format("YYYY-MM-DD")
-        sendOffer(job, user, offerType, offer, '', date).then(res => {
-            const { data: { data } } = res;
-            if (data.affectedRows === 1) {
-                navigation.push('PostJob')
+        if (type.length >= 5) {
+            if (proposal.length >= 5) {
+                toggleVisible()
+                sendOffer(job, user, offerType, offer, '', date).then(res => {
+                    const { data: { data } } = res;
+                    if (data.affectedRows === 1) {
+                        navigation.push('PostJob')
+                    }
+                })
+            } else {
+                Toast.show({ type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address' })
             }
-        })
+        } else {
+            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address' })
+        }
+        toggleVisible()
     }
+
+
+
+    const [loadingVisible, setLoadingVisible] = useState(false)
+    const toggleVisible = () => setLoadingVisible(!loadingVisible)
 
     return (
 
         <ScrollView>
             <OfferModal visible={typeVisible} toggleVisibility={toggleVisibility} set={setType} />
+            <LoadingModal visible={loadingVisible} toggleVisible={toggleVisible} />
             <View style={{
                 flexDirection: 'column',
                 width: '100%',
@@ -114,6 +132,12 @@ const OfferSend = ({ route, navigation }) => {
                 marginHorizontal: 100
             }}><Text style={{ color: '#ffff', fontSize: 15, fontFamily: 'poppins_medium' }}>
                     Send Offer  </Text></Pressable>
+
+            <Toast
+                position='top'
+                bottomOffset={20}
+            />
+
         </ScrollView>
     )
 }
