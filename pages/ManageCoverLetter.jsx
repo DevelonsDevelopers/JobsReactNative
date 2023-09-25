@@ -8,9 +8,10 @@ const ManageCoverLetter = ({ navigation,apply,visible,toggleVisible }) => {
 
     const Apply = () => {
          apply(intro, proposal)
+        toggleVisible()
     }
 
-     
+
 
     return (
             <Modal visible={visible} animationType='fade' onRequestClose={toggleVisible} >

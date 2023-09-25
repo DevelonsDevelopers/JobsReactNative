@@ -32,6 +32,7 @@ const ViewResume = ({ route, navigation }) => {
 
     const { ID } = route.params
     const { job } = route.params;
+    const { offer } = route.params;
 
     // const { seeker } = route.params;
 

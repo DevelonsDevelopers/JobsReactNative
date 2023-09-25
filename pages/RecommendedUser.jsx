@@ -75,6 +75,7 @@ function RecommendedUser({route, navigation}) {
                                 paddingVertical: 20,
                                 paddingHorizontal: 20
                             }}>
+                            {item.offer !== 0 ?
                             <View style={{flexDirection: 'row', flex: 1}}>
                                 <Text style={{
                                     color: '#207A00',
@@ -84,7 +85,7 @@ function RecommendedUser({route, navigation}) {
                                     fontSize: 13,
                                     fontFamily: 'poppins_medium',
                                     borderRadius: 5
-                                }}>Verified</Text>
+                                }}>Offer Sent</Text>
                                 <Text style={{
                                     marginLeft: 'auto',
                                     textAlign: 'right',
@@ -92,6 +93,9 @@ function RecommendedUser({route, navigation}) {
                                     fontSize: 12
                                 }}></Text>
                             </View>
+                                :
+                                ''
+                            }
                             <Text style={{fontSize: 17, fontFamily: 'poppins_medium', marginTop: 10}}>{item.name}</Text>
                             <Text>{item.city_name}</Text>
                             <Text style={{
@@ -107,7 +111,7 @@ function RecommendedUser({route, navigation}) {
                                 fontSize: 12,
                                 fontFamily: 'poppins_medium'
                             }}>Demand 5000/month</Text></View>
-                            <Ripple onPress={() => navigation.push('ViewResume', { ID: item.id })} style={{paddingHorizontal: 36, marginTop: 4}}>
+                            <Ripple onPress={() => navigation.push('ViewResume', { ID: item.id, offer: item.offer })} style={{paddingHorizontal: 36, marginTop: 4}}>
                                 <Text style={{
                                     backgroundColor: '#143D59',
                                     textAlign: "center",
