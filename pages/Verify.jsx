@@ -34,7 +34,9 @@ function Verify({ route, navigation }) {
     }, [forgot]);
 
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
+        <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}
+            keyboardShouldPersistTaps="handled"
+        >
             <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
 
 

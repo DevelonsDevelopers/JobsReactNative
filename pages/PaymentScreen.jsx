@@ -174,7 +174,9 @@ const PaymentScreen = ({ route, navigation }) => {
     }
 
     return (
-        <ScrollView >
+        <ScrollView 
+        keyboardShouldPersistTaps="handled"
+        >
             <View style={{
                 flexDirection: 'column',
                 width: '100%',
