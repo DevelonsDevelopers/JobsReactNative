@@ -105,7 +105,7 @@ function Verify({ route, navigation }) {
                         borderTopLeftRadius: 25,
                         borderBottomLeftRadius: 25,
                         alignItems: 'center'
-                    }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"} />
+                    }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"} >{code}</TextInput>
                     </Pressable>
                     <TextInput keyboardType='numeric' onChangeText={text => setPhone(phone)}
                         placeholder="Enter Your Number" style={{
@@ -122,7 +122,7 @@ function Verify({ route, navigation }) {
                             borderBottomWidth: 1,
                             borderRightWidth: 1,
                             backgroundColor: 'white'
-                        }}></TextInput>
+                        }}>{phone}</TextInput>
                 </View>
 
 

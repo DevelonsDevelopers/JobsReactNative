@@ -133,7 +133,7 @@ function OffersByJob({ route, navigation }) {
                                     </Text>
                                 </View>
                                 <Ripple
-                                    onPress={() => navigation.push('ViewResume', { ID: item.user })}
+                                    onPress={() => navigation.push('OfferAccepted', { ID: item.job })}
                                     rippleColor="white" style={{ marginTop: 4, marginLeft: 'auto', marginRight: 'auto' }}>
                                     <Text style={{
                                         backgroundColor: '#13A3E1',

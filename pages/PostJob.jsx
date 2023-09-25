@@ -399,8 +399,11 @@ function PostJob({navigation}) {
                                         marginTop: 4
                                     }}
                                           onPress={() => navigation.push('Verify', {
+                                              code: company?.code,
                                               verifyPhone: company?.phone,
-                                              type: 'PROVIDER'
+                                              type: "PROVIDER",
+                                              verify: true,
+                                              ID: ID
                                           })}>(Verify Now)</Text>
                                 </View>
                             }

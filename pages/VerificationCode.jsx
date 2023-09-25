@@ -66,7 +66,7 @@ function VerificationCode({ route, navigation }) {
 						const {data: {message}} = res;
 						if (responseCode === 200) {
 							if (verify){
-								navigation.push('ProfileVerifiedSuccessful')
+								navigation.push('ProfileVerifiedSuccessful', { type: type })
 							} else {
 								navigation.push('ChangePassword', { type: 'PROVIDER', ID: ID })
 							}
@@ -86,7 +86,7 @@ function VerificationCode({ route, navigation }) {
 						const {data: {message}} = res;
 						if (responseCode === 200) {
 							if (verify){
-								navigation.push('ProfileVerifiedSuccessful')
+								navigation.push('ProfileVerifiedSuccessful', { type: type })
 							} else {
 								navigation.push('ChangePassword', {type: 'SEEKER', ID: ID})
 							}
