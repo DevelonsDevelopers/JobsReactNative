@@ -44,18 +44,9 @@ function Verify({ route, navigation }) {
                 <Text style={{ color: '#000', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center' }}>Verify</Text>
                 <Text style={{ color: 'gray', marginHorizontal: 40, textAlign: 'center', marginTop: 20 }}>Add your Phone number we'll Send You a verification code</Text>
                 <Text style={{ color: 'gray' }}>so we know you are real</Text>
-                {/* <TextInput value={phone} onChangeText={text => setPhone(text)} style={{
-                    height: 50,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 10,
-                    marginTop: 30,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }} placeholder={'Phone Number'} inputMode={'text'} /> */}
 
-                <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
+
+                {/* <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
                     <TextInput editable={false} style={{
                         textAlign: 'center',
                         paddingHorizontal: 10,
@@ -97,20 +88,51 @@ function Verify({ route, navigation }) {
                         borderBottomWidth: 1,
                         borderRightWidth: 1
                     }}  >{verifyPhone}</TextInput>
+                </View> */}
+
+
+
+                <View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
+                    <Pressable onPress={() => togglePhoneVisible()} style={{
+                        textAlign: 'center',
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 10,
+                        borderColor: '#b2b2b2',
+                        backgroundColor: 'white',
+                        borderWidth: 1,
+                        width: '20%',
+                        borderTopLeftRadius: 25,
+                        borderBottomLeftRadius: 25,
+                        alignItems: 'center'
+                    }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"} />
+                    </Pressable>
+                    <TextInput keyboardType='numeric' onChangeText={text => setPhone(phone)}
+                        placeholder="Enter Your Number" style={{
+                            textAlign: 'left',
+                            paddingHorizontal: 8,
+                            marginTop: 'auto',
+                            marginBottom: 'auto',
+                            paddingVertical: 10,
+                            width: '72%',
+                            borderColor: '#b2b2b2',
+                            borderTopRightRadius: 25,
+                            borderBottomRightRadius: 25,
+                            borderTopWidth: 1,
+                            borderBottomWidth: 1,
+                            borderRightWidth: 1,
+                            backgroundColor: 'white'
+                        }}></TextInput>
                 </View>
 
 
-                {/*<Text style={{color: '#000', fontFamily: 'poppins_regular', fontSize: 15, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center'}}>OR</Text>*/}
-                {/*<TextInput style={{*/}
-                {/*    height: 50,*/}
-                {/*    backgroundColor: '#fff',*/}
-                {/*    width: '85%',*/}
-                {/*    borderRadius: 25,*/}
-                {/*    marginTop: 15,*/}
-                {/*    paddingHorizontal: 20,*/}
-                {/*    color: '#626262',*/}
-                {/*    elevation: 10*/}
-                {/*}} placeholder={'Email'} secureTextEntry={true}/>*/}
+
+
+
+
+
+
+
 
                 <Pressable onPress={() => navigation.push('VerificationCode', { code: code, phone: phone, type: type, ID: ID, verify: verify })} style={{
                     width: '50%',

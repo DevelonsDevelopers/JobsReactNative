@@ -86,33 +86,33 @@ const ProviderProfile = ({ navigation }) => {
                         if (updateData.headquater !== '') {
                             if (updateData.type !== '') {
                                 completeCompany(updateData.country, updateData.city, phoneCode, updateData.phone, updateData.headquater, updateData.type, ID).then(res => {
-                                    const {data: {data}} = res;
-                                    const {data: {responseCode}} = res;
-                                    const {data: {message}} = res;
+                                    const { data: { data } } = res;
+                                    const { data: { responseCode } } = res;
+                                    const { data: { message } } = res;
                                     console.log(message)
                                     if (responseCode === 200) {
-                                        navigation.push('PostJob')
+                                        navigation.replace('PostJob')
                                     } else {
 
                                     }
                                 })
                             } else {
-                                Toast.show({type: 'error', position: 'top', text1: 'Please Enter Your Company Type'})
+                                Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Your Company Type' })
                             }
                         } else {
-                            Toast.show({type: 'error', position: 'top', text1: 'Please Enter Address'})
+                            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Address' })
                         }
                     } else {
-                        Toast.show({type: 'error', position: 'top', text1: 'Please Enter Phone Number'})
+                        Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Phone Number' })
                     }
                 } else {
-                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter Your City'})
+                    Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Your City' })
                 }
             } else {
-                Toast.show({type: 'error', position: 'top', text1: 'Please Enter Your Country'})
+                Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Your Country' })
             }
         } else {
-            Toast.show({type: 'error', position: 'top', text1: 'Please Enter Country Code'})
+            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Country Code' })
         }
 
     }
@@ -140,7 +140,7 @@ const ProviderProfile = ({ navigation }) => {
         <View style={{ flex: 1, backgroundColor: '#F0A51E' }}>
 
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={citiesData} click={cityClick} />
-            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode}/>
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
             <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick} />
@@ -161,22 +161,22 @@ const ProviderProfile = ({ navigation }) => {
 
 
 
-                <View style={{ flexDirection: 'row', marginTop: 20,marginHorizontal:15,elevation:10, }}>
+                <View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
 
-                    <Pressable onPress={() => togglePhoneVisible() } style={{
+                    <Pressable onPress={() => togglePhoneVisible()} style={{
                         textAlign: 'center',
                         marginTop: 'auto',
                         marginBottom: 'auto',
                         paddingVertical: 10,
                         borderColor: '#b2b2b2',
-                        backgroundColor:'white',
-                        borderWidth:1,
-                        width:'20%',
-                        borderTopLeftRadius:25,
-                        borderBottomLeftRadius:25,
+                        backgroundColor: 'white',
+                        borderWidth: 1,
+                        width: '20%',
+                        borderTopLeftRadius: 25,
+                        borderBottomLeftRadius: 25,
                         alignItems: 'center'
-                    }}><TextInput style={{ color: '#000' }} editable={false}  placeholder={"+01"} >{phoneCode}</TextInput></Pressable>
-                    <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })}
+                    }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"} >{phoneCode}</TextInput></Pressable>
+                    <TextInput keyboardType='numeric' onChangeText={text => setUpdateData({ ...updateData, phone: text })}
                         placeholder="Enter Your Number" style={{
                             textAlign: 'left',
                             paddingHorizontal: 8,
@@ -190,7 +190,7 @@ const ProviderProfile = ({ navigation }) => {
                             borderTopWidth: 1,
                             borderBottomWidth: 1,
                             borderRightWidth: 1,
-                            backgroundColor:'white'
+                            backgroundColor: 'white'
                         }}></TextInput>
                 </View>
                 {/* <View style={{ marginTop: 50, paddingVertical: 5 }}>
@@ -204,17 +204,19 @@ const ProviderProfile = ({ navigation }) => {
                 </View> */}
 
 
-                <Pressable style={{
-                    paddingVertical: 10,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 25,
-                    marginTop: 10,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }}>
-                    <TextInput editable value={countryName} onTouchStart={() => toggleCountryVisibility()} placeholder='Enter your Country'
+                <Pressable
+                    onPress={() => toggleCountryVisibility()}
+                    style={{
+                        paddingVertical: 10,
+                        backgroundColor: '#fff',
+                        width: '85%',
+                        borderRadius: 25,
+                        marginTop: 10,
+                        paddingHorizontal: 20,
+                        color: '#626262',
+                        elevation: 10
+                    }}>
+                    <TextInput editable={false} value={countryName} placeholder='Enter your Country'
                         inputMode={'text'} />
                 </Pressable>
                 <Pressable onPress={() => toggleVisibility()} style={{
@@ -227,7 +229,7 @@ const ProviderProfile = ({ navigation }) => {
                     color: '#626262',
                     elevation: 10
                 }}>
-                    <TextInput value={nameCity} onTouchStart={() => toggleVisibility()} placeholder={'Enter your City'} />
+                    <TextInput value={nameCity} editable={false} placeholder={'Enter your City'} />
                 </Pressable>
 
                 {/* <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })} style={{
@@ -274,12 +276,13 @@ const ProviderProfile = ({ navigation }) => {
                         paddingRight: 20
                     }}>
 
-                        <TextInput value={updateData.type} onChangeText={text => setUpdateData({ ...updateData, type: text })} onTouchStart={() => toggleType()} style={{
-                            height: 50,
-                            paddingHorizontal: 20,
-                            color: '#626262',
-                            flex: 1
-                        }} placeholder={'Enter your Company Type'} />
+                        <TextInput value={updateData.type} editable={false} onChangeText={text => setUpdateData({ ...updateData, type: text })}
+                            style={{
+                                height: 50,
+                                paddingHorizontal: 20,
+                                color: '#626262',
+                                flex: 1
+                            }} placeholder={'Enter your Company Type'} />
 
                     </View>
                 </Pressable>
