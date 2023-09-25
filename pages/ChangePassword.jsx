@@ -57,7 +57,9 @@ function ChangePassword({route, navigation}) {
     }
 
     return (
-        <ScrollView style={{flex: 1, backgroundColor: '#fff'}}>
+        <ScrollView style={{flex: 1, backgroundColor: '#fff'}}
+        keyboardShouldPersistTaps="handled"
+        >
             <Pressable onPress={() => navigation.goBack()}
                        style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
                 <Image style={{tintColor: 'gray', width: 24, height: 10}}

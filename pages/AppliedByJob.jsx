@@ -77,15 +77,19 @@ function AppliedByJob({ route, navigation }) {
                                     paddingHorizontal: 20
                                 }}>
                                 <View style={{ flexDirection: 'row', flex: 1 }}>
-                                    <Text style={{
-                                        color: '#207A00',
-                                        backgroundColor: 'rgba(0,180,18,0.2)',
-                                        paddingHorizontal: 15,
-                                        paddingTop: 4,
-                                        fontSize: 13,
-                                        fontFamily: 'poppins_medium',
-                                        borderRadius: 5
-                                    }}>Verified</Text>
+                                    {item.offer !== 0 ?
+                                        <Text style={{
+                                            color: '#207A00',
+                                            backgroundColor: 'rgba(0,180,18,0.2)',
+                                            paddingHorizontal: 15,
+                                            paddingTop: 4,
+                                            fontSize: 13,
+                                            fontFamily: 'poppins_medium',
+                                            borderRadius: 5
+                                        }}>Offer sent</Text>
+                                        :
+                                        ''
+                                    }
                                     <Text style={{
                                         marginLeft: 'auto',
                                         textAlign: 'right',
@@ -107,7 +111,7 @@ function AppliedByJob({ route, navigation }) {
                             }}>Demand 5000/month</Text></View> */}
                                 <View style={{ paddingHorizontal: 36, marginTop: 4 }}>
                                     <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={600} rippleSize={800}
-                                        onPress={() => navigation.push('ViewResume', { ID: item.user, job: item.job })}>
+                                        onPress={() => navigation.push('ViewResume', { ID: item.user, job: item.job, offer: item.offer })}>
                                         <Text style={{
                                             backgroundColor: '#143D59',
                                             textAlign: "center",
