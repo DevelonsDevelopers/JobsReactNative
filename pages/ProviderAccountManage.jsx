@@ -22,19 +22,30 @@ import { AllCities } from "../API/actions/cityActions";
 import { AllCountries } from "../API/actions/countryActions";
 import PhoneInput from 'react-native-phone-number-input';
 import PhoneModal from '../Components/PhoneModal';
+import { updateCompany } from '../API';
+import { RESET } from '../Utils/Constants';
 
 const ProviderAccountManage = ({ navigation }) => {
 
     const dispatch = useDispatch();
 
+    const [trigger, setTrigger] = useState(false)
+
     const [ID, setID] = useState()
     const [cityVisible, setCityVisible] = useState(false)
     const [countryVisible, setCountryVisible] = useState(false)
     const [type, setType] = useState(false)
+    const [country, setCountry] = useState()
+    const [citiesData, setCitiesData] = useState()
 
 
     const [nameCity, setNameCity] = useState()
     const [countryName, setCountryName] = useState()
+
+    const [phoneCode, setPhoneCode] = useState('')
+
+    const [verified, setVerified] = useState(false)
+
 
     const [data, setData] = useState({
         email: '',
@@ -71,10 +82,16 @@ const ProviderAccountManage = ({ navigation }) => {
                 size: company?.size,
                 city: company?.city,
                 country: company?.country,
+                code: company?.code,
                 phone: company?.phone,
                 headquater: company?.headquater,
                 type: company?.type
             })
+            setCountry(data?.country)
+            setPhoneCode(data?.code)
+            setNameCity(data?.city_name)
+            setCountryName(data?.country_name)
+
         }
     }, [company])
 
@@ -106,9 +123,17 @@ const ProviderAccountManage = ({ navigation }) => {
 
     const countryClick = (item) => {
         setData({ ...data, country: item.id })
+        setCountry(item.id)
         toggleCountryVisibility()
         setCountryName(item.name)
     }
+
+    useEffect(() => {
+        const searched = cities?.filter((data) => {
+            return data.country === country
+        })
+        setCitiesData(searched)
+    }, [country]);
 
     const typeClick = (value) => [
         setData({ ...data, type: value })
@@ -118,16 +143,24 @@ const ProviderAccountManage = ({ navigation }) => {
     const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
     const UpdateCompany = async () => {
+        dispatch(updateCompany(data.size, data.country, data.city, data.code, data.phone, data.headquater, data.type, data.id, data.email))
+        dispatch({ type: RESET })
+        setTrigger(!trigger)
+    }
 
+    const setCode = (code) => {
+        setPhoneCode(code)
+        setData({ ...data, code: code })
+        togglePhoneVisible()
     }
 
     return (
         <View style={{ flex: 1 }}>
-            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={cities} click={cityClick} />
+            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={citiesData} click={cityClick} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
 
-            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} />
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
 
             <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick} />
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', }}>
@@ -381,6 +414,45 @@ const ProviderAccountManage = ({ navigation }) => {
                         borderColor: '#b2b2b2',
 
                     }}>
+
+                        <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                            <View style={{
+                                flex: 0.7,
+                                backgroundColor: '#E6E6E6',
+                                borderColor: '#b2b2b2',
+                                borderWidth: 1,
+                                paddingHorizontal: 20,
+                                paddingVertical: 5
+                            }}>
+                                <Text style={{
+                                    color: '#000',
+                                    fontSize: 14,
+                                    fontFamily: 'poppins_light',
+                                    width: '100%',
+                                    textAlign: 'left'
+                                }}>Country</Text>
+                            </View>
+                            <View style={{
+                                flex: 1.3,
+                                borderColor: '#b2b2b2',
+                                borderWidth: 1,
+                                paddingHorizontal: 20,
+                                paddingVertical: 5
+                            }}>
+                                <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
+                                    onFocus={() => toggleCountryVisibility()}
+                                    placeholder={'Missing!!!'}
+                                    style={{
+                                        color: '#000',
+                                        fontSize: 14,
+                                        fontFamily: 'poppins_medium',
+                                        width: '100%',
+                                        textAlign: 'left'
+                                    }}> {countryName} </TextInput></Pressable>
+                            </View>
+                        </View>
+
+
                         <View style={{ flexDirection: 'row', flex: 1 }}>
                             <View style={{
                                 flex: 0.7,
@@ -400,13 +472,15 @@ const ProviderAccountManage = ({ navigation }) => {
                             </View>
                             <View style={{
                                 flex: 1.3,
+                                borderBottomRightRadius: 30,
                                 borderColor: '#b2b2b2',
                                 borderWidth: 1,
                                 paddingHorizontal: 20,
                                 paddingVertical: 5
                             }}>
-                                <Pressable>
+                                <Pressable onPress={() => toggleVisibility()}>
                                     <TextInput editable={false}
+                                        onFocus={() => toggleVisibility()}
                                         placeholder={'Missing!!!'}
                                         style={{
                                             color: '#000',
@@ -414,49 +488,12 @@ const ProviderAccountManage = ({ navigation }) => {
                                             fontFamily: 'poppins_medium',
                                             width: '100%',
                                             textAlign: 'left'
-                                        }}> {company?.city_name} </TextInput>
+                                        }}> {nameCity} </TextInput>
                                 </Pressable>
                             </View>
                         </View>
 
-                        <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
-                            <View style={{
-                                flex: 0.7,
-                                backgroundColor: '#E6E6E6',
-                                borderBottomLeftRadius: 30,
-                                borderColor: '#b2b2b2',
-                                borderWidth: 1,
-                                paddingHorizontal: 20,
-                                paddingVertical: 5
-                            }}>
-                                <Text style={{
-                                    color: '#000',
-                                    fontSize: 14,
-                                    fontFamily: 'poppins_light',
-                                    width: '100%',
-                                    textAlign: 'left'
-                                }}>Country</Text>
-                            </View>
-                            <View style={{
-                                flex: 1.3,
-                                borderBottomRightRadius: 30,
-                                borderColor: '#b2b2b2',
-                                borderWidth: 1,
-                                paddingHorizontal: 20,
-                                paddingVertical: 5
-                            }}>
-                                <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
 
-                                    placeholder={'Missing!!!'}
-                                    style={{
-                                        color: '#000',
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_medium',
-                                        width: '100%',
-                                        textAlign: 'left'
-                                    }}> {company?.country_name} </TextInput></Pressable>
-                            </View>
-                        </View>
                     </View>
 
 
@@ -493,21 +530,22 @@ const ProviderAccountManage = ({ navigation }) => {
                         borderTopWidth: 1,
                         borderBottomWidth: 1,
                         borderRightWidth: 1
-                    }} placeholder="country code" ></TextInput>
-                    <TextInput placeholder="Enter Your Number" style={{
-                        textAlign: 'left',
-                        paddingHorizontal: 10,
-                        marginTop: 'auto',
-                        marginBottom: 'auto',
-                        paddingVertical: 8,
-                        width: '46%',
-                        borderColor: '#b2b2b2',
-                        borderTopRightRadius: 20,
-                        borderBottomRightRadius: 20,
-                        borderTopWidth: 1,
-                        borderBottomWidth: 1,
-                        borderRightWidth: 1
-                    }}  >verifyPhone</TextInput>
+                    }} placeholder="country code" >{phoneCode}</TextInput>
+                    <TextInput editable={!verified} onChangeText={text => setSeekerData({ ...seekerData, phone: text })}
+                        placeholder="Enter Your Number" style={{
+                            textAlign: 'left',
+                            paddingHorizontal: 10,
+                            marginTop: 'auto',
+                            marginBottom: 'auto',
+                            paddingVertical: 8,
+                            width: '46%',
+                            borderColor: '#b2b2b2',
+                            borderTopRightRadius: 20,
+                            borderBottomRightRadius: 20,
+                            borderTopWidth: 1,
+                            borderBottomWidth: 1,
+                            borderRightWidth: 1
+                        }}  >{data?.phone}</TextInput>
                 </View>
 
 
