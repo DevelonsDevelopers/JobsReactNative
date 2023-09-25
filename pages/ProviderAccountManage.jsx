@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import {
     ActivityIndicator,
     BackHandler,
@@ -12,20 +12,20 @@ import {
     TextInput,
     View
 } from "react-native";
-import { useDispatch, useSelector } from 'react-redux';
-import { CompanyData } from '../API/actions/companyActions';
+import {useDispatch, useSelector} from 'react-redux';
+import {CompanyData} from '../API/actions/companyActions';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CitySelectModal from "../Components/CitySelectModal";
 import CountrySelectModal from "../Components/CountrySelectModal";
 import ProviderTypeModal from "../Components/ProviderTypeModal";
-import { AllCities } from "../API/actions/cityActions";
-import { AllCountries } from "../API/actions/countryActions";
+import {AllCities} from "../API/actions/cityActions";
+import {AllCountries} from "../API/actions/countryActions";
 import PhoneInput from 'react-native-phone-number-input';
 import PhoneModal from '../Components/PhoneModal';
-import { updateCompany } from '../API';
-import { RESET } from '../Utils/Constants';
+import {updateCompany} from '../API';
+import {RESET} from '../Utils/Constants';
 
-const ProviderAccountManage = ({ navigation }) => {
+const ProviderAccountManage = ({navigation}) => {
 
     const dispatch = useDispatch();
 
@@ -71,10 +71,11 @@ const ProviderAccountManage = ({ navigation }) => {
         if (ID) {
             dispatch(CompanyData(ID))
         }
-    }, [dispatch, ID]);
+    }, [dispatch, ID, trigger]);
 
 
     useEffect(() => {
+        console.log(company)
         if (company) {
             setData({
                 ...data,
@@ -87,11 +88,10 @@ const ProviderAccountManage = ({ navigation }) => {
                 headquater: company?.headquater,
                 type: company?.type
             })
-            setCountry(data?.country)
-            setPhoneCode(data?.code)
-            setNameCity(data?.city_name)
-            setCountryName(data?.country_name)
-
+            setCountry(company?.country)
+            setPhoneCode(company?.code)
+            setNameCity(company?.city_name)
+            setCountryName(company?.country_name)
         }
     }, [company])
 
@@ -116,13 +116,13 @@ const ProviderAccountManage = ({ navigation }) => {
     }, [dispatch, countries]);
 
     const cityClick = (item) => {
-        setData({ ...data, city: item.id })
+        setData({...data, city: item.id})
         toggleVisibility()
         setNameCity(item.name)
     }
 
     const countryClick = (item) => {
-        setData({ ...data, country: item.id })
+        setData({...data, country: item.id})
         setCountry(item.id)
         toggleCountryVisibility()
         setCountryName(item.name)
@@ -136,47 +136,49 @@ const ProviderAccountManage = ({ navigation }) => {
     }, [country]);
 
     const typeClick = (value) => [
-        setData({ ...data, type: value })
+        setData({...data, type: value})
     ]
 
     const [phoneVisible, setPhoneVisible] = useState(false)
     const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
     const UpdateCompany = async () => {
-        dispatch(updateCompany(data.size, data.country, data.city, data.code, data.phone, data.headquater, data.type, data.id, data.email))
-        dispatch({ type: RESET })
+        await updateCompany(data.size, data.country, data.city, data.code, data.phone, data.headquater, data.email, data.type, ID).then(res => {
+            console.log(res)
+        })
         setTrigger(!trigger)
     }
 
     const setCode = (code) => {
         setPhoneCode(code)
-        setData({ ...data, code: code })
+        setData({...data, code: code})
         togglePhoneVisible()
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={citiesData} click={cityClick} />
+        <View style={{flex: 1}}>
+            <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={citiesData}
+                             click={cityClick}/>
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
-                click={countryClick} />
+                                click={countryClick}/>
 
-            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode}/>
 
-            <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick} />
-            <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', }}>
-                <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
-                    <View style={{ flexDirection: 'row', height: 130 }}>
-                        <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
+            <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick}/>
+            <ScrollView style={{flex: 1, backgroundColor: '#F1F1F1',}}>
+                <View style={{flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1'}}>
+                    <View style={{flexDirection: 'row', height: 130}}>
+                        <Pressable onPress={() => navigation.goBack()} style={{padiingRight: 5}}><Image style={{
                             width: 22,
                             height: 20,
                             marginTop: 70,
                             marginLeft: 30,
                             marginBottom: 250,
                             tintColor: '#fff'
-                        }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
-                        <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                            <Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                                source={require('../assets/logo.png')} alt={'Okay'} />
+                        }} source={require('../assets/back_arrow.png')} alt={'Okay'}/></Pressable>
+                        <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                            <Image style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
+                                   source={require('../assets/logo.png')} alt={'Okay'}/>
                         </View>
                     </View>
                     <Text style={{
@@ -213,7 +215,7 @@ const ProviderAccountManage = ({ navigation }) => {
                     borderRadius: 30,
                     marginTop: 20
                 }}>
-                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                    <View style={{flexDirection: 'row', flex: 1}}>
                         <View style={{
                             flex: 0.7,
                             backgroundColor: '#E6E6E6',
@@ -241,15 +243,15 @@ const ProviderAccountManage = ({ navigation }) => {
                         }}>
                             <TextInput
                                 placeholder={'Missing!!!'} style={{
-                                    color: '#000',
-                                    fontSize: 14,
-                                    fontFamily: 'poppins_medium',
-                                    width: '100%',
-                                    textAlign: 'left'
-                                }}> {company?.name} </TextInput>
+                                color: '#000',
+                                fontSize: 14,
+                                fontFamily: 'poppins_medium',
+                                width: '100%',
+                                textAlign: 'left'
+                            }}> {company?.name} </TextInput>
                         </View>
                     </View>
-                    <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                    <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
                         <View style={{
                             flex: 0.7,
                             backgroundColor: '#E6E6E6',
@@ -274,17 +276,17 @@ const ProviderAccountManage = ({ navigation }) => {
                             paddingVertical: 5
                         }}>
                             <TextInput
-                                onChangeText={text => setData({ ...data, email: text })}
+                                onChangeText={text => setData({...data, email: text})}
                                 placeholder={'Missing!!!'} style={{
-                                    color: '#000',
-                                    fontSize: 14,
-                                    fontFamily: 'poppins_medium',
-                                    width: '100%',
-                                    textAlign: 'left'
-                                }}>{company?.email}</TextInput>
+                                color: '#000',
+                                fontSize: 14,
+                                fontFamily: 'poppins_medium',
+                                width: '100%',
+                                textAlign: 'left'
+                            }}>{company?.email}</TextInput>
                         </View>
                     </View>
-                    <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                    <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
                         <View style={{
                             flex: 0.7,
                             backgroundColor: '#E6E6E6',
@@ -313,14 +315,14 @@ const ProviderAccountManage = ({ navigation }) => {
                             }}>
                             <View>
                                 <TextInput
-                                    onChangeText={text => setData({ ...data, headquater: text })}
+                                    onChangeText={text => setData({...data, headquater: text})}
                                     placeholder={'Missing!!!'} style={{
-                                        color: '#000',
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_medium',
-                                        width: '100%',
-                                        textAlign: 'left'
-                                    }}>{company?.headquater}</TextInput>
+                                    color: '#000',
+                                    fontSize: 14,
+                                    fontFamily: 'poppins_medium',
+                                    width: '100%',
+                                    textAlign: 'left'
+                                }}>{company?.headquater}</TextInput>
                             </View>
                         </Pressable>
                     </View>
@@ -335,7 +337,7 @@ const ProviderAccountManage = ({ navigation }) => {
                     borderRadius: 30,
                     marginTop: 20
                 }}>
-                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                    <View style={{flexDirection: 'row', flex: 1}}>
                         <View style={{
                             flex: 0.7,
                             backgroundColor: '#E6E6E6',
@@ -361,7 +363,8 @@ const ProviderAccountManage = ({ navigation }) => {
                             paddingHorizontal: 20,
                             paddingVertical: 5
                         }}>
-                            <TextInput onChangeText={text => setData({ ...data, type: text })} editable={false} placeholder={'Missing!!!'} style={{
+                            <TextInput onChangeText={text => setData({...data, type: text})} editable={false}
+                                       placeholder={'Missing!!!'} style={{
                                 color: '#000',
                                 fontSize: 14,
                                 fontFamily: 'poppins_medium',
@@ -372,8 +375,7 @@ const ProviderAccountManage = ({ navigation }) => {
                     </View>
 
 
-
-                    <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                    <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
                         <View style={{
                             flex: 0.7,
                             backgroundColor: '#E6E6E6',
@@ -398,14 +400,14 @@ const ProviderAccountManage = ({ navigation }) => {
                             paddingHorizontal: 20,
                             paddingVertical: 5
                         }}>
-                            <TextInput onChangeText={text => setData({ ...data, size: text })}
-                                placeholder={'Missing!!!'} style={{
-                                    color: '#000',
-                                    fontSize: 14,
-                                    fontFamily: 'poppins_medium',
-                                    width: '100%',
-                                    textAlign: 'left'
-                                }}>{company?.size}</TextInput>
+                            <TextInput onChangeText={text => setData({...data, size: text})}
+                                       placeholder={'Missing!!!'} style={{
+                                color: '#000',
+                                fontSize: 14,
+                                fontFamily: 'poppins_medium',
+                                width: '100%',
+                                textAlign: 'left'
+                            }}>{company?.size}</TextInput>
                         </View>
                     </View>
 
@@ -415,7 +417,7 @@ const ProviderAccountManage = ({ navigation }) => {
 
                     }}>
 
-                        <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                        <View style={{flexDirection: 'row', flex: 1, marginTop: -1}}>
                             <View style={{
                                 flex: 0.7,
                                 backgroundColor: '#E6E6E6',
@@ -439,21 +441,23 @@ const ProviderAccountManage = ({ navigation }) => {
                                 paddingHorizontal: 20,
                                 paddingVertical: 5
                             }}>
-                                <Pressable onPress={() => toggleCountryVisibility()}><TextInput editable={false}
-                                    onFocus={() => toggleCountryVisibility()}
-                                    placeholder={'Missing!!!'}
-                                    style={{
-                                        color: '#000',
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_medium',
-                                        width: '100%',
-                                        textAlign: 'left'
-                                    }}> {countryName} </TextInput></Pressable>
+                                <Pressable onPress={() => toggleCountryVisibility()}>
+                                    <TextInput editable={false}
+                                               onFocus={() => toggleCountryVisibility()}
+                                               placeholder={'Missing!!!'}
+                                               style={{
+                                                   color: '#000',
+                                                   fontSize: 14,
+                                                   fontFamily: 'poppins_medium',
+                                                   width: '100%',
+                                                   textAlign: 'left'
+                                               }}> {countryName} </TextInput>
+                                </Pressable>
                             </View>
                         </View>
 
 
-                        <View style={{ flexDirection: 'row', flex: 1 }}>
+                        <View style={{flexDirection: 'row', flex: 1}}>
                             <View style={{
                                 flex: 0.7,
                                 backgroundColor: '#E6E6E6',
@@ -480,30 +484,21 @@ const ProviderAccountManage = ({ navigation }) => {
                             }}>
                                 <Pressable onPress={() => toggleVisibility()}>
                                     <TextInput editable={false}
-                                        onFocus={() => toggleVisibility()}
-                                        placeholder={'Missing!!!'}
-                                        style={{
-                                            color: '#000',
-                                            fontSize: 14,
-                                            fontFamily: 'poppins_medium',
-                                            width: '100%',
-                                            textAlign: 'left'
-                                        }}> {nameCity} </TextInput>
+                                               onFocus={() => toggleVisibility()}
+                                               placeholder={'Missing!!!'}
+                                               style={{
+                                                   color: '#000',
+                                                   fontSize: 14,
+                                                   fontFamily: 'poppins_medium',
+                                                   width: '100%',
+                                                   textAlign: 'left'
+                                               }}> {nameCity} </TextInput>
                                 </Pressable>
                             </View>
                         </View>
-
-
                     </View>
-
-
-
-
                 </View>
-
-
-
-                <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
+                <View style={{flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto',}}>
                     <TextInput editable={false} style={{
                         textAlign: 'center',
                         paddingHorizontal: 10,
@@ -530,58 +525,23 @@ const ProviderAccountManage = ({ navigation }) => {
                         borderTopWidth: 1,
                         borderBottomWidth: 1,
                         borderRightWidth: 1
-                    }} placeholder="country code" >{phoneCode}</TextInput>
-                    <TextInput editable={!verified} onChangeText={text => setSeekerData({ ...seekerData, phone: text })}
-                        placeholder="Enter Your Number" style={{
-                            textAlign: 'left',
-                            paddingHorizontal: 10,
-                            marginTop: 'auto',
-                            marginBottom: 'auto',
-                            paddingVertical: 8,
-                            width: '46%',
-                            borderColor: '#b2b2b2',
-                            borderTopRightRadius: 20,
-                            borderBottomRightRadius: 20,
-                            borderTopWidth: 1,
-                            borderBottomWidth: 1,
-                            borderRightWidth: 1
-                        }}  >{data?.phone}</TextInput>
+                    }} placeholder="country code">{phoneCode}</TextInput>
+                    <TextInput editable={!verified} onChangeText={text => setData({...data, phone: text})}
+                               placeholder="Enter Your Number" style={{
+                        textAlign: 'left',
+                        paddingHorizontal: 10,
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                        paddingVertical: 8,
+                        width: '46%',
+                        borderColor: '#b2b2b2',
+                        borderTopRightRadius: 20,
+                        borderBottomRightRadius: 20,
+                        borderTopWidth: 1,
+                        borderBottomWidth: 1,
+                        borderRightWidth: 1
+                    }}>{data?.phone}</TextInput>
                 </View>
-
-
-                {/* <View style={{ flexDirection: 'column', marginTop: 20, marginHorizontal: 30 }}>
-                    <View style={{ height: 60, borderColor: '#b2b2b2', borderWidth: 1, borderRadius: 10, padding: 4, backgroundColor: 'white' }}>
-                        <PhoneInput onChangeText={text => console.log(text)}
-                            layout='first'
-                            defaultCode='PK'
-                        />
-                    </View>
-                    <Image style={{ width: 14, height: 14, marginLeft: 'auto', position: 'absolute', top: 22, left: '92%' }}
-                        source={require('../assets/verified.png')} />
-                </View> */}
-                {/* <View style={{
-                            flex: 1.3,
-                            borderColor: '#b2b2b2',
-                            borderWidth: 1,
-                            paddingHorizontal: 20,
-                            paddingVertical: 5
-                        }}>
-                            <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center' }}>
-                                <TextInput
-                                    onChangeText={text => setData({ ...data, phone: text })}
-                                    placeholder={'Missing!!!'} style={{
-                                        color: '#000',
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_medium',
-                                        textAlign: 'left'
-                                    }}>{company?.phone}</TextInput>
-
-                                <Image style={{ width: 14, height: 14, marginLeft: 'auto' }}
-                                    source={require('../assets/verified.png')} />
-
-                            </View>
-                        </View> */}
-
                 <Pressable onPress={() => UpdateCompany()} style={{
                     backgroundColor: '#13A3E1',
                     borderRadius: 25,
@@ -590,23 +550,23 @@ const ProviderAccountManage = ({ navigation }) => {
                     marginTop: 15,
                     marginHorizontal: 25
                 }}>
-                    <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
+                    <Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}
                     >Update
                     </Text>
                 </Pressable>
 
-                <Pressable onPress={() => navigation.push('Verify', { verifyPhone: company?.phone })}
-                    style={{
-                        borderColor: '#000',
-                        backgroundColor: '#000',
-                        borderWidth: 1,
-                        borderRadius: 25,
-                        alignItems: 'center',
-                        padding: 15,
-                        marginTop: 15,
-                        marginHorizontal: 25
-                    }}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Verify
-                        Phone</Text></Pressable>
+                <Pressable onPress={() => navigation.push('Verify', {verifyPhone: company?.phone})}
+                           style={{
+                               borderColor: '#000',
+                               backgroundColor: '#000',
+                               borderWidth: 1,
+                               borderRadius: 25,
+                               alignItems: 'center',
+                               padding: 15,
+                               marginTop: 15,
+                               marginHorizontal: 25
+                           }}><Text style={{color: '#fff', fontWeight: '800', fontSize: 15}}>Verify
+                    Phone</Text></Pressable>
             </ScrollView>
         </View>
     )
