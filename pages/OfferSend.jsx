@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Image, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
 import OfferModal from '../Components/OfferModal'
 import ProposelModal from '../Components/ProposelModal'
-import {sendOffer} from "../API";
+import { sendOffer } from "../API";
 import moment from "moment";
 
 const OfferSend = ({ route, navigation }) => {
@@ -21,8 +21,8 @@ const OfferSend = ({ route, navigation }) => {
 
     const SendOffer = (job, user, offerType, offer) => {
         const date = moment().format("YYYY-MM-DD")
-        sendOffer(job, user, offerType, offer, '',date).then(res => {
-            const {data: {data}} = res;
+        sendOffer(job, user, offerType, offer, '', date).then(res => {
+            const { data: { data } } = res;
             if (data.affectedRows === 1) {
                 navigation.push('PostJob')
             }
@@ -32,7 +32,7 @@ const OfferSend = ({ route, navigation }) => {
     return (
 
         <ScrollView>
-            <OfferModal visible={typeVisible} toggleVisibility={toggleVisibility} set={setType}/>
+            <OfferModal visible={typeVisible} toggleVisibility={toggleVisibility} set={setType} />
             <View style={{
                 flexDirection: 'column',
                 width: '100%',
@@ -80,7 +80,10 @@ const OfferSend = ({ route, navigation }) => {
                     }}>Offer Type</Text>
 
                 </View>
-                <Pressable onPress={() => toggleVisibility()}><TextInput editable={false} style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}  >{type}</TextInput></Pressable>
+                <Pressable onPress={() => toggleVisibility()}>
+                    <TextInput editable={false}
+                        style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}  >{type}</TextInput>
+                </Pressable>
             </View>
             <View style={{
                 flexDirection: 'column',
@@ -100,7 +103,7 @@ const OfferSend = ({ route, navigation }) => {
                         fontSize: 16
                     }}>Proposal</Text>
                 </View>
-                    <TextInput onChangeText={text => setProposal(text)} multiline={true} style={{ textAlign: 'center', borderWidth: 0.2, borderColor: 'gray', borderRadius: 18, marginTop: 15 ,padding:30,fontSize:11,fontFamily:'poppins_medium',lineHeight:45}} placeholder='write Your proposal' numberOfLines={17} />
+                <TextInput onChangeText={text => setProposal(text)} multiline={true} style={{ textAlign: 'center', borderWidth: 0.2, borderColor: 'gray', borderRadius: 18, marginTop: 15, padding: 30, fontSize: 11, fontFamily: 'poppins_medium', lineHeight: 45 }} placeholder='write Your proposal' numberOfLines={17} />
             </View>
             <Pressable onPress={() => SendOffer(job, user, type, proposal)} style={{
                 backgroundColor: '#13A3E1',
