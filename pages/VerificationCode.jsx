@@ -147,7 +147,7 @@ function VerificationCode({ route, navigation }) {
 					<Text style={{ color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15 }}>Verify</Text>
 				</Pressable>
 				<Text style={{ marginTop: 40, fontFamily: 'poppins_medium', fontSize: 13, color: 'gray' }}>Didn't recieve any code ?</Text>
-				<Pressable onPress={() => { }} style={{
+				<Pressable onPress={() => { signInWithPhoneNumber(phone) }} style={{
 					width: '85%',
 					alignItems: 'center',
 					borderRadius: 25,

@@ -117,8 +117,9 @@ const ProviderAccountManage = ({ navigation }) => {
     const [phoneVisible, setPhoneVisible] = useState(false)
     const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
+    const UpdateCompany = async () => {
 
-
+    }
 
     return (
         <View style={{ flex: 1 }}>
@@ -543,7 +544,7 @@ const ProviderAccountManage = ({ navigation }) => {
                             </View>
                         </View> */}
 
-                <Pressable style={{
+                <Pressable onPress={() => UpdateCompany()} style={{
                     backgroundColor: '#13A3E1',
                     borderRadius: 25,
                     alignItems: 'center',
