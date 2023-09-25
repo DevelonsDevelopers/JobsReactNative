@@ -322,7 +322,6 @@ function PostJob({navigation}) {
 
                             <Text style={{paddingLeft: 20}}>Open profile and fill the required data </Text>
                             <View style={{flexDirection: 'row', gap: 40, marginVertical: 10}}>
-
                                 {isComplete ?
                                     <>
                                         <Image style={{width: 20, height: 20, marginTop: 5}}
