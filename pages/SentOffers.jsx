@@ -65,8 +65,8 @@ function SentOffers({ navigation }) {
                                 alt={'Okay'} />
                         </Pressable>
                         <Pressable  onPress={() => navigation.push('PaymentSuccesful') }  style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                            <Image 
-                           
+                            <Image
+
                             style={{
                                 width: 150,
                                 height: 40,
@@ -142,9 +142,9 @@ function SentOffers({ navigation }) {
                                         Salary ${item.salary}
                                     </Text>
                                 </View>
-                                
+
                                     <Text
-                                        onPress={() => navigation.push('AcceptResponse')}
+                                        onPress={() => navigation.push('JobResponse', { ID: item.job })}
                                         style={{
                                             backgroundColor: '#13A3E1',
                                             textAlign: "center",
@@ -157,7 +157,7 @@ function SentOffers({ navigation }) {
                                             paddingHorizontal:30,
                                             marginLeft:'auto',marginRight:'auto'
                                         }}>View Response</Text>
-                               
+
                             </View>
                         )} />
                 </SafeAreaView>

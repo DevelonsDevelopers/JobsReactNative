@@ -402,7 +402,7 @@ function PostJob({navigation}) {
                                               code: company?.code,
                                               verifyPhone: company?.phone,
                                               type: "PROVIDER",
-                                              verify: false,
+                                              verify: true,
                                               ID: ID
                                           })}>(Verify Now)</Text>
                                 </View>

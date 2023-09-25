@@ -5,7 +5,9 @@ import {CheckCV} from "../API/actions/cvActions";
 import {useDispatch} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const PaymentSuccessful = ({ navigation }) => {
+const PaymentSuccessful = ({ route, navigation }) => {
+
+    const { type } = route.params
 
     const dispatch = useDispatch()
     const [ID, setID] = useState()
@@ -21,13 +23,17 @@ const PaymentSuccessful = ({ navigation }) => {
     }
 
     useEffect(() => {
-        if (ID) {
-            dispatch(fetchSeeker(ID))
-            dispatch(CheckCV(ID))
-            dispatch(CheckSeeker(ID))
-            sleep(1000).then( async () => {
-                navigation.replace('Home')
-            })
+        if (type === "Seeker") {
+            if (ID) {
+                dispatch(fetchSeeker(ID))
+                dispatch(CheckCV(ID))
+                dispatch(CheckSeeker(ID))
+                sleep(1000).then(async () => {
+                    navigation.replace('Home')
+                })
+            }
+        } else {
+            navigation.replace('PostJob')
         }
     }, [ID]);
 

@@ -166,7 +166,7 @@ const PaymentScreen = ({ route, navigation }) => {
             const {data: {responseCode}} = res;
             if (responseCode === 200) {
                 navigation.popToTop()
-                navigation.replace('PaymentSuccessful')
+                navigation.replace('PaymentSuccessful', { type: type })
             } else {
 
             }
