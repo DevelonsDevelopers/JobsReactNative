@@ -12,8 +12,8 @@ const OfferSend = ({ route, navigation }) => {
     const { job } = route.params;
     const { user } = route.params;
 
-    const [type, setType] = useState()
-    const [proposal, setProposal] = useState()
+    const [type, setType] = useState('')
+    const [proposal, setProposal] = useState('by')
 
     const [typeVisible, setTypeVisible] = useState(false)
     const toggleVisibility = () => setTypeVisible(!typeVisible)
@@ -25,20 +25,20 @@ const OfferSend = ({ route, navigation }) => {
         const date = moment().format("YYYY-MM-DD")
         if (type.length >= 5) {
             if (proposal.length >= 5) {
-                toggleVisible()
                 sendOffer(job, user, offerType, offer, '', date).then(res => {
+                    toggleVisible()
                     const { data: { data } } = res;
                     if (data.affectedRows === 1) {
                         navigation.push('PostJob')
+                        toggleVisible()
                     }
                 })
             } else {
-                Toast.show({ type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address' })
+                Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Proposal' })
             }
         } else {
-            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address' })
+            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Offer Type' })
         }
-        toggleVisible()
     }
 
 
