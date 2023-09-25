@@ -107,7 +107,7 @@ function AppliedByJob({ route, navigation }) {
                             }}>Demand 5000/month</Text></View> */}
                                 <View style={{ paddingHorizontal: 36, marginTop: 4 }}>
                                     <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={600} rippleSize={800}
-                                        onPress={() => navigation.push('ViewResume', { ID: item.user, job: job })}>
+                                        onPress={() => navigation.push('ViewResume', { ID: item.user, job: item.job })}>
                                         <Text style={{
                                             backgroundColor: '#143D59',
                                             textAlign: "center",

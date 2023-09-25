@@ -54,12 +54,10 @@ function PostJob({navigation}) {
 
     useEffect(() => {
         if (ID) {
-            if (!companyJobs) {
-                dispatch(FeaturedProviderJobs(ID))
-            }
+            dispatch(FeaturedProviderJobs(ID))
             dispatch(CompanyData(ID))
         }
-    }, [dispatch, companyJobs, ID]);
+    }, [dispatch, ID]);
 
     useEffect(() => {
         console.log(company)

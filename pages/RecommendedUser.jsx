@@ -111,7 +111,7 @@ function RecommendedUser({route, navigation}) {
                                 fontSize: 12,
                                 fontFamily: 'poppins_medium'
                             }}>Demand 5000/month</Text></View>
-                            <Ripple onPress={() => navigation.push('ViewResume', { ID: item.id, offer: item.offer })} style={{marginTop: 4,marginLeft:'auto',marginRight:'auto'}}>
+                            <Ripple onPress={() => navigation.push('ViewResume', { ID: item.id, offer: item.offer, job: item.job })} style={{marginTop: 4,marginLeft:'auto',marginRight:'auto'}}>
                                 <Text style={{
                                     backgroundColor: '#13A3E1',
                                     textAlign: "center",
