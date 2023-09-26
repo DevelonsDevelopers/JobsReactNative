@@ -234,48 +234,57 @@ const ViewResume = ({ route, navigation }) => {
 
 			</ScrollView>
 
-			<View  style={{
-				flexDirection: 'row',
-				justifyContent: "center",
-				gap: 20,
-				fontFamily: 'poppins_medium',
-				paddingVertical: 10,
-				backgroundColor: '#e8e8e8'
-			}}>
-				<Ripple onPress={() => navigation.push('AppliedUsers')} >
+
+
+			{offer !== 0 ?
+				<Ripple>
 					<Text style={{
 						justifyContent: 'center',
 						height: 50,
 						fontSize: 15,
 						fontFamily: 'poppins_bold',
-						backgroundColor: '#143D59',
+						backgroundColor: '#13A3E1',
 						color: 'white',
 						width: 150,
 						textAlign: "center",
 						paddingVertical: 10,
 						borderRadius: 25,
 						paddingTop: 13,
-					}}>Ignore</Text>
+						marginLeft:'auto',
+						marginRight:'auto'
+					}} >Already Sent</Text>
 				</Ripple>
-				{offer !== 0 ?
-					<Ripple >
+				:
+
+				<View style={{
+					flexDirection: 'row',
+					justifyContent: "center",
+					gap: 20,
+					fontFamily: 'poppins_medium',
+					paddingVertical: 10,
+					backgroundColor: '#e8e8e8'
+				}}>
+
+
+					<Ripple onPress={() => navigation.push('AppliedUsers')} >
 						<Text style={{
 							justifyContent: 'center',
 							height: 50,
 							fontSize: 15,
 							fontFamily: 'poppins_bold',
-							backgroundColor: '#13A3E1',
+							backgroundColor: '#143D59',
 							color: 'white',
 							width: 150,
 							textAlign: "center",
 							paddingVertical: 10,
 							borderRadius: 25,
 							paddingTop: 13,
-						}} >Already Sent</Text>
+						}}>Ignore</Text>
 					</Ripple>
-					:
+
+
 					<Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })}  >
-						<Text  style={{
+						<Text style={{
 							justifyContent: 'center',
 							height: 50,
 							fontSize: 15,
@@ -289,8 +298,8 @@ const ViewResume = ({ route, navigation }) => {
 							paddingTop: 13,
 						}}>Send Offer</Text>
 					</Ripple>
-				}
-			</View>
+				</View>
+			}
 		</View>
 	)
 }

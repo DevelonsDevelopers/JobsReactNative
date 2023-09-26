@@ -130,7 +130,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                     }}>{company?.headquater}</Text>
                 </View>
 
-                {/* <View style={{
+                <View style={{
                     flexDirection: 'row',
                     backgroundColor: '#13A3E1',
                     paddingVertical: 20,
@@ -175,8 +175,8 @@ const ProviderProfileInfo = ({ navigation }) => {
                             marginTop: 20
                         }}>0</Text>
                     </Pressable>
-                </View> */}
-                <Text style={{ marginLeft: 40, fontSize: 16, fontFamily: 'poppins_medium', marginTop: 10 }}>Current Plan:</Text>
+                </View>
+                {/* <Text style={{ marginLeft: 40, fontSize: 16, fontFamily: 'poppins_medium', marginTop: 10 }}>Current Plan:</Text>
                 <Ripple onPress={() => navigation.push('Plans')} style={{ backgroundColor: 'white', padding: 20, marginTop: 10, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
                     <Text style={{ color: '#194666', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Basic</Text>
                     <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
@@ -185,7 +185,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                     </View>
                     <Text style={{ color: '#194666', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  Get 3 months listing</Text>
                     <Text style={{ color: '#194666', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 20 jobs</Text>
-                </Ripple>
+                </Ripple> */}
 
                 <View style={{
                     flexDirection: 'column',
