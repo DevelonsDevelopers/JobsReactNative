@@ -50,9 +50,9 @@ function PostJob({ navigation }) {
     const companyJobs = useSelector(state => state.job.providerJobsFeatured)
     const company = useSelector(state => state.company.company)
     const noCompany = useSelector(state => state.company.noCompany)
-    const nodata = useSelector(state => state.job.nodata)
-    const error = useSelector(state => state.job.error)
-    const loading = useSelector(state => state.job.isLoading)
+    const nodata = useSelector(state => state.company.nodata)
+    const error = useSelector(state => state.company.error)
+    const loading = useSelector(state => state.company.isLoading)
 
     useEffect(() => {
         if (ID) {
@@ -107,7 +107,6 @@ function PostJob({ navigation }) {
         await AsyncStorage.setItem("USER", '')
         await AsyncStorage.setItem("NAME", '')
         await AsyncStorage.setItem("EMAIL", '')
-        navigation.popToTop()
         navigation.push('UserType')
         toggleLoadingVisibility()
     }
