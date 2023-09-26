@@ -215,7 +215,7 @@ const Verification = ({ navigation }) => {
 						</View>
 						:
 						<Pressable onPress={() => {
-							if (verify) {
+							if (cv) {
 								navigation.push('PersonalInfo')
 							} else {
 								click('Complete your cv first')
@@ -254,7 +254,7 @@ const Verification = ({ navigation }) => {
 						</View>
 						:
 						<Pressable onPress={() => {
-							if (plan) {
+							if (verify) {
 								navigation.push('SeekerPlans')
 							} else {
 								click('Verify your phone first')
