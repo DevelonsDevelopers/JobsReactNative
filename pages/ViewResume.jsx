@@ -234,17 +234,60 @@ const ViewResume = ({ route, navigation }) => {
 
 			</ScrollView>
 
-			<View style={{ flexDirection: "row", justifyContent: 'center', }}>
-				<Ripple onPress={() => navigation.push('AppliedUsers')} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
-					<Text style={{ backgroundColor: 'white', color: '#143D59', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 40, borderColor: '#143D59', borderWidth: 1 }}>Ignore</Text>
+			<View  style={{
+				flexDirection: 'row',
+				justifyContent: "center",
+				gap: 20,
+				fontFamily: 'poppins_medium',
+				paddingVertical: 10,
+				backgroundColor: '#e8e8e8'
+			}}>
+				<Ripple onPress={() => navigation.push('AppliedUsers')} >
+					<Text style={{
+						justifyContent: 'center',
+						height: 50,
+						fontSize: 15,
+						fontFamily: 'poppins_bold',
+						backgroundColor: '#143D59',
+						color: 'white',
+						width: 150,
+						textAlign: "center",
+						paddingVertical: 10,
+						borderRadius: 25,
+						paddingTop: 13,
+					}}>Ignore</Text>
 				</Ripple>
 				{offer !== 0 ?
-					<Ripple style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
-						<Text style={{ backgroundColor: '#13A3E1', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Already Sent</Text>
+					<Ripple >
+						<Text style={{
+							justifyContent: 'center',
+							height: 50,
+							fontSize: 15,
+							fontFamily: 'poppins_bold',
+							backgroundColor: '#13A3E1',
+							color: 'white',
+							width: 150,
+							textAlign: "center",
+							paddingVertical: 10,
+							borderRadius: 25,
+							paddingTop: 13,
+						}} >Already Sent</Text>
 					</Ripple>
 					:
-					<Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
-						<Text style={{ backgroundColor: '#143D59', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Send Offer</Text>
+					<Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })}  >
+						<Text  style={{
+							justifyContent: 'center',
+							height: 50,
+							fontSize: 15,
+							fontFamily: 'poppins_bold',
+							backgroundColor: '#13A3E1',
+							color: 'white',
+							width: 150,
+							textAlign: "center",
+							paddingVertical: 10,
+							borderRadius: 25,
+							paddingTop: 13,
+						}}>Send Offer</Text>
 					</Ripple>
 				}
 			</View>

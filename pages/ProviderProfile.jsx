@@ -215,7 +215,7 @@ const ProviderProfile = ({ navigation }) => {
                         color: '#626262',
                         elevation: 10
                     }}>
-                    <TextInput editable={false} value={countryName} placeholder='Enter your Country'
+                    <TextInput style={{ color: '#000' }} editable={false} value={countryName} placeholder='Enter your Country'
                         inputMode={'text'} />
                 </Pressable>
                 <Pressable onPress={() => toggleVisibility()} style={{
@@ -228,7 +228,7 @@ const ProviderProfile = ({ navigation }) => {
                     color: '#626262',
                     elevation: 10
                 }}>
-                    <TextInput value={nameCity} editable={false} placeholder={'Enter your City'} />
+                    <TextInput style={{ color: '#000' }} value={nameCity} editable={false} placeholder={'Enter your City'} />
                 </Pressable>
 
                 {/* <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })} style={{

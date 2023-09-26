@@ -5,7 +5,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {CheckSeeker, fetchSeeker} from "../API/actions/seekerActions";
 import {CheckCV} from "../API/actions/cvActions";
 
-const ProfileVerifiedSuccessful = ({ navigation }) => {
+const ProfileVerifiedSuccessful = ({ route, navigation }) => {
+
+    const { type } = route.params
 
     const dispatch = useDispatch()
     const [ID, setID] = useState()
@@ -21,13 +23,17 @@ const ProfileVerifiedSuccessful = ({ navigation }) => {
     }
 
     useEffect(() => {
-        if (ID) {
-            dispatch(fetchSeeker(ID))
-            dispatch(CheckCV(ID))
-            dispatch(CheckSeeker(ID))
-            sleep(1000).then(async () => {
-                navigation.replace('Home')
-            })
+        if (type === "PROVIDER"){
+            navigation.replace('PostJob')
+        } else {
+            if (ID) {
+                dispatch(fetchSeeker(ID))
+                dispatch(CheckCV(ID))
+                dispatch(CheckSeeker(ID))
+                sleep(1000).then(async () => {
+                    navigation.replace('Home')
+                })
+            }
         }
     }, [ID]);
 

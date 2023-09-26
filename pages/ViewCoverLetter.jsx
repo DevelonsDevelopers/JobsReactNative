@@ -122,7 +122,7 @@ const ViewCoverLetter = ({ navigation, route }) => {
                     <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', marginTop: 11, marginHorizontal: 30 }}>Your's Sincerly</Text>
                     <Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 10, marginHorizontal: 30, marginLeft: 'auto' }}>  {cv?.name}</Text>
                     <View style={{ flexDirection: "row", justifyContent: 'center', marginHorizontal: 40 }}>
-                        {cv?.offer === 0 ?
+                        {offer !== 0 ?
                         <Ripple onPress={() => navigation.push('OfferSend',{  job: job, user: ID })} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: 20, marginBottom: 6, }}>
                             <Text style={{ backgroundColor: 'green', color: 'white', fontSize: 16, fontFamily: 'poppins_bold', paddingTop: 9, paddingBottom: 9, borderRadius: 20, textAlign: 'center', paddingHorizontal: 20 }}>Already sent </Text>
                         </Ripple>
