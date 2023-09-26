@@ -1,15 +1,16 @@
-import React, {useEffect, useState} from 'react'
-import {Image, Modal, Pressable, Text, View} from 'react-native'
-import {GestureHandlerRootView, NativeViewGestureHandler, TextInput} from 'react-native-gesture-handler'
+import React, { useEffect, useState } from 'react'
+import { Image, Modal, Pressable, Text, View } from 'react-native'
+import { GestureHandlerRootView, NativeViewGestureHandler, TextInput } from 'react-native-gesture-handler'
+import Toast from 'react-native-toast-message';
 
-const EducationModal = ({visible, toggleEducationVisibility, add, data, edit}) => {
+const EducationModal = ({ visible, toggleEducationVisibility, add, data, edit }) => {
 
-    const [degree, setDegree] = useState();
-    const [timeperiod, setTimePeriod] = useState();
-    const [university, setUniversity] = useState();
+    const [degree, setDegree] = useState('');
+    const [timeperiod, setTimePeriod] = useState('');
+    const [university, setUniversity] = useState('');
 
     useEffect(() => {
-        if (data!==null){
+        if (data !== null) {
             setDegree(data?.degree)
             setTimePeriod(data?.timeperiod)
             setUniversity(data?.institute)
@@ -17,12 +18,25 @@ const EducationModal = ({visible, toggleEducationVisibility, add, data, edit}) =
     }, [data]);
 
     const Add = () => {
-        if (data !== null){
-            edit(degree, timeperiod, university, data.id)
+
+        if (degree.length >= 4) {
+            if (university.length >= 4) {
+                if (timeperiod.length >= 4) {
+                    if (data !== null) {
+                        edit(degree, timeperiod, university, data.id)
+                    } else {
+                        add(degree, timeperiod, university)
+                    }
+                    toggleEducationVisibility()
+                } else {
+                    Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Timperiod' })
+                }
+            } else {
+                Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Institute' })
+            }
         } else {
-            add(degree, timeperiod, university)
+            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Degree' })
         }
-        toggleEducationVisibility()
     }
 
     return (
@@ -43,11 +57,11 @@ const EducationModal = ({visible, toggleEducationVisibility, add, data, edit}) =
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <Pressable style={{width: 15, height: 15, marginLeft: 'auto'}}
-                               onPress={() => toggleEducationVisibility()}><Image
-                        style={{width: 15, height: 15, marginLeft: 'auto'}}
-                        source={require('../assets/close.png')}/></Pressable>
-                    <Text style={{fontSize: 16, fontFamily: 'poppins_bold'}}>Education</Text>
+                    <Pressable style={{ width: 15, height: 15, marginLeft: 'auto', paddingLeft: 10, paddingRight: 30, paddingBottom: 30, paddingTop: 10 }}
+                        onPress={() => toggleEducationVisibility()}><Image
+                            style={{ width: 15, height: 15, marginLeft: 'auto' }}
+                            source={require('../assets/close.png')} /></Pressable>
+                    <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Education</Text>
                     <TextInput onChangeText={text => setDegree(text)} placeholder={'Degree'} style={{
                         width: '80%',
                         marginTop: 20,
@@ -81,9 +95,12 @@ const EducationModal = ({visible, toggleEducationVisibility, add, data, edit}) =
                         backgroundColor: '#13A3E1',
                         borderRadius: 25,
                         marginTop: 10
-                    }}><Text style={{color: '#fff', fontSize: 14, fontFamily: 'poppins_bold'}}>ADD</Text></Pressable>
+                    }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
                 </View>
             </GestureHandlerRootView>
+
+            <Toast position='top' bottomOffset={20} />
+
 
         </Modal>
 

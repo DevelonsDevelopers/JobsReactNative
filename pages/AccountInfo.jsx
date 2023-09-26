@@ -357,8 +357,9 @@ function AccountInfo({ route, navigation }) {
 												padding: 15,
 												marginTop: 15,
 												marginHorizontal: 100
-											}}><Text style={{ color: '#000', fontWeight: '800', fontSize: 15 }}>Build
-												CV</Text></Pressable>
+}}>
+											<Text style={{ color: '#000', fontWeight: '800', fontSize: 15 }}>Build CV</Text>
+											</Pressable>
 										</View>
 										{isloading ?
 											<View style={{ marginTop: 200 }}>
@@ -498,13 +499,14 @@ function AccountInfo({ route, navigation }) {
 																			borderRadius: 10,
 																			borderColor: '#939393',
 																			borderWidth: 0.5,
-																			padding: 10
+																			// padding: 10,
+																			paddingHorizontal:10
 																		}}>
 																		<Text style={{
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.qualification}</Text>
-																		<Pressable style={{ marginLeft: 'auto' }} onPress={() => editEducation({ id: item.id, degree: item.qualification, institute: item.institute, timeperiod: item.timeperiod })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto',backgroundColor:'violet',padding:10 }} onPress={() => editEducation({ id: item.id, degree: item.qualification, institute: item.institute, timeperiod: item.timeperiod })}><Image style={{
 																			width: 15,
 																			height: 15
 																		}}
