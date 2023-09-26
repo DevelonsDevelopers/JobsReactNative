@@ -241,7 +241,8 @@ const ProviderAccountManage = ({ navigation }) => {
 							paddingHorizontal: 20,
 							paddingVertical: 5
 						}}>
-							<TextInput
+							<TextInput 
+							editable={false}
 								placeholder={'Missing!!!'} style={{
 									color: '#000',
 									fontSize: 14,
@@ -406,7 +407,8 @@ const ProviderAccountManage = ({ navigation }) => {
 									fontSize: 14,
 									fontFamily: 'poppins_medium',
 									width: '100%',
-									textAlign: 'left'
+									textAlign: 'left',
+									paddingLeft:2
 								}}>{company?.size}</TextInput>
 						</View>
 					</View>
@@ -512,7 +514,7 @@ const ProviderAccountManage = ({ navigation }) => {
 						borderBottomLeftRadius: 25,
 						marginLeft: 'auto'
 					}} placeholder="country code">{phoneCode}</TextInput>
-					<TextInput editable={!verified}
+					<TextInput editable={false}
 						keyboardType='numeric'
 						onChangeText={text => setData({ ...data, phone: text })}
 						placeholder="Enter Your Number" style={{
@@ -527,7 +529,8 @@ const ProviderAccountManage = ({ navigation }) => {
 							borderBottomWidth: 1,
 							borderRightWidth: 1,
 							backgroundColor: 'white',
-							marginRight: 'auto'
+							marginRight: 'auto',
+							color:'black'
 						}}>{data?.phone}</TextInput>
 				</View>
 				<Pressable onPress={() => UpdateCompany()} style={{
@@ -543,7 +546,7 @@ const ProviderAccountManage = ({ navigation }) => {
 					</Text>
 				</Pressable>
 
-				<Pressable onPress={() => navigation.push('Verify', { verifyPhone: company?.phone })}
+				<Pressable
 					style={{
 						borderColor: '#000',
 						backgroundColor: '#000',
@@ -553,8 +556,7 @@ const ProviderAccountManage = ({ navigation }) => {
 						padding: 15,
 						marginTop: 15,
 						marginHorizontal: 25
-					}}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Verify
-						Phone</Text></Pressable>
+					}}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Change Password</Text></Pressable>
 			</ScrollView>
 		</View>
 	)
