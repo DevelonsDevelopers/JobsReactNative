@@ -23,17 +23,17 @@ const ContactModal = ({ visible, toggleVisibility, name, phone, email }) => {
                     <Image source={require('../assets/contact.png')} style={{ width: 225, height: 190, marginLeft: 'auto', marginRight: 'auto' }} />
                     {/* <Text style={{ fontFamily: 'poppins_medium', textAlign: 'center', marginVertical: 20, fontSize: 19 }}>Contact Info </Text> */}
 
-                    <Ripple style={{ flexDirection: 'row', borderWidth: 1, padding: 10, borderRadius: 10, borderColor: '#13A3E1' }}>
+                    <Ripple style={{ flexDirection: 'row', borderWidth: 2, padding: 10, borderRadius: 10, borderColor: 'lightgray' }}>
                         <Image source={require('../assets/profile.png')} style={{ height: 25, width: 25, tintColor: '#13A3E1' }} />
                         <Text style={{ fontFamily: 'poppins_medium', textAlign: 'right', width: '90%', color: '#13A3E1' }}>{name}</Text>
                     </Ripple>
 
-                    <Ripple onPress={() => Linking.openURL(`tel:${phone}`)} rippleDuration={600} style={{ flexDirection: 'row', borderWidth: 1, padding: 10, marginVertical: 20, borderRadius: 10, borderColor: '#13A3E1' }}>
+                    <Ripple onPress={() => Linking.openURL(`tel:${phone}`)} rippleDuration={600} style={{ flexDirection: 'row', borderWidth: 2, padding: 10, marginVertical: 20, borderRadius: 10, borderColor: 'lightgray' }}>
                         <Image source={require('../assets/call.png')} style={{ height: 25, width: 25, tintColor: '#13A3E1' }} />
                         <Text style={{ fontFamily: 'poppins_medium', textAlign: 'right', width: '90%', color: '#13A3E1' }}>{phone}</Text>
                     </Ripple>
 
-                    <Ripple onPress={() => Linking.openURL(`mailto:${email}`)} style={{ flexDirection: 'row', borderWidth: 1, padding: 10, borderRadius: 10, borderColor: '#13A3E1' }}>
+                    <Ripple onPress={() => Linking.openURL(`mailto:${email}`)} style={{ flexDirection: 'row', borderWidth: 2, padding: 10, borderRadius: 10, borderColor: 'lightgray' }}>
                         <Image source={require('../assets/mail.png')} style={{ height: 25, width: 25, tintColor: '#13A3E1' }} />
                         <Text style={{ fontFamily: 'poppins_medium', textAlign: 'right', width: '90%', color: '#13A3E1' }}>{email}</Text>
                     </Ripple>
