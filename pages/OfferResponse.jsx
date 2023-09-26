@@ -41,10 +41,10 @@ const OfferResponse = ({route, navigation}) => {
 
     return (
         <View style={{flex: 1,}}>
-            <ScrollView style={{backgroundColor: '#F1F1F1'}}>
+            <ScrollView style={{backgroundColor: '#EAEAEA', flex: 1}}>
                 <ContactModal visible={visible} toggleVisibility={toggleVisible} name={offer?.seeker_name}
                               phone={offer?.phone} email={offer?.email}/>
-                <View style={{backgroundColor: '#EAEAEA',}}>
+                <View style={{backgroundColor: '#EAEAEA', flex: 1}}>
                     <View style={{flexDirection: 'row', height: 90}}>
                         <Pressable onPress={() => navigation.goBack()} style={{paddingRight: 5}}><Image style={{
                             width: 22,
@@ -74,7 +74,7 @@ const OfferResponse = ({route, navigation}) => {
                             paddingVertical: 15,
                             display: "flex",
                             flexDirection: "column",
-                            backgroundColor: '#fff'
+                            backgroundColor: '#fff',
                         }}>
                             <View style={{flexDirection: 'row', flex: 1}}>
                                 <Text style={{
@@ -135,6 +135,8 @@ const OfferResponse = ({route, navigation}) => {
                                     flex: 1,
                                     textAlign: 'center'
                                 }}>Response</Text>
+                                {offer?.response ?
+                                    <View>
                                 <Text style={{
                                     fontSize: 12,
                                     fontFamily: 'poppins_medium',
@@ -153,6 +155,16 @@ const OfferResponse = ({route, navigation}) => {
                                     marginLeft: 25,
                                     marginTop: 10
                                 }}>{response?.text3} </Text>
+                                    </View>
+                                    :
+                                    <Text style={{
+                                        fontSize: 12,
+                                        fontFamily: 'poppins_medium',
+                                        marginLeft: 25,
+                                        marginTop: 10,
+                                        flex: 1,
+                                    }}>No Response Yet</Text>
+                                }
                             </View>
                         </View>
                     </View>
