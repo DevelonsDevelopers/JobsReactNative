@@ -138,6 +138,7 @@ function Login({ route, navigation }) {
                         await AsyncStorage.setItem("USER", "PROVIDER")
                         await AsyncStorage.setItem("NAME", user.name)
                         await AsyncStorage.setItem("EMAIL", user.email)
+                        navigation.popToTop()
                         navigation.replace('PostJob')
                     }
                 } else {
