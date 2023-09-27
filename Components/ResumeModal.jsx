@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from 'react'
-import {Text} from 'react-native'
-import {Image} from 'react-native'
-import {Pressable} from 'react-native'
-import {View} from 'react-native'
-import {Modal} from 'react-native'
-import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler'
+import React, { useEffect, useState } from 'react'
+import { Text } from 'react-native'
+import { Image } from 'react-native'
+import { Pressable } from 'react-native'
+import { View } from 'react-native'
+import { Modal } from 'react-native'
+import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler'
+import Toast from 'react-native-toast-message'
 
-const ResumeModal = ({visible, toggleResumeVisibility, add, edit, data}) => {
+const ResumeModal = ({ visible, toggleResumeVisibility, add, edit, data }) => {
 
-    const [resume, setResume] = useState();
+    const [resume, setResume] = useState('');
 
     useEffect(() => {
         if (data !== null) {
@@ -17,12 +18,18 @@ const ResumeModal = ({visible, toggleResumeVisibility, add, edit, data}) => {
     }, [data]);
 
     const Add = () => {
-        if (data !== null) {
-            edit(resume, data.id)
+        if (resume.length >= 2) {
+            if (data !== null) {
+                edit(resume, data.id)
+            } else {
+                add(resume)
+            }
+            toggleResumeVisibility()
         } else {
-            add(resume)
+            Toast.show({position:'top',type:'error',text1:'Please Enter Your Resume' })
         }
-        toggleResumeVisibility()
+
+
     }
 
     return (
@@ -43,11 +50,11 @@ const ResumeModal = ({visible, toggleResumeVisibility, add, edit, data}) => {
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <Pressable style={{width: 15, height: 15, marginLeft: 'auto'}}
-                               onPress={() => toggleResumeVisibility()}><Image
-                        style={{width: 15, height: 15, marginLeft: 'auto'}}
-                        source={require('../assets/close.png')}/></Pressable>
-                    <Text style={{fontSize: 16, fontFamily: 'poppins_bold'}}>Resumes</Text>
+                    <Pressable style={{ width: 15, height: 15, marginLeft: 'auto',padding:10 }}
+                        onPress={() => toggleResumeVisibility()}><Image
+                            style={{ width: 15, height: 15, marginLeft: 'auto' }}
+                            source={require('../assets/close.png')} /></Pressable>
+                    <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Resumes</Text>
                     <TextInput onChangeText={text => setResume(text)} placeholder={'Enter Your Resume'} style={{
                         width: '80%',
                         marginTop: 20,
@@ -63,9 +70,10 @@ const ResumeModal = ({visible, toggleResumeVisibility, add, edit, data}) => {
                         backgroundColor: '#13A3E1',
                         borderRadius: 25,
                         marginTop: 10
-                    }}><Text style={{color: '#fff', fontSize: 14, fontFamily: 'poppins_bold'}}>ADD</Text></Pressable>
+                    }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
                 </View>
             </GestureHandlerRootView>
+            <Toast  position='top' bottomOffset={20} />
         </Modal>
     )
 }

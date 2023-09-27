@@ -1,24 +1,29 @@
-import React, {useEffect, useState} from 'react'
-import {Image, Modal, Pressable, Text, View} from 'react-native'
-import {GestureHandlerRootView, TextInput} from 'react-native-gesture-handler'
+import React, { useEffect, useState } from 'react'
+import { Image, Modal, Pressable, Text, View } from 'react-native'
+import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler'
+import Toast from 'react-native-toast-message';
 
-const SkillModal = ({visible, toggleSkillVisibility, add, edit, data}) => {
+const SkillModal = ({ visible, toggleSkillVisibility, add, edit, data }) => {
 
-    const [skill, setSkill] = useState();
+    const [skill, setSkill] = useState('');
 
     useEffect(() => {
-        if (data!==null){
+        if (data !== null) {
             setSkill(data.skill)
         }
     }, [data]);
 
     const Add = () => {
-        if (data!==null){
-            edit(skill, data.id)
+        if (skill.length >= 2) {
+            if (data !== null) {
+                edit(skill, data.id)
+            } else {
+                add(skill)
+            }
+            toggleSkillVisibility()
         } else {
-            add(skill)
+            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Your Skill' })
         }
-        toggleSkillVisibility()
     }
 
     return (
@@ -39,11 +44,11 @@ const SkillModal = ({visible, toggleSkillVisibility, add, edit, data}) => {
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <Pressable style={{width: 15, height: 15, marginLeft: 'auto'}}
-                               onPress={() => toggleSkillVisibility()}><Image
-                        style={{width: 15, height: 15, marginLeft: 'auto'}}
-                        source={require('../assets/close.png')}/></Pressable>
-                    <Text style={{fontSize: 16, fontFamily: 'poppins_bold'}}>Skills</Text>
+                    <Pressable style={{ width: 15, height: 15, marginLeft: 'auto',padding:20 }}
+                        onPress={() => toggleSkillVisibility()}><Image
+                            style={{ width: 15, height: 15, marginLeft: 'auto' }}
+                            source={require('../assets/close.png')} /></Pressable>
+                    <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Skills</Text>
                     <TextInput onChangeText={text => setSkill(text)} placeholder={'Enter Your Skills'} style={{
                         width: '80%',
                         marginTop: 20,
@@ -59,9 +64,10 @@ const SkillModal = ({visible, toggleSkillVisibility, add, edit, data}) => {
                         backgroundColor: '#13A3E1',
                         borderRadius: 25,
                         marginTop: 10
-                    }}><Text style={{color: '#fff', fontSize: 14, fontFamily: 'poppins_bold'}}>ADD</Text></Pressable>
+                    }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
                 </View>
             </GestureHandlerRootView>
+            <Toast position='top' bottomOffset={20} />
         </Modal>
     )
 }

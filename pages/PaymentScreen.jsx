@@ -23,6 +23,7 @@ import { useEffect } from 'react';
 import { createUserPlan } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
+import LoadingModal from '../Components/LoadingModal';
 
 const API_URL = "http://192.168.1.25:5001";
 
@@ -67,6 +68,8 @@ const PaymentScreen = ({ route, navigation }) => {
 
     const handlePayPress = async () => {
         //1.Gather the customer's billing information (e.g., email)
+        toggleVisibility(true)
+
         if (!cardDetails?.complete || !email) {
             Alert.alert("Please enter Complete card details and Email");
             return;
@@ -90,6 +93,7 @@ const PaymentScreen = ({ route, navigation }) => {
                     alert(`Payment Confirmation Error ${error.message}`);
                 } else if (paymentIntent) {
                     subscribePlan()
+                    toggleVisibility(false)
                     console.log("Payment successful ", paymentIntent);
                 }
             }
@@ -173,10 +177,15 @@ const PaymentScreen = ({ route, navigation }) => {
         })
     }
 
+
+const [loadingVisible,setLoadingVisible ] = useState(false)
+const toggleVisibility = (val) => setLoadingVisible(!val)
+
     return (
         <ScrollView 
         keyboardShouldPersistTaps="handled"
         >
+            <LoadingModal  visible={loadingVisible}  />
             <View style={{
                 flexDirection: 'column',
                 width: '100%',
