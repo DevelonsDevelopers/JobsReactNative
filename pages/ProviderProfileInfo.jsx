@@ -54,9 +54,9 @@ const ProviderProfileInfo = ({ navigation }) => {
         setLoginVal('false')
         toggleLoadingVisibility()
         navigation.popToTop()
-        navigation.replace('Home')
+        navigation.replace('UserType')
     }
-    // log out===================
+
     const [loadingVisible, setLoadingVisible] = useState(false)
     const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
     const [loginVal, setLoginVal] = useState()
@@ -155,7 +155,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                             width: '100%',
                             textAlign: 'center',
                             marginTop: 20
-                        }}>5</Text>
+                        }}>{company?.applied}</Text>
                     </Pressable>
                     <View style={{ backgroundColor: '#fff', width: 3 }} />
                     <Pressable onPress={() => navigation.push('SentOffers', { screen: 1 })} style={{ flex: 1, paddingVertical: 20 }}>
@@ -173,20 +173,9 @@ const ProviderProfileInfo = ({ navigation }) => {
                             width: '100%',
                             textAlign: 'center',
                             marginTop: 20
-                        }}>0</Text>
+                        }}>{company?.sent_offers}</Text>
                     </Pressable>
                 </View>
-                {/* <Text style={{ marginLeft: 40, fontSize: 16, fontFamily: 'poppins_medium', marginTop: 10 }}>Current Plan:</Text>
-                <Ripple onPress={() => navigation.push('Plans')} style={{ backgroundColor: 'white', padding: 20, marginTop: 10, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
-                    <Text style={{ color: '#194666', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Basic</Text>
-                    <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
-                        <Text style={{ color: '#194666', textAlign: 'center', fontSize: 14 }}>$ </Text>
-                        <Text style={{ fontSize: 40, color: '#194666', marginTop: -5 }}>8</Text>
-                    </View>
-                    <Text style={{ color: '#194666', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  Get 3 months listing</Text>
-                    <Text style={{ color: '#194666', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 20 jobs</Text>
-                </Ripple> */}
-
                 <View style={{
                     flexDirection: 'column',
                     backgroundColor: '#fff',

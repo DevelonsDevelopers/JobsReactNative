@@ -26,6 +26,7 @@ export const LoginAuthentication = (navigation, email, password) => async (dispa
         await AsyncStorage.setItem("USERNAME", data.username)
         if (responseCode === 200){
             sleep(2000).then( async () => {
+                navigation.popToTop()
                 navigation.replace('Onboarding')
                 dispatch({type: SUCCESS})
             })
@@ -53,6 +54,7 @@ export const ProviderLoginAuthentication = (navigation, email, password) => asyn
         await AsyncStorage.setItem("EMAIL", data.email)
         console.log("Provider")
         if (responseCode === 200){
+            navigation.popToTop()
             navigation.replace('PostJob')
             dispatch ({ type: SUCCESS })
         } else {
