@@ -506,16 +506,16 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.qualification}</Text>
-																		<Pressable style={{ marginLeft: 'auto',  padding: 10 }} onPress={() => editEducation({ id: item.id, degree: item.qualification, institute: item.institute, timeperiod: item.timeperiod })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editEducation({ id: item.id, degree: item.qualification, institute: item.institute, timeperiod: item.timeperiod })}><Image style={{
 																			width: 15,
 																			height: 15
 																		}}
 																			source={require('../assets/editIcon.png')} />
 																		</Pressable>
-																		<Pressable style={{  padding: 10 }} ><Image style={{
+																		<Pressable style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
-																			tintColor:'red'
+																			tintColor: 'red'
 																		}}
 																			source={require('../assets/cvDelete.png')} /></Pressable>
 																	</View>
@@ -591,15 +591,15 @@ function AccountInfo({ route, navigation }) {
 																			fontSize: 12,
 
 																		}}>{item.company}</Text>
-																		<Pressable style={{ marginLeft: 'auto',  padding: 10 }} onPress={() => editCareer({ company: item.company, job: item.job, timeperiod: item.timeperiod, address: item.address, phone: item.phone, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editCareer({ company: item.company, job: item.job, timeperiod: item.timeperiod, address: item.address, phone: item.phone, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																				<Pressable style={{  padding: 10 }} ><Image style={{
+																		<Pressable style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
-																			tintColor:'red'
+																			tintColor: 'red'
 																		}}
 																			source={require('../assets/cvDelete.png')} /></Pressable>
 																	</View>
@@ -673,15 +673,15 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.course}</Text>
-																		<Pressable style={{ marginLeft: 'auto',  padding: 10 }} onPress={() => editCourse({ course: item.course, timeperiod: item.timeperiod, institute: item.institute, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editCourse({ course: item.course, timeperiod: item.timeperiod, institute: item.institute, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																				<Pressable style={{  padding: 10 }} ><Image style={{
+																		<Pressable style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
-																			tintColor:'red'
+																			tintColor: 'red'
 																		}}
 																			source={require('../assets/cvDelete.png')} /></Pressable>
 																	</View>
@@ -755,15 +755,15 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.skill}</Text>
-																		<Pressable style={{ marginLeft: 'auto',  padding: 10 }} onPress={() => editSkill({ skill: item.skill, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editSkill({ skill: item.skill, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																				<Pressable style={{  padding: 10 }} ><Image style={{
+																		<Pressable style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
-																			tintColor:'red'
+																			tintColor: 'red'
 																		}}
 																			source={require('../assets/cvDelete.png')} /></Pressable>
 																	</View>
@@ -837,15 +837,15 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.interest}</Text>
-																		<Pressable style={{ marginLeft: 'auto',  padding: 10 }} onPress={() => editInterest({ interest: item.interest, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editInterest({ interest: item.interest, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																				<Pressable style={{  padding: 10 }} ><Image style={{
+																		<Pressable style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
-																			tintColor:'red'
+																			tintColor: 'red'
 																		}}
 																			source={require('../assets/cvDelete.png')} /></Pressable>
 																	</View>
@@ -919,15 +919,15 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.language}</Text>
-																		<Pressable style={{ marginLeft: 'auto',  padding: 10 }} onPress={() => editLanguage({ language: item.language, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editLanguage({ language: item.language, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																				<Pressable style={{  padding: 10 }} ><Image style={{
+																		<Pressable style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
-																			tintColor:'red'
+																			tintColor: 'red'
 																		}}
 																			source={require('../assets/cvDelete.png')} /></Pressable>
 																	</View>
@@ -1002,15 +1002,15 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.resume}</Text>
-																		<Pressable style={{ marginLeft: 'auto',  padding: 10 }} onPress={() => editResume({ resume: item.resume, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editResume({ resume: item.resume, id: item.id })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{  padding: 10 }} ><Image style={{
+																		<Pressable style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
-																			tintColor:'red'
+																			tintColor: 'red'
 																		}}
 																			source={require('../assets/cvDelete.png')} /></Pressable>
 																	</View>

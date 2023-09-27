@@ -169,7 +169,7 @@ function PostJob({ navigation }) {
                         </View>
                         {isPaid ?
                             <>
-                                <View style={{ flexDirection: 'row', marginTop: 30, marginLeft: 'auto', marginRight: 'auto', gap: 10 }}>
+                                <View style={{ flexDirection: 'row', marginTop: 30, marginLeft: 'auto', marginRight: 'auto', gap: 10,paddingHorizontal:20 }}>
 
                                     <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
                                         onPress={() => navigation.push('AppliedUsers')} style={{

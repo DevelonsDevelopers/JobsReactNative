@@ -2,9 +2,10 @@ import { Button, Image, Pressable, ScrollView, Text, TextInput, View, StyleSheet
 import { CodeField, useBlurOnFulfill, useClearByFocusCell, Cursor } from "react-native-confirmation-code-field";
 import { useEffect, useState } from "react";
 import { firebase } from "@react-native-firebase/auth";
-import {changePassword, changePasswordProvider, verifyCompany, verifySeeker} from "../API";
+import { changePassword, changePasswordProvider, verifyCompany, verifySeeker } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Toast from "react-native-toast-message";
+import Ripple from "react-native-material-ripple";
 
 const styles = StyleSheet.create({
 	root: { flex: 1, padding: 20 },
@@ -57,15 +58,16 @@ function VerificationCode({ route, navigation }) {
 	}
 
 	async function confirmCode() {
+		
 		try {
 			await confirm.confirm(value).then(res => {
-				if (type === "PROVIDER"){
+				if (type === "PROVIDER") {
 					verifyCompany("true", code, phone, ID).then(res => {
-						const {data: {data}} = res;
-						const {data: {responseCode}} = res;
-						const {data: {message}} = res;
+						const { data: { data } } = res;
+						const { data: { responseCode } } = res;
+						const { data: { message } } = res;
 						if (responseCode === 200) {
-							if (verify){
+							if (verify) {
 								navigation.push('ProfileVerifiedSuccessful', { type: type })
 							} else {
 								navigation.push('ChangePassword', { type: 'PROVIDER', ID: ID })
@@ -81,14 +83,14 @@ function VerificationCode({ route, navigation }) {
 					})
 				} else {
 					verifySeeker("true", code, phone, ID).then(res => {
-						const {data: {data}} = res;
-						const {data: {responseCode}} = res;
-						const {data: {message}} = res;
+						const { data: { data } } = res;
+						const { data: { responseCode } } = res;
+						const { data: { message } } = res;
 						if (responseCode === 200) {
-							if (verify){
+							if (verify) {
 								navigation.push('ProfileVerifiedSuccessful', { type: type })
 							} else {
-								navigation.push('ChangePassword', {type: 'SEEKER', ID: ID})
+								navigation.push('ChangePassword', { type: 'SEEKER', ID: ID })
 							}
 						} else {
 							Toast.show({
@@ -147,12 +149,15 @@ function VerificationCode({ route, navigation }) {
 					<Text style={{ color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15 }}>Verify</Text>
 				</Pressable>
 				<Text style={{ marginTop: 40, fontFamily: 'poppins_medium', fontSize: 13, color: 'gray' }}>Didn't recieve any code ?</Text>
-				<Pressable onPress={() => { signInWithPhoneNumber(phone) }} style={{
-					width: '85%',
-					alignItems: 'center',
-					borderRadius: 25,
-					marginTop: 5
-				}}><Text style={{ color: '#13A3E1', fontFamily: 'poppins_semibold', fontSize: 15 }}>Resend New Code</Text></Pressable>
+				<Ripple rippleColor="#13A3E1"
+					onPress={() => { signInWithPhoneNumber(phone) }}
+					style={{
+						width: '85%',
+						alignItems: 'center',
+						borderRadius: 25,
+						marginTop: 5,
+						paddingVertical: 7
+					}}><Text style={{ color: '#13A3E1', fontFamily: 'poppins_semibold', fontSize: 15 }}>Resend New Code</Text></Ripple>
 			</View>
 			<Toast position='top' bottomOffset={20} />
 		</ScrollView>

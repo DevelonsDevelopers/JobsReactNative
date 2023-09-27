@@ -190,19 +190,22 @@ const ProviderAccountManage = ({ navigation }) => {
 						marginTop: 10
 					}}>Company Details</Text>
 
-					<Text style={{
-						color: '#fff',
-						fontSize: 12,
-						fontFamily: 'poppins_semibold',
-						width: '60%',
-						alignSelf: 'center',
-						textAlign: 'center',
-						marginTop: 5,
-						backgroundColor: '#ff0000',
-						borderRadius: 10,
-						paddingTop: 1
-					}}>Complete Your Profile</Text>
-
+					{company.verified ?
+						''
+						:
+						<Text style={{
+							color: '#fff',
+							fontSize: 12,
+							fontFamily: 'poppins_semibold',
+							width: '60%',
+							alignSelf: 'center',
+							textAlign: 'center',
+							marginTop: 5,
+							backgroundColor: '#ff0000',
+							borderRadius: 10,
+							paddingTop: 1
+						}}>Complete Your Profile</Text>
+					}
 				</View>
 
 				<View style={{
@@ -241,8 +244,8 @@ const ProviderAccountManage = ({ navigation }) => {
 							paddingHorizontal: 20,
 							paddingVertical: 5
 						}}>
-							<TextInput 
-							editable={false}
+							<TextInput
+								editable={false}
 								placeholder={'Missing!!!'} style={{
 									color: '#000',
 									fontSize: 14,
@@ -408,7 +411,7 @@ const ProviderAccountManage = ({ navigation }) => {
 									fontFamily: 'poppins_medium',
 									width: '100%',
 									textAlign: 'left',
-									paddingLeft:2
+									paddingLeft: 2
 								}}>{company?.size}</TextInput>
 						</View>
 					</View>
@@ -514,7 +517,7 @@ const ProviderAccountManage = ({ navigation }) => {
 						borderBottomLeftRadius: 25,
 						marginLeft: 'auto'
 					}} placeholder="country code">{phoneCode}</TextInput>
-					<TextInput editable={false}
+					<TextInput editable={true}
 						keyboardType='numeric'
 						onChangeText={text => setData({ ...data, phone: text })}
 						placeholder="Enter Your Number" style={{
@@ -530,7 +533,7 @@ const ProviderAccountManage = ({ navigation }) => {
 							borderRightWidth: 1,
 							backgroundColor: 'white',
 							marginRight: 'auto',
-							color:'black'
+							color: 'black'
 						}}>{data?.phone}</TextInput>
 				</View>
 				<Pressable onPress={() => UpdateCompany()} style={{
@@ -546,7 +549,27 @@ const ProviderAccountManage = ({ navigation }) => {
 					</Text>
 				</Pressable>
 
-				<Pressable
+				<Pressable   onPress={() => {
+                                if (verified) {
+                                    navigation.push('Verify', {
+                                        code: company?.code,
+                                        verifyPhone: company?.phone,
+                                        type: "Organization",
+                                        verify: false,
+                                        forgot: true,
+                                        ID: ID
+                                    })
+                                } else {
+                                    navigation.push('Verify', {
+                                        code: company?.code,
+                                        verifyPhone: company?.phone,
+                                        type: "Organization",
+                                        verify: false,
+                                        ID: ID
+                                    })
+                                }
+                            }}
+
 					style={{
 						borderColor: '#000',
 						backgroundColor: '#000',

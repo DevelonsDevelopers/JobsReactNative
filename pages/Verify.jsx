@@ -126,16 +126,6 @@ function Verify({ route, navigation }) {
                             backgroundColor: 'white'
                         }}>{phone}</TextInput>
                 </View>
-
-
-
-
-
-
-
-
-
-
                 <Pressable onPress={() => navigation.push('VerificationCode', { code: code, phone: phone, type: type, ID: ID, verify: verify })} style={{
                     width: '50%',
                     backgroundColor: '#13A3E1',
@@ -143,7 +133,9 @@ function Verify({ route, navigation }) {
                     borderRadius: 15,
                     marginTop: 40,
                     paddingVertical: 7,
-                }}><Text style={{ color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15 }}>Send </Text></Pressable>
+                }}>
+                    <Text style={{ color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15 }}>Send </Text>
+                </Pressable>
             </View>
         </ScrollView>
     );
