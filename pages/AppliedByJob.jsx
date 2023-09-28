@@ -1,4 +1,4 @@
-import { FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Ripple from "react-native-material-ripple";
@@ -41,7 +41,7 @@ function AppliedByJob({ route, navigation }) {
     return (
         <View style={{ flex: 1 }}>
             {loading ?
-                <View style={{ marginTop: 200 }}>
+                <View style={{ marginTop: 400 }}>
                     <ActivityIndicator size={60} color="#13A3E1" />
                 </View>
                 :

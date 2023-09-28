@@ -61,6 +61,12 @@ function SentOffers({ navigation }) {
                 </View>
                 :
                 <>
+                 {nodata ? <View style={{ marginTop: 200 }}>
+                        <Image source={require('../assets/nodata.png')}
+                            style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
+                        <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
+                    </View> :
+                        <>
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
                 <View style={{
                     flexDirection: 'column',
@@ -181,6 +187,7 @@ function SentOffers({ navigation }) {
 
                 <View style={{ height: 90 }} />
             </ScrollView>
+                </>}
                 </>}
 
         </View>
