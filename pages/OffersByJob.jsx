@@ -9,22 +9,14 @@ import Ripple from "react-native-material-ripple";
 function OffersByJob({ route, navigation }) {
 
     const { job } = route.params;
-    console.log(job)
-
-    useEffect(() => {
-        console.log(job)
-    }, [job])
 
     const dispatch = useDispatch();
-    const [login, isLogin] = useState(false);
     const offers = useSelector(state => state.offers.jobOffers)
     const success = useSelector(state => state.success.sentOfferJobSuccess)
     const error = useSelector(state => state.error.sentOfferJobError)
     const nodata = useSelector(state => state.nodata.sentOfferJobNoData)
 
     const [isLoading, setIsLoading] = useState(true)
-    const [visible, setVisible] = useState(false)
-    const toggleVisibility = () => setVisible(!visible)
 
     useEffect(() => {
         if (success || error || nodata) {
@@ -37,10 +29,6 @@ function OffersByJob({ route, navigation }) {
             dispatch(FetchSentOffersByJob(job))
         }
     }, [dispatch, job]);
-
-    useEffect(() => {
-        console.log(offers)
-    }, [offers]);
 
 
     return (

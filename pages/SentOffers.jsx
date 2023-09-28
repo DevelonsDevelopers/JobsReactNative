@@ -13,7 +13,7 @@ function SentOffers({ navigation }) {
 
     const success = useSelector(state => state.success.sentOfferSuccess)
     const error = useSelector(state => state.error.sentOfferError)
-    const nodata = useSelector(state => state.nodata.sentOfferError)
+    const nodata = useSelector(state => state.nodata.sentOfferNoData)
 
     const [loading, setLoading] = useState(true)
     useEffect(() => {

@@ -73,6 +73,7 @@ export const SeekerByEmail = (email) => async (dispatch) => {
 }
 
 export const CheckSeeker = (ID) => async (dispatch) => {
+    console.log(ID)
     try {
         dispatch ({ type: LOADING })
         const { data: { status } } = await api.checkSeeker(ID);

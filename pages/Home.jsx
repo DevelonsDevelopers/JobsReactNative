@@ -19,15 +19,15 @@ function Home({ route, navigation }) {
 	const dispatch = useDispatch();
 	const [login, isLogin] = useState(false);
 	const [search, setSearch] = useState('');
+	const seeker = useSelector(state => state.seeker.seeker)
 	const categories = useSelector(state => state.category.featured_categories)
 	const recentJobs = useSelector(state => state.job.recentJobs)
-	const loading = useSelector(state => state.category.isLoading)
-	const jobLoading = useSelector(state => state.job.isLoading)
 
 	const error = useSelector(state => state.error.featuredCategoryError)
 	const success = useSelector(state => state.success.featuredCategorySuccess)
 	const nodata = useSelector(state => state.nodata.featuredCategoryNoData)
 	const check = useSelector(state => state.seeker.check)
+
 	const [ID, setID] = useState()
 
 	const [loginval, setLoginVal] = useState('')
@@ -50,7 +50,15 @@ function Home({ route, navigation }) {
 		}
 	}, [error, success, nodata])
 
-
+	useEffect(() => {
+		if (ID) {
+			if (!seeker) {
+				dispatch(fetchSeeker(ID))
+			} else if ((seeker.id).toString() !== ID) {
+				dispatch(fetchSeeker(ID))
+			}
+		}
+	}, [dispatch, seeker, ID]);
 
 	useEffect(() => {
 		if (!recentJobs) {
@@ -86,7 +94,6 @@ function Home({ route, navigation }) {
 		await AsyncStorage.setItem("EMAIL", '')
 		await AsyncStorage.setItem("USERNAME", '')
 		setLoginVal('false')
-		// toggleVisibility()
 		toggleLoadingVisibility()
 	}
 	// log out===================
@@ -413,7 +420,7 @@ function Home({ route, navigation }) {
 						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 							onPress={() => {
 								if (login) {
-									navigation.push('AccountInfo')
+									navigation.push('AccountInfo', { role: seeker?.role })
 								} else {
 									toggleRequireVisible()
 								}

@@ -238,6 +238,7 @@ export const updateCVEducation = (cv, qualification, timeperiod, institute, id) 
     institute: institute,
     id: id
 })
+export const deleteCVEducation = (id) => API.delete('/cvEducation/delete', { data: { id: id }})
 export const addCVCareer = (cv, company, job, timeperiod, address, phone) => API.post('/cvCareer/create', {
     cv: cv,
     company: company,
@@ -255,6 +256,7 @@ export const updateCVCareer = (cv, company, job, timeperiod, address, phone, id)
     phone: phone,
     id: id
 })
+export const deleteCVCareer = (id) => API.delete('/cvCareer/delete', { data: { id: id }})
 export const addCVCourse = (cv, course, timeperiod, institute) => API.post('/cvCourse/create', {
     cv: cv,
     course: course,
@@ -268,6 +270,7 @@ export const updateCVCourse = (cv, course, timeperiod, institute, id) => API.put
     institute: institute,
     id: id
 })
+export const deleteCVCourse = (id) => API.delete('/cvCourse/delete', { data: { id: id }})
 export const addCVInterest = (cv, interest) => API.post('/cvInterest/create', {
     cv: cv,
     interest: interest
@@ -277,6 +280,7 @@ export const updateCVInterest = (cv, interest, id) => API.put('/cvInterest/updat
     interest: interest,
     id: id
 })
+export const deleteCVInterest = (id) => API.delete('/cvInterest/delete', { data: { id: id }})
 export const addCVLanguage = (cv, language) => API.post('/cvLanguage/create', {
     cv: cv,
     language: language
@@ -286,6 +290,7 @@ export const updateCVLanguage = (cv, language, id) => API.put('/cvLanguage/updat
     language: language,
     id: id
 })
+export const deleteCVLanguage = (id) => API.delete('/cvLanguage/delete', { data: { id: id }})
 export const addCVResume = (cv, resume) => API.post('/cvResume/create', {
     cv: cv,
     resume: resume
@@ -295,6 +300,7 @@ export const updateCVResume = (cv, resume, id) => API.put('/cvResume/update', {
     resume: resume,
     id: id
 })
+export const deleteCVResume = (id) => API.delete('/cvResume/delete', { data: { id: id }})
 export const addCVSkill = (cv, skill) => API.post('/cvSkill/create', {
     cv: cv,
     skill: skill
@@ -304,6 +310,7 @@ export const updateCVSkill = (cv, skill, id) => API.put('/cvSkill/update', {
     skill: skill,
     id: id
 })
+export const deleteCVSkill = (id) => API.delete('/cvSkill/update', { data: { id: id }})
 
 
 //TAGS API CALL

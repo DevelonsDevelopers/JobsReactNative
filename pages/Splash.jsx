@@ -66,14 +66,6 @@ function Splash({navigation}) {
             })
         }
     }, [check]);
-
-    // useEffect(() => {
-    //
-    //     sleep(3000).then( async () => {
-    //
-    //     });
-    // });
-
     return (
         <View style={{flex: 1, backgroundColor: '#fff'}}>
             <ImageBackground

@@ -1,5 +1,30 @@
 import * as api from '../../API/index'
-import {ALL_OFFER_ERROR, ALL_OFFER_LOADING, ALL_OFFER_NODATA, ALL_OFFER_SUCCESS, ERROR, LOADING, NODATA, OFFER, OFFERS, OFFER_ERROR, OFFER_LOADING, OFFER_NODATA, OFFER_SUCCESS, SEND_OFFER_JOB_ERROR, SEND_OFFER_JOB_LOADING, SEND_OFFER_JOB_SUCCESS, SENT_OFFERS, SENT_OFFERS_BY_JOB, SENT_OFFER_ERROR, SENT_OFFER_LOADING, SENT_OFFER_NODATA, SENT_OFFER_SUCCESS, SUCCESS} from "../../Utils/Constants";
+import {
+    ALL_OFFER_ERROR,
+    ALL_OFFER_LOADING,
+    ALL_OFFER_NODATA,
+    ALL_OFFER_SUCCESS,
+    ERROR,
+    LOADING,
+    NODATA,
+    OFFER,
+    OFFERS,
+    OFFER_ERROR,
+    OFFER_LOADING,
+    OFFER_NODATA,
+    OFFER_SUCCESS,
+    SEND_OFFER_JOB_ERROR,
+    SEND_OFFER_JOB_LOADING,
+    SEND_OFFER_JOB_SUCCESS,
+    SENT_OFFERS,
+    SENT_OFFERS_BY_JOB,
+    SENT_OFFER_ERROR,
+    SENT_OFFER_LOADING,
+    SENT_OFFER_NODATA,
+    SENT_OFFER_SUCCESS,
+    SUCCESS,
+    SEND_OFFER_JOB_NODATA
+} from "../../Utils/Constants";
 import {sentOffersByJob} from "../../API/index";
 
 export const FetchSentOffers = (company) => async (dispatch) => {
@@ -28,13 +53,15 @@ export const FetchSentOffersByJob = (job) => async (dispatch) => {
         dispatch ({ type: LOADING })
         dispatch ({ type: SEND_OFFER_JOB_LOADING })
         const { data: { data } } = await api.sentOffersByJob(job);
-        // if (data.length > 0) {
+        console.log(data)
+        if (data.length > 0) {
             dispatch({type: SENT_OFFERS_BY_JOB, payload: {jobOffers: data}})
             dispatch({type: SUCCESS})
             dispatch({type: SEND_OFFER_JOB_SUCCESS})
-        // } else {
-        //     dispatch({type: NODATA})
-        // }
+        } else {
+            dispatch({type: NODATA})
+            dispatch({ type: SEND_OFFER_JOB_NODATA })
+        }
     } catch (error) {
         console.log(error)
         dispatch ({ type: ERROR })
