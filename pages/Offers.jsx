@@ -16,16 +16,17 @@ const Offers = ({ navigation }) => {
     const [login, isLogin] = useState(false);
 
     const offers = useSelector(state => state.offers.offers)
-    const success = useSelector(state => state.success.offerSuccess)
-    const error = useSelector(state => state.error.offerError)
+    const success = useSelector(state => state.success.allOfferSuccess)
+    const noData = useSelector(state => state.nodata.allOfferNoData)
+    const error = useSelector(state => state.error.allOfferError)
 
     const [ID, setID] = useState()
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        if (success || error) {
+        if (success || error || noData) {
             setIsLoading(false)
         }
-    }, [success, error])
+    }, [success, error, noData])
 
 
     useEffect(() => {
