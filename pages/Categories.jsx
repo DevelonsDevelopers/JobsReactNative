@@ -8,9 +8,9 @@ import { AllCategories } from "../API/actions/categoryActions";
 function Categories({ navigation }) {
 
     const categories = useSelector(state => state.category.categories)
-    const noData = useSelector(state => state.category.nodata)
-    const success = useSelector(state => state.category.success)
-    const error = useSelector(state => state.category.error)
+    const noData = useSelector(state => state.nodata.allCategoryNoData)
+    const success = useSelector(state => state.success.allCategorySuccess)
+    const error = useSelector(state => state.error.allCategoryError)
     const dispatch = useDispatch();
     const [data, setData] = useState()
     const [loading, setLoading] = useState(true)

@@ -12,20 +12,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {RESET} from "../Utils/Constants";
 import categories from "./Categories";
 
-const data = [
-    {"name": "Facebook"},
-    {"name": "Google"},
-    {"name": "Netflix"},
-    {"name": "Youtube"}
-]
 
 function JobsByCategory({route, navigation}) {
 
     const {CATID} = route.params
 
     const jobs = useSelector(state => state.job.categoryJobs)
-    const isLoading = useSelector(state => state.job.isLoading)
-    const success = useSelector(state => state.job.success)
+    const success = useSelector(state => state.success.categoryJobSuccess)
+    const nodata = useSelector(state => state.nodata.categoryJobNoData)
+    const error = useSelector(state => state.error.categoryJobError)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
@@ -54,7 +49,7 @@ function JobsByCategory({route, navigation}) {
     }, [jobs]);
 
     useEffect(() => {
-        if (success) {
+        if (success || error || nodata) {
             setData(jobs)
             setLoading(false)
             dispatch({ type: RESET })

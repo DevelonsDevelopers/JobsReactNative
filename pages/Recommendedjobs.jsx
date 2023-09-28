@@ -23,10 +23,9 @@ function Recommendedjobs({ navigation }) {
     const dispatch = useDispatch()
     const topTags = useSelector(state => state.tag.topTags)
     const recommendedJobs = useSelector(state => state.job.recommendedJobs)
-    const isloading = useSelector(state => state.job.isLoading)
-    const success = useSelector(state => state.job.success)
-    const error = useSelector(state => state.job.error)
-    const noData = useSelector(state => state.job.nodata)
+    const success = useSelector(state => state.success.recommendedJobSuccess)
+    const error = useSelector(state => state.error.recommendedJobError)
+    const noData = useSelector(state => state.nodata.recommendedJobNoData)
     const [ID, setID] = useState()
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
@@ -72,10 +71,9 @@ function Recommendedjobs({ navigation }) {
     }, [topTags]);
 
     useEffect(() => {
-        if (success) {
+        if (success || error || noData) {
             setData(recommendedJobs)
             setLoading(false)
-            dispatch({ type: RESET })
         }
     }, [success]);
 

@@ -18,12 +18,11 @@ const JobDetails = ({ route, navigation }) => {
     const { ID } = route.params
 
     const job = useSelector(state => state.job.job)
-    const error = useSelector(state => state.job.error)
-    const nodata = useSelector(state => state.job.nodata)
-    const success = useSelector(state => state.job.success)
+    const error = useSelector(state => state.error.jobError)
+    const nodata = useSelector(state => state.nodata.jobNoData)
+    const success = useSelector(state => state.success.jobSuccess)
     const dispatch = useDispatch()
 
-    const [isloading, setIsLoading] = useState(true)
     const [USERID, setUSERID] = useState()
     const [applied, setApplied] = useState(0)
     const [bookmark, setBookmark] = useState(0)
@@ -31,11 +30,12 @@ const JobDetails = ({ route, navigation }) => {
     const [login, setLogin] = useState()
     const [plan, setPlan] = useState()
     const [loginVal, setLoginVal] = useState()
-
+    
     const seeker = useSelector(state => state.seeker.seeker)
-
-
-
+    
+    
+    
+    const [isloading, setIsLoading] = useState(true)
     useEffect(() => {
         if (success || error || nodata) {
             setIsLoading(false)

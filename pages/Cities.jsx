@@ -9,9 +9,9 @@ function Cities({ navigation }) {
 
     const cities = useSelector(state => state.city.cities)
 
-    const success = useSelector(state => state.city.success)
-    const error = useSelector(state => state.city.error)
-    const nodata = useSelector(state => state.city.nodata)
+    const success = useSelector(state => state.success.allCitySuccess)
+    const error = useSelector(state => state.error.allCityError)
+    const nodata = useSelector(state => state.nodata.allCityNoData)
     const dispatch = useDispatch()
     const [data, setData] = useState()
     const [isLoading,setIsLoading] = useState(true)

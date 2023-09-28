@@ -23,9 +23,10 @@ function Home({ route, navigation }) {
 	const recentJobs = useSelector(state => state.job.recentJobs)
 	const loading = useSelector(state => state.category.isLoading)
 	const jobLoading = useSelector(state => state.job.isLoading)
-	const error = useSelector(state => state.category.error)
-	const success = useSelector(state => state.category.success)
-	const nodata = useSelector(state => state.category.nodata)
+
+	const error = useSelector(state => state.error.featuredCategoryError)
+	const success = useSelector(state => state.success.featuredCategorySuccess)
+	const nodata = useSelector(state => state.nodata.featuredCategoryNoData)
 	const check = useSelector(state => state.seeker.check)
 	const [ID, setID] = useState()
 
@@ -45,7 +46,7 @@ function Home({ route, navigation }) {
 	useEffect(() => {
 		if (error || success || nodata) {
 			setIsLoading(false)
-			dispatch({ type: RESET })
+			// dispatch({ type: RESET })
 		}
 	}, [error, success, nodata])
 

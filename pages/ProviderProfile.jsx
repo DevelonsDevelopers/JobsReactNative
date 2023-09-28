@@ -47,6 +47,8 @@ const ProviderProfile = ({navigation}) => {
     const cities = useSelector(state => state.city.cities)
     const countries = useSelector(state => state.country.countries)
 
+    const success = useSelector(state => state.success.companySuccess)
+
 
     useEffect(() => {
         if (!cities) {

@@ -12,12 +12,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {RESET} from "../Utils/Constants";
 import cities from "./Cities";
 
-const data = [
-    {"name": "Facebook"},
-    {"name": "Google"},
-    {"name": "Netflix"},
-    {"name": "Youtube"}
-]
 
 function JobsByCity({route, navigation}) {
 
@@ -25,8 +19,9 @@ function JobsByCity({route, navigation}) {
     const {CITYID} = route.params
 
     const jobs = useSelector(state => state.job.cityJobs)
-    const isLoading = useSelector(state => state.job.isLoading)
-    const success = useSelector(state => state.job.success)
+    const error = useSelector(state => state.error.allCityError)
+    const nodata = useSelector(state => state.nodata.allCityNoData)
+    const success = useSelector(state => state.success.allCitySuccess)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
@@ -49,10 +44,9 @@ function JobsByCity({route, navigation}) {
     }, [dispatch, jobs, ID]);
 
     useEffect(() => {
-        if (success) {
+        if (success || error || nodata) {
             setData(jobs)
             setLoading(false)
-            dispatch({ type: RESET })
         }
     }, [success]);
 

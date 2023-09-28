@@ -33,22 +33,23 @@ function PersonalInfo({ navigation }) {
     const seeker = useSelector(state => state.seeker.seeker)
     const cities = useSelector(state => state.city.cities)
     const countries = useSelector(state => state.country.countries)
-    const success = useSelector(state => state.seeker.success)
+    const success = useSelector(state => state.success.seekerSuccess)
+    const nodata = useSelector(state => state.success.seekerNoData)
+    const error = useSelector(state => state.success.seekerError)
+
     const [completed, setCompleted] = useState(false)
     const [verified, setVerified] = useState(false)
     const [country, setCountry] = useState()
     const [citiesData, setCitiesData] = useState()
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (seeker && cities && countries && success == "false") {
-            setLoading(true)
-        } else {
+        if (nodata || error || success ) {
             setLoading(false)
-        }
-        setCitiesData(cities)
-    }, [seeker, cities, countries, success])
+            setCitiesData(cities)
+        } 
+    }, [success,error,nodata])
 
     const dispatch = useDispatch();
     const [ID, setID] = useState()

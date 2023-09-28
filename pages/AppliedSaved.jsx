@@ -51,10 +51,9 @@ const FirstRoute = ({ navigation }) => {
 
     useEffect(() => {
         console.log(bookmarks)
-        console.log(loading)
         console.log(error)
         console.log(noData)
-    }, [bookmarks, loading, error, noData]);
+    }, [bookmarks, error, noData]);
 
     useEffect(() => {
         GetData()
@@ -206,17 +205,16 @@ const SecondRoute = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const applied = useSelector(state => state.applied.appliedJobs);
-    const loading = useSelector(state => state.applied.isLoading)
-    const error = useSelector(state => state.applied.error)
-    const noData = useSelector(state => state.applied.nodata)
-    const success = useSelector(state => state.applied.success)
+    const error = useSelector(state => state.error.allAppliedError)
+    const noData = useSelector(state => state.nodata.allAppliedNoData)
+    const success = useSelector(state => state.success.allAppliedSuccess)
 
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        if (success) {
+        if (success || noData || error) {
             setIsLoading(false)
         }
-    }, [success])
+    }, [success,noData,error])
 
 
     const [ID, setID] = useState()

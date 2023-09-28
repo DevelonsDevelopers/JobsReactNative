@@ -50,9 +50,16 @@ function PostJob({ navigation }) {
     const companyJobs = useSelector(state => state.job.providerJobsFeatured)
     const company = useSelector(state => state.company.company)
     const noCompany = useSelector(state => state.company.noCompany)
-    const nodata = useSelector(state => state.company.nodata)
-    const error = useSelector(state => state.company.error)
-    const loading = useSelector(state => state.company.isLoading)
+    const nodata = useSelector(state => state.nodata.providerFeaturedNoData)
+    const error = useSelector(state => state.error.providerFeaturedError)
+    const success = useSelector(state => state.success.providerFeaturedSuccess)
+
+    const [isloading, setIsLoading] = useState(true)
+    useEffect(() => {
+        if (success || error || nodata) {
+            setIsLoading(false)
+        }
+    }, [success, error, nodata])
 
     useEffect(() => {
         if (ID) {
@@ -123,7 +130,7 @@ function PostJob({ navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
-            {loading ?
+            {isloading ?
                 <View style={{ marginTop: 400 }}>
                     <ActivityIndicator size={60} color="#13A3E1" />
                 </View>
@@ -169,7 +176,7 @@ function PostJob({ navigation }) {
                         </View>
                         {isPaid ?
                             <>
-                                <View style={{ flexDirection: 'row', marginTop: 30, marginLeft: 'auto', marginRight: 'auto', gap: 10,paddingHorizontal:20 }}>
+                                <View style={{ flexDirection: 'row', marginTop: 30, marginLeft: 'auto', marginRight: 'auto', gap: 10, paddingHorizontal: 20 }}>
 
                                     <Ripple rippleColor="#fff" rippleOpacity={0.5} rippleDuration={800} rippleSize={500}
                                         onPress={() => navigation.push('AppliedUsers')} style={{
@@ -546,9 +553,9 @@ function PostJob({ navigation }) {
                         }
                         <View style={{ height: 90 }} />
                     </ScrollView>
-</>}
-                </View>
-            )
+                </>}
+        </View>
+    )
 }
 
-            export default PostJob
+export default PostJob

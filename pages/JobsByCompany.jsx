@@ -12,20 +12,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {RESET} from "../Utils/Constants";
 import Ripple from "react-native-material-ripple";
 
-const data = [
-    {"name": "Facebook"},
-    {"name": "Google"},
-    {"name": "Netflix"},
-    {"name": "Youtube"}
-]
-
 function JobsByCompany({route, navigation}) {
 
     const {COMID} = route.params
 
     const jobs = useSelector(state => state.job.companyJobs)
-    const isLoading = useSelector(state => state.job.isLoading)
-    const success = useSelector(state => state.job.success)
+    const error = useSelector(state => state.error.companyJobError)
+    const nodata = useSelector(state => state.nodata.companyJobNoData)
+    const success = useSelector(state => state.success.companyJobSuccess)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
@@ -48,7 +42,7 @@ function JobsByCompany({route, navigation}) {
     }, [dispatch, jobs, ID]);
 
     useEffect(() => {
-        if (success) {
+        if (success || nodata || error) {
             setData(jobs)
             setLoading(false)
             dispatch({ type: RESET })

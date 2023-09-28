@@ -34,9 +34,9 @@ const CoverLetter = ({ route, navigation }) => {
 	const dispatch = useDispatch();
 
 	const cv = useSelector((state) => state.cv.cv);
-	const success = useSelector((state) => state.cv.success);
-	const error = useSelector((state) => state.cv.error);
-	const nodata = useSelector((state) => state.cv.nodata);
+	const success = useSelector(state => state.success.coverLetterSuccess);
+	const error = useSelector(state => state.error.coverLetterError);
+	const nodata = useSelector(state => state.nodata.coverLetterNoData);
 	const date = moment().format("DD MMM YYYY")
 	const [isLoading, setIsLoading] = useState(true)
 

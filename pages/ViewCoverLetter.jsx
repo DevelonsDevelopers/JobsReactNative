@@ -8,12 +8,6 @@ import { CVByUser } from '../API/actions/cvActions'
 import moment from 'moment'
 import { useState } from 'react'
 
-const data = [
-    { 'data': 'Enhanced domestic helicopter transfer sales by 60% in 2018/2019 via business-to-business concept ' },
-    { 'data': 'Implemented first helicopter medical evacuation service in Sri Lanka (2018) ' },
-    { 'data': 'Introduced media booth helicopter filming project for local television hostess (2018)   ' },
-]
-
 
 const ViewCoverLetter = ({ navigation, route }) => {
 
@@ -26,25 +20,22 @@ const ViewCoverLetter = ({ navigation, route }) => {
     // const[isLoading,setIsLoading] = useState(true)
 
     const coverLetter = useSelector(state => state.coverLetter.coverLetter)
-    const isloading = useSelector(state => state.coverLetter.isLoading)
     useEffect(() => {
         dispatch(CoverLetterByUser(ID, job))
     }, [dispatch, ID, job])
 
     const cv = useSelector(state => state.cv.cv);
-    const cvLoading = useSelector(state => state.cv.isLoading);
+    const success = useSelector(state => state.success.coverLetterSuccess);
+    const error = useSelector(state => state.error.coverLetterError);
 
-    const [cLoading, setCLoading] = useState(true)
+
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (isloading && cvLoading) {
-            setCLoading(true)
-        } else {
-            setCLoading(false)
+        if (success || error) {
+            setLoading(false)
         }
-
-
-    }, [isloading, cvLoading])
+    }, [success, error])
 
 
 
@@ -61,7 +52,7 @@ const ViewCoverLetter = ({ navigation, route }) => {
 
     return (
         <ScrollView>
-            {cLoading ?
+            {loading ?
                 <View style={{ marginTop: 400 }}>
                     <ActivityIndicator size={60} color="#13A3E1" />
                 </View>
@@ -122,7 +113,7 @@ const ViewCoverLetter = ({ navigation, route }) => {
                     <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', marginTop: 11, marginHorizontal: 30 }}>Your's Sincerly</Text>
                     <Text style={{ fontSize: 12, fontFamily: 'poppins_semibold', marginTop: 10, marginHorizontal: 30, marginLeft: 'auto' }}>  {cv?.name}</Text>
                     {offer !== 0 ?
-                        <Ripple onPress={() => navigation.push('OfferSend', { job: job, user: ID })} style={{ flex:1 }} >
+                        <Ripple onPress={() => navigation.push('OfferSend', { job: job, user: ID })} style={{ flex: 1 }} >
                             <Text style={{
                                 justifyContent: 'center',
                                 height: 50,

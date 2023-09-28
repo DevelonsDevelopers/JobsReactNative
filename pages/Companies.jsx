@@ -18,9 +18,9 @@ const data = [
 function Companies({ navigation }) {
 
     const companies = useSelector(state => state.company.companies)
-    const noData = useSelector(state => state.company.nodata)
-    const error = useSelector(state => state.company.error)
-    const success = useSelector(state => state.company.success)
+    const noData = useSelector(state => state.nodata.allCompanyNoData)
+    const error = useSelector(state => state.error.allCompanyError)
+    const success = useSelector(state => state.success.allCompanySuccess)
     const dispatch = useDispatch()
     const [data, setData] = useState()
     const [isLoading, setIsLoading] = useState(true)

@@ -77,9 +77,9 @@ function AccountInfo({ route, navigation }) {
 	const [ID, setID] = useState()
 	const cv = useSelector(state => state.cv.cv);
 
-	const data = useSelector(state => state.cv.nodata);
-	const error = useSelector(state => state.cv.error);
-	const success = useSelector(state => state.cv.success);
+	const data = useSelector(state => state.nodata.seekerNoData);
+	const error = useSelector(state => state.error.seekerError);
+	const success = useSelector(state => state.success.seekerSuccess);
 
 	useEffect(() => {
 		GetData()

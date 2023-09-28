@@ -31,9 +31,9 @@ const History = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const history = useSelector(state => state.interactions.interactions)
-    const error = useSelector(state => state.interactions.error)
-    const success = useSelector(state => state.interactions.success)
-    const nodata = useSelector(state => state.interactions.nodata)
+    const error = useSelector(state => state.error.allInteractionError)
+    const success = useSelector(state => state.success.allInteractionSuccess)
+    const nodata = useSelector(state => state.nodata.allInteractionNoData)
 
     const [isLoading, setIsLoading] = useState(true)
     const [ID, setID] = useState()
