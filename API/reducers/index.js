@@ -16,5 +16,9 @@ import applied from "./applied";
 import offers from "./offers"
 import coverLetter from "./coverLetter"
 import plans from "./plans";
+import loading from "./loading";
+import error from "./error";
+import success from "./success";
+import nodata from "./nodata";
 
-export default combineReducers({ category, register, login, seeker, city, country, company, job, cv, tag, interactions, bookmark, applied, offers, coverLetter, plans })
+export default combineReducers({ category, register, login, seeker, city, country, company, job, cv, tag, interactions, bookmark, applied, offers, coverLetter, plans, loading, error, success, nodata })

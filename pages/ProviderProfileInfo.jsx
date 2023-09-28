@@ -113,7 +113,7 @@ const ProviderProfileInfo = ({ navigation }) => {
                         fontFamily: 'poppins_medium',
                         width: '100%',
                         textAlign: 'center'
-                    }}>{company?.phone}</Text>
+                    }}>{company?.code + company?.phone}</Text>
                     <Text style={{
                         color: '#000',
                         fontSize: 15,

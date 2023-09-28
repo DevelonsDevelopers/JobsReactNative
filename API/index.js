@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-const API = axios.create({ baseURL: 'http://192.168.1.25:5001'})
+const API = axios.create({ baseURL: 'http://develons.biz/api'})
 
 
-export const register = (name, username, email, phone, address, dob, gender, password) => API.post(`/seekerAuth/register`, {
+export const register = (name, username, email, phone, address, dob, gender, password, type) => API.post(`/seekerAuth/register`, {
     name: name,
     username: username,
     email: email,
@@ -12,6 +12,7 @@ export const register = (name, username, email, phone, address, dob, gender, pas
     dob: dob,
     gender: gender,
     password: password,
+    type: type
 })
 
 
@@ -20,7 +21,7 @@ export const login = (email, password) => API.post('/seekerAuth/login', {
     password: password
 })
 
-export const google = (name, username, email, phone ,address, dob, gender, password) => API.post(`/seekerAuth/google`, {
+export const google = (name, username, email, phone ,address, dob, gender, password, type) => API.post(`/seekerAuth/google`, {
     name: name,
     username: username,
     email: email,
@@ -29,6 +30,7 @@ export const google = (name, username, email, phone ,address, dob, gender, passw
     dob: dob,
     gender: gender,
     password: password,
+    type: type
 })
 
 export const changePassword = (password, id) => API.post('/seekerAuth/password', {
@@ -36,7 +38,7 @@ export const changePassword = (password, id) => API.post('/seekerAuth/password',
     id: id
 })
 
-export const registerProvider = (name, size, city, country, email, phone, address, headquater, type, password) => API.post('/providerAuth/register', {
+export const registerProvider = (name, size, city, country, email, phone, address, headquater, type, password, account) => API.post('/providerAuth/register', {
     name: name,
     size: size,
     city: city,
@@ -46,7 +48,8 @@ export const registerProvider = (name, size, city, country, email, phone, addres
     address: address,
     headquater: headquater,
     type: type,
-    password: password
+    password: password,
+    account: account
 })
 
 export const loginProvider = (email, password) => API.post('/providerAuth/login', {
@@ -54,7 +57,7 @@ export const loginProvider = (email, password) => API.post('/providerAuth/login'
     password: password
 })
 
-export const googleProvider = (name, size, city, country, email, phone, address, headquater, type, password) => API.post('/providerAuth/google', {
+export const googleProvider = (name, size, city, country, email, phone, address, headquater, type, password, account) => API.post('/providerAuth/google', {
     name: name,
     size: size,
     city: city,
@@ -64,7 +67,8 @@ export const googleProvider = (name, size, city, country, email, phone, address,
     address: address,
     headquater: headquater,
     type: type,
-    password: password
+    password: password,
+    account: account
 })
 
 export const changePasswordProvider = (password, id) => API.post('/providerAuth/password', {

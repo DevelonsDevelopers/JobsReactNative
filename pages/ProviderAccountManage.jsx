@@ -506,7 +506,7 @@ const ProviderAccountManage = ({ navigation }) => {
 				</View>
 				<View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
 
-					<TextInput onTouchStart={() => togglePhoneVisible()} style={{
+					<TextInput style={{
 						textAlign: 'center',
 						paddingVertical: 10,
 						borderColor: '#b2b2b2',
@@ -517,7 +517,7 @@ const ProviderAccountManage = ({ navigation }) => {
 						borderBottomLeftRadius: 25,
 						marginLeft: 'auto'
 					}} placeholder="country code">{phoneCode}</TextInput>
-					<TextInput editable={true}
+					<TextInput editable={false}
 						keyboardType='numeric'
 						onChangeText={text => setData({ ...data, phone: text })}
 						placeholder="Enter Your Number" style={{
@@ -548,13 +548,13 @@ const ProviderAccountManage = ({ navigation }) => {
 					>Update
 					</Text>
 				</Pressable>
-
+				{company?.account !== "GOOGLE" ?
 				<Pressable   onPress={() => {
                                 if (verified) {
                                     navigation.push('Verify', {
                                         code: company?.code,
                                         verifyPhone: company?.phone,
-                                        type: "Organization",
+                                        type: "PROVIDER",
                                         verify: false,
                                         forgot: true,
                                         ID: ID
@@ -563,7 +563,7 @@ const ProviderAccountManage = ({ navigation }) => {
                                     navigation.push('Verify', {
                                         code: company?.code,
                                         verifyPhone: company?.phone,
-                                        type: "Organization",
+                                        type: "PROVIDER",
                                         verify: false,
                                         ID: ID
                                     })
@@ -580,6 +580,21 @@ const ProviderAccountManage = ({ navigation }) => {
 						marginTop: 15,
 						marginHorizontal: 25
 					}}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Change Password</Text></Pressable>
+					:
+					<Pressable   onPress={() => null
+					}
+
+								 style={{
+									 borderColor: '#000',
+									 backgroundColor: '#000',
+									 borderWidth: 1,
+									 borderRadius: 25,
+									 alignItems: 'center',
+									 padding: 15,
+									 marginTop: 15,
+									 marginHorizontal: 25
+								 }}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Log In Using Google</Text></Pressable>
+				}
 			</ScrollView>
 		</View>
 	)

@@ -30,7 +30,7 @@ function Register({ route, navigation }) {
                     } else {
                         if (password.length >= 9) {
                             if (password === confirmPassword) {
-                                dispatch(Registeration(navigation, name, username, email, '', '', '', '', password));
+                                dispatch(Registeration(navigation, name, username, email, '', '', '', '', password, 'NORMAL'));
                                 toggleLoadingVisibility()
                             } else {
                                 Toast.show({ type: 'error', position: 'top', text1: 'Password Not Match' })
@@ -49,7 +49,7 @@ function Register({ route, navigation }) {
                     } else {
                         if (password.length >= 9) {
                             if (password === confirmPassword) {
-                                dispatch(ProviderRegistration(navigation, name, size, 0, 0, email, '', '', '', '', password));
+                                dispatch(ProviderRegistration(navigation, name, size, 0, 0, email, '', '', '', '', password, 'NORMAL'));
                                 toggleLoadingVisibility()
                             } else {
                                 Toast.show({ type: 'error', position: 'top', text1: 'Password Not Match' })

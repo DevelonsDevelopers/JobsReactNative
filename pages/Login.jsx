@@ -67,7 +67,7 @@ function Login({ route, navigation }) {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             const { user } = userInfo;
-            await google(user.name, user.givenName + (user.id).substring((user.id).length - 6), user.email, '', '', '', '', user.id).then(async res => {
+            await google(user.name, user.givenName + (user.id).substring((user.id).length - 6), user.email, '', '', '', '', user.id, 'GOOGLE').then(async res => {
                 const { data: { data } } = res;
                 const { data: { responseCode } } = res;
                 const { data: { message } } = res;
@@ -114,7 +114,7 @@ function Login({ route, navigation }) {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             const { user } = userInfo;
-            await googleProvider('', '', 0, 0, user.email, '', '', '', '', user.id).then(async res => {
+            await googleProvider('', '', 0, 0, user.email, '', '', '', '', user.id, 'GOOGLE').then(async res => {
                 console.log(res)
                 const { data: { data } } = res;
                 const { data: { responseCode } } = res;

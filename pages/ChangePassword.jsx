@@ -1,7 +1,7 @@
-import {Button, Image, Pressable, ScrollView, Text, TextInput, View} from "react-native";
+import { Image, Pressable, ScrollView, Text, TextInput, View} from "react-native";
 import {useState} from "react";
 import Toast from "react-native-toast-message";
-import {changePassword, verifyCompany, verifySeeker} from "../API";
+import {changePassword, changePasswordProvider} from "../API";
 
 function ChangePassword({route, navigation}) {
 
@@ -23,7 +23,7 @@ function ChangePassword({route, navigation}) {
                 // navigation.navigate('Verify', { verifyPhone: verifyPhone, password: password})
                 if (type === "PROVIDER") {
 
-                        changePassword(password, ID).then(res => {
+                        changePasswordProvider(password, ID).then(res => {
                             navigation.replace('Login', { USER: 'PROVIDER' })
                         }).catch(err => {
                             console.log(err)

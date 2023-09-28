@@ -1,10 +1,10 @@
 import * as api from '../../API/index'
 import {ERROR, LOADING, SUCCESS} from "../../Utils/Constants";
 
-export const Registeration = (navigation, name, username, email, phone, address, dob, gender, password) => async (dispatch) => {
+export const Registeration = (navigation, name, username, email, phone, address, dob, gender, password, type) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { responseCode } } = await api.register(name, username, email, phone, address, dob, gender, password)
+        const { data: { responseCode } } = await api.register(name, username, email, phone, address, dob, gender, password, type)
         console.log(responseCode)
         if (responseCode === 200){
             navigation.replace('Login', { USER: 'SEEKER' })
@@ -17,10 +17,10 @@ export const Registeration = (navigation, name, username, email, phone, address,
     }
 }
 
-export const ProviderRegistration = (navigation, name, size, city, country, email, phone, address, headquater, type, password) => async (dispatch) => {
+export const ProviderRegistration = (navigation, name, size, city, country, email, phone, address, headquater, type, password, account) => async (dispatch) => {
     try {
         dispatch ({ type: LOADING })
-        const { data: { responseCode } } = await api.registerProvider(name, size, city, country, email, phone, address, headquater, type, password)
+        const { data: { responseCode } } = await api.registerProvider(name, size, city, country, email, phone, address, headquater, type, password, account)
         console.log(responseCode)
         if (responseCode === 200){
             navigation.replace('Login', { USER: 'PROVIDER' })
