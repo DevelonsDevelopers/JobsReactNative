@@ -246,12 +246,10 @@ function AccountInfo({ route, navigation }) {
 
 
 	useEffect(() => {
-		console.log("SUCCESSISHERE")
-		console.log(success)
-		if (success) {
+		if (success || error || data) {
 			setIsLoading(false)
 		}
-	}, [success])
+	}, [success , error , data])
 
 	// personalInfo Modal==============
 	const [infoVisible, setInfoVisible] = useState(false)

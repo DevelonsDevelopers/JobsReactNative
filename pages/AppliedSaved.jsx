@@ -28,7 +28,6 @@ const FirstRoute = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const bookmarks = useSelector(state => state.bookmark.bookmarks);
-    const loading = useSelector(state => state.bookmark.bookmarkIsLoading)
     const error = useSelector(state => state.bookmark.bookmarkError)
     const noData = useSelector(state => state.bookmark.bookmarkNoData)
     const success = useSelector(state => state.bookmark.bookmarkSuccess)
@@ -37,10 +36,10 @@ const FirstRoute = ({ navigation }) => {
 
     const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
-        if (success) {
+        if (success || error || noData ) {
             setIsLoading(false)
         }
-    }, [success])
+    }, [success,error,noData])
 
 
 

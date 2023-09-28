@@ -24,6 +24,8 @@ function Home({ route, navigation }) {
 	const loading = useSelector(state => state.category.isLoading)
 	const jobLoading = useSelector(state => state.job.isLoading)
 	const error = useSelector(state => state.category.error)
+	const success = useSelector(state => state.category.success)
+	const nodata = useSelector(state => state.category.nodata)
 	const check = useSelector(state => state.seeker.check)
 	const [ID, setID] = useState()
 
@@ -38,15 +40,14 @@ function Home({ route, navigation }) {
 		}
 	}, [dispatch, navigation, categories]);
 
-	const [isloading, setIsLoading] = useState(false)
+	const [isloading, setIsLoading] = useState(true)
+
 	useEffect(() => {
-		if (loading && jobLoading) {
-			setIsLoading(true)
-		} else {
+		if (error || success || nodata) {
 			setIsLoading(false)
 			dispatch({ type: RESET })
 		}
-	}, [loading, jobLoading])
+	}, [error, success, nodata])
 
 
 
@@ -144,7 +145,7 @@ function Home({ route, navigation }) {
 									tintColor: '#fff'
 								}} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
 								<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-									<Pressable 
+									<Pressable
 									><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 										source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
 								</View>
