@@ -28,9 +28,9 @@ const FirstRoute = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const bookmarks = useSelector(state => state.bookmark.bookmarks);
-    const error = useSelector(state => state.bookmark.bookmarkError)
-    const noData = useSelector(state => state.bookmark.bookmarkNoData)
-    const success = useSelector(state => state.bookmark.bookmarkSuccess)
+    const error = useSelector(state => state.error.bookmarksError)
+    const noData = useSelector(state => state.nodata.bookmarksNoData)
+    const success = useSelector(state => state.success.bookmarksSuccess)
 
     const [ID, setID] = useState()
 
@@ -205,6 +205,7 @@ const SecondRoute = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const applied = useSelector(state => state.applied.appliedJobs);
+    
     const error = useSelector(state => state.error.allAppliedError)
     const noData = useSelector(state => state.nodata.allAppliedNoData)
     const success = useSelector(state => state.success.allAppliedSuccess)
@@ -218,16 +219,11 @@ const SecondRoute = ({ navigation }) => {
 
 
     const [ID, setID] = useState()
-
     useEffect(() => {
         if (ID) {
             dispatch(AllApplied(ID))
         }
     }, [dispatch, ID]);
-
-    useEffect(() => {
-        console.log(applied)
-    }, [applied]);
 
     useEffect(() => {
         GetData()

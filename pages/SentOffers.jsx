@@ -10,26 +10,19 @@ function SentOffers({ navigation }) {
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
     const offers = useSelector(state => state.offers.sentOffers)
-    const succcess = useSelector(state => state.success.sentOfferSuccess)
+
+    const success = useSelector(state => state.success.sentOfferSuccess)
     const error = useSelector(state => state.error.sentOfferError)
-    const nodata = useSelector(state => state.error.sentOfferNoData)
+    const nodata = useSelector(state => state.nodata.sentOfferError)
 
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        if (succcess || error || nodata) {
-            setLoading(true)
+        if (success || error || nodata) {
+            setLoading(false)
         }
-    }, [succcess, error, nodata])
-
+    }, [success, error, nodata])
 
     const [ID, setID] = useState()
-
-
-
-    useEffect(() => {
-        console.log(ID)
-    }, [ID])
-
 
     useEffect(() => {
         GetData()

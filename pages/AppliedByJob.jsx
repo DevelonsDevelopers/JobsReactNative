@@ -11,9 +11,10 @@ function AppliedByJob({ route, navigation }) {
     const dispatch = useDispatch();
 
 
-    const success = useSelector(state => state.success.allAppliedSuccess)
-    const error = useSelector(state => state.success.allAppliedError)
-    const nodata = useSelector(state => state.success.allAppliedNoData)
+    const success = useSelector(state => state.success.appliedJobSuccess)
+    const error = useSelector(state => state.error.appliedJobError)
+    const nodata = useSelector(state => state.nodata.appliedJobNoData)
+
     const [loading, setLoading] = useState(true)
 
     const [login, isLogin] = useState(false);

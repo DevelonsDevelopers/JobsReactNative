@@ -14,13 +14,13 @@ function Cities({ navigation }) {
     const nodata = useSelector(state => state.nodata.allCityNoData)
     const dispatch = useDispatch()
     const [data, setData] = useState()
-    const [isLoading,setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         if (success || error || nodata) {
             setIsLoading(false)
         }
-    }, [success, nodata, error])
+    }, [success, error, nodata])
 
 
     useEffect(() => {

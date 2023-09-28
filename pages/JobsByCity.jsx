@@ -19,9 +19,9 @@ function JobsByCity({route, navigation}) {
     const {CITYID} = route.params
 
     const jobs = useSelector(state => state.job.cityJobs)
-    const error = useSelector(state => state.error.allCityError)
-    const nodata = useSelector(state => state.nodata.allCityNoData)
-    const success = useSelector(state => state.success.allCitySuccess)
+    const error = useSelector(state => state.error.cityJobError)
+    const nodata = useSelector(state => state.nodata.cityJobNoData)
+    const success = useSelector(state => state.success.cityJobSuccess)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
@@ -36,7 +36,6 @@ function JobsByCity({route, navigation}) {
                 } else if (jobs.length === 0 || jobs[0].city !== CITYID) {
                     dispatch(CityJobs(ID, CITYID))
                 } else {
-                    setLoading(false)
                     setData(jobs)
                 }
             }
@@ -45,10 +44,10 @@ function JobsByCity({route, navigation}) {
 
     useEffect(() => {
         if (success || error || nodata) {
-            setData(jobs)
             setLoading(false)
+            setData(jobs)
         }
-    }, [success]);
+    }, [success,error,nodata]);
 
     useEffect(() => {
         if (jobs){

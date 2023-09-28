@@ -33,14 +33,17 @@ const ProviderProfileInfo = ({ navigation }) => {
     }
 
     const company = useSelector(state => state.company.company)
+
     const success = useSelector(state => state.success.companySuccess)
     const error = useSelector(state => state.error.companyError)
+    const nodata = useSelector(state => state.nodata.companyNoData)
+
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        if (success, error) {
+        if (success || error || nodata) {
             setLoading(false)
         }
-    }, [success, error])
+    }, [success, error, nodata])
 
     useEffect(() => {
         if (ID) {

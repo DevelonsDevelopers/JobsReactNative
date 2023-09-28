@@ -12,9 +12,9 @@ function RecommendedUser({ route, navigation }) {
     const dispatch = useDispatch();
     const [login, isLogin] = useState(false);
     const seekers = useSelector(state => state.seeker.seekers)
-    const success = useSelector(state => state.success.seekerSuccess)
-    const nodata = useSelector(state => state.nodata.seekerNoData)
-    const error = useSelector(state => state.error.seekerError)
+    const success = useSelector(state => state.success.recommendedSeekersSuccess)
+    const nodata = useSelector(state => state.nodata.recommendedSeekersNoData)
+    const error = useSelector(state => state.error.recommendedSeekersError)
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         if (success || error || nodata) {
