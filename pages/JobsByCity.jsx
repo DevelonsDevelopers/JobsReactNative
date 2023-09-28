@@ -1,16 +1,11 @@
-import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator} from "react-native";
+import {Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator} from "react-native";
 import React, {useEffect, useState} from 'react'
 import {View} from 'react-native'
-import {useNavigation} from "@react-navigation/native";
-import Resume from "./Resume";
 import {useDispatch, useSelector} from "react-redux";
-import {AllCities} from "../API/actions/cityActions";
 import {AllJobs, CityJobs} from "../API/actions/jobActions";
 import moment from "moment";
 import {recordInteraction} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {RESET} from "../Utils/Constants";
-import cities from "./Cities";
 
 
 function JobsByCity({route, navigation}) {

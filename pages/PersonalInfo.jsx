@@ -34,8 +34,8 @@ function PersonalInfo({ navigation }) {
     const cities = useSelector(state => state.city.cities)
     const countries = useSelector(state => state.country.countries)
     const success = useSelector(state => state.success.seekerSuccess)
-    const nodata = useSelector(state => state.success.seekerNoData)
-    const error = useSelector(state => state.success.seekerError)
+    const nodata = useSelector(state => state.nodata.seekerNoData)
+    const error = useSelector(state => state.error.seekerError)
 
     const [completed, setCompleted] = useState(false)
     const [verified, setVerified] = useState(false)
@@ -48,7 +48,7 @@ function PersonalInfo({ navigation }) {
         if (nodata || error || success ) {
             setLoading(false)
             setCitiesData(cities)
-        } 
+        }
     }, [success,error,nodata])
 
     const dispatch = useDispatch();
@@ -93,6 +93,8 @@ function PersonalInfo({ navigation }) {
                 dispatch(fetchSeeker(ID))
             } else if ((seeker.id).toString() !== ID) {
                 dispatch(fetchSeeker(ID))
+            } else {
+                setLoading(false)
             }
         }
     }, [dispatch, seeker, ID, navigation, trigger]);
@@ -118,7 +120,7 @@ function PersonalInfo({ navigation }) {
             setNameCity(seeker?.city_name)
             setCountryName(seeker?.country_name)
         }
-        dispatch(CheckSeeker(ID))
+        dispatch(CheckSeeker(seeker?.id))
         if (seeker?.address && seeker?.city && seeker?.country && seeker?.dob && seeker?.email && seeker?.gender && seeker?.id && seeker?.name && seeker?.password && seeker?.code && seeker?.phone && seeker?.username) {
             setCompleted(true)
         } else {

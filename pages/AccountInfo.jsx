@@ -97,8 +97,9 @@ function AccountInfo({ route, navigation }) {
 	}, [ID, trigger])
 
 	useEffect(() => {
-		console.log(cv)
+		if (ID){
 		dispatch(CheckCV(ID))
+			}
 	}, [cv]);
 
 	const editEducation = (d) => {
