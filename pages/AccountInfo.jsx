@@ -35,12 +35,21 @@ import CourseModal from "../Components/CourseModal";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
 	cvStatement,
+	deleteCVCareer,
+	deleteCVCourse,
+	deleteCVEducation,
+	deleteCVInterest,
+	deleteCVLanguage,
+	deleteCVResume,
+	deleteCVSkill,
 	roleUpdate,
 	updateCVCareer,
 	updateCVCourse,
 	updateCVEducation,
 	updateCVInterest,
-	updateCVLanguage, updateCVResume, updateCVSkill
+	updateCVLanguage,
+	updateCVResume,
+	updateCVSkill
 } from "../API";
 import PersonalStatementModal from "../Components/PersonalStatementModal";
 import RoleModal from "../Components/RoleModal";
@@ -165,6 +174,12 @@ function AccountInfo({ route, navigation }) {
 		})
 	}
 
+	const deleteEducation = async (id) => {
+		await deleteCVEducation(id).then(res => {
+			setTrigger(!trigger)
+		})
+	}
+
 	const addCareer = (company, job, timeperiod, address, phone) => {
 		dispatch(CVCareer(cv.id, company, job, timeperiod, address, phone))
 		setTrigger(!trigger)
@@ -174,6 +189,12 @@ function AccountInfo({ route, navigation }) {
 		await updateCVCareer(cv.id, company, job, timeperiod, address, phone, id).then(res => {
 			setTrigger(!trigger)
 			setCarData(null)
+		})
+	}
+
+	const deleteCareer = async (id) => {
+		await deleteCVCareer(id).then(res => {
+			setTrigger(!trigger)
 		})
 	}
 
@@ -189,6 +210,12 @@ function AccountInfo({ route, navigation }) {
 		})
 	}
 
+	const deleteCourse = async (id) => {
+		await deleteCVCourse(id).then(res => {
+			setTrigger(!trigger)
+		})
+	}
+
 	const addInterest = (interest) => {
 		dispatch(CVInterest(cv.id, interest))
 		setTrigger(!trigger)
@@ -198,6 +225,12 @@ function AccountInfo({ route, navigation }) {
 		await updateCVInterest(cv.id, interest, id).then(res => {
 			setTrigger(!trigger)
 			setInData(null)
+		})
+	}
+
+	const deleteInterest = async (id) => {
+		await deleteCVInterest(id).then(res => {
+			setTrigger(!trigger)
 		})
 	}
 
@@ -213,15 +246,27 @@ function AccountInfo({ route, navigation }) {
 		})
 	}
 
+	const deleteLanguage = async (id) => {
+		await deleteCVLanguage(id).then(res => {
+			setTrigger(!trigger)
+		})
+	}
+
 	const addResume = (resume) => {
 		dispatch(CVResume(cv.id, resume))
 		setTrigger(!trigger)
 	}
 
 	const updateResume = async (resume, id) => {
-		updateCVResume(cv.id, resume, id).then(res => {
+		await updateCVResume(cv.id, resume, id).then(res => {
 			setTrigger(!trigger)
 			setResData(null)
+		})
+	}
+
+	const deleteResume = async (id) => {
+		await deleteCVResume(id).then(res => {
+			setTrigger(!trigger)
 		})
 	}
 
@@ -230,10 +275,16 @@ function AccountInfo({ route, navigation }) {
 		setTrigger(!trigger)
 	}
 
-	const updateSkill = (skill, id) => {
-		updateCVSkill(cv.id, skill, id).then(res => {
+	const updateSkill = async (skill, id) => {
+		await updateCVSkill(cv.id, skill, id).then(res => {
 			setTrigger(!trigger)
 			setSkData(null)
+		})
+	}
+
+	const deleteSkill = async (id) => {
+		await deleteCVSkill(id).then(res => {
+			setTrigger(!trigger)
 		})
 	}
 
