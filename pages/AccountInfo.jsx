@@ -53,6 +53,7 @@ import {
 } from "../API";
 import PersonalStatementModal from "../Components/PersonalStatementModal";
 import RoleModal from "../Components/RoleModal";
+import DeleteModal from "../Components/DeleteModal";
 
 function AccountInfo({ route, navigation }) {
 
@@ -70,6 +71,7 @@ function AccountInfo({ route, navigation }) {
 	const [interestVisible, setInterestVisible] = useState(false)
 	const [languageVisible, setLanguageVisible] = useState(false)
 	const [resumeVisible, setResumeVisible] = useState(false)
+	const [deleteVisible, setDeleteVisible] = useState(false)
 
 	const [edData, setEdData] = useState(null)
 	const [carData, setCarData] = useState(null)
@@ -106,9 +108,9 @@ function AccountInfo({ route, navigation }) {
 	}, [ID, trigger])
 
 	useEffect(() => {
-		if (ID){
-		dispatch(CheckCV(ID))
-			}
+		if (ID) {
+			dispatch(CheckCV(ID))
+		}
 	}, [cv]);
 
 	const editEducation = (d) => {
@@ -295,13 +297,14 @@ function AccountInfo({ route, navigation }) {
 	const toggleInterestVisibility = () => setInterestVisible(!interestVisible)
 	const toggleLanguageVisibility = () => setLanguageVisible(!languageVisible)
 	const toggleResumeVisibility = () => setResumeVisible(!resumeVisible)
+	const toggleDeleteVisibile = () => setDeleteVisible(!deleteVisible)
 
 
 	useEffect(() => {
 		if (success || error || data) {
 			setIsLoading(false)
 		}
-	}, [success , error , data])
+	}, [success, error, data])
 
 	// personalInfo Modal==============
 	const [infoVisible, setInfoVisible] = useState(false)
@@ -340,7 +343,7 @@ function AccountInfo({ route, navigation }) {
 										Error...!</Text>
 								</View> : <>
 
-
+									<DeleteModal visible={deleteVisible} toggleVisibility={toggleDeleteVisibile} />
 									<EducationModal visible={educationVisible}
 										toggleEducationVisibility={toggleEducationVisibility}
 										add={addEducation} edit={updateEducation} data={edData} />
@@ -562,7 +565,7 @@ function AccountInfo({ route, navigation }) {
 																		}}
 																			source={require('../assets/editIcon.png')} />
 																		</Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -646,7 +649,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -728,7 +731,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -810,7 +813,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -892,7 +895,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -974,7 +977,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -1057,7 +1060,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
