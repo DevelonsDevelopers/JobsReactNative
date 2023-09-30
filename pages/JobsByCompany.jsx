@@ -43,11 +43,9 @@ function JobsByCompany({route, navigation}) {
 
     useEffect(() => {
         if (success || nodata || error) {
-            setData(jobs)
             setLoading(false)
-            dispatch({ type: RESET })
         }
-    }, [success]);
+    }, [success, nodata, error]);
 
     useEffect(() => {
         if (jobs){

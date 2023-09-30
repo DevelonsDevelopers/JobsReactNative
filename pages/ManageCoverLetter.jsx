@@ -1,21 +1,30 @@
 import React, { useState } from 'react'
 import { Image, Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
+import Toast from "react-native-toast-message";
 
 const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
 
-    const [proposal, setProposal] = useState()
-    const [intro, setIntro] = useState()
+    const [proposal, setProposal] = useState('')
+    const [intro, setIntro] = useState('')
 
     const Apply = () => {
-        apply(intro, proposal)
-        toggleVisible()
+        if (intro.length > 20){
+            if (proposal.length > 20){
+                apply(intro, proposal)
+                toggleVisible()
+            } else {
+                Toast.show({ type: 'error', position: 'top', text1: 'Proposal Length Must be greater than 20 Words' })
+            }
+        } else {
+            Toast.show({ type: 'error', position: 'top', text1: 'Intro Length Must be greater than 20 Words' })
+        }
     }
 
 
 
     return (
-        <Modal visible={visible} animationType='fade' onRequestClose={toggleVisible} >
-            <ScrollView>
+        <Modal visible={visible} animationType='fade' onRequestClose={toggleVisible}>
+            <ScrollView keyboardShouldPersistTaps="handled">
                 <View style={{
                     flexDirection: 'column',
                     width: '100%',
@@ -83,6 +92,10 @@ const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
                     marginBottom: 40
                 }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold', textAlign: 'center' }}>Create Now</Text></Pressable>
             </ScrollView>
+            <Toast
+                position='top'
+                bottomOffset={20}
+            />
         </Modal>
     )
 }

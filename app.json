@@ -32,11 +32,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/anImageThat.png",
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json",
-      "package": "com.anonymous.jobsApplication"
+      "package": "com.anonymous.jobsApplication",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

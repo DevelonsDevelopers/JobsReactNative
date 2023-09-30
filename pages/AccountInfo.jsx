@@ -81,6 +81,11 @@ function AccountInfo({ route, navigation }) {
 	const [resData, setResData] = useState(null)
 	const [skData, setSkData] = useState(null)
 
+	const [delV, setDelV] = useState()
+	const [delID, setDelID] = useState()
+	const [delVal, setDelVal] = useState('')
+	const [delLoad, setDelLoad] = useState(false)
+
 	const [trigger, setTrigger] = useState(false)
 
 	const [isloading, setIsLoading] = useState(true)
@@ -179,6 +184,9 @@ function AccountInfo({ route, navigation }) {
 	const deleteEducation = async (id) => {
 		await deleteCVEducation(id).then(res => {
 			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -197,6 +205,9 @@ function AccountInfo({ route, navigation }) {
 	const deleteCareer = async (id) => {
 		await deleteCVCareer(id).then(res => {
 			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -215,6 +226,9 @@ function AccountInfo({ route, navigation }) {
 	const deleteCourse = async (id) => {
 		await deleteCVCourse(id).then(res => {
 			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -233,6 +247,9 @@ function AccountInfo({ route, navigation }) {
 	const deleteInterest = async (id) => {
 		await deleteCVInterest(id).then(res => {
 			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -251,6 +268,9 @@ function AccountInfo({ route, navigation }) {
 	const deleteLanguage = async (id) => {
 		await deleteCVLanguage(id).then(res => {
 			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -269,6 +289,9 @@ function AccountInfo({ route, navigation }) {
 	const deleteResume = async (id) => {
 		await deleteCVResume(id).then(res => {
 			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -287,6 +310,9 @@ function AccountInfo({ route, navigation }) {
 	const deleteSkill = async (id) => {
 		await deleteCVSkill(id).then(res => {
 			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -297,7 +323,29 @@ function AccountInfo({ route, navigation }) {
 	const toggleInterestVisibility = () => setInterestVisible(!interestVisible)
 	const toggleLanguageVisibility = () => setLanguageVisible(!languageVisible)
 	const toggleResumeVisibility = () => setResumeVisible(!resumeVisible)
-	const toggleDeleteVisibile = () => setDeleteVisible(!deleteVisible)
+	const toggleDeleteVisibile = (val, id) => {
+		setDelV(val)
+		setDelID(id)
+		setDeleteVisible(!deleteVisible)
+	}
+
+	useEffect(() => {
+		if (delVal === "EDUCATION") {
+			deleteEducation(delID)
+		} else if (delVal === "CAREER") {
+			deleteCareer(delID)
+		} else if (delVal === "COURSE") {
+			deleteCourse(delID)
+		} else if (delVal === "SKILL") {
+			deleteSkill(delID)
+		} else if (delVal === "INTEREST") {
+			deleteInterest(delID)
+		} else if (delVal === "LANGUAGE") {
+			deleteLanguage(delID)
+		} else if (delVal === "RESUME") {
+			deleteResume(delID)
+		}
+	}, [delVal]);
 
 
 	useEffect(() => {
@@ -343,7 +391,7 @@ function AccountInfo({ route, navigation }) {
 										Error...!</Text>
 								</View> : <>
 
-									<DeleteModal visible={deleteVisible} toggleVisibility={toggleDeleteVisibile} />
+									<DeleteModal visible={deleteVisible} toggleVisibility={toggleDeleteVisibile} del={setDelVal} val={delV} setLoad={setDelLoad} isLoad={delLoad}/>
 									<EducationModal visible={educationVisible}
 										toggleEducationVisibility={toggleEducationVisibility}
 										add={addEducation} edit={updateEducation} data={edData} />
@@ -565,7 +613,7 @@ function AccountInfo({ route, navigation }) {
 																		}}
 																			source={require('../assets/editIcon.png')} />
 																		</Pressable>
-																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('EDUCATION', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -649,7 +697,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('CAREER', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -731,7 +779,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('COURSE', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -813,7 +861,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('SKILL', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -895,7 +943,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('INTEREST', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -977,7 +1025,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('LANGUAGE', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -1060,7 +1108,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable onPress={() => toggleDeleteVisibile()} style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('RESUME', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'

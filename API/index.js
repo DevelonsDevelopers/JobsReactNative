@@ -310,7 +310,7 @@ export const updateCVSkill = (cv, skill, id) => API.put('/cvSkill/update', {
     skill: skill,
     id: id
 })
-export const deleteCVSkill = (id) => API.delete('/cvSkill/update', { data: { id: id }})
+export const deleteCVSkill = (id) => API.delete('/cvSkill/delete', { data: { id: id }})
 
 
 //TAGS API CALL

@@ -33,7 +33,7 @@ function Cities({ navigation }) {
         if (cities) {
             setData(cities)
         }
-    }, [cities, data]);
+    }, [cities]);
 
     const search = (query) => {
         const searched = cities.filter((city) => {

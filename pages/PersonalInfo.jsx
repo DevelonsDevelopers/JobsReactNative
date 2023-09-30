@@ -101,6 +101,7 @@ function PersonalInfo({ navigation }) {
 
     useEffect(() => {
         if (seeker) {
+            setLoadingVisible(false)
             setSeekerData({
                 ...seekerData,
                 name: seeker?.name,
@@ -758,7 +759,7 @@ function PersonalInfo({ navigation }) {
                             :
                             ''
                         }
-
+                        {seeker?.plan === 0 ?
                         <Ripple rippleColor="white"
                             onPress={() => navigation.push('SeekerPlans')}
                             style={{
@@ -774,7 +775,7 @@ function PersonalInfo({ navigation }) {
                             >Activate Account
                             </Text>
                         </Ripple>
-
+                        : ''}
                     </>}
             </ScrollView>
         </View>
