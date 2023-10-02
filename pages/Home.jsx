@@ -38,8 +38,10 @@ function Home({ route, navigation }) {
 	useEffect(() => {
 		if (!categories) {
 			dispatch(FeaturedCategories())
+		} else {
+			setIsLoading(false)
 		}
-	}, [dispatch, navigation, categories]);
+	}, [dispatch, categories]);
 
 	const [isloading, setIsLoading] = useState(true)
 

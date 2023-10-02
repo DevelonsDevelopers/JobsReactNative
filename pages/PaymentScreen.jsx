@@ -20,12 +20,10 @@ import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 import ButtonComp from "../Components/ButtonComp";
 import paypalApi from "../API/paypal"
 import { useEffect } from 'react';
-import { createUserPlan } from "../API";
+import {API_URL, createUserPlan} from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 import LoadingModal from '../Components/LoadingModal';
-
-const API_URL = "http://192.168.1.25:5001";
 
 const PaymentScreen = ({ route, navigation }) => {
     const [email, setEmail] = useState();
@@ -131,11 +129,11 @@ const PaymentScreen = ({ route, navigation }) => {
 
     const onUrlChange = (webviewState) => {
         console.log("webviewStatewebviewState", webviewState)
-        if (webviewState.url.includes('http://192.168.1.25:5001/cancel')) {
+        if (webviewState.url.includes(`${API_URL}/cancel`)) {
             clearPaypalState()
             return;
         }
-        if (webviewState.url.includes('http://192.168.1.25:5001/return')) {
+        if (webviewState.url.includes(`${API_URL}/return`)) {
 
             const urlValues = queryString.parseUrl(webviewState.url)
             console.log("my urls value", urlValues)
@@ -182,7 +180,7 @@ const [loadingVisible,setLoadingVisible ] = useState(false)
 const toggleVisibility = (val) => setLoadingVisible(!val)
 
     return (
-        <ScrollView 
+        <ScrollView
         keyboardShouldPersistTaps="handled"
         >
             <LoadingModal  visible={loadingVisible}  />

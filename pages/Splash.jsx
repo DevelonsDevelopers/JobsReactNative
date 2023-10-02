@@ -24,15 +24,21 @@ function Splash({navigation}) {
     const GetData = async () => {
         const id = await AsyncStorage.getItem('ID')
         const value = await AsyncStorage.getItem('USER')
+        console.log("WHY1")
         console.log(id)
-        if (value === "PROVIDER"){
+        console.log("WHY3")
+        console.log(value)
+        if (value === "PROVIDER" && id){
+            console.log("HERE0")
             sleep(1000).then( async () => {
                 navigation.replace('PostJob')
             })
         } else if (id && id !== "0"){
+            console.log("HERE1")
             setUser(value)
             setID(id)
         } else {
+            console.log("HERE2")
             sleep(1000).then( async () => {
                 navigation.replace('Home')
                 await AsyncStorage.setItem("ID", "0")
@@ -51,8 +57,10 @@ function Splash({navigation}) {
     }, [ID]);
 
     useEffect(() => {
+        console.log("WHY2")
         console.log(check)
         if (check){
+            console.log("CHECK")
             sleep(1000).then( async () => {
                 if (user === "PROVIDER") {
                     navigation.replace('PostJob')

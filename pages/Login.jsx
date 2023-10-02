@@ -34,17 +34,17 @@ function Login({ route, navigation }) {
         } else {
             if (USER === "SEEKER") {
                 dispatch(LoginAuthentication(navigation, email, password))
-                toggleLoadingVisibility()
+                toggleLoadingVisibility(true)
             } else {
                 dispatch(ProviderLoginAuthentication(navigation, email, password))
-                toggleLoadingVisibility()
+                toggleLoadingVisibility(true)
             }
         }
     }
 
     useEffect(() => {
         if (error) {
-            toggleLoadingVisibility()
+            toggleLoadingVisibility(false)
             Toast.show({
                 type: 'error',
                 position: 'top',
@@ -56,7 +56,7 @@ function Login({ route, navigation }) {
 
     // loadingModal================
     const [loadingVisible, setLoadingVisible] = useState(false)
-    const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
+    const toggleLoadingVisibility = (val) => setLoadingVisible(val);
 
     GoogleSignin.configure({
         webClientId: '404623696003-doe1cpjrlljj8om770ha3ri9s9vatoc8.apps.googleusercontent.com', // Replace with your actual Web Client ID

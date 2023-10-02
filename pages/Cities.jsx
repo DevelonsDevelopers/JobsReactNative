@@ -26,6 +26,8 @@ function Cities({ navigation }) {
     useEffect(() => {
         if (!cities) {
             dispatch(AllCities())
+        } else {
+            setIsLoading(false)
         }
     }, [dispatch, navigation, cities]);
 

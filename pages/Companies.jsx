@@ -33,6 +33,8 @@ function Companies({ navigation }) {
     useEffect(() => {
         if (!companies) {
             dispatch(AllCompanies())
+        } else {
+            setIsLoading(false)
         }
     }, [dispatch, navigation, companies]);
 

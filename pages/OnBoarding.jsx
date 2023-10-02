@@ -10,7 +10,7 @@ function OnBoarding({ navigation }) {
             </ImageBackground>
             <Text style={{color: 'black', fontWeight: '600', fontSize:20, alignSelf: 'center', marginTop: 50}}>Welcome to</Text>
             <Image style={{ width: 300, height: 40, marginBottom: 130, alignSelf: 'center' }} source={require('../assets/logo.png')} alt={'Okay'} />
-            <Pressable onPress={() => navigation.push('Home')} style={{
+            <Pressable onPress={() => navigation.replace('Home')} style={{
                 width: '85%',
                 backgroundColor: '#13A3E1',
                 alignItems: 'center',

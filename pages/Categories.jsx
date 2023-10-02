@@ -13,7 +13,6 @@ function Categories({ navigation }) {
     const error = useSelector(state => state.error.allCategoryError)
     const dispatch = useDispatch();
     const [data, setData] = useState()
-    const [loading, setLoading] = useState(true)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
@@ -24,9 +23,11 @@ function Categories({ navigation }) {
 
 
     useEffect(() => {
-        if (loading) {
+        if (isLoading) {
             if (!categories) {
                 dispatch(AllCategories())
+            } else {
+                setIsLoading(false)
             }
         }
     }, [dispatch, navigation, categories]);
