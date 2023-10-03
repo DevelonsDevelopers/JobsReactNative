@@ -17,12 +17,13 @@ function Verify({ route, navigation }) {
     const [changeable, setChangeable] = useState()
 
     const [phone, setPhone] = useState(verifyPhone)
-
+    const [phoneCode, setPhoneCode] = useState(code)
 
     const [phoneVisible, setPhoneVisible] = useState(false)
     const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
     const setCode = (code) => {
+        setPhoneCode(code)
         togglePhoneVisible()
     }
 
@@ -43,7 +44,7 @@ function Verify({ route, navigation }) {
     // }, [phone])
 
     const handleClick = () => {
-        if (phone.length > 4) {
+        if (phone) {
             navigation.push('VerificationCode', { code: code, phone: phone, type: type, ID: ID, verify: verify })
         } else {
             Toast.show({ type: 'error', text1: 'Please Enter Phone Number', position: 'top' })
@@ -112,7 +113,7 @@ function Verify({ route, navigation }) {
 
 
                 <View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
-                    <Pressable onPress={() => togglePhoneVisible()} style={{
+                    <Pressable onPress={() => { if (changeable) { togglePhoneVisible() } }} style={{
                         textAlign: 'center',
                         marginTop: 'auto',
                         marginBottom: 'auto',
@@ -124,9 +125,9 @@ function Verify({ route, navigation }) {
                         borderTopLeftRadius: 25,
                         borderBottomLeftRadius: 25,
                         alignItems: 'center'
-                    }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"} >{code}</TextInput>
+                    }}><TextInput style={{ color: '#000' }} editable={changeable} placeholder={"+01"} >{phoneCode}</TextInput>
                     </Pressable>
-                    <TextInput keyboardType='numeric' onChangeText={text => setPhone(phone)}
+                    <TextInput editable={changeable} keyboardType='numeric' onChangeText={text => setPhone(phone)}
                         placeholder="Enter Your Number" style={{
                             textAlign: 'left',
                             paddingHorizontal: 8,
