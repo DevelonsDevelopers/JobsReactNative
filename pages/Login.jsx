@@ -55,7 +55,7 @@ function Login({ route, navigation }) {
                 Toast.show({
                     type: 'error',
                     position: 'top',
-                    text1: 'Failed to Register',
+                    text1: 'Failed to Login',
                     text2: 'Invalid email or Password'
                 })
             } else if (seekerSuccess || providerSuccess) {
