@@ -9,9 +9,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {CheckCV} from "../API/actions/cvActions";
 import {CheckSeeker} from "../API/actions/seekerActions";
 
-// import {GoogleSignin, statusCodes} from "@react-native-google-signin/google-signin";
-
-
 function Login({ route, navigation }) {
 
     const { USER } = route.params
@@ -20,13 +17,20 @@ function Login({ route, navigation }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    const [buttonClick, setButtonClick] = useState(false)
+
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     const dispatch = useDispatch()
 
     const toggleVisibility = () => setShow(!show)
 
-    const error = useSelector(state => state.login.error)
+    const seekerError = useSelector(state => state.error.seekerLoginError)
+    const providerError = useSelector(state => state.error.providerLoginError)
+    const seekerSuccess = useSelector(state => state.success.seekerLoginSuccess)
+    const providerSuccess = useSelector(state => state.success.providerLoginSuccess)
+    const seekerLoading = useSelector(state => state.loading.seekerLoginLoading)
+    const providerLoading = useSelector(state => state.loading.providerLoginLoading)
 
     const LoginUser = () => {
         if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
@@ -35,26 +39,37 @@ function Login({ route, navigation }) {
             if (USER === "SEEKER") {
                 dispatch(LoginAuthentication(navigation, email, password))
                 toggleLoadingVisibility(true)
+                setButtonClick(true)
             } else {
                 dispatch(ProviderLoginAuthentication(navigation, email, password))
                 toggleLoadingVisibility(true)
+                setButtonClick(true)
             }
         }
     }
 
     useEffect(() => {
-        if (error) {
-            toggleLoadingVisibility(false)
-            Toast.show({
-                type: 'error',
-                position: 'top',
-                text1: 'Failed to Register',
-                text2: 'Invalid email or Password'
-            })
+        if (buttonClick) {
+            if (seekerError || providerError) {
+                toggleLoadingVisibility(false)
+                Toast.show({
+                    type: 'error',
+                    position: 'top',
+                    text1: 'Failed to Register',
+                    text2: 'Invalid email or Password'
+                })
+            } else if (seekerSuccess || providerSuccess) {
+                toggleLoadingVisibility(false)
+                Toast.show({
+                    type: 'success',
+                    position: 'top',
+                    text1: 'Success',
+                    text2: 'Successfully Logged In'
+                })
+            }
         }
-    }, [error]);
+    }, [seekerError, seekerSuccess, seekerLoading, providerError, providerSuccess, providerLoading, buttonClick]);
 
-    // loadingModal================
     const [loadingVisible, setLoadingVisible] = useState(false)
     const toggleLoadingVisibility = (val) => setLoadingVisible(val);
 
@@ -67,6 +82,7 @@ function Login({ route, navigation }) {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             const { user } = userInfo;
+            toggleLoadingVisibility(true)
             await google(user.name, user.givenName + (user.id).substring((user.id).length - 6), user.email, '', '', '', '', user.id, 'GOOGLE').then(async res => {
                 const { data: { data } } = res;
                 const { data: { responseCode } } = res;
@@ -89,11 +105,12 @@ function Login({ route, navigation }) {
                         await AsyncStorage.setItem("NAME", user.name)
                         await AsyncStorage.setItem("EMAIL", user.email)
                         await AsyncStorage.setItem("USERNAME", user.givenName + (user.id).substring((user.id).length - 6))
+                        toggleLoadingVisibility(false)
                         navigation.popToTop()
                         navigation.replace('Home')
                     })
                 } else {
-
+                    toggleLoadingVisibility(false)
                 }
             })
         } catch (error) {
@@ -114,6 +131,7 @@ function Login({ route, navigation }) {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             const { user } = userInfo;
+            toggleLoadingVisibility(true)
             await googleProvider('', '', 0, 0, user.email, '', '', '', '', user.id, 'GOOGLE').then(async res => {
                 console.log(res)
                 const { data: { data } } = res;
@@ -127,9 +145,11 @@ function Login({ route, navigation }) {
                         var ID = (data.id).toString()
                     }
                     if (data.affectedRows === 1) {
+                        toggleLoadingVisibility(false)
                         navigation.popToTop()
                         navigation.replace('GoogleRegister', { id: ID, name: user.name, email: user.email })
                     } else if (data.name === "") {
+                        toggleLoadingVisibility(false)
                         navigation.popToTop()
                         navigation.replace('GoogleRegister', { id: ID, name: user.name, email: user.email })
                     } else {
@@ -138,11 +158,12 @@ function Login({ route, navigation }) {
                         await AsyncStorage.setItem("USER", "PROVIDER")
                         await AsyncStorage.setItem("NAME", user.name)
                         await AsyncStorage.setItem("EMAIL", user.email)
+                        toggleLoadingVisibility(false)
                         navigation.popToTop()
                         navigation.replace('PostJob')
                     }
                 } else {
-
+                    toggleLoadingVisibility(false)
                 }
             }).catch(error => console.log(error))
         } catch (error) {

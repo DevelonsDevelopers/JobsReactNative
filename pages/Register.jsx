@@ -16,10 +16,18 @@ function Register({ route, navigation }) {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [size, setSize] = useState('')
+    const [buttonClick, setButtonClick] = useState(false)
 
     const dispatch = useDispatch();
 
     const toggleVisibility = () => setShow(!show);
+
+    const seekerError = useSelector(state => state.error.seekerRegisterError)
+    const providerError = useSelector(state => state.error.providerRegisterError)
+    const seekerSuccess = useSelector(state => state.success.seekerRegisterSuccess)
+    const providerSuccess = useSelector(state => state.success.providerRegisterSuccess)
+    const seekerLoading = useSelector(state => state.loading.seekerRegisterLoading)
+    const providerLoading = useSelector(state => state.loading.providerRegisterLoading)
 
     const RegisterUser = () => {
         if (name.length >= 2) {
@@ -31,7 +39,8 @@ function Register({ route, navigation }) {
                         if (password.length >= 9) {
                             if (password === confirmPassword) {
                                 dispatch(Registeration(navigation, name, username, email, '', '', '', '', password, 'NORMAL'));
-                                toggleLoadingVisibility()
+                                toggleLoadingVisibility(true)
+                                setButtonClick(true)
                             } else {
                                 Toast.show({ type: 'error', position: 'top', text1: 'Password Not Match' })
                             }
@@ -50,7 +59,8 @@ function Register({ route, navigation }) {
                         if (password.length >= 9) {
                             if (password === confirmPassword) {
                                 dispatch(ProviderRegistration(navigation, name, size, 0, 0, email, '', '', '', '', password, 'NORMAL'));
-                                toggleLoadingVisibility()
+                                toggleLoadingVisibility(true)
+                                setButtonClick(true)
                             } else {
                                 Toast.show({ type: 'error', position: 'top', text1: 'Password Not Match' })
                             }
@@ -72,17 +82,33 @@ function Register({ route, navigation }) {
     const error = useSelector(state => state.register.error)
 
     useEffect(() => {
-        if (error) {
-            toggleLoadingVisibility()
-            Toast.show({ type: 'error', position: 'top', text1: 'Failed to Login', text2: 'User Name OR Email Already Exist' })
-            dispatch({ type: RESET_SEEKER })
+        if (buttonClick) {
+            if (seekerError || providerError) {
+                toggleLoadingVisibility(false)
+                Toast.show({
+                    type: 'error',
+                    position: 'top',
+                    text1: 'Failed to Register',
+                    text2: 'Invalid email or Password'
+                })
+                setButtonClick(false)
+            } else if (seekerSuccess || providerSuccess) {
+                toggleLoadingVisibility(false)
+                Toast.show({
+                    type: 'success',
+                    position: 'top',
+                    text1: 'Success',
+                    text2: 'Successfully Logged In'
+                })
+                setButtonClick(false)
+            }
         }
-    }, [error]);
+    }, [seekerError, seekerSuccess, seekerLoading, providerError, providerSuccess, providerLoading, buttonClick]);
 
 
     // loading===============
     const [loadingVisible, setLoadingVisible] = useState(false)
-    const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
+    const toggleLoadingVisibility = (val) => setLoadingVisible(val);
 
 
 

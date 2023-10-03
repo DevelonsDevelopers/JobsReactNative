@@ -519,8 +519,7 @@ const ProviderAccountManage = ({ navigation }) => {
 							</View>
 						</View>
 						<View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
-
-							<TextInput style={{
+							<TextInput editable={false} style={{
 								textAlign: 'center',
 								paddingVertical: 10,
 								borderColor: '#b2b2b2',

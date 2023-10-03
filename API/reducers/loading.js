@@ -23,17 +23,21 @@ import {
     JOB_LOADING,
     OFFER_LOADING,
     PROVIDER_FEATURED_LOADING,
-    PROVIDER_JOB_LOADING,
+    PROVIDER_JOB_LOADING, PROVIDER_LOGIN_LOADING, PROVIDER_REGISTER_LOADING,
     RECENT_JOB_LOADING,
     RECOMMENDED_JOB_LOADING,
     RECOMMENDED_SEEKER_LOADING,
     SEARCH_JOB_LOADING,
-    SEEKER_LOADING,
+    SEEKER_LOADING, SEEKER_LOGIN_LOADING, SEEKER_REGISTER_LOADING,
     SEND_OFFER_JOB_LOADING,
     SENT_OFFER_LOADING, TOP_TAGS_LOADING
 } from "../../Utils/Constants";
 
 const initialState = {
+    seekerLoginLoading: false,
+    providerLoginLoading: false,
+    seekerRegisterLoading: false,
+    providerRegisterLoading: false,
     allAppliedLoading: false,
     appliedCompanyLoading: false,
     appliedJobLoading: false,
@@ -71,6 +75,14 @@ const initialState = {
 
 const loading = (state = initialState, action) => {
     switch (action.type){
+        case SEEKER_LOGIN_LOADING:
+            return {...state, seekerLoginLoading: true}
+        case SEEKER_REGISTER_LOADING:
+            return {...state, seekerRegisterLoading: true}
+        case PROVIDER_LOGIN_LOADING:
+            return {...state, providerLoginLoading: true}
+        case PROVIDER_REGISTER_LOADING:
+            return {...state, providerRegisterLoading: true}
         case ALL_APPLIED_LOADING:
             return {...state, allAppliedLoading: true}
         case APPLIED_COMPANY_LOADING:

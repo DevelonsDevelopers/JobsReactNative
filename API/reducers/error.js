@@ -32,10 +32,15 @@ import {
     SEND_OFFER_JOB_ERROR,
     SENT_OFFER_ERROR,
     TOP_TAGS_ERROR,
+    PROVIDER_REGISTER_ERROR, PROVIDER_LOGIN_ERROR, SEEKER_REGISTER_ERROR, SEEKER_LOGIN_ERROR,
 
 } from "../../Utils/Constants";
 
 const initialState = {
+    seekerLoginError: false,
+    providerLoginError: false,
+    seekerRegisterError: false,
+    providerRegisterError: false,
     allAppliedError: false,
     appliedCompanyError: false,
     appliedJobError: false,
@@ -73,6 +78,14 @@ const initialState = {
 
 const error = (state = initialState, action) => {
     switch (action.type){
+        case SEEKER_LOGIN_ERROR:
+            return {...state, seekerLoginError: true}
+        case SEEKER_REGISTER_ERROR:
+            return {...state, seekerRegisterError: true}
+        case PROVIDER_LOGIN_ERROR:
+            return {...state, providerLoginError: true}
+        case PROVIDER_REGISTER_ERROR:
+            return {...state, providerRegisterError: true}
         case ALL_APPLIED_ERROR:
             return {...state, allAppliedError: true}
         case APPLIED_COMPANY_ERROR:
