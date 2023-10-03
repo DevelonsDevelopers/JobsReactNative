@@ -59,7 +59,7 @@ const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
                 <View style={{ marginHorizontal: 20, borderWidth: 1, padding: 16, borderRadius: 20, backgroundColor: 'white' }}>
                     <View style={{ width: '100%', fontSize: 13, fontFamily: 'poppins_medium', }}>
                         <Text style={{ marginTop: 10, fontSize: 16, fontFamily: 'poppins_semibold' }}>Intro</Text>
-                        <TextInput onChangeText={text => setIntro(text)} style={{ width: '100%', borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, textAlign: 'center', fontSize: 13, fontFamily: 'poppins_medium', padding: 20, backgroundColor: 'white' }}
+                        <TextInput value={intro} onChangeText={text => setIntro(text)} style={{ width: '100%', borderColor: '#adadad', borderRadius: 20, borderWidth: 0.5, textAlign: 'center', fontSize: 13, fontFamily: 'poppins_medium', padding: 20, backgroundColor: 'white' }}
                             multiline numberOfLines={5} placeholder={'Introduce Yourself'} >
                         </TextInput>
                     </View>
@@ -69,7 +69,7 @@ const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
                         fontFamily: 'poppins_medium',
                     }}>
                         <Text style={{ marginTop: 10, fontSize: 16, fontFamily: 'poppins_semibold' }}>Body</Text>
-                        <TextInput onChangeText={text => setProposal(text)} multiline numberOfLines={9} placeholder={'Proposal'} style={{
+                        <TextInput value={proposal} onChangeText={text => setProposal(text)} multiline numberOfLines={9} placeholder={'Proposal'} style={{
                             width: '100%',
                             borderColor: '#adadad',
                             borderRadius: 20,
