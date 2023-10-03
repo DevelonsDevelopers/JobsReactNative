@@ -1,14 +1,11 @@
 import {
 	ActivityIndicator,
-	Button,
 	FlatList,
 	Image,
-	Modal,
 	Pressable,
 	SafeAreaView,
 	ScrollView,
 	Text,
-	TextInput,
 	View
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -32,7 +29,6 @@ import {
 } from "../API/actions/cvActions";
 import CareerModal from "../Components/CareerModal";
 import CourseModal from "../Components/CourseModal";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
 	cvStatement,
 	deleteCVCareer,
@@ -58,12 +54,15 @@ import DeleteModal from "../Components/DeleteModal";
 function AccountInfo({ route, navigation }) {
 
 	const { role } = route.params
-	// const [role,setRole] = useState()
 
 	const dispatch = useDispatch()
 
-	const [roleData, setRoleData] = useState(role)
+	const cv = useSelector(state => state.cv.cv);
+	const data = useSelector(state => state.nodata.cvNoData);
+	const error = useSelector(state => state.error.cvError);
+	const success = useSelector(state => state.success.cvSuccess);
 
+	const [roleData, setRoleData] = useState(role)
 	const [educationVisible, setEducationVisible] = useState(false)
 	const [careerVisible, setCareerVisible] = useState(false)
 	const [courseVisible, setCourseVisible] = useState(false)
@@ -72,7 +71,6 @@ function AccountInfo({ route, navigation }) {
 	const [languageVisible, setLanguageVisible] = useState(false)
 	const [resumeVisible, setResumeVisible] = useState(false)
 	const [deleteVisible, setDeleteVisible] = useState(false)
-
 	const [edData, setEdData] = useState(null)
 	const [carData, setCarData] = useState(null)
 	const [couData, setCouData] = useState(null)
@@ -80,22 +78,16 @@ function AccountInfo({ route, navigation }) {
 	const [lanData, setLanData] = useState(null)
 	const [resData, setResData] = useState(null)
 	const [skData, setSkData] = useState(null)
-
 	const [delV, setDelV] = useState()
 	const [delID, setDelID] = useState()
 	const [delVal, setDelVal] = useState('')
 	const [delLoad, setDelLoad] = useState(false)
-
 	const [trigger, setTrigger] = useState(false)
-
 	const [isloading, setIsLoading] = useState(true)
-
 	const [ID, setID] = useState()
-	const cv = useSelector(state => state.cv.cv);
+	const [infoVisible, setInfoVisible] = useState(false)
+	const [roleVisible, setRoleVisible] = useState(false)
 
-	const data = useSelector(state => state.nodata.cvNoData);
-	const error = useSelector(state => state.error.cvError);
-	const success = useSelector(state => state.success.cvSuccess);
 
 	useEffect(() => {
 		GetData()
@@ -119,7 +111,6 @@ function AccountInfo({ route, navigation }) {
 	}, [cv]);
 
 	const editEducation = (d) => {
-		// setEdEdit(true)
 		setEdData(d)
 		toggleEducationVisibility()
 	}
@@ -155,7 +146,6 @@ function AccountInfo({ route, navigation }) {
 	}
 
 	const addRole = async (role) => {
-		console.log(role)
 		await roleUpdate(role, ID).then(res => {
 			setRoleData(role)
 		}).catch(err => {
@@ -355,13 +345,10 @@ function AccountInfo({ route, navigation }) {
 	}, [success, error, data])
 
 	// personalInfo Modal==============
-	const [infoVisible, setInfoVisible] = useState(false)
+
 	const toggleInfoVisibility = () => setInfoVisible(!infoVisible)
 
 
-	// Role Modal ===========
-
-	const [roleVisible, setRoleVisible] = useState(false)
 	const toggleRoleVisibility = () => setRoleVisible(!roleVisible)
 	return (
 		<View style={{ flex: 1 }}>
