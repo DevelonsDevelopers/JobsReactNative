@@ -1,26 +1,22 @@
-import { ActivityIndicator, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Ripple from "react-native-material-ripple";
-import { AppliedByCompany, FetchAppliedByJob } from "../API/actions/appliedActions";
+import { FetchAppliedByJob } from "../API/actions/appliedActions";
 import moment from "moment/moment";
 
 function AppliedByJob({ route, navigation }) {
 
     const { job } = route.params
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
 
     const success = useSelector(state => state.success.appliedJobSuccess)
     const error = useSelector(state => state.error.appliedJobError)
     const nodata = useSelector(state => state.nodata.appliedJobNoData)
+    const appliedUsers = useSelector(state => state.applied.appliedUsers)
 
     const [loading, setLoading] = useState(true)
-
-    const [login, isLogin] = useState(false);
-    const appliedUsers = useSelector(state => state.applied.appliedUsers)
-    const [visible, setVisible] = useState(false)
-    const toggleVisibility = () => setVisible(!visible)
 
     useEffect(() => {
         if (success || error || nodata) {
