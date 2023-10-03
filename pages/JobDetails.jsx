@@ -200,7 +200,7 @@ const JobDetails = ({ route, navigation }) => {
                                             fontFamily: 'poppins_medium',
                                             fontSize: 13,
                                             marginRight: 25
-                                        }}>{moment(job?.date).fromNow()}</Text>
+                                        }}>{moment(job?.created).format("MMM Do YY")}</Text>
                                     </View>
                                     <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                                         <Text style={{
