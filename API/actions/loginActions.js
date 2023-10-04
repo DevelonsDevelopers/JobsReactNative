@@ -34,8 +34,10 @@ export const LoginAuthentication = (navigation, email, password) => async (dispa
         if (responseCode === 200){
             sleep(2000).then( async () => {
                 dispatch({type: SEEKER_LOGIN_SUCCESS})
-                navigation.popToTop()
-                navigation.replace('Onboarding')
+                sleep(500).then(async () => {
+                    navigation.popToTop()
+                    navigation.replace('Onboarding')
+                })
             })
         } else {
             dispatch ({ type: SEEKER_LOGIN_ERROR })
@@ -62,8 +64,10 @@ export const ProviderLoginAuthentication = (navigation, email, password) => asyn
         console.log("Provider")
         if (responseCode === 200){
             dispatch ({ type: PROVIDER_LOGIN_SUCCESS })
-            navigation.popToTop()
-            navigation.replace('PostJob')
+            sleep(500).then(async () => {
+                navigation.popToTop()
+                navigation.replace('PostJob')
+            })
         } else {
             dispatch ({ type: PROVIDER_LOGIN_ERROR })
         }
