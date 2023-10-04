@@ -12,6 +12,7 @@ import WebView from "react-native-webview";
 import { fetchSeeker } from "../API/actions/seekerActions";
 import LoginRequireModal from "../Components/LoginRequireModal";
 import ManageCoverLetter from "./ManageCoverLetter";
+import Ripple from "react-native-material-ripple";
 
 const JobDetails = ({ route, navigation }) => {
 
@@ -30,11 +31,11 @@ const JobDetails = ({ route, navigation }) => {
     const [login, setLogin] = useState()
     const [plan, setPlan] = useState()
     const [loginVal, setLoginVal] = useState()
-    
+
     const seeker = useSelector(state => state.seeker.seeker)
-    
-    
-    
+
+
+
     const [isloading, setIsLoading] = useState(true)
     useEffect(() => {
         if (success || error || nodata) {
@@ -202,20 +203,17 @@ const JobDetails = ({ route, navigation }) => {
                                             marginRight: 25
                                         }}>{moment(job?.created).format("MMM Do YY")}</Text>
                                     </View>
-                                    <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-                                        <Text style={{
-                                            fontFamily: 'poppins_medium',
-                                            fontSize: 15,
-                                            textAlign: 'center',
-                                            marginTop: 19,
-                                            backgroundColor: '#00A224',
-                                            color: "white",
-                                            borderRadius: 20,
-                                            margin: 'auto',
-                                            paddingTop: 5,
-                                            paddingBottom: 2,
-                                            paddingHorizontal: 20
-                                        }}>
+                                    <View style={{
+                                        marginTop: 19,
+                                        backgroundColor: '#00A224',
+                                        marginLeft: 'auto',
+                                        marginRight: 'auto',
+                                        paddingTop: 5,
+                                        paddingBottom: 2,
+                                        paddingHorizontal: 20,
+                                        borderRadius:20
+                                    }}>
+                                        <Text style={{ textAlign: 'center',color: "white",fontSize: 15,fontFamily: 'poppins_medium',  }}>
                                             Salary {job?.salary}
                                         </Text>
                                     </View>
@@ -240,7 +238,8 @@ const JobDetails = ({ route, navigation }) => {
                                         flexDirection: "row",
                                         marginTop: 20,
                                         backgroundColor: 'white',
-                                        gap: 10
+                                        gap: 10,
+                                        
                                     }}>
                                         <View style={{
                                             flex: 0.4,
@@ -252,17 +251,13 @@ const JobDetails = ({ route, navigation }) => {
                                             borderBottomRightRadius: 40
                                         }}>
                                             <View style={{ flexDirection: 'column' }}>
-                                                <View style={{ paddingHorizontal: 10 }}>
-                                                    <Text style={{
-                                                        color: 'white',
-                                                        backgroundColor: '#13a3e1',
-                                                        paddingHorizontal: 6,
-                                                        paddingVertical: 8,
-                                                        fontSize: 14,
-                                                        fontFamily: 'poppins_medium',
-                                                        borderRadius: 14,
-                                                        textAlign: "center",
-                                                    }}>{job?.type}</Text>
+                                                <View style={{
+                                                    backgroundColor: '#13a3e1',
+                                                    paddingHorizontal: 6,
+                                                    paddingVertical: 8,
+                                                    borderRadius: 14
+                                                }}>
+                                                    <Text style={{ textAlign: "center", fontFamily: 'poppins_medium', fontSize: 14, color: 'white', }}>{job?.type}</Text>
                                                 </View>
                                                 <Text style={{
                                                     fontSize: 16,
@@ -330,62 +325,57 @@ const JobDetails = ({ route, navigation }) => {
                     backgroundColor: '#e8e8e8'
                 }}>
                     {bookmark === 0 ?
-                        <Pressable onPress={() => { if (login) { BookmarkJob() } else { toggleLoginVisible() } }}><Text style={{
-                            justifyContent: 'center',
-                            height: 50,
-                            fontSize: 15,
-                            fontFamily: 'poppins_bold',
-                            backgroundColor: '#143D59',
-                            color: 'white',
-                            width: 150,
-                            textAlign: "center",
-                            paddingVertical: 10,
-                            borderRadius: 25,
-                            paddingTop: 13,
-                        }}>SAVE</Text></Pressable>
-                        :
-                        <Pressable onPress={() => RemoveBookmark()}><Text style={{
-                            justifyContent: 'center',
-                            height: 50,
-                            fontSize: 15,
-                            fontFamily: 'poppins_bold',
-                            backgroundColor: '#143D59',
-                            color: 'white',
-                            width: 150,
-                            textAlign: "center",
-                            paddingVertical: 10,
-                            borderRadius: 25,
-
-                        }}>SAVED</Text></Pressable>
-                    }
-                    {applied === 0 ?
-                        <Pressable onPress={() => { if (login) { if (plan) { toggleApplyVisibility() } else { navigation.push('VerificationProfile') } } else { toggleLoginVisible() } }}>
-                            <Text style={{
+                        <Ripple rippleColor="white" onPress={() => { if (login) { BookmarkJob() } else { toggleLoginVisible() } }}
+                            style={{
                                 justifyContent: 'center',
                                 height: 50,
-                                fontSize: 15,
-                                fontFamily: 'poppins_bold',
-                                backgroundColor: '#13A3E1',
-                                color: 'white',
+                                backgroundColor: '#143D59',
                                 width: 150,
-                                textAlign: "center",
                                 paddingVertical: 10,
                                 borderRadius: 25,
                                 paddingTop: 13,
-                            }}>APPLY NOW</Text>
+                            }}
+                        >
+                            <Text style={{ color: 'white', textAlign: "center", fontSize: 15, fontFamily: 'poppins_bold', }}>SAVE</Text>
+                        </Ripple>
+                        :
+                        <Pressable onPress={() => RemoveBookmark()}
+                            style={{
+                                justifyContent: 'center',
+                                height: 50,
+                                backgroundColor: '#143D59',
+                                width: 150,
+                                paddingVertical: 10,
+                                borderRadius: 25,
+                                paddingTop: 13,
+                            }}>
+                            <Text style={{ color: 'white', textAlign: "center", fontSize: 15, fontFamily: 'poppins_bold', }}>SAVED</Text></Pressable>
+                    }
+                    {applied === 0 ?
+                        <Pressable onPress={() => { if (login) { if (plan) { toggleApplyVisibility() } else { navigation.push('VerificationProfile') } } else { toggleLoginVisible() } }}
+                            style={{
+                                justifyContent: 'center',
+                                height: 50,
+                                backgroundColor: '#13A3E1',
+                                width: 150,
+                                paddingVertical: 10,
+                                borderRadius: 25,
+                                paddingTop: 13,
+                            }}>
+                            <Text style={{ fontFamily: 'poppins_bold', textAlign: "center", color: 'white', fontSize: 15, }}>APPLY NOW</Text>
                         </Pressable>
-                        : <Text style={{
+                        :
+                        <Pressable style={{
                             justifyContent: 'center',
                             height: 50,
-                            fontSize: 15,
-                            fontFamily: 'poppins_bold',
                             backgroundColor: '#13A3E1',
-                            color: 'white',
                             width: 150,
-                            textAlign: "center",
                             paddingVertical: 10,
                             borderRadius: 25,
-                        }}>APPLIED</Text>}
+                            paddingTop: 13,
+                        }}>
+                            <Text style={{ fontFamily: 'poppins_bold', textAlign: "center", color: 'white', fontSize: 15, }}>APPLIED</Text>
+                        </Pressable>}
 
                 </View>
                 : ''}
