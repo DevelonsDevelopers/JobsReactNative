@@ -123,7 +123,7 @@ const History = ({ navigation }) => {
                     </View>
                     :
                     <>
-                        {nodata ? <View style={{ marginTop: 200 }}>
+                        {nodata ? <View style={{  }}>
                             <Image source={require('../assets/nodata.png')}
                                 style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
                             <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
@@ -152,7 +152,7 @@ const History = ({ navigation }) => {
                                         }}>
                                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                                 style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
-                                                    <Ripple
+                                                    <Ripple rippleSize={200}
                                                         onPress={() => navigation.push('JobDetails', { ID: item.job })}>
                                                         <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
                                                             <Text numberOfLines={1} ellipsizeMode={"tail"} style={{
