@@ -1,4 +1,4 @@
-import { FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -11,14 +11,18 @@ function SentOffers({ navigation }) {
     const [login, isLogin] = useState(false);
     const offers = useSelector(state => state.offers.sentOffers)
 
-    const [ID, setID] = useState()
+    const success = useSelector(state => state.success.sentOfferSuccess)
+    const error = useSelector(state => state.error.sentOfferError)
+    const nodata = useSelector(state => state.nodata.sentOfferNoData)
 
-
-
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
-        console.log(ID)
-    }, [ID])
+        if (success || error || nodata) {
+            setLoading(false)
+        }
+    }, [success, error, nodata])
 
+    const [ID, setID] = useState()
 
     useEffect(() => {
         GetData()
@@ -44,7 +48,18 @@ function SentOffers({ navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
-
+            {loading ?
+                <View style={{ marginTop: 400 }}>
+                    <ActivityIndicator size={60} color="#13A3E1" />
+                </View>
+                :
+                <>
+                 {nodata ? <View style={{ marginTop: 200 }}>
+                        <Image source={require('../assets/nodata.png')}
+                            style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
+                        <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
+                    </View> :
+                        <>
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
                 <View style={{
                     flexDirection: 'column',
@@ -64,15 +79,15 @@ function SentOffers({ navigation }) {
                             }} source={require('../assets/back_arrow.png')}
                                 alt={'Okay'} />
                         </Pressable>
-                        <Pressable  onPress={() => navigation.push('PaymentSuccesful') }  style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
+                        <Pressable onPress={() => navigation.push('PaymentSuccesful')} style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
                             <Image
 
-                            style={{
-                                width: 150,
-                                height: 40,
-                                marginTop: 60,
-                                alignSelf: 'center'
-                            }}
+                                style={{
+                                    width: 150,
+                                    height: 40,
+                                    marginTop: 60,
+                                    alignSelf: 'center'
+                                }}
                                 source={require('../assets/logo.png')} alt={'Okay'} />
                         </Pressable>
                     </View>
@@ -143,20 +158,20 @@ function SentOffers({ navigation }) {
                                     </Text>
                                 </View>
 
-                                    <Text
-                                        onPress={() => navigation.push('OfferResponse',{ID:item.id})}
-                                        style={{
-                                            backgroundColor: '#13A3E1',
-                                            textAlign: "center",
-                                            borderRadius: 10,
-                                            fontSize: 16,
-                                            fontFamily: 'poppins_bold',
-                                            color: 'white',
-                                            marginTop: 9,
-                                            paddingVertical: 5,
-                                            paddingHorizontal:30,
-                                            marginLeft:'auto',marginRight:'auto'
-                                        }}>View Response</Text>
+                                <Text
+                                    onPress={() => navigation.push('OfferResponse', { ID: item.id })}
+                                    style={{
+                                        backgroundColor: '#13A3E1',
+                                        textAlign: "center",
+                                        borderRadius: 10,
+                                        fontSize: 16,
+                                        fontFamily: 'poppins_bold',
+                                        color: 'white',
+                                        marginTop: 9,
+                                        paddingVertical: 5,
+                                        paddingHorizontal: 30,
+                                        marginLeft: 'auto', marginRight: 'auto'
+                                    }}>View Response</Text>
 
                             </View>
                         )} />
@@ -165,6 +180,8 @@ function SentOffers({ navigation }) {
 
                 <View style={{ height: 90 }} />
             </ScrollView>
+                </>}
+                </>}
 
         </View>
     )

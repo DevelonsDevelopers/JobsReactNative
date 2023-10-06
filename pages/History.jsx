@@ -31,9 +31,11 @@ const History = ({ navigation }) => {
 
     const dispatch = useDispatch();
     const history = useSelector(state => state.interactions.interactions)
-    const loading = useSelector(state => state.interactions.isLoading)
-    const success = useSelector(state => state.interactions.success)
+    const error = useSelector(state => state.error.allInteractionError)
+    const success = useSelector(state => state.success.allInteractionSuccess)
+    const nodata = useSelector(state => state.nodata.allInteractionNoData)
 
+    const [isLoading, setIsLoading] = useState(true)
     const [ID, setID] = useState()
 
     useEffect(() => {
@@ -51,15 +53,10 @@ const History = ({ navigation }) => {
     }, [ID])
 
     useEffect(() => {
-        console.log(history)
-    }, [history]);
-
-    const [isLoading, setIsLoading] = useState(true)
-    useEffect(() => {
-        if (success) {
+        if (success || error || nodata) {
             setIsLoading(false)
         }
-    }, [success])
+    }, [success,error,nodata])
 
 
     const [data, setData] = useState()
@@ -126,43 +123,64 @@ const History = ({ navigation }) => {
                     </View>
                     :
                     <>
-                        <SafeAreaView style={{
-                            backgroundColor: '#fff',
-                            borderRadius: 5,
-                            padding: 23,
-                            borderTopLeftRadius: 40,
-                            borderTopRightRadius: 40,
-                            marginTop: 9
-                        }}>
-                            <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                                style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
-                                    <Ripple
-                                    onPress={() => navigation.push('JobDetails', { ID: item.job })}>
-                                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
-                                            <Text numberOfLines={1} ellipsizeMode={"tail"} style={{
-                                                fontSize: 15,
-                                                fontWeight: 600,
-                                                fontFamily: 'poppins_semibold',
-                                                width: '70%'
-                                            }}>{item.title}</Text>
+                        {nodata ? <View style={{  }}>
+                            <Image source={require('../assets/nodata.png')}
+                                style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
+                            <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
+                        </View> :
+                            <>
+                                {error ?
+                                    <View style={{ marginTop: 360 }}>
+                                        <Image source={require('../assets/delete.png')} style={{
+                                            width: 30,
+                                            height: 30,
+                                            marginLeft: 190,
+                                            marginBottom: -20,
+                                            marginTop: 40
+                                        }} />
+                                        <Text
+                                            style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network
+                                            Error...!</Text>
+                                    </View> : <>
+                                        <SafeAreaView style={{
+                                            backgroundColor: '#fff',
+                                            borderRadius: 5,
+                                            padding: 23,
+                                            borderTopLeftRadius: 40,
+                                            borderTopRightRadius: 40,
+                                            marginTop: 9
+                                        }}>
+                                            <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                                                style={{ marginHorizontal: 0, marginTop: 10 }} data={data} renderItem={({ item }) => (
+                                                    <Ripple rippleSize={200}
+                                                        onPress={() => navigation.push('JobDetails', { ID: item.job })}>
+                                                        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+                                                            <Text numberOfLines={1} ellipsizeMode={"tail"} style={{
+                                                                fontSize: 15,
+                                                                fontWeight: 600,
+                                                                fontFamily: 'poppins_semibold',
+                                                                width: '70%'
+                                                            }}>{item.title}</Text>
 
-                                            <Text style={{
-                                                fontSize: 12,
-                                                fontWeight: 200,
-                                                fontFamily: 'poppins_light',
-                                                marginLeft: 'auto',
-                                                marginRight: 10
-                                            }}>{moment(item.createddate).format("MMM Do YY")}</Text>
-                                        </View>
-                                        <View style={{
-                                            backgroundColor: '#777777',
-                                            height: 0.5,
-                                            marginHorizontal: 10,
-                                            marginVertical: 5
-                                        }}></View>
-                                    </Ripple>
-                                )} />
-                        </SafeAreaView>
+                                                            <Text style={{
+                                                                fontSize: 12,
+                                                                fontWeight: 200,
+                                                                fontFamily: 'poppins_light',
+                                                                marginLeft: 'auto',
+                                                                marginRight: 10
+                                                            }}>{moment(item.createddate).format("MMM Do YY")}</Text>
+                                                        </View>
+                                                        <View style={{
+                                                            backgroundColor: '#777777',
+                                                            height: 0.5,
+                                                            marginHorizontal: 10,
+                                                            marginVertical: 5
+                                                        }}></View>
+                                                    </Ripple>
+                                                )} />
+                                        </SafeAreaView>
+                                    </>}
+                            </>}
                     </>}
             </View>
         </ScrollView>

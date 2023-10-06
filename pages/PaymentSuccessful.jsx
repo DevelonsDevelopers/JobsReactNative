@@ -4,6 +4,7 @@ import {CheckSeeker, fetchSeeker} from "../API/actions/seekerActions";
 import {CheckCV} from "../API/actions/cvActions";
 import {useDispatch} from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {RESET} from "../Utils/Constants";
 
 const PaymentSuccessful = ({ route, navigation }) => {
 

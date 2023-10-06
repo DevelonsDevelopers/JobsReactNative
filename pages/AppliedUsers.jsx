@@ -2,28 +2,22 @@ import {
     ActivityIndicator,
     FlatList,
     Image,
-    Modal,
     Pressable,
     SafeAreaView,
     ScrollView,
     Text,
-    TextInput,
     View
 } from "react-native";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {AllCategories} from "../API/actions/categoryActions";
 import Ripple from "react-native-material-ripple";
 import {AppliedByCompany} from "../API/actions/appliedActions";
-import company from "../API/reducers/company";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment/moment";
-import nodata from "../API/reducers/nodata";
 
-function AppliedUsers({route, navigation}) {
+function AppliedUsers({navigation}) {
 
     const dispatch = useDispatch();
-    const user = route.params?.user
 
     const [ID, setID] = useState()
     const [loading, setLoading] = useState(true)

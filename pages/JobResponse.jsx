@@ -15,10 +15,10 @@ const JobResponse = ({route, navigation}) => {
     const {response} = route.params
 
     const job = useSelector(state => state.job.job)
-    const loading = useSelector(state => state.job.isLoading)
-    const success = useSelector(state => state.job.success)
+    const success = useSelector(state => state.success.jobSuccess)
+    const error = useSelector(state => state.error.jobError)
+    const nodata = useSelector(state => state.nodata.jobNoData)
     const dispatch = useDispatch()
-    const [isloading, setIsLoading] = useState(true)
     const [USERID, setUSERID] = useState()
     const [applied, setApplied] = useState(0)
     const [bookmark, setBookmark] = useState(0)
@@ -37,12 +37,15 @@ const JobResponse = ({route, navigation}) => {
         }
     }, [dispatch, USERID]);
 
+
+    const [isloading, setIsLoading] = useState(true)
     useEffect(() => {
-        if (success) {
+        if (success || error || nodata) {
             setIsLoading(false)
             dispatch({type: RESET})
         }
-    }, [success]);
+    }, [success, error, nodata])
+
 
     useEffect(() => {
         if (job) {

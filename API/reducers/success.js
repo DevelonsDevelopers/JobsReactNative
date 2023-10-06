@@ -24,16 +24,25 @@ import {
     OFFER_SUCCESS,
     PROVIDER_FEATURED_SUCCESS,
     PROVIDER_JOB_SUCCESS,
+    PROVIDER_LOGIN_SUCCESS,
+    PROVIDER_REGISTER_SUCCESS,
     RECENT_JOB_SUCCESS,
     RECOMMENDED_JOB_SUCCESS,
     RECOMMENDED_SEEKER_SUCCESS,
     SEARCH_JOB_SUCCESS,
+    SEEKER_LOGIN_SUCCESS,
+    SEEKER_REGISTER_SUCCESS,
     SEEKER_SUCCESS,
     SEND_OFFER_JOB_SUCCESS,
-    SENT_OFFER_SUCCESS, TOP_TAGS_SUCCESS
+    SENT_OFFER_SUCCESS,
+    TOP_TAGS_SUCCESS
 } from "../../Utils/Constants";
 
 const initialState = {
+    seekerLoginSuccess: false,
+    providerLoginSuccess: false,
+    seekerRegisterSuccess: false,
+    providerRegisterSuccess: false,
     allAppliedSuccess: false,
     appliedCompanySuccess: false,
     appliedJobSuccess: false,
@@ -71,6 +80,14 @@ const initialState = {
 
 const success = (state = initialState, action) => {
     switch (action.type){
+        case SEEKER_LOGIN_SUCCESS:
+            return {...state, seekerLoginSuccess: true}
+        case SEEKER_REGISTER_SUCCESS:
+            return {...state, seekerRegisterSuccess: true}
+        case PROVIDER_LOGIN_SUCCESS:
+            return {...state, providerLoginSuccess: true}
+        case PROVIDER_REGISTER_SUCCESS:
+            return {...state, providerRegisterSuccess: true}
         case ALL_APPLIED_SUCCESS:
             return {...state, allAppliedSuccess: true}
         case APPLIED_COMPANY_SUCCESS:

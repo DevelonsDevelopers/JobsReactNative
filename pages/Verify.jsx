@@ -3,6 +3,7 @@ import { firebase } from "@react-native-firebase/auth";
 import React, { useEffect, useState } from "react";
 import PhoneInput from "react-native-phone-number-input";
 import PhoneModal from "../Components/PhoneModal";
+import Toast from "react-native-toast-message";
 
 function Verify({ route, navigation }) {
 
@@ -16,12 +17,13 @@ function Verify({ route, navigation }) {
     const [changeable, setChangeable] = useState()
 
     const [phone, setPhone] = useState(verifyPhone)
-
+    const [phoneCode, setPhoneCode] = useState(code)
 
     const [phoneVisible, setPhoneVisible] = useState(false)
     const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
     const setCode = (code) => {
+        setPhoneCode(code)
         togglePhoneVisible()
     }
 
@@ -32,6 +34,22 @@ function Verify({ route, navigation }) {
             setChangeable(true)
         }
     }, [forgot]);
+
+    // useEffect(() => {
+    //     if (phone.length > 4) {
+    //         ''
+    //     } else {
+    //         Toast.show({ type: 'error', text1: 'Please Enter Phone Number', position: 'top' })
+    //     }
+    // }, [phone])
+
+    const handleClick = () => {
+        if (phone) {
+            navigation.push('VerificationCode', { code: code, phone: phone, type: type, ID: ID, verify: verify })
+        } else {
+            Toast.show({ type: 'error', text1: 'Please Enter Phone Number', position: 'top' })
+        }
+    }
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}
@@ -95,7 +113,7 @@ function Verify({ route, navigation }) {
 
 
                 <View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
-                    <Pressable onPress={() => togglePhoneVisible()} style={{
+                    <Pressable onPress={() => { if (changeable) { togglePhoneVisible() } }} style={{
                         textAlign: 'center',
                         marginTop: 'auto',
                         marginBottom: 'auto',
@@ -107,9 +125,9 @@ function Verify({ route, navigation }) {
                         borderTopLeftRadius: 25,
                         borderBottomLeftRadius: 25,
                         alignItems: 'center'
-                    }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"} >{code}</TextInput>
+                    }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"} >{phoneCode}</TextInput>
                     </Pressable>
-                    <TextInput keyboardType='numeric' onChangeText={text => setPhone(phone)}
+                    <TextInput editable={changeable} keyboardType='numeric' onChangeText={text => setPhone(phone)}
                         placeholder="Enter Your Number" style={{
                             textAlign: 'left',
                             paddingHorizontal: 8,
@@ -126,7 +144,7 @@ function Verify({ route, navigation }) {
                             backgroundColor: 'white'
                         }}>{phone}</TextInput>
                 </View>
-                <Pressable onPress={() => navigation.push('VerificationCode', { code: code, phone: phone, type: type, ID: ID, verify: verify })} style={{
+                <Pressable onPress={() => handleClick()} style={{
                     width: '50%',
                     backgroundColor: '#13A3E1',
                     alignItems: 'center',
@@ -137,6 +155,7 @@ function Verify({ route, navigation }) {
                     <Text style={{ color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15 }}>Send </Text>
                 </Pressable>
             </View>
+            <Toast position="top" bottomOffset={20} />
         </ScrollView>
     );
 }

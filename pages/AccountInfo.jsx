@@ -1,14 +1,11 @@
 import {
 	ActivityIndicator,
-	Button,
 	FlatList,
 	Image,
-	Modal,
 	Pressable,
 	SafeAreaView,
 	ScrollView,
 	Text,
-	TextInput,
 	View
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -32,28 +29,40 @@ import {
 } from "../API/actions/cvActions";
 import CareerModal from "../Components/CareerModal";
 import CourseModal from "../Components/CourseModal";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
 	cvStatement,
+	deleteCVCareer,
+	deleteCVCourse,
+	deleteCVEducation,
+	deleteCVInterest,
+	deleteCVLanguage,
+	deleteCVResume,
+	deleteCVSkill,
 	roleUpdate,
 	updateCVCareer,
 	updateCVCourse,
 	updateCVEducation,
 	updateCVInterest,
-	updateCVLanguage, updateCVResume, updateCVSkill
+	updateCVLanguage,
+	updateCVResume,
+	updateCVSkill
 } from "../API";
 import PersonalStatementModal from "../Components/PersonalStatementModal";
 import RoleModal from "../Components/RoleModal";
+import DeleteModal from "../Components/DeleteModal";
 
 function AccountInfo({ route, navigation }) {
 
 	const { role } = route.params
-	// const [role,setRole] = useState()
 
 	const dispatch = useDispatch()
 
-	const [roleData, setRoleData] = useState(role)
+	const cv = useSelector(state => state.cv.cv);
+	const data = useSelector(state => state.nodata.cvNoData);
+	const error = useSelector(state => state.error.cvError);
+	const success = useSelector(state => state.success.cvSuccess);
 
+	const [roleData, setRoleData] = useState(role)
 	const [educationVisible, setEducationVisible] = useState(false)
 	const [careerVisible, setCareerVisible] = useState(false)
 	const [courseVisible, setCourseVisible] = useState(false)
@@ -61,7 +70,7 @@ function AccountInfo({ route, navigation }) {
 	const [interestVisible, setInterestVisible] = useState(false)
 	const [languageVisible, setLanguageVisible] = useState(false)
 	const [resumeVisible, setResumeVisible] = useState(false)
-
+	const [deleteVisible, setDeleteVisible] = useState(false)
 	const [edData, setEdData] = useState(null)
 	const [carData, setCarData] = useState(null)
 	const [couData, setCouData] = useState(null)
@@ -69,17 +78,16 @@ function AccountInfo({ route, navigation }) {
 	const [lanData, setLanData] = useState(null)
 	const [resData, setResData] = useState(null)
 	const [skData, setSkData] = useState(null)
-
+	const [delV, setDelV] = useState()
+	const [delID, setDelID] = useState()
+	const [delVal, setDelVal] = useState('')
+	const [delLoad, setDelLoad] = useState(false)
 	const [trigger, setTrigger] = useState(false)
-
 	const [isloading, setIsLoading] = useState(true)
-
 	const [ID, setID] = useState()
-	const cv = useSelector(state => state.cv.cv);
+	const [infoVisible, setInfoVisible] = useState(false)
+	const [roleVisible, setRoleVisible] = useState(false)
 
-	const data = useSelector(state => state.cv.nodata);
-	const error = useSelector(state => state.cv.error);
-	const success = useSelector(state => state.cv.success);
 
 	useEffect(() => {
 		GetData()
@@ -97,12 +105,12 @@ function AccountInfo({ route, navigation }) {
 	}, [ID, trigger])
 
 	useEffect(() => {
-		console.log(cv)
-		dispatch(CheckCV(ID))
+		if (ID) {
+			dispatch(CheckCV(ID))
+		}
 	}, [cv]);
 
 	const editEducation = (d) => {
-		// setEdEdit(true)
 		setEdData(d)
 		toggleEducationVisibility()
 	}
@@ -138,7 +146,6 @@ function AccountInfo({ route, navigation }) {
 	}
 
 	const addRole = async (role) => {
-		console.log(role)
 		await roleUpdate(role, ID).then(res => {
 			setRoleData(role)
 		}).catch(err => {
@@ -164,6 +171,15 @@ function AccountInfo({ route, navigation }) {
 		})
 	}
 
+	const deleteEducation = async (id) => {
+		await deleteCVEducation(id).then(res => {
+			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
+		})
+	}
+
 	const addCareer = (company, job, timeperiod, address, phone) => {
 		dispatch(CVCareer(cv.id, company, job, timeperiod, address, phone))
 		setTrigger(!trigger)
@@ -173,6 +189,15 @@ function AccountInfo({ route, navigation }) {
 		await updateCVCareer(cv.id, company, job, timeperiod, address, phone, id).then(res => {
 			setTrigger(!trigger)
 			setCarData(null)
+		})
+	}
+
+	const deleteCareer = async (id) => {
+		await deleteCVCareer(id).then(res => {
+			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -188,6 +213,15 @@ function AccountInfo({ route, navigation }) {
 		})
 	}
 
+	const deleteCourse = async (id) => {
+		await deleteCVCourse(id).then(res => {
+			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
+		})
+	}
+
 	const addInterest = (interest) => {
 		dispatch(CVInterest(cv.id, interest))
 		setTrigger(!trigger)
@@ -197,6 +231,15 @@ function AccountInfo({ route, navigation }) {
 		await updateCVInterest(cv.id, interest, id).then(res => {
 			setTrigger(!trigger)
 			setInData(null)
+		})
+	}
+
+	const deleteInterest = async (id) => {
+		await deleteCVInterest(id).then(res => {
+			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -212,15 +255,33 @@ function AccountInfo({ route, navigation }) {
 		})
 	}
 
+	const deleteLanguage = async (id) => {
+		await deleteCVLanguage(id).then(res => {
+			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
+		})
+	}
+
 	const addResume = (resume) => {
 		dispatch(CVResume(cv.id, resume))
 		setTrigger(!trigger)
 	}
 
 	const updateResume = async (resume, id) => {
-		updateCVResume(cv.id, resume, id).then(res => {
+		await updateCVResume(cv.id, resume, id).then(res => {
 			setTrigger(!trigger)
 			setResData(null)
+		})
+	}
+
+	const deleteResume = async (id) => {
+		await deleteCVResume(id).then(res => {
+			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -229,10 +290,19 @@ function AccountInfo({ route, navigation }) {
 		setTrigger(!trigger)
 	}
 
-	const updateSkill = (skill, id) => {
-		updateCVSkill(cv.id, skill, id).then(res => {
+	const updateSkill = async (skill, id) => {
+		await updateCVSkill(cv.id, skill, id).then(res => {
 			setTrigger(!trigger)
 			setSkData(null)
+		})
+	}
+
+	const deleteSkill = async (id) => {
+		await deleteCVSkill(id).then(res => {
+			setTrigger(!trigger)
+			setDelVal('')
+			toggleDeleteVisibile('', 0)
+			setDelLoad(false)
 		})
 	}
 
@@ -243,24 +313,42 @@ function AccountInfo({ route, navigation }) {
 	const toggleInterestVisibility = () => setInterestVisible(!interestVisible)
 	const toggleLanguageVisibility = () => setLanguageVisible(!languageVisible)
 	const toggleResumeVisibility = () => setResumeVisible(!resumeVisible)
+	const toggleDeleteVisibile = (val, id) => {
+		setDelV(val)
+		setDelID(id)
+		setDeleteVisible(!deleteVisible)
+	}
+
+	useEffect(() => {
+		if (delVal === "EDUCATION") {
+			deleteEducation(delID)
+		} else if (delVal === "CAREER") {
+			deleteCareer(delID)
+		} else if (delVal === "COURSE") {
+			deleteCourse(delID)
+		} else if (delVal === "SKILL") {
+			deleteSkill(delID)
+		} else if (delVal === "INTEREST") {
+			deleteInterest(delID)
+		} else if (delVal === "LANGUAGE") {
+			deleteLanguage(delID)
+		} else if (delVal === "RESUME") {
+			deleteResume(delID)
+		}
+	}, [delVal]);
 
 
 	useEffect(() => {
-		console.log("SUCCESSISHERE")
-		console.log(success)
-		if (success) {
+		if (success || error || data) {
 			setIsLoading(false)
 		}
-	}, [success])
+	}, [success, error, data])
 
 	// personalInfo Modal==============
-	const [infoVisible, setInfoVisible] = useState(false)
+
 	const toggleInfoVisibility = () => setInfoVisible(!infoVisible)
 
 
-	// Role Modal ===========
-
-	const [roleVisible, setRoleVisible] = useState(false)
 	const toggleRoleVisibility = () => setRoleVisible(!roleVisible)
 	return (
 		<View style={{ flex: 1 }}>
@@ -290,7 +378,7 @@ function AccountInfo({ route, navigation }) {
 										Error...!</Text>
 								</View> : <>
 
-
+									<DeleteModal visible={deleteVisible} toggleVisibility={toggleDeleteVisibile} del={setDelVal} val={delV} setLoad={setDelLoad} isLoad={delLoad}/>
 									<EducationModal visible={educationVisible}
 										toggleEducationVisibility={toggleEducationVisibility}
 										add={addEducation} edit={updateEducation} data={edData} />
@@ -512,7 +600,7 @@ function AccountInfo({ route, navigation }) {
 																		}}
 																			source={require('../assets/editIcon.png')} />
 																		</Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('EDUCATION', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -596,7 +684,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('CAREER', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -678,7 +766,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('COURSE', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -760,7 +848,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('SKILL', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -842,7 +930,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('INTEREST', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -924,7 +1012,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('LANGUAGE', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'
@@ -1007,7 +1095,7 @@ function AccountInfo({ route, navigation }) {
 																			height: 15,
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable style={{ padding: 10 }} ><Image style={{
+																		<Pressable onPress={() => toggleDeleteVisibile('RESUME', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'

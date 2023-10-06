@@ -19,12 +19,15 @@ function Home({ route, navigation }) {
 	const dispatch = useDispatch();
 	const [login, isLogin] = useState(false);
 	const [search, setSearch] = useState('');
+	const seeker = useSelector(state => state.seeker.seeker)
 	const categories = useSelector(state => state.category.featured_categories)
 	const recentJobs = useSelector(state => state.job.recentJobs)
-	const loading = useSelector(state => state.category.isLoading)
-	const jobLoading = useSelector(state => state.job.isLoading)
-	const error = useSelector(state => state.category.error)
+
+	const error = useSelector(state => state.error.featuredCategoryError)
+	const success = useSelector(state => state.success.featuredCategorySuccess)
+	const nodata = useSelector(state => state.nodata.featuredCategoryNoData)
 	const check = useSelector(state => state.seeker.check)
+
 	const [ID, setID] = useState()
 
 	const [loginval, setLoginVal] = useState('')
@@ -35,20 +38,29 @@ function Home({ route, navigation }) {
 	useEffect(() => {
 		if (!categories) {
 			dispatch(FeaturedCategories())
-		}
-	}, [dispatch, navigation, categories]);
-
-	const [isloading, setIsLoading] = useState(false)
-	useEffect(() => {
-		if (loading && jobLoading) {
-			setIsLoading(true)
 		} else {
 			setIsLoading(false)
-			dispatch({ type: RESET })
 		}
-	}, [loading, jobLoading])
+	}, [dispatch, categories]);
 
+	const [isloading, setIsLoading] = useState(true)
 
+	useEffect(() => {
+		if (error || success || nodata) {
+			setIsLoading(false)
+			// dispatch({ type: RESET })
+		}
+	}, [error, success, nodata])
+
+	useEffect(() => {
+		if (ID) {
+			if (!seeker) {
+				dispatch(fetchSeeker(ID))
+			} else if ((seeker.id).toString() !== ID) {
+				dispatch(fetchSeeker(ID))
+			}
+		}
+	}, [dispatch, seeker, ID]);
 
 	useEffect(() => {
 		if (!recentJobs) {
@@ -84,7 +96,6 @@ function Home({ route, navigation }) {
 		await AsyncStorage.setItem("EMAIL", '')
 		await AsyncStorage.setItem("USERNAME", '')
 		setLoginVal('false')
-		// toggleVisibility()
 		toggleLoadingVisibility()
 	}
 	// log out===================
@@ -144,7 +155,7 @@ function Home({ route, navigation }) {
 									tintColor: '#fff'
 								}} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
 								<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-									<Pressable 
+									<Pressable
 									><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 										source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
 								</View>
@@ -222,15 +233,10 @@ function Home({ route, navigation }) {
 							<Text ellipsizeMode={'tail'} numberOfLines={1}
 								style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Categories</Text>
 							<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
-								style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Categories')}><Text numberOfLines={1} style={{
-									fontFamily: 'poppins_light',
-									fontSize: 12,
-									marginLeft: 'auto',
-									backgroundColor: '#d7d7d7',
-									paddingHorizontal: 10,
-									paddingVertical: 1,
-									borderRadius: 10
-								}}>Show All</Text></Ripple>
+								style={{marginLeft: 'auto', backgroundColor: '#d7d7d7',paddingHorizontal: 10,paddingVertical: 1,borderRadius: 10}} 
+								onPress={() => navigation.push('Categories')}>
+								<Text numberOfLines={1} style={{fontFamily: 'poppins_light',fontSize: 12,}}
+								>Show All</Text></Ripple>
 						</View>
 						<SafeAreaView style={{ flex: 1 }}>
 							{error ?
@@ -277,16 +283,11 @@ function Home({ route, navigation }) {
 							}}>
 							<Text ellipsizeMode={'tail'} numberOfLines={1}
 								style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Recent Jobs</Text>
-							<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
-								style={{ marginLeft: 'auto' }} onPress={() => navigation.push('Jobs')}><Text numberOfLines={1} style={{
-									fontFamily: 'poppins_light',
-									fontSize: 12,
-									marginLeft: 'auto',
-									backgroundColor: '#d7d7d7',
-									paddingHorizontal: 10,
-									paddingVertical: 1,
-									borderRadius: 10
-								}}>Show All</Text></Ripple>
+								<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
+								style={{marginLeft: 'auto', backgroundColor: '#d7d7d7',paddingHorizontal: 10,paddingVertical: 1,borderRadius: 10}} 
+								onPress={() => navigation.push('Jobs')}>
+								<Text numberOfLines={1} style={{fontFamily: 'poppins_light',fontSize: 12,}}
+								>Show All</Text></Ripple>
 						</View>
 						{error ?
 							<View>
@@ -411,7 +412,7 @@ function Home({ route, navigation }) {
 						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 							onPress={() => {
 								if (login) {
-									navigation.push('AccountInfo')
+									navigation.push('AccountInfo', { role: seeker?.role })
 								} else {
 									toggleRequireVisible()
 								}

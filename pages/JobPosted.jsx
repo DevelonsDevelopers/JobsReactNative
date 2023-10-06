@@ -12,7 +12,18 @@ function JobPosted({ navigation }) {
   const dispatch = useDispatch();
   const [login, isLogin] = useState(false);
   const companyJobs = useSelector(state => state.job.providerJobs)
-  const loading = useSelector(state => state.job.isLoading)
+  const nodata = useSelector(state => state.nodata.providerJobNoData)
+  const error = useSelector(state => state.error.providerJobError)
+  const success = useSelector(state => state.success.providerJobSuccess)
+
+
+  const [isloading, setIsLoading] = useState(true)
+  useEffect(() => {
+      if (success || error || nodata) {
+          setIsLoading(false)
+      }
+  }, [success, error, nodata])
+
 
   const [ID, setID] = useState()
 
@@ -41,7 +52,7 @@ function JobPosted({ navigation }) {
 
     <View style={{ flex: 1 }}>
 
-      {loading ?
+      {isloading ?
         <View style={{ marginTop: 400 }}>
           <ActivityIndicator size={60} color="#13A3E1" />
         </View>

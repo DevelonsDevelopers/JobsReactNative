@@ -33,22 +33,23 @@ function PersonalInfo({ navigation }) {
     const seeker = useSelector(state => state.seeker.seeker)
     const cities = useSelector(state => state.city.cities)
     const countries = useSelector(state => state.country.countries)
-    const success = useSelector(state => state.seeker.success)
+    const success = useSelector(state => state.success.seekerSuccess)
+    const nodata = useSelector(state => state.nodata.seekerNoData)
+    const error = useSelector(state => state.error.seekerError)
+
     const [completed, setCompleted] = useState(false)
     const [verified, setVerified] = useState(false)
     const [country, setCountry] = useState()
     const [citiesData, setCitiesData] = useState()
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (seeker && cities && countries && success == "false") {
-            setLoading(true)
-        } else {
+        if (nodata || error || success ) {
             setLoading(false)
+            setCitiesData(cities)
         }
-        setCitiesData(cities)
-    }, [seeker, cities, countries, success])
+    }, [success,error,nodata])
 
     const dispatch = useDispatch();
     const [ID, setID] = useState()
@@ -92,12 +93,15 @@ function PersonalInfo({ navigation }) {
                 dispatch(fetchSeeker(ID))
             } else if ((seeker.id).toString() !== ID) {
                 dispatch(fetchSeeker(ID))
+            } else {
+                setLoading(false)
             }
         }
     }, [dispatch, seeker, ID, navigation, trigger]);
 
     useEffect(() => {
         if (seeker) {
+            setLoadingVisible(false)
             setSeekerData({
                 ...seekerData,
                 name: seeker?.name,
@@ -117,7 +121,7 @@ function PersonalInfo({ navigation }) {
             setNameCity(seeker?.city_name)
             setCountryName(seeker?.country_name)
         }
-        dispatch(CheckSeeker(ID))
+        dispatch(CheckSeeker(seeker?.id))
         if (seeker?.address && seeker?.city && seeker?.country && seeker?.dob && seeker?.email && seeker?.gender && seeker?.id && seeker?.name && seeker?.password && seeker?.code && seeker?.phone && seeker?.username) {
             setCompleted(true)
         } else {
@@ -755,7 +759,7 @@ function PersonalInfo({ navigation }) {
                             :
                             ''
                         }
-
+                        {seeker?.plan === 0 ?
                         <Ripple rippleColor="white"
                             onPress={() => navigation.push('SeekerPlans')}
                             style={{
@@ -771,7 +775,7 @@ function PersonalInfo({ navigation }) {
                             >Activate Account
                             </Text>
                         </Ripple>
-
+                        : ''}
                     </>}
             </ScrollView>
         </View>

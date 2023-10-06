@@ -1,3 +1,5 @@
+import {API_URL} from "./index";
+
 let baseUrl = 'https://api-m.sandbox.paypal.com';
 const base64 = require('base-64');
 
@@ -34,8 +36,8 @@ let orderDetail = (price) => {
             }
         ],
         "application_context": {
-            "return_url": "http://192.168.1.25:5001/return",
-            "cancel_url": "http://192.168.1.25:5001/cancel"
+            "return_url": `${API_URL}/return`,
+            "cancel_url": `${API_URL}/cancel`
         }
     }
 }

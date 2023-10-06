@@ -178,7 +178,7 @@ const Verification = ({ navigation }) => {
 						:
 						<Pressable onPress={() => {
 							if (isComplete) {
-								navigation.push('AccountInfo')
+								navigation.push('AccountInfo', { role: seeker?.role })
 							} else {
 								click('Please Complete Your Profile First')
 							}

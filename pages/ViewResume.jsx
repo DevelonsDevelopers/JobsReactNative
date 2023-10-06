@@ -6,28 +6,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CVByUser } from "../API/actions/cvActions";
 import Ripple from "react-native-material-ripple";
 
-const skills = [
-	{ 'skill': 'react' },
-	{ 'skill': 'react' },
-	{ 'skill': 'react' },
-	{ 'skill': 'react' },
-	{ 'skill': 'react' },
-	{ 'skill': 'react' },
-]
-const careers = [
-	{ "job": "react", 'timeperiod': '2021-2022', 'company': 'technomentor', 'address': 'lahore' },
-	{ "job": "react", 'timeperiod': '2021-2022', 'company': 'technomentor', 'address': 'lahore' },
-	{ "job": "react", 'timeperiod': '2021-2022', 'company': 'technomentor', 'address': 'lahore' },
-	{ "job": "react", 'timeperiod': '2021-2022', 'company': 'technomentor', 'address': 'lahore' },
-]
-const educations = [
-	{ 'qualification': 'Matric', 'institute': 'LGS', 'timeperiod': '2021-2022', 'course': 'Fron-end' },
-	{ 'qualification': 'Inter', 'institute': 'LGS', 'timeperiod': '2021-2022', 'course': 'Back-end' },
-	{ 'qualification': 'Matric', 'institute': 'LGS', 'timeperiod': '2021-2022', 'course': 'Fron-end' },
-
-]
-
-
 const ViewResume = ({ route, navigation }) => {
 
 	const { ID } = route.params
@@ -40,8 +18,8 @@ const ViewResume = ({ route, navigation }) => {
 
 	const dispatch = useDispatch();
 	const cv = useSelector((state) => state.cv.cv);
-	const loading = useSelector((state) => state.cv.isLoading);
-	const success = useSelector((state) => state.cv.success);
+	const success = useSelector((state) => state.success.cvSuccess);
+	const error = useSelector((state) => state.success.cvError);
 
 	useEffect(() => {
 		if (ID) {
@@ -60,14 +38,12 @@ const ViewResume = ({ route, navigation }) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		if (success) {
+		if (success||error) {
 			setIsLoading(false);
 		}
-	}, [success]);
+	}, [success,error]);
 
-	useEffect(() => {
-		console.log(cv)
-	}, [cv])
+
 
 
 
@@ -75,7 +51,7 @@ const ViewResume = ({ route, navigation }) => {
 	return (
 		<View style={{ flex: 1 }}>
 			<ScrollView>
-				{loading ?
+				{isLoading ?
 					<View style={{ marginTop: 400 }}>
 						<ActivityIndicator size={60} color="#13A3E1" />
 					</View>

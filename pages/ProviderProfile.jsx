@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react'
-import {Pressable, Text, TextInput, View} from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Pressable, Text, TextInput, View } from 'react-native'
 import CitySelectModal from '../Components/CitySelectModal'
-import {AllCities} from '../API/actions/cityActions'
-import {useDispatch, useSelector} from 'react-redux'
-import {AllCountries} from '../API/actions/countryActions'
+import { AllCities } from '../API/actions/cityActions'
+import { useDispatch, useSelector } from 'react-redux'
+import { AllCountries } from '../API/actions/countryActions'
 import CountrySelectModal from '../Components/CountrySelectModal'
 import ProviderTypeModal from '../Components/ProviderTypeModal'
 import Toast from 'react-native-toast-message'
-import {completeCompany} from "../API";
+import { completeCompany } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import PhoneModal from '../Components/PhoneModal'
 
-const ProviderProfile = ({navigation}) => {
+const ProviderProfile = ({ navigation }) => {
 
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -47,6 +47,8 @@ const ProviderProfile = ({navigation}) => {
     const cities = useSelector(state => state.city.cities)
     const countries = useSelector(state => state.country.countries)
 
+    const success = useSelector(state => state.success.companySuccess)
+
 
     useEffect(() => {
         if (!cities) {
@@ -61,20 +63,20 @@ const ProviderProfile = ({navigation}) => {
     }, [dispatch, countries]);
 
     const cityClick = (item) => {
-        setUpdateData({...updateData, city: item.id})
+        setUpdateData({ ...updateData, city: item.id })
         toggleVisibility()
         setNameCity(item.name)
     }
 
     const countryClick = (item) => {
         setCountry(item.id)
-        setUpdateData({...updateData, country: item.id})
+        setUpdateData({ ...updateData, country: item.id })
         toggleCountryVisibility()
         setCountryName(item.name)
     }
 
     const typeClick = (value) => [
-        setUpdateData({...updateData, type: value})
+        setUpdateData({ ...updateData, type: value })
     ]
 
     const updateProfile = () => {
@@ -85,33 +87,33 @@ const ProviderProfile = ({navigation}) => {
                         if (updateData.headquater !== '') {
                             if (updateData.type !== '') {
                                 completeCompany(updateData.country, updateData.city, phoneCode, updateData.phone, updateData.headquater, updateData.type, ID).then(res => {
-                                    const {data: {data}} = res;
-                                    const {data: {responseCode}} = res;
-                                    const {data: {message}} = res;
+                                    const { data: { data } } = res;
+                                    const { data: { responseCode } } = res;
+                                    const { data: { message } } = res;
                                     console.log(message)
                                     if (responseCode === 200) {
                                         navigation.replace('PostJob')
                                     } else {
-                                        Toast.show({type: 'error', position: 'top', text1: 'Unexpected Error Occured!', text2: 'Unable to post data please try again later'})
+                                        Toast.show({ type: 'error', position: 'top', text1: 'Unexpected Error Occured!', text2: 'Unable to post data please try again later' })
                                     }
                                 })
                             } else {
-                                Toast.show({type: 'error', position: 'top', text1: 'Please Enter Your Company Type'})
+                                Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Your Company Type' })
                             }
                         } else {
-                            Toast.show({type: 'error', position: 'top', text1: 'Please Enter Address'})
+                            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Address' })
                         }
                     } else {
-                        Toast.show({type: 'error', position: 'top', text1: 'Please Enter Phone Number'})
+                        Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Phone Number' })
                     }
                 } else {
-                    Toast.show({type: 'error', position: 'top', text1: 'Please Enter Your City'})
+                    Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Your City' })
                 }
             } else {
-                Toast.show({type: 'error', position: 'top', text1: 'Please Enter Your Country'})
+                Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Your Country' })
             }
         } else {
-            Toast.show({type: 'error', position: 'top', text1: 'Please Enter Country Code'})
+            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Country Code' })
         }
 
     }
@@ -133,22 +135,22 @@ const ProviderProfile = ({navigation}) => {
         })
         setCitiesData(searched)
         setNameCity('')
-        setUpdateData({...updateData, city: null})
+        setUpdateData({ ...updateData, city: null })
     }, [country]);
 
     return (
 
-        <View style={{flex: 1, backgroundColor: '#F0A51E'}}>
+        <View style={{ flex: 1, backgroundColor: '#F0A51E' }}>
 
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={citiesData}
-                             click={cityClick}/>
-            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode}/>
+                click={cityClick} />
+            <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
-                                click={countryClick}/>
-            <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick}/>
+                click={countryClick} />
+            <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick} />
 
 
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
                 <Text style={{
                     color: 'white',
@@ -162,7 +164,7 @@ const ProviderProfile = ({navigation}) => {
                 </Text>
 
 
-                <View style={{flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10,}}>
+                <View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
                     <Pressable onPress={() => togglePhoneVisible()} style={{
                         textAlign: 'center',
                         marginTop: 'auto',
@@ -175,24 +177,24 @@ const ProviderProfile = ({navigation}) => {
                         borderTopLeftRadius: 25,
                         borderBottomLeftRadius: 25,
                         alignItems: 'center'
-                    }}><TextInput style={{color: '#000'}} editable={false}
-                                  placeholder={"+01"}>{phoneCode}</TextInput></Pressable>
-                    <TextInput keyboardType='numeric' onChangeText={text => setUpdateData({...updateData, phone: text})}
-                               placeholder="Enter Your Number" style={{
-                        textAlign: 'left',
-                        paddingHorizontal: 8,
-                        marginTop: 'auto',
-                        marginBottom: 'auto',
-                        paddingVertical: 10,
-                        width: '72%',
-                        borderColor: '#b2b2b2',
-                        borderTopRightRadius: 25,
-                        borderBottomRightRadius: 25,
-                        borderTopWidth: 1,
-                        borderBottomWidth: 1,
-                        borderRightWidth: 1,
-                        backgroundColor: 'white'
-                    }}></TextInput>
+                    }}><TextInput style={{ color: '#000' }} editable={false}
+                        placeholder={"+01"}>{phoneCode}</TextInput></Pressable>
+                    <TextInput keyboardType='numeric' onChangeText={text => setUpdateData({ ...updateData, phone: text })}
+                        placeholder="Enter Your Number" style={{
+                            textAlign: 'left',
+                            paddingHorizontal: 8,
+                            marginTop: 'auto',
+                            marginBottom: 'auto',
+                            paddingVertical: 10,
+                            width: '72%',
+                            borderColor: '#b2b2b2',
+                            borderTopRightRadius: 25,
+                            borderBottomRightRadius: 25,
+                            borderTopWidth: 1,
+                            borderBottomWidth: 1,
+                            borderRightWidth: 1,
+                            backgroundColor: 'white'
+                        }}></TextInput>
                 </View>
                 {/* <View style={{ marginTop: 50, paddingVertical: 5 }}>
                     <PhoneInput
@@ -217,9 +219,9 @@ const ProviderProfile = ({navigation}) => {
                         color: '#626262',
                         elevation: 10
                     }}>
-                    <TextInput style={{color: '#000'}} editable={false} value={countryName}
-                               placeholder='Enter your Country'
-                               inputMode={'text'}/>
+                    <TextInput style={{ color: '#000' }} editable={false} value={countryName}
+                        placeholder='Enter your Country'
+                        inputMode={'text'} />
                 </Pressable>
                 <Pressable onPress={() => toggleVisibility()} style={{
                     paddingVertical: 10,
@@ -231,8 +233,8 @@ const ProviderProfile = ({navigation}) => {
                     color: '#626262',
                     elevation: 10
                 }}>
-                    <TextInput style={{color: '#000'}} value={nameCity} editable={false}
-                               placeholder={'Enter your City'}/>
+                    <TextInput style={{ color: '#000' }} value={nameCity} editable={false}
+                        placeholder={'Enter your City'} />
                 </Pressable>
 
                 {/* <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })} style={{
@@ -257,12 +259,12 @@ const ProviderProfile = ({navigation}) => {
                     width: '85%',
                     paddingRight: 20
                 }}>
-                    <TextInput onChangeText={text => setUpdateData({...updateData, headquater: text})} style={{
+                    <TextInput onChangeText={text => setUpdateData({ ...updateData, headquater: text })} style={{
                         height: 50,
                         paddingHorizontal: 20,
                         color: '#626262',
                         flex: 1
-                    }} placeholder={'Enter your HeadQuarter Address'}/>
+                    }} placeholder={'Enter your HeadQuarter Address'} />
 
                 </View>
                 <Pressable onPress={() => toggleType()}>
@@ -278,13 +280,13 @@ const ProviderProfile = ({navigation}) => {
                     }}>
 
                         <TextInput value={updateData.type} editable={false}
-                                   onChangeText={text => setUpdateData({...updateData, type: text})}
-                                   style={{
-                                       height: 50,
-                                       paddingHorizontal: 20,
-                                       color: '#626262',
-                                       flex: 1
-                                   }} placeholder={'Enter your Company Type'}/>
+                            onChangeText={text => setUpdateData({ ...updateData, type: text })}
+                            style={{
+                                height: 50,
+                                paddingHorizontal: 20,
+                                color: '#626262',
+                                flex: 1
+                            }} placeholder={'Enter your Company Type'} />
 
                     </View>
                 </Pressable>
@@ -296,7 +298,7 @@ const ProviderProfile = ({navigation}) => {
                     borderRadius: 25,
                     marginTop: 50,
                     paddingVertical: 15
-                }}><Text style={{color: '#fff', fontWeight: '900', fontSize: 15}}>Continue</Text></Pressable>
+                }}><Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Continue</Text></Pressable>
 
             </View>
             <Toast

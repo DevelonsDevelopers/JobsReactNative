@@ -1,5 +1,12 @@
 import * as api from '../../API/index'
-import {ERROR, LOADING, SUCCESS} from "../../Utils/Constants";
+import {
+    ERROR,
+    LOADING, PROVIDER_LOGIN_ERROR, PROVIDER_LOGIN_LOADING, PROVIDER_LOGIN_SUCCESS,
+    SEEKER_LOGIN_ERROR,
+    SEEKER_LOGIN_LOADING,
+    SEEKER_LOGIN_SUCCESS,
+    SUCCESS
+} from "../../Utils/Constants";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {CheckCV} from "./cvActions";
 import {CheckSeeker} from "./seekerActions";
@@ -8,7 +15,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const LoginAuthentication = (navigation, email, password) => async (dispatch) => {
     try {
-        dispatch ({ type: LOADING })
+        dispatch ({ type: SEEKER_LOGIN_LOADING })
         const response = await api.login(email, password)
         const { data: { responseCode } } = response
         const { data: { message } } = response
@@ -26,21 +33,23 @@ export const LoginAuthentication = (navigation, email, password) => async (dispa
         await AsyncStorage.setItem("USERNAME", data.username)
         if (responseCode === 200){
             sleep(2000).then( async () => {
-                navigation.popToTop()
-                navigation.replace('Onboarding')
-                dispatch({type: SUCCESS})
+                dispatch({type: SEEKER_LOGIN_SUCCESS})
+                sleep(500).then(async () => {
+                    navigation.popToTop()
+                    navigation.replace('Onboarding')
+                })
             })
         } else {
-            dispatch ({ type: ERROR })
+            dispatch ({ type: SEEKER_LOGIN_ERROR })
         }
     } catch (e){
-        dispatch({ type: ERROR })
+        dispatch({ type: SEEKER_LOGIN_ERROR })
     }
 }
 
 export const ProviderLoginAuthentication = (navigation, email, password) => async (dispatch) => {
     try {
-        dispatch ({ type: LOADING })
+        dispatch ({ type: PROVIDER_LOGIN_LOADING })
         const response = await api.loginProvider(email, password)
         const { data: { responseCode } } = response
         const { data: { message } } = response
@@ -54,14 +63,16 @@ export const ProviderLoginAuthentication = (navigation, email, password) => asyn
         await AsyncStorage.setItem("EMAIL", data.email)
         console.log("Provider")
         if (responseCode === 200){
-            navigation.popToTop()
-            navigation.replace('PostJob')
-            dispatch ({ type: SUCCESS })
+            dispatch ({ type: PROVIDER_LOGIN_SUCCESS })
+            sleep(500).then(async () => {
+                navigation.popToTop()
+                navigation.replace('PostJob')
+            })
         } else {
-            dispatch ({ type: ERROR })
+            dispatch ({ type: PROVIDER_LOGIN_ERROR })
         }
     } catch (e){
         console.log("error")
-        dispatch({ type: ERROR })
+        dispatch({ type: PROVIDER_LOGIN_ERROR })
     }
 }

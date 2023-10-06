@@ -55,9 +55,9 @@ function Search({ route, navigation }) {
     const companies = useSelector(state => state.company.companies)
     const searchJobs = useSelector(state => state.job.searchJobs)
     const isloading = useSelector(state => state.job.isLoading)
-    const error = useSelector(state => state.job.error)
-    const nodata = useSelector(state => state.job.nodata)
-    const success = useSelector(state => state.job.success)
+    const error = useSelector(state => state.error.searchJobError)
+    const nodata = useSelector(state => state.nodata.searchJobNoData)
+    const success = useSelector(state => state.success.searchJobSuccess)
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState([])
     const dispatch = useDispatch();
@@ -78,12 +78,11 @@ function Search({ route, navigation }) {
     }, [dispatch, loading]);
 
     useEffect(() => {
-        if (success) {
+        if (success || error || nodata) {
             setData(searchJobs)
             setLoading(false)
-            dispatch({ type: RESET })
         }
-    }, [success]);
+    }, [success,error,nodata]);
 
     useEffect(() => {
         console.log(searchJobs)
@@ -159,7 +158,18 @@ function Search({ route, navigation }) {
                 :
                 <>
                     {nodata ?
-                        '' :
+                        <View style={{ marginTop: 360 }}>
+                        <Image source={require('../assets/delete.png')} style={{
+                            width: 30,
+                            height: 30,
+                            marginLeft: 190,
+                            marginBottom: -20,
+                            marginTop: 40
+                        }} />
+                        <Text
+                            style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network
+                            Error...!</Text>
+                    </View>  :
 
                         <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }} keyboardShouldPersistTaps="handled">
                             <View style={{ backgroundColor: '#EAEAEA' }}>

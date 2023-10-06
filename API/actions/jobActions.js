@@ -157,7 +157,6 @@ export const JobByID = (user, id) => async (dispatch) => {
 
 export const CityJobs = (user, id) => async (dispatch) => {
     try {
-        dispatch ({ type: CITY })
         dispatch ({ type: CITY_JOB_LOADING })
         const { data: { data } } = await api.fetchJobByCity(user, id);
         if (data.length > 0) {

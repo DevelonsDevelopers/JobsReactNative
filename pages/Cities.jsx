@@ -8,15 +8,26 @@ import { ActivityIndicator } from 'react-native'
 function Cities({ navigation }) {
 
     const cities = useSelector(state => state.city.cities)
-    const loading = useSelector(state => state.city.isLoading)
-    const error = useSelector(state => state.city.error)
-    const nodata = useSelector(state => state.city.nodata)
+
+    const success = useSelector(state => state.success.allCitySuccess)
+    const error = useSelector(state => state.error.allCityError)
+    const nodata = useSelector(state => state.nodata.allCityNoData)
     const dispatch = useDispatch()
     const [data, setData] = useState()
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        if (success || error || nodata) {
+            setIsLoading(false)
+        }
+    }, [success, error, nodata])
+
 
     useEffect(() => {
         if (!cities) {
             dispatch(AllCities())
+        } else {
+            setIsLoading(false)
         }
     }, [dispatch, navigation, cities]);
 
@@ -24,7 +35,7 @@ function Cities({ navigation }) {
         if (cities) {
             setData(cities)
         }
-    }, [cities, data]);
+    }, [cities]);
 
     const search = (query) => {
         const searched = cities.filter((city) => {
@@ -36,7 +47,7 @@ function Cities({ navigation }) {
     return (
         <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 
-            {loading ?
+            {isLoading ?
                 <View style={{ marginTop: 400 }}>
                     <ActivityIndicator size={60} color="#13A3E1" />
                 </View>
@@ -72,11 +83,11 @@ function Cities({ navigation }) {
                                                     tintColor: '#000'
                                                 }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
                                             <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                                                <Pressable 
+                                                <Pressable
                                                 // onPress={() => navigation.push('Categories')}
                                                 ><Image
-                                                    style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                                                    source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
+                                                        style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+                                                        source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                                             </View>
                                         </View>
                                         {/*<View style={{ display: "flex", flexDirection: "row", marginTop: 40 }}>*/}
@@ -172,10 +183,10 @@ function Cities({ navigation }) {
                                                             }}>{item.country_name}</Text>
                                                         </View>
                                                         <Text style={{
-                                                           backgroundColor:'gray',
-                                                           height:1.2,
-                                                           marginVertical:4,
-                                                           color:'gray'
+                                                            backgroundColor: 'gray',
+                                                            height: 1.2,
+                                                            marginVertical: 4,
+                                                            color: 'gray'
                                                         }}>-</Text>
                                                     </Pressable>
                                                 )} />

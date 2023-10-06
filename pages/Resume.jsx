@@ -17,8 +17,8 @@ function Resume({ navigation }) {
   const dispatch = useDispatch();
   const [ID, setID] = useState();
   const cv = useSelector((state) => state.cv.cv);
-  const loading = useSelector((state) => state.cv.isLoading);
-  const success = useSelector((state) => state.cv.success);
+  const success = useSelector((state) => state.success.cvSuccess);
+  const error = useSelector((state) => state.error.cvError);
 
   useEffect(() => {
     GetData();
@@ -38,21 +38,21 @@ function Resume({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (success) {
+    if (success || error) {
       setIsLoading(false);
     }
-  }, [success]);
+  }, [success,error]);
 
 
 
   return (
     <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
 
-      {isLoading ? (
+      {isLoading ? 
         <View style={{ marginTop: 400 }}>
           <ActivityIndicator size={60} color="#13A3E1" />
         </View>
-      ) : (
+       : 
         <>
           <View style={{ flexDirection: 'row', height: 90 }}>
             <Pressable onPress={() => navigation.goBack()}
@@ -351,8 +351,7 @@ function Resume({ navigation }) {
             </View>
           </View> */}
 
-        </>
-      )}
+        </>}
     </ScrollView>
   );
 }

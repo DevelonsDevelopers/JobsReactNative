@@ -19,12 +19,19 @@ import { RESET, RESET_SEEKER } from "../Utils/Constants";
 function Profile({ navigation }) {
 
     const seeker = useSelector(state => state.seeker.seeker)
-    const loading = useSelector(state => state.seeker.isLoading)
-    const success = useSelector(state => state.seeker.success)
+
+    const error = useSelector(state => state.error.seekerError)
+    const success = useSelector(state => state.success.seekerSuccess)
     const dispatch = useDispatch();
     const [ID, setID] = useState()
 
     const [isloading, setIsLoading] = useState(true)
+    useEffect(() => {
+        if (success || error) {
+            setIsLoading(false)
+            // dispatch({ type: RESET })
+        }
+    }, [success, error])
 
     const [loginVal, setLoginVal] = useState()
 
@@ -60,13 +67,7 @@ function Profile({ navigation }) {
         console.log(seeker)
     }, [seeker])
 
-    useEffect(() => {
-        if (success) {
-            console.log("SUCCESS")
-            setIsLoading(false)
-            dispatch({ type: RESET })
-        }
-    }, [success])
+ 
 
 
     const [visible, setVisible] = useState(false)
