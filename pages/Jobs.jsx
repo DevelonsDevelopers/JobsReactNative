@@ -1,15 +1,12 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
+import { Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
-import Resume from "./Resume";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCities } from "../API/actions/cityActions";
 import { AllJobs } from "../API/actions/jobActions";
 import moment from "moment";
 import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RESET, SUCCESS } from "../Utils/Constants";
+import { RESET } from "../Utils/Constants";
 
 const data = [
 	{ "name": "Facebook" },
@@ -67,6 +64,9 @@ function Jobs({ navigation }) {
 		const id = await AsyncStorage.getItem('ID')
 		setID(id);
 	}
+	useEffect(()=>{
+console.log(jobs)
+	},[jobs])
 
 	return (
 		<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
@@ -106,7 +106,7 @@ function Jobs({ navigation }) {
 											}} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
 											<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
 												<Pressable
-												// onPress={() => navigation.push('Recommendedjobs')}
+												onPress={() => navigation.push('ApiDescription')}
 												><Image
 														style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 														source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>

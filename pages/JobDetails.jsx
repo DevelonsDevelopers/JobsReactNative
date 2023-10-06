@@ -34,6 +34,9 @@ const JobDetails = ({ route, navigation }) => {
 
     const seeker = useSelector(state => state.seeker.seeker)
 
+    useEffect(() => {
+        console.log(job)
+    }, [job])
 
 
     const [isloading, setIsLoading] = useState(true)
@@ -76,7 +79,7 @@ const JobDetails = ({ route, navigation }) => {
     }, [dispatch, seeker, USERID, navigation]);
 
     useEffect(() => {
-        console.log(seeker)
+        // console.log(seeker)
         if (seeker?.plan === 0) {
             setPlan(false)
         } else {
@@ -211,9 +214,9 @@ const JobDetails = ({ route, navigation }) => {
                                         paddingTop: 5,
                                         paddingBottom: 2,
                                         paddingHorizontal: 20,
-                                        borderRadius:20
+                                        borderRadius: 20
                                     }}>
-                                        <Text style={{ textAlign: 'center',color: "white",fontSize: 15,fontFamily: 'poppins_medium',  }}>
+                                        <Text style={{ textAlign: 'center', color: "white", fontSize: 15, fontFamily: 'poppins_medium', }}>
                                             Salary {job?.salary}
                                         </Text>
                                     </View>
@@ -239,7 +242,7 @@ const JobDetails = ({ route, navigation }) => {
                                         marginTop: 20,
                                         backgroundColor: 'white',
                                         gap: 10,
-                                        
+
                                     }}>
                                         <View style={{
                                             flex: 0.4,

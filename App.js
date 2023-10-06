@@ -77,6 +77,7 @@ import SeekerPlans from "./pages/SeekerPlans";
 import ForgotPassword from './pages/ForgotPassword';
 import ProfileVerifiedSuccessful from './pages/ProfileVerifiedSuccessful';
 import OfferResponse from './pages/OfferResponse';
+import ApiDescription from './pages/ApiDescription';
 
 
 
@@ -231,6 +232,8 @@ function App() {
                             options={{ title: "ProfileVerifiedSuccessful", headerShown: false }} />
                         <Stack.Screen name="OfferResponse" component={OfferResponse}
                             options={{ title: "OfferResponse", headerShown: false }} />
+                            <Stack.Screen  name='ApiDescription' component={ApiDescription} 
+                            options={{title:'ApiDescription' ,headerShown:false}} />
 
                     </Stack.Navigator>
                 </NavigationContainer>
