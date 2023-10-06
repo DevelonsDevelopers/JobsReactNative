@@ -1,4 +1,4 @@
-import { ERROR, GET_JOBAPI_JOB, LOADING, SUCCESS } from "../../Utils/Constant";
+import { ERROR, GET_JOBAPI_JOB, LOADING, SUCCESS } from "../../Utils/Constants";
 
 
 

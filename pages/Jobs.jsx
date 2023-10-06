@@ -53,8 +53,13 @@ function Jobs({ navigation }) {
 
 
 	const JobClick = (id) => {
-		recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
-		navigation.push('JobDetails', { ID: id })
+		if (jobs?.link === null) {
+			recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
+			navigation.push('JobDetails', { ID: id })
+		}
+		else{
+     navigation.push('ApiDescription', { ID: id })
+		}
 	}
 
 	useEffect(() => {
@@ -64,9 +69,9 @@ function Jobs({ navigation }) {
 		const id = await AsyncStorage.getItem('ID')
 		setID(id);
 	}
-	useEffect(()=>{
-console.log(jobs)
-	},[jobs])
+	useEffect(() => {
+		console.log(jobs)
+	}, [jobs])
 
 	return (
 		<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
@@ -106,7 +111,7 @@ console.log(jobs)
 											}} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
 											<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
 												<Pressable
-												onPress={() => navigation.push('ApiDescription')}
+													onPress={() => navigation.push('ApiDescription')}
 												><Image
 														style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 														source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
