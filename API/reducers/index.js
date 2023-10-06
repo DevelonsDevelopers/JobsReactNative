@@ -20,5 +20,7 @@ import loading from "./loading";
 import error from "./error";
 import success from "./success";
 import nodata from "./nodata";
+import jobsApi from "./jobsApi";
 
-export default combineReducers({ category, register, login, seeker, city, country, company, job, cv, tag, interactions, bookmark, applied, offers, coverLetter, plans, loading, error, success, nodata })
+
+export default combineReducers({ category, register, login, seeker, city, country, company, job, cv, tag, interactions, bookmark, applied, offers, coverLetter, plans, loading, error, success, nodata, jobsApi })

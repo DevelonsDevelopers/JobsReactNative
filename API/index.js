@@ -359,3 +359,9 @@ export const createUserPlan = (user, plan, activation_date, user_type) => API.po
     activation_date: activation_date,
     user_type: user_type
 })
+
+
+//Api Jobs 
+export const fetchJobsApiId = (id) => API.post('/apiJobs/job', {
+    id: id
+})

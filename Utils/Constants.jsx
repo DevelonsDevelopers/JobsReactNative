@@ -304,6 +304,10 @@ export const SENT_OFFERS = "SENT_OFFERS";
 export const SENT_OFFERS_BY_JOB = "SENT_OFFERS_BY_JOB"
 export const OFFERS = "OFFERS"
 
+//JobsApi
+export const GET_JOBAPI_JOB = "GET_JOBAPI_JOB"
+
+
 export const PhoneData = [
     {
         "name": "Afghanistan",
