@@ -282,31 +282,19 @@ function Login({ route, navigation }) {
                         }
                     }
                     } style={{
-                        width: '41%',
+                        width: '85%',
                         backgroundColor: '#fff',
                         alignItems: 'center',
-                        borderRadius: 25,
+                        borderRadius: 25, 
                         marginTop: 15,
                         paddingVertical: 15,
                         marginRight: 5,
                         flexDirection: 'row',
-                        justifyContent: 'center'
+                        paddingHorizontal:20
                     }}><Image style={{ width: 25, height: 25, marginRight: 10 }}
                         source={require('../assets/google.png')} /><Text
-                            style={{ color: '#000', fontWeight: '900', fontSize: 15 }}>Google</Text></Pressable>
-                    <Pressable style={{
-                        width: '41%',
-                        backgroundColor: '#fff',
-                        alignItems: 'center',
-                        borderRadius: 25,
-                        marginTop: 15,
-                        paddingVertical: 15,
-                        marginLeft: 5,
-                        flexDirection: 'row',
-                        justifyContent: 'center'
-                    }}><Image style={{ width: 25, height: 25, marginRight: 10 }}
-                        source={require('../assets/facebook.png')} /><Text
-                            style={{ color: '#000', fontWeight: '900', fontSize: 15 }}>Facebook</Text></Pressable>
+                            style={{ color: '#000', fontFamily: 'poppins_medium', fontSize: 15,marginLeft:'30%' }}>Google</Text></Pressable>
+                    
                 </View>
                 <View style={{ flexDirection: 'row', marginTop: 25 }}>
                     <Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Don't have an account?</Text>

@@ -378,7 +378,7 @@ function AccountInfo({ route, navigation }) {
 										Error...!</Text>
 								</View> : <>
 
-									<DeleteModal visible={deleteVisible} toggleVisibility={toggleDeleteVisibile} del={setDelVal} val={delV} setLoad={setDelLoad} isLoad={delLoad}/>
+									<DeleteModal visible={deleteVisible} toggleVisibility={toggleDeleteVisibile} del={setDelVal} val={delV} setLoad={setDelLoad} isLoad={delLoad} />
 									<EducationModal visible={educationVisible}
 										toggleEducationVisibility={toggleEducationVisibility}
 										add={addEducation} edit={updateEducation} data={edData} />
