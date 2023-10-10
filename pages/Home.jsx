@@ -13,6 +13,7 @@ import CompleteProfileSeekerModal from "../Components/CompleteProfileSeekerModal
 import { recordInteraction } from "../API";
 import { CheckSeeker, fetchSeeker } from "../API/actions/seekerActions";
 import { CheckCV } from "../API/actions/cvActions";
+import {BannerAd, BannerAdSize} from "react-native-google-mobile-ads";
 
 function Home({ route, navigation }) {
 
@@ -541,6 +542,13 @@ function Home({ route, navigation }) {
 							}}>Profile</Text>
 						</Ripple>
 					</View>
+					<BannerAd
+						unitId="ca-app-pub-3940256099942544/6300978111"
+						size={BannerAdSize.BANNER}
+						requestOptions={{
+							requestNonPersonalizedAdsOnly: true,
+						}}
+					/>
 				</>}
 		</View>
 	)
