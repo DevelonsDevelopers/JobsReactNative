@@ -1,4 +1,4 @@
-import { ActivityIndicator, FlatList, Image, Modal, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, Modal, Pressable, RefreshControl, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories, FeaturedCategories } from "../API/actions/categoryActions";
@@ -129,6 +129,18 @@ function Home({ route, navigation }) {
 		navigation.push('JobDetails', { ID: id })
 	}
 
+	// swipe Loading =========
+	const [refreshing, setRefreshing] = React.useState(false);
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		if (!recentJobs) {
+			dispatch(RecentJobs())
+		}
+		else {
+			setRefreshing(false);
+		}
+	}, [dispatch, recentJobs]);
 
 
 	return (
@@ -143,7 +155,11 @@ function Home({ route, navigation }) {
 					<NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={login} toggleLoadingVisibility={toggleLoadingVisibility} />
 					<LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
 					<LoginRequireModal visible={requireVisible} toggleRequireVisible={toggleRequireVisible} navigation={navigation} />
-					<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled">
+
+
+					<ScrollView refreshControl={
+						<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+					} style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled">
 						<View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
 							<View style={{ flexDirection: 'row', height: 130 }}>
 								<Pressable onPress={() => toggleVisibility()}><Image style={{

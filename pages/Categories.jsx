@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, Pressable, ScrollView, FlatList, SafeAreaView, ActivityIndicator } from 'react-native'
+import { Image, TextInput, Text, Pressable, ScrollView, FlatList, SafeAreaView, ActivityIndicator, RefreshControl } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import Termsandconditions from './Termsandconditions'
@@ -45,8 +45,26 @@ function Categories({ navigation }) {
         setData(searched)
     }
 
+    // swipe Loading ==========
+    const [refreshing, setRefreshing] = React.useState(false);
+
+    const onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+        if (!categories) {
+            dispatch(AllCategories())
+        } else {
+            setRefreshing(false);
+        }
+
+    }, [dispatch, categories]);
+
+
+
+
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+        <ScrollView refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        } style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
             {isLoading ?
                 <View style={{ marginTop: 400 }}>
                     <ActivityIndicator size={60} color="#13A3E1" />
@@ -72,6 +90,10 @@ function Categories({ navigation }) {
                                         style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network
                                         Error...!</Text>
                                 </View> : <>
+
+
+
+
                                     <View style={{ backgroundColor: '#F1F1F1' }}>
                                         <View style={{ flexDirection: 'row', height: 90 }}>
                                             <Pressable onPress={() => navigation.goBack()} style={{ paddingRight: 5 }}><Image style={{

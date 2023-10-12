@@ -31,8 +31,8 @@ const cv = (state = {isLoading: true, success: false, error: false}, action) => 
             return {...state, interest: action.payload.data}
         case CREATE_CV_LANGUAGE:
             return {...state, language: action.payload.data}
-        case CREATE_CV_RESUME:
-            return {...state, resume: action.payload.data}
+        // case CREATE_CV_RESUME:
+        //     return {...state, resume: action.payload.data}
         case CREATE_CV_SKILL:
             return {...state, skill: action.payload.data}
         case CV_CHECK:
