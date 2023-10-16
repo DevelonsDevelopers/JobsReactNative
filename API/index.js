@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const API_URL = "http://develons.biz/api";
+export const API_URL = "http://jobss.com.au/api";
 
 const API = axios.create({ baseURL: `${API_URL}`})
 
@@ -370,7 +370,7 @@ export const createUserPlan = (user, plan, activation_date, user_type) => API.po
 })
 
 
-//Api Jobs 
+//Api Jobs
 export const fetchJobsApiId = (id) => API.post('/apiJobs/job', {
     id: id
 })
