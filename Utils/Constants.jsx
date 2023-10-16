@@ -318,6 +318,7 @@ export const OFFERS = "OFFERS"
 
 //JobsApi
 export const GET_JOBAPI_JOB = "GET_JOBAPI_JOB"
+export const GET_RECENT_APIJOBS = "GET_RECENT_APIJOBS"
 
 
 export const PhoneData = [

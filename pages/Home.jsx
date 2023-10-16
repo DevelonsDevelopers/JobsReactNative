@@ -14,6 +14,7 @@ import { recordInteraction } from "../API";
 import { CheckSeeker, fetchSeeker } from "../API/actions/seekerActions";
 import { CheckCV } from "../API/actions/cvActions";
 import {BannerAd, BannerAdSize} from "react-native-google-mobile-ads";
+import { getApiJobsRecent } from "../API/actions/jobsApi";
 
 function Home({ route, navigation }) {
 
@@ -22,7 +23,7 @@ function Home({ route, navigation }) {
 	const [search, setSearch] = useState('');
 	const seeker = useSelector(state => state.seeker.seeker)
 	const categories = useSelector(state => state.category.featured_categories)
-	const recentJobs = useSelector(state => state.job.recentJobs)
+	const recentJobs = useSelector(state => state.jobsApi.jobsApiRecent)
 
 	const error = useSelector(state => state.error.featuredCategoryError)
 	const success = useSelector(state => state.success.featuredCategorySuccess)
@@ -62,12 +63,12 @@ function Home({ route, navigation }) {
 			}
 		}
 	}, [dispatch, seeker, ID]);
-
+	
 	useEffect(() => {
 		if (!recentJobs) {
-			dispatch(RecentJobs())
+			dispatch(getApiJobsRecent(search))
 		}
-	}, [dispatch, navigation, recentJobs]);
+	}, [dispatch, recentJobs, search]);
 
 
 	useEffect(() => {

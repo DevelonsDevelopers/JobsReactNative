@@ -196,6 +196,15 @@ export const fetchSearchJob = (search, country, category, city, company, salaryS
     isType: isType,
 })
 
+//apiJobs API CALL
+export const fetchJobsApiId = (id) => API.post('/apiJobs/job', {
+    id: id
+})
+
+export const fetchApiJobsRecent = (search) => API.post(`/apiJobs/recent`, {
+    search: search,
+})
+
 
 //INTERACTIONS API CALL
 export const recordInteraction = (job, user, query, title, interactiontype) => API.post('/interactions/create', {
@@ -375,6 +384,3 @@ export const createUserPlan = (user, plan, activation_date, user_type) => API.po
 
 
 //Api Jobs
-export const fetchJobsApiId = (id) => API.post('/apiJobs/job', {
-    id: id
-})
