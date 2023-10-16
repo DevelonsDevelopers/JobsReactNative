@@ -18,18 +18,20 @@ const data = [
 function Jobs({ navigation }) {
 
 	const jobs = useSelector(state => state.job.jobs)
+
 	const error = useSelector(state => state.error.jobError)
 	const nodata = useSelector(state => state.nodata.jobNoData)
 	const success = useSelector(state => state.success.jobSuccess)
+	const loading = useSelector(state => state.loading.allJobLoading)
 
-	const [isloading, setIsLoading] = useState(true)
-	useEffect(() => {
-		if (success || error || nodata) {
-			setIsLoading(false)
-			setData(jobs)
-			dispatch({ type: RESET })
-		}
-	}, [success, error, nodata])
+	// const [isloading, setIsLoading] = useState(true)
+
+	// useEffect(() => {
+	// 	if (success || error || nodata) {
+	// 		setIsLoading(false)
+	// 		setData(jobs)
+	// 	}
+	// }, [success, error, nodata])
 
 	const [data, setData] = useState([])
 
@@ -39,12 +41,13 @@ function Jobs({ navigation }) {
 
 	useEffect(() => {
 		if (ID) {
-			if (isloading) {
+			if (loading) {
 				if (!jobs) {
+					setRefreshing(false);
 					dispatch(AllJobs(ID))
 				} else {
-					setIsLoading(false)
 					setData(jobs)
+					setRefreshing(false);
 				}
 			}
 		}
@@ -80,18 +83,21 @@ function Jobs({ navigation }) {
 		setRefreshing(true);
 		if (!jobs) {
 			dispatch(AllJobs(ID))
-		} else {
 			setRefreshing(false);
-		}
+		} 
 
-	}, [dispatch,jobs]);
+	}, [dispatch, jobs]);
+
+	useEffect(() => {
+		console.log(loading)
+	}, [loading])
 
 
 	return (
 		<ScrollView refreshControl={
 			<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 		} style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
-			{isloading ?
+			{loading ?
 				<View style={{ marginTop: 400 }}>
 					<ActivityIndicator size={60} color="#13A3E1" />
 				</View>

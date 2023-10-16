@@ -143,6 +143,9 @@ function Home({ route, navigation }) {
 			setRefreshing(false);
 		}
 	}, [dispatch, recentJobs]);
+	useEffect(() => {
+		console.log(categories)
+	}, [categories])
 
 
 	return (
@@ -293,9 +296,9 @@ function Home({ route, navigation }) {
 											<Image style={{
 												width: 25,
 												height: 25,
-												tintColor: '#000'
-											}} source={require('../assets/provider.png')} alt={'Okay'} />
-											<Text style={{ fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10 }}>{item.name}</Text>
+											}} source={{ uri: `${item.image}` }}
+												alt={'Okay'} />
+											<Text style={{ fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10,textAlign:'center' }}>{item.name}</Text>
 										</Ripple>
 									)}
 									numColumns={2} />
