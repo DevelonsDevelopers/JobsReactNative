@@ -293,16 +293,20 @@ export const updateCVLanguage = (cv, language, id) => API.put('/cvLanguage/updat
     id: id
 })
 export const deleteCVLanguage = (id) => API.delete('/cvLanguage/delete', { data: { id: id }})
-export const addCVResume = (cv, resume) => API.post('/cvResume/create', {
-    cv: cv,
-    resume: resume
-})
-export const updateCVResume = (cv, resume, id) => API.put('/cvResume/update', {
-    cv: cv,
-    resume: resume,
-    id: id
-})
-export const deleteCVResume = (id) => API.delete('/cvResume/delete', { data: { id: id }})
+
+// export const addCVResume = (cv, resume) => API.post('/cvResume/create', {
+//     cv: cv,
+//     resume: resume
+// })
+
+// export const updateCVResume = (cv, resume, id) => API.put('/cvResume/update', {
+//     cv: cv,
+//     resume: resume,
+//     id: id
+// })
+
+// export const deleteCVResume = (id) => API.delete('/cvResume/delete', { data: { id: id }})
+
 export const addCVSkill = (cv, skill) => API.post('/cvSkill/create', {
     cv: cv,
     skill: skill

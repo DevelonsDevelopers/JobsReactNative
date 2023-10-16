@@ -44,7 +44,7 @@ import {
 	updateCVEducation,
 	updateCVInterest,
 	updateCVLanguage,
-	updateCVResume,
+	// updateCVResume,
 	updateCVSkill
 } from "../API";
 import PersonalStatementModal from "../Components/PersonalStatementModal";
@@ -69,7 +69,6 @@ function AccountInfo({ route, navigation }) {
 	const [skillVisible, setSkillVisible] = useState(false)
 	const [interestVisible, setInterestVisible] = useState(false)
 	const [languageVisible, setLanguageVisible] = useState(false)
-	const [resumeVisible, setResumeVisible] = useState(false)
 	const [deleteVisible, setDeleteVisible] = useState(false)
 	const [edData, setEdData] = useState(null)
 	const [carData, setCarData] = useState(null)
@@ -135,10 +134,10 @@ function AccountInfo({ route, navigation }) {
 		toggleLanguageVisibility()
 	}
 
-	const editResume = (d) => {
-		setResData(d)
-		toggleResumeVisibility()
-	}
+	// const editResume = (d) => {
+	// 	setResData(d)
+	// 	toggleResumeVisibility()
+	// }
 
 	const editSkill = (d) => {
 		setSkData(d)
@@ -269,12 +268,12 @@ function AccountInfo({ route, navigation }) {
 		setTrigger(!trigger)
 	}
 
-	const updateResume = async (resume, id) => {
-		await updateCVResume(cv.id, resume, id).then(res => {
-			setTrigger(!trigger)
-			setResData(null)
-		})
-	}
+	// const updateResume = async (resume, id) => {
+	// 	await updateCVResume(cv.id, resume, id).then(res => {
+	// 		setTrigger(!trigger)
+	// 		setResData(null)
+	// 	})
+	// }
 
 	const deleteResume = async (id) => {
 		await deleteCVResume(id).then(res => {
@@ -312,7 +311,6 @@ function AccountInfo({ route, navigation }) {
 	const toggleSkillVisibility = () => setSkillVisible(!skillVisible)
 	const toggleInterestVisibility = () => setInterestVisible(!interestVisible)
 	const toggleLanguageVisibility = () => setLanguageVisible(!languageVisible)
-	const toggleResumeVisibility = () => setResumeVisible(!resumeVisible)
 	const toggleDeleteVisibile = (val, id) => {
 		setDelV(val)
 		setDelID(id)
@@ -394,8 +392,7 @@ function AccountInfo({ route, navigation }) {
 									<LanguageModal visible={languageVisible}
 										toggleLanguageVisibility={toggleLanguageVisibility}
 										add={addLanguage} edit={updateLanguage} data={lanData} />
-									<ResumeModal visible={resumeVisible} toggleResumeVisibility={toggleResumeVisibility}
-										add={addResume} edit={updateResume} data={resData} />
+
 									<PersonalStatementModal visible={infoVisible}
 										toggleInfoVisibility={toggleInfoVisibility}
 										add={addPersonalInfo} />
@@ -1013,89 +1010,6 @@ function AccountInfo({ route, navigation }) {
 																		}}
 																			source={require('../assets/editIcon.png')} /></Pressable>
 																		<Pressable onPress={() => toggleDeleteVisibile('LANGUAGE', item.id)} style={{ padding: 10 }} ><Image style={{
-																			width: 19,
-																			height: 19,
-																			tintColor: 'red'
-																		}}
-																			source={require('../assets/cvDelete.png')} /></Pressable>
-																	</View>
-																)}
-															/>
-														}
-													</SafeAreaView>
-												</View>
-												<View style={{
-													flexDirection: 'column',
-													borderColor: '#b2b2b2',
-													backgroundColor: '#fff',
-													padding: 20,
-													marginHorizontal: 10,
-													marginRight: 30,
-													marginLeft: 30,
-													borderRadius: 30,
-													marginTop: 20,
-													marginBottom: 40
-												}}>
-													<View style={{ flexDirection: 'row' }}>
-														<Text style={{
-															fontFamily: 'poppins_bold',
-															fontSize: 16
-														}}>Resumes</Text>
-														<Pressable onPress={() => toggleResumeVisibility()} style={{
-															backgroundColor: '#e7e7e7',
-															borderRadius: 25,
-															alignItems: 'center',
-															paddingVertical: 5,
-															paddingHorizontal: 15,
-															marginLeft: 'auto'
-														}}><Text
-															style={{
-																color: '#000',
-																fontFamily: 'poppins_medium',
-																fontSize: 12
-															}}>Add</Text></Pressable>
-													</View>
-													<SafeAreaView style={{
-														flex: 1,
-														minHeight: 90,
-														justifyContent: 'center',
-														alignItems: 'center'
-													}}>
-														{cv?.resumes.length === 0 ?
-															<Text
-																style={{ fontFamily: 'poppins_light', color: '#a6a6a6' }}>No
-																Resume Added</Text>
-															:
-															<FlatList scrollEnabled={false} nestedScrollEnabled={true}
-																style={{
-																	marginVertical: 15,
-																	width: '100%',
-																	paddingHorizontal: 15
-																}}
-																data={cv?.resumes}
-																renderItem={({ item }) => (
-																	<View
-																		style={{
-																			flex: 1,
-																			flexDirection: 'row',
-																			margin: 7,
-																			backgroundColor: '#fff',
-																			alignItems: 'center',
-																			borderRadius: 10,
-																			borderColor: '#939393',
-																			borderWidth: 0.5,
-																			paddingHorizontal: 10
-																		}}>
-																		<Text style={{
-																			fontFamily: 'poppins_light',
-																			fontSize: 12,
-																		}}>{item.resume}</Text>
-																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editResume({ resume: item.resume, id: item.id })}><Image style={{
-																			width: 15,
-																			height: 15,
-																		}}
-																			source={require('../assets/editIcon.png')} /></Pressable>
-																		<Pressable onPress={() => toggleDeleteVisibile('RESUME', item.id)} style={{ padding: 10 }} ><Image style={{
 																			width: 19,
 																			height: 19,
 																			tintColor: 'red'

@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
+import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, RefreshControl } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
@@ -52,9 +52,8 @@ function JobsByCategory({ route, navigation }) {
 		if (success || error || nodata) {
 			setData(jobs)
 			setLoading(false)
-			dispatch({ type: RESET })
 		}
-	}, [success]);
+	}, [success,error,nodata]);
 
 	const JobClick = (id) => {
 		recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
@@ -69,8 +68,28 @@ function JobsByCategory({ route, navigation }) {
 		setID(id);
 	}
 
+
+	const [refreshing, setRefreshing] = React.useState(false);
+
+	const onRefresh = React.useCallback(() => {
+	  setRefreshing(true);
+	  if (!jobs) {
+		dispatch(CategoryJobs(ID, CATID))
+	} else if (jobs.length === 0 || jobs[0].category !== CATID) {
+		dispatch(CategoryJobs(ID, CATID))
+	} else {
+		setRefreshing(false);
+		setData(jobs)
+	}
+	  
+	
+	}, [dispatch,jobs]);
+
+
 	return (
-		<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+		<ScrollView refreshControl={
+			<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+		  } style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 			<View style={{ backgroundColor: '#EAEAEA' }}>
 				<View style={{ flexDirection: 'row', height: 90 }}>
 					<Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
@@ -101,7 +120,26 @@ function JobsByCategory({ route, navigation }) {
 					<View style={{ marginTop: 200 }}>
 						<ActivityIndicator size={60} color="#13A3E1" />
 					</View>
-					:
+					: <>
+						{nodata ? <View style={{ marginTop: 200 }}>
+						<Image source={require('../assets/nodata.png')}
+							style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
+						<Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Jobs Found</Text>
+					</View> :
+						<>
+							{error ?
+								<View style={{ marginTop: 200 }}>
+									<Image source={require('../assets/delete.png')} style={{
+										width: 30,
+										height: 30,
+										marginLeft: 190,
+										marginBottom: -20,
+										marginTop: 40
+									}} />
+									<Text
+										style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network
+										Error...!</Text>
+								</View> : <>
 					<SafeAreaView>
 						<FlatList nestedScrollEnabled={false} scrollEnabled={false}
 							initialNumToRender={5}
@@ -218,7 +256,9 @@ function JobsByCategory({ route, navigation }) {
 								</View></Pressable>
 							)} />
 					</SafeAreaView>
-				}
+				</>}
+				</>}
+				</>}
 			</View>
 		</ScrollView>
 	)

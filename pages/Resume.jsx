@@ -12,6 +12,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CVByUser } from '../API/actions/cvActions';
+import DistributeModal from '../Components/DistributeModal';
 
 function Resume({ navigation }) {
   const dispatch = useDispatch();
@@ -43,11 +44,17 @@ function Resume({ navigation }) {
     }
   }, [success, error]);
 
+  useEffect(() => {
+  console.log(cv)
+  }, [cv]);
+
+  const [completed, setCompleted] = useState(true)
   const [verify, setVerify] = useState(false)
+  const toggleDistributeVisible = () => setVerify(!verify)
 
   return (
     <View style={{ flex: 1 }}>
-
+      <DistributeModal visible={verify} toggleVisible={toggleDistributeVisible} />
       <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
 
         {isLoading ?
@@ -198,21 +205,20 @@ function Resume({ navigation }) {
       </ScrollView>
       <Pressable
         onPress={() => {
-          if (verify) {
-            navigation.push('Home')
+          if (!completed) {
+            toggleDistributeVisible()
           } else {
             navigation.push('VerificationProfile')
           }
         }}
         style={{
-          backgroundColor: '#2994FF',
           borderRadius: 25,
           alignItems: 'center',
           padding: 15,
           marginTop: 15,
-          marginHorizontal: 100,
+
         }}>
-        <Text style={{ color: 'white', fontSize: 18, }}>Distribute Resume</Text>
+        <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#2994FF', paddingHorizontal: 20, paddingVertical: 6, borderRadius: 20 }}>Distribute Resume</Text>
       </Pressable>
 
 

@@ -1,4 +1,4 @@
-import { Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
+import { Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, RefreshControl } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
@@ -57,8 +57,8 @@ function Jobs({ navigation }) {
 			recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
 			navigation.push('JobDetails', { ID: id })
 		}
-		else{
-     navigation.push('ApiDescription', { ID: id })
+		else {
+			navigation.push('ApiDescription', { ID: id })
 		}
 	}
 
@@ -73,8 +73,24 @@ function Jobs({ navigation }) {
 		console.log(jobs)
 	}, [jobs])
 
+	// swipe Loading =========
+	const [refreshing, setRefreshing] = React.useState(false);
+
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		if (!jobs) {
+			dispatch(AllJobs(ID))
+		} else {
+			setRefreshing(false);
+		}
+
+	}, [dispatch,jobs]);
+
+
 	return (
-		<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+		<ScrollView refreshControl={
+			<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+		} style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 			{isloading ?
 				<View style={{ marginTop: 400 }}>
 					<ActivityIndicator size={60} color="#13A3E1" />
@@ -190,7 +206,7 @@ function Jobs({ navigation }) {
 																}} source={require('../assets/bookmark.png')} />
 															}
 														</View>
-														<View style={{ flexDirection: 'row', flex: 1 }}>
+														<View style={{ flex: 1 }}>
 															<Text style={{
 																fontFamily: 'poppins_bold',
 
