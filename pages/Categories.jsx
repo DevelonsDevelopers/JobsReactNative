@@ -149,11 +149,12 @@ function Categories({ navigation }) {
                                                             justifyContent: 'center'
                                                         }}>
                                                         <Image style={{ width: 40, height: 40, marginTop: 5 }}
-                                                            source={require('../assets/marketing.png')} />
+                                                            source={{ uri: `${item.image}` }} />
                                                         <Text style={{
                                                             fontSize: 12,
                                                             fontFamily: 'poppins_semibold',
-                                                            marginTop: 12
+                                                            marginTop: 12,
+                                                            textAlign:'center'
                                                         }}>{item.name}</Text>
                                                     </Pressable>
                                                 )}

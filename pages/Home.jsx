@@ -13,7 +13,7 @@ import CompleteProfileSeekerModal from "../Components/CompleteProfileSeekerModal
 import { recordInteraction } from "../API";
 import { CheckSeeker, fetchSeeker } from "../API/actions/seekerActions";
 import { CheckCV } from "../API/actions/cvActions";
-import {BannerAd, BannerAdSize} from "react-native-google-mobile-ads";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 function Home({ route, navigation }) {
 
@@ -142,6 +142,9 @@ function Home({ route, navigation }) {
 			setRefreshing(false);
 		}
 	}, [dispatch, recentJobs]);
+	useEffect(() => {
+		console.log(categories)
+	}, [categories])
 
 
 	return (
@@ -292,9 +295,9 @@ function Home({ route, navigation }) {
 											<Image style={{
 												width: 25,
 												height: 25,
-												tintColor: '#000'
-											}} source={require('../assets/provider.png')} alt={'Okay'} />
-											<Text style={{ fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10 }}>{item.name}</Text>
+											}} source={{ uri: `${item.image}` }}
+												alt={'Okay'} />
+											<Text style={{ fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10,textAlign:'center' }}>{item.name}</Text>
 										</Ripple>
 									)}
 									numColumns={2} />
