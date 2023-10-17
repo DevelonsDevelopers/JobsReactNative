@@ -12,6 +12,7 @@ import { fetchSeeker } from "../API/actions/seekerActions";
 import LoginRequireModal from "../Components/LoginRequireModal";
 import ManageCoverLetter from "./ManageCoverLetter";
 import Ripple from "react-native-material-ripple";
+import WebsiteModal from "../Components/WebsiteModal";
 
 const JobDetails = ({ route, navigation }) => {
 
@@ -139,11 +140,16 @@ const JobDetails = ({ route, navigation }) => {
     const [loginVisible, setLoginVisible] = useState(false)
     const toggleLoginVisible = () => setLoginVisible(!loginVisible)
 
+    const [webVisible, setWebVisible] = useState(false)
+    const toggWebVisibility = () => setWebVisible(!webVisible)
+
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
                 <LoginRequireModal visible={loginVisible} toggleRequireVisible={toggleLoginVisible} navigation={navigation} />
                 <ManageCoverLetter visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
+                <WebsiteModal visible={webVisible} toggleRequireVisible={toggWebVisibility} url={job?.link} />
+
                 <View style={{ backgroundColor: '#EAEAEA' }}>
                     <View style={{ flexDirection: 'row', height: 90 }}>
                         <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
@@ -196,7 +202,7 @@ const JobDetails = ({ route, navigation }) => {
                                             fontFamily: 'poppins_bold',
                                             borderRadius: 5,
                                             marginLeft: 25,
-                                        }}>{job?.company_name}</Text>
+                                        }}>{job?.company === 0 ? job?.company_n : job?.company_name}</Text>
                                         <Text style={{
                                             marginLeft: 'auto',
                                             textAlign: 'right',
@@ -354,7 +360,21 @@ const JobDetails = ({ route, navigation }) => {
                             <Text style={{ color: 'white', textAlign: "center", fontSize: 15, fontFamily: 'poppins_bold', }}>SAVED</Text></Pressable>
                     }
                     {applied === 0 ?
-                        <Pressable onPress={() => { if (login) { if (plan) { toggleApplyVisibility() } else { navigation.push('VerificationProfile') } } else { toggleLoginVisible() } }}
+                        <Pressable onPress={() => {
+                            if (login) {
+                                if (plan) {
+                                    if (job?.link) {
+                                        toggWebVisibility()
+                                    } else {
+                                        toggleApplyVisibility()
+                                    }
+                                } else {
+                                    navigation.push('VerificationProfile')
+                                }
+                            } else {
+                                toggleLoginVisible()
+                            }
+                        }}
                             style={{
                                 justifyContent: 'center',
                                 height: 50,

@@ -7,6 +7,8 @@ import moment from "moment";
 import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RESET } from "../Utils/Constants";
+import company from "../API/reducers/company";
+import Ripple from "react-native-material-ripple";
 
 const data = [
 	{ "name": "Facebook" },
@@ -57,13 +59,13 @@ function Jobs({ navigation }) {
 
 
 
-	const JobClick = (id) => {
-		if (jobs?.link === null) {
-			recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
-			navigation.push('JobDetails', { ID: id })
-		}
-		else {
-			navigation.push('ApiDescription', { ID: id })
+	const JobClick = (val) => {
+		let num = Number(val.company)
+		console.log(num)
+		if (isNaN(num)) {
+			navigation.push('ApiDescription', { ID: val.id })
+		} else {
+			navigation.push('JobDetails', { ID: val.id })
 		}
 	}
 
@@ -134,11 +136,10 @@ function Jobs({ navigation }) {
 												tintColor: '#000'
 											}} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
 											<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-												<Pressable
-													onPress={() => navigation.push('ApiDescription')}
-												><Image
+												
+												<Image
 														style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-														source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
+														source={require('../assets/logo.png')} alt={'Okay'} />
 											</View>
 										</View>
 										<View>
@@ -155,8 +156,9 @@ function Jobs({ navigation }) {
 										<SafeAreaView>
 											<FlatList nestedScrollEnabled={false} scrollEnabled={false}
 												style={{ marginHorizontal: 0, marginTop: 10 }} data={jobs}
-												renderItem={({ item }) => (
-													<Pressable onPress={() => JobClick(item.id)}><View style={{
+												keyExtractor={(item, index) => String(index)}
+												renderItem={({ item,index }) => (
+													<Ripple rippleColor="#13a3e1" rippleOpacity={0.2} onPress={() => JobClick(item)}><View style={{
 														marginLeft: 25,
 														marginRight: 25,
 														marginBottom: 8,
@@ -196,7 +198,7 @@ function Jobs({ navigation }) {
 																	fontFamily: 'poppins_regular',
 																	marginTop: 0,
 																	fontSize: 12
-																}}>{item.company_name}</Text>
+																}}>{item.company === '0' ? item.company_n : item.company_name}</Text>
 															</View>
 															{item.bookmark === 0 ?
 																<Image style={{
@@ -264,7 +266,7 @@ function Jobs({ navigation }) {
 														</View>
 
 
-													</View></Pressable>
+													</View></Ripple>
 												)} />
 										</SafeAreaView>
 									</View>
