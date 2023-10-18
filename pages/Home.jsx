@@ -63,7 +63,7 @@ function Home({ route, navigation }) {
 			}
 		}
 	}, [dispatch, seeker, ID]);
-	
+
 	useEffect(() => {
 		if (!recentJobs) {
 			dispatch(getApiJobsRecent(search))
@@ -564,7 +564,7 @@ function Home({ route, navigation }) {
 					</View>
 					<BannerAd
 						unitId="ca-app-pub-3940256099942544/6300978111"
-						size={BannerAdSize.BANNER}
+						size={BannerAdSize.FULL_BANNER}
 						requestOptions={{
 							requestNonPersonalizedAdsOnly: true,
 						}}
