@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, RefreshControl } from "react-native";
+import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
@@ -69,27 +69,8 @@ function JobsByCategory({ route, navigation }) {
 	}
 
 
-	const [refreshing, setRefreshing] = React.useState(false);
-
-	const onRefresh = React.useCallback(() => {
-	  setRefreshing(true);
-	  if (!jobs) {
-		dispatch(CategoryJobs(ID, CATID))
-	} else if (jobs.length === 0 || jobs[0].category !== CATID) {
-		dispatch(CategoryJobs(ID, CATID))
-	} else {
-		setRefreshing(false);
-		setData(jobs)
-	}
-	  
-	
-	}, [dispatch,jobs]);
-
-
 	return (
-		<ScrollView refreshControl={
-			<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-		  } style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+		<ScrollView   style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 			<View style={{ backgroundColor: '#EAEAEA' }}>
 				<View style={{ flexDirection: 'row', height: 90 }}>
 					<Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{

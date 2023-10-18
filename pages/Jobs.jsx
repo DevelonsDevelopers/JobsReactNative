@@ -1,4 +1,4 @@
-import { Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, RefreshControl } from "react-native";
+import { Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +33,7 @@ function Jobs({ navigation }) {
 			console.log("success")
 			setIsLoading(false)
 			setData(jobs)
-			setRefreshing(false);
+			
 		}
 	}, [success, error, nodata])
 
@@ -51,7 +51,7 @@ function Jobs({ navigation }) {
 				} else {
 					setIsLoading(false)
 					setData(jobs)
-					setRefreshing(false);
+				
 				}
 			}
 		}
@@ -80,27 +80,11 @@ function Jobs({ navigation }) {
 		console.log(jobs)
 	}, [jobs])
 
-	// swipe Loading =========
-	const [refreshing, setRefreshing] = React.useState(false);
-
-	const onRefresh = React.useCallback(() => {
-		setRefreshing(true);
-		if (!jobs) {
-			dispatch(AllJobs(ID))
-			setRefreshing(false);
-		}
-
-	}, [dispatch, jobs]);
-
-	useEffect(() => {
-		console.log(loading)
-	}, [loading])
+ 
 
 
 	return (
-		<ScrollView refreshControl={
-			<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-		} style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+		<ScrollView  style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 			{isloading ?
 				<View style={{ marginTop: 400 }}>
 					<ActivityIndicator size={60} color="#13A3E1" />

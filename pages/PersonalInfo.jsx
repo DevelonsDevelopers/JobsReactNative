@@ -755,8 +755,9 @@ function PersonalInfo({ navigation }) {
                                     Password</Text></Pressable>
                         }
                         {!verified ?
-                            <Pressable onPress={() => { 
+                            <Pressable onPress={() => {
                                 if (completed) {
+
                                     navigation.push('Verify', {
                                         code: seeker?.code,
                                         verifyPhone: seeker?.phone,
@@ -764,12 +765,13 @@ function PersonalInfo({ navigation }) {
                                         verify: true,
                                         ID: ID
                                     })
+
                                 } else {
                                     click('Please Complete Your Profile First')
 
                                 }
                             }
-                        }
+                            }
                                 style={{
                                     borderColor: '#000',
                                     backgroundColor: '#000',
@@ -785,17 +787,18 @@ function PersonalInfo({ navigation }) {
                             :
                             ''
                         }
-                        {seeker?.plan === 0 ?
+                        {seeker?.plan === 0 ? 
                             <Ripple rippleColor="white"
-                                onPress={() => { 
+                                onPress={() => {
                                     if (completed) {
-                                        navigation.push('SeekerPlans')
-                                        
-                                    } else {
-                                        click('Please Verify Phone First')
-                                    }
-                                    
-                            }}
+                                        if (verified) {
+                                            navigation.push('SeekerPlans')
+                                        } else{
+                                            click('Please Verify Phone First')
+                                        }
+                                    } 
+
+                                }}
                                 style={{
                                     backgroundColor: 'green',
                                     borderRadius: 25,
@@ -805,7 +808,7 @@ function PersonalInfo({ navigation }) {
                                     marginHorizontal: 25,
                                     marginBottom: 25
                                 }}
-                                >
+                            >
                                 <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
                                 >Activate Account
                                 </Text>

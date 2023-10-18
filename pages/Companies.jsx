@@ -136,7 +136,7 @@ function Companies({ navigation }) {
                                                             backgroundColor: '#fff'
                                                         }}>
                                                         <Image style={{ width: 45, height: 45, marginLeft: 10 }}
-                                                            source={require('../assets/fblogosquare.png')} />
+                                                            source={require('../assets/buildings.png')} />
                                                         <Text style={{
                                                             marginTop: 8,
                                                             fontSize: 16,

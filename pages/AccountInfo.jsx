@@ -6,6 +6,7 @@ import {
 	SafeAreaView,
 	ScrollView,
 	Text,
+	TextInput,
 	View
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -485,7 +486,7 @@ function AccountInfo({ route, navigation }) {
 																}}>Update</Text>
 															</View></Pressable>
 													</View>
-													<Text style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{roleData}</Text>
+													<TextInput placeholder="Role" editable={false} style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{roleData}</TextInput>
 
 												</View>
 												<View style={{

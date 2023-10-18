@@ -51,7 +51,7 @@ const PersonalStatementModal = ({visible, toggleInfoVisibility, add}) => {
                         backgroundColor: '#13A3E1',
                         borderRadius: 25,
                         marginTop: 10
-                    }}><Text style={{color: '#fff', fontSize: 14, fontFamily: 'poppins_bold'}}>Send</Text></Pressable>
+                    }}><Text style={{color: '#fff', fontSize: 14, fontFamily: 'poppins_bold'}}>Update</Text></Pressable>
                 </View>
             </GestureHandlerRootView>
         </Modal>

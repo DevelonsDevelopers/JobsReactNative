@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView, ActivityIndicator, RefreshControl } from 'react-native'
+import { Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView, ActivityIndicator } from 'react-native'
 import { View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Categories from './Categories'
@@ -58,23 +58,9 @@ const History = ({ navigation }) => {
 	}
 
 
-
-	const [refreshing, setRefreshing] = React.useState(false);
-	const onRefresh = React.useCallback(() => {
-		setRefreshing(true);
-		if (ID) {
-			dispatch(AllInteractions(ID))
-		}
-		else {
-			setRefreshing(false);
-		}
-	}, [dispatch, ID]);
-
 	return (
 
-		<ScrollView refreshControl={
-			<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-		} style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+		<ScrollView  style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 			<View style={{ backgroundColor: '#F1F1F1' }}>
 				<View style={{ flexDirection: 'row', height: 90 }}>
 					<Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
