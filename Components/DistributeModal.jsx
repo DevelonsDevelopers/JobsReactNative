@@ -2,8 +2,9 @@ import React from 'react'
 import { ActivityIndicator, Modal, Text, View } from 'react-native'
 
 const DistributeModal = ({visible,toggleVisible}) => {
+
   return (
-    <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={() => toggleVisible()} >
+    <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={() => toggleVisible(false)} >
     <View style={{
         flex: 1,
         alignContent: 'center',

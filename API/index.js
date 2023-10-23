@@ -383,4 +383,19 @@ export const createUserPlan = (user, plan, activation_date, user_type) => API.po
 })
 
 
-//Api Jobs
+
+//Distribute
+export const distributeResume = (data) => API.post(`/distribute`, {
+    name: data.name,
+    address: data.address,
+    phone: data.phone,
+    code: data.code,
+    email: data.email,
+    role: data.role,
+    intro: data.statement,
+    skills: data.skills,
+    careers: data.careers,
+    educations: data.educations,
+    courses: data.courses,
+    interests: data.interests
+})
