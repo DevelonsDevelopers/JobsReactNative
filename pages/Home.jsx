@@ -126,9 +126,14 @@ function Home({ route, navigation }) {
 	const [cv, setCv] = useState(false)
 	const [cover, setCover] = useState(true)
 
-	const JobClick = (id) => {
-		recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
-		navigation.push('JobDetails', { ID: id })
+	const JobClick = (val) => {
+		let num = Number(val.company)
+		console.log(num)
+		if (isNaN(num)) {
+			navigation.push('ApiDescription', { ID: val.id })
+		} else {
+			navigation.push('JobDetails', { ID: val.id })
+		}
 	}
 
 

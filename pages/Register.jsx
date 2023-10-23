@@ -163,18 +163,6 @@ function Register({ route, navigation }) {
                         elevation: 10
                     }} placeholder={'Enter your Company Size'} />
                 }
-
-                {/* <TextInput onChangeText={(text) => setEmail(text)} style={{
-                    height: 50,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 25,
-                    marginTop: 15,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }} placeholder={'Enter your email'} /> */}
-
                 <TextInput
                     autoCapitalize="none"
                     placeholder="Enter Your Email"

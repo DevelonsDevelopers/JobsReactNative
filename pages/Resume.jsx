@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CVByUser } from '../API/actions/cvActions';
 import DistributeModal from '../Components/DistributeModal';
+import {distributeResume} from "../API";
 
 function Resume({ navigation }) {
   const dispatch = useDispatch();
@@ -49,8 +50,19 @@ function Resume({ navigation }) {
   }, [cv]);
 
   const [completed, setCompleted] = useState(true)
+
   const [verify, setVerify] = useState(false)
-  const toggleDistributeVisible = () => setVerify(!verify)
+  const toggleDistributeVisible = (dis) => {
+    if (dis) {
+      distributeResume(cv).then(res => {
+        const { data: { responseCode } } = res;
+        if (responseCode===200){
+          setVerify(false)
+        }
+      })
+    }
+    setVerify(!verify)
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -85,7 +97,7 @@ function Resume({ navigation }) {
               <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.name}</Text>
               <Text style={{ fontSize: 11, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center' }}>{cv?.address}</Text>
               <View style={{ flexDirection: 'row', gap: 10, marginLeft: 'auto', marginRight: 'auto', marginTop: 5 }}>
-                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center', }}>{cv?.phone}</Text>
+                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center', }}>{cv?.code}{cv?.phone}</Text>
                 <Text style={{ fontSize: 12, fontFamily: 'poppins_medium', color: 'black', textAlign: 'center', }}>{cv?.email}</Text>
               </View>
             </View>
@@ -205,8 +217,8 @@ function Resume({ navigation }) {
       </ScrollView>
       <Pressable
         onPress={() => {
-          if (!completed) {
-            toggleDistributeVisible()
+          if (completed) {
+            toggleDistributeVisible(true)
           } else {
             navigation.push('VerificationProfile')
           }
