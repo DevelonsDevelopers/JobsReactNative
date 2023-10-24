@@ -33,8 +33,6 @@ const FirstRoute = ({navigation}) => {
     }, [dispatch, ID]);
 
     useEffect(() => {
-        console.log(bookmarks)
-        console.log(error)
         console.log(noData)
     }, [bookmarks, error, noData]);
 

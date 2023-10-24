@@ -285,7 +285,7 @@ function Login({ route, navigation }) {
                         width: '85%',
                         backgroundColor: '#fff',
                         alignItems: 'center',
-                        borderRadius: 25, 
+                        borderRadius: 25,
                         marginTop: 15,
                         paddingVertical: 15,
                         marginRight: 5,
@@ -294,9 +294,9 @@ function Login({ route, navigation }) {
                     }}><Image style={{ width: 25, height: 25, marginRight: 10 }}
                         source={require('../assets/google.png')} /><Text
                             style={{ color: '#000', fontFamily: 'poppins_medium', fontSize: 15,marginLeft:'30%' }}>Google</Text></Pressable>
-                    
+
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: 25 }}>
+                <View style={{ flexDirection: 'row', marginTop: 25, marginBottom: 30 }}>
                     <Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Don't have an account?</Text>
                     <Pressable onPress={() => navigation.replace('Register', { USER: USER })}><Text
                         style={{ color: '#000', fontWeight: '900', fontSize: 15 }}> Register</Text></Pressable>
