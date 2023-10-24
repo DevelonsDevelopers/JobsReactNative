@@ -15,6 +15,7 @@ import { CheckSeeker, fetchSeeker } from "../API/actions/seekerActions";
 import { CheckCV } from "../API/actions/cvActions";
 import {BannerAd, BannerAdSize} from "react-native-google-mobile-ads";
 import { getApiJobsRecent } from "../API/actions/jobsApi";
+import ProfileVerficationModal from "../Components/ProfileVerification";
 
 function Home({ route, navigation }) {
 
@@ -121,6 +122,11 @@ function Home({ route, navigation }) {
 		}
 	}, [check, login]);
 
+	const [profileVerifiedVisibility, setProfileVerifiedVisibility] = useState(false)
+
+	const toggleProfile = () => setProfileVerifiedVisibility(!profileVerifiedVisibility)
+
+
 	const [isComplete, setIsComplete] = useState(false)
 	const [plan, setPlan] = useState(false)
 	const [cv, setCv] = useState(false)
@@ -154,7 +160,7 @@ function Home({ route, navigation }) {
 					<NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={login} toggleLoadingVisibility={toggleLoadingVisibility} />
 					<LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
 					<LoginRequireModal visible={requireVisible} toggleRequireVisible={toggleRequireVisible} navigation={navigation} />
-
+					<ProfileVerficationModal visible={profileVerifiedVisibility} toggleCompleteVisible={toggleProfile} isComplete={isComplete} navigation={navigation} />
 
 					<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled">
 						<View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
@@ -279,11 +285,12 @@ function Home({ route, navigation }) {
 												flexDirection: 'column',
 												margin: 7,
 												backgroundColor: '#fff',
-												height: 90,
+												height: 100,
 												justifyContent: 'center',
 												alignItems: 'center',
 												borderRadius: 20,
-												elevation: 5
+												elevation: 5,
+												paddingHorizontal: 10
 											}}>
 											<Image style={{
 												width: 25,
@@ -324,7 +331,7 @@ function Home({ route, navigation }) {
 									<FlatList scrollEnabled={false} nestedScrollEnabled={true}
 										style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
 											<Ripple rippleColor="#13A3E1" rippleOpacity={0.5} rippleDuration={300} rippleSize={200}
-												onPress={() => JobClick(item.id)}
+												onPress={() => JobClick(item)}
 												style={{
 													flex: 1,
 													flexDirection: 'row',
@@ -437,7 +444,11 @@ function Home({ route, navigation }) {
 						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 							onPress={() => {
 								if (login) {
-									navigation.push('AccountInfo', { role: seeker?.role })
+									if (check === "complete") {
+										navigation.push('AccountInfo', {role: seeker?.role})
+									} else {
+										toggleProfile()
+									}
 								} else {
 									toggleRequireVisible()
 								}
@@ -554,13 +565,13 @@ function Home({ route, navigation }) {
 							}}>Profile</Text>
 						</Ripple>
 					</View>
-					<BannerAd
-						unitId="ca-app-pub-3940256099942544/6300978111"
-						size={BannerAdSize.FULL_BANNER}
-						requestOptions={{
-							requestNonPersonalizedAdsOnly: true,
-						}}
-					/>
+					{/*<BannerAd*/}
+					{/*	unitId="ca-app-pub-3940256099942544/6300978111"*/}
+					{/*	size={BannerAdSize.FULL_BANNER}*/}
+					{/*	requestOptions={{*/}
+					{/*		requestNonPersonalizedAdsOnly: true,*/}
+					{/*	}}*/}
+					{/*/>*/}
 				</>}
 		</View>
 	)

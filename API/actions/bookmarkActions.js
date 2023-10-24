@@ -13,6 +13,7 @@ export const AllBookmarks = (user) => async (dispatch) => {
         dispatch ({ type: BOOKMARKLOADING })
         dispatch ({ type: BOOKMARKS_LOADING })
         const { data: { data } } = await api.fetchBookmarks(user);
+        console.log("DONE")
         if (data.length > 0) {
             dispatch({type: ALL_BOOKMARKS, payload: {bookmarks: data}})
             dispatch({type: BOOKMARKSUCCESS})

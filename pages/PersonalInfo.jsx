@@ -27,6 +27,7 @@ import Ripple from "react-native-material-ripple";
 import PhoneInput from "react-native-phone-number-input";
 import PhoneModal from "../Components/PhoneModal";
 import VerificationStatusModal from "../Components/VerificationStatusModal";
+import {checkCV} from "../API";
 
 function PersonalInfo({ navigation }) {
 
@@ -37,6 +38,7 @@ function PersonalInfo({ navigation }) {
     const success = useSelector(state => state.success.seekerSuccess)
     const nodata = useSelector(state => state.nodata.seekerNoData)
     const error = useSelector(state => state.error.seekerError)
+    const checkCV = useSelector(state => state.cv.check)
 
     const [completed, setCompleted] = useState(false)
     const [verified, setVerified] = useState(false)
@@ -787,16 +789,22 @@ function PersonalInfo({ navigation }) {
                             :
                             ''
                         }
-                        {seeker?.plan === 0 ? 
+                        {seeker?.plan === 0 ?
                             <Ripple rippleColor="white"
                                 onPress={() => {
                                     if (completed) {
                                         if (verified) {
-                                            navigation.push('SeekerPlans')
+                                            if (checkCV === "complete") {
+                                                navigation.push('SeekerPlans')
+                                            } else {
+                                                click('Please Complete your CV First')
+                                            }
                                         } else{
                                             click('Please Verify Phone First')
                                         }
-                                    } 
+                                    } else {
+                                        click('Please Complete your Profile First')
+                                    }
 
                                 }}
                                 style={{
