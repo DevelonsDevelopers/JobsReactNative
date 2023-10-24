@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "jobsApplication",
+    "name": "Jobs Australia",
     "slug": "jobsapplication",
     "plugins": [
       "@react-native-google-signin/google-signin",
