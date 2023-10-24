@@ -13,6 +13,7 @@ import LoginRequireModal from "../Components/LoginRequireModal";
 import ManageCoverLetter from "./ManageCoverLetter";
 import Ripple from "react-native-material-ripple";
 import WebsiteModal from "../Components/WebsiteModal";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 const JobDetails = ({ route, navigation }) => {
 
@@ -401,6 +402,13 @@ const JobDetails = ({ route, navigation }) => {
 
                 </View>
                 : ''}
+                <BannerAd
+                unitId="ca-app-pub-3940256099942544/6300978111"
+                size={BannerAdSize.FULL_BANNER}
+                requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                }}
+            />
         </View>
     )
 }
