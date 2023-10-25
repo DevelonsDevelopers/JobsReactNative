@@ -12,6 +12,14 @@
           "merchantIdentifier": "",
           "enableGooglePay": false
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
       ]
     ],
     "version": "1.0.0",
