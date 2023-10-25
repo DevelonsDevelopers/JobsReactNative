@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { AllCities } from "../API/actions/cityActions";
 import { ActivityIndicator } from 'react-native'
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 
 function Cities({ navigation }) {
 
@@ -45,6 +46,7 @@ function Cities({ navigation }) {
     }
 
     return (
+        <View style={{ flex:1 }}>
         <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 
             {isLoading ?
@@ -197,6 +199,14 @@ function Cities({ navigation }) {
                         </>}
                 </>}
         </ScrollView>
+        <BannerAd
+                unitId="ca-app-pub-3940256099942544/6300978111"
+                size={BannerAdSize.FULL_BANNER}
+                requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                }}
+            />
+        </View>
     )
 }
 

@@ -7,6 +7,7 @@ import { AllCities } from "../API/actions/cityActions";
 import { AllCompanies } from "../API/actions/companyActions";
 import { ActivityIndicator } from "react-native";
 import Ripple from "react-native-material-ripple";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 const data = [
     { "name": "Facebook" },
@@ -52,6 +53,7 @@ function Companies({ navigation }) {
     }
 
     return (
+        <View style={{ flex:1 }}>  
         <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
             {isLoading ?
                 <View style={{ marginTop: 400 }}>
@@ -152,6 +154,14 @@ function Companies({ navigation }) {
                         </>}
                 </>}
         </ScrollView>
+        <BannerAd
+                unitId="ca-app-pub-3940256099942544/6300978111"
+                size={BannerAdSize.FULL_BANNER}
+                requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                }}
+            />
+        </View>
     )
 }
 

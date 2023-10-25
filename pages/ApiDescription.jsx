@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getJobsApiId } from '../API/actions/jobsApi'
 import WebsiteModal from '../Components/WebsiteModal'
 import Ripple from 'react-native-material-ripple'
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads'
 
 const ApiDescription = ({ route, navigation }) => {
 
@@ -136,10 +137,18 @@ const ApiDescription = ({ route, navigation }) => {
                 borderRadius: 25,
                 paddingTop: 13,
                 marginLeft: 'auto',
-                marginRight: 'auto'
+                marginRight: 'auto',
+                marginBottom:10
             }}>
                 <Text style={{ fontFamily: 'poppins_bold', textAlign: "center", color: 'white', fontSize: 15, }}>APPLY</Text>
             </Ripple>
+            <BannerAd
+                unitId="ca-app-pub-3940256099942544/6300978111"
+                size={BannerAdSize.FULL_BANNER}
+                requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                }}
+            />
         </View>
     )
 }
