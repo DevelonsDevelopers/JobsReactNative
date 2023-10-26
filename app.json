@@ -48,6 +48,9 @@
       "package": "com.anonymous.jobsApplication",
       "versionCode": 1
     },
+    "packagerOpts": {
+      "sourceExts": [ "js", "json", "ts", "tsx", "jsx", "vue"]
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     },
