@@ -565,13 +565,13 @@ function Home({ route, navigation }) {
 							}}>Profile</Text>
 						</Ripple>
 					</View>
-					<BannerAd
+					{/* <BannerAd
 						unitId="ca-app-pub-3940256099942544/6300978111"
 						size={BannerAdSize.FULL_BANNER}
 						requestOptions={{
 							requestNonPersonalizedAdsOnly: true,
 						}}
-					/>
+					/> */}
 				</>}
 		</View>
 	)
