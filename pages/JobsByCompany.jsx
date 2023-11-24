@@ -11,6 +11,7 @@ import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RESET } from "../Utils/Constants";
 import Ripple from "react-native-material-ripple";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 function JobsByCompany({ route, navigation }) {
 
@@ -71,6 +72,7 @@ function JobsByCompany({ route, navigation }) {
     // },[jobs])
 
     return (
+        <View style={{ flex:1 }}> 
         <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
             <View style={{ backgroundColor: '#F1F1F1' }}>
                 <View style={{ flexDirection: 'row', height: 90 }}>
@@ -218,6 +220,14 @@ function JobsByCompany({ route, navigation }) {
                 }
             </View>
         </ScrollView>
+        <BannerAd
+                unitId="ca-app-pub-3940256099942544/6300978111"
+                size={BannerAdSize.FULL_BANNER}
+                requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                }}
+            />
+        </View>
     )
 }
 

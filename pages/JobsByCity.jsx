@@ -6,6 +6,7 @@ import { AllJobs, CityJobs } from "../API/actions/jobActions";
 import moment from "moment";
 import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 
 function JobsByCity({ route, navigation }) {
@@ -64,6 +65,7 @@ function JobsByCity({ route, navigation }) {
 	}
 
 	return (
+		<View style={{ flex:1}}> 
 		<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 			<View style={{ backgroundColor: '#EAEAEA' }}>
 				<View style={{ flexDirection: 'row', height: 90 }}>
@@ -209,6 +211,14 @@ function JobsByCity({ route, navigation }) {
 				}
 			</View>
 		</ScrollView>
+		<BannerAd
+                unitId="ca-app-pub-3940256099942544/6300978111"
+                size={BannerAdSize.FULL_BANNER}
+                requestOptions={{
+                    requestNonPersonalizedAdsOnly: true,
+                }}
+            />
+		</View>
 	)
 }
 

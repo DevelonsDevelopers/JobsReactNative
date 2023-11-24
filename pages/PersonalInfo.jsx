@@ -14,10 +14,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {CheckSeeker, fetchSeeker, updateSeeker} from "../API/actions/seekerActions";
+import { CheckSeeker, fetchSeeker, updateSeeker } from "../API/actions/seekerActions";
 import { AllCities } from "../API/actions/cityActions";
 import { AllCountries } from "../API/actions/countryActions";
-import {PhoneData, RESET, RESET_SEEKER} from "../Utils/Constants";
+import { PhoneData, RESET, RESET_SEEKER } from "../Utils/Constants";
 import city from "../API/reducers/city";
 import CitySelectModal from "../Components/CitySelectModal";
 import CountrySelectModal from "../Components/CountrySelectModal";
@@ -26,6 +26,8 @@ import DatePicker from "react-native-date-picker";
 import Ripple from "react-native-material-ripple";
 import PhoneInput from "react-native-phone-number-input";
 import PhoneModal from "../Components/PhoneModal";
+import VerificationStatusModal from "../Components/VerificationStatusModal";
+import {checkCV} from "../API";
 
 function PersonalInfo({ navigation }) {
 
@@ -36,6 +38,7 @@ function PersonalInfo({ navigation }) {
     const success = useSelector(state => state.success.seekerSuccess)
     const nodata = useSelector(state => state.nodata.seekerNoData)
     const error = useSelector(state => state.error.seekerError)
+    const checkCV = useSelector(state => state.cv.check)
 
     const [completed, setCompleted] = useState(false)
     const [verified, setVerified] = useState(false)
@@ -45,11 +48,11 @@ function PersonalInfo({ navigation }) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (nodata || error || success ) {
+        if (nodata || error || success) {
             setLoading(false)
             setCitiesData(cities)
         }
-    }, [success,error,nodata])
+    }, [success, error, nodata])
 
     const dispatch = useDispatch();
     const [ID, setID] = useState()
@@ -209,6 +212,16 @@ function PersonalInfo({ navigation }) {
         setCitiesData(searched)
     }, [country]);
 
+    const [visible, setVisible] = useState(false)
+    const toggleVisible = () => setVisible(!visible)
+    const [text, setText] = useState('Please Complete your Profile First')
+    const click = (t) => {
+        toggleVisible();
+        setText(t)
+    }
+
+
+
     return (
         <View style={{ flex: 1 }}>
             <DatePicker
@@ -223,6 +236,7 @@ function PersonalInfo({ navigation }) {
                     setOpen(false)
                 }}
             />
+            <VerificationStatusModal visible={visible} toggleVisibility={toggleVisible} line={text} />
 
             <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
             <CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={citiesData} click={cityClick} />
@@ -554,7 +568,7 @@ function PersonalInfo({ navigation }) {
                                 backgroundColor: '#fff',
                                 borderRadius: 30,
                             }}>
-                                  <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
+                                <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
                                     <View style={{
                                         flex: 0.7,
                                         backgroundColor: '#E6E6E6',
@@ -706,24 +720,30 @@ function PersonalInfo({ navigation }) {
                                     Google</Text></Pressable>
                             :
                             <Pressable onPress={() => {
-                                if (verified) {
-                                    navigation.push('Verify', {
-                                        code: seeker?.code,
-                                        verifyPhone: seeker?.phone,
-                                        type: "SEEKER",
-                                        verify: false,
-                                        forgot: true,
-                                        ID: ID
-                                    })
+                                if (completed) {
+                                    if (verified) {
+
+                                        navigation.push('Verify', {
+                                            code: seeker?.code,
+                                            verifyPhone: seeker?.phone,
+                                            type: "SEEKER",
+                                            verify: false,
+                                            forgot: true,
+                                            ID: ID
+                                        })
+                                    } else {
+                                        navigation.push('Verify', {
+                                            code: seeker?.code,
+                                            verifyPhone: seeker?.phone,
+                                            type: "SEEKER",
+                                            verify: false,
+                                            ID: ID
+                                        })
+                                    }
                                 } else {
-                                    navigation.push('Verify', {
-                                        code: seeker?.code,
-                                        verifyPhone: seeker?.phone,
-                                        type: "SEEKER",
-                                        verify: false,
-                                        ID: ID
-                                    })
+                                    click('Please Complete Your Profile First')
                                 }
+
                             }}
                                 style={{
                                     borderColor: '#000',
@@ -737,13 +757,23 @@ function PersonalInfo({ navigation }) {
                                     Password</Text></Pressable>
                         }
                         {!verified ?
-                            <Pressable onPress={() => navigation.push('Verify', {
-                                code: seeker?.code,
-                                verifyPhone: seeker?.phone,
-                                type: "SEEKER",
-                                verify: true,
-                                ID: ID
-                            })}
+                            <Pressable onPress={() => {
+                                if (completed) {
+
+                                    navigation.push('Verify', {
+                                        code: seeker?.code,
+                                        verifyPhone: seeker?.phone,
+                                        type: "SEEKER",
+                                        verify: true,
+                                        ID: ID
+                                    })
+
+                                } else {
+                                    click('Please Complete Your Profile First')
+
+                                }
+                            }
+                            }
                                 style={{
                                     borderColor: '#000',
                                     backgroundColor: '#000',
@@ -760,22 +790,38 @@ function PersonalInfo({ navigation }) {
                             ''
                         }
                         {seeker?.plan === 0 ?
-                        <Ripple rippleColor="white"
-                            onPress={() => navigation.push('SeekerPlans')}
-                            style={{
-                                backgroundColor: 'green',
-                                borderRadius: 25,
-                                alignItems: 'center',
-                                padding: 15,
-                                marginTop: 15,
-                                marginHorizontal: 25,
-                                marginBottom: 25
-                            }}>
-                            <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
-                            >Activate Account
-                            </Text>
-                        </Ripple>
-                        : ''}
+                            <Ripple rippleColor="white"
+                                onPress={() => {
+                                    if (completed) {
+                                        if (verified) {
+                                            if (checkCV === "complete") {
+                                                navigation.push('SeekerPlans')
+                                            } else {
+                                                click('Please Complete your CV First')
+                                            }
+                                        } else{
+                                            click('Please Verify Phone First')
+                                        }
+                                    } else {
+                                        click('Please Complete your Profile First')
+                                    }
+
+                                }}
+                                style={{
+                                    backgroundColor: 'green',
+                                    borderRadius: 25,
+                                    alignItems: 'center',
+                                    padding: 15,
+                                    marginTop: 15,
+                                    marginHorizontal: 25,
+                                    marginBottom: 25
+                                }}
+                            >
+                                <Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}
+                                >Activate Account
+                                </Text>
+                            </Ripple>
+                            : ''}
                     </>}
             </ScrollView>
         </View>

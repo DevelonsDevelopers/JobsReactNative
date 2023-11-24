@@ -163,18 +163,6 @@ function Register({ route, navigation }) {
                         elevation: 10
                     }} placeholder={'Enter your Company Size'} />
                 }
-
-                {/* <TextInput onChangeText={(text) => setEmail(text)} style={{
-                    height: 50,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 25,
-                    marginTop: 15,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }} placeholder={'Enter your email'} /> */}
-
                 <TextInput
                     autoCapitalize="none"
                     placeholder="Enter Your Email"
@@ -185,7 +173,7 @@ function Register({ route, navigation }) {
                         backgroundColor: '#fff',
                         width: '85%',
                         borderRadius: 25,
-                        marginTop: 25,
+                        marginTop: 15,
                         paddingHorizontal: 20,
                         color: '#626262',
                         elevation: 10
@@ -241,7 +229,7 @@ function Register({ route, navigation }) {
                     marginTop: 50,
                     paddingVertical: 15
                 }}><Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Register</Text></Pressable>
-                <View style={{ flexDirection: 'row', marginTop: 25 }}>
+                <View style={{ flexDirection: 'row', marginTop: 25, marginBottom: 30 }}>
                     <Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Already have an account?</Text>
                     <Pressable onPress={() => navigation.replace('Login', { USER: USER })}><Text
                         style={{ color: '#000', fontWeight: '900', fontSize: 15 }}> Sign In</Text></Pressable>

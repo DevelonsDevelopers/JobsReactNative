@@ -1,6 +1,7 @@
 import React, {PureComponent, useState} from 'react'
 import { FlatList, Image, KeyboardAvoidingView, Modal, Pressable, SafeAreaView, Text, TextInput, View } from "react-native";
 import { PhoneData } from '../Utils/Constants';
+import Ripple from 'react-native-material-ripple';
 
 const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
 
@@ -61,8 +62,8 @@ const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
                     }}></View>
                     <FlatList scrollEnabled={true} nestedScrollEnabled={false}
                         style={{ marginHorizontal: 0, marginTop: 20, }} data={data}
-                        renderItem={({ item }) => (
-                            <Pressable onPress={() => add(item.dial_code)}><View>
+                        renderItem={({ item,index }) => (
+                            <Ripple rippleColor='#13A3E1' rippleOpacity={0.3} rippleSize={800} onPress={() => add(item.dial_code)}><View>
                                 <View style={{
                                     flexDirection: 'row',
                                     alignItems: 'center',
@@ -92,9 +93,9 @@ const PhoneModal = ({ visible, togglePhoneVisible, set }) => {
                                     marginHorizontal: 10,
                                     marginVertical: 5
                                 }}></View>
-                            </View></Pressable>
+                            </View></Ripple>
                         )}
-                    keyExtractor={item => item.id}
+                        keyExtractor={(item, index) => String(index)}
                     getItemLayout={getItemLayout}/>
                 </SafeAreaView>
             </View>

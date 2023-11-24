@@ -129,22 +129,22 @@ export const CVLanguage = (cv, language) => async (dispatch) => {
     }
 }
 
-export const CVResume = (cv, resume) => async (dispatch) => {
-    try {
-        dispatch ({ type: LOADING })
-        dispatch ({ type: CV_LOADING })
+// export const CVResume = (cv, resume) => async (dispatch) => {
+//     try {
+//         dispatch ({ type: LOADING })
+//         dispatch ({ type: CV_LOADING })
 
-        const { data: { data } } = await api.addCVResume(cv, resume);
-        dispatch ({ type: CREATE_CV_RESUME, payload: { data: data } })
-        dispatch ({ type: SUCCESS })
-        dispatch ({ type: CV_SUCCESS })
+//         const { data: { data } } = await api.addCVResume(cv, resume);
+//         dispatch ({ type: CREATE_CV_RESUME, payload: { data: data } })
+//         dispatch ({ type: SUCCESS })
+//         dispatch ({ type: CV_SUCCESS })
 
-    } catch (error) {
-        console.log(error)
-        dispatch ({ type: CV_ERROR })
+//     } catch (error) {
+//         console.log(error)
+//         dispatch ({ type: CV_ERROR })
 
-    }
-}
+//     }
+// }
 
 export const CVSkill = (cv, skill) => async (dispatch) => {
     try {

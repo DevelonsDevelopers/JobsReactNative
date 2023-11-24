@@ -22,6 +22,8 @@ function Profile({ navigation }) {
 
     const error = useSelector(state => state.error.seekerError)
     const success = useSelector(state => state.success.seekerSuccess)
+    const check = useSelector(state => state.seeker.check)
+    const checkCV = useSelector(state => state.cv.check)
     const dispatch = useDispatch();
     const [ID, setID] = useState()
 
@@ -67,7 +69,7 @@ function Profile({ navigation }) {
         console.log(seeker)
     }, [seeker])
 
- 
+
 
 
     const [visible, setVisible] = useState(false)
@@ -215,7 +217,13 @@ function Profile({ navigation }) {
                             borderRadius: 30,
                             marginTop: 20
                         }}>
-                            <Pressable onPress={() => navigation.push('AccountInfo', { role: seeker?.role })}><View
+                            <Pressable onPress={() => {
+                                if (check === "complete") {
+                                    navigation.push('AccountInfo', {role: seeker?.role})
+                                } else {
+                                    navigation.push('VerificationProfile')
+                                }
+                            }}><View
                                 style={{ flex: 1, paddingVertical: 10, marginTop: 10 }}>
                                 <Text style={{
                                     color: '#000',
@@ -247,6 +255,7 @@ function Profile({ navigation }) {
                             marginLeft: 30,
                             borderRadius: 30,
                             marginTop: 20,
+                            marginBottom: 30
                         }}>
                             <Pressable onPress={() => navigation.push('PersonalInfo')}><View
                                 style={{ flexDirection: 'row', flex: 1, marginTop: 20, alignItems: 'center' }}>

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "jobsApplication",
+    "name": "Jobs Australia",
     "slug": "jobsapplication",
     "plugins": [
       "@react-native-google-signin/google-signin",
@@ -11,6 +11,14 @@
         {
           "merchantIdentifier": "",
           "enableGooglePay": false
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
         }
       ]
     ],
@@ -33,12 +41,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/anImageThat.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json",
       "package": "com.anonymous.jobsApplication",
       "versionCode": 1
+    },
+    "packagerOpts": {
+      "sourceExts": [ "js", "json", "ts", "tsx", "jsx", "vue"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -49,5 +60,9 @@
       }
     },
     "owner": "tayyabrana"
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-3940256099942544~3347511713",
+    "ios_app_id": "ca-app-pub-3940256099942544~3347511713"
   }
 }

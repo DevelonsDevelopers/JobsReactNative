@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View, Text, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Splash from "./pages/Splash";
@@ -232,7 +231,7 @@ function App() {
                             options={{ title: "ProfileVerifiedSuccessful", headerShown: false }} />
                         <Stack.Screen name="OfferResponse" component={OfferResponse}
                             options={{ title: "OfferResponse", headerShown: false }} />
-                            <Stack.Screen  name='ApiDescription' component={ApiDescription} 
+                            <Stack.Screen  name='ApiDescription' component={ApiDescription}
                             options={{title:'ApiDescription' ,headerShown:false}} />
 
                     </Stack.Navigator>

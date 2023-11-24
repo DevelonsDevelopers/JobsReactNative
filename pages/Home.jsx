@@ -13,6 +13,9 @@ import CompleteProfileSeekerModal from "../Components/CompleteProfileSeekerModal
 import { recordInteraction } from "../API";
 import { CheckSeeker, fetchSeeker } from "../API/actions/seekerActions";
 import { CheckCV } from "../API/actions/cvActions";
+import {BannerAd, BannerAdSize} from "react-native-google-mobile-ads";
+import { getApiJobsRecent } from "../API/actions/jobsApi";
+import ProfileVerficationModal from "../Components/ProfileVerification";
 
 function Home({ route, navigation }) {
 
@@ -21,7 +24,7 @@ function Home({ route, navigation }) {
 	const [search, setSearch] = useState('');
 	const seeker = useSelector(state => state.seeker.seeker)
 	const categories = useSelector(state => state.category.featured_categories)
-	const recentJobs = useSelector(state => state.job.recentJobs)
+	const recentJobs = useSelector(state => state.jobsApi.jobsApiRecent)
 
 	const error = useSelector(state => state.error.featuredCategoryError)
 	const success = useSelector(state => state.success.featuredCategorySuccess)
@@ -64,9 +67,9 @@ function Home({ route, navigation }) {
 
 	useEffect(() => {
 		if (!recentJobs) {
-			dispatch(RecentJobs())
+			dispatch(getApiJobsRecent(search))
 		}
-	}, [dispatch, navigation, recentJobs]);
+	}, [dispatch, recentJobs, search]);
 
 
 	useEffect(() => {
@@ -119,16 +122,30 @@ function Home({ route, navigation }) {
 		}
 	}, [check, login]);
 
+	const [profileVerifiedVisibility, setProfileVerifiedVisibility] = useState(false)
+
+	const toggleProfile = () => setProfileVerifiedVisibility(!profileVerifiedVisibility)
+
+
 	const [isComplete, setIsComplete] = useState(false)
 	const [plan, setPlan] = useState(false)
 	const [cv, setCv] = useState(false)
 	const [cover, setCover] = useState(true)
 
-	const JobClick = (id) => {
-		recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
-		navigation.push('JobDetails', { ID: id })
+	const JobClick = (val) => {
+		let num = Number(val.company)
+		console.log(num)
+		if (isNaN(num)) {
+			navigation.push('ApiDescription', { ID: val.id })
+		} else {
+			navigation.push('JobDetails', { ID: val.id })
+		}
 	}
 
+
+	useEffect(() => {
+		console.log(categories)
+	}, [categories])
 
 
 	return (
@@ -143,6 +160,8 @@ function Home({ route, navigation }) {
 					<NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={login} toggleLoadingVisibility={toggleLoadingVisibility} />
 					<LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={loadingVisible} Logout={Logout} />
 					<LoginRequireModal visible={requireVisible} toggleRequireVisible={toggleRequireVisible} navigation={navigation} />
+					<ProfileVerficationModal visible={profileVerifiedVisibility} toggleCompleteVisible={toggleProfile} isComplete={isComplete} navigation={navigation} />
+
 					<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled">
 						<View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
 							<View style={{ flexDirection: 'row', height: 130 }}>
@@ -187,7 +206,7 @@ function Home({ route, navigation }) {
 
 						{login ?
 							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={600} rippleSize={400}
-								onPress={() => navigation.push('Recommendedjobs')} aria-hidden={true} style={{
+								onPress={() => navigation.push('AccountInfo', { role: seeker?.role })} aria-hidden={true} style={{
 									backgroundColor: '#F0A51E',
 									borderRadius: 25,
 									height: 100,
@@ -196,13 +215,25 @@ function Home({ route, navigation }) {
 									marginHorizontal: 25,
 									alignItems: 'center',
 									flexDirection: 'row'
-								}}><Text style={{
-									color: '#000',
-									fontFamily: 'poppins_medium',
-									fontSize: 18,
-									width: 170,
-									textAlign: 'center'
-								}}>Recommended Jobs</Text>
+								}}>
+								<View style={{ flexDirection: 'column', marginLeft: 8 }}>
+									<Text style={{
+										color: '#000',
+										fontFamily: 'poppins_medium',
+										fontSize: 18,
+										width: 170,
+										textAlign: 'center'
+									}}>Distribute Resume</Text>
+									<Text style={{
+										color: 'white',
+										fontFamily: 'poppins_medium',
+										fontSize: 12,
+										width: 170,
+										textAlign: 'center'
+									}}>Over 1000+ email</Text>
+
+								</View>
+
 								<Image style={{
 									width: 70,
 									height: 70,
@@ -254,18 +285,19 @@ function Home({ route, navigation }) {
 												flexDirection: 'column',
 												margin: 7,
 												backgroundColor: '#fff',
-												height: 90,
+												height: 100,
 												justifyContent: 'center',
 												alignItems: 'center',
 												borderRadius: 20,
-												elevation: 5
+												elevation: 5,
+												paddingHorizontal: 10
 											}}>
 											<Image style={{
 												width: 25,
 												height: 25,
-												tintColor: '#000'
-											}} source={require('../assets/provider.png')} alt={'Okay'} />
-											<Text style={{ fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10 }}>{item.name}</Text>
+											}} source={{ uri: `${item.image}` }}
+												alt={'Okay'} />
+											<Text style={{ fontFamily: 'poppins_bold', fontSize: 12, marginTop: 10,textAlign:'center' }}>{item.name}</Text>
 										</Ripple>
 									)}
 									numColumns={2} />
@@ -299,7 +331,7 @@ function Home({ route, navigation }) {
 									<FlatList scrollEnabled={false} nestedScrollEnabled={true}
 										style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
 											<Ripple rippleColor="#13A3E1" rippleOpacity={0.5} rippleDuration={300} rippleSize={200}
-												onPress={() => JobClick(item.id)}
+												onPress={() => JobClick(item)}
 												style={{
 													flex: 1,
 													flexDirection: 'row',
@@ -412,7 +444,11 @@ function Home({ route, navigation }) {
 						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 							onPress={() => {
 								if (login) {
-									navigation.push('AccountInfo', { role: seeker?.role })
+									if (check === "complete") {
+										navigation.push('AccountInfo', {role: seeker?.role})
+									} else {
+										toggleProfile()
+									}
 								} else {
 									toggleRequireVisible()
 								}
@@ -529,6 +565,13 @@ function Home({ route, navigation }) {
 							}}>Profile</Text>
 						</Ripple>
 					</View>
+					<BannerAd
+						unitId="ca-app-pub-3940256099942544/6300978111"
+						size={BannerAdSize.FULL_BANNER}
+						requestOptions={{
+							requestNonPersonalizedAdsOnly: true,
+						}}
+					/>
 				</>}
 		</View>
 	)

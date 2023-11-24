@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const API_URL = "http://develons.biz/api";
+export const API_URL = "https://jobss.com.au/api";
 
 const API = axios.create({ baseURL: `${API_URL}`})
 
@@ -196,6 +196,15 @@ export const fetchSearchJob = (search, country, category, city, company, salaryS
     isType: isType,
 })
 
+//apiJobs API CALL
+export const fetchJobsApiId = (id) => API.post('/apiJobs/job', {
+    id: id
+})
+
+export const fetchApiJobsRecent = (search) => API.post(`/apiJobs/recent`, {
+    search: search,
+})
+
 
 //INTERACTIONS API CALL
 export const recordInteraction = (job, user, query, title, interactiontype) => API.post('/interactions/create', {
@@ -293,16 +302,20 @@ export const updateCVLanguage = (cv, language, id) => API.put('/cvLanguage/updat
     id: id
 })
 export const deleteCVLanguage = (id) => API.delete('/cvLanguage/delete', { data: { id: id }})
-export const addCVResume = (cv, resume) => API.post('/cvResume/create', {
-    cv: cv,
-    resume: resume
-})
-export const updateCVResume = (cv, resume, id) => API.put('/cvResume/update', {
-    cv: cv,
-    resume: resume,
-    id: id
-})
-export const deleteCVResume = (id) => API.delete('/cvResume/delete', { data: { id: id }})
+
+// export const addCVResume = (cv, resume) => API.post('/cvResume/create', {
+//     cv: cv,
+//     resume: resume
+// })
+
+// export const updateCVResume = (cv, resume, id) => API.put('/cvResume/update', {
+//     cv: cv,
+//     resume: resume,
+//     id: id
+// })
+
+// export const deleteCVResume = (id) => API.delete('/cvResume/delete', { data: { id: id }})
+
 export const addCVSkill = (cv, skill) => API.post('/cvSkill/create', {
     cv: cv,
     skill: skill
@@ -370,7 +383,19 @@ export const createUserPlan = (user, plan, activation_date, user_type) => API.po
 })
 
 
-//Api Jobs 
-export const fetchJobsApiId = (id) => API.post('/apiJobs/job', {
-    id: id
+
+//Distribute
+export const distributeResume = (data) => API.post(`/distribute`, {
+    name: data.name,
+    address: data.address,
+    phone: data.phone,
+    code: data.code,
+    email: data.email,
+    role: data.role,
+    intro: data.statement,
+    skills: data.skills,
+    careers: data.careers,
+    educations: data.educations,
+    courses: data.courses,
+    interests: data.interests
 })
