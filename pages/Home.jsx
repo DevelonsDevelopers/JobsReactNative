@@ -233,9 +233,9 @@ function Home({ route, navigation }) {
 							<Text ellipsizeMode={'tail'} numberOfLines={1}
 								style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Categories</Text>
 							<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
-								style={{marginLeft: 'auto', backgroundColor: '#d7d7d7',paddingHorizontal: 10,paddingVertical: 1,borderRadius: 10}} 
+								style={{ marginLeft: 'auto', backgroundColor: '#d7d7d7', paddingHorizontal: 10, paddingVertical: 1, borderRadius: 10 }}
 								onPress={() => navigation.push('Categories')}>
-								<Text numberOfLines={1} style={{fontFamily: 'poppins_light',fontSize: 12,}}
+								<Text numberOfLines={1} style={{ fontFamily: 'poppins_light', fontSize: 12, }}
 								>Show All</Text></Ripple>
 						</View>
 						<SafeAreaView style={{ flex: 1 }}>
@@ -283,10 +283,10 @@ function Home({ route, navigation }) {
 							}}>
 							<Text ellipsizeMode={'tail'} numberOfLines={1}
 								style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Recent Jobs</Text>
-								<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
-								style={{marginLeft: 'auto', backgroundColor: '#d7d7d7',paddingHorizontal: 10,paddingVertical: 1,borderRadius: 10}} 
+							<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100}
+								style={{ marginLeft: 'auto', backgroundColor: '#d7d7d7', paddingHorizontal: 10, paddingVertical: 1, borderRadius: 10 }}
 								onPress={() => navigation.push('Jobs')}>
-								<Text numberOfLines={1} style={{fontFamily: 'poppins_light',fontSize: 12,}}
+								<Text numberOfLines={1} style={{ fontFamily: 'poppins_light', fontSize: 12, }}
 								>Show All</Text></Ripple>
 						</View>
 						{error ?
