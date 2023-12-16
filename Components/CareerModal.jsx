@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Modal, Pressable, Text, View } from 'react-native'
-import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler'
+import { Image, Modal, Pressable, Text, TouchableWithoutFeedback, View, TextInput } from 'react-native'
 import company from "../API/reducers/company";
 import Toast from 'react-native-toast-message';
 
@@ -22,22 +21,24 @@ const CareerModal = ({ visible, toggleCareerVisibility, add, edit, data }) => {
         }
     }, [data]);
 
+    console.log(data?.status)
+
     const Add = () => {
 
         if (company.length >= 2) {
             if (job.length >= 2) {
                 if (timeperiod.length >= 2) {
                     if (address.length >= 2) {
-                        if (phone.length >= 2) {
-                            if (data !== null) {
-                                edit(company, job, timeperiod, address, phone, data.id)
-                            } else {
-                                add(company, job, timeperiod, address, phone)
-                            }
-                            toggleCareerVisibility()
+                        // if (phone.length >= 2) {
+                        if (data?.status === 0) {
+                            edit(company, job, timeperiod, address, phone, data.id)
                         } else {
-                            Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Company Phone' })
+                            add(company, job, timeperiod, address, phone)
                         }
+                        toggleCareerVisibility()
+                        // } else {
+                        //     Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Company Phone' })
+                        // }
                     } else {
                         Toast.show({ type: 'error', position: 'top', text1: 'Please Enter Company Address' })
                     }
@@ -56,81 +57,94 @@ const CareerModal = ({ visible, toggleCareerVisibility, add, edit, data }) => {
 
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleCareerVisibility}>
-            <GestureHandlerRootView style={{
-                flex: 1,
-                alignContent: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(66, 66, 66, 0.4)'
-            }}>
+            <TouchableWithoutFeedback onPress={toggleCareerVisibility}>
                 <View style={{
-                    margin: 35,
-                    elevation: 24,
-                    borderRadius: 25,
-                    backgroundColor: '#fff',
-                    opacity: 1,
-                    padding: 20,
+                    flex: 1,
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
                 }}>
-                    <Pressable style={{ width: 15, height: 15, marginLeft: 'auto' }}
-                        onPress={() => toggleCareerVisibility()}><Image
-                            style={{ width: 15, height: 15, marginLeft: 'auto' }}
-                            source={require('../assets/close.png')} /></Pressable>
-                    <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Career</Text>
-                    <TextInput onChangeText={text => setCompany(text)} placeholder={'Company'} style={{
-                        width: '80%',
-                        marginTop: 20,
-                        borderColor: '#adadad',
-                        borderRadius: 20,
-                        borderWidth: 0.5,
-                        height: 50,
-                        textAlign: 'center'
-                    }}>{data?.company}</TextInput>
-                    <TextInput onChangeText={text => setJob(text)} placeholder={'Job'} style={{
-                        width: '80%',
-                        marginTop: 8,
-                        borderColor: '#adadad',
-                        borderRadius: 20,
-                        borderWidth: 0.5,
-                        height: 50,
-                        textAlign: 'center'
-                    }}>{data?.job}</TextInput>
-                    <TextInput onChangeText={text => setTimePeriod(text)} placeholder={'Time Period'} style={{
-                        width: '80%',
-                        marginTop: 8,
-                        borderColor: '#adadad',
-                        borderRadius: 20,
-                        borderWidth: 0.5,
-                        height: 50,
-                        textAlign: 'center'
-                    }}>{data?.timeperiod}</TextInput>
-                    <TextInput onChangeText={text => setAddress(text)} placeholder={'Address'} style={{
-                        width: '80%',
-                        marginTop: 8,
-                        borderColor: '#adadad',
-                        borderRadius: 20,
-                        borderWidth: 0.5,
-                        height: 50,
-                        textAlign: 'center'
-                    }}>{data?.address}</TextInput>
-                    <TextInput onChangeText={text => setPhone(text)} placeholder={'Phone'} style={{
-                        width: '80%',
-                        marginTop: 8,
-                        borderColor: '#adadad',
-                        borderRadius: 20,
-                        borderWidth: 0.5,
-                        height: 50,
-                        textAlign: 'center'
-                    }}>{data?.phone}</TextInput>
-                    <Pressable onPress={() => Add()} style={{
-                        paddingHorizontal: 60,
-                        paddingVertical: 13,
-                        backgroundColor: '#13A3E1',
+                    <View style={{
+                        margin: 35,
+                        elevation: 24,
                         borderRadius: 25,
-                        marginTop: 10
-                    }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>ADD</Text></Pressable>
+                        backgroundColor: '#fff',
+                        opacity: 1,
+                        padding: 20,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '90%'
+                    }}>
+                        <Pressable style={{ width: 15, height: 15, marginLeft: 'auto' }}
+                            onPress={() => toggleCareerVisibility()}><Image
+                                style={{ width: 15, height: 15, marginLeft: 'auto' }}
+                                source={require('../assets/close.png')} /></Pressable>
+                        <Text style={{ fontSize: 16, fontFamily: 'poppins_bold' }}>Career</Text>
+                        <TextInput onChangeText={text => setCompany(text)} placeholder={'Company'} style={{
+                            width: '80%',
+                            marginTop: 20,
+                            borderColor: '#adadad',
+                            borderRadius: 20,
+                            borderWidth: 0.5,
+                            height: 50,
+                            textAlign: 'center'
+                        }}>{data?.company}</TextInput>
+                        <TextInput onChangeText={text => setJob(text)} placeholder={'Job'} style={{
+                            width: '80%',
+                            marginTop: 8,
+                            borderColor: '#adadad',
+                            borderRadius: 20,
+                            borderWidth: 0.5,
+                            height: 50,
+                            textAlign: 'center'
+                        }}>{data?.job}</TextInput>
+                        <TextInput onChangeText={text => setTimePeriod(text)} placeholder={'Time Period'} style={{
+                            width: '80%',
+                            marginTop: 8,
+                            borderColor: '#adadad',
+                            borderRadius: 20,
+                            borderWidth: 0.5,
+                            height: 50,
+                            textAlign: 'center'
+                        }}>{data?.timeperiod}</TextInput>
+                        <TextInput onChangeText={text => setAddress(text)} placeholder={'Address'} style={{
+                            width: '80%',
+                            marginTop: 8,
+                            borderColor: '#adadad',
+                            borderRadius: 20,
+                            borderWidth: 0.5,
+                            height: 50,
+                            textAlign: 'center'
+                        }}>{data?.address}</TextInput>
+                        {/* <TextInput onChangeText={text => setPhone(text)} placeholder={'Phone'} style={{
+                        width: '80%',
+                        marginTop: 8,
+                        borderColor: '#adadad',
+                        borderRadius: 20,
+                        borderWidth: 0.5,
+                        height: 50,
+                        textAlign: 'center'
+                    }}>{data?.phone}</TextInput> */}
+                          {data?.status === 0 ?
+                            <Pressable onPress={() => Add()} style={{
+                                paddingHorizontal: 60,
+                                paddingVertical: 13,
+                                backgroundColor: '#13A3E1',
+                                borderRadius: 25,
+                                marginTop: 10
+                            }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>Update</Text></Pressable>
+                            :
+                            <Pressable onPress={() => Add()} style={{
+                                paddingHorizontal: 60,
+                                paddingVertical: 13,
+                                backgroundColor: '#13A3E1',
+                                borderRadius: 25,
+                                marginTop: 10
+                            }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>Add</Text></Pressable>
+                        }
+                    </View>
                 </View>
-            </GestureHandlerRootView>
+            </TouchableWithoutFeedback>
             <Toast position='top' bottomOffset={20} />
         </Modal>
     )

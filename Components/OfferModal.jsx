@@ -1,5 +1,5 @@
 import React from 'react'
-import {Image, Modal, Pressable, Text, View} from 'react-native'
+import {Image, Modal, Pressable, Text, TouchableWithoutFeedback, View} from 'react-native'
 
 const OfferModal = ({visible, toggleVisibility, set}) => {
 
@@ -10,12 +10,13 @@ const OfferModal = ({visible, toggleVisibility, set}) => {
 
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleVisibility} >
-            <View style={{
-                flex: 1,
-                alignContent: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(66, 66, 66, 0.4)'
-            }}>
+           <TouchableWithoutFeedback onPress={toggleVisibility}>
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                }}>
                 <View style={{
                     margin: 35,
                     elevation: 24,
@@ -37,7 +38,7 @@ const OfferModal = ({visible, toggleVisibility, set}) => {
                         }}>Select Your Offer Type </Text>
                         <View style={{marginLeft: 20}}>
                             <Pressable onPress={() => toggleVisibility()} style={{paddingLeft: 10}}>
-                                <Image style={{width: 15, height: 15, marginLeft: 'auto'}}
+                                <Image style={{width: 12, height: 12, marginLeft: 'auto'}}
                                        source={require('../assets/close.png')}/></Pressable>
                         </View>
                     </View>
@@ -75,6 +76,7 @@ const OfferModal = ({visible, toggleVisibility, set}) => {
                     </Pressable>
                 </View>
             </View>
+            </TouchableWithoutFeedback>
         </Modal>
     )
 }

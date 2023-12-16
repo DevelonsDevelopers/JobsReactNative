@@ -145,7 +145,7 @@ function Profile({ navigation }) {
                                 fontFamily: 'poppins_medium',
                                 width: '100%',
                                 textAlign: 'center'
-                            }}>{seeker?.phone}</Text>
+                            }}> {seeker?.code}{seeker?.phone}</Text>
                             <Text style={{
                                 color: '#000',
                                 fontSize: 15,
@@ -171,7 +171,7 @@ function Profile({ navigation }) {
                             borderRadius: 30,
                             marginTop: 20
                         }}>
-                            <Pressable onPress={() => navigation.push('AppliedSaved', { screen: 0 })} style={{ flex: 1, paddingVertical: 20 }}>
+                            <Pressable onPress={() => navigation.push('saved')} style={{ flex: 1, paddingVertical: 20 }}>
                                 <Text style={{
                                     color: '#fff',
                                     fontSize: 14,
@@ -189,7 +189,7 @@ function Profile({ navigation }) {
                                 }}>{seeker?.saved}</Text>
                             </Pressable>
                             <View style={{ backgroundColor: '#fff', width: 3 }} />
-                            <Pressable onPress={() => navigation.push('AppliedSaved', { screen: 1 })} style={{ flex: 1, paddingVertical: 20 }}>
+                            <Pressable onPress={() => navigation.push('applied')} style={{ flex: 1, paddingVertical: 20 }}>
                                 <Text style={{
                                     color: '#fff',
                                     fontSize: 14,
@@ -219,20 +219,20 @@ function Profile({ navigation }) {
                         }}>
                             <Pressable onPress={() => {
                                 if (check === "complete") {
-                                    navigation.push('AccountInfo', {role: seeker?.role})
+                                    navigation.push('AccountInfo', { role: seeker?.role })
                                 } else {
                                     navigation.push('VerificationProfile')
                                 }
                             }}><View
                                 style={{ flex: 1, paddingVertical: 10, marginTop: 10 }}>
-                                <Text style={{
-                                    color: '#000',
-                                    fontSize: 15,
-                                    fontFamily: 'poppins_semibold',
-                                    width: '100%',
-                                    textAlign: 'center'
-                                }}>Manage Your Resume</Text>
-                            </View></Pressable>
+                                    <Text style={{
+                                        color: '#000',
+                                        fontSize: 15,
+                                        fontFamily: 'poppins_semibold',
+                                        width: '100%',
+                                        textAlign: 'center'
+                                    }}>Manage Your Resume</Text>
+                                </View></Pressable>
                             <View style={{ backgroundColor: '#000', height: 3 }} />
                             <Pressable onPress={() => navigation.push('History')}>
                                 <View style={{ flex: 1, paddingVertical: 10, marginBottom: 10 }}>

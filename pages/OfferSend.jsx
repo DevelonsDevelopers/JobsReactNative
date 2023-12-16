@@ -117,7 +117,7 @@ const OfferSend = ({ route, navigation }) => {
 
                         </View>
                         <Pressable onPress={() => toggleVisibility()}>
-                            <TextInput editable={false}
+                            <TextInput editable={false} placeholder='select your offer type'
                                 style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}  >{type}</TextInput>
                         </Pressable>
                     </View>

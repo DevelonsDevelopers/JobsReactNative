@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const API_URL = "https://jobss.com.au/api";
+export const API_URL = "http://182.176.99.175/api";
 
 const API = axios.create({ baseURL: `${API_URL}`})
 
@@ -170,7 +170,7 @@ export const completeRegistration = (name, size, id) => API.put('/companies/regi
 })
 
 //JOBS API CALL
-export const fetchAllJobs = (user) => API.post('/jobs/all', { user: user })
+export const fetchAllJobs = (user) => API.post('/jobs/jobs', { user: user })
 export const fetchRecentJobs = () => API.get('/jobs/recent')
 export const fetchRecommendedJobs = (user, tag) => API.post('/jobs/recommended', { user: user, tag: tag })
 export const fetchJobByID = (user, id) => API.post('/jobs/get', { user: user, id: id })

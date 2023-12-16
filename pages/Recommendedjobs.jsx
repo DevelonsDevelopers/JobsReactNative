@@ -10,6 +10,7 @@ import { RecommendedJobs } from "../API/actions/jobActions";
 import moment from "moment/moment";
 import { recordInteraction } from "../API";
 import { RESET } from "../Utils/Constants";
+import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 const data = [
 	{ "name": "Facebook" },
@@ -87,6 +88,9 @@ function Recommendedjobs({ navigation }) {
 	}, [noData])
 
 	return (
+		<View style={{ flex:1 }}> 
+			
+
 		<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
 			{loading ?
 				<View style={{ marginTop: 400 }}>
@@ -117,12 +121,13 @@ function Recommendedjobs({ navigation }) {
 
 									<View style={{ backgroundColor: '#EAEAEA' }}>
 										<View style={{ flexDirection: 'row', height: 90 }}>
-											<Pressable onPress={() => navigation.goBack()}><Image style={{
+											<Pressable onPress={() => navigation.goBack()} ><Image style={{
 												width: 22,
 												height: 20,
 												marginTop: 70,
 												marginLeft: 30,
-												tintColor: '#000'
+												tintColor: '#000',
+												
 											}} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
 											<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
 												<Pressable
@@ -160,7 +165,7 @@ function Recommendedjobs({ navigation }) {
 														backgroundColor: '#fff'
 													}}>
 														<View style={{ flexDirection: 'row', flex: 1 }}>
-															<Text style={{
+															{/* <Text style={{
 																color: '#207A00',
 																backgroundColor: 'rgba(0,180,18,0.2)',
 																paddingHorizontal: 10,
@@ -168,7 +173,7 @@ function Recommendedjobs({ navigation }) {
 																fontSize: 10,
 																fontFamily: 'poppins_medium',
 																borderRadius: 5
-															}}>NEW</Text>
+															}}>NEW</Text> */}
 															<Text style={{
 																marginLeft: 'auto',
 																textAlign: 'right',
@@ -258,6 +263,15 @@ function Recommendedjobs({ navigation }) {
 						</>}
 				</>}
 		</ScrollView>
+
+		<BannerAd
+        unitId="ca-app-pub-3940256099942544/6300978111"
+        size={BannerAdSize.FULL_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
+        }}
+      />
+		</View>
 	)
 }
 

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import PhoneInput from "react-native-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
 import { SeekerByEmail } from "../API/actions/seekerActions";
+import Toast from "react-native-toast-message";
 
 function ForgotPassword({ route, navigation }) {
 
@@ -17,11 +18,14 @@ function ForgotPassword({ route, navigation }) {
 
     const fetch = (email) => {
         dispatch(SeekerByEmail(email))
+        if (!seekerEmail) {
+            Toast.show({ type: 'error', position: 'top', text1: 'Email not exist' })
+        }
     }
 
     useEffect(() => {
         console.log(seekerEmail)
-        if (seekerEmail){
+        if (seekerEmail) {
             navigation.push('Verify', { code: seekerEmail?.code, verifyPhone: seekerEmail?.phone, forgot: true, type: "SEEKER", verify: false, ID: seekerEmail?.id })
         }
     }, [seekerEmail]);
@@ -58,7 +62,7 @@ function ForgotPassword({ route, navigation }) {
                         paddingHorizontal: 20,
                         color: '#626262',
                         elevation: 10
-                    }} placeholder={'Enter your Email'}  />
+                    }} placeholder={'Enter your Email'} />
 
 
                 {/*<Text style={{color: '#000', fontFamily: 'poppins_regular', fontSize: 15, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center'}}>OR</Text>*/}
@@ -82,6 +86,7 @@ function ForgotPassword({ route, navigation }) {
                     paddingVertical: 7,
                 }}><Text style={{ color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15 }}>Send </Text></Pressable>
             </View>
+            <Toast position='top' bottomOffset={20} />
         </ScrollView>
     );
 }

@@ -13,7 +13,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CVByUser } from '../API/actions/cvActions';
 import DistributeModal from '../Components/DistributeModal';
-import {distributeResume} from "../API";
+import { distributeResume } from "../API";
+import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 
 function Resume({ navigation }) {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ function Resume({ navigation }) {
   }, [success, error]);
 
   useEffect(() => {
-  console.log(cv)
+    console.log(cv)
   }, [cv]);
 
   const [completed, setCompleted] = useState(true)
@@ -56,7 +57,7 @@ function Resume({ navigation }) {
     if (dis) {
       distributeResume(cv).then(res => {
         const { data: { responseCode } } = res;
-        if (responseCode===200){
+        if (responseCode === 200) {
           setVerify(false)
         }
       })
@@ -215,7 +216,7 @@ function Resume({ navigation }) {
 
           </>}
       </ScrollView>
-      <Pressable
+      {/* <Pressable
         onPress={() => {
           if (completed) {
             toggleDistributeVisible(true)
@@ -231,8 +232,14 @@ function Resume({ navigation }) {
 
         }}>
         <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#2994FF', paddingHorizontal: 20, paddingVertical: 6, borderRadius: 20 }}>Distribute Resume</Text>
-      </Pressable>
-
+      </Pressable> */}
+      <BannerAd
+        unitId="ca-app-pub-3940256099942544/6300978111"
+        size={BannerAdSize.FULL_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
+        }}
+      />
 
     </View>
   );

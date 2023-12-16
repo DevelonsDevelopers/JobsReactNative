@@ -20,7 +20,7 @@ function OnBoarding({ navigation }) {
                 elevation:10,
                 zIndex: 1
             }}><Text style={{color: '#fff', fontWeight: '900', fontSize: 20}}>Continue</Text></Pressable>
-            <ImageBackground style={{width: 270, height: 287, marginTop: 'auto', marginLeft: 'auto', paddingTop: 40}}
+            {/* <ImageBackground style={{width: 270, height: 287, marginTop: 'auto', marginLeft: 'auto', paddingTop: 40}}
                              source={require('../assets/circle_yellow.png')}>
                 <Text style={{
                     textAlign: 'center',
@@ -41,7 +41,7 @@ function OnBoarding({ navigation }) {
                     marginLeft: 40,
                     marginRight: 10
                 }}>The largest resume distribution Service in Australia and New Zealand</Text>
-            </ImageBackground>
+            </ImageBackground> */}
         </View>
     )
 }

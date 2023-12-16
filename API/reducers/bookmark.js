@@ -9,18 +9,22 @@ import {
     SUCCESS
 } from "../../Utils/Constants";
 
-const bookmark = (state = {bookmarkIsLoading: true, bookmarkSuccess: false, bookmarkError: false, bookmarkNoData: false}, action) => {
-    switch (action.type){
+const bookmark = (state = { bookmarkIsLoading: true, bookmarkSuccess: false, bookmarkError: false, bookmarkNoData: false }, action) => {
+    switch (action.type) {
         case BOOKMARKLOADING:
-            return {...state, bookmarkIsLoading: true, bookmarkSuccess: true, bookmarkError: false, bookmarkNoData: false}
+            return { ...state, bookmarkIsLoading: true, bookmarkSuccess: true, bookmarkError: false, bookmarkNoData: false }
         case BOOKMARKSUCCESS:
-            return {...state, bookmarkIsLoading: false, bookmarkSuccess: true, bookmarkError: false, bookmarkNoData: false}
+            return { ...state, bookmarkIsLoading: false, bookmarkSuccess: true, bookmarkError: false, bookmarkNoData: false }
         case BOOKMARKERROR:
-            return {...state, bookmarkIsLoading: false, bookmarkSuccess: false, bookmarkError: true, bookmarkNoData: false}
+            return { ...state, bookmarkIsLoading: false, bookmarkSuccess: false, bookmarkError: true, bookmarkNoData: false }
         case BOOKMARKNODATA:
-            return {...state, bookmarkIsLoading: false, bookmarkSuccess: false, bookmarkError: false, bookmarkNoData: true}
+            return { ...state, bookmarkIsLoading: false, bookmarkSuccess: false, bookmarkError: false, bookmarkNoData: true }
         case ALL_BOOKMARKS:
-            return {...state, bookmarks: action.payload.bookmarks}
+            return { ...state, bookmarks: action.payload.bookmarks }
+        case BOOKMARK_JOB:
+            const bookmarks = state.bookmarks.filter((job) => (job.id !== action.payload.bookmarks))
+            console.log(state)
+            return { ...state, bookmarks: bookmarks }
         default:
             return state
     }

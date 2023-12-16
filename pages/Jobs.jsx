@@ -157,7 +157,7 @@ function Jobs({ navigation }) {
 															backgroundColor: '#fff'
 														}}>
 															<View style={{ flexDirection: 'row', flex: 1 }}>
-																<Text style={{
+																{/* <Text style={{
 																	color: '#207A00',
 																	backgroundColor: 'rgba(0,180,18,0.2)',
 																	paddingHorizontal: 10,
@@ -165,7 +165,7 @@ function Jobs({ navigation }) {
 																	fontSize: 10,
 																	fontFamily: 'poppins_medium',
 																	borderRadius: 5
-																}}>NEW</Text>
+																}}>NEW</Text> */}
 																<Text style={{
 																	marginLeft: 'auto',
 																	textAlign: 'right',

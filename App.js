@@ -77,6 +77,10 @@ import ForgotPassword from './pages/ForgotPassword';
 import ProfileVerifiedSuccessful from './pages/ProfileVerifiedSuccessful';
 import OfferResponse from './pages/OfferResponse';
 import ApiDescription from './pages/ApiDescription';
+import AppliedSuccess from './pages/AppliedSuccess';
+import { StatusBar } from 'react-native';
+import Applied from './pages/Applied';
+import Saved from './pages/Saved';
 
 
 
@@ -84,7 +88,13 @@ const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
 const Stack = createNativeStackNavigator();
 
+
 function App() {
+    
+    React.useEffect(() => {
+        StatusBar.setBackgroundColor('#13A3E1'); 
+        StatusBar.setBarStyle('light-content'); 
+      }, []);
 
     let [fontLoad] = useFonts({
         'poppins_thin': require('./assets/fonts/poppins_thin.ttf'),
@@ -233,6 +243,12 @@ function App() {
                             options={{ title: "OfferResponse", headerShown: false }} />
                             <Stack.Screen  name='ApiDescription' component={ApiDescription}
                             options={{title:'ApiDescription' ,headerShown:false}} />
+                            <Stack.Screen  name='appliedSuccess' component={AppliedSuccess}
+                            options={{title:'appliedSuccess' ,headerShown:false}} />
+                            <Stack.Screen  name='applied' component={Applied}
+                            options={{title:'applied' ,headerShown:false}} />
+                            <Stack.Screen  name='saved' component={Saved}
+                            options={{title:'saved' ,headerShown:false}} />
 
                     </Stack.Navigator>
                 </NavigationContainer>

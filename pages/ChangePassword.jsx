@@ -18,7 +18,7 @@ function ChangePassword({route, navigation}) {
     const toggleVisibility = () => setShow(!show)
 
     const passwordUpdate = () => {
-        if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password)) {
+        if (password?.length > 5 ) {
             if (password === cPassword) {
                 // navigation.navigate('Verify', { verifyPhone: verifyPhone, password: password})
                 if (type === "PROVIDER") {

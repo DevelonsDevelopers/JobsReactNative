@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, Pressable, ScrollView, FlatList, SafeAreaView, ActivityIndicator } from 'react-native'
+import { Image, TextInput, Text, Pressable, ScrollView, FlatList, SafeAreaView, ActivityIndicator, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import Termsandconditions from './Termsandconditions'
@@ -47,12 +47,23 @@ function Categories({ navigation }) {
     }
 
 
+    const [noSearch, setNoSearch] = useState(false)
 
+    useEffect(() => {
+        if (data?.length === 0) {
+            setNoSearch(true)
+        } else {
+            setNoSearch(false)
+        }
+    }, [data])
+
+
+    const height = Dimensions.get("window").height;
 
 
 
     return (
-        <View style={{ flex: 1 }} >
+        <View style={{ height: height }} >
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 {isLoading ?
                     <View style={{ marginTop: 400 }}>
@@ -121,47 +132,51 @@ function Categories({ navigation }) {
                                                     padding: 0
                                                 }}>Browse by Categories</Text>
                                             </View>
-                                            <SafeAreaView>
-                                                <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                                                    style={{ marginHorizontal: 20 }} data={data}
-                                                    renderItem={({ item }) => (
-                                                        <Pressable
-                                                            onPress={() => navigation.push('JobsByCategory', { CATID: item.id })}
-                                                            style={{
-                                                                flex: 1,
-                                                                backgroundColor: '#fff',
-                                                                height: 120,
-                                                                alignItems: 'center',
-                                                                padding: 15,
-                                                                borderRadius: 15,
-                                                                margin: 5,
-                                                                justifyContent: 'center'
-                                                            }}>
-                                                            <Image style={{ width: 40, height: 40, marginTop: 5 }}
-                                                                source={{ uri: `${item.image}` }} />
-                                                            <Text style={{
-                                                                fontSize: 12,
-                                                                fontFamily: 'poppins_semibold',
-                                                                marginTop: 12,
-                                                                textAlign: 'center'
-                                                            }}>{item.name}</Text>
-                                                        </Pressable>
-                                                    )}
-                                                    numColumns={2} />
-                                            </SafeAreaView>
+                                            {noSearch ?
+                                                <Text style={{ textAlign: 'center', color: 'gray', fontSize: 16, marginTop: '20%' }}>No Search Found</Text>
+                                                :
+                                                <SafeAreaView>
+                                                    <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                                                        style={{ marginHorizontal: 20 }} data={data}
+                                                        renderItem={({ item }) => (
+                                                            <Pressable
+                                                                onPress={() => navigation.push('JobsByCategory', { CATID: item.id })}
+                                                                style={{
+                                                                    flex: 1,
+                                                                    backgroundColor: '#fff',
+                                                                    height: 120,
+                                                                    alignItems: 'center',
+                                                                    padding: 15,
+                                                                    borderRadius: 15,
+                                                                    margin: 5,
+                                                                    justifyContent: 'center'
+                                                                }}>
+                                                                <Image style={{ width: 40, height: 40, marginTop: 5 }}
+                                                                    source={{ uri: `${item.image}` }} />
+                                                                <Text style={{
+                                                                    fontSize: 12,
+                                                                    fontFamily: 'poppins_semibold',
+                                                                    marginTop: 12,
+                                                                    textAlign: 'center'
+                                                                }}>{item.name}</Text>
+                                                            </Pressable>
+                                                        )}
+                                                        numColumns={2} />
+                                                </SafeAreaView>
+                                            }
                                         </View>
                                     </>
                                 }
                             </>}
                     </>}
             </ScrollView>
-            <BannerAd
+            {/* <BannerAd
                 unitId="ca-app-pub-3940256099942544/6300978111"
                 size={BannerAdSize.FULL_BANNER}
                 requestOptions={{
                     requestNonPersonalizedAdsOnly: true,
                 }}
-            />
+            /> */}
         </View>
     )
 }

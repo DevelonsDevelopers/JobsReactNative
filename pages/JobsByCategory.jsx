@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
+import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, Dimensions } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
@@ -17,10 +17,11 @@ import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 function JobsByCategory({ route, navigation }) {
 
 	const { CATID } = route.params
+	console.log(CATID)
 
 	const jobs = useSelector(state => state.job.categoryJobs)
 	const success = useSelector(state => state.success.categoryJobSuccess)
-	const nodata = useSelector(state => state.nodata.categoryJobNoData)
+	const [nodata, setNodata] = useState();
 	const error = useSelector(state => state.error.categoryJobError)
 	const dispatch = useDispatch()
 	const [loading, setLoading] = useState(true)
@@ -28,20 +29,41 @@ function JobsByCategory({ route, navigation }) {
 
 	const [ID, setID] = useState()
 
+
+	// const [input, setInput] = useState("");
+	// useEffect(() => {
+	//    const unsubscribe = navigation.addListener('focus', () => {
+	// 	setData("");
+	//    });
+	//    return unsubscribe;
+	// }, [navigation]);
+
+	// useEffect(() => {
+	// 	if (ID) {
+	// 		if (loading) {
+	// 			if (!jobs) {
+	// 				dispatch(CategoryJobs(ID, CATID))
+	// 			} else if (jobs.length === 0 || jobs[0].category !== CATID) {
+	// 				dispatch(CategoryJobs(ID, CATID))
+	// 			} else {
+	// 				setLoading(false)
+	// 				setData(jobs)
+	// 			}
+	// 		}
+	// 	}
+	// }, [dispatch, jobs, ID]);
+
+	console.log(success)
+
+
 	useEffect(() => {
-		if (ID) {
-			if (loading) {
-				if (!jobs) {
-					dispatch(CategoryJobs(ID, CATID))
-				} else if (jobs.length === 0 || jobs[0].category !== CATID) {
-					dispatch(CategoryJobs(ID, CATID))
-				} else {
-					setLoading(false)
-					setData(jobs)
-				}
-			}
-		}
-	}, [dispatch, jobs, ID]);
+
+		dispatch(CategoryJobs(ID, CATID))
+		setData(jobs)
+
+	}, [dispatch])
+
+
 
 	useEffect(() => {
 		if (jobs) {
@@ -49,12 +71,37 @@ function JobsByCategory({ route, navigation }) {
 		}
 	}, [jobs]);
 
+
 	useEffect(() => {
-		if (success || error || nodata) {
-			setData(jobs)
-			setLoading(false)
+		if (jobs?.length === 0) {
+			setNodata(true)
 		}
-	}, [success, error, nodata]);
+		else {
+			setNodata(false)
+		}
+	}, [jobs])
+
+	useEffect(() => {
+		if (data) {
+			setLoading(false)
+		} else {
+			setLoading(true)
+		}
+	}, [data])
+
+
+	// console.log(jobs)
+	// console.log(ID)
+
+	// useEffect(() => {
+	// 	if (success || error) {
+	// 		setData(jobs)
+	// 		setLoading(false)
+	// 	}
+	// }, [success, error]);
+
+	// console.log("jobs", jobs)
+	// console.log("data", data)
 
 	const JobClick = (id) => {
 		recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
@@ -64,16 +111,17 @@ function JobsByCategory({ route, navigation }) {
 	useEffect(() => {
 		GetData()
 	}, []);
+
 	const GetData = async () => {
 		const id = await AsyncStorage.getItem('ID')
 		setID(id);
 	}
-
+	const height = Dimensions.get("window").height;
 
 	return (
-		<View style={{ flex: 1 }}>
-			<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
-				<View style={{ backgroundColor: '#EAEAEA' }}>
+		<View style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+			<ScrollView style={{ height: height, }}>
+				<View style={{}}>
 					<View style={{ flexDirection: 'row', height: 90 }}>
 						<Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
 							width: 22,
@@ -100,15 +148,18 @@ function JobsByCategory({ route, navigation }) {
 						}}>Jobs</Text>
 					</View>
 					{loading ?
-						<View style={{ marginTop: 200 }}>
+						<View style={{ marginTop: '50%' }}>
 							<ActivityIndicator size={60} color="#13A3E1" />
 						</View>
 						: <>
-							{nodata ? <View style={{ marginTop: 200 }}>
-								<Image source={require('../assets/nodata.png')}
-									style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-								<Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Jobs Found</Text>
-							</View> :
+							{nodata ?
+								<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+									<Image
+										source={require('../assets/nodata.png')}
+										style={{ width: 260, height: 260, marginBottom: -20 }}
+									/>
+									<Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Jobs </Text>
+								</View> :
 								<>
 									{error ?
 										<View style={{ marginTop: 200 }}>

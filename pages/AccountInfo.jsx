@@ -64,6 +64,7 @@ function AccountInfo({ route, navigation }) {
 	const success = useSelector(state => state.success.cvSuccess);
 
 	const [roleData, setRoleData] = useState(role)
+	const [personalInfo, setPersonalInfo] = useState()
 	const [educationVisible, setEducationVisible] = useState(false)
 	const [careerVisible, setCareerVisible] = useState(false)
 	const [courseVisible, setCourseVisible] = useState(false)
@@ -87,6 +88,8 @@ function AccountInfo({ route, navigation }) {
 	const [ID, setID] = useState()
 	const [infoVisible, setInfoVisible] = useState(false)
 	const [roleVisible, setRoleVisible] = useState(false)
+
+
 
 
 	useEffect(() => {
@@ -152,12 +155,16 @@ function AccountInfo({ route, navigation }) {
 			console.log(err)
 		})
 	}
+	// console.log(roleData)
 
 	const addPersonalInfo = async (statement) => {
 		await cvStatement(cv.id, statement).then(res => {
 			setTrigger(!trigger)
+			setPersonalInfo(cv?.statement)
 		})
 	}
+
+	console.log(cv?.statement)
 
 	const addEducation = (qualification, timeperiod, institute) => {
 		dispatch(CVEducation(cv.id, qualification, timeperiod, institute))
@@ -396,9 +403,9 @@ function AccountInfo({ route, navigation }) {
 
 									<PersonalStatementModal visible={infoVisible}
 										toggleInfoVisibility={toggleInfoVisibility}
-										add={addPersonalInfo} />
+										add={addPersonalInfo} data={cv?.statement} />
 									<RoleModal visible={roleVisible}
-										toggleRoleVisibility={toggleRoleVisibility} add={addRole}
+										toggleRoleVisibility={toggleRoleVisibility} add={addRole} data={roleData}
 									/>
 
 									<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
@@ -478,12 +485,24 @@ function AccountInfo({ route, navigation }) {
 															paddingHorizontal: 15,
 															marginLeft: 'auto'
 														}}>
-															<View><Text
-																style={{
-																	color: '#000',
-																	fontFamily: 'poppins_medium',
-																	fontSize: 12
-																}}>Update</Text>
+															<View>
+																{roleData?.length > 0 ?
+																	<Text
+																		style={{
+																			color: '#000',
+																			fontFamily: 'poppins_medium',
+																			fontSize: 12
+																		}}>Update</Text>
+																	:
+																	<Text
+																		style={{
+																			color: '#000',
+																			fontFamily: 'poppins_medium',
+																			fontSize: 12
+																		}}>Add</Text>
+																}
+
+
 															</View></Pressable>
 													</View>
 													<TextInput placeholder="Role" editable={false} style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{roleData}</TextInput>
@@ -514,15 +533,23 @@ function AccountInfo({ route, navigation }) {
 															paddingHorizontal: 15,
 															marginLeft: 'auto'
 														}}>
-															<View><Text
-																style={{
-																	color: '#000',
-																	fontFamily: 'poppins_medium',
-																	fontSize: 12
-																}}>Update</Text>
+															<View>
+																{cv?.statement?.length > 0 ?
+																	<Text style={{
+																		color: '#000',
+																		fontFamily: 'poppins_medium',
+																		fontSize: 12
+																	}}>Update</Text>
+																	:
+																	<Text style={{
+																		color: '#000',
+																		fontFamily: 'poppins_medium',
+																		fontSize: 12
+																	}}>Add</Text>
+																}
 															</View></Pressable>
 													</View>
-													<Text style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{cv?.statement}</Text>
+													<TextInput style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }} placeholder="About me " editable={false}>{cv?.statement}</TextInput>
 
 												</View>
 
@@ -542,19 +569,20 @@ function AccountInfo({ route, navigation }) {
 															fontFamily: 'poppins_bold',
 															fontSize: 16
 														}}>Education</Text>
-														<Pressable onPress={() => toggleEducationVisibility()} style={{
-															backgroundColor: '#e7e7e7',
-															borderRadius: 25,
-															alignItems: 'center',
-															paddingVertical: 5,
-															paddingHorizontal: 15,
-															marginLeft: 'auto'
-														}}><Text
+														<Pressable onPress={() => editEducation({ status: 1 })}
 															style={{
-																color: '#000',
-																fontFamily: 'poppins_medium',
-																fontSize: 12
-															}}>Add</Text></Pressable>
+																backgroundColor: '#e7e7e7',
+																borderRadius: 25,
+																alignItems: 'center',
+																paddingVertical: 5,
+																paddingHorizontal: 15,
+																marginLeft: 'auto'
+															}}><Text
+																style={{
+																	color: '#000',
+																	fontFamily: 'poppins_medium',
+																	fontSize: 12
+																}}>Add</Text></Pressable>
 													</View>
 													<SafeAreaView style={{
 														flex: 1,
@@ -592,7 +620,7 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.qualification}</Text>
-																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editEducation({ id: item.id, degree: item.qualification, institute: item.institute, timeperiod: item.timeperiod })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editEducation({ id: item.id, degree: item.qualification, institute: item.institute, timeperiod: item.timeperiod, status: 0 })}><Image style={{
 																			width: 15,
 																			height: 15
 																		}}
@@ -626,19 +654,20 @@ function AccountInfo({ route, navigation }) {
 															fontFamily: 'poppins_bold',
 															fontSize: 16
 														}}>Career</Text>
-														<Pressable onPress={() => toggleCareerVisibility()} style={{
-															backgroundColor: '#e7e7e7',
-															borderRadius: 25,
-															alignItems: 'center',
-															paddingVertical: 5,
-															paddingHorizontal: 15,
-															marginLeft: 'auto'
-														}}><Text
+														<Pressable onPress={() => editCareer({ status: 1 })}
 															style={{
-																color: '#000',
-																fontFamily: 'poppins_medium',
-																fontSize: 12
-															}}>Add</Text></Pressable>
+																backgroundColor: '#e7e7e7',
+																borderRadius: 25,
+																alignItems: 'center',
+																paddingVertical: 5,
+																paddingHorizontal: 15,
+																marginLeft: 'auto'
+															}}><Text
+																style={{
+																	color: '#000',
+																	fontFamily: 'poppins_medium',
+																	fontSize: 12
+																}}>Add</Text></Pressable>
 													</View>
 													<SafeAreaView style={{
 														flex: 1,
@@ -677,7 +706,7 @@ function AccountInfo({ route, navigation }) {
 																			fontSize: 12,
 
 																		}}>{item.company}</Text>
-																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editCareer({ company: item.company, job: item.job, timeperiod: item.timeperiod, address: item.address, phone: item.phone, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editCareer({ company: item.company, job: item.job, timeperiod: item.timeperiod, address: item.address, phone: item.phone, id: item.id, status: 0 })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
@@ -710,19 +739,20 @@ function AccountInfo({ route, navigation }) {
 															fontFamily: 'poppins_bold',
 															fontSize: 16
 														}}>Courses</Text>
-														<Pressable onPress={() => toggleCourseVisibility()} style={{
-															backgroundColor: '#e7e7e7',
-															borderRadius: 25,
-															alignItems: 'center',
-															paddingVertical: 5,
-															paddingHorizontal: 15,
-															marginLeft: 'auto'
-														}}><Text
+														<Pressable onPress={() => editCourse({ status: 1 })}
 															style={{
-																color: '#000',
-																fontFamily: 'poppins_medium',
-																fontSize: 12
-															}}>Add</Text></Pressable>
+																backgroundColor: '#e7e7e7',
+																borderRadius: 25,
+																alignItems: 'center',
+																paddingVertical: 5,
+																paddingHorizontal: 15,
+																marginLeft: 'auto'
+															}}><Text
+																style={{
+																	color: '#000',
+																	fontFamily: 'poppins_medium',
+																	fontSize: 12
+																}}>Add</Text></Pressable>
 													</View>
 													<SafeAreaView style={{
 														flex: 1,
@@ -759,7 +789,7 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.course}</Text>
-																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editCourse({ course: item.course, timeperiod: item.timeperiod, institute: item.institute, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editCourse({ course: item.course, timeperiod: item.timeperiod, institute: item.institute, id: item.id, status: 0 })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
@@ -792,19 +822,20 @@ function AccountInfo({ route, navigation }) {
 															fontFamily: 'poppins_bold',
 															fontSize: 16
 														}}>Skills</Text>
-														<Pressable onPress={() => toggleSkillVisibility()} style={{
-															backgroundColor: '#e7e7e7',
-															borderRadius: 25,
-															alignItems: 'center',
-															paddingVertical: 5,
-															paddingHorizontal: 15,
-															marginLeft: 'auto'
-														}}><Text
+														<Pressable onPress={() => editSkill({ status: 1 })}
 															style={{
-																color: '#000',
-																fontFamily: 'poppins_medium',
-																fontSize: 12
-															}}>Add</Text></Pressable>
+																backgroundColor: '#e7e7e7',
+																borderRadius: 25,
+																alignItems: 'center',
+																paddingVertical: 5,
+																paddingHorizontal: 15,
+																marginLeft: 'auto'
+															}}><Text
+																style={{
+																	color: '#000',
+																	fontFamily: 'poppins_medium',
+																	fontSize: 12
+																}}>Add</Text></Pressable>
 													</View>
 													<SafeAreaView style={{
 														flex: 1,
@@ -841,7 +872,7 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.skill}</Text>
-																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editSkill({ skill: item.skill, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editSkill({ skill: item.skill, id: item.id, status: 0 })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
@@ -874,19 +905,20 @@ function AccountInfo({ route, navigation }) {
 															fontFamily: 'poppins_bold',
 															fontSize: 16
 														}}>Interests</Text>
-														<Pressable onPress={() => toggleInterestVisibility()} style={{
-															backgroundColor: '#e7e7e7',
-															borderRadius: 25,
-															alignItems: 'center',
-															paddingVertical: 5,
-															paddingHorizontal: 15,
-															marginLeft: 'auto'
-														}}><Text
+														<Pressable onPress={() => editInterest({ status: 1 })}
 															style={{
-																color: '#000',
-																fontFamily: 'poppins_medium',
-																fontSize: 12
-															}}>Add</Text></Pressable>
+																backgroundColor: '#e7e7e7',
+																borderRadius: 25,
+																alignItems: 'center',
+																paddingVertical: 5,
+																paddingHorizontal: 15,
+																marginLeft: 'auto'
+															}}><Text
+																style={{
+																	color: '#000',
+																	fontFamily: 'poppins_medium',
+																	fontSize: 12
+																}}>Add</Text></Pressable>
 													</View>
 													<SafeAreaView style={{
 														flex: 1,
@@ -923,7 +955,7 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.interest}</Text>
-																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editInterest({ interest: item.interest, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editInterest({ interest: item.interest, id: item.id, status: 0 })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
@@ -956,19 +988,20 @@ function AccountInfo({ route, navigation }) {
 															fontFamily: 'poppins_bold',
 															fontSize: 16
 														}}>Languages</Text>
-														<Pressable onPress={() => toggleLanguageVisibility()} style={{
-															backgroundColor: '#e7e7e7',
-															borderRadius: 25,
-															alignItems: 'center',
-															paddingVertical: 5,
-															paddingHorizontal: 15,
-															marginLeft: 'auto'
-														}}><Text
+														<Pressable onPress={() => editLanguage({ status: 1 })}
 															style={{
-																color: '#000',
-																fontFamily: 'poppins_medium',
-																fontSize: 12
-															}}>Add</Text></Pressable>
+																backgroundColor: '#e7e7e7',
+																borderRadius: 25,
+																alignItems: 'center',
+																paddingVertical: 5,
+																paddingHorizontal: 15,
+																marginLeft: 'auto'
+															}}><Text
+																style={{
+																	color: '#000',
+																	fontFamily: 'poppins_medium',
+																	fontSize: 12
+																}}>Add</Text></Pressable>
 													</View>
 													<SafeAreaView style={{
 														flex: 1,
@@ -1005,7 +1038,7 @@ function AccountInfo({ route, navigation }) {
 																			fontFamily: 'poppins_light',
 																			fontSize: 12,
 																		}}>{item.language}</Text>
-																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editLanguage({ language: item.language, id: item.id })}><Image style={{
+																		<Pressable style={{ marginLeft: 'auto', padding: 10 }} onPress={() => editLanguage({ language: item.language, id: item.id, status: 0 })}><Image style={{
 																			width: 15,
 																			height: 15,
 																		}}
@@ -1029,6 +1062,7 @@ function AccountInfo({ route, navigation }) {
 							}
 						</>}
 				</>}
+				
 		</View>
 	)
 }

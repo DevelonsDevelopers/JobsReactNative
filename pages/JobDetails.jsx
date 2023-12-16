@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
+import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, Dimensions } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
@@ -80,11 +80,11 @@ const JobDetails = ({ route, navigation }) => {
     }, [dispatch, seeker, USERID, navigation]);
 
     useEffect(() => {
-        // console.log(seeker)
-        if (seeker?.plan === 0) {
-            setPlan(false)
-        } else {
+        console.log(seeker)
+        if (seeker?.verified === "true") {
             setPlan(true)
+        } else {
+            setPlan(false)
         }
     }, [seeker]);
 
@@ -123,6 +123,8 @@ const JobDetails = ({ route, navigation }) => {
         })
     }
 
+    console.log(bookmark)
+
     const RemoveBookmark = () => {
         removeBookmark(bookmark).then(res => {
             const { data: { data } } = res;
@@ -144,6 +146,9 @@ const JobDetails = ({ route, navigation }) => {
     const [webVisible, setWebVisible] = useState(false)
     const toggWebVisibility = () => setWebVisible(!webVisible)
 
+
+	const height = Dimensions.get("window").height;
+
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
@@ -151,7 +156,7 @@ const JobDetails = ({ route, navigation }) => {
                 <ManageCoverLetter visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
                 <WebsiteModal visible={webVisible} toggleRequireVisible={toggWebVisibility} url={job?.link} />
 
-                <View style={{ backgroundColor: '#EAEAEA' }}>
+                <View style={{ }}>
                     <View style={{ flexDirection: 'row', height: 90 }}>
                         <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
                             width: 22,
@@ -182,8 +187,6 @@ const JobDetails = ({ route, navigation }) => {
                                 }}>{job?.title}</Text>
                             </View>
                             <SafeAreaView style={{ marginTop: 30 }}>
-
-
                                 <View style={{
                                     marginBottom: 8,
                                     borderColor: '#4C4C4C',
@@ -192,9 +195,10 @@ const JobDetails = ({ route, navigation }) => {
                                     paddingVertical: 15,
                                     display: "flex",
                                     flexDirection: "column",
-                                    backgroundColor: '#fff'
+                                    backgroundColor: '#fff',
+                                    minHeight:height
                                 }}>
-                                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                                    <View style={{ flexDirection: 'row' }}>
                                         <Text style={{
 
                                             paddingHorizontal: 10,
@@ -226,7 +230,7 @@ const JobDetails = ({ route, navigation }) => {
                                             Salary {job?.salary}
                                         </Text>
                                     </View>
-                                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{  flexDirection: 'row' }}>
                                         <View style={{ flex: 1 }}>
                                             <Text numberOfLines={1} style={{
                                                 fontFamily: 'poppins_bold',
@@ -243,7 +247,7 @@ const JobDetails = ({ route, navigation }) => {
                                         </View>
                                     </View>
                                     <View style={{
-                                        flex: 1,
+                                         
                                         flexDirection: "row",
                                         marginTop: 20,
                                         backgroundColor: 'white',
@@ -331,7 +335,8 @@ const JobDetails = ({ route, navigation }) => {
                     gap: 20,
                     fontFamily: 'poppins_medium',
                     paddingVertical: 10,
-                    backgroundColor: '#e8e8e8'
+                    backgroundColor: '#fff',
+                    marginTop:'-4%'
                 }}>
                     {bookmark === 0 ?
                         <Ripple rippleColor="white" onPress={() => { if (login) { BookmarkJob() } else { toggleLoginVisible() } }}
@@ -402,13 +407,7 @@ const JobDetails = ({ route, navigation }) => {
 
                 </View>
                 : ''}
-                <BannerAd
-                unitId="ca-app-pub-3940256099942544/6300978111"
-                size={BannerAdSize.FULL_BANNER}
-                requestOptions={{
-                    requestNonPersonalizedAdsOnly: true,
-                }}
-            />
+          
         </View>
     )
 }

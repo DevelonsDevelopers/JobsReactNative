@@ -27,7 +27,7 @@ function PostJob({ navigation }) {
     const [isVerified, setIsVerified] = useState(false)
     const [isPaid, setIsPaid] = useState(false)
 
-    // companyjob dispatch==========
+
     const [ID, setID] = useState()
 
     useEffect(() => {
@@ -65,22 +65,19 @@ function PostJob({ navigation }) {
             if (company.id === Number(ID)) {
                 if (noCompany === "YES") {
                     setIsComplete(false)
-                    setIsPaid(false)
                     setIsVerified(false)
                 } else {
                     setIsComplete(true)
                     if (company?.verified === "true") {
                         setIsVerified(true)
-                        if (company?.plan !== 0) {
-                            setIsPaid(true)
-                        } else {
-                            setIsPaid(false)
-                        }
                     } else {
                         setIsVerified(false)
                     }
                 }
             }
+        } else {
+            setIsVerified(false);
+            setIsComplete(false)
         }
     }, [ID, company, noCompany]);
 
@@ -88,14 +85,7 @@ function PostJob({ navigation }) {
     const toggleVisibility = () => setVisible(!visible)
 
 
-    const data = [
-        { 'name': 'Social media marketing ', 'department': 'IT communication' },
-        { 'name': 'Web Developer', 'department': 'IT communication' },
-        { 'name': 'Engineer ', 'department': 'IT communication' },
-        { 'name': 'Software Developer ', 'department': 'IT communication' },
-        { 'name': 'Web Developer', 'department': 'IT communication' },
 
-    ]
     const Logout = async () => {
         await AsyncStorage.setItem("LOGIN", 'false')
         await AsyncStorage.setItem("ID", '')
@@ -116,7 +106,7 @@ function PostJob({ navigation }) {
     const toggleDrawerVisibility = () => setDrawerVisible(!drawerVisible)
 
 
-    const [verify, setVerify] = useState()
+    const [verify, setVerify] = useState(false)
     const toggleVerify = () => setVerify(!verify)
     const [text, setText] = useState('Please Complete your Profile First')
     const click = (t) => {
@@ -140,7 +130,7 @@ function PostJob({ navigation }) {
                         Logout={Logout} />
                     <ProviderDrawerModal visible={drawerVisible} toggleVisibility={toggleVisibility}
                         toggleLoadingVisibility={toggleLoadingVisibility} navigation={navigation}
-                        toggleDrawerVisibility={toggleDrawerVisibility} isPaid={isPaid} complete={isComplete} />
+                        toggleDrawerVisibility={toggleDrawerVisibility} complete={isComplete} />
                     <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
                         <View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
                             <View style={{ flexDirection: 'row', height: 130 }}>
@@ -168,18 +158,17 @@ function PostJob({ navigation }) {
                                 marginTop: -10,
                                 marginBottom: 10,
                                 fontSize: 20,
-                            }}>Provider</Text>
+                            }}>{company?.name}</Text>
                             <Text style={{
                                 color: '#fff',
                                 fontSize: 23,
                                 fontWeight: '500',
                                 width: '100%',
                                 textAlign: 'center'
-                            }}>Good
-                                Morning!</Text>
+                            }}>Welcome Back !</Text>
 
                         </View>
-                        {isPaid ?
+                        {isComplete && isVerified ?
                             <>
                                 <View style={{
                                     flexDirection: 'row',
@@ -210,7 +199,7 @@ function PostJob({ navigation }) {
                                             fontSize: 20,
                                             fontFamily: 'poppins_medium',
                                             marginTop: -5, textAlign: 'center'
-                                        }}>Users</Text>
+                                        }}>Seekers</Text>
                                     </Ripple>
 
 
@@ -255,7 +244,7 @@ function PostJob({ navigation }) {
                                             fontSize: 20,
                                             fontFamily: 'poppins_bold'
                                         }}> Post
-                                        job</Text>
+                                        a job</Text>
                                     <Text style={{ textAlign: 'center', fontSize: 14, fontFamily: 'poppins_medium', }}>You
                                         can see
                                         reports
@@ -267,11 +256,11 @@ function PostJob({ navigation }) {
                                     <Text style={{
                                         textAlign: 'center',
                                         color: 'white',
-                                        fontSize: 20,
+                                        fontSize: 17,
                                         fontFamily: 'poppins_bold',
                                         paddingVertical: 10
-                                    }}>Post Jobs using your portal</Text>
-                                    <View style={{ paddingHorizontal: 60 }}>
+                                    }}>Post jobs by visiting your Portal </Text>
+                                    <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                                         <Ripple rippleColor="blue" rippleOpacity={0.1} rippleDuration={400}
                                             rippleSize={300}
                                             onPress={() => toggWebVisibility()}
@@ -282,7 +271,8 @@ function PostJob({ navigation }) {
                                                 borderRadius: 20,
                                                 color: '#0038FF',
                                                 fontSize: 12,
-                                                fontFamily: 'poppins_medium'
+                                                fontFamily: 'poppins_medium',
+                                                paddingHorizontal: 8
                                             }}><Text
                                                 style={{
                                                     textAlign: 'center',
@@ -453,7 +443,7 @@ function PostJob({ navigation }) {
                                         </View>
                                     }
 
-                                    <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, padding: 2 }}>
+                                    {/* <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, padding: 2 }}>
                                         <Text style={{
                                             textAlign: 'center',
                                             color: 'black',
@@ -466,8 +456,8 @@ function PostJob({ navigation }) {
                                             fontSize: 14,
                                             fontFamily: 'poppins_bold',
                                         }}>Buy a Plan</Text>
-                                    </View>
-                                    <Text style={{ paddingLeft: 20 }}>Buy a plan to post your jobs</Text>
+                                    </View> */}
+                                    {/* <Text style={{ paddingLeft: 20 }}>Buy a plan to post your jobs</Text>
                                     {isPaid ?
 
                                         <View style={{ flexDirection: 'row', gap: 40, marginTop: 10 }}>
@@ -500,105 +490,103 @@ function PostJob({ navigation }) {
                                                     }
                                                 }}>(Buy Plan)</Text>
                                         </View>
-                                    }
+                                    } */}
                                 </View>
                             </View>
                         }
 
-                        {isPaid ?
-                            <View>
-                                <View style={{
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                    marginHorizontal: 47,
-                                    marginTop: 30
-                                }}>
-                                    <Text style={{ fontSize: 17, fontFamily: 'poppins_bold' }}>Posted Jobs</Text>
-                                    <Pressable onPress={() => navigation.push('JobPosted')}>
-                                        <Text style={{
-                                            backgroundColor: '#CBCBCB',
-                                            paddingHorizontal: 16,
-                                            paddingVertical: 6,
-                                            fontSize: 13,
-                                            fontFamily: 'poppins_medium',
-                                            borderRadius: 20,
-                                            color: 'rgba(0, 0, 0, 0.81)'
-                                        }}>Show All</Text></Pressable>
-                                </View>
-                                {nodata ? <View style={{ marginTop: -39 }}>
-                                    <Image source={require('../assets/nodata.png')}
-                                        style={{
-                                            width: 260,
-                                            height: 260,
-                                            marginLeft: 80,
-                                            marginBottom: -20,
-                                            marginTop: 40
-                                        }} />
-                                    <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No job
-                                        Found</Text>
-                                </View> :
-                                    <>
-                                        {error ?
-                                            <View style={{ marginTop: 10 }}>
-                                                <Image source={require('../assets/delete.png')} style={{
-                                                    width: 30,
-                                                    height: 30,
-                                                    marginLeft: 190,
-                                                    marginBottom: -20,
-                                                    marginTop: 40
-                                                }} />
-                                                <Text
-                                                    style={{
-                                                        textAlign: 'center',
-                                                        marginVertical: 20,
-                                                        fontFamily: 'poppins_medium'
-                                                    }}>Network
-                                                    Error...!</Text>
-                                            </View> : <>
 
-                                                <SafeAreaView style={{ flex: 1 }}>
-                                                    <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                                                        style={{ marginHorizontal: 30, marginTop: 10 }}
-                                                        data={companyJobs}
-                                                        renderItem={({ item }) => (
-                                                            <Ripple rippleColor="gray" rippleOpacity={0.2}
-                                                                rippleDuration={800}
-                                                                rippleSize={400}
-                                                                onPress={() => navigation.push('OfferAccepted', { ID: item.id })}
-                                                                style={{
-                                                                    flex: 1,
-                                                                    flexDirection: 'row',
-                                                                    margin: 5,
-                                                                    backgroundColor: '#fff',
-                                                                    borderColor: '#c2c2c2',
-                                                                    borderWidth: 1,
-                                                                    height: 50,
-                                                                    borderRadius: 25,
-                                                                    elevation: 5,
-                                                                    alignItems: 'center',
-                                                                    paddingHorizontal: 20
-                                                                }}>
-                                                                <Text ellipsizeMode={'tail'} numberOfLines={1}
-                                                                    style={{
-                                                                        width: '60%',
-                                                                        fontFamily: 'poppins_bold',
-                                                                        fontSize: 12
-                                                                    }}>{item.title}</Text>
-                                                                <Text numberOfLines={1} style={{
-                                                                    fontFamily: 'poppins_light',
-                                                                    fontSize: 9,
-                                                                    marginLeft: 'auto',
-                                                                    width: 110
-                                                                }}>{item.qualification}</Text>
-                                                            </Ripple>
-                                                        )}
-                                                    />
-                                                </SafeAreaView>
-                                            </>}
-                                    </>}
+                        <View>
+                            <View style={{
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                marginHorizontal: 47,
+                                marginTop: 30
+                            }}>
+                                <Text style={{ fontSize: 17, fontFamily: 'poppins_bold' }}>Recent Jobs </Text>
+                                <Pressable onPress={() => navigation.push('JobPosted')}>
+                                    <Text style={{
+                                        backgroundColor: '#CBCBCB',
+                                        paddingHorizontal: 16,
+                                        paddingVertical: 6,
+                                        fontSize: 13,
+                                        fontFamily: 'poppins_medium',
+                                        borderRadius: 20,
+                                        color: 'rgba(0, 0, 0, 0.81)'
+                                    }}>Show All</Text></Pressable>
+                            </View>
+                            {nodata ? <View style={{ marginTop: -39 }}>
+                                <Image source={require('../assets/nodata.png')}
+                                    style={{
+                                        width: 260,
+                                        height: 260,
+                                        marginLeft: 80,
+                                        marginBottom: -20,
+                                        marginTop: 40
+                                    }} />
+                                <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No job
+                                    Found</Text>
                             </View> :
-                            ''
-                        }
+                                <>
+                                    {error ?
+                                        <View style={{ marginTop: 10 }}>
+                                            <Image source={require('../assets/delete.png')} style={{
+                                                width: 30,
+                                                height: 30,
+                                                marginLeft: 190,
+                                                marginBottom: -20,
+                                                marginTop: 40
+                                            }} />
+                                            <Text
+                                                style={{
+                                                    textAlign: 'center',
+                                                    marginVertical: 20,
+                                                    fontFamily: 'poppins_medium'
+                                                }}>Network
+                                                Error...!</Text>
+                                        </View> : <>
+
+                                            <SafeAreaView style={{ flex: 1 }}>
+                                                <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                                                    style={{ marginHorizontal: 30, marginTop: 10 }}
+                                                    data={companyJobs}
+                                                    renderItem={({ item }) => (
+                                                        <Ripple rippleColor="gray" rippleOpacity={0.2}
+                                                            rippleDuration={800}
+                                                            rippleSize={400}
+                                                            onPress={() => navigation.push('OfferAccepted', { ID: item.id })}
+                                                            style={{
+                                                                flex: 1,
+                                                                flexDirection: 'row',
+                                                                margin: 5,
+                                                                backgroundColor: '#fff',
+                                                                borderColor: '#c2c2c2',
+                                                                borderWidth: 1,
+                                                                height: 50,
+                                                                borderRadius: 25,
+                                                                elevation: 5,
+                                                                alignItems: 'center',
+                                                                paddingHorizontal: 20
+                                                            }}>
+                                                            <Text ellipsizeMode={'tail'} numberOfLines={1}
+                                                                style={{
+                                                                    width: '60%',
+                                                                    fontFamily: 'poppins_bold',
+                                                                    fontSize: 12
+                                                                }}>{item.title}</Text>
+                                                            <Text numberOfLines={1} style={{
+                                                                fontFamily: 'poppins_light',
+                                                                fontSize: 9,
+                                                                marginLeft: 'auto',
+
+                                                            }}>{item.qualification}</Text>
+                                                        </Ripple>
+                                                    )}
+                                                />
+                                            </SafeAreaView>
+                                        </>}
+                                </>}
+                        </View>
                         <View style={{ height: 90 }} />
                     </ScrollView>
                 </>}

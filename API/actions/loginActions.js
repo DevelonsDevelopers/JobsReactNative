@@ -36,7 +36,7 @@ export const LoginAuthentication = (navigation, email, password) => async (dispa
                 dispatch({type: SEEKER_LOGIN_SUCCESS})
                 sleep(500).then(async () => {
                     navigation.popToTop()
-                    navigation.replace('Onboarding')
+                    navigation.replace('Home')
                 })
             })
         } else {

@@ -107,7 +107,7 @@ function JobPosted({ navigation }) {
                     <Text style={{ fontFamily: 'poppins_medium', fontSize: 14, marginLeft: 'auto' }}>{moment(item.created).format('ll')}</Text>
                     <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', fontSize: 16, textAlign: 'center', color: '#F0A51E' }}>{item.title}</Text>
                     <Text style={{ textAlign: "center", fontSize: 14, fontFamily: 'poppins_medium', paddingVertical: 5 }}>{item.category_name}</Text>
-                    <View style={{ paddingHorizontal: 50 }}><Text style={{ backgroundColor: '#D9D9D9', textAlign: "center", paddingVertical: 6, borderRadius: 20, fontSize: 12, fontFamily: 'poppins_medium' }}>Salary {item.salary}/month</Text></View>
+                    <View style={{  marginLeft:'auto',marginRight:'auto'  }}><Text style={{ backgroundColor: '#D9D9D9', textAlign: "center", paddingVertical: 6, borderRadius: 20, fontSize: 12, fontFamily: 'poppins_medium',paddingHorizontal:9 }}>Salary {item.salary}/month</Text></View>
                     <View style={{ paddingHorizontal: 30, marginTop: 14 }}>
                       <Ripple rippleColor="white" onPress={() => navigation.push('RecommendedUser', { job: item.id })}><Text style={{ backgroundColor: '#143D59', textAlign: "center", borderRadius: 20, fontSize: 14, fontFamily: 'poppins_bold', color: 'white', marginVertical: 4, paddingVertical: 11 }}>Recommended Users</Text></Ripple>
                       <Ripple rippleColor="white" onPress={() => navigation.push('AppliedByJob', { job: item.id })} >

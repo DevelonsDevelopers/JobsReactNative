@@ -31,9 +31,7 @@ const OfferAccepted = ({ route, navigation }) => {
   }, [dispatch,]);
 
   useEffect(() => {
-
     console.log(job)
-
   }, [job])
 
 
@@ -63,7 +61,7 @@ const OfferAccepted = ({ route, navigation }) => {
                   tintColor: '#000'
                 }} source={require('../assets/back_arrow.png')} alt={''} /></Pressable>
                 <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                  <Pressable onPress={() => navigation.push('OfferRejected')}><Image
+                  <Pressable><Image
                     style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
                     source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                 </View>
@@ -104,7 +102,7 @@ const OfferAccepted = ({ route, navigation }) => {
                   </View>
                   <View style={{ flex: 1, flexDirection: 'row' }}>
                     <View style={{ flex: 1 }}>
-                      <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', marginTop: 15, fontSize: 20, textAlign: "center", }}>{job?.category_name}</Text>
+                      <Text numberOfLines={1} style={{ fontFamily: 'poppins_bold', marginTop: 15, fontSize: 20, textAlign: "center", }}>{job?.title}</Text>
                       <Text style={{ fontFamily: 'poppins_medium', marginTop: 0, fontSize: 14, textAlign: "center" }}>{job?.address}</Text>
                     </View>
                   </View>
@@ -150,10 +148,10 @@ const OfferAccepted = ({ route, navigation }) => {
               </View>
             </View>
         </ScrollView>
-          </> }
       <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
         <Text onPress={() => navigation.push('AppliedByJob', { job: job?.id })} style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', textAlign: "center", paddingVertical: 7, borderRadius: 20, paddingHorizontal: 50 }}>View Applied</Text>
       </View>
+          </> }
 
     </View>
   )

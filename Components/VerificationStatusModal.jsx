@@ -1,15 +1,16 @@
 import React from 'react'
-import { Image, Modal, Pressable, Text, View } from 'react-native'
+import { Image, Modal, Pressable, Text, TouchableWithoutFeedback, View } from 'react-native'
 
 const VerificationStatusModal = ({ visible, toggleVisibility,line }) => {
     return (
         <Modal visible={visible} onRequestClose={toggleVisibility} >
-            <View style={{
-                flex: 1,
-                alignContent: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(0,0,0,0.6)'
-            }}>
+            <TouchableWithoutFeedback onPress={toggleVisibility}>
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                }}>
                 <View style={{
                     width: '100%',
                     maxWidth: 300,
@@ -28,6 +29,7 @@ const VerificationStatusModal = ({ visible, toggleVisibility,line }) => {
 
                 </View>
             </View>
+            </TouchableWithoutFeedback>
         </Modal>
     )
 }

@@ -8,8 +8,8 @@ const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
     const [intro, setIntro] = useState('')
 
     const Apply = () => {
-        if (intro.length > 20){
-            if (proposal.length > 20){
+        if (intro.length > 20) {
+            if (proposal.length > 20) {
                 apply(intro, proposal)
                 toggleVisible()
             } else {
@@ -90,7 +90,7 @@ const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
                     borderRadius: 25,
                     marginTop: 10,
                     marginBottom: 40
-                }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold', textAlign: 'center' }}>Create Now</Text></Pressable>
+                }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold', textAlign: 'center' }}>Create Cover Letter</Text></Pressable>
             </ScrollView>
             <Toast
                 position='top'

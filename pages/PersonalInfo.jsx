@@ -27,7 +27,7 @@ import Ripple from "react-native-material-ripple";
 import PhoneInput from "react-native-phone-number-input";
 import PhoneModal from "../Components/PhoneModal";
 import VerificationStatusModal from "../Components/VerificationStatusModal";
-import {checkCV} from "../API";
+import { checkCV } from "../API";
 
 function PersonalInfo({ navigation }) {
 
@@ -540,7 +540,9 @@ function PersonalInfo({ navigation }) {
                                         fontSize: 14,
                                         fontFamily: 'poppins_light',
                                         width: '100%',
-                                        textAlign: 'left'
+                                        textAlign: 'left',
+                                        marginTop:"auto",
+                                        marginBottom:'auto'
                                     }}>Address</Text>
                                 </View>
                                 <View style={{
@@ -551,9 +553,11 @@ function PersonalInfo({ navigation }) {
                                     paddingVertical: 5
                                 }}>
                                     <TextInput onChangeText={(text) => setSeekerData({ ...seekerData, address: text })}
+                                        numberOfLines={2}
+                                        multiline
                                         placeholder={'Missing!!!'} style={{
                                             color: '#000',
-                                            fontSize: 14,
+                                            fontSize: 13,
                                             fontFamily: 'poppins_medium',
                                             width: '100%',
                                             textAlign: 'left'
@@ -650,7 +654,7 @@ function PersonalInfo({ navigation }) {
 
                             </View>
                         </View>
-                        <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', }}>
+                        <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto',paddingHorizontal:20 }}>
                             <TextInput editable={false} style={{
                                 textAlign: 'center',
                                 paddingHorizontal: 10,
@@ -719,42 +723,44 @@ function PersonalInfo({ navigation }) {
                                 }}><Text style={{ color: '#000', fontWeight: '800', fontSize: 15 }}>Logged In using
                                     Google</Text></Pressable>
                             :
-                            <Pressable onPress={() => {
-                                if (completed) {
-                                    if (verified) {
-
-                                        navigation.push('Verify', {
-                                            code: seeker?.code,
-                                            verifyPhone: seeker?.phone,
-                                            type: "SEEKER",
-                                            verify: false,
-                                            forgot: true,
-                                            ID: ID
-                                        })
-                                    } else {
-                                        navigation.push('Verify', {
-                                            code: seeker?.code,
-                                            verifyPhone: seeker?.phone,
-                                            type: "SEEKER",
-                                            verify: false,
-                                            ID: ID
-                                        })
-                                    }
-                                } else {
-                                    click('Please Complete Your Profile First')
+                            <>
+                                {completed ?
+                                    <>
+                                        <Pressable onPress={() => {
+                                            if (verified) {
+                                                navigation.push('Verify', {
+                                                    code: seeker?.code,
+                                                    verifyPhone: seeker?.phone,
+                                                    type: "SEEKER",
+                                                    verify: false,
+                                                    forgot: true,
+                                                    ID: ID
+                                                })
+                                            } else {
+                                                navigation.push('Verify', {
+                                                    code: seeker?.code,
+                                                    verifyPhone: seeker?.phone,
+                                                    type: "SEEKER",
+                                                    verify: false,
+                                                    ID: ID
+                                                })
+                                            }
+                                        }}
+                                            style={{
+                                                borderColor: '#000',
+                                                borderWidth: 1,
+                                                borderRadius: 25,
+                                                alignItems: 'center',
+                                                padding: 15,
+                                                marginTop: 15,
+                                                marginHorizontal: 25
+                                            }}><Text style={{ color: '#000', fontWeight: '800', fontSize: 15 }}>Change
+                                                Password</Text></Pressable>
+                                    </>
+                                    :
+                                    ''
                                 }
-
-                            }}
-                                style={{
-                                    borderColor: '#000',
-                                    borderWidth: 1,
-                                    borderRadius: 25,
-                                    alignItems: 'center',
-                                    padding: 15,
-                                    marginTop: 15,
-                                    marginHorizontal: 25
-                                }}><Text style={{ color: '#000', fontWeight: '800', fontSize: 15 }}>Change
-                                    Password</Text></Pressable>
+                            </>
                         }
                         {!verified ?
                             <Pressable onPress={() => {
@@ -789,7 +795,7 @@ function PersonalInfo({ navigation }) {
                             :
                             ''
                         }
-                        {seeker?.plan === 0 ?
+                        {/* {seeker?.plan === 0 ?
                             <Ripple rippleColor="white"
                                 onPress={() => {
                                     if (completed) {
@@ -821,7 +827,7 @@ function PersonalInfo({ navigation }) {
                                 >Activate Account
                                 </Text>
                             </Ripple>
-                            : ''}
+                            : ''} */}
                     </>}
             </ScrollView>
         </View>

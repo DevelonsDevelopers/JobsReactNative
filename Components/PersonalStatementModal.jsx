@@ -1,8 +1,8 @@
 import {GestureHandlerRootView} from "react-native-gesture-handler";
-import {Modal, Pressable, Text, TextInput, View} from "react-native";
+import {Modal, Pressable, Text, TextInput, TouchableWithoutFeedback, View} from "react-native";
 import React, {useState} from "react";
 
-const PersonalStatementModal = ({visible, toggleInfoVisibility, add}) => {
+const PersonalStatementModal = ({visible, toggleInfoVisibility, add ,data}) => {
 
     const [statement, setStatement] = useState()
 
@@ -13,12 +13,13 @@ const PersonalStatementModal = ({visible, toggleInfoVisibility, add}) => {
 
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleInfoVisibility}>
-            <GestureHandlerRootView style={{
-                flex: 1,
-                alignContent: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(66, 66, 66, 0.4)'
-            }}>
+              <TouchableWithoutFeedback onPress={toggleInfoVisibility}>
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                }}>
                 <View style={{
                     margin: 35,
                     elevation: 24,
@@ -28,7 +29,7 @@ const PersonalStatementModal = ({visible, toggleInfoVisibility, add}) => {
                     padding: 20,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: 400
+                   width:'90%'
                 }}>
                     <Text style={{fontSize: 16, fontFamily: 'poppins_bold', marginBottom: 'auto', marginTop: 'auto'}}>Personal
                         Info</Text>
@@ -44,16 +45,28 @@ const PersonalStatementModal = ({visible, toggleInfoVisibility, add}) => {
                         fontFamily: 'poppins_medium',
                         padding: 20,
                         marginBottom: 'auto'
-                    }}></TextInput>
-                    <Pressable onPress={() => Add()} style={{
-                        paddingHorizontal: 60,
-                        paddingVertical: 13,
-                        backgroundColor: '#13A3E1',
-                        borderRadius: 25,
-                        marginTop: 10
-                    }}><Text style={{color: '#fff', fontSize: 14, fontFamily: 'poppins_bold'}}>Update</Text></Pressable>
+                    }}>{data}</TextInput>
+
+                    {data?.length > 0 ?
+                            <Pressable onPress={() => Add()} style={{
+                                paddingHorizontal: 60,
+                                paddingVertical: 13,
+                                backgroundColor: '#13A3E1',
+                                borderRadius: 25,
+                                marginTop: 45
+                            }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>Update</Text></Pressable>
+                            :
+                            <Pressable onPress={() => Add()} style={{
+                                paddingHorizontal: 60,
+                                paddingVertical: 13,
+                                backgroundColor: '#13A3E1',
+                                borderRadius: 25,
+                                marginTop: 45
+                            }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold' }}>Add</Text></Pressable>
+                        }
                 </View>
-            </GestureHandlerRootView>
+                </View>
+             </TouchableWithoutFeedback>
         </Modal>
     )
 }

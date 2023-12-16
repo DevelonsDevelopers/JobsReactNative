@@ -45,14 +45,11 @@ const Verification = ({ navigation }) => {
 		console.log(seeker)
 		if (seeker?.verified === "true") {
 			setVerify(true)
-			if (seeker?.plan !== 0) {
-				setPlan(true)
-			} else {
-				setPlan(false)
-			}
 		} else {
 			setVerify(false)
 		}
+
+
 	}, [seeker]);
 
 	useEffect(() => {
@@ -62,6 +59,7 @@ const Verification = ({ navigation }) => {
 			setIsComplete(false)
 		}
 	}, [check]);
+	console.log(check)
 
 	useEffect(() => {
 		if (checkCV === "complete") {
@@ -230,7 +228,7 @@ const Verification = ({ navigation }) => {
 
 					}
 
-					<View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, marginTop: 10, padding: 2 }}>
+					{/* <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, marginTop: 10, padding: 2 }}>
 						<Text style={{
 							textAlign: 'center',
 							color: 'black',
@@ -244,8 +242,8 @@ const Verification = ({ navigation }) => {
 							fontSize: 14,
 							fontFamily: 'poppins_bold',
 						}}>Choose a plan </Text>
-					</View>
-					{plan ?
+					</View> */}
+					{/* {plan ?
 						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/verified.png')} />
@@ -266,7 +264,7 @@ const Verification = ({ navigation }) => {
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_regular', marginTop: 4 }}
 							>(Choose Plan)</Text>
 						</Pressable>
-					}
+					} */}
 
 				</View>
 			</View>

@@ -143,7 +143,7 @@ const Offers = ({ navigation }) => {
                                                                 <Text style={{
                                                                     fontFamily: 'poppins_bold',
                                                                     fontSize: 16,
-                                                                }}>{item.role}</Text>
+                                                                }}>{item.title}</Text>
                                                             </View>
                                                             <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                                                                 <Text style={{

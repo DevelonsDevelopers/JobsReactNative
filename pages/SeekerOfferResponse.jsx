@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react'
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, View } from "react-native";
+import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, View, ActivityIndicator } from "react-native";
 import WebView from 'react-native-webview';
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchOffer, FetchOffers } from '../API/actions/offersActions';

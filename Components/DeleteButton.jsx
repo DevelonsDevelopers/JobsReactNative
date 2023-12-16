@@ -1,26 +1,26 @@
-import {ActivityIndicator, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
 
 const DeleteButton = ({
-                        text = 'DONE',
-                        onPress = () => {
-                        },
-                        disabled = false,
-                        btnStyle = {},
-                        isLoading = false
-                    }) => {
+    text = 'DONE',
+    onPress = () => {
+    },
+    disabled = false,
+    btnStyle = {},
+    isLoading = false
+}) => {
     return (
         <TouchableOpacity
             onPress={onPress}
             style={{
                 ...styles.container,
-                backgroundColor: !disabled ? '#D7654D' : 'grey',
+                backgroundColor: !disabled ? 'red' : 'grey',
                 ...btnStyle,
 
             }}
             disabled={disabled}
         >
-            {isLoading ? <ActivityIndicator size={'small'}/> : <Text style={styles.textStyle}>{text}</Text>}
+            {isLoading ? <ActivityIndicator size={'small'} /> : <Text style={styles.textStyle}>{text}</Text>}
 
 
         </TouchableOpacity>
@@ -30,18 +30,19 @@ const DeleteButton = ({
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        height: 52,
-        borderRadius:18,
+        
+        borderRadius: 18,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth:1,
+        borderWidth: 1,
+        borderColor:'red'
 
     },
 
     textStyle: {
         fontSize: 15,
-        fontFamily:'poppins_bold',
-        color:'white'
+        fontFamily: 'poppins_bold',
+        color: 'white'
     }
 });
 

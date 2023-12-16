@@ -1,20 +1,25 @@
-import {Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator} from "react-native";
-import React, {useEffect, useState} from 'react'
-import {View} from 'react-native'
-import {useDispatch, useSelector} from "react-redux";
-import {JobByID} from "../API/actions/jobActions";
+import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
+import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
+import { useDispatch, useSelector } from "react-redux";
+import { JobByID } from "../API/actions/jobActions";
 import moment from "moment";
-import {BOOKMARK_JOB, RESET} from "../Utils/Constants";
-import {applyJob, bookmarkJob, removeBookmark} from "../API";
+import { BOOKMARK_JOB, RESET } from "../Utils/Constants";
+import { applyJob, bookmarkJob, removeBookmark } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ApplyModal from "../Components/ApplyModal";
+import { FetchOffer } from "../API/actions/offersActions";
 
-const JobResponse = ({route, navigation}) => {
+const JobResponse = ({ route, navigation }) => {
 
-    const {ID} = route.params
-    const {response} = route.params
+    const { IDs } = route.params
+    const { response } = route.params
+
+    // const [ID, setID] = useState()
 
     const job = useSelector(state => state.job.job)
+    const offers = useSelector(state => state.offers.offer)
+
     const success = useSelector(state => state.success.jobSuccess)
     const error = useSelector(state => state.error.jobError)
     const nodata = useSelector(state => state.nodata.jobNoData)
@@ -23,9 +28,13 @@ const JobResponse = ({route, navigation}) => {
     const [applied, setApplied] = useState(0)
     const [bookmark, setBookmark] = useState(0)
 
+
+    console.log("offers", offers)
+
     useEffect(() => {
         GetData()
     }, []);
+
     const GetData = async () => {
         const value = await AsyncStorage.getItem('ID')
         setUSERID(value);
@@ -33,7 +42,7 @@ const JobResponse = ({route, navigation}) => {
 
     useEffect(() => {
         if (USERID) {
-            dispatch(JobByID(USERID, ID))
+            dispatch(JobByID(USERID, IDs))
         }
     }, [dispatch, USERID]);
 
@@ -42,7 +51,7 @@ const JobResponse = ({route, navigation}) => {
     useEffect(() => {
         if (success || error || nodata) {
             setIsLoading(false)
-            dispatch({type: RESET})
+            dispatch({ type: RESET })
         }
     }, [success, error, nodata])
 
@@ -56,55 +65,62 @@ const JobResponse = ({route, navigation}) => {
 
     const ApplyJob = (proposal) => {
         const date = moment().format("YYYY-MM-DD")
-        console.log(date)
         applyJob(job.id, USERID, date, proposal).then(res => {
-            const {data: {data}} = res;
+            const { data: { data } } = res;
             if (data.affectedRows === 1) {
                 setApplied(data.insertId)
             }
         })
     }
 
-    const BookmarkJob = () => {
-        bookmarkJob(job.id, USERID).then(res => {
-            const {data: {data}} = res;
-            if (data.affectedRows === 1) {
-                setBookmark(data.insertId)
-                dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: data.insertId}})
-            }
-        })
-    }
+    console.log("id", response)
 
-    const RemoveBookmark = () => {
-        removeBookmark(bookmark).then(res => {
-            const {data: {data}} = res;
-            if (data.affectedRows === 1) {
-                setBookmark(0)
-                dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: 0}})
-            }
-        })
-    }
+    useEffect(() => {
+        if (response) {
+            dispatch(FetchOffer(response))
+        }
+    }, [dispatch, response]);
 
-// Apply Modal ============
-    const [applyVisible,setApplyVisible] = useState(false)
+    // const BookmarkJob = () => {
+    //     bookmarkJob(job.id, USERID).then(res => {
+    //         const {data: {data}} = res;
+    //         if (data.affectedRows === 1) {
+    //             setBookmark(data.insertId)
+    //             dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: data.insertId}})
+    //         }
+    //     })
+    // }
+
+    // const RemoveBookmark = () => {
+    //     removeBookmark(bookmark).then(res => {
+    //         const {data: {data}} = res;
+    //         if (data.affectedRows === 1) {
+    //             setBookmark(0)
+    //             dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: 0}})
+    //         }
+    //     })
+    // }
+
+    // Apply Modal ============
+    const [applyVisible, setApplyVisible] = useState(false)
     const toggleApplyVisibility = () => setApplyVisible(!applyVisible)
 
     return (
-        <ScrollView style={{backgroundColor: '#F1F1F1'}}>
-            <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob}/>
-            <View style={{backgroundColor: '#EAEAEA'}}>
-                <View style={{flexDirection: 'row', height: 90}}>
-                    <Pressable onPress={() => navigation.goBack()} style={{ padiingRight:5 }}><Image style={{
+        <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
+            <ApplyModal visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
+            <View style={{ backgroundColor: '#EAEAEA' }}>
+                <View style={{ flexDirection: 'row', height: 90 }}>
+                    <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
                         width: 22,
                         height: 20,
                         marginTop: 70,
                         marginLeft: 30,
                         tintColor: '#000'
-                    }} source={require('../assets/back_arrow.png')} alt={''}/></Pressable>
-                    <View style={{width: '100%', marginTop: 0, paddingEnd: 90}}>
+                    }} source={require('../assets/back_arrow.png')} alt={''} /></Pressable>
+                    <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
                         <Pressable onPress={() => null}><Image
-                            style={{width: 150, height: 40, marginTop: 60, alignSelf: 'center'}}
-                            source={require('../assets/logo.png')} alt={'Okay'}/></Pressable>
+                            style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
+                            source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                     </View>
                 </View>
                 <View>
@@ -119,10 +135,10 @@ const JobResponse = ({route, navigation}) => {
                     }}>{job?.title}</Text>
                 </View>
                 {isloading ?
-                    <View style={{marginTop: 300}}>
-                        <ActivityIndicator size={60} color="#13A3E1"/></View>
+                    <View style={{ marginTop: 300 }}>
+                        <ActivityIndicator size={60} color="#13A3E1" /></View>
                     : <>
-                        <SafeAreaView style={{marginTop: 30}}>
+                        <SafeAreaView style={{ marginTop: 30 }}>
 
 
                             <View style={{
@@ -136,9 +152,8 @@ const JobResponse = ({route, navigation}) => {
                                 flexDirection: "column",
                                 backgroundColor: '#fff'
                             }}>
-                                <View style={{flexDirection: 'row', flex: 1}}>
+                                <View style={{ flexDirection: 'row', flex: 1 }}>
                                     <Text style={{
-
                                         paddingHorizontal: 10,
                                         paddingTop: 4,
                                         fontSize: 14,
@@ -154,7 +169,7 @@ const JobResponse = ({route, navigation}) => {
                                         marginRight: 25
                                     }}>{moment(job?.date).fromNow()}</Text>
                                 </View>
-                                <View style={{paddingHorizontal: 100,}}>
+                                <View style={{ paddingHorizontal: 100, }}>
                                     <Text style={{
                                         fontFamily: 'poppins_medium',
                                         fontSize: 13,
@@ -170,8 +185,8 @@ const JobResponse = ({route, navigation}) => {
                                         Salary {job?.salary}
                                     </Text>
                                 </View>
-                                <View style={{flex: 1, flexDirection: 'row'}}>
-                                    <View style={{flex: 1}}>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}>
                                         <Text numberOfLines={1} style={{
                                             fontFamily: 'poppins_bold',
                                             marginTop: 15,
@@ -202,8 +217,8 @@ const JobResponse = ({route, navigation}) => {
                                         borderTopRightRadius: 40,
                                         borderBottomRightRadius: 40
                                     }}>
-                                        <View style={{flexDirection: 'column'}}>
-                                            <View style={{paddingHorizontal: 10}}>
+                                        <View style={{ flexDirection: 'column' }}>
+                                            <View style={{ paddingHorizontal: 10 }}>
                                                 <Text style={{
                                                     color: 'white',
                                                     backgroundColor: '#13a3e1',
@@ -227,8 +242,8 @@ const JobResponse = ({route, navigation}) => {
                                             }}>{job?.worktime}</Text>
                                         </View>
                                     </View>
-                                    <View style={{flex: 0.6}}>
-                                        <View style={{flexDirection: 'column', paddingVertical: 25,}}>
+                                    <View style={{ flex: 0.6 }}>
+                                        <View style={{ flexDirection: 'column', paddingVertical: 25, }}>
                                             <Text style={{
                                                 textAlign: "center",
                                                 fontSize: 15,
@@ -254,13 +269,14 @@ const JobResponse = ({route, navigation}) => {
                                     marginTop: 20,
                                     width: '100%',
                                     textAlign: 'center'
-                                }}>Response </Text>
+                                }}>{offers?.offerType} </Text>
                                 <Text style={{
                                     marginHorizontal: 25,
-                                    fontSize: 12,
+                                    fontSize: 14,
                                     fontFamily: 'poppins_medium',
-                                    minHeight: 250
-                                }}>{response ? response : 'No Response'}</Text>
+                                    minHeight: 250,
+                                    marginTop: 30
+                                }}>{offers?.offer}</Text>
                                 <View style={{
                                     flexDirection: 'row',
                                     justifyContent: "center",

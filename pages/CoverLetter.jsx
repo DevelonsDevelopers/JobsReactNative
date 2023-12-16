@@ -74,12 +74,12 @@ const CoverLetter = ({ route, navigation }) => {
 					console.log(res)
 					const { data: { data } } = res;
 					if (data.affectedRows === 1) {
-						navigation.push('Home')
+						// navigation.popToTop()
+						navigation.replace('appliedSuccess')
 					}
 				})
 			}
 		})
-
 	}
 
 	return (
