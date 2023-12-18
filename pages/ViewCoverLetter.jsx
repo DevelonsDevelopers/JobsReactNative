@@ -10,26 +10,25 @@ import { useState } from 'react'
 
 
 const ViewCoverLetter = ({ navigation, route }) => {
+    
+    const dispatch = useDispatch();
 
     const { ID } = route.params
     const { job } = route.params
     const { offer } = route.params
 
-    const dispatch = useDispatch();
-
-    // const[isLoading,setIsLoading] = useState(true)
-
+    const [loading, setLoading] = useState(true)
+    
     const coverLetter = useSelector(state => state.coverLetter.coverLetter)
-    useEffect(() => {
-        dispatch(CoverLetterByUser(ID, job))
-    }, [dispatch, ID, job])
-
     const cv = useSelector(state => state.cv.cv);
+
     const success = useSelector(state => state.success.coverLetterSuccess);
     const error = useSelector(state => state.error.coverLetterError);
 
 
-    const [loading, setLoading] = useState(true)
+    useEffect(() => {
+        dispatch(CoverLetterByUser(ID, job))
+    }, [dispatch, ID, job])
 
     useEffect(() => {
         if (success || error) {
@@ -37,13 +36,6 @@ const ViewCoverLetter = ({ navigation, route }) => {
         }
     }, [success, error])
 
-
-
-
-
-    // useEffect(() => {
-    //     console.log(cv)
-    // }, [cv])
 
     useEffect(() => {
         dispatch(CVByUser(ID));
@@ -88,7 +80,6 @@ const ViewCoverLetter = ({ navigation, route }) => {
                         <Text style={{ color: 'red', fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>{moment(coverLetter?.date).format("DD MMM YYYY")}</Text>
                     </View>
                     <Text style={{ fontSize: 10, fontFamily: 'poppins_semibold', marginTop: 15, marginHorizontal: 20 }}>Expression of interest: {coverLetter?.role}</Text>
-                    {/* <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>intro</Text> */}
                     <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter?.intro}</Text>
                     <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginTop: 15, marginHorizontal: 30 }}>{coverLetter?.body}</Text>
 

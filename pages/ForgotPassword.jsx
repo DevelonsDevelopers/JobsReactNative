@@ -1,7 +1,5 @@
-import { Button, Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
-import { firebase } from "@react-native-firebase/auth";
+import {  Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import PhoneInput from "react-native-phone-number-input";
 import { useDispatch, useSelector } from "react-redux";
 import { SeekerByEmail } from "../API/actions/seekerActions";
 import Toast from "react-native-toast-message";
@@ -39,16 +37,6 @@ function ForgotPassword({ route, navigation }) {
                 <Text style={{ color: '#000', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center' }}>Forgot Password?</Text>
                 <Text style={{ color: 'gray', marginHorizontal: 40, textAlign: 'center', marginTop: 20 }}>Add your Phone number we'll Send You a verification code</Text>
                 <Text style={{ color: 'gray' }}>so we know you are real</Text>
-                {/* <TextInput value={phone} onChangeText={text => setPhone(text)} style={{
-                    height: 50,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 10,
-                    marginTop: 30,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }} placeholder={'Phone Number'} inputMode={'text'} /> */}
                 <TextInput
                     onChangeText={(text) => setEmail(text)}
                     keyboardType='email-address'
@@ -63,19 +51,6 @@ function ForgotPassword({ route, navigation }) {
                         color: '#626262',
                         elevation: 10
                     }} placeholder={'Enter your Email'} />
-
-
-                {/*<Text style={{color: '#000', fontFamily: 'poppins_regular', fontSize: 15, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center'}}>OR</Text>*/}
-                {/*<TextInput style={{*/}
-                {/*    height: 50,*/}
-                {/*    backgroundColor: '#fff',*/}
-                {/*    width: '85%',*/}
-                {/*    borderRadius: 25,*/}
-                {/*    marginTop: 15,*/}
-                {/*    paddingHorizontal: 20,*/}
-                {/*    color: '#626262',*/}
-                {/*    elevation: 10*/}
-                {/*}} placeholder={'Email'} secureTextEntry={true}/>*/}
 
                 <Pressable onPress={() => fetch(email)} style={{
                     width: '50%',

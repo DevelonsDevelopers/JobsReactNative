@@ -10,24 +10,21 @@ import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 const Saved = ({ navigation }) => {
 
     const dispatch = useDispatch();
-    const bookmarks = useSelector(state => state.bookmark.bookmarks);
-    const error = useSelector(state => state.error.bookmarksError)
-    // const noData = useSelector(state => state.nodata.bookmarksNoData)
-    // const success = useSelector(state => state.success.bookmarksSuccess)
+
     const [success, setsuccess] = useState();
     const [noData, setnoData] = useState();
+    const [ID, setID] = useState()
+    const [isLoading, setIsLoading] = useState(true)
 
-    // console.log(bookmarks)
-    // console.log("saved compiled")
+    const bookmarks = useSelector(state => state.bookmark.bookmarks);
+    const error = useSelector(state => state.error.bookmarksError)
+
+
     useEffect(() => {
         if (bookmarks) {
             setsuccess(true)
         }
     }, [bookmarks])
-
-    const [ID, setID] = useState()
-
-    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         if (success || error) {
@@ -40,8 +37,6 @@ const Saved = ({ navigation }) => {
             dispatch(AllBookmarks(ID))
         }
     }, [dispatch, ID]);
-
-
 
     useEffect(() => {
         if (bookmarks?.length === 0) {
@@ -60,11 +55,9 @@ const Saved = ({ navigation }) => {
         setID(id);
     }
 
-console.log('saved',bookmarks)
 
     return (
         <View style={{ flex: 1 }}>
-
             <ScrollView>
                 {isLoading ?
                     <View style={{ marginTop: '90%' }}>
@@ -114,7 +107,7 @@ console.log('saved',bookmarks)
                                             </View>
                                         </View>
                                         <Text style={{ marginTop: 20, fontFamily: 'poppins_medium', marginLeft: 14, fontSize: 16 }}> Saved Jobs </Text>
-                                        <FlatList 
+                                        <FlatList
                                             style={{ marginHorizontal: 0, marginTop: 20 }} data={bookmarks}
                                             renderItem={({ item }) => (
                                                 <Ripple onPress={() => navigation.push('JobDetails', { ID: item.job })}

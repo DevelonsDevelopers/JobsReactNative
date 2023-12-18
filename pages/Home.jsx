@@ -23,13 +23,11 @@ function Home({ route, navigation }) {
 	const categories = useSelector(state => state.category.featured_categories)
 	const recentJobs = useSelector(state => state.job.recentJobs)
 
-	console.log(seeker)
-	
+	// console.log("seeker", seeker)
+
 
 	useEffect(() => {
-
 		dispatch(RecentJobs())
-
 	}, [dispatch])
 
 
@@ -40,7 +38,7 @@ function Home({ route, navigation }) {
 
 	const [ID, setID] = useState()
 
-	const [loginval, setLoginVal] = useState(true)
+	const [loginval, setLoginVal] = useState(false)
 
 	const [visible, setVisible] = useState(false)
 	const toggleVisibility = () => setVisible(!visible)
@@ -85,7 +83,9 @@ function Home({ route, navigation }) {
 
 	const GetData = async () => {
 		const value = await AsyncStorage.getItem('LOGIN')
+		console.log('value',value)
 		const userID = await AsyncStorage.getItem("ID")
+		console.log('id',userID)
 		setLoginVal(value);
 		setID(userID)
 	}
@@ -98,6 +98,8 @@ function Home({ route, navigation }) {
 		}
 	}, [loginval])
 
+	// console.log("loginval" , loginval)
+
 
 	const Logout = async () => {
 		await AsyncStorage.setItem("LOGIN", 'false')
@@ -106,7 +108,7 @@ function Home({ route, navigation }) {
 		await AsyncStorage.setItem("NAME", '')
 		await AsyncStorage.setItem("EMAIL", '')
 		await AsyncStorage.setItem("USERNAME", '')
-		setLoginVal('false')
+		setLoginVal(false)
 		toggleLoadingVisibility()
 	}
 	// log out===================
@@ -122,13 +124,23 @@ function Home({ route, navigation }) {
 
 	useEffect(() => {
 		if (login) {
+			console.log("login is true")
+			console.log("chuna lagna laga ha  ")
 			if (check === "complete") {
 				setCompleteVisible(false)
+				console.log("chuna ni laga ")
+			} else if (check === undefined) {
+				setCompleteVisible(false)
+				console.log("chuna ni laga ")
 			} else {
 				setCompleteVisible(true)
+				console.log("chuna lag gia ")
 			}
 		}
 	}, [check, login]);
+
+	console.log("check", check)
+	// console.log("login", login)
 
 	const [profileVerifiedVisibility, setProfileVerifiedVisibility] = useState(false)
 
@@ -138,7 +150,7 @@ function Home({ route, navigation }) {
 	const [isComplete, setIsComplete] = useState(false)
 	const [plan, setPlan] = useState(false)
 	const [cv, setCv] = useState(false)
-	const [cover, setCover] = useState(true)
+	const [cover, setCover] = useState(false)
 
 	const JobClick = (val) => {
 		let num = Number(val.company)
@@ -155,7 +167,7 @@ function Home({ route, navigation }) {
 
 
 	return (
-		<View style={{ flex:1 }} >
+		<View style={{ flex: 1 }} >
 			{isloading ?
 				<View style={{ marginTop: 'auto', marginBottom: 'auto' }}>
 					<ActivityIndicator size={60} color="#13A3E1" />
@@ -166,6 +178,7 @@ function Home({ route, navigation }) {
 					<NavigationDrawer visible={visible} navigation={navigation} toggleVisibility={toggleVisibility} isLogin={login} toggleLoadingVisibility={toggleLoadingVisibility} />
 					<LogoutConfirmationModal toggleLoadingVisibility={toggleLoadingVisibility} visible={handleSignOut} Logout={Logout} />
 					<LoginRequireModal visible={requireVisible} toggleRequireVisible={toggleRequireVisible} navigation={navigation} />
+
 					<ProfileVerficationModal visible={profileVerifiedVisibility} toggleCompleteVisible={toggleProfile} isComplete={isComplete} navigation={navigation} />
 
 					<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled" onPress={() => setHandleSignOut(false)}>
@@ -180,12 +193,11 @@ function Home({ route, navigation }) {
 									tintColor: '#fff'
 								}} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
 								<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-									<Pressable
+									<Pressable 
 									><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 										source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
 								</View>
 							</View>
-							{/* <Text style={{ color: '#fff', fontSize: 16, fontWeight: '500', width: '100%', textAlign: 'center' }}>Hi {seeker.name} let's find Job together </Text> */}
 							<View style={{
 								flexDirection: 'row',
 								alignItems: 'center',
@@ -411,7 +423,7 @@ function Home({ route, navigation }) {
 						height: 60,
 						borderRadius: 30,
 						marginHorizontal: 20,
-						 
+
 						paddingHorizontal: 20,
 
 						width: '92%'
@@ -571,7 +583,7 @@ function Home({ route, navigation }) {
 							}}>Profile</Text>
 						</Ripple>
 					</View>
-					
+
 					{/* <BannerAd
 						unitId="ca-app-pub-3940256099942544/6300978111"
 						size={BannerAdSize.FULL_BANNER}

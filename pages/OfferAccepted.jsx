@@ -67,14 +67,10 @@ const OfferAccepted = ({ route, navigation }) => {
                 </View>
               </View>
               <Text style={{ fontSize: 22, fontFamily: 'poppins_bold', textAlign: "center", marginTop: 90 }}>{job?.role}</Text>
-              {/* <View style={{ paddingHorizontal: 106, marginTop: 4 }}>
-          <Text style={{ backgroundColor: '#0EB000', textAlign: "center", borderRadius: 20, fontSize: 16, fontFamily: 'poppins_bold', color: 'white', marginVertical: 4, paddingVertical: 7 }}>{job?.address}</Text>
-        </View> */}
               <View style={{ marginTop: 10 }}>
 
 
                 <View style={{
-
                   marginBottom: 8,
                   borderColor: '#4C4C4C',
                   borderTopLeftRadius: 50,

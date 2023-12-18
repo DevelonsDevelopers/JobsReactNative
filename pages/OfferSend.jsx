@@ -14,17 +14,6 @@ const OfferSend = ({ route, navigation }) => {
     const { job } = route.params;
     const { user } = route.params;
 
-    // const success = useSelector(state => state.success.sentOfferSuccess)
-    // const error = useSelector(state => state.success.sentOfferError)
-    // const nodata = useSelector(state => state.success.sentOfferNoData)
-    // const [loading, setLoading] = useState(true)
-
-    // useEffect(() => {
-    //     if (success || error || nodata) {
-    //         setLoading(false)
-    //     }
-    // }, [success, error, nodata])
-
     const [type, setType] = useState('')
     const [proposal, setProposal] = useState('by')
 
@@ -33,6 +22,8 @@ const OfferSend = ({ route, navigation }) => {
 
     const [proposalVisible, setProposalVisible] = useState(false)
     const toggleProposelVisibility = () => setProposalVisible(!proposalVisible)
+    const [loadingVisible, setLoadingVisible] = useState(false)
+    const toggleVisible = (val) => setLoadingVisible(val)
 
     const SendOffer = (job, user, offerType, offer) => {
         const date = moment().format("YYYY-MM-DD")
@@ -55,18 +46,10 @@ const OfferSend = ({ route, navigation }) => {
     }
 
 
-
-    const [loadingVisible, setLoadingVisible] = useState(false)
-    const toggleVisible = (val) => setLoadingVisible(val)
-
     return (
 
         <ScrollView>
-            {/* {loading ?
-                <View style={{ marginTop: 200 }}>
-                    <ActivityIndicator size={60} color="#13A3E1" />
-                </View>
-                : <> */}
+           
                     <OfferModal visible={typeVisible} toggleVisibility={toggleVisibility} set={setType} />
                     <LoadingModal visible={loadingVisible} />
                     <View style={{
@@ -155,7 +138,7 @@ const OfferSend = ({ route, navigation }) => {
                         position='top'
                         bottomOffset={20}
                     />
-                {/* </>} */}
+            
         </ScrollView>
     )
 }

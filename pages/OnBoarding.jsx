@@ -20,28 +20,6 @@ function OnBoarding({ navigation }) {
                 elevation:10,
                 zIndex: 1
             }}><Text style={{color: '#fff', fontWeight: '900', fontSize: 20}}>Continue</Text></Pressable>
-            {/* <ImageBackground style={{width: 270, height: 287, marginTop: 'auto', marginLeft: 'auto', paddingTop: 40}}
-                             source={require('../assets/circle_yellow.png')}>
-                <Text style={{
-                    textAlign: 'center',
-                    fontSize: 18,
-                    color: '#fff',
-                    fontFamily: 'poppins_bold',
-                    alignSelf: 'center',
-                    marginTop: 'auto',
-                    marginRight: 20,
-                    marginLeft: 40
-                }}>Reliable Opportunities Await: Aus & NZ Jobs!</Text>
-                <Text style={{
-                    textAlign: 'right',
-                    fontSize: 10,
-                    color: '#fff',
-                    fontFamily: 'poppins_regular',
-                    marginTop: 'auto',
-                    marginLeft: 40,
-                    marginRight: 10
-                }}>The largest resume distribution Service in Australia and New Zealand</Text>
-            </ImageBackground> */}
         </View>
     )
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Image, Modal, Pressable, Text, View} from 'react-native'
+import {Image, Modal, Pressable, Text, TouchableWithoutFeedback, View} from 'react-native'
 
 const GenderModal = ({visible, toggleVisibility, set}) => {
 
@@ -10,12 +10,13 @@ const GenderModal = ({visible, toggleVisibility, set}) => {
 
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleVisibility}>
-            <View style={{
-                flex: 1,
-                alignContent: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(66, 66, 66, 0.4)'
-            }}>
+             <TouchableWithoutFeedback onPress={toggleVisibility}>
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                }}>
                 <View style={{
                     margin: 35,
                     elevation: 24,
@@ -59,6 +60,7 @@ const GenderModal = ({visible, toggleVisibility, set}) => {
                     </Pressable>
                 </View>
             </View>
+            </TouchableWithoutFeedback>
         </Modal>
     )
 }

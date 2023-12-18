@@ -1,20 +1,13 @@
 import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, Dimensions } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCities } from "../API/actions/cityActions";
 import { AllCompanies } from "../API/actions/companyActions";
 import { ActivityIndicator } from "react-native";
 import Ripple from "react-native-material-ripple";
-import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
-const data = [
-    { "name": "Facebook" },
-    { "name": "Google" },
-    { "name": "Netflix" },
-    { "name": "Youtube" }
-]
+
+
 
 function Companies({ navigation }) {
 
@@ -64,11 +57,11 @@ function Companies({ navigation }) {
     }, [data])
 
 
-    const height = Dimensions.get("window").height;
-    
+
+
 
     return (
-        <View style={{ flex:1 }}>
+        <View style={{ flex: 1 }}>
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 {isLoading ?
                     <View style={{ marginTop: 400 }}>
@@ -95,8 +88,10 @@ function Companies({ navigation }) {
                                         <Text
                                             style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network
                                             Error...!</Text>
-                                    </View> : <>
-                                        <View style={{ }}>
+                                    </View>
+                                    :
+                                    <>
+                                        <View >
                                             <View style={{ flexDirection: 'row', height: 90 }}>
                                                 <Pressable onPress={() => navigation.goBack()}
                                                     style={{ padiingRight: 5 }}><Image style={{
@@ -107,11 +102,11 @@ function Companies({ navigation }) {
                                                         tintColor: '#000'
                                                     }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
                                                 <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                                                    <Pressable
-                                                    // onPress={() => navigation.push('Test')}
-                                                    ><Image
+                                                    <Pressable >
+                                                        <Image
                                                             style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                                                            source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
+                                                            source={require('../assets/logo.png')} alt={'Okay'} />
+                                                    </Pressable>
                                                 </View>
                                             </View>
                                             <View>
@@ -136,7 +131,7 @@ function Companies({ navigation }) {
                                                 }}>Browse by Companies</Text>
                                             </View>
                                             {noSearch ?
-                                                <Text style={{ textAlign:'center',color:'gray',fontSize:16,marginTop:'20%' }}>No Search Found</Text>
+                                                <Text style={{ textAlign: 'center', color: 'gray', fontSize: 16, marginTop: '20%' }}>No Search Found</Text>
                                                 :
                                                 <SafeAreaView>
                                                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
@@ -174,16 +169,6 @@ function Companies({ navigation }) {
                             </>}
                     </>}
             </ScrollView>
-
-            {/* <View style={{  marginTop:'auto' }}>
-            <BannerAd
-                unitId="ca-app-pub-3940256099942544/6300978111"
-                size={BannerAdSize.FULL_BANNER}
-                requestOptions={{
-                    requestNonPersonalizedAdsOnly: true,
-                }}
-                />
-                </View> */}
         </View>
     )
 }

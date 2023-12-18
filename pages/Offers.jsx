@@ -1,11 +1,9 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
+import { Image,  Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
-import Resume from "./Resume";
 import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FetchOffers, FetchSentOffers } from "../API/actions/offersActions";
+import { FetchOffers } from "../API/actions/offersActions";
 import moment from "moment/moment";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
@@ -23,6 +21,9 @@ const Offers = ({ navigation }) => {
 
     const [ID, setID] = useState()
     const [isLoading, setIsLoading] = useState(true)
+    const [visible, setVisible] = useState(false)
+    const toggleVisibility = () => setVisible(!visible)
+
     useEffect(() => {
         if (success || error || noData) {
             setIsLoading(false)
@@ -38,20 +39,12 @@ const Offers = ({ navigation }) => {
         setID(value);
     }
 
-    const [visible, setVisible] = useState(false)
-    const toggleVisibility = () => setVisible(!visible)
-
     useEffect(() => {
         if (ID) {
             dispatch(FetchOffers(ID))
         }
     }, [dispatch, ID]);
 
-    useEffect(() => {
-
-        console.log(offers)
-
-    }, [offers]);
 
     return (
         <View style={{ flex: 1 }}>

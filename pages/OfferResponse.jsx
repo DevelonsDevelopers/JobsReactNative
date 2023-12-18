@@ -15,15 +15,19 @@ const OfferResponse = ({ route, navigation }) => {
     const offer = useSelector(state => state.offers.offer)
     const success = useSelector(state => state.success.offerSuccess)
     const error = useSelector(state => state.error.offerError)
-    // const nodata = useSelector(state => state.offers.error)
 
     const [isLoading, setIsLoading] = useState(true)
+    const [response, setResponse] = useState()
+
+    const [visible, setVisible] = useState(false)
+    const toggleVisible = () => setVisible(!visible)
 
     useEffect(() => {
         if (success || error) {
             setIsLoading(false)
         }
     }, [success, error])
+
     useEffect(() => {
         if (ID) {
             dispatch(FetchOffer(ID))
@@ -36,14 +40,7 @@ const OfferResponse = ({ route, navigation }) => {
         }
     }, [offer])
 
-    const [response, setResponse] = useState()
 
-    const [visible, setVisible] = useState(false)
-    const toggleVisible = () => setVisible(!visible)
-
-    useEffect(() => {
-        console.log(response)
-    }, [response])
 
     return (
         <View style={{ flex: 1, }}>

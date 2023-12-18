@@ -145,7 +145,7 @@ function Resume({ navigation }) {
                       <Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft: 'auto', marginTop: 6, marginBottom: 6 }}>
                         {item.phone}
                       </Text>
-                      {/* <Text style={{ backgroundColor: 'gray', height: 1, paddingHorizontal: 20 }}>-</Text> */}
+
                     </View>
                   )} />
 
@@ -240,7 +240,6 @@ function Resume({ navigation }) {
           requestNonPersonalizedAdsOnly: true,
         }}
       />
-
     </View>
   );
 }

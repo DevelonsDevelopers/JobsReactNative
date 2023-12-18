@@ -2,7 +2,7 @@ import { Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityInd
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
-import { AllJobs, CityJobs } from "../API/actions/jobActions";
+import {  CityJobs } from "../API/actions/jobActions";
 import moment from "moment";
 import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -11,12 +11,12 @@ import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 function JobsByCity({ route, navigation }) {
 
-	// console.log(route)
+	
 	const { CITYID } = route.params
 
 	const jobs = useSelector(state => state.job.cityJobs)
 	const error = useSelector(state => state.error.cityJobError)
-	// const nodata = useSelector(state => state.nodata.cityJobNoData)
+
 	const [nodata, setNodata] = useState(false)
 	const success = useSelector(state => state.success.cityJobSuccess)
 	const dispatch = useDispatch()
@@ -25,19 +25,7 @@ function JobsByCity({ route, navigation }) {
 
 	const [ID, setID] = useState()
 
-	// useEffect(() => {
-	// 	if (ID) {
-	// 		if (loading) {
-	// 			if (!jobs) {
-	// 				dispatch(CityJobs(ID, CITYID))
-	// 			} else if (jobs.length === 0 || jobs[0].city !== CITYID) {
-	// 				dispatch(CityJobs(ID, CITYID))
-	// 			} else {
-	// 				setData(jobs)
-	// 			}
-	// 		}
-	// 	}
-	// }, [dispatch, jobs, ID]);
+	
 
 	useEffect(() => {
 		dispatch(CityJobs(ID, CITYID))
@@ -138,15 +126,7 @@ function JobsByCity({ route, navigation }) {
 												backgroundColor: '#fff'
 											}}>
 												<View style={{ flexDirection: 'row', flex: 1 }}>
-													<Text style={{
-														color: '#207A00',
-														backgroundColor: 'rgba(0,180,18,0.2)',
-														paddingHorizontal: 10,
-														paddingTop: 4,
-														fontSize: 10,
-														fontFamily: 'poppins_medium',
-														borderRadius: 5
-													}}>NEW</Text>
+													
 													<Text style={{
 														marginLeft: 'auto',
 														textAlign: 'right',

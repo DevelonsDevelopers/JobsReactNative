@@ -24,14 +24,14 @@ const ProfileVerifiedSuccessful = ({ route, navigation }) => {
 
     useEffect(() => {
         if (type === "PROVIDER"){
-            navigation.replace('PostJob')
+            navigation.popToTop('PostJob')
         } else {
             if (ID) {
                 dispatch(fetchSeeker(ID))
                 dispatch(CheckCV(ID))
                 dispatch(CheckSeeker(ID))
                 sleep(1000).then(async () => {
-                    navigation.replace('Home')
+                    navigation.popToTop('Home')
                 })
             }
         }

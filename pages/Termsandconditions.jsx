@@ -1,11 +1,11 @@
 import { Text, Image, Pressable } from 'react-native'
 import React from 'react'
 import { View } from 'react-native'
-import Privacypolicy from './Privacypolicy'
 import { ScrollView } from 'react-native'
 import { Linking } from 'react-native'
 
 function Termsandconditions({ navigation }) {
+
   return (
     <ScrollView>
       <View style={{ display: "flex", flexDirection: "row", marginTop: 50, }}>

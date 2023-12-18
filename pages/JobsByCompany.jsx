@@ -1,15 +1,11 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, Dimensions } from "react-native";
+import { Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, Dimensions } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
-import Resume from "./Resume";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCities } from "../API/actions/cityActions";
-import { AllJobs, CityJobs, CompanyJobs } from "../API/actions/jobActions";
+import {  CompanyJobs } from "../API/actions/jobActions";
 import moment from "moment";
 import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RESET } from "../Utils/Constants";
 import Ripple from "react-native-material-ripple";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
@@ -19,7 +15,7 @@ function JobsByCompany({ route, navigation }) {
 
     const jobs = useSelector(state => state.job.companyJobs)
     const error = useSelector(state => state.error.companyJobError)
-    // const nodata = useSelector(state => state.nodata.companyJobNoData)
+
     const success = useSelector(state => state.success.companyJobSuccess)
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
@@ -28,23 +24,7 @@ function JobsByCompany({ route, navigation }) {
 
     const [ID, setID] = useState()
 
-    console.log(success)
-
-
-    // useEffect(() => {
-    //     if (ID) {
-    //         if (loading) {
-    //             if (!jobs) {
-    //                 dispatch(CompanyJobs(ID, COMID))
-    //             } else if (jobs.length === 0 || jobs[0].company !== COMID) {
-    //                 dispatch(CompanyJobs(ID, COMID))
-    //             } else {
-    //                 setLoading(false)
-    //                 setData(jobs)
-    //             }
-    //         }
-    //     }
-    // }, [dispatch, jobs, ID]);
+  
 
     useEffect(() => {
 		if (jobs) {
@@ -59,23 +39,7 @@ function JobsByCompany({ route, navigation }) {
         }
     }, [dispatch])
 
-    console.log("data",data)
-
-    // useEffect(() => {
-    //     if (success || error) {
-    //         setLoading(false)
-    //     }  
-    // }, [success, error]);
-
-    // useEffect(() => {
-    //     const unsubscribe = navigation.addListener('focus', () => {
-    //         setData("");
-    //         setNoData(false)
-    //     });
-    //     return unsubscribe;
-    // }, [navigation]);
-
-
+ 
     useEffect(() => {
         if (data) {
             setLoading(false)
@@ -91,13 +55,6 @@ function JobsByCompany({ route, navigation }) {
         }
     }, [data])
 
-    console.log(loading)
-
-    // useEffect(() => {
-    //     if (jobs) {
-    //         setData(jobs)
-    //     }
-    // }, [jobs]);
 
     const JobClick = (id) => {
         recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
@@ -112,9 +69,7 @@ function JobsByCompany({ route, navigation }) {
         setID(id);
     }
 
-    // useEffect(()=>{
-    //     console.log(jobs)
-    // },[jobs])
+  
     const height = Dimensions.get("window").height;
 
     return (
@@ -154,7 +109,7 @@ function JobsByCompany({ route, navigation }) {
                         </View>
                         : <>
                             {noData ?
-                                <View style={{ marginTop: '40%', height: height }}>
+                                <View style={{ flex:1, justifyContent:'center',alignContent:'center' }}>
                                     <Image source={require('../assets/nodata.png')}
                                         style={{ width: 260, height: 260, marginLeft: 'auto', marginBottom: -20, marginRight: 'auto' }} />
                                     <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Jobs Found</Text>
@@ -206,21 +161,7 @@ function JobsByCompany({ route, navigation }) {
                                                             fontSize: 12
                                                         }}>{item.company_name}</Text>
                                                     </View>
-                                                    {/* {item.bookmark === 0 ?
-                                    <Image style={{
-                                        width: 20,
-                                        height: 20,
-                                        marginLeft: 'auto',
-                                        marginTop: 10
-                                    }} source={require('../assets/bookmarked.png')}/>
-                                    :
-                                    <Image style={{
-                                        width: 20,
-                                        height: 20,
-                                        marginLeft: 'auto',
-                                        marginTop: 10
-                                    }} source={require('../assets/bookmark.png')}/>
-                                } */}
+                                                   
                                                 </View>
                                                 <View style={{ flexDirection: 'row', flex: 1 }}>
                                                     <Text style={{

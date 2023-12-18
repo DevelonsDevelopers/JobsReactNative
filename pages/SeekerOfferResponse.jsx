@@ -1,34 +1,28 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react'
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, View, ActivityIndicator } from "react-native";
-import WebView from 'react-native-webview';
+import { Image, Text, Pressable, ScrollView, View, ActivityIndicator } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
-import { FetchOffer, FetchOffers } from '../API/actions/offersActions';
+import { FetchOffer } from '../API/actions/offersActions';
 
 const SeekerOfferResponse = ({ route, navigation }) => {
 
     const { ID } = route.params
 
-    useEffect(() => {
-        console.log(ID)
-    }, [ID])
-
-
     const dispatch = useDispatch();
+
+    const [loading, setLoading] = useState(true)
+    const [response, setResponse] = useState()
 
     const offer = useSelector(state => state.offers.offer)
     const success = useSelector(state => state.success.offerSuccess)
 
-    const [loading, setLoading] = useState(true)
+
     useEffect(() => {
         if (success) {
             setLoading(false)
         }
     }, [success])
 
-
-    const [response, setResponse] = useState()
 
     useEffect(() => {
         if (offer) {
@@ -186,10 +180,10 @@ const SeekerOfferResponse = ({ route, navigation }) => {
                             }}>Negotiate</Text>
                         </View>
                     }
-          </> }
+                </>}
 
-                </View>
-            )
+        </View>
+    )
 }
 
-            export default SeekerOfferResponse
+export default SeekerOfferResponse

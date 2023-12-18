@@ -45,8 +45,6 @@ function Categories({ navigation }) {
         })
         setData(searched)
     }
-
-
     const [noSearch, setNoSearch] = useState(false)
 
     useEffect(() => {
@@ -58,12 +56,11 @@ function Categories({ navigation }) {
     }, [data])
 
 
-    const height = Dimensions.get("window").height;
 
 
 
     return (
-        <View style={{ height: height }} >
+        <View style={{ flex:1 }} >
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 {isLoading ?
                     <View style={{ marginTop: 400 }}>
@@ -75,7 +72,8 @@ function Categories({ navigation }) {
                             <Image source={require('../assets/nodata.png')}
                                 style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
                             <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
-                        </View> :
+                        </View> 
+                        :
                             <>
                                 {error ?
                                     <View style={{ marginTop: 360 }}>
@@ -89,11 +87,9 @@ function Categories({ navigation }) {
                                         <Text
                                             style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network
                                             Error...!</Text>
-                                    </View> : <>
-
-
-
-
+                                    </View> 
+                                    : 
+                                    <>
                                         <View style={{ backgroundColor: '#F1F1F1' }}>
                                             <View style={{ flexDirection: 'row', height: 90 }}>
                                                 <Pressable onPress={() => navigation.goBack()} style={{ paddingRight: 5 }}><Image style={{
@@ -104,11 +100,11 @@ function Categories({ navigation }) {
                                                     tintColor: '#000'
                                                 }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
                                                 <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                                                    <Pressable
-                                                    //  onPress={() => navigation.push('Jobs')}
-                                                    ><Image
+                                                    <Pressable >
+                                                        <Image
                                                             style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                                                            source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
+                                                            source={require('../assets/logo.png')} alt={'Okay'} />
+                                                    </Pressable>
                                                 </View>
                                             </View>
                                             <View>
@@ -170,13 +166,7 @@ function Categories({ navigation }) {
                             </>}
                     </>}
             </ScrollView>
-            {/* <BannerAd
-                unitId="ca-app-pub-3940256099942544/6300978111"
-                size={BannerAdSize.FULL_BANNER}
-                requestOptions={{
-                    requestNonPersonalizedAdsOnly: true,
-                }}
-            /> */}
+          
         </View>
     )
 }

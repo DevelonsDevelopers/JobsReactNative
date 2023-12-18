@@ -30,32 +30,37 @@ const ProviderAccountManage = ({ navigation }) => {
 	const dispatch = useDispatch();
 
 	const [trigger, setTrigger] = useState(false)
-
 	const [ID, setID] = useState()
 	const [cityVisible, setCityVisible] = useState(false)
+
 	const [countryVisible, setCountryVisible] = useState(false)
 	const [type, setType] = useState(false)
+	const [isLoading, setIsLoading] = useState(true)
+
 	const [country, setCountry] = useState()
 	const [citiesData, setCitiesData] = useState()
 
+	const toggleVisibility = () => setCityVisible(!cityVisible)
+	const toggleCountryVisibility = () => setCountryVisible(!countryVisible)
+	const toggleType = () => setType(!type)
+
+	const [phoneVisible, setPhoneVisible] = useState(false)
+	const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
 	const [nameCity, setNameCity] = useState()
 	const [countryName, setCountryName] = useState()
 
 	const [phoneCode, setPhoneCode] = useState('')
-
 	const [verified, setVerified] = useState(false)
+	const [data, setData] = useState({ email: '', size: '', city: '', country: '', phone: '', headquater: '', type: '' })
 
+	const company = useSelector(state => state.company.company)
+	const success = useSelector(state => state.success.companySuccess)
 
-	const [data, setData] = useState({
-		email: '',
-		size: '',
-		city: '',
-		country: '',
-		phone: '',
-		headquater: '',
-		type: ''
-	})
+	const error = useSelector(state => state.company.companyError)
+	const cities = useSelector(state => state.city.cities)
+	const countries = useSelector(state => state.country.countries)
+
 
 	useEffect(() => {
 		GetData()
@@ -65,11 +70,7 @@ const ProviderAccountManage = ({ navigation }) => {
 		setID(value);
 	}
 
-	const company = useSelector(state => state.company.company)
-	const success = useSelector(state => state.success.companySuccess)
-	const error = useSelector(state => state.company.companyError)
 
-	const [isLoading, setIsLoading] = useState(true)
 	useEffect(() => {
 		if (success || error) {
 			setIsLoading(false)
@@ -84,7 +85,7 @@ const ProviderAccountManage = ({ navigation }) => {
 
 
 	useEffect(() => {
-		console.log(company)
+
 		if (company) {
 			setData({
 				...data,
@@ -103,13 +104,6 @@ const ProviderAccountManage = ({ navigation }) => {
 			setCountryName(company?.country_name)
 		}
 	}, [company])
-
-	const toggleVisibility = () => setCityVisible(!cityVisible)
-	const toggleCountryVisibility = () => setCountryVisible(!countryVisible)
-	const toggleType = () => setType(!type)
-
-	const cities = useSelector(state => state.city.cities)
-	const countries = useSelector(state => state.country.countries)
 
 
 	useEffect(() => {
@@ -137,19 +131,9 @@ const ProviderAccountManage = ({ navigation }) => {
 		setCountryName(item.name)
 	}
 
-	useEffect(() => {
-		const searched = cities?.filter((data) => {
-			return data.country === country
-		})
-		setCitiesData(searched)
-	}, [country]);
-
 	const typeClick = (value) => [
 		setData({ ...data, type: value })
 	]
-
-	const [phoneVisible, setPhoneVisible] = useState(false)
-	const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
 	const UpdateCompany = async () => {
 		await updateCompany(data.size, data.country, data.city, data.code, data.phone, data.headquater, data.email, data.type, ID).then(res => {
@@ -163,6 +147,14 @@ const ProviderAccountManage = ({ navigation }) => {
 		setData({ ...data, code: code })
 		togglePhoneVisible()
 	}
+
+	useEffect(() => {
+		const searched = cities?.filter((data) => {
+			return data.country === country
+		})
+		setCitiesData(searched)
+	}, [country]);
+
 
 	return (
 		<View style={{ flex: 1 }}  >

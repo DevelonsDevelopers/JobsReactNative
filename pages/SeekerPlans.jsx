@@ -1,27 +1,24 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import {FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, View} from 'react-native'
+import { FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, View } from 'react-native'
 import Ripple from 'react-native-material-ripple'
-import {useDispatch, useSelector} from "react-redux";
-import {getPlans} from "../API/actions/plansActions";
+import { useDispatch, useSelector } from "react-redux";
+import { getPlans } from "../API/actions/plansActions";
 
 
 const Plans = ({ navigation }) => {
 
     const dispatch = useDispatch()
 
-    const plans = useSelector(state => state.plans.typePlans)
-
     const [plan, setPlan] = useState()
     const [price, setPrice] = useState()
+
+    const plans = useSelector(state => state.plans.typePlans)
 
     useEffect(() => {
         dispatch(getPlans('Seeker'))
     }, [dispatch]);
 
-    useEffect(() => {
-        console.log(plans)
-    }, [plans]);
 
     return (
         <ScrollView>
@@ -65,7 +62,7 @@ const Plans = ({ navigation }) => {
                                 <Text style={{ color: 'green', textAlign: 'center', fontSize: 14, }}>$</Text>
                                 <Text style={{ fontSize: 40, marginTop: -5, color: 'green' }}>{item.amount}</Text>
                             </View>
-                            <Text style={{ color: 'black',opacity:0.6, fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center' }}>{item.purpose}</Text>
+                            <Text style={{ color: 'black', opacity: 0.6, fontSize: 16, fontFamily: 'poppins_medium', textAlign: 'center' }}>{item.purpose}</Text>
                         </Ripple>
                     )}
                 />

@@ -15,7 +15,7 @@ const JobResponse = ({ route, navigation }) => {
     const { IDs } = route.params
     const { response } = route.params
 
-    // const [ID, setID] = useState()
+  
 
     const job = useSelector(state => state.job.job)
     const offers = useSelector(state => state.offers.offer)
@@ -81,25 +81,7 @@ const JobResponse = ({ route, navigation }) => {
         }
     }, [dispatch, response]);
 
-    // const BookmarkJob = () => {
-    //     bookmarkJob(job.id, USERID).then(res => {
-    //         const {data: {data}} = res;
-    //         if (data.affectedRows === 1) {
-    //             setBookmark(data.insertId)
-    //             dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: data.insertId}})
-    //         }
-    //     })
-    // }
-
-    // const RemoveBookmark = () => {
-    //     removeBookmark(bookmark).then(res => {
-    //         const {data: {data}} = res;
-    //         if (data.affectedRows === 1) {
-    //             setBookmark(0)
-    //             dispatch({type: BOOKMARK_JOB, payload: {job: job.id, bookmark: 0}})
-    //         }
-    //     })
-    // }
+    
 
     // Apply Modal ============
     const [applyVisible, setApplyVisible] = useState(false)
@@ -284,58 +266,7 @@ const JobResponse = ({ route, navigation }) => {
                                     marginTop: 10,
                                     fontFamily: 'poppins_medium'
                                 }}>
-                                    {/*{bookmark === 0 ?*/}
-                                    {/*    <Pressable onPress={() => BookmarkJob()}><Text style={{*/}
-                                    {/*        justifyContent: 'center',*/}
-                                    {/*        height: 50,*/}
-                                    {/*        fontSize: 15,*/}
-                                    {/*        fontFamily: 'poppins_bold',*/}
-                                    {/*        backgroundColor: '#143D59',*/}
-                                    {/*        color: 'white',*/}
-                                    {/*        width: 150,*/}
-                                    {/*        textAlign: "center",*/}
-                                    {/*        paddingVertical: 10,*/}
-                                    {/*        borderRadius: 25,*/}
-                                    {/*    }}>SAVE</Text></Pressable>*/}
-                                    {/*    :*/}
-                                    {/*    <Pressable onPress={() => RemoveBookmark()}><Text style={{*/}
-                                    {/*        justifyContent: 'center',*/}
-                                    {/*        height: 50,*/}
-                                    {/*        fontSize: 15,*/}
-                                    {/*        fontFamily: 'poppins_bold',*/}
-                                    {/*        backgroundColor: '#143D59',*/}
-                                    {/*        color: 'white',*/}
-                                    {/*        width: 150,*/}
-                                    {/*        textAlign: "center",*/}
-                                    {/*        paddingVertical: 10,*/}
-                                    {/*        borderRadius: 25,*/}
-                                    {/*    }}>SAVED</Text></Pressable>*/}
-                                    {/*}*/}
-                                    {/*{applied === 0 ?*/}
-                                    {/*    <Pressable onPress={() => toggleApplyVisibility()}><Text style={{*/}
-                                    {/*        justifyContent: 'center',*/}
-                                    {/*        height: 50,*/}
-                                    {/*        fontSize: 15,*/}
-                                    {/*        fontFamily: 'poppins_bold',*/}
-                                    {/*        backgroundColor: '#13A3E1',*/}
-                                    {/*        color: 'white',*/}
-                                    {/*        width: 150,*/}
-                                    {/*        textAlign: "center",*/}
-                                    {/*        paddingVertical: 10,*/}
-                                    {/*        borderRadius: 25,*/}
-                                    {/*    }}>APPLY NOW</Text></Pressable>*/}
-                                    {/*    : <Text style={{*/}
-                                    {/*        justifyContent: 'center',*/}
-                                    {/*        height: 50,*/}
-                                    {/*        fontSize: 15,*/}
-                                    {/*        fontFamily: 'poppins_bold',*/}
-                                    {/*        backgroundColor: '#13A3E1',*/}
-                                    {/*        color: 'white',*/}
-                                    {/*        width: 150,*/}
-                                    {/*        textAlign: "center",*/}
-                                    {/*        paddingVertical: 10,*/}
-                                    {/*        borderRadius: 25,*/}
-                                    {/*    }}>APPLIED</Text>}*/}
+                                    
                                 </View>
 
                             </View>

@@ -8,14 +8,16 @@ import Ripple from "react-native-material-ripple";
 function RecommendedUser({ route, navigation }) {
 
     const { job } = route.params
-
     const dispatch = useDispatch();
+
     const [login, isLogin] = useState(false);
+    const [loading, setLoading] = useState(true)
+
     const seekers = useSelector(state => state.seeker.seekers)
     const success = useSelector(state => state.success.recommendedSeekersSuccess)
     const nodata = useSelector(state => state.nodata.recommendedSeekersNoData)
     const error = useSelector(state => state.error.recommendedSeekersError)
-    const [loading, setLoading] = useState(true)
+
     useEffect(() => {
         if (success || error || nodata) {
             setLoading(false)
@@ -45,7 +47,7 @@ function RecommendedUser({ route, navigation }) {
                     {nodata ? <View style={{ marginTop: 200 }}>
                         <Image source={require('../assets/nodata.png')}
                             style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-                        <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Recommended jobs Found</Text>
+                        <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Recommended Users Found</Text>
                     </View> :
                         <>
                             {error ?
@@ -135,14 +137,6 @@ function RecommendedUser({ route, navigation }) {
                                                             fontFamily: 'poppins_medium',
                                                             marginBottom: 10
                                                         }}>{item.role}</Text>
-                                                        <View style={{ paddingHorizontal: 50 }}><Text style={{
-                                                            backgroundColor: '#D9D9D9',
-                                                            textAlign: "center",
-                                                            paddingVertical: 6,
-                                                            borderRadius: 20,
-                                                            fontSize: 12,
-                                                            fontFamily: 'poppins_medium'
-                                                        }}>Demand 5000/month</Text></View>
                                                         <Ripple onPress={() => navigation.push('ViewResume', { ID: item.id, offer: item.offer, job: item.job })} style={{ marginTop: 4, marginLeft: 'auto', marginRight: 'auto' }}>
                                                             <Text style={{
                                                                 backgroundColor: '#13A3E1',
@@ -161,8 +155,6 @@ function RecommendedUser({ route, navigation }) {
                                                 )}
                                             />
                                         </SafeAreaView>
-
-
                                         <View style={{ height: 90 }} />
                                     </ScrollView>
                                 </>}

@@ -4,20 +4,11 @@ import { View } from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
 import { AllJobs } from "../API/actions/jobActions";
 import moment from "moment";
-import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RESET } from "../Utils/Constants";
-import company from "../API/reducers/company";
 import Ripple from "react-native-material-ripple";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
-const data = [
-	{ "name": "Facebook" },
-	{ "name": "Google" },
-	{ "name": "Netflix" },
-	{ "name": "Youtube" }
-]
-
+ 
 function Jobs({ navigation }) {
 
 	const jobs = useSelector(state => state.job.jobs)
@@ -157,15 +148,6 @@ function Jobs({ navigation }) {
 															backgroundColor: '#fff'
 														}}>
 															<View style={{ flexDirection: 'row', flex: 1 }}>
-																{/* <Text style={{
-																	color: '#207A00',
-																	backgroundColor: 'rgba(0,180,18,0.2)',
-																	paddingHorizontal: 10,
-																	paddingTop: 4,
-																	fontSize: 10,
-																	fontFamily: 'poppins_medium',
-																	borderRadius: 5
-																}}>NEW</Text> */}
 																<Text style={{
 																	marginLeft: 'auto',
 																	textAlign: 'right',

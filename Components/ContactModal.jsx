@@ -2,7 +2,7 @@ import React from "react";
 import { Image, Linking, Modal, Pressable, Text, View } from "react-native";
 import Ripple from "react-native-material-ripple";
 
-const ContactModal = ({ visible, toggleVisibility, name, phone, email }) => {
+const ContactModal = ({ visible, toggleVisibility, name, phone, email, code }) => {
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleVisibility}>
             <View style={{
@@ -30,7 +30,7 @@ const ContactModal = ({ visible, toggleVisibility, name, phone, email }) => {
 
                     <Ripple onPress={() => Linking.openURL(`tel:${phone}`)} rippleDuration={600} style={{ flexDirection: 'row', borderWidth: 2, padding: 10, marginVertical: 20, borderRadius: 10, borderColor: 'lightgray' }}>
                         <Image source={require('../assets/call.png')} style={{ height: 25, width: 25, tintColor: '#13A3E1' }} />
-                        <Text style={{ fontFamily: 'poppins_medium', textAlign: 'right', width: '90%', color: '#13A3E1' }}>{phone}</Text>
+                        <Text style={{ fontFamily: 'poppins_medium', textAlign: 'right', width: '90%', color: '#13A3E1' }}>{code}{phone}</Text>
                     </Ripple>
 
                     <Ripple onPress={() => Linking.openURL(`mailto:${email}`)} style={{ flexDirection: 'row', borderWidth: 2, padding: 10, borderRadius: 10, borderColor: 'lightgray' }}>

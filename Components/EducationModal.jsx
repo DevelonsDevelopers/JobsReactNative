@@ -19,9 +19,9 @@ const EducationModal = ({ visible, toggleEducationVisibility, add, data, edit })
 
     const Add = () => {
 
-        if (degree.length >= 4) {
-            if (university.length >= 4) {
-                if (timeperiod.length >= 4) {
+        if (degree.length >= 1) {
+            if (university.length >= 1) {
+                if (timeperiod.length >= 1) {
                     if (data?.status === 0) {
                         edit(degree, timeperiod, university, data.id)
                     } else {

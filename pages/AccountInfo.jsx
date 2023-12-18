@@ -1,14 +1,4 @@
-import {
-	ActivityIndicator,
-	FlatList,
-	Image,
-	Pressable,
-	SafeAreaView,
-	ScrollView,
-	Text,
-	TextInput,
-	View
-} from "react-native";
+import { ActivityIndicator, FlatList, Image, Pressable, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import EducationModal from "../Components/EducationModal";
 import SkillModal from "../Components/SkillModal";
@@ -17,17 +7,7 @@ import LanguageModal from "../Components/LanguageModal";
 import ResumeModal from "../Components/ResumeModal";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	CheckCV,
-	CVByUser,
-	CVCareer,
-	CVCourse,
-	CVEducation,
-	CVInterest,
-	CVLanguage,
-	CVResume,
-	CVSkill
-} from "../API/actions/cvActions";
+import { CheckCV, CVByUser, CVCareer, CVCourse, CVEducation, CVInterest, CVLanguage, CVResume, CVSkill } from "../API/actions/cvActions";
 import CareerModal from "../Components/CareerModal";
 import CourseModal from "../Components/CourseModal";
 import {
@@ -1062,7 +1042,7 @@ function AccountInfo({ route, navigation }) {
 							}
 						</>}
 				</>}
-				
+
 		</View>
 	)
 }

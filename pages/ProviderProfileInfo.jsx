@@ -23,6 +23,17 @@ const ProviderProfileInfo = ({ navigation }) => {
     const dispatch = useDispatch();
 
     const [ID, setID] = useState()
+    const [loading, setLoading] = useState(true)
+
+    const [loadingVisible, setLoadingVisible] = useState(false)
+    const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
+    const [loginVal, setLoginVal] = useState()
+
+    const company = useSelector(state => state.company.company)
+    const success = useSelector(state => state.success.companySuccess)
+    const error = useSelector(state => state.error.companyError)
+    const nodata = useSelector(state => state.nodata.companyNoData)
+
 
     useEffect(() => {
         GetData()
@@ -32,13 +43,6 @@ const ProviderProfileInfo = ({ navigation }) => {
         setID(value);
     }
 
-    const company = useSelector(state => state.company.company)
-
-    const success = useSelector(state => state.success.companySuccess)
-    const error = useSelector(state => state.error.companyError)
-    const nodata = useSelector(state => state.nodata.companyNoData)
-
-    const [loading, setLoading] = useState(true)
     useEffect(() => {
         if (success || error || nodata) {
             setLoading(false)
@@ -52,10 +56,6 @@ const ProviderProfileInfo = ({ navigation }) => {
     }, [dispatch, ID]);
 
 
-    useEffect(() => {
-        console.log(company)
-    }, [company])
-
     const Logout = async () => {
         await AsyncStorage.setItem("LOGIN", 'false')
         await AsyncStorage.setItem("ID", '')
@@ -67,10 +67,6 @@ const ProviderProfileInfo = ({ navigation }) => {
         navigation.popToTop()
         navigation.replace('UserType')
     }
-
-    const [loadingVisible, setLoadingVisible] = useState(false)
-    const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
-    const [loginVal, setLoginVal] = useState()
 
 
     return (

@@ -180,6 +180,9 @@ function Login({ route, navigation }) {
     };
 
     return (
+        <View style={{ flex:1 }}>
+
+        
         <ScrollView style={{ flex: 1, backgroundColor: '#F0A51E' }} keyboardShouldPersistTaps='handled'>
 
             <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
@@ -206,8 +209,7 @@ function Login({ route, navigation }) {
                 </View>
             </Modal>
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30 }}>
-                {/* <Image style={{tintColor: '#000', width: 40, height: 40}}
-                       source={require('../assets/back_arrow.png')}/> */}
+
                 <Pressable onPress={() => navigation.replace('Home', { Status: 0 })} style={{
                     marginLeft: 'auto',
                     marginRight: 20,
@@ -255,10 +257,10 @@ function Login({ route, navigation }) {
                         flex: 1
                     }} placeholder={'Enter your Password'} secureTextEntry={!show} />
                     {show === true ?
-                        <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
+                        <Pressable onPress={() => setShow(false)} style={{ marginLeft: 'auto' }}><Image
                             style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>
                         :
-                        <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
+                        <Pressable onPress={() => setShow(true)} style={{ marginLeft: 'auto' }}><Image
                             style={{ width: 25, height: 25 }} source={require('../assets/hide.png')} /></Pressable>}
                 </View>
                 <Pressable onPress={() => navigation.push('ForgotPassword')} style={{
@@ -304,11 +306,12 @@ function Login({ route, navigation }) {
                         style={{ color: '#000', fontWeight: '900', fontSize: 15 }}> Register</Text></Pressable>
                 </View>
             </View>
+        </ScrollView>
             <Toast
                 position='top'
                 bottomOffset={20}
             />
-        </ScrollView>
+        </View>
     );
 }
 

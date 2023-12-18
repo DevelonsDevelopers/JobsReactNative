@@ -18,16 +18,22 @@ import { RESET, RESET_SEEKER } from "../Utils/Constants";
 
 function Profile({ navigation }) {
 
-    const seeker = useSelector(state => state.seeker.seeker)
+    const dispatch = useDispatch();
 
+    const [ID, setID] = useState()
+    const [isloading, setIsLoading] = useState(true)
+    const [visible, setVisible] = useState(false)
+    const toggleVisibility = () => setVisible(!visible)
+
+    const [loadingVisible, setLoadingVisible] = useState(false)
+    const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
+
+    const seeker = useSelector(state => state.seeker.seeker)
     const error = useSelector(state => state.error.seekerError)
     const success = useSelector(state => state.success.seekerSuccess)
     const check = useSelector(state => state.seeker.check)
     const checkCV = useSelector(state => state.cv.check)
-    const dispatch = useDispatch();
-    const [ID, setID] = useState()
 
-    const [isloading, setIsLoading] = useState(true)
     useEffect(() => {
         if (success || error) {
             setIsLoading(false)
@@ -65,15 +71,6 @@ function Profile({ navigation }) {
         }
     }, [dispatch, navigation, seeker, ID]);
 
-    useEffect(() => {
-        console.log(seeker)
-    }, [seeker])
-
-
-
-
-    const [visible, setVisible] = useState(false)
-    const toggleVisibility = () => setVisible(!visible)
 
     const Logout = async () => {
         await AsyncStorage.setItem("LOGIN", 'false')
@@ -81,15 +78,13 @@ function Profile({ navigation }) {
         await AsyncStorage.setItem("NAME", '')
         await AsyncStorage.setItem("EMAIL", '')
         await AsyncStorage.setItem("USERNAME", '')
-        setLoginVal('false')
+        setLoginVal(false)
         toggleVisibility()
         toggleLoadingVisibility()
         navigation.popToTop()
         navigation.replace('Home')
     }
-    // log out===================
-    const [loadingVisible, setLoadingVisible] = useState(false)
-    const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
+
 
     return (
         <View style={{ flex: 1 }}>

@@ -8,15 +8,14 @@ import Ripple from "react-native-material-ripple";
 
 const ViewResume = ({ route, navigation }) => {
 
+	const dispatch = useDispatch();
+
 	const { ID } = route.params
 	const { job } = route.params;
 	const { offer } = route.params;
 
-	// const { seeker } = route.params;
+	const [isLoading, setIsLoading] = useState(true);
 
-
-
-	const dispatch = useDispatch();
 	const cv = useSelector((state) => state.cv.cv);
 	const success = useSelector((state) => state.success.cvSuccess);
 	const error = useSelector((state) => state.success.cvError);
@@ -27,26 +26,11 @@ const ViewResume = ({ route, navigation }) => {
 		}
 	}, [dispatch, ID]);
 
-	// useEffect(() => {
-	//     if (seeker) {
-	//         dispatch(CVByUser(seeker));
-	//     }
-	// }, [dispatch, seeker]);
-
-
-
-	const [isLoading, setIsLoading] = useState(true);
-
 	useEffect(() => {
-		if (success||error) {
+		if (success || error) {
 			setIsLoading(false);
 		}
-	}, [success,error]);
-
-
-
-
-
+	}, [success, error]);
 
 	return (
 		<View style={{ flex: 1 }}>
@@ -137,7 +121,7 @@ const ViewResume = ({ route, navigation }) => {
 											<Text style={{ fontSize: 10, fontFamily: 'poppins_medium', marginLeft: 'auto', marginTop: 6, marginBottom: 6 }}>
 												{item.phone}
 											</Text>
-											{/* <Text style={{ backgroundColor: 'black', height: 1, paddingHorizontal: 20 }}>-</Text> */}
+
 										</View>
 									)} />
 
@@ -201,15 +185,9 @@ const ViewResume = ({ route, navigation }) => {
 										</Text>
 									)} />
 							</SafeAreaView>
-
-
-
 						</View>
-
 					</>}
-
 			</ScrollView>
-
 
 
 			{offer !== 0 ?
@@ -226,8 +204,8 @@ const ViewResume = ({ route, navigation }) => {
 						paddingVertical: 10,
 						borderRadius: 25,
 						paddingTop: 13,
-						marginLeft:'auto',
-						marginRight:'auto'
+						marginLeft: 'auto',
+						marginRight: 'auto'
 					}} >Already Sent</Text>
 				</Ripple>
 				:
@@ -240,8 +218,6 @@ const ViewResume = ({ route, navigation }) => {
 					paddingVertical: 10,
 					backgroundColor: '#e8e8e8'
 				}}>
-
-
 					<Ripple onPress={() => navigation.push('AppliedUsers')} >
 						<Text style={{
 							justifyContent: 'center',
@@ -257,7 +233,6 @@ const ViewResume = ({ route, navigation }) => {
 							paddingTop: 13,
 						}}>Ignore</Text>
 					</Ripple>
-
 
 					<Ripple onPress={() => navigation.push('OfferSend', { user: ID, job: job })}  >
 						<Text style={{

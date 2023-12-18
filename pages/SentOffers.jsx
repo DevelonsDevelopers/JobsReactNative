@@ -8,43 +8,40 @@ import moment from "moment/moment";
 function SentOffers({ navigation }) {
 
     const dispatch = useDispatch();
-    const [login, isLogin] = useState(false);
-    const offers = useSelector(state => state.offers.sentOffers)
 
+    const [login, isLogin] = useState(false);
+    const [loading, setLoading] = useState(true)
+    const [ID, setID] = useState()
+
+    const [visible, setVisible] = useState(false)
+    const toggleVisibility = () => setVisible(!visible)
+
+    const offers = useSelector(state => state.offers.sentOffers)
     const success = useSelector(state => state.success.sentOfferSuccess)
     const error = useSelector(state => state.error.sentOfferError)
     const nodata = useSelector(state => state.nodata.sentOfferNoData)
 
-    const [loading, setLoading] = useState(true)
+   
     useEffect(() => {
         if (success || error || nodata) {
             setLoading(false)
         }
     }, [success, error, nodata])
 
-    const [ID, setID] = useState()
-
     useEffect(() => {
         GetData()
     }, []);
+    
     const GetData = async () => {
         const value = await AsyncStorage.getItem('ID')
         setID(value);
     }
-
-    const [visible, setVisible] = useState(false)
-    const toggleVisibility = () => setVisible(!visible)
 
     useEffect(() => {
         if (ID) {
             dispatch(FetchSentOffers(ID))
         }
     }, [dispatch, ID]);
-
-    useEffect(() => {
-        console.log(offers)
-    }, [offers]);
-
 
     return (
         <View style={{ flex: 1 }}>

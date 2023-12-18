@@ -30,7 +30,6 @@ import Jobs from "./pages/Jobs";
 import Resume from './pages/Resume';
 import Offers from './pages/Offers';
 import JobDetails from './pages/JobDetails';
-import AdvanceSearch from './pages/AdvanceSearch';
 import PostJob from './pages/PostJob';
 import JobPosted from './pages/JobPosted';
 import AppliedUsers from './pages/AppliedUsers';
@@ -42,7 +41,6 @@ import Recommendedjobs from './pages/Recommendedjobs';
 // import SavedJobs from './pages/SavedJobs';
 import Search from './pages/Search';
 import RecommendedUser from './pages/RecommendedUser';
-import AppliedSaved from './pages/AppliedSaved';
 import JobsByCity from "./pages/JobsByCity";
 import JobsByCategory from "./pages/JobsByCategory";
 import JobsByCompany from "./pages/JobsByCompany";
@@ -65,7 +63,7 @@ import PaymentSuccessful from './pages/PaymentSuccessful';
 import GoogleRegister from './pages/GoogleRegister';
 import SeekerOfferResponse from './pages/SeekerOfferResponse';
 import AcceptResponse from './pages/AcceptResponse';
-import AppliedSuccessful from './pages/AppliedSuccessful';
+// import AppliedSuccessful from './pages/AppliedSuccessful';
 import Plans from './pages/Plans';
 import ViewCoverLetter from './pages/ViewCoverLetter';
 import CompleteProfileSeekerModal from './Components/CompleteProfileSeekerModal';
@@ -90,11 +88,11 @@ const Stack = createNativeStackNavigator();
 
 
 function App() {
-    
+
     React.useEffect(() => {
-        StatusBar.setBackgroundColor('#13A3E1'); 
-        StatusBar.setBarStyle('light-content'); 
-      }, []);
+        StatusBar.setBackgroundColor('#13A3E1');
+        StatusBar.setBarStyle('light-content');
+    }, []);
 
     let [fontLoad] = useFonts({
         'poppins_thin': require('./assets/fonts/poppins_thin.ttf'),
@@ -163,8 +161,7 @@ function App() {
                             options={{ title: "JobDetails", headerShown: false }} />
                         <Stack.Screen name="JobResponse" component={JobResponse}
                             options={{ title: "JobResponse", headerShown: false }} />
-                        <Stack.Screen name="AdvanceSearch" component={AdvanceSearch}
-                            options={{ title: "AdvanceSearch", headerShown: false }} />
+
                         <Stack.Screen name="PostJob" component={PostJob}
                             options={{ title: "PostJob", headerShown: false }} />
                         <Stack.Screen name="JobPosted" component={JobPosted}
@@ -183,8 +180,7 @@ function App() {
                         <Stack.Screen name="Search" component={Search} options={{ title: "Search", headerShown: false }} />
                         <Stack.Screen name="RecommendedUser" component={RecommendedUser}
                             options={{ title: "RecommendedUser", headerShown: false }} />
-                        <Stack.Screen name="AppliedSaved" component={AppliedSaved}
-                            options={{ title: "AppliedSaved", headerShown: false }} />
+
                         <Stack.Screen name="ProviderProfile" component={ProviderProfile}
                             options={{ title: "ProviderProfile", headerShown: false }} />
                         <Stack.Screen name="ProviderTypeModal" component={ProviderTypeModal}
@@ -219,8 +215,8 @@ function App() {
                             options={{ title: "SeekerOfferResponse", headerShown: false }} />
                         <Stack.Screen name="AcceptResponse" component={AcceptResponse}
                             options={{ title: "AcceptResponse", headerShown: false }} />
-                        <Stack.Screen name="AppliedSuccessful" component={AppliedSuccessful}
-                            options={{ title: "AppliedSuccessful", headerShown: false }} />
+                        {/* <Stack.Screen name="AppliedSuccessful" component={AppliedSuccessful}
+                            options={{ title: "AppliedSuccessful", headerShown: false }} /> */}
                         <Stack.Screen name="Plans" component={Plans}
                             options={{ title: "Plans", headerShown: false }} />
                         <Stack.Screen name="SeekerPlans" component={SeekerPlans}
@@ -241,14 +237,14 @@ function App() {
                             options={{ title: "ProfileVerifiedSuccessful", headerShown: false }} />
                         <Stack.Screen name="OfferResponse" component={OfferResponse}
                             options={{ title: "OfferResponse", headerShown: false }} />
-                            <Stack.Screen  name='ApiDescription' component={ApiDescription}
-                            options={{title:'ApiDescription' ,headerShown:false}} />
-                            <Stack.Screen  name='appliedSuccess' component={AppliedSuccess}
-                            options={{title:'appliedSuccess' ,headerShown:false}} />
-                            <Stack.Screen  name='applied' component={Applied}
-                            options={{title:'applied' ,headerShown:false}} />
-                            <Stack.Screen  name='saved' component={Saved}
-                            options={{title:'saved' ,headerShown:false}} />
+                        <Stack.Screen name='ApiDescription' component={ApiDescription}
+                            options={{ title: 'ApiDescription', headerShown: false }} />
+                        <Stack.Screen name='appliedSuccess' component={AppliedSuccess}
+                            options={{ title: 'appliedSuccess', headerShown: false }} />
+                        <Stack.Screen name='applied' component={Applied}
+                            options={{ title: 'applied', headerShown: false }} />
+                        <Stack.Screen name='saved' component={Saved}
+                            options={{ title: 'saved', headerShown: false }} />
 
                     </Stack.Navigator>
                 </NavigationContainer>

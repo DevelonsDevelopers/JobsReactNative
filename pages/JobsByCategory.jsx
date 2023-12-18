@@ -1,16 +1,11 @@
 import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, Dimensions } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import { useNavigation } from "@react-navigation/native";
-import Resume from "./Resume";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCities } from "../API/actions/cityActions";
-import { AllJobs, CategoryJobs } from "../API/actions/jobActions";
+import {  CategoryJobs } from "../API/actions/jobActions";
 import moment from "moment";
 import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { RESET } from "../Utils/Constants";
-import categories from "./Categories";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
 
@@ -30,34 +25,7 @@ function JobsByCategory({ route, navigation }) {
 	const [ID, setID] = useState()
 
 
-	// const [input, setInput] = useState("");
-	// useEffect(() => {
-	//    const unsubscribe = navigation.addListener('focus', () => {
-	// 	setData("");
-	//    });
-	//    return unsubscribe;
-	// }, [navigation]);
-
-	// useEffect(() => {
-	// 	if (ID) {
-	// 		if (loading) {
-	// 			if (!jobs) {
-	// 				dispatch(CategoryJobs(ID, CATID))
-	// 			} else if (jobs.length === 0 || jobs[0].category !== CATID) {
-	// 				dispatch(CategoryJobs(ID, CATID))
-	// 			} else {
-	// 				setLoading(false)
-	// 				setData(jobs)
-	// 			}
-	// 		}
-	// 	}
-	// }, [dispatch, jobs, ID]);
-
-	console.log(success)
-
-
 	useEffect(() => {
-
 		dispatch(CategoryJobs(ID, CATID))
 		setData(jobs)
 
@@ -90,18 +58,7 @@ function JobsByCategory({ route, navigation }) {
 	}, [data])
 
 
-	// console.log(jobs)
-	// console.log(ID)
-
-	// useEffect(() => {
-	// 	if (success || error) {
-	// 		setData(jobs)
-	// 		setLoading(false)
-	// 	}
-	// }, [success, error]);
-
-	// console.log("jobs", jobs)
-	// console.log("data", data)
+	
 
 	const JobClick = (id) => {
 		recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
@@ -116,11 +73,11 @@ function JobsByCategory({ route, navigation }) {
 		const id = await AsyncStorage.getItem('ID')
 		setID(id);
 	}
-	const height = Dimensions.get("window").height;
+	// const height = Dimensions.get("window").height;
 
 	return (
 		<View style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
-			<ScrollView style={{ height: height, }}>
+			<ScrollView style={{ flex:1 }}>
 				<View style={{}}>
 					<View style={{ flexDirection: 'row', height: 90 }}>
 						<Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
@@ -153,7 +110,7 @@ function JobsByCategory({ route, navigation }) {
 						</View>
 						: <>
 							{nodata ?
-								<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+								<View style={{  justifyContent: 'center', alignItems: 'center' }}>
 									<Image
 										source={require('../assets/nodata.png')}
 										style={{ width: 260, height: 260, marginBottom: -20 }}

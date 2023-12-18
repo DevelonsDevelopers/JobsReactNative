@@ -1,14 +1,11 @@
-import { Image, Pressable, ScrollView, Text, TextInput, View} from "react-native";
-import {useState} from "react";
+import { Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { useState } from "react";
 import Toast from "react-native-toast-message";
-import {changePassword, changePasswordProvider} from "../API";
+import { changePassword, changePasswordProvider } from "../API";
 
-function ChangePassword({route, navigation}) {
+function ChangePassword({ route, navigation }) {
 
-    // const { verifyPhone } = route.params
-    // const { code } = route.params
-    // const { phone } = route.params
-    const {type} = route.params
+    const { type } = route.params
     const { ID } = route.params
 
     const [password, setPassword] = useState()
@@ -18,24 +15,21 @@ function ChangePassword({route, navigation}) {
     const toggleVisibility = () => setShow(!show)
 
     const passwordUpdate = () => {
-        if (password?.length > 5 ) {
+        if (password?.length > 5) {
             if (password === cPassword) {
-                // navigation.navigate('Verify', { verifyPhone: verifyPhone, password: password})
                 if (type === "PROVIDER") {
-
-                        changePasswordProvider(password, ID).then(res => {
-                            navigation.replace('Login', { USER: 'PROVIDER' })
-                        }).catch(err => {
-                            console.log(err)
-                        })
-
+                    changePasswordProvider(password, ID).then(res => {
+                        navigation.replace('Login', { USER: 'PROVIDER' })
+                    }).catch(err => {
+                        console.log(err)
+                    })
                 } else {
 
-                        changePassword(password, ID).then(res => {
-                            navigation.replace('Login', { USER: 'SEEKER' })
-                        }).catch(err => {
-                            console.log(err)
-                        })
+                    changePassword(password, ID).then(res => {
+                        navigation.replace('Login', { USER: 'SEEKER' })
+                    }).catch(err => {
+                        console.log(err)
+                    })
 
                 }
             } else {
@@ -57,17 +51,17 @@ function ChangePassword({route, navigation}) {
     }
 
     return (
-        <ScrollView style={{flex: 1, backgroundColor: '#fff'}}
-        keyboardShouldPersistTaps="handled"
+        <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}
+            keyboardShouldPersistTaps="handled"
         >
             <Pressable onPress={() => navigation.goBack()}
-                       style={{flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30}}>
-                <Image style={{tintColor: 'gray', width: 24, height: 10}}
-                       source={require('../assets/back_arrow.png')}/>
+                style={{ flexDirection: 'row', alignItems: 'center', marginTop: 70, marginLeft: 30 }}>
+                <Image style={{ tintColor: 'gray', width: 24, height: 10 }}
+                    source={require('../assets/back_arrow.png')} />
             </Pressable>
-            <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                <Image style={{height: 200, width: 300, marginTop: 80}}
-                       source={require('../assets/passwordchange.png')}/>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                <Image style={{ height: 200, width: 300, marginTop: 80 }}
+                    source={require('../assets/passwordchange.png')} />
                 <Text style={{
                     color: '#4041B0',
                     fontFamily: 'poppins_semibold',
@@ -93,11 +87,11 @@ function ChangePassword({route, navigation}) {
                         paddingHorizontal: 20,
                         color: '#626262',
                         flex: 1
-                    }} placeholder={'Enter your new Password'} secureTextEntry={!show}/>
-                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
-                            style={{width: 25, height: 25}} source={require('../assets/hide.png')}/></Pressable>
-                        : <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
-                            style={{width: 25, height: 25}} source={require('../assets/show.png')}/></Pressable>}
+                    }} placeholder={'Enter your new Password'} secureTextEntry={!show} />
+                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
+                        style={{ width: 25, height: 25 }} source={require('../assets/hide.png')} /></Pressable>
+                        : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
+                            style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>}
                 </View>
                 <View style={{
                     flexDirection: 'row',
@@ -114,11 +108,11 @@ function ChangePassword({route, navigation}) {
                         paddingHorizontal: 20,
                         color: '#626262',
                         flex: 1
-                    }} placeholder={'Confirm your Password'} secureTextEntry={!show}/>
-                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
-                            style={{width: 25, height: 25}} source={require('../assets/hide.png')}/></Pressable>
-                        : <Pressable onPress={() => toggleVisibility()} style={{marginLeft: 'auto'}}><Image
-                            style={{width: 25, height: 25}} source={require('../assets/show.png')}/></Pressable>}
+                    }} placeholder={'Confirm your Password'} secureTextEntry={!show} />
+                    {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
+                        style={{ width: 25, height: 25 }} source={require('../assets/hide.png')} /></Pressable>
+                        : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image
+                            style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>}
                 </View>
                 <Pressable onPress={() => passwordUpdate()} style={{
                     width: '85%',
@@ -127,7 +121,7 @@ function ChangePassword({route, navigation}) {
                     borderRadius: 25,
                     marginTop: 80,
                     paddingVertical: 15,
-                }}><Text style={{color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15}}>Change
+                }}><Text style={{ color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15 }}>Change
                     Password</Text></Pressable>
             </View>
             <Toast

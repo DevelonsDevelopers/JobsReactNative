@@ -145,9 +145,9 @@ function VerificationCode({ route, navigation }) {
 						</Text>
 					)}
 				/>
-				<Pressable onPress={() => confirmCode()} style={{ width: '75%', backgroundColor: '#13A3E1', alignItems: 'center', borderRadius: 15, marginTop: 40, paddingVertical: 15, }}>
+				<Ripple rippleColor="white" onPress={() => confirmCode()} style={{ width: '75%', backgroundColor: '#13A3E1', alignItems: 'center', borderRadius: 15, marginTop: 40, paddingVertical: 15, }}>
 					<Text style={{ color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15 }}>Verify</Text>
-				</Pressable>
+				</Ripple>
 				<Text style={{ marginTop: 40, fontFamily: 'poppins_medium', fontSize: 13, color: 'gray' }}>Didn't recieve any code ?</Text>
 				<Ripple rippleColor="#13A3E1"
 					onPress={() => { signInWithPhoneNumber(phone) }}

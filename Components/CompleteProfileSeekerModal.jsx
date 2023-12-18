@@ -7,7 +7,7 @@ const CompleteProfileSeekerModal = ({ visible, toggleCompleteVisible, isComplete
 		<Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleCompleteVisible}>
 			<View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
 				<View style={{ marginHorizontal: 20, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, height: 450, }}>
-
+					
 					<Pressable style={{ marginRight: 20, marginLeft: 'auto', marginTop: 20, padding: 10 }} onPress={() => toggleCompleteVisible()}>
 						<Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: 'gray' }} source={require('../assets/close.png')} />
 					</Pressable>

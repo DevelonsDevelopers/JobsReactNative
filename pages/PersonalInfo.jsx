@@ -39,13 +39,39 @@ function PersonalInfo({ navigation }) {
     const nodata = useSelector(state => state.nodata.seekerNoData)
     const error = useSelector(state => state.error.seekerError)
     const checkCV = useSelector(state => state.cv.check)
-
     const [completed, setCompleted] = useState(false)
     const [verified, setVerified] = useState(false)
     const [country, setCountry] = useState()
     const [citiesData, setCitiesData] = useState()
-
     const [loading, setLoading] = useState(true)
+    const dispatch = useDispatch();
+    const [ID, setID] = useState()
+    const [seekerData, setSeekerData] = useState({ name: '', city: '', country: '', username: '', phone: '', address: '', dob: '', gender: '', id: '' })
+    const [cityName, setNameCity] = useState('')
+    const [countryName, setCountryName] = useState('')
+    const [phoneCode, setPhoneCode] = useState('')
+    const [gen, setGen] = useState('')
+    const [trigger, setTrigger] = useState(false)
+    const [cityVisible, setCityVisible] = useState(false)
+    const [countryVisible, setCountryVisible] = useState(false)
+    const [changed, setChanged] = useState(false)
+    const toggleVisibility = () => setCityVisible(!cityVisible)
+    const toggleCountryVisibility = () => setCountryVisible(!countryVisible)
+    const [date, setDate] = useState(new Date())
+    const [open, setOpen] = useState(false)
+    const [gender, setGender] = useState(false)
+    const toggleGenderVisibility = () => setGender(!gender)
+    const [phoneVisible, setPhoneVisible] = useState(false)
+    const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
+    const [visible, setVisible] = useState(false)
+    const toggleVisible = () => setVisible(!visible)
+    const [text, setText] = useState('Please Complete your Profile First')
+
+
+    const click = (t) => {
+        toggleVisible();
+        setText(t)
+    }
 
     useEffect(() => {
         if (nodata || error || success) {
@@ -53,34 +79,6 @@ function PersonalInfo({ navigation }) {
             setCitiesData(cities)
         }
     }, [success, error, nodata])
-
-    const dispatch = useDispatch();
-    const [ID, setID] = useState()
-    const [seekerData, setSeekerData] = useState({
-        name: '',
-        city: '',
-        country: '',
-        username: '',
-        phone: '',
-        address: '',
-        dob: '',
-        gender: '',
-        id: ''
-    })
-
-    const [cityName, setNameCity] = useState('')
-    const [countryName, setCountryName] = useState('')
-    const [phoneCode, setPhoneCode] = useState('')
-    const [gen, setGen] = useState('')
-    const [trigger, setTrigger] = useState(false)
-
-    const [cityVisible, setCityVisible] = useState(false)
-    const [countryVisible, setCountryVisible] = useState(false)
-
-    const [changed, setChanged] = useState(false)
-
-    const toggleVisibility = () => setCityVisible(!cityVisible)
-    const toggleCountryVisibility = () => setCountryVisible(!countryVisible)
 
     useEffect(() => {
         GetData()
@@ -188,17 +186,6 @@ function PersonalInfo({ navigation }) {
         setCountryName(item.name)
     }
 
-    const [date, setDate] = useState(new Date())
-    const [open, setOpen] = useState(false)
-
-    // gendermodal==============
-
-    const [gender, setGender] = useState(false)
-    const toggleGenderVisibility = () => setGender(!gender)
-
-    const [phoneVisible, setPhoneVisible] = useState(false)
-    const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
-
     const setCode = (code) => {
         setPhoneCode(code)
         setSeekerData({ ...seekerData, code: code })
@@ -212,30 +199,20 @@ function PersonalInfo({ navigation }) {
         setCitiesData(searched)
     }, [country]);
 
-    const [visible, setVisible] = useState(false)
-    const toggleVisible = () => setVisible(!visible)
-    const [text, setText] = useState('Please Complete your Profile First')
-    const click = (t) => {
-        toggleVisible();
-        setText(t)
-    }
 
 
 
     return (
         <View style={{ flex: 1 }}>
-            <DatePicker
-                modal
-                open={open}
-                date={date}
+            <DatePicker modal open={open} date={date}
                 onConfirm={(date) => {
                     setOpen(false)
                     setDate(date)
                 }}
                 onCancel={() => {
                     setOpen(false)
-                }}
-            />
+                }} />
+
             <VerificationStatusModal visible={visible} toggleVisibility={toggleVisible} line={text} />
 
             <PhoneModal visible={phoneVisible} togglePhoneVisible={togglePhoneVisible} set={setCode} />
@@ -243,6 +220,7 @@ function PersonalInfo({ navigation }) {
             <CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
                 click={countryClick} />
             <GenderModal visible={gender} toggleVisibility={toggleGenderVisibility} set={updateGender} />
+
             <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                 <View style={{
                     flex: 1,
@@ -481,51 +459,7 @@ function PersonalInfo({ navigation }) {
                                     }}>{seeker?.email}</TextInput>
                                 </View>
                             </View>
-
-                            {/* <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
-                                <View style={{
-                                    flex: 0.7,
-                                    backgroundColor: '#E6E6E6',
-                                    borderColor: '#b2b2b2',
-                                    borderWidth: 1,
-                                    paddingHorizontal: 20,
-                                    paddingVertical: 5
-                                }}>
-                                    <Text style={{
-                                        color: '#000',
-                                        fontSize: 14,
-                                        fontFamily: 'poppins_light',
-                                        width: '100%',
-                                        textAlign: 'left'
-                                    }}>Phone</Text>
-                                </View>
-                                <View style={{
-                                    flex: 1.3,
-                                    borderColor: '#b2b2b2',
-                                    borderWidth: 1,
-                                    paddingHorizontal: 20,
-                                    paddingVertical: 5
-                                }}>
-                                    <View style={{ width: '100%', flexDirection: 'row', alignItems: 'center' }}>
-                                        <TextInput
-                                            onChangeText={(text) => setSeekerData({ ...seekerData, phone: text })}
-                                            placeholder={'Missing!!!'} style={{
-                                                fontSize: 14,
-                                                fontFamily: 'poppins_medium',
-                                                textAlign: 'left',
-                                                width: '90%'
-                                            }}>{seeker?.phone}</TextInput>
-                                        {verified ?
-                                            <Image style={{ width: 14, height: 14, marginLeft: 'auto' }}
-                                                source={require('../assets/verified.png')} />
-                                            :
-                                            <Image style={{ width: 14, height: 14, marginLeft: 'auto' }}
-                                                source={require('../assets/unverified.png')} />
-                                        }
-                                    </View>
-                                </View>
-                            </View> */}
-
+                            
                             <View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
                                 <View style={{
                                     flex: 0.7,
@@ -541,8 +475,8 @@ function PersonalInfo({ navigation }) {
                                         fontFamily: 'poppins_light',
                                         width: '100%',
                                         textAlign: 'left',
-                                        marginTop:"auto",
-                                        marginBottom:'auto'
+                                        marginTop: "auto",
+                                        marginBottom: 'auto'
                                     }}>Address</Text>
                                 </View>
                                 <View style={{
@@ -654,7 +588,7 @@ function PersonalInfo({ navigation }) {
 
                             </View>
                         </View>
-                        <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto',paddingHorizontal:20 }}>
+                        <View style={{ flexDirection: 'row', marginTop: 20, marginLeft: 'auto', marginRight: 'auto', paddingHorizontal: 20 }}>
                             <TextInput editable={false} style={{
                                 textAlign: 'center',
                                 paddingHorizontal: 10,
@@ -724,7 +658,7 @@ function PersonalInfo({ navigation }) {
                                     Google</Text></Pressable>
                             :
                             <>
-                                {completed ?
+                                {verified ?
                                     <>
                                         <Pressable onPress={() => {
                                             if (verified) {

@@ -70,35 +70,6 @@ const Plans = ({ navigation }) => {
                     )}
                 />
             </SafeAreaView>
-            {/* <Ripple onPress={() => navigation.push('Payment', { plan: 'Basic', price: '8' })} style={{ backgroundColor: 'white', padding: 20, marginTop: 10, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
-                <Text style={{ color: '#194666', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Basic</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
-                    <Text style={{ color: '#194666', textAlign: 'center', fontSize: 14 }}>$ </Text>
-                    <Text style={{ fontSize: 40, color: '#194666', marginTop: -5 }}>8</Text>
-                </View>
-                <Text style={{ color: '#194666', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  Get 3 months listing</Text>
-                <Text style={{ color: '#194666', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 20 jobs</Text>
-            </Ripple>
-
-            <Ripple onPress={() => navigation.push('Payment', { plan: 'Essential', price: '14' })} rippleColor='white' style={{ backgroundColor: '#00C1E4', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10 }}>
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Essential</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
-                    <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>$ </Text>
-                    <Text style={{ fontSize: 40, color: 'white', marginTop: -5 }}>14</Text>
-                </View>
-                <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  Get all the benefits of Basic</Text>
-                <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 50 jobs</Text>
-            </Ripple>
-
-            <Ripple onPress={() => navigation.push('Payment', { plan: 'Premium', price: '20' })} rippleColor='white' style={{ backgroundColor: '#004BFF', padding: 20, marginTop: 20, paddingVertical: 20, marginHorizontal: 30, borderRadius: 10, marginBottom: 20 }}>
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontFamily: 'poppins_medium' }}>Premium</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'center', paddingVertical: 20 }}>
-                    <Text style={{ color: 'white', textAlign: 'center', fontSize: 14 }}>$ </Text>
-                    <Text style={{ fontSize: 40, color: 'white', marginTop: -5 }}>20</Text>
-                </View>
-                <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  Our most popular package</Text>
-                <Text style={{ color: 'white', fontSize: 16, fontFamily: 'poppins_medium' }}>{`\u2022`}  up to 200 jobs</Text>
-            </Ripple> */}
 
         </ScrollView>
     )

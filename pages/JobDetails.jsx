@@ -1,4 +1,4 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator, Dimensions } from "react-native";
+import { Image,  Text, Pressable,  SafeAreaView, ScrollView, ActivityIndicator, Dimensions } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,7 @@ import LoginRequireModal from "../Components/LoginRequireModal";
 import ManageCoverLetter from "./ManageCoverLetter";
 import Ripple from "react-native-material-ripple";
 import WebsiteModal from "../Components/WebsiteModal";
-import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+
 
 const JobDetails = ({ route, navigation }) => {
 
@@ -23,6 +23,12 @@ const JobDetails = ({ route, navigation }) => {
     const error = useSelector(state => state.error.jobError)
     const nodata = useSelector(state => state.nodata.jobNoData)
     const success = useSelector(state => state.success.jobSuccess)
+
+
+    const check = useSelector(state => state.seeker.check)
+	const checkCV = useSelector(state => state.cv.check)
+    console.log("check" ,check )
+    console.log("checkCVVV" ,checkCV )
     const dispatch = useDispatch()
 
     const [USERID, setUSERID] = useState()
@@ -35,9 +41,9 @@ const JobDetails = ({ route, navigation }) => {
 
     const seeker = useSelector(state => state.seeker.seeker)
 
-    useEffect(() => {
-        console.log(job)
-    }, [job])
+    // useEffect(() => {
+    //     console.log(job)
+    // }, [job])
 
 
     const [isloading, setIsLoading] = useState(true)
@@ -81,7 +87,7 @@ const JobDetails = ({ route, navigation }) => {
 
     useEffect(() => {
         console.log(seeker)
-        if (seeker?.verified === "true") {
+        if (seeker?.verified === "true" && check !== 'incomplete' && checkCV !== 'incomplete'  ) {
             setPlan(true)
         } else {
             setPlan(false)
@@ -123,7 +129,7 @@ const JobDetails = ({ route, navigation }) => {
         })
     }
 
-    console.log(bookmark)
+    // console.log(bookmark)
 
     const RemoveBookmark = () => {
         removeBookmark(bookmark).then(res => {

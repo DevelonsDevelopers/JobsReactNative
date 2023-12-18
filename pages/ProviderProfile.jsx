@@ -16,15 +16,32 @@ const ProviderProfile = ({ navigation }) => {
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     const dispatch = useDispatch();
+
     const [cityVisible, setCityVisible] = useState(false)
     const [countryVisible, setCountryVisible] = useState(false)
 
     const [nameCity, setNameCity] = useState()
     const [countryName, setCountryName] = useState()
     const [country, setCountry] = useState()
+
     const [citiesData, setCitiesData] = useState()
     const [ID, setID] = useState()
     const [phoneCode, setPhoneCode] = useState('')
+
+    const [type, setType] = useState(false)
+    const toggleType = () => setType(!type)
+
+    const [phoneVisible, setPhoneVisible] = useState(false)
+    const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
+
+    const [updateData, setUpdateData] = useState({ city: '', country: '', phone: '', headquater: '', type: '' })
+    const toggleVisibility = () => setCityVisible(!cityVisible)
+    const toggleCountryVisibility = () => setCountryVisible(!countryVisible)
+
+    const cities = useSelector(state => state.city.cities)
+    const countries = useSelector(state => state.country.countries)
+    const success = useSelector(state => state.success.companySuccess)
+
 
     useEffect(() => {
         GetData()
@@ -33,22 +50,6 @@ const ProviderProfile = ({ navigation }) => {
         const value = await AsyncStorage.getItem('ID')
         setID(value);
     }
-
-    const [updateData, setUpdateData] = useState({
-        city: '',
-        country: '',
-        phone: '',
-        headquater: '',
-        type: ''
-    })
-    const toggleVisibility = () => setCityVisible(!cityVisible)
-    const toggleCountryVisibility = () => setCountryVisible(!countryVisible)
-
-    const cities = useSelector(state => state.city.cities)
-    const countries = useSelector(state => state.country.countries)
-
-    const success = useSelector(state => state.success.companySuccess)
-
 
     useEffect(() => {
         if (!cities) {
@@ -118,11 +119,6 @@ const ProviderProfile = ({ navigation }) => {
 
     }
 
-    const [type, setType] = useState(false)
-    const toggleType = () => setType(!type)
-
-    const [phoneVisible, setPhoneVisible] = useState(false)
-    const togglePhoneVisible = () => setPhoneVisible(!phoneVisible)
 
     const setCode = (code) => {
         setPhoneCode(code)
@@ -196,16 +192,6 @@ const ProviderProfile = ({ navigation }) => {
                             backgroundColor: 'white'
                         }}></TextInput>
                 </View>
-                {/* <View style={{ marginTop: 50, paddingVertical: 5 }}>
-                    <PhoneInput
-                        layout='first'
-                        defaultCode='PK'
-                        containerStyle={{ borderRadius: 60, width: 350, paddingRight: 20, height: 50 }}
-                        placeholder='Enter Your Number'
-                        onChangeText={text => setUpdateData({ ...updateData, phone: text })}
-                    />
-                </View> */}
-
 
                 <Pressable
                     onPress={() => toggleCountryVisibility()}
@@ -236,18 +222,6 @@ const ProviderProfile = ({ navigation }) => {
                     <TextInput style={{ color: '#000' }} value={nameCity} editable={false}
                         placeholder={'Enter your City'} />
                 </Pressable>
-
-                {/* <TextInput onChangeText={text => setUpdateData({ ...updateData, phone: text })} style={{
-                    height: 50,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 25,
-                    marginTop: 15,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }} placeholder={'Enter your Phone'} /> */}
-
 
                 <View style={{
                     flexDirection: 'row',

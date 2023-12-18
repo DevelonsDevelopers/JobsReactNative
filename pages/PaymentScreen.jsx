@@ -20,7 +20,7 @@ import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 import ButtonComp from "../Components/ButtonComp";
 import paypalApi from "../API/paypal"
 import { useEffect } from 'react';
-import {API_URL, createUserPlan} from "../API";
+import { API_URL, createUserPlan } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
 import LoadingModal from '../Components/LoadingModal';
@@ -28,6 +28,13 @@ import LoadingModal from '../Components/LoadingModal';
 const PaymentScreen = ({ route, navigation }) => {
     const [email, setEmail] = useState();
     const [cardDetails, setCardDetails] = useState();
+    const [isLoading, setLoading] = useState(false)
+    const [paypalUrl, setPaypalUrl] = useState(null)
+    const [accessToken, setAccessToken] = useState(null)
+
+    const [loadingVisible, setLoadingVisible] = useState(false)
+    const toggleVisibility = (val) => setLoadingVisible(!val)
+
     const { confirmPayment, loading } = useConfirmPayment();
 
     const [ID, setID] = useState()
@@ -36,9 +43,6 @@ const PaymentScreen = ({ route, navigation }) => {
     const { price } = route.params
     const { type } = route.params
 
-    // useEffect(() => {
-    //   console.log(ID)
-    // }, [ID])
 
 
     useEffect(() => {
@@ -57,7 +61,7 @@ const PaymentScreen = ({ route, navigation }) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                price: Number(price)*100,
+                price: Number(price) * 100,
             })
         });
         const { clientSecret, error } = await response.json();
@@ -67,7 +71,6 @@ const PaymentScreen = ({ route, navigation }) => {
     const handlePayPress = async () => {
         //1.Gather the customer's billing information (e.g., email)
         toggleVisibility(true)
-
         if (!cardDetails?.complete || !email) {
             Alert.alert("Please enter Complete card details and Email");
             return;
@@ -100,9 +103,6 @@ const PaymentScreen = ({ route, navigation }) => {
         }
     }
 
-    const [isLoading, setLoading] = useState(false)
-    const [paypalUrl, setPaypalUrl] = useState(null)
-    const [accessToken, setAccessToken] = useState(null)
 
 
     const onPressPaypal = async () => {
@@ -125,7 +125,6 @@ const PaymentScreen = ({ route, navigation }) => {
 
         }
     }
-
 
     const onUrlChange = (webviewState) => {
         console.log("webviewStatewebviewState", webviewState)
@@ -165,7 +164,7 @@ const PaymentScreen = ({ route, navigation }) => {
     const subscribePlan = () => {
         const postDate = moment().format("YYYY-MM-DD")
         createUserPlan(ID, plan, postDate, type).then(res => {
-            const {data: {responseCode}} = res;
+            const { data: { responseCode } } = res;
             if (responseCode === 200) {
                 navigation.popToTop()
                 navigation.replace('PaymentSuccessful', { type: type })
@@ -176,20 +175,17 @@ const PaymentScreen = ({ route, navigation }) => {
     }
 
 
-const [loadingVisible,setLoadingVisible ] = useState(false)
-const toggleVisibility = (val) => setLoadingVisible(!val)
+
 
     return (
         <ScrollView
-        keyboardShouldPersistTaps="handled"
-        >
-            <LoadingModal  visible={loadingVisible}  />
+            keyboardShouldPersistTaps="handled" >
+            <LoadingModal visible={loadingVisible} />
             <View style={{
                 flexDirection: 'column',
                 width: '100%',
                 height: 90,
-                marginBottom: 20
-            }}>
+                marginBottom: 20 }}>
                 <View style={{ flexDirection: 'row', height: 130 }}>
                     <Pressable onPress={() => navigation.goBack()}
                         style={{ paddingRight: 5 }}><Image style={{
@@ -239,24 +235,6 @@ const toggleVisibility = (val) => setLoadingVisible(!val)
 
             </View>
 
-            {/* <View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 70, width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-                        <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: 'gray' }}>Amount</Text>
-                        <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: 'green' }}>$5</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 70, width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-                        <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: 'gray' }}>Tax</Text>
-                        <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: 'green' }}>$0.1</Text>
-                    </View>
-                    <Text style={{ backgroundColor: "gray", height: 2, width: '80%', marginLeft: 'auto', marginRight: 'auto', marginVertical: 20 }}>-</Text>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', gap: 70, width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
-                        <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', color: 'gray' }}>Total</Text>
-                        <Text style={{ fontSize: 24, fontFamily: 'poppins_medium', color: 'black' }}>$5.1</Text>
-                    </View>
-
-
-                </View> */}
-
             <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
                 <View style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto' }}>
                     <ButtonComp
@@ -282,7 +260,7 @@ const toggleVisibility = (val) => setLoadingVisible(!val)
                 </View>
                 <Modal visible={!!paypalUrl} onRequestClose={clearPaypalState} >
                     <TouchableOpacity onPress={clearPaypalState} style={{ margin: 24 }} >
-                        <Image source={require('../assets/back_arrow.png')} style={{ width:24,height:24,tintColor:'gray' }}  />
+                        <Image source={require('../assets/back_arrow.png')} style={{ width: 24, height: 24, tintColor: 'gray' }} />
 
                     </TouchableOpacity>
                     <View style={{ flex: 1 }}>

@@ -2,6 +2,7 @@ import { Image, ImageBackground, Pressable, Text, TextInput, View } from "react-
 import Ripple from "react-native-material-ripple";
 
 function UserType({ navigation }) {
+    
     return (
         <View style={{ marginTop: 'auto', marginBottom: 'auto' }}>
             <Ripple rippleColor="white" onPress={() => navigation.navigate('Login', { USER: 'PROVIDER' })} style={{

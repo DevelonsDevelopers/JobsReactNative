@@ -1,15 +1,12 @@
 import { Image, TextInput, Text, Pressable, FlatList, ScrollView, SafeAreaView, ActivityIndicator, Dimensions } from 'react-native'
 import { View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Categories from './Categories'
-import Resume from './Resume'
 import { useDispatch, useSelector } from "react-redux";
-import { AllCities } from "../API/actions/cityActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AllInteractions } from "../API/actions/interactionsActions";
 import moment from "moment";
 import Ripple from 'react-native-material-ripple'
-import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads'
+
 
 
 const History = ({ navigation }) => {
@@ -165,15 +162,6 @@ const History = ({ navigation }) => {
 						</>}
 				</View>
 			</ScrollView>
-			<View style={{ marginBottom:-27 }}>
-			{/* <BannerAd
-				unitId="ca-app-pub-3940256099942544/6300978111"
-				size={BannerAdSize.FULL_BANNER}
-				requestOptions={{
-					requestNonPersonalizedAdsOnly: true,
-				}}
-				/> */}
-				</View>
 		</View>
 	)
 }

@@ -26,6 +26,7 @@ const Verification = ({ navigation }) => {
 	useEffect(() => {
 		GetData()
 	}, []);
+
 	const GetData = async () => {
 		const value = await AsyncStorage.getItem('ID')
 		setID(value);
@@ -42,14 +43,11 @@ const Verification = ({ navigation }) => {
 	}, [dispatch, seeker, ID, navigation]);
 
 	useEffect(() => {
-		console.log(seeker)
 		if (seeker?.verified === "true") {
 			setVerify(true)
 		} else {
 			setVerify(false)
 		}
-
-
 	}, [seeker]);
 
 	useEffect(() => {
@@ -59,8 +57,7 @@ const Verification = ({ navigation }) => {
 			setIsComplete(false)
 		}
 	}, [check]);
-	console.log(check)
-
+	
 	useEffect(() => {
 		if (checkCV === "complete") {
 			setCv(true)
@@ -78,8 +75,8 @@ const Verification = ({ navigation }) => {
 	const toggleVisibility = () => setVisible(!visible)
 
 	return (
-		<View style={{}}>
 
+		<View >
 			<VerificationStatusModal visible={visible} toggleVisibility={toggleVisibility} line={text} />
 			<View style={{}}>
 				<View style={{
@@ -141,14 +138,6 @@ const Verification = ({ navigation }) => {
 							>(complete now)</Text>
 						</Pressable>
 					}
-					{/* <View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
-								<Image style={{ width: 20, height: 20, marginTop: 5 }}
-									source={require('../assets/unverified.png')} />
-								<Text onPress={() => navigation.push('ProviderProfile')} style={{ color: 'gray', fontSize: 14, fontFamily: 'poppins_bold', marginTop: 4 }}
-								>(Complete Now)</Text>
-
-							</View> */}
-
 
 					<View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, marginTop: 10, padding: 2 }}>
 						<Text style={{

@@ -8,11 +8,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CVByUser } from "../API/actions/cvActions";
 import { applyJob, createCover } from "../API";
 
-const data = [
-	{ 'data': 'Enhanced domestic helicopter transfer sales by 60% in 2018/2019 via business-to-business concept ' },
-	{ 'data': 'Implemented first helicopter medical evacuation service in Sri Lanka (2018) ' },
-	{ 'data': 'Introduced media booth helicopter filming project for local television hostess (2018)   ' },
-]
 
 
 const CoverLetter = ({ route, navigation }) => {

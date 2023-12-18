@@ -38,7 +38,7 @@ const AcceptResponse = ({route, navigation}) => {
             if (issue.length >= 20) {
                 if (great.length >= 20) {
                     const jsonString = `{ "text1": "${thank}", "text2": "${issue}", "text3": "${great}" }`;
-                    offerResponse("Negotiate", jsonString, postDate, offer.id).then((res) => {
+                    offerResponse("Accept", jsonString, postDate, offer.id).then((res) => {
                         navigation.push('Home')
                     })
                 } else {

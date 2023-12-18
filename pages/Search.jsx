@@ -1,28 +1,16 @@
-import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
+import { Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
-import BottomSheet from "react-native-simple-bottom-sheet";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCategories } from "../API/actions/categoryActions";
-import { AllCompanies } from "../API/actions/companyActions";
-import { AllCities } from "../API/actions/cityActions";
 import CitySelectModal from "../Components/CitySelectModal";
 import CategorySelectModal from "../Components/CategorySelectModal";
 import CompanySelectModal from "../Components/CompanySelectModal";
-import { AllJobs, SearchJobs } from "../API/actions/jobActions";
-import { RESET } from "../Utils/Constants";
+import { SearchJobs } from "../API/actions/jobActions";
 import moment from "moment/moment";
 import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import LogoutConfirmationModal from "../Components/LogoutConfirmationModal";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 
-const data = [
-    { "name": "Facebook" },
-    { "name": "Google" },
-    { "name": "Netflix" },
-    { "name": "Youtube" }
-]
 
 function Search({ route, navigation }) {
 
@@ -57,7 +45,6 @@ function Search({ route, navigation }) {
     const searchJobs = useSelector(state => state.job.searchJobs)
 
     const error = useSelector(state => state.error.searchJobError)
-    // const nodata = useSelector(state => state.nodata.searchJobNoData)
     const [nodata, setnodata] = useState(false);
     const success = useSelector(state => state.success.searchJobSuccess)
     const [loading, setLoading] = useState(true)
@@ -109,39 +96,6 @@ function Search({ route, navigation }) {
         }
     }, [data]);
 
-    console.log("data", data)
-    console.log("searchData", searchJobs)
-
-    // useEffect(() => {
-    //     const unsubscribe = navigation.addListener('focus', () => {
-    //         setData("");
-    //         setnodata(false)
-    //     });
-    //     return unsubscribe;
-    // }, [navigation])
-    
-
-    // useEffect(() => {
-    //     console.log(searchJobs)
-    // }, [searchJobs]);
-
-    // useEffect(() => {
-    //     if (!categories) {
-    //         dispatch(AllCategories())
-    //     }
-    // }, [dispatch, navigation, categories]);
-    //
-    // useEffect(() => {
-    //     if (!companies) {
-    //         dispatch(AllCompanies())
-    //     }
-    // }, [dispatch, navigation, companies]);
-    //
-    // useEffect(() => {
-    //     if (!cities) {
-    //         dispatch(AllCities())
-    //     }
-    // }, [dispatch, cities]);
 
     const cityClick = (item) => {
         toggleCityVisibility()
@@ -169,16 +123,13 @@ function Search({ route, navigation }) {
     useEffect(() => {
         GetData()
     }, []);
+
     const GetData = async () => {
         const id = await AsyncStorage.getItem('ID')
         setID(id);
     }
 
-    const data1 = ["Good", "LevelGood", "New"]
 
-    // const SearchQuery = () => {
-    //     setLoading(true)
-    // }
 
     return (
         <View style={{ flex: 1 }}>
@@ -200,28 +151,13 @@ function Search({ route, navigation }) {
                         }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
                         <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
                             <Pressable
-                            // onPress={() => navigation.push('AdvanceSearch')}
+
                             ><Image
                                     style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
                                     source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                         </View>
                     </View>
                     <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', marginLeft: 20, marginTop: 20 }}>Searched Job</Text>
-                    {/* <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        backgroundColor: '#fff',
-                        marginHorizontal: 30,
-                        height: 50,
-                        borderRadius: 25,
-                        paddingHorizontal: 20,
-                        marginTop: 10
-                    }}>
-                        <TextInput onChangeText={text => setSearch(text)} style={{
-                            height: 50,
-                        }} placeholder={'Start your Job Search'} />
-                        <Pressable onPress={() => SearchQuery()} style={{ marginLeft: 'auto' }}><Image style={{width: 25, height: 25}} source={require('../assets/search-interface-symbol.png')}/></Pressable>
-                    </View> */}
                     {nodata ?
                         <View style={{ marginTop: 360 }}>
                             <Text
@@ -249,15 +185,6 @@ function Search({ route, navigation }) {
                                                 backgroundColor: '#fff'
                                             }}>
                                                 <View style={{ flexDirection: 'row', flex: 1 }}>
-                                                    {/* <Text style={{
-                                                        color: '#207A00',
-                                                        backgroundColor: 'rgba(0,180,18,0.2)',
-                                                        paddingHorizontal: 10,
-                                                        paddingTop: 4,
-                                                        fontSize: 10,
-                                                        fontFamily: 'poppins_medium',
-                                                        borderRadius: 5
-                                                    }}>NEW</Text> */}
                                                     <Text style={{
                                                         marginLeft: 'auto',
                                                         textAlign: 'right',
@@ -346,13 +273,12 @@ function Search({ route, navigation }) {
                                                     }}>{item.city_name}</Text>
                                                 </View>
 
-
-                                            </View></Pressable>
+                                            </View>
+                                            </Pressable>
                                         )} />
                                 </SafeAreaView>
                             }
                         </>}
-
                 </View>
             </ScrollView>
             <BannerAd

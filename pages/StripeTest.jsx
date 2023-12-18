@@ -6,6 +6,8 @@ import { CardField, useConfirmPayment } from "@stripe/stripe-react-native";
 const API_URL = "http://192.168.1.25:5001";
 
 const StripeApp = props => {
+
+    
     const [email, setEmail] = useState();
     const [cardDetails, setCardDetails] = useState();
     const { confirmPayment, loading } = useConfirmPayment();

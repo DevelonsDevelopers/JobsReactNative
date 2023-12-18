@@ -28,18 +28,6 @@ const GoogleRegister = ({ route, navigation }) => {
         })
     }
 
-    // const Register = () => {
-    //     if (name = '' ) {
-    //         if (size = '' ) {
-    //             Toast.show({ type: 'error', position: 'top', text1: 'Please Enter your company size' })
-    //         }
-    //     } else {
-    //         Toast.show({ type: 'error', position: 'top', text1: 'Please Enter your company name' })
-
-    //     }
-    // }
-
-
     return (
         <View style={{ flex: 1, backgroundColor: '#F0A51E' }}>
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
