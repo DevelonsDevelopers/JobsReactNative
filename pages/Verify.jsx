@@ -70,9 +70,9 @@ function Verify({ route, navigation }) {
                         borderTopLeftRadius: 25,
                         borderBottomLeftRadius: 25,
                         alignItems: 'center'
-                    }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"} >{phoneCode}</TextInput>
+                    }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"}  >{phoneCode}</TextInput>
                     </Pressable>
-                    <TextInput editable={changeable} keyboardType='numeric' onChangeText={text => setPhone(phone)}
+                    <TextInput editable={false} keyboardType='numeric' onChangeText={text => setPhone(phone)}
                         placeholder="Enter Your Number" style={{
                             textAlign: 'left',
                             paddingHorizontal: 8,

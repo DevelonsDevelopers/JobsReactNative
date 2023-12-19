@@ -267,7 +267,7 @@ function Login({ route, navigation }) {
                     width: '100%',
                 }}
                 >
-                    <Text style={{ color: '#000', fontWeight: 400, width: '85%', textAlign: 'right', marginTop: 20 }}>Forgot
+                    <Text style={{ color: '#000', fontWeight: 400, width: '90%', textAlign: 'right', marginTop: 20 }}>Forgot
                         Password?</Text></Pressable>
                 <Pressable onPress={() => LoginUser()} style={{
                     width: '85%',

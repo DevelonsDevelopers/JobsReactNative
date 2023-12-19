@@ -130,7 +130,8 @@ const SeeekerNegotiate = ({ route, navigation }) => {
                 paddingHorizontal: 50,
                 paddingVertical: 4,
                 borderRadius: 20,
-                marginTop: 90
+                marginTop: 90,
+                marginBottom:20
             }}>Send Proposal</Text>
             <Toast
                 position='top'

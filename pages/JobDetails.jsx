@@ -1,4 +1,4 @@
-import { Image,  Text, Pressable,  SafeAreaView, ScrollView, ActivityIndicator, Dimensions } from "react-native";
+import { Image, Text, Pressable, SafeAreaView, ScrollView, ActivityIndicator, Dimensions, FlatList } from "react-native";
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 import { useDispatch, useSelector } from "react-redux";
@@ -26,9 +26,9 @@ const JobDetails = ({ route, navigation }) => {
 
 
     const check = useSelector(state => state.seeker.check)
-	const checkCV = useSelector(state => state.cv.check)
-    console.log("check" ,check )
-    console.log("checkCVVV" ,checkCV )
+    const checkCV = useSelector(state => state.cv.check)
+    console.log("check", check)
+    console.log("checkCVVV", checkCV)
     const dispatch = useDispatch()
 
     const [USERID, setUSERID] = useState()
@@ -87,7 +87,7 @@ const JobDetails = ({ route, navigation }) => {
 
     useEffect(() => {
         console.log(seeker)
-        if (seeker?.verified === "true" && check !== 'incomplete' && checkCV !== 'incomplete'  ) {
+        if (seeker?.verified === "true" && check !== 'incomplete' && checkCV !== 'incomplete') {
             setPlan(true)
         } else {
             setPlan(false)
@@ -153,7 +153,18 @@ const JobDetails = ({ route, navigation }) => {
     const toggWebVisibility = () => setWebVisible(!webVisible)
 
 
-	const height = Dimensions.get("window").height;
+    const height = Dimensions.get("window").height;
+
+
+    var str = `${job?.skills}`;
+    var myarray = str.split(',');
+
+    for (var i = 0; i < myarray.length; i++) {
+        console.log(myarray[i]);
+    }
+
+
+
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
@@ -162,7 +173,7 @@ const JobDetails = ({ route, navigation }) => {
                 <ManageCoverLetter visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
                 <WebsiteModal visible={webVisible} toggleRequireVisible={toggWebVisibility} url={job?.link} />
 
-                <View style={{ }}>
+                <View style={{}}>
                     <View style={{ flexDirection: 'row', height: 90 }}>
                         <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
                             width: 22,
@@ -202,7 +213,7 @@ const JobDetails = ({ route, navigation }) => {
                                     display: "flex",
                                     flexDirection: "column",
                                     backgroundColor: '#fff',
-                                    minHeight:height
+                                    minHeight: height
                                 }}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={{
@@ -236,7 +247,7 @@ const JobDetails = ({ route, navigation }) => {
                                             Salary {job?.salary}
                                         </Text>
                                     </View>
-                                    <View style={{  flexDirection: 'row' }}>
+                                    <View style={{ flexDirection: 'row' }}>
                                         <View style={{ flex: 1 }}>
                                             <Text numberOfLines={1} style={{
                                                 fontFamily: 'poppins_bold',
@@ -253,7 +264,7 @@ const JobDetails = ({ route, navigation }) => {
                                         </View>
                                     </View>
                                     <View style={{
-                                         
+
                                         flexDirection: "row",
                                         marginTop: 20,
                                         backgroundColor: 'white',
@@ -283,11 +294,11 @@ const JobDetails = ({ route, navigation }) => {
                                                     fontFamily: 'poppins_medium',
                                                     textAlign: "center"
                                                 }}>{job?.workdays}</Text>
-                                                <Text style={{
+                                                {/* <Text style={{
                                                     fontSize: 13,
                                                     fontFamily: 'poppins_medium',
                                                     textAlign: "center"
-                                                }}>{job?.worktime}</Text>
+                                                }}>{job?.worktime}</Text>  */}
                                             </View>
                                         </View>
                                         <View style={{ flex: 0.6 }}>
@@ -302,15 +313,46 @@ const JobDetails = ({ route, navigation }) => {
                                                     fontSize: 20,
                                                     fontFamily: 'poppins_medium'
                                                 }}>{job?.qualification}</Text>
-                                                <Text style={{
+
+                                                {/* <Text style={{
                                                     textAlign: "center",
                                                     fontSize: 12,
                                                     fontFamily: 'poppins_medium'
-                                                }}>{job?.skills}</Text>
+                                                }}>{job?.skills}</Text> */}
 
                                             </View>
                                         </View>
                                     </View>
+
+                                    <Text style={{
+                                        fontSize: 18,
+                                        fontFamily: 'poppins_medium',
+                                        marginLeft: 15,
+                                        marginTop: 10,
+                                    }}>Skills: </Text>
+                                    
+                                    {/* <FlatList data={myarray}
+                                    
+                                        renderItem={({ item, index }) => (
+                                            <View style={{ marginLeft: '10%' }}>
+                                                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium' }}>
+                                                    {`\u2022 ${item}`}
+                                                </Text>
+                                            </View>
+                                        )} 
+                                        keyExtractor={(item, index) => String(index)}
+                                        /> */}
+                                    
+                                    {myarray?.map((value, index) => {
+                                        return (
+                                            <View style={{ marginLeft: '10%' }} key={index}>
+                                                <Text style={{ fontSize: 14, fontFamily: 'poppins_medium' }}>
+                                                    {`\u2022 ${value}`}
+                                                </Text>
+                                            </View>
+                                        )
+                                    })}
+
                                     <Text style={{
                                         fontSize: 18,
                                         fontFamily: 'poppins_medium',
@@ -328,6 +370,7 @@ const JobDetails = ({ route, navigation }) => {
                                         injectedJavaScript='window.ReactNativeWebView.postMessage(document.body.scrollHeight)'
                                     />
 
+
                                 </View>
 
                             </SafeAreaView>
@@ -342,7 +385,7 @@ const JobDetails = ({ route, navigation }) => {
                     fontFamily: 'poppins_medium',
                     paddingVertical: 10,
                     backgroundColor: '#fff',
-                    marginTop:'-4%'
+                    marginTop: '-4%'
                 }}>
                     {bookmark === 0 ?
                         <Ripple rippleColor="white" onPress={() => { if (login) { BookmarkJob() } else { toggleLoginVisible() } }}
@@ -413,7 +456,7 @@ const JobDetails = ({ route, navigation }) => {
 
                 </View>
                 : ''}
-          
+
         </View>
     )
 }

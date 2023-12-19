@@ -39,6 +39,7 @@ const OfferResponse = ({ route, navigation }) => {
             setResponse(JSON.parse(offer.response))
         }
     }, [offer])
+    
 
 
 
@@ -66,7 +67,8 @@ const OfferResponse = ({ route, navigation }) => {
                                         tintColor: '#000'
                                     }} source={require('../assets/back_arrow.png')} alt={''} /></Pressable>
                                     <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                                        <Pressable onPress={() => navigation.push('OfferRejected')}><Image
+                                        <Pressable 
+                                        ><Image
                                             style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
                                             source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                                     </View>
@@ -184,7 +186,7 @@ const OfferResponse = ({ route, navigation }) => {
                         </ScrollView>
                     }
                 </>}
-            <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+            <View style={{ marginLeft: 'auto', marginRight: 'auto',marginBottom:20,backgroundColor: '#EAEAEA' }}>
                 <Text onPress={() => toggleVisible()} style={{
                     fontSize: 16,
                     fontFamily: 'poppins_medium',

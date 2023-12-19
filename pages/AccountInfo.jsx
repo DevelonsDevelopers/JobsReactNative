@@ -31,6 +31,7 @@ import {
 import PersonalStatementModal from "../Components/PersonalStatementModal";
 import RoleModal from "../Components/RoleModal";
 import DeleteModal from "../Components/DeleteModal";
+import NoData from "../Components/NoData";
 
 function AccountInfo({ route, navigation }) {
 
@@ -43,7 +44,7 @@ function AccountInfo({ route, navigation }) {
 	const error = useSelector(state => state.error.cvError);
 	const success = useSelector(state => state.success.cvSuccess);
 
-	const [roleData, setRoleData] = useState(role)
+	const [roleData, setRoleData] = useState()
 	const [personalInfo, setPersonalInfo] = useState()
 	const [educationVisible, setEducationVisible] = useState(false)
 	const [careerVisible, setCareerVisible] = useState(false)
@@ -70,7 +71,7 @@ function AccountInfo({ route, navigation }) {
 	const [roleVisible, setRoleVisible] = useState(false)
 
 
-
+console.log(cv)
 
 	useEffect(() => {
 		GetData()
@@ -344,11 +345,7 @@ function AccountInfo({ route, navigation }) {
 				</View>
 				:
 				<>
-					{data ? <View style={{ marginTop: 200 }}>
-						<Image source={require('../assets/nodata.png')}
-							style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-						<Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
-					</View> :
+					{data ? <NoData  text={"No Information Yet"} />:
 						<>
 							{error ?
 								<View style={{ marginTop: 360 }}>
@@ -481,9 +478,8 @@ function AccountInfo({ route, navigation }) {
 																			fontSize: 12
 																		}}>Add</Text>
 																}
-
-
-															</View></Pressable>
+															</View>
+															</Pressable>
 													</View>
 													<TextInput placeholder="Role" editable={false} style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{roleData}</TextInput>
 
@@ -529,7 +525,7 @@ function AccountInfo({ route, navigation }) {
 																}
 															</View></Pressable>
 													</View>
-													<TextInput style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }} placeholder="About me " editable={false}>{cv?.statement}</TextInput>
+													<TextInput style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }} placeholder="About me " multiline  editable={false}>{cv?.statement}</TextInput>
 
 												</View>
 
@@ -961,7 +957,8 @@ function AccountInfo({ route, navigation }) {
 													marginRight: 30,
 													marginLeft: 30,
 													borderRadius: 30,
-													marginTop: 20
+													marginTop: 20,
+													marginBottom:40
 												}}>
 													<View style={{ flexDirection: 'row' }}>
 														<Text style={{
@@ -987,7 +984,8 @@ function AccountInfo({ route, navigation }) {
 														flex: 1,
 														minHeight: 90,
 														justifyContent: 'center',
-														alignItems: 'center'
+														alignItems: 'center',
+														
 													}}>
 														{cv?.languages.length === 0 ?
 															<Text

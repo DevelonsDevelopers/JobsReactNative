@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Ripple from "react-native-material-ripple";
 import { FetchAppliedByJob } from "../API/actions/appliedActions";
 import moment from "moment/moment";
+import NoData from "../Components/NoData";
 
 function AppliedByJob({ route, navigation }) {
 
@@ -43,17 +44,7 @@ function AppliedByJob({ route, navigation }) {
                 </View>
                 :
                 <>
-                    {nodata ? <View style={{ marginBottom: 'auto', marginTop: 'auto' }}>
-                        <Image source={require('../assets/nodata.png')}
-                            style={{
-                                width: 260,
-                                height: 260,
-                                marginLeft: 'auto',
-                                marginRight: 'auto',
-                                marginBottom: -20,
-                            }} />
-                        <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Applied Found</Text>
-                    </View> :
+                    {nodata ? <NoData text={"No Applied Yet"} /> :
                         <>
                             {error ?
                                 <View style={{ marginTop: 360 }}>

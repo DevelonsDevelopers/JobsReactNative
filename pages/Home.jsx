@@ -83,9 +83,9 @@ function Home({ route, navigation }) {
 
 	const GetData = async () => {
 		const value = await AsyncStorage.getItem('LOGIN')
-		console.log('value',value)
+		console.log('value', value)
 		const userID = await AsyncStorage.getItem("ID")
-		console.log('id',userID)
+		console.log('id', userID)
 		setLoginVal(value);
 		setID(userID)
 	}
@@ -181,7 +181,7 @@ function Home({ route, navigation }) {
 
 					<ProfileVerficationModal visible={profileVerifiedVisibility} toggleCompleteVisible={toggleProfile} isComplete={isComplete} navigation={navigation} />
 
-					<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled" onPress={() => setHandleSignOut(false)}>
+					<ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }} keyboardShouldPersistTaps="handled" onPress={() => setHandleSignOut(false)} >
 						<View style={{ flexDirection: 'column', width: '100%', height: 240, backgroundColor: '#13A3E1' }}>
 							<View style={{ flexDirection: 'row', height: 130 }}>
 								<Pressable onPress={() => toggleVisibility()}><Image style={{
@@ -193,7 +193,7 @@ function Home({ route, navigation }) {
 									tintColor: '#fff'
 								}} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
 								<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-									<Pressable 
+									<Pressable
 									><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 										source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
 								</View>
@@ -417,171 +417,174 @@ function Home({ route, navigation }) {
 					</ScrollView>
 
 
-					<View style={{
-						flexDirection: 'row',
-						backgroundColor: '#13A3E1',
-						height: 60,
-						borderRadius: 30,
-						marginHorizontal: 20,
+					<View style={{ backgroundColor: '#F1F1F1', paddingVertical: 10, paddingBottom: 16 }}>
 
-						paddingHorizontal: 20,
 
-						width: '92%'
-					}}>
-						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
-							onPress={() => {
-								if (login) {
-									navigation.push('saved')
-								} else {
-									toggleRequireVisible()
-								}
-							}}
-							style={{
-								height: '100%',
-								flex: 1,
-								flexDirection: 'column',
-								justifyContent: 'center',
 
-								marginLeft: -6,
-								alignItems: 'center',
-								width: '20%'
-							}} >
-							<View >
+						<View style={{
+							flexDirection: 'row',
+							backgroundColor: '#13A3E1',
+							height: 60,
+							borderRadius: 30,
+							marginHorizontal: 20,
+							paddingHorizontal: 20,
+							width: '92%',
+						}}>
+							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
+								onPress={() => {
+									if (login) {
+										navigation.push('saved')
+									} else {
+										toggleRequireVisible()
+									}
+								}}
+								style={{
+									height: '100%',
+									flex: 1,
+									flexDirection: 'column',
+									justifyContent: 'center',
+									marginLeft: -6,
+									alignItems: 'center',
+									width: '20%'
+								}} >
+								<View >
+									<Image style={{
+										width: 20,
+										height: 17,
+										tintColor: '#fff',
+										marginLeft: 14,
+
+									}} source={require('../assets/saved.png')} alt={'Okay'} />
+									<Text numberOfLines={1}
+										style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Saved
+										Jobs</Text>
+								</View>
+							</Ripple>
+
+							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
+								onPress={() => {
+									// if (login) {
+									// 	if (check === "complete") {
+									navigation.push('applied')
+									// 	} else {
+									// 		toggleProfile()
+									// 	}
+									// } else {
+									// 	toggleRequireVisible()
+									// }
+								}}
+								style={{
+									height: '100%',
+									flex: 1,
+									flexDirection: 'column',
+									justifyContent: 'center',
+									alignItems: 'center',
+									width: '22%',
+									marginTop: 2
+								}}>
+								<View >
+									<Image style={{
+										width: 27,
+										height: 17,
+										tintColor: '#fff', marginLeft: 5,
+									}} source={require('../assets/cv.png')} alt={'Okay'} />
+									<Text numberOfLines={1}
+										style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Applied Jobs</Text>
+								</View>
+							</Ripple>
+
+							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
+								onPress={() => {
+									if (login) {
+										navigation.push('Offers')
+									} else {
+
+										toggleRequireVisible()
+									}
+								}}
+								style={{
+									height: '100%',
+									flex: 1,
+									flexDirection: 'column',
+									justifyContent: 'center',
+									alignItems: 'center',
+									width: '20%'
+								}}>
+								<View >
+									<Image style={{
+										width: 32,
+										height: 28,
+										tintColor: '#fff',
+										marginLeft: 5
+									}} source={require('../assets/offersss.png')} alt={'Okay'} />
+									<Text numberOfLines={1}
+										style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Offers</Text>
+									<View style={{ height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E', marginLeft: -4 }} />
+								</View>
+							</Ripple>
+							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
+								onPress={() => {
+									if (login) {
+										navigation.push('History')
+									} else {
+
+										toggleRequireVisible()
+									}
+								}}
+								style={{
+									height: '100%',
+									flex: 1,
+									flexDirection: 'column',
+									justifyContent: 'center',
+									marginLeft: -4,
+									alignItems: 'center',
+									width: '20%'
+								}}>
 								<Image style={{
 									width: 20,
-									height: 17,
+									height: 19,
 									tintColor: '#fff',
-									marginLeft: 14,
-
-								}} source={require('../assets/saved.png')} alt={'Okay'} />
-								<Text numberOfLines={1}
-									style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Saved
-									Jobs</Text>
-							</View>
-						</Ripple>
-						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
-							onPress={() => {
-								if (login) {
-									if (check === "complete") {
-										navigation.push('AccountInfo', { role: seeker?.role })
+									marginLeft: 3
+								}} source={require('../assets/history.png')} alt={'Okay'} />
+								<Text numberOfLines={1} style={{
+									fontFamily: 'poppins_medium',
+									fontSize: 9,
+									color: '#fff',
+									marginTop: 2
+								}}>History</Text>
+							</Ripple>
+							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
+								onPress={() => {
+									if (login) {
+										navigation.push('Profile')
 									} else {
-										toggleProfile()
+
+										toggleRequireVisible()
 									}
-								} else {
-									toggleRequireVisible()
-								}
-							}}
-							style={{
-								height: '100%',
-								flex: 1,
-								flexDirection: 'column',
-								justifyContent: 'center',
-								alignItems: 'center',
-								width: '22%',
-								marginTop: 2
-							}}>
-							<View >
+								}}
+								style={{
+									height: '100%',
+									flex: 1,
+									flexDirection: 'column',
+									justifyContent: 'center',
+									marginLeft: -4,
+									alignItems: 'center',
+									width: '20%'
+								}}>
 								<Image style={{
-									width: 27,
-									height: 17,
-									tintColor: '#fff', marginLeft: 5,
-								}} source={require('../assets/cv.png')} alt={'Okay'} />
-								<Text numberOfLines={1}
-									style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>CV
-									Builder</Text>
-							</View>
-						</Ripple>
-						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
-							onPress={() => {
-								if (login) {
-									navigation.push('Offers')
-								} else {
-
-									toggleRequireVisible()
-								}
-							}}
-							style={{
-								height: '100%',
-								flex: 1,
-								flexDirection: 'column',
-								justifyContent: 'center',
-								alignItems: 'center',
-								width: '20%'
-							}}>
-							<View >
-								<Image style={{
-									width: 32,
-									height: 28,
+									width: 20,
+									height: 18,
 									tintColor: '#fff',
-									marginLeft: 5
-								}} source={require('../assets/offersss.png')} alt={'Okay'} />
-								<Text numberOfLines={1}
-									style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Offers</Text>
-								<View style={{ height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E', marginLeft: -4 }} />
-							</View>
-						</Ripple>
-						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
-							onPress={() => {
-								if (login) {
-									navigation.push('History')
-								} else {
-
-									toggleRequireVisible()
-								}
-							}}
-							style={{
-								height: '100%',
-								flex: 1,
-								flexDirection: 'column',
-								justifyContent: 'center',
-								marginLeft: -4,
-								alignItems: 'center',
-								width: '20%'
-							}}>
-							<Image style={{
-								width: 20,
-								height: 19,
-								tintColor: '#fff',
-								marginLeft: 3
-							}} source={require('../assets/history.png')} alt={'Okay'} />
-							<Text numberOfLines={1} style={{
-								fontFamily: 'poppins_medium',
-								fontSize: 9,
-								color: '#fff',
-								marginTop: 2
-							}}>History</Text>
-						</Ripple>
-						<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
-							onPress={() => {
-								if (login) {
-									navigation.push('Profile')
-								} else {
-
-									toggleRequireVisible()
-								}
-							}}
-							style={{
-								height: '100%',
-								flex: 1,
-								flexDirection: 'column',
-								justifyContent: 'center',
-								marginLeft: -4,
-								alignItems: 'center',
-								width: '20%'
-							}}>
-							<Image style={{
-								width: 20,
-								height: 18,
-								tintColor: '#fff',
-								marginLeft: 3
-							}} source={require('../assets/profile.png')} alt={'Okay'} />
-							<Text numberOfLines={1} style={{
-								fontFamily: 'poppins_medium',
-								fontSize: 9,
-								color: '#fff',
-								marginTop: 2
-							}}>Profile</Text>
-						</Ripple>
+									marginLeft: 3
+								}} source={require('../assets/profile.png')} alt={'Okay'} />
+								<Text numberOfLines={1} style={{
+									fontFamily: 'poppins_medium',
+									fontSize: 9,
+									color: '#fff',
+									marginTop: 2
+								}}>Profile</Text>
+							</Ripple>
+						</View>
 					</View>
 
 					{/* <BannerAd

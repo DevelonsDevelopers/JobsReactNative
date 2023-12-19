@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FetchOffers } from "../API/actions/offersActions";
 import moment from "moment/moment";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+import NoData from "../Components/NoData";
 
 
 const Offers = ({ navigation }) => {
@@ -34,6 +35,7 @@ const Offers = ({ navigation }) => {
     useEffect(() => {
         GetData()
     }, []);
+    
     const GetData = async () => {
         const value = await AsyncStorage.getItem('ID')
         setID(value);
@@ -59,11 +61,7 @@ const Offers = ({ navigation }) => {
                                 <Text style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network Error...!</Text>
                             </View> :
                             <>
-                                {noData ? <View style={{ marginTop: 200 }}>
-                                    <Image source={require('../assets/nodata.png')}
-                                        style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-                                    <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Offers Found</Text>
-                                </View> :
+                                {noData ? <NoData text={"No Offers Found"} /> :
                                     <>
                                         <View style={{ backgroundColor: '#EAEAEA' }}>
                                             <View style={{ flexDirection: 'row', height: 90 }}>

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react'
-import { Image, Text, Pressable, ScrollView, View, ActivityIndicator } from "react-native";
+import { Image, Text, Pressable, ScrollView, View, ActivityIndicator, Dimensions } from "react-native";
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchOffer } from '../API/actions/offersActions';
 
@@ -36,6 +36,9 @@ const SeekerOfferResponse = ({ route, navigation }) => {
         }
     }, [dispatch, ID]);
 
+
+    const height = Dimensions.get("window").height;
+
     return (
         <View style={{ flex: 1 }}>
             {loading ?
@@ -66,9 +69,10 @@ const SeekerOfferResponse = ({ route, navigation }) => {
                                     display: "flex",
                                     flexDirection: "column",
                                     backgroundColor: '#fff',
-                                    marginTop: 40
+                                    marginTop: 40,
+                                    minHeight:height
                                 }}>
-                                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                                    <View style={{ flexDirection: 'row',   }}>
                                         <Text style={{
                                             paddingHorizontal: 10,
                                             paddingTop: 4,
@@ -87,7 +91,7 @@ const SeekerOfferResponse = ({ route, navigation }) => {
                                             marginRight: 25
                                         }}>{moment(offer?.date).add(0, 'days').calendar()}</Text>
                                     </View>
-                                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{  flexDirection: 'row' }}>
                                         <View style={{ flex: 1 }}>
                                             <Text numberOfLines={1} style={{
                                                 fontFamily: 'poppins_bold',
@@ -157,7 +161,7 @@ const SeekerOfferResponse = ({ route, navigation }) => {
                 :
                 <>
                     {offer?.response ? '' :
-                        <View style={{ flexDirection: 'row', justifyContent: "center", gap: 20, marginTop: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: "center", gap: 20, marginTop: 10,marginBottom:20 }}>
                             <Text onPress={() => navigation.push('AcceptResponse', { ID: offer?.id })} style={{
                                 fontSize: 16,
                                 fontFamily: 'poppins_semibold',

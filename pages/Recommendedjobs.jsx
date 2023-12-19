@@ -8,6 +8,7 @@ import { RecommendedJobs } from "../API/actions/jobActions";
 import moment from "moment/moment";
 import { recordInteraction } from "../API";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+import NoData from "../Components/NoData";
 
 
 
@@ -95,11 +96,7 @@ function Recommendedjobs({ navigation }) {
 					:
 					<>
 						{noData ?
-							<View style={{ marginTop: 200 }}>
-								<Image source={require('../assets/nodata.png')}
-									style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-								<Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Recommended jobs Found</Text>
-							</View> :
+							<NoData text={"No Recommended Found"} /> :
 							<>
 								{error ?
 									<View style={{ marginTop: 360 }}>

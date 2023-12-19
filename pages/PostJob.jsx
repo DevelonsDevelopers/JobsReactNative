@@ -18,6 +18,7 @@ import WebsiteModal from "../Components/WebsiteModal";
 import ProviderDrawerModal from "../Components/ProviderDrawerModal";
 import { CompanyData } from "../API/actions/companyActions";
 import VerificationStatusModal from "../Components/VerificationStatusModal";
+import NoData from "../Components/NoData";
 
 function PostJob({ navigation }) {
 
@@ -314,18 +315,7 @@ function PostJob({ navigation }) {
                                         color: 'rgba(0, 0, 0, 0.81)'
                                     }}>Show All</Text></Pressable>
                             </View>
-                            {nodata ? <View style={{ marginTop: -39 }}>
-                                <Image source={require('../assets/nodata.png')}
-                                    style={{
-                                        width: 260,
-                                        height: 260,
-                                        marginLeft: 80,
-                                        marginBottom: -20,
-                                        marginTop: 40
-                                    }} />
-                                <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No job
-                                    Found</Text>
-                            </View> :
+                            {nodata ? <NoData text={"No Recommended Found"} /> :
                                 <>
                                     {error ?
                                         <View style={{ marginTop: 10 }}>
@@ -516,7 +506,7 @@ function PostJob({ navigation }) {
                                                 color: 'blue',
                                                 fontSize: 14,
                                                 marginLeft: -32,
-                                                fontFamily: 'poppins_light',
+                                                fontFamily: 'poppins_bold',
                                                 marginTop: 4
                                             }}
                                                 onPress={() => {

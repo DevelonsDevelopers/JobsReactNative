@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
 import { RecommendedSeekers } from "../API/actions/seekerActions";
 import Ripple from "react-native-material-ripple";
+import NoData from "../Components/NoData";
 
 function RecommendedUser({ route, navigation }) {
 
@@ -44,11 +45,7 @@ function RecommendedUser({ route, navigation }) {
                 </View>
                 :
                 <>
-                    {nodata ? <View style={{ marginTop: 200 }}>
-                        <Image source={require('../assets/nodata.png')}
-                            style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-                        <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Recommended Users Found</Text>
-                    </View> :
+                    {nodata ? <NoData text={"No Recommended Found"} /> :
                         <>
                             {error ?
                                 <View style={{ marginTop: 360 }}>

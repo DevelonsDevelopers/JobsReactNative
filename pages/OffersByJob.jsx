@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FetchSentOffers, FetchSentOffersByJob } from "../API/actions/offersActions";
 import moment from "moment";
 import Ripple from "react-native-material-ripple";
+import NoData from "../Components/NoData";
 
 function OffersByJob({ route, navigation }) {
 
@@ -43,11 +44,7 @@ function OffersByJob({ route, navigation }) {
                             <Text style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network Error...!</Text>
                         </View> : <>
                         {nodata ?
-                            <View style = {{ marginTop: 200 } } >
-                         <Image source={require('../assets/nodata.png')}
-                             style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-                         <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
-                     </View> :
+                            <NoData text={"No Jobs Found"} /> :
             <>
                 <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
                     <View style={{
@@ -145,7 +142,7 @@ function OffersByJob({ route, navigation }) {
                                         </Text>
                                     </View>
                                     <Ripple
-                                        onPress={() => navigation.push('OfferAccepted', { ID: item.job })}
+                                         onPress={() => navigation.push('OfferResponse', { ID: item.id })}
                                         rippleColor="white" style={{ marginTop: 4, marginLeft: 'auto', marginRight: 'auto' }}>
                                         <Text style={{
                                             backgroundColor: '#13A3E1',

@@ -5,6 +5,7 @@ import Termsandconditions from './Termsandconditions'
 import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
 import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import NoData from '../Components/NoData';
 
 function Categories({ navigation }) {
 
@@ -60,7 +61,7 @@ function Categories({ navigation }) {
 
 
     return (
-        <View style={{ flex:1 }} >
+        <View style={{ flex: 1 }} >
             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
                 {isLoading ?
                     <View style={{ marginTop: 400 }}>
@@ -68,12 +69,8 @@ function Categories({ navigation }) {
                     </View>
                     :
                     <>
-                        {noData ? <View style={{ marginTop: 200 }}>
-                            <Image source={require('../assets/nodata.png')}
-                                style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-                            <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
-                        </View> 
-                        :
+                        {noData ? <NoData text={"No Categories Found"} />
+                            :
                             <>
                                 {error ?
                                     <View style={{ marginTop: 360 }}>
@@ -87,8 +84,8 @@ function Categories({ navigation }) {
                                         <Text
                                             style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network
                                             Error...!</Text>
-                                    </View> 
-                                    : 
+                                    </View>
+                                    :
                                     <>
                                         <View style={{ backgroundColor: '#F1F1F1' }}>
                                             <View style={{ flexDirection: 'row', height: 90 }}>
@@ -166,7 +163,7 @@ function Categories({ navigation }) {
                             </>}
                     </>}
             </ScrollView>
-          
+
         </View>
     )
 }

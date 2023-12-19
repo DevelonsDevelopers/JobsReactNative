@@ -111,7 +111,7 @@ function Register({ route, navigation }) {
 
     return (
         <View style={{ flex: 1 }}>
-            <ScrollView style={{ flex: 1, backgroundColor: '#F0A51E' }}>
+            <ScrollView style={{ flex: 1, backgroundColor: '#F0A51E' }} keyboardShouldPersistTaps='handled'>
                 <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
                     <View style={{ flex: 1, alignContent: 'center', justifyContent: 'center', backgroundColor: 'rgba(66, 66, 66, 0.4)' }}>
                         <View style={{ margin: 35, elevation: 24, borderRadius: 25, backgroundColor: '#fff', opacity: 1, padding: 20, justifyContent: 'center', alignItems: 'center', marginHorizontal: 100 }}>

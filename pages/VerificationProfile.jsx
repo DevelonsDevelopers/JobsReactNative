@@ -57,7 +57,7 @@ const Verification = ({ navigation }) => {
 			setIsComplete(false)
 		}
 	}, [check]);
-	
+
 	useEffect(() => {
 		if (checkCV === "complete") {
 			setCv(true)
@@ -131,50 +131,11 @@ const Verification = ({ navigation }) => {
 							>Completed</Text>
 						</View>
 						:
-						<Pressable onPress={() => navigation.push('PersonalInfo')} style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+						<Pressable onPress={() => navigation.replace('PersonalInfo')} style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
 							<Image style={{ width: 20, height: 20, marginTop: 5 }}
 								source={require('../assets/unverified.png')} />
 							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_medium', marginTop: 4 }}
 							>(complete now)</Text>
-						</Pressable>
-					}
-
-					<View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, marginTop: 10, padding: 2 }}>
-						<Text style={{
-							textAlign: 'center',
-							color: 'black',
-							fontSize: 14,
-							fontFamily: 'poppins_bold',
-						}}>2)</Text>
-
-						<Text style={{
-							textAlign: 'center',
-							color: 'black',
-							fontSize: 14,
-							fontFamily: 'poppins_bold',
-						}}>Create Your CV</Text>
-					</View>
-
-					{cv ?
-						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
-							<Image style={{ width: 20, height: 20, marginTop: 5 }}
-								source={require('../assets/verified.png')} />
-							<Text style={{ color: 'green', fontSize: 14, fontFamily: 'poppins_bold', marginTop: 4 }}
-							>Created</Text>
-						</View>
-						:
-						<Pressable onPress={() => {
-							if (isComplete) {
-								navigation.push('AccountInfo', { role: seeker?.role })
-							} else {
-								click('Please Complete Your Profile First')
-							}
-						}}
-							style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
-							<Image style={{ width: 20, height: 20, marginTop: 5 }}
-								source={require('../assets/unverified.png')} />
-							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_regular', marginTop: 4 }}
-							>(Create CV)</Text>
 						</Pressable>
 					}
 
@@ -202,10 +163,10 @@ const Verification = ({ navigation }) => {
 						</View>
 						:
 						<Pressable onPress={() => {
-							if (cv) {
-								navigation.push('PersonalInfo')
+							if (isComplete) {
+								navigation.replace('PersonalInfo')
 							} else {
-								click('Complete your cv first')
+								click('Complete your Profile First')
 							}
 						}}
 							style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
@@ -215,6 +176,45 @@ const Verification = ({ navigation }) => {
 							>(Verify now)</Text>
 						</Pressable>
 
+					}
+
+					<View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, marginTop: 10, padding: 2 }}>
+						<Text style={{
+							textAlign: 'center',
+							color: 'black',
+							fontSize: 14,
+							fontFamily: 'poppins_bold',
+						}}>2)</Text>
+
+						<Text style={{
+							textAlign: 'center',
+							color: 'black',
+							fontSize: 14,
+							fontFamily: 'poppins_bold',
+						}}>Create Your CV</Text>
+					</View>
+
+					{cv ?
+						<View style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+							<Image style={{ width: 20, height: 20, marginTop: 5 }}
+								source={require('../assets/verified.png')} />
+							<Text style={{ color: 'green', fontSize: 14, fontFamily: 'poppins_bold', marginTop: 4 }}
+							>Created</Text>
+						</View>
+						:
+						<Pressable onPress={() => {
+							if (verify) {
+								navigation.replace('AccountInfo', { role: seeker?.role })
+							} else {
+								click('Please verify phone first')
+							}
+						}}
+							style={{ flexDirection: 'row', marginLeft: 10, gap: 10 }}>
+							<Image style={{ width: 20, height: 20, marginTop: 5 }}
+								source={require('../assets/unverified.png')} />
+							<Text style={{ color: 'red', fontSize: 14, fontFamily: 'poppins_regular', marginTop: 4 }}
+							>(Create CV)</Text>
+						</Pressable>
 					}
 
 					{/* <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, marginTop: 10, padding: 2 }}>

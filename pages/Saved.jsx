@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AllBookmarks } from "../API/actions/bookmarkActions";
 import Ripple from 'react-native-material-ripple';
 import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import NoData from '../Components/NoData';
 
 const Saved = ({ navigation }) => {
 
@@ -65,18 +66,7 @@ const Saved = ({ navigation }) => {
                     </View>
                     :
                     <>
-                        {noData ? <View style={{ marginBottom: 'auto', marginTop: 'auto' }}>
-                            <Image source={require('../assets/nodata.png')}
-                                style={{
-                                    width: 260,
-                                    height: 260,
-                                    marginRight: 'auto',
-                                    marginLeft: 'auto',
-                                    marginBottom: -20,
-                                    marginTop: 40
-                                }} />
-                            <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Saved Found</Text>
-                        </View> :
+                        {noData ? <NoData text={"No Saved Found"} /> :
                             <>
                                 {error ?
                                     <View style={{ marginTop: 360 }}>
@@ -109,8 +99,8 @@ const Saved = ({ navigation }) => {
                                         <Text style={{ marginTop: 20, fontFamily: 'poppins_medium', marginLeft: 14, fontSize: 16 }}> Saved Jobs </Text>
                                         <FlatList
                                             style={{ marginHorizontal: 0, marginTop: 20 }} data={bookmarks}
-                                            renderItem={({ item }) => (
-                                                <Ripple onPress={() => navigation.push('JobDetails', { ID: item.job })}
+                                            renderItem={({ item, index }) => (
+                                                <Ripple key={index} onPress={() => navigation.push('JobDetails', { ID: item.job })}
                                                     style={{
                                                         marginLeft: 25,
                                                         marginRight: 25,
@@ -153,7 +143,7 @@ const Saved = ({ navigation }) => {
                                                         }}
                                                             source={require('../assets/bookmarkIcon.png')} />
                                                     </View>
-                                                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                                                    <View style={{ flex: 1 }}>
                                                         <Text style={{
                                                             fontFamily: 'poppins_bold',
 

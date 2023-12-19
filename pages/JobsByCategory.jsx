@@ -7,6 +7,7 @@ import moment from "moment";
 import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+import NoData from "../Components/NoData";
 
 
 function JobsByCategory({ route, navigation }) {
@@ -110,13 +111,7 @@ function JobsByCategory({ route, navigation }) {
 						</View>
 						: <>
 							{nodata ?
-								<View style={{  justifyContent: 'center', alignItems: 'center' }}>
-									<Image
-										source={require('../assets/nodata.png')}
-										style={{ width: 260, height: 260, marginBottom: -20 }}
-									/>
-									<Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Jobs </Text>
-								</View> :
+								<NoData text={"No Jobs Found"} /> :
 								<>
 									{error ?
 										<View style={{ marginTop: 200 }}>

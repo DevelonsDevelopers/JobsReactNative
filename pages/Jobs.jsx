@@ -7,6 +7,7 @@ import moment from "moment";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ripple from "react-native-material-ripple";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
+import NoData from "../Components/NoData";
 
  
 function Jobs({ navigation }) {
@@ -84,11 +85,7 @@ function Jobs({ navigation }) {
 					</View>
 					:
 					<>
-						{nodata ? <View style={{ marginTop: 200 }}>
-							<Image source={require('../assets/nodata.png')}
-								style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-							<Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
-						</View> :
+						{nodata ? <NoData text={"No Jobs Found"} /> :
 							<>
 								{error ?
 									<View style={{ marginTop: 360 }}>

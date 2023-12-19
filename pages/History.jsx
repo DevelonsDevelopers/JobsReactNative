@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AllInteractions } from "../API/actions/interactionsActions";
 import moment from "moment";
 import Ripple from 'react-native-material-ripple'
+import NoData from '../Components/NoData';
 
 
 
@@ -101,11 +102,7 @@ const History = ({ navigation }) => {
 						</View>
 						:
 						<>
-							{nodata ? <View style={{}}>
-								<Image source={require('../assets/nodata.png')}
-									style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-								<Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
-							</View> :
+							{nodata ? <NoData text={"No History Found"} /> :
 								<>
 									{error ?
 										<View style={{ marginTop: 360 }}>

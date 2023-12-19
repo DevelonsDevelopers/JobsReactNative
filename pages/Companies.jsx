@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AllCompanies } from "../API/actions/companyActions";
 import { ActivityIndicator } from "react-native";
 import Ripple from "react-native-material-ripple";
+import NoData from "../Components/NoData";
 
 
 
@@ -70,11 +71,7 @@ function Companies({ navigation }) {
                     :
                     <>
                         {noData ?
-                            <View style={{ marginTop: 200 }}>
-                                <Image source={require('../assets/nodata.png')}
-                                    style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-                                <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
-                            </View> :
+                            <NoData text={"No Companies Found"} /> :
                             <>
                                 {error ?
                                     <View style={{ marginTop: 360 }}>

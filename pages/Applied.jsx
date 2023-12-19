@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AllApplied } from "../API/actions/appliedActions";
 import Ripple from 'react-native-material-ripple';
 import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import NoData from '../Components/NoData';
  
 
 const Applied = ({ navigation }) => {
@@ -91,17 +92,7 @@ const Applied = ({ navigation }) => {
                     </View>
                     :
                     <>
-                        {noData ? <View style={{ marginBottom: 'auto', marginTop: 'auto' }}>
-                            <Image source={require('../assets/nodata.png')}
-                                style={{
-                                    width: 260,
-                                    height: 260,
-                                    marginLeft: 'auto',
-                                    marginRight: 'auto',
-                                    marginBottom: -20,
-                                }} />
-                            <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Applied Found</Text>
-                        </View> :
+                        {noData ?  <NoData text={"No Applied Found"} /> :
                             <>
                                 {error ?
                                     <View style={{ marginTop: 360 }}>

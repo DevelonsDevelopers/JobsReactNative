@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FetchSentOffers } from "../API/actions/offersActions";
 import moment from "moment/moment";
+import NoData from "../Components/NoData";
 
 function SentOffers({ navigation }) {
 
@@ -21,7 +22,7 @@ function SentOffers({ navigation }) {
     const error = useSelector(state => state.error.sentOfferError)
     const nodata = useSelector(state => state.nodata.sentOfferNoData)
 
-   
+
     useEffect(() => {
         if (success || error || nodata) {
             setLoading(false)
@@ -31,7 +32,7 @@ function SentOffers({ navigation }) {
     useEffect(() => {
         GetData()
     }, []);
-    
+
     const GetData = async () => {
         const value = await AsyncStorage.getItem('ID')
         setID(value);
@@ -51,11 +52,7 @@ function SentOffers({ navigation }) {
                 </View>
                 :
                 <>
-                    {nodata ? <View style={{ marginTop: 200 }}>
-                        <Image source={require('../assets/nodata.png')}
-                            style={{ width: 260, height: 260, marginLeft: 80, marginBottom: -20, marginTop: 40 }} />
-                        <Text style={{ textAlign: 'center', fontFamily: 'poppins_medium' }}>No Data Found</Text>
-                    </View> :
+                    {nodata ? <NoData text={"No Offers Found"} /> :
                         <>
                             <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1', marginBottom: -75 }}>
                                 <View style={{
@@ -76,7 +73,7 @@ function SentOffers({ navigation }) {
                                             }} source={require('../assets/back_arrow.png')}
                                                 alt={'Okay'} />
                                         </Pressable>
-                                        <Pressable onPress={() => navigation.push('PaymentSuccesful')} style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
+                                        <Pressable  style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
                                             <Image
 
                                                 style={{
