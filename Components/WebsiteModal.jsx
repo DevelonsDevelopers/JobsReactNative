@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, Linking, Modal, Pressable, Text, View, TouchableWithoutFeedback } from 'react-native';
 
-function WebsiteModal({ toggleRequireVisible, visible, url }) {
+function WebsiteModal({ toggleRequireVisible, visible, url, navigation }) {
   return (
     <Modal visible={visible} animationType="fade" transparent={true} onRequestClose={toggleRequireVisible}>
       <TouchableWithoutFeedback onPress={toggleRequireVisible}>
@@ -10,13 +10,13 @@ function WebsiteModal({ toggleRequireVisible, visible, url }) {
             <Image style={{ width: 160, height: 150 }} source={require('../assets/website.png')} />
             <Text style={{ paddingVertical: 7, fontSize: 16, fontFamily: 'poppins_small', marginTop: 10, textAlign: 'center', color: 'gray' }}>You will be redirected to an external WebPage through this link. Are you sure you want to open it? </Text>
             <View style={{ flexDirection: 'row', paddingBottom: 20, paddingTop: 10, gap: 30 }}>
-              <Text onPress={() => { Linking.openURL(url), toggleRequireVisible() }} style={{ backgroundColor: '#13A3E1', color: 'white', paddingVertical: 7, fontSize: 16, fontFamily: 'poppins_medium', width: 130, textAlign: 'center', borderRadius: 20 }}>Open Web </Text>
+              <Text onPress={() => { toggleRequireVisible(), navigation.push('Web', { url: url }) }} style={{ backgroundColor: '#13A3E1', color: 'white', paddingVertical: 7, fontSize: 16, fontFamily: 'poppins_medium', width: 130, textAlign: 'center', borderRadius: 20 }}>Open Web </Text>
               <Text onPress={toggleRequireVisible} style={{ backgroundColor: 'white', color: 'black', paddingVertical: 7, fontSize: 16, fontFamily: 'poppins_medium', width: 130, textAlign: 'center', borderRadius: 20, borderWidth: 1 }}>Cancel</Text>
             </View>
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </Modal>
+    </Modal >
   );
 }
 

@@ -23,6 +23,9 @@ function SentOffers({ navigation }) {
     const nodata = useSelector(state => state.nodata.sentOfferNoData)
 
 
+    console.log("offers", offers)
+
+
     useEffect(() => {
         if (success || error || nodata) {
             setLoading(false)
@@ -73,7 +76,7 @@ function SentOffers({ navigation }) {
                                             }} source={require('../assets/back_arrow.png')}
                                                 alt={'Okay'} />
                                         </Pressable>
-                                        <Pressable  style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
+                                        <Pressable style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
                                             <Image
 
                                                 style={{
@@ -105,7 +108,6 @@ function SentOffers({ navigation }) {
                                                 backgroundColor: '#fff'
                                             }}>
                                                 <View style={{ flex: 1 }}>
-
                                                     <Text style={{
                                                         marginLeft: 'auto',
                                                         textAlign: 'right',
@@ -113,27 +115,28 @@ function SentOffers({ navigation }) {
                                                         fontSize: 13
                                                     }}>{moment(item.date).format('ll')}</Text>
                                                 </View>
-                                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                                <View style={{ flex: 1, flexDirection: 'column' }}>
                                                     <View style={{ flex: 1 }}>
                                                         <Text numberOfLines={1} style={{
                                                             fontFamily: 'poppins_bold',
                                                             marginTop: 5,
                                                             fontSize: 15,
-                                                            textAlign: "center",
+                                                             
                                                             color: '#0044a9',
                                                         }}>{item.offerType}</Text>
                                                         <Text style={{
                                                             fontFamily: 'poppins_medium',
                                                             marginTop: 0,
                                                             fontSize: 14,
-                                                            textAlign: "center"
+                                                            textAlign: "left"
                                                         }}>{item.seeker_name}</Text>
                                                     </View>
                                                 </View>
-                                                <View style={{ flexDirection: 'row', flex: 1 }}>
+                                                <View style={{}}>
                                                     <Text style={{
                                                         fontFamily: 'poppins_bold',
                                                         fontSize: 16,
+                                                        textAlign: 'left'
                                                     }}>{item.title}</Text>
                                                 </View>
                                                 <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>

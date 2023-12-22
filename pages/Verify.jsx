@@ -35,6 +35,8 @@ function Verify({ route, navigation }) {
         }
     }, [forgot]);
 
+    console.log('phone', phone)
+
 
     const handleClick = () => {
         if (phone) {
@@ -53,9 +55,9 @@ function Verify({ route, navigation }) {
             <Pressable onPress={() => navigation.goBack()}><Image style={{ width: 22, height: 20, marginTop: 70, marginLeft: 30, tintColor: 'gray', }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
             <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                 <Image style={{ height: 150, width: 150, marginTop: 70, borderRadius: 500, padding: 120 }} source={require('../assets/verify.png')} />
-                <Text style={{ color: '#000', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center' }}>Verify</Text>
-                <Text style={{ color: 'gray', marginHorizontal: 40, textAlign: 'center', marginTop: 20 }}>Add your Phone number we'll Send You a verification code</Text>
-                <Text style={{ color: 'gray' }}>so we know you are real</Text>
+                <Text style={{ color: '#000', fontFamily: 'poppins_semibold', fontSize: 18, width: '85%', textAlign: 'center', marginTop: 20, alignSelf: 'center' }}>Verify It's You</Text>
+                <Text style={{ color: 'gray', marginHorizontal: 40, textAlign: 'center', marginTop: 20 }}>We'll send a verification code to your number</Text>
+                
 
                 <View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
                     <Pressable onPress={() => { if (changeable) { togglePhoneVisible() } }} style={{
@@ -72,7 +74,7 @@ function Verify({ route, navigation }) {
                         alignItems: 'center'
                     }}><TextInput style={{ color: '#000' }} editable={false} placeholder={"+01"}  >{phoneCode}</TextInput>
                     </Pressable>
-                    <TextInput editable={false} keyboardType='numeric' onChangeText={text => setPhone(phone)}
+                    <TextInput keyboardType='numeric' onChangeText={text => setPhone(text)}
                         placeholder="Enter Your Number" style={{
                             textAlign: 'left',
                             paddingHorizontal: 8,

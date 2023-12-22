@@ -193,7 +193,7 @@ function Home({ route, navigation }) {
 									tintColor: '#fff'
 								}} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
 								<View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-									<Pressable
+									<Pressable 
 									><Image style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
 										source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
 								</View>
@@ -267,7 +267,6 @@ function Home({ route, navigation }) {
 								marginHorizontal: 25
 							}}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Log In</Text></Pressable>
 						}
-
 
 						<View
 							style={{
@@ -452,12 +451,11 @@ function Home({ route, navigation }) {
 										width: 20,
 										height: 17,
 										tintColor: '#fff',
-										marginLeft: 14,
-
+										marginLeft: 'auto',
+										marginRight: 'auto'
 									}} source={require('../assets/saved.png')} alt={'Okay'} />
 									<Text numberOfLines={1}
-										style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Saved
-										Jobs</Text>
+										style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Saved</Text>
 								</View>
 							</Ripple>
 
@@ -480,16 +478,18 @@ function Home({ route, navigation }) {
 									justifyContent: 'center',
 									alignItems: 'center',
 									width: '22%',
-									marginTop: 2
+
 								}}>
 								<View >
 									<Image style={{
-										width: 27,
-										height: 17,
-										tintColor: '#fff', marginLeft: 5,
-									}} source={require('../assets/cv.png')} alt={'Okay'} />
+										width: 20,
+										height: 20,
+										tintColor: '#fff',
+										marginLeft: 'auto',
+										marginRight: 'auto'
+									}} source={require('../assets/applied.png')} alt={'Okay'} />
 									<Text numberOfLines={1}
-										style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Applied Jobs</Text>
+										style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Applied</Text>
 								</View>
 							</Ripple>
 
@@ -515,7 +515,8 @@ function Home({ route, navigation }) {
 										width: 32,
 										height: 28,
 										tintColor: '#fff',
-										marginLeft: 5
+										marginLeft: 'auto',
+										marginRight: 'auto'
 									}} source={require('../assets/offersss.png')} alt={'Okay'} />
 									<Text numberOfLines={1}
 										style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Offers</Text>
@@ -544,7 +545,8 @@ function Home({ route, navigation }) {
 									width: 20,
 									height: 19,
 									tintColor: '#fff',
-									marginLeft: 3
+									marginLeft: 'auto',
+									marginRight: 'auto'
 								}} source={require('../assets/history.png')} alt={'Okay'} />
 								<Text numberOfLines={1} style={{
 									fontFamily: 'poppins_medium',
@@ -558,7 +560,6 @@ function Home({ route, navigation }) {
 									if (login) {
 										navigation.push('Profile')
 									} else {
-
 										toggleRequireVisible()
 									}
 								}}
@@ -575,7 +576,8 @@ function Home({ route, navigation }) {
 									width: 20,
 									height: 18,
 									tintColor: '#fff',
-									marginLeft: 3
+									marginLeft: 'auto',
+									marginRight: 'auto'
 								}} source={require('../assets/profile.png')} alt={'Okay'} />
 								<Text numberOfLines={1} style={{
 									fontFamily: 'poppins_medium',

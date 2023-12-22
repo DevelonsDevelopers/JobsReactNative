@@ -10,7 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import WebView from "react-native-webview";
 import { fetchSeeker } from "../API/actions/seekerActions";
 import LoginRequireModal from "../Components/LoginRequireModal";
-import ManageCoverLetter from "./ManageCoverLetter";
+// import ManageCoverLetter from "./ManageCoverLetter";
 import Ripple from "react-native-material-ripple";
 import WebsiteModal from "../Components/WebsiteModal";
 
@@ -18,6 +18,8 @@ import WebsiteModal from "../Components/WebsiteModal";
 const JobDetails = ({ route, navigation }) => {
 
     const { ID } = route.params
+    const { status } = route.params
+    console.log('stat', status)
 
     const job = useSelector(state => state.job.job)
     const error = useSelector(state => state.error.jobError)
@@ -92,7 +94,7 @@ const JobDetails = ({ route, navigation }) => {
         } else {
             setPlan(false)
         }
-    }, [seeker]);
+    }, [seeker, check, checkCV]);
 
     useEffect(() => {
         if (USERID) {
@@ -114,10 +116,10 @@ const JobDetails = ({ route, navigation }) => {
         }
     }, [job]);
 
-    const ApplyJob = (intro, body) => {
-        const date = moment().format("YYYY-MM-DD")
-        navigation.push('CoverLetter', { job: job.id, role: job?.role, intro: intro, body: body })
-    }
+    // const ApplyJob = (intro, body) => {
+    //     const date = moment().format("YYYY-MM-DD")
+    //     navigation.push('CoverLetter', { job: job.id, role: job?.role, intro: intro, body: body })
+    // }
 
     const BookmarkJob = () => {
         bookmarkJob(job.id, USERID).then(res => {
@@ -170,8 +172,8 @@ const JobDetails = ({ route, navigation }) => {
         <View style={{ flex: 1, backgroundColor: '#fff' }}>
             <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
                 <LoginRequireModal visible={loginVisible} toggleRequireVisible={toggleLoginVisible} navigation={navigation} />
-                <ManageCoverLetter visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} />
-                <WebsiteModal visible={webVisible} toggleRequireVisible={toggWebVisibility} url={job?.link} />
+                {/* <ManageCoverLetter visible={applyVisible} toggleVisible={toggleApplyVisibility} apply={ApplyJob} /> */}
+                <WebsiteModal visible={webVisible} toggleRequireVisible={toggWebVisibility} url={job?.link} navigation={navigation} />
 
                 <View style={{}}>
                     <View style={{ flexDirection: 'row', height: 90 }}>
@@ -264,7 +266,6 @@ const JobDetails = ({ route, navigation }) => {
                                         </View>
                                     </View>
                                     <View style={{
-
                                         flexDirection: "row",
                                         marginTop: 20,
                                         backgroundColor: 'white',
@@ -329,8 +330,8 @@ const JobDetails = ({ route, navigation }) => {
                                         fontFamily: 'poppins_medium',
                                         marginLeft: 15,
                                         marginTop: 10,
-                                    }}>Skills: </Text>
-                                    
+                                    }}>Required Skills: </Text>
+
                                     {/* <FlatList data={myarray}
                                     
                                         renderItem={({ item, index }) => (
@@ -342,11 +343,11 @@ const JobDetails = ({ route, navigation }) => {
                                         )} 
                                         keyExtractor={(item, index) => String(index)}
                                         /> */}
-                                    
+
                                     {myarray?.map((value, index) => {
                                         return (
                                             <View style={{ marginLeft: '10%' }} key={index}>
-                                                <Text style={{ fontSize: 14, fontFamily: 'poppins_medium' }}>
+                                                <Text style={{ fontSize: 12, fontFamily: 'poppins_light' }}>
                                                     {`\u2022 ${value}`}
                                                 </Text>
                                             </View>
@@ -402,17 +403,33 @@ const JobDetails = ({ route, navigation }) => {
                             <Text style={{ color: 'white', textAlign: "center", fontSize: 15, fontFamily: 'poppins_bold', }}>SAVE</Text>
                         </Ripple>
                         :
-                        <Pressable onPress={() => RemoveBookmark()}
-                            style={{
-                                justifyContent: 'center',
-                                height: 50,
-                                backgroundColor: '#143D59',
-                                width: 150,
-                                paddingVertical: 10,
-                                borderRadius: 25,
-                                paddingTop: 13,
-                            }}>
-                            <Text style={{ color: 'white', textAlign: "center", fontSize: 15, fontFamily: 'poppins_bold', }}>SAVED</Text></Pressable>
+                        <>
+                            {status ?
+                                <Pressable onPress={() => { RemoveBookmark(), navigation.popToTop() }}
+                                    style={{
+                                        justifyContent: 'center',
+                                        height: 50,
+                                        backgroundColor: '#143D59',
+                                        width: 150,
+                                        paddingVertical: 10,
+                                        borderRadius: 25,
+                                        paddingTop: 13,
+                                    }}>
+                                    <Text style={{ color: 'white', textAlign: "center", fontSize: 15, fontFamily: 'poppins_bold', }}>SAVED</Text>
+                                </Pressable>
+                                :
+                                <Pressable onPress={() => { RemoveBookmark() }}
+                                    style={{
+                                        justifyContent: 'center',
+                                        height: 50,
+                                        backgroundColor: '#143D59',
+                                        width: 150,
+                                        paddingVertical: 10,
+                                        borderRadius: 25,
+                                        paddingTop: 13,
+                                    }}>
+                                    <Text style={{ color: 'white', textAlign: "center", fontSize: 15, fontFamily: 'poppins_bold', }}>SAVED</Text></Pressable>}
+                        </>
                     }
                     {applied === 0 ?
                         <Pressable onPress={() => {
@@ -421,7 +438,7 @@ const JobDetails = ({ route, navigation }) => {
                                     if (job?.link) {
                                         toggWebVisibility()
                                     } else {
-                                        toggleApplyVisibility()
+                                        navigation.push('ManageCoverLetter' , { job: job?.id, role: job?.role, })
                                     }
                                 } else {
                                     navigation.push('VerificationProfile')

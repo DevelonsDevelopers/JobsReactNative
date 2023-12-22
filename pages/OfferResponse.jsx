@@ -56,7 +56,7 @@ const OfferResponse = ({ route, navigation }) => {
                         </View> :
                         <ScrollView style={{ backgroundColor: '#EAEAEA', flex: 1 }}>
                             <ContactModal visible={visible} toggleVisibility={toggleVisible} name={offer?.seeker_name}
-                                phone={offer?.phone} email={offer?.email} />
+                                phone={offer?.phone} email={offer?.email} code={offer?.code} />
                             <View style={{ backgroundColor: '#EAEAEA', flex: 1 }}>
                                 <View style={{ flexDirection: 'row', height: 90 }}>
                                     <Pressable onPress={() => navigation.goBack()} style={{ paddingRight: 5 }}><Image style={{
@@ -144,7 +144,6 @@ const OfferResponse = ({ route, navigation }) => {
                                             <Text style={{
                                                 fontSize: 18,
                                                 fontFamily: 'poppins_bold',
-                                                marginLeft: 25,
                                                 marginTop: 10,
                                                 flex: 1,
                                                 textAlign: 'center'
@@ -186,7 +185,7 @@ const OfferResponse = ({ route, navigation }) => {
                         </ScrollView>
                     }
                 </>}
-            <View style={{ marginLeft: 'auto', marginRight: 'auto',marginBottom:20,backgroundColor: '#EAEAEA' }}>
+            <View style={{ paddingBottom:20,backgroundColor:'#EAEAEA' }}>
                 <Text onPress={() => toggleVisible()} style={{
                     fontSize: 16,
                     fontFamily: 'poppins_medium',
@@ -195,7 +194,9 @@ const OfferResponse = ({ route, navigation }) => {
                     textAlign: "center",
                     paddingVertical: 7,
                     borderRadius: 20,
-                    paddingHorizontal: 50
+                    paddingHorizontal: 50,
+                    marginLeft:'auto',
+                    marginRight:'auto'
                 }}>Contact</Text>
             </View>
         </View>

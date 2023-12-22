@@ -54,6 +54,9 @@ const ProviderAccountManage = ({ navigation }) => {
 	const [verified, setVerified] = useState(false)
 	const [data, setData] = useState({ email: '', size: '', city: '', country: '', phone: '', headquater: '', type: '' })
 
+	const [loadingVisible, setLoadingVisible] = useState(false)
+	const toggleLoadingVisibility = () => setLoadingVisible(!loadingVisible);
+
 	const company = useSelector(state => state.company.company)
 	const success = useSelector(state => state.success.companySuccess)
 
@@ -65,6 +68,7 @@ const ProviderAccountManage = ({ navigation }) => {
 	useEffect(() => {
 		GetData()
 	}, []);
+
 	const GetData = async () => {
 		const value = await AsyncStorage.getItem('ID')
 		setID(value);
@@ -136,10 +140,13 @@ const ProviderAccountManage = ({ navigation }) => {
 	]
 
 	const UpdateCompany = async () => {
+		setLoadingVisible(true)
 		await updateCompany(data.size, data.country, data.city, data.code, data.phone, data.headquater, data.email, data.type, ID).then(res => {
 			console.log(res)
 		})
+		setLoadingVisible(false)
 		setTrigger(!trigger)
+		navigation.replace('ProviderAccountManage')
 	}
 
 	const setCode = (code) => {
@@ -158,6 +165,36 @@ const ProviderAccountManage = ({ navigation }) => {
 
 	return (
 		<View style={{ flex: 1 }}  >
+
+
+			<Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
+				<View style={{
+					flex: 1,
+					alignContent: 'center',
+					justifyContent: 'center',
+					backgroundColor: 'rgba(66, 66, 66, 0.4)'
+				}}>
+					<View style={{
+						margin: 35,
+						elevation: 24,
+						borderRadius: 25,
+						backgroundColor: '#fff',
+						opacity: 1,
+						padding: 20,
+						justifyContent: 'center',
+						alignItems: 'center',
+						marginHorizontal: 100
+					}}>
+						<Text style={{ paddingBottom: 16, fontSize: 14, fontFamily: 'poppins_medium' }}>Please Wait
+							...</Text>
+						<ActivityIndicator size={60} color="#13A3E1" />
+					</View>
+				</View>
+			</Modal>
+
+
+
+
 			<CitySelectModal visible={cityVisible} toggleVisibility={toggleVisibility} list={citiesData}
 				click={cityClick} />
 			<CountrySelectModal visible={countryVisible} toggleVisibility={toggleCountryVisibility} list={countries}
@@ -253,7 +290,7 @@ const ProviderAccountManage = ({ navigation }) => {
 									<TextInput
 										editable={false}
 										placeholder={'Missing!!!'} style={{
-											color: '#000',
+											color: 'gray',
 											fontSize: 14,
 											fontFamily: 'poppins_medium',
 											width: '100%',
@@ -286,9 +323,10 @@ const ProviderAccountManage = ({ navigation }) => {
 									paddingVertical: 5
 								}}>
 									<TextInput
+									editable={false}
 										onChangeText={text => setData({ ...data, email: text })}
 										placeholder={'Missing!!!'} style={{
-											color: '#000',
+											color: 'gray',
 											fontSize: 14,
 											fontFamily: 'poppins_medium',
 											width: '100%',
@@ -375,7 +413,7 @@ const ProviderAccountManage = ({ navigation }) => {
 								}}>
 									<TextInput onChangeText={text => setData({ ...data, type: text })} editable={false}
 										placeholder={'Missing!!!'} style={{
-											color: '#000',
+											color: 'gray',
 											fontSize: 14,
 											fontFamily: 'poppins_medium',
 											width: '100%',
@@ -383,7 +421,6 @@ const ProviderAccountManage = ({ navigation }) => {
 										}}>{company?.type}</TextInput>
 								</View>
 							</View>
-
 
 							<View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
 								<View style={{
@@ -425,7 +462,6 @@ const ProviderAccountManage = ({ navigation }) => {
 							<View style={{
 								flexDirection: 'column',
 								borderColor: '#b2b2b2',
-
 							}}>
 
 								<View style={{ flexDirection: 'row', flex: 1, marginTop: -1 }}>
@@ -538,7 +574,7 @@ const ProviderAccountManage = ({ navigation }) => {
 									borderRightWidth: 1,
 									backgroundColor: 'white',
 									marginRight: 'auto',
-									color: 'black'
+									color: 'gray'
 								}}>{data?.phone}</TextInput>
 						</View>
 						<Pressable onPress={() => UpdateCompany()} style={{

@@ -100,7 +100,7 @@ const Saved = ({ navigation }) => {
                                         <FlatList
                                             style={{ marginHorizontal: 0, marginTop: 20 }} data={bookmarks}
                                             renderItem={({ item, index }) => (
-                                                <Ripple key={index} onPress={() => navigation.push('JobDetails', { ID: item.job })}
+                                                <Ripple key={index} onPress={() => navigation.push('JobDetails', { ID: item.job, status: 1 })}
                                                     style={{
                                                         marginLeft: 25,
                                                         marginRight: 25,

@@ -35,7 +35,7 @@ import NoData from "../Components/NoData";
 
 function AccountInfo({ route, navigation }) {
 
-	const { role } = route.params
+	// const { role } = route.params
 
 	const dispatch = useDispatch()
 
@@ -44,7 +44,7 @@ function AccountInfo({ route, navigation }) {
 	const error = useSelector(state => state.error.cvError);
 	const success = useSelector(state => state.success.cvSuccess);
 
-	const [roleData, setRoleData] = useState()
+	const [roleData, setRoleData] = useState(cv?.role)
 	const [personalInfo, setPersonalInfo] = useState()
 	const [educationVisible, setEducationVisible] = useState(false)
 	const [careerVisible, setCareerVisible] = useState(false)
@@ -71,7 +71,7 @@ function AccountInfo({ route, navigation }) {
 	const [roleVisible, setRoleVisible] = useState(false)
 
 
-console.log(cv)
+	console.log(cv)
 
 	useEffect(() => {
 		GetData()
@@ -136,6 +136,14 @@ console.log(cv)
 			console.log(err)
 		})
 	}
+	useEffect(() => {
+		if (cv?.role) {
+			setRoleData(cv?.role)
+		} else {
+			setRoleData('')
+		}
+	}, [cv])
+
 	// console.log(roleData)
 
 	const addPersonalInfo = async (statement) => {
@@ -345,7 +353,7 @@ console.log(cv)
 				</View>
 				:
 				<>
-					{data ? <NoData  text={"No Information Yet"} />:
+					{data ? <NoData text={"No Information Yet"} /> :
 						<>
 							{error ?
 								<View style={{ marginTop: 360 }}>
@@ -381,6 +389,7 @@ console.log(cv)
 									<PersonalStatementModal visible={infoVisible}
 										toggleInfoVisibility={toggleInfoVisibility}
 										add={addPersonalInfo} data={cv?.statement} />
+
 									<RoleModal visible={roleVisible}
 										toggleRoleVisibility={toggleRoleVisibility} add={addRole} data={roleData}
 									/>
@@ -479,7 +488,7 @@ console.log(cv)
 																		}}>Add</Text>
 																}
 															</View>
-															</Pressable>
+														</Pressable>
 													</View>
 													<TextInput placeholder="Role" editable={false} style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }}>{roleData}</TextInput>
 
@@ -525,7 +534,7 @@ console.log(cv)
 																}
 															</View></Pressable>
 													</View>
-													<TextInput style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }} placeholder="About me " multiline  editable={false}>{cv?.statement}</TextInput>
+													<TextInput style={{ flex: 1, textAlign: 'center', color: '#757575', fontFamily: 'poppins_light', margin: 15 }} placeholder="About me " multiline editable={false}>{cv?.statement}</TextInput>
 
 												</View>
 
@@ -958,7 +967,7 @@ console.log(cv)
 													marginLeft: 30,
 													borderRadius: 30,
 													marginTop: 20,
-													marginBottom:40
+													marginBottom: 40
 												}}>
 													<View style={{ flexDirection: 'row' }}>
 														<Text style={{
@@ -985,7 +994,7 @@ console.log(cv)
 														minHeight: 90,
 														justifyContent: 'center',
 														alignItems: 'center',
-														
+
 													}}>
 														{cv?.languages.length === 0 ?
 															<Text

@@ -41,6 +41,12 @@ const OfferAccepted = ({ route, navigation }) => {
     setWebHeight(Number(e.nativeEvent.data))
   }
 
+  var str = `${job?.skills}`;
+  var myarray = str.split(',');
+
+  for (var i = 0; i < myarray.length; i++) {
+    console.log(myarray[i]);
+  }
 
   return (
 
@@ -51,7 +57,7 @@ const OfferAccepted = ({ route, navigation }) => {
         </View>
         : <>
           <ScrollView style={{ backgroundColor: '#F1F1F1' }}>
-            <View style={{ backgroundColor: '#EAEAEA', }}>
+            <View style={{  }}>
               <View style={{ flexDirection: 'row', height: 90 }}>
                 <Pressable onPress={() => navigation.goBack()} style={{ padiingRight: 5 }}><Image style={{
                   width: 22,
@@ -117,18 +123,47 @@ const OfferAccepted = ({ route, navigation }) => {
                           marginLeft: 'auto', marginRight: 'auto'
                         }}>{job?.type}</Text>
                         <Text style={{ fontSize: 14, fontFamily: 'poppins_medium', textAlign: "center", marginTop: 5 }}> {job?.workdays} </Text>
-                        <Text style={{ fontSize: 13, fontFamily: 'poppins_regular', textAlign: "center", marginTop: 5 }}>  {job?.worktime}</Text>
+                        {/* <Text style={{ fontSize: 13, fontFamily: 'poppins_regular', textAlign: "center", marginTop: 5 }}>  {job?.worktime}</Text> */}
                       </View>
                     </View>
                     <View style={{ width: '50%' }}>
                       <View style={{ flexDirection: 'column', paddingVertical: 25, }}>
                         <Text style={{ textAlign: "center", fontSize: 19, fontFamily: 'poppins_medium' }}>{job?.experience}</Text>
                         <Text style={{ textAlign: "center", fontSize: 25, fontFamily: 'poppins_medium' }}>{job?.qualification}</Text>
-                        <Text style={{ textAlign: "center", width: '80%', marginLeft: 15, fontSize: 12, fontFamily: 'poppins_regular' }}>{job?.skills}</Text>
+
 
                       </View>
                     </View>
                   </View>
+
+                  <Text style={{
+                    fontSize: 18,
+                    fontFamily: 'poppins_medium',
+                    marginLeft: 25,
+                    marginTop: 10,
+                  }}>Required Skills: </Text>
+
+                  {/* <FlatList data={myarray}
+                                    
+                                        renderItem={({ item, index }) => (
+                                            <View style={{ marginLeft: '10%' }}>
+                                                <Text style={{ fontSize: 12, fontFamily: 'poppins_medium' }}>
+                                                    {`\u2022 ${item}`}
+                                                </Text>
+                                            </View>
+                                        )} 
+                                        keyExtractor={(item, index) => String(index)}
+                                        /> */}
+
+                  {myarray?.map((value, index) => {
+                    return (
+                      <View style={{ marginLeft: '10%' }} key={index}>
+                        <Text style={{ fontSize: 12, fontFamily: 'poppins_light' }}>
+                          {`\u2022 ${value}`}
+                        </Text>
+                      </View>
+                    )
+                  })}
                   <View  >
                     <Text style={{ fontSize: 18, fontFamily: 'poppins_medium', marginLeft: 25, marginTop: 10 }}>Job Details: </Text>
                     <ScrollView >
@@ -143,11 +178,11 @@ const OfferAccepted = ({ route, navigation }) => {
                 </View>
               </View>
             </View>
-        </ScrollView>
-      <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-        <Text onPress={() => navigation.push('AppliedByJob', { job: job?.id })} style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', textAlign: "center", paddingVertical: 7, borderRadius: 20, paddingHorizontal: 50 }}>View Applied</Text>
-      </View>
-          </> }
+          </ScrollView>
+          <View style={{ marginLeft: 'auto', marginRight: 'auto',marginBottom:10,marginTop:10 }}>
+            <Text onPress={() => navigation.push('AppliedByJob', { job: job?.id })} style={{ fontSize: 16, fontFamily: 'poppins_medium', backgroundColor: '#13A3E1', color: 'white', textAlign: "center", paddingVertical: 7, borderRadius: 20, paddingHorizontal: 50 }}>View Applied</Text>
+          </View>
+        </>}
 
     </View>
   )

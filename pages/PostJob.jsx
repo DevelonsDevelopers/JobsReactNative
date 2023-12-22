@@ -52,6 +52,16 @@ function PostJob({ navigation }) {
     const error = useSelector(state => state.error.providerFeaturedError)
     const success = useSelector(state => state.success.providerFeaturedSuccess)
 
+    const [noData, setNoData] = useState(false)
+
+    useEffect(() => {
+        if (companyJobs?.length === 0) {
+            setNoData(true)
+        } else {
+            setNoData(false)
+        }
+    }, [companyJobs])
+
 
     const click = (t) => {
         toggleVerify();
@@ -69,6 +79,7 @@ function PostJob({ navigation }) {
     }
 
     const [isloading, setIsLoading] = useState(true)
+
     useEffect(() => {
         if (success || error || nodata) {
             setIsLoading(false)
@@ -83,7 +94,7 @@ function PostJob({ navigation }) {
     }, [dispatch, ID]);
 
     useEffect(() => {
-        console.log(company)
+        console.log('company', company)
         if (company) {
             if (company.id === Number(ID)) {
                 if (noCompany === "YES") {
@@ -103,6 +114,17 @@ function PostJob({ navigation }) {
             setIsComplete(false)
         }
     }, [ID, company, noCompany]);
+
+    useEffect(() => {
+        if (company?.verified === "true") {
+            setIsVerified(true)
+        } else {
+            setIsVerified(false)
+        }
+    }, [company])
+
+    console.log('company ', company?.verified)
+
 
     const Logout = async () => {
         await AsyncStorage.setItem("LOGIN", 'false')
@@ -145,7 +167,7 @@ function PostJob({ navigation }) {
                                         width: 22,
                                         height: 20,
                                         tintColor: '#fff',
-                                       
+
                                     }} source={require('../assets/menu.png')} alt={'Okay'} /></Pressable>
                                 <View style={{ width: '100%', paddingEnd: 160 }}>
                                     <Pressable><Image
@@ -187,7 +209,7 @@ function PostJob({ navigation }) {
                                             borderRadius: 20,
                                             paddingVertical: 20
                                         }}>
-                                       
+
 
                                         <Text style={{
                                             color: 'white',
@@ -297,84 +319,88 @@ function PostJob({ navigation }) {
                                 </View>
 
                                 <View>
-                            <View style={{
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                                marginHorizontal: 47,
-                                marginTop: 30
-                            }}>
-                                <Text style={{ fontSize: 17, fontFamily: 'poppins_bold' }}>Recent Jobs </Text>
-                                <Pressable onPress={() => navigation.push('JobPosted')}>
-                                    <Text style={{
-                                        backgroundColor: '#CBCBCB',
-                                        paddingHorizontal: 16,
-                                        paddingVertical: 6,
-                                        fontSize: 13,
-                                        fontFamily: 'poppins_medium',
-                                        borderRadius: 20,
-                                        color: 'rgba(0, 0, 0, 0.81)'
-                                    }}>Show All</Text></Pressable>
-                            </View>
-                            {nodata ? <NoData text={"No Recommended Found"} /> :
-                                <>
-                                    {error ?
-                                        <View style={{ marginTop: 10 }}>
-                                            <Image source={require('../assets/delete.png')} style={{
-                                                width: 30,
-                                                height: 30,
-                                                marginLeft: 190,
-                                                marginBottom: -20,
-                                                marginTop: 40
-                                            }} />
-                                            <Text
-                                                style={{
-                                                    textAlign: 'center',
-                                                    marginVertical: 20,
-                                                    fontFamily: 'poppins_medium'
-                                                }}>Network
-                                                Error...!</Text>
-                                        </View> : <>
+                                    <View style={{
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between',
+                                        marginHorizontal: 47,
+                                        marginTop: 30
+                                    }}>
+                                        <Text style={{ fontSize: 17, fontFamily: 'poppins_bold' }}>Recent Jobs </Text>
+                                        <Pressable onPress={() => navigation.push('JobPosted')}>
+                                            <Text style={{
+                                                backgroundColor: '#CBCBCB',
+                                                paddingHorizontal: 16,
+                                                paddingVertical: 6,
+                                                fontSize: 13,
+                                                fontFamily: 'poppins_medium',
+                                                borderRadius: 20,
+                                                color: 'rgba(0, 0, 0, 0.81)'
+                                            }}>Show All</Text></Pressable>
+                                    </View>
+                                    {noData ?
+                                        <Text style={{ textAlign:'center',marginTop:20,color:'gray' }}>
+                                            No Recent Jobs Yet
+                                        </Text>
+                                        :
+                                        <>
+                                            {error ?
+                                                <View style={{ marginTop: 10 }}>
+                                                    <Image source={require('../assets/delete.png')} style={{
+                                                        width: 30,
+                                                        height: 30,
+                                                        marginLeft: 190,
+                                                        marginBottom: -20,
+                                                        marginTop: 40
+                                                    }} />
+                                                    <Text
+                                                        style={{
+                                                            textAlign: 'center',
+                                                            marginVertical: 20,
+                                                            fontFamily: 'poppins_medium'
+                                                        }}>Network
+                                                        Error...!</Text>
+                                                </View> : <>
 
-                                            <SafeAreaView style={{ flex: 1 }}>
-                                                <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                                                    style={{ marginHorizontal: 30, marginTop: 10 }}
-                                                    data={companyJobs}
-                                                    renderItem={({ item }) => (
-                                                        <Ripple rippleColor="gray" rippleOpacity={0.2}
-                                                            rippleDuration={800}
-                                                            rippleSize={400}
-                                                            onPress={() => navigation.push('OfferAccepted', { ID: item.id })}
-                                                            style={{
-                                                                flex: 1,
-                                                                flexDirection: 'row',
-                                                                margin: 5,
-                                                                backgroundColor: '#fff',
-                                                                borderColor: '#c2c2c2',
-                                                                borderWidth: 1,
-                                                                height: 50,
-                                                                borderRadius: 25,
-                                                                elevation: 5,
-                                                                alignItems: 'center',
-                                                                paddingHorizontal: 20
-                                                            }}>
-                                                            <Text ellipsizeMode={'tail'} numberOfLines={1}
-                                                                style={{
-                                                                    width: '60%',
-                                                                    fontFamily: 'poppins_bold',
-                                                                    fontSize: 12
-                                                                }}>{item.title}</Text>
-                                                            <Text numberOfLines={1} style={{
-                                                                fontFamily: 'poppins_light',
-                                                                fontSize: 9,
-                                                                marginLeft: 'auto',
-                                                            }}>{item.qualification}</Text>
-                                                        </Ripple>
-                                                    )}
-                                                />
-                                            </SafeAreaView>
+                                                    <SafeAreaView style={{ flex: 1 }}>
+                                                        <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                                                            style={{ marginHorizontal: 30, marginTop: 10 }}
+                                                            data={companyJobs}
+                                                            renderItem={({ item }) => (
+                                                                <Ripple rippleColor="gray" rippleOpacity={0.2}
+                                                                    rippleDuration={800}
+                                                                    rippleSize={400}
+                                                                    onPress={() => navigation.push('OfferAccepted', { ID: item.id })}
+                                                                    style={{
+                                                                        flex: 1,
+                                                                        flexDirection: 'row',
+                                                                        margin: 5,
+                                                                        backgroundColor: '#fff',
+                                                                        borderColor: '#c2c2c2',
+                                                                        borderWidth: 1,
+                                                                        height: 50,
+                                                                        borderRadius: 25,
+                                                                        elevation: 5,
+                                                                        alignItems: 'center',
+                                                                        paddingHorizontal: 20
+                                                                    }}>
+                                                                    <Text ellipsizeMode={'tail'} numberOfLines={1}
+                                                                        style={{
+                                                                            width: '60%',
+                                                                            fontFamily: 'poppins_bold',
+                                                                            fontSize: 12
+                                                                        }}>{item.title}</Text>
+                                                                    <Text numberOfLines={1} style={{
+                                                                        fontFamily: 'poppins_light',
+                                                                        fontSize: 9,
+                                                                        marginLeft: 'auto',
+                                                                    }}>{item.qualification}</Text>
+                                                                </Ripple>
+                                                            )}
+                                                        />
+                                                    </SafeAreaView>
+                                                </>}
                                         </>}
-                                </>}
-                        </View>
+                                </View>
 
 
 
@@ -408,7 +434,7 @@ function PostJob({ navigation }) {
                                         color: 'red'
                                     }}>Three
                                         step Verification </Text>
- 
+
                                     <View style={{
                                         flexDirection: 'row',
                                         gap: 4,
@@ -493,9 +519,8 @@ function PostJob({ navigation }) {
                                                 marginLeft: -32,
                                                 fontFamily: 'poppins_bold',
                                                 marginTop: 4
-                                            }}
-
-                                            >Verified</Text>
+                                            }}>
+                                                Verified</Text>
 
                                         </View>
                                         :
@@ -578,8 +603,8 @@ function PostJob({ navigation }) {
                         }
 
 
-                       
-                        
+
+
                         <View style={{ height: 90 }} />
                     </ScrollView>
                 </>}

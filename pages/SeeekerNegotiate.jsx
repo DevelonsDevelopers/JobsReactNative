@@ -82,11 +82,11 @@ const SeeekerNegotiate = ({ route, navigation }) => {
                     marginLeft: 20,
                     marginBottom: -20,
                     marginTop: 10,
-                    color: 'gray'
+                    color: 'black'
                 }}>ISSUES:</Text>
                 <TextInput onChangeText={(text) => setIssue(text)} multiline={true}
-                    style={{ marginTop: 20, fontSize: 14, fontFamily: 'poppins_medium', marginHorizontal: 20 }}
-                    placeholder='Enter Your Issue' />
+                    style={{ marginTop: 20, fontSize: 14, fontFamily: 'poppins_medium', marginHorizontal: 20, }} placeholderTextColor='gray'
+                    placeholder='(Enter Your Issue)...' />
                 <TextInput onChangeText={(text) => setGreat(text)} multiline={true}
                     style={{ marginTop: 10, fontSize: 14, fontFamily: 'poppins_medium', marginHorizontal: 20 }}>Once
                     again, thank you for the great opportunity.</TextInput>
@@ -131,7 +131,7 @@ const SeeekerNegotiate = ({ route, navigation }) => {
                 paddingVertical: 4,
                 borderRadius: 20,
                 marginTop: 90,
-                marginBottom:20
+                marginBottom: 20
             }}>Send Proposal</Text>
             <Toast
                 position='top'

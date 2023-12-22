@@ -62,7 +62,7 @@ function Categories({ navigation }) {
 
     return (
         <View style={{ flex: 1 }} >
-            <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
+            <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1'}}>
                 {isLoading ?
                     <View style={{ marginTop: 400 }}>
                         <ActivityIndicator size={60} color="#13A3E1" />
@@ -128,7 +128,7 @@ function Categories({ navigation }) {
                                             {noSearch ?
                                                 <Text style={{ textAlign: 'center', color: 'gray', fontSize: 16, marginTop: '20%' }}>No Search Found</Text>
                                                 :
-                                                <SafeAreaView>
+                                                <SafeAreaView style={{ paddingBottom:25 }}>
                                                     <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                                         style={{ marginHorizontal: 20 }} data={data}
                                                         renderItem={({ item }) => (

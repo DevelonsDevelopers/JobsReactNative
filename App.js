@@ -79,6 +79,7 @@ import AppliedSuccess from './pages/AppliedSuccess';
 import { StatusBar } from 'react-native';
 import Applied from './pages/Applied';
 import Saved from './pages/Saved';
+import Web from './pages/WebView';
 
 
 
@@ -245,6 +246,9 @@ function App() {
                             options={{ title: 'applied', headerShown: false }} />
                         <Stack.Screen name='saved' component={Saved}
                             options={{ title: 'saved', headerShown: false }} />
+                        <Stack.Screen name='Web' component={Web}
+                            options={{ title: 'Web', headerShown: false }} />
+                        
 
                     </Stack.Navigator>
                 </NavigationContainer>

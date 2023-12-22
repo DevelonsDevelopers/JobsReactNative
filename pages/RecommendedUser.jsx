@@ -19,6 +19,8 @@ function RecommendedUser({ route, navigation }) {
     const nodata = useSelector(state => state.nodata.recommendedSeekersNoData)
     const error = useSelector(state => state.error.recommendedSeekersError)
 
+    const [NoData, setNoData] = useState();
+
     useEffect(() => {
         if (success || error || nodata) {
             setLoading(false)
@@ -33,7 +35,11 @@ function RecommendedUser({ route, navigation }) {
     }, [dispatch, navigation]);
 
     useEffect(() => {
-        console.log(seekers)
+        if (seekers?.length === 0) {
+            setNoData(true)
+        } else {
+            setNoData(true)
+        }
     }, [seekers])
 
     return (
@@ -91,68 +97,71 @@ function RecommendedUser({ route, navigation }) {
                                                 </View>
                                             </View>
                                         </View>
-
-
-                                        <SafeAreaView style={{ flex: 1 }}>
-                                            <FlatList scrollEnabled={false} nestedScrollEnabled={true}
-                                                style={{ marginHorizontal: 26, marginTop: 10 }} data={seekers} renderItem={({ item }) => (
-                                                    <View
-                                                        style={{
-                                                            margin: 5,
-                                                            backgroundColor: '#fff',
-                                                            borderColor: '#c2c2c2',
-                                                            borderWidth: 1,
-                                                            borderRadius: 25,
-                                                            paddingVertical: 20,
-                                                            paddingHorizontal: 20
-                                                        }}>
-                                                        {item.offer !== 0 ?
-                                                            <View style={{ flexDirection: 'row', flex: 1 }}>
-                                                                <Text style={{
-                                                                    color: '#207A00',
-                                                                    backgroundColor: 'rgba(0,180,18,0.2)',
-                                                                    paddingHorizontal: 15,
-                                                                    paddingTop: 4,
-                                                                    fontSize: 13,
-                                                                    fontFamily: 'poppins_medium',
-                                                                    borderRadius: 5
-                                                                }}>Offer Sent</Text>
-                                                                <Text style={{
-                                                                    marginLeft: 'auto',
-                                                                    textAlign: 'right',
-                                                                    fontFamily: 'poppins_medium',
-                                                                    fontSize: 12
-                                                                }}></Text>
-                                                            </View>
-                                                            :
-                                                            ''
-                                                        }
-                                                        <Text style={{ fontSize: 17, fontFamily: 'poppins_medium', marginTop: 10 }}>{item.name}</Text>
-                                                        <Text>{item.city_name}</Text>
-                                                        <Text style={{
-                                                            fontSize: 17,
-                                                            fontFamily: 'poppins_medium',
-                                                            marginBottom: 10
-                                                        }}>{item.role}</Text>
-                                                        <Ripple onPress={() => navigation.push('ViewResume', { ID: item.id, offer: item.offer, job: item.job })} style={{ marginTop: 4, marginLeft: 'auto', marginRight: 'auto' }}>
+                                        {NoData ?
+                                            <Text style={{ marginTop: 10, textAlign: 'center', color: 'gray' }}>No Recommend Candidates Yet</Text>
+                                            :
+                                            <SafeAreaView style={{ flex: 1 }}>
+                                                <FlatList scrollEnabled={false} nestedScrollEnabled={true}
+                                                    style={{ marginHorizontal: 26, marginTop: 10 }} data={seekers} renderItem={({ item }) => (
+                                                        <View
+                                                            style={{
+                                                                margin: 5,
+                                                                backgroundColor: '#fff',
+                                                                borderColor: '#c2c2c2',
+                                                                borderWidth: 1,
+                                                                borderRadius: 25,
+                                                                paddingVertical: 20,
+                                                                paddingHorizontal: 20
+                                                            }}>
+                                                            {item.offer !== 0 ?
+                                                                <View style={{ flexDirection: 'row', flex: 1 }}>
+                                                                    <Text style={{
+                                                                        color: '#207A00',
+                                                                        backgroundColor: 'rgba(0,180,18,0.2)',
+                                                                        paddingHorizontal: 15,
+                                                                        paddingTop: 4,
+                                                                        fontSize: 13,
+                                                                        fontFamily: 'poppins_medium',
+                                                                        borderRadius: 5
+                                                                    }}>Offer Sent</Text>
+                                                                    <Text style={{
+                                                                        marginLeft: 'auto',
+                                                                        textAlign: 'right',
+                                                                        fontFamily: 'poppins_medium',
+                                                                        fontSize: 12
+                                                                    }}></Text>
+                                                                </View>
+                                                                :
+                                                                ''
+                                                            }
+                                                            <Text style={{ fontSize: 17, fontFamily: 'poppins_medium', marginTop: 10 }}>{item.name}</Text>
+                                                            <Text>{item.city_name}</Text>
                                                             <Text style={{
-                                                                backgroundColor: '#13A3E1',
-                                                                textAlign: "center",
-                                                                borderRadius: 20,
-                                                                fontSize: 16,
-                                                                fontFamily: 'poppins_bold',
-                                                                color: 'white',
-                                                                marginVertical: 4,
-                                                                paddingVertical: 4,
-                                                                paddingHorizontal: 50
-                                                            }}>View Resume</Text>
-                                                        </Ripple>
-                                                    </View>
+                                                                fontSize: 17,
+                                                                fontFamily: 'poppins_medium',
+                                                                marginBottom: 10
+                                                            }}>{item.role}</Text>
+                                                            <Ripple onPress={() => navigation.push('ViewResume', { ID: item.id, offer: item.offer, job: item.job })} style={{ marginTop: 4, marginLeft: 'auto', marginRight: 'auto' }}>
+                                                                <Text style={{
+                                                                    backgroundColor: '#13A3E1',
+                                                                    textAlign: "center",
+                                                                    borderRadius: 20,
+                                                                    fontSize: 16,
+                                                                    fontFamily: 'poppins_bold',
+                                                                    color: 'white',
+                                                                    marginVertical: 4,
+                                                                    paddingVertical: 4,
+                                                                    paddingHorizontal: 50
+                                                                }}>View Resume</Text>
+                                                            </Ripple>
+                                                        </View>
 
-                                                )}
-                                            />
-                                        </SafeAreaView>
-                                        <View style={{ height: 90 }} />
+                                                    )}
+                                                />
+                                            </SafeAreaView>
+
+                                        }
+
                                     </ScrollView>
                                 </>}
                         </>}

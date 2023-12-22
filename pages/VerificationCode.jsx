@@ -38,6 +38,7 @@ function VerificationCode({ route, navigation }) {
 	const { verify } = route.params
 
 	console.log(type)
+	console.log("phoneeee",phone)
 
 	const [confirm, setConfirm] = useState()
 

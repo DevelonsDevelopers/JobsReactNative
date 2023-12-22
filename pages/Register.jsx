@@ -42,7 +42,7 @@ function Register({ route, navigation }) {
                     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
                         Toast.show({ type: 'error', position: 'top', text1: 'Please Enter a Valid Email Address' })
                     } else {
-                        if (password.length >= 9) {
+                        if (password.length >= 5) {
                             if (password === confirmPassword) {
                                 dispatch(Registeration(navigation, name, username, email, '', '', '', '', password, 'NORMAL'));
                                 toggleLoadingVisibility(true)
@@ -193,8 +193,8 @@ function Register({ route, navigation }) {
                             color: '#626262',
                             flex: 1
                         }} placeholder={'Enter your Password'} secureTextEntry={show} />
-                        {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>
-                            : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} source={require('../assets/hide.png')} /></Pressable>}
+                        {show === true ? <Pressable onPress={() => setShow(false)} style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} source={require('../assets/hide.png')} /></Pressable>
+                            : <Pressable onPress={() => setShow(true)} style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>}
 
                     </View>
                     <View style={{
@@ -213,8 +213,8 @@ function Register({ route, navigation }) {
                             color: '#626262',
                             flex: 1
                         }} placeholder={'Confirm Password'} secureTextEntry={show} />
-                        {show === true ? <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>
-                            : <Pressable onPress={() => toggleVisibility()} style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} source={require('../assets/hide.png')} /></Pressable>}
+                        {show === true ? <Pressable onPress={() => setShow(false)} style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} source={require('../assets/hide.png')} /></Pressable>
+                            : <Pressable onPress={() => setShow(true)} style={{ marginLeft: 'auto' }}><Image style={{ width: 25, height: 25 }} source={require('../assets/show.png')} /></Pressable>}
                     </View>
 
                     <Pressable onPress={() => RegisterUser()} style={{

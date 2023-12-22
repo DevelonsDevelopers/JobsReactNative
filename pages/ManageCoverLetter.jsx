@@ -2,7 +2,13 @@ import React, { useState } from 'react'
 import { Image, Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
 import Toast from "react-native-toast-message";
 
-const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
+const ManageCoverLetter = ({ navigation, route }) => {
+
+    const { job } = route.params
+    const { role } = route.params
+
+    console.log("Job", job)
+    console.log("role", role)
 
     const [proposal, setProposal] = useState('')
     const [intro, setIntro] = useState('')
@@ -10,8 +16,8 @@ const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
     const Apply = () => {
         if (intro.length > 20) {
             if (proposal.length > 20) {
-                apply(intro, proposal)
-                toggleVisible()
+                navigation.push('CoverLetter', { job: job, role: role, intro: intro, body: proposal })
+
             } else {
                 Toast.show({ type: 'error', position: 'top', text1: 'Proposal Length Must be greater than 20 Words' })
             }
@@ -23,7 +29,7 @@ const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
 
 
     return (
-        <Modal visible={visible} animationType='fade' onRequestClose={toggleVisible}>
+        <View style={{ flex: 1 }}>
             <ScrollView keyboardShouldPersistTaps="handled">
                 <View style={{
                     flexDirection: 'column',
@@ -32,7 +38,7 @@ const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
                     marginBottom: 20
                 }}>
                     <View style={{ flexDirection: 'row', height: 130 }}>
-                        <Pressable onPress={() => toggleVisible()}
+                        <Pressable onPress={() => navigation.goBack()}
                             style={{ paddingRight: 5 }}><Image style={{
                                 width: 22,
                                 height: 20,
@@ -83,20 +89,24 @@ const ManageCoverLetter = ({ navigation, apply, visible, toggleVisible }) => {
                         }}></TextInput>
                     </View>
                 </View>
+
+            </ScrollView>
+            <View keyboardShouldPersistTaps="handled" style={{ marginBottom:20 }}>
                 <Pressable onPress={() => Apply()} style={{
                     marginHorizontal: 60,
                     paddingVertical: 13,
                     backgroundColor: '#13A3E1',
                     borderRadius: 25,
                     marginTop: 10,
-                    marginBottom: 40
+
                 }}><Text style={{ color: '#fff', fontSize: 14, fontFamily: 'poppins_bold', textAlign: 'center' }}>Create Cover Letter</Text></Pressable>
-            </ScrollView>
+            </View>
             <Toast
                 position='top'
-                bottomOffset={20}
+                bottomOffset={10}
             />
-        </Modal>
+        </View>
+
     )
 }
 

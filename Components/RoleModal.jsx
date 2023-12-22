@@ -1,19 +1,24 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Modal, Pressable, Text, TextInput, View, Image, TouchableWithoutFeedback } from "react-native";
 import React, { useState } from "react";
+import Toast from "react-native-toast-message";
 
 const RoleModal = ({ visible, toggleRoleVisibility, add, data }) => {
 
     const [role, setRole] = useState()
 
     const AddRole = () => {
-        add(role)
-        toggleRoleVisibility()
+        if (role?.length >= 3) {
+            add(role)
+            toggleRoleVisibility()
+        } else {
+            Toast.show({ position: 'top', type: 'error', text1: 'Please Enter Role' })
+        }
     }
 
     return (
         <Modal visible={visible} animationType={"fade"} transparent={true} onRequestClose={toggleRoleVisibility}>
-            <TouchableWithoutFeedback onPress={toggleRoleVisibility}>
+            {/* <TouchableWithoutFeedback onPress={toggleRoleVisibility}> */}
                 <View style={{
                     flex: 1,
                     justifyContent: 'center',
@@ -72,7 +77,8 @@ const RoleModal = ({ visible, toggleRoleVisibility, add, data }) => {
 
                     </View>
                 </View>
-            </TouchableWithoutFeedback>
+                <Toast position='top' bottomOffset={20} />
+            {/* </TouchableWithoutFeedback> */}
         </Modal>
     )
 }
