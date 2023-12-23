@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Pressable, Text, TextInput, View } from 'react-native'
+import { Pressable, ScrollView, Text, TextInput, View } from 'react-native'
 import CitySelectModal from '../Components/CitySelectModal'
 import { AllCities } from '../API/actions/cityActions'
 import { useDispatch, useSelector } from 'react-redux'
@@ -145,103 +145,85 @@ const ProviderProfile = ({ navigation }) => {
                 click={countryClick} />
             <ProviderTypeModal visible={type} toggleVisibility={toggleType} click={typeClick} />
 
+            <ScrollView style={{ flex:1 }}>
+                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-
-                <Text style={{
-                    color: 'white',
-                    fontFamily: 'poppins_bold',
-                    fontSize: 17,
-                    width: 250,
-                    textAlign: 'center',
-                    marginBottom: 10
-                }}>
-                    Please Complete Your Profile !!!
-                </Text>
-
-
-                <View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
-                    <Pressable onPress={() => togglePhoneVisible()} style={{
+                    <Text style={{
+                        color: 'white',
+                        fontFamily: 'poppins_bold',
+                        fontSize: 17,
+                        width: 250,
                         textAlign: 'center',
-                        marginTop: 'auto',
-                        marginBottom: 'auto',
-                        paddingVertical: 10,
-                        borderColor: '#b2b2b2',
-                        backgroundColor: 'white',
-                        borderWidth: 1,
-                        width: '20%',
-                        borderTopLeftRadius: 25,
-                        borderBottomLeftRadius: 25,
-                        alignItems: 'center'
-                    }}><TextInput style={{ color: '#000' }} editable={false}
-                        placeholder={"+01"}>{phoneCode}</TextInput></Pressable>
-                    <TextInput keyboardType='numeric' onChangeText={text => setUpdateData({ ...updateData, phone: text })}
-                        placeholder="Enter Your Number" style={{
-                            textAlign: 'left',
-                            paddingHorizontal: 8,
+                        marginBottom: 10,
+                        marginTop:'50%'
+                    }}>
+                        Please Complete Your Profile !!!
+                    </Text>
+
+
+                    <View style={{ flexDirection: 'row', marginTop: 20, marginHorizontal: 15, elevation: 10, }}>
+                        <Pressable onPress={() => togglePhoneVisible()} style={{
+                            textAlign: 'center',
                             marginTop: 'auto',
                             marginBottom: 'auto',
                             paddingVertical: 10,
-                            width: '72%',
                             borderColor: '#b2b2b2',
-                            borderTopRightRadius: 25,
-                            borderBottomRightRadius: 25,
-                            borderTopWidth: 1,
-                            borderBottomWidth: 1,
-                            borderRightWidth: 1,
-                            backgroundColor: 'white'
-                        }}></TextInput>
-                </View>
+                            backgroundColor: 'white',
+                            borderWidth: 1,
+                            width: '20%',
+                            borderTopLeftRadius: 25,
+                            borderBottomLeftRadius: 25,
+                            alignItems: 'center'
+                        }}><TextInput style={{ color: '#000' }} editable={false}
+                            placeholder={"+01"}>{phoneCode}</TextInput></Pressable>
+                        <TextInput keyboardType='numeric' onChangeText={text => setUpdateData({ ...updateData, phone: text })}
+                            placeholder="Enter Your Number" style={{
+                                textAlign: 'left',
+                                paddingHorizontal: 8,
+                                marginTop: 'auto',
+                                marginBottom: 'auto',
+                                paddingVertical: 10,
+                                width: '72%',
+                                borderColor: '#b2b2b2',
+                                borderTopRightRadius: 25,
+                                borderBottomRightRadius: 25,
+                                borderTopWidth: 1,
+                                borderBottomWidth: 1,
+                                borderRightWidth: 1,
+                                backgroundColor: 'white'
+                            }}></TextInput>
+                    </View>
 
-                <Pressable
-                    onPress={() => toggleCountryVisibility()}
-                    style={{
+                    <Pressable
+                        onPress={() => toggleCountryVisibility()}
+                        style={{
+                            paddingVertical: 10,
+                            backgroundColor: '#fff',
+                            width: '85%',
+                            borderRadius: 25,
+                            marginTop: 10,
+                            paddingHorizontal: 20,
+                            color: '#626262',
+                            elevation: 10
+                        }}>
+                        <TextInput style={{ color: '#000' }} editable={false} value={countryName}
+                            placeholder='Enter your Country'
+                            inputMode={'text'} />
+                    </Pressable>
+                    <Pressable onPress={() => toggleVisibility()} style={{
                         paddingVertical: 10,
                         backgroundColor: '#fff',
                         width: '85%',
                         borderRadius: 25,
-                        marginTop: 10,
+                        marginTop: 15,
                         paddingHorizontal: 20,
                         color: '#626262',
                         elevation: 10
                     }}>
-                    <TextInput style={{ color: '#000' }} editable={false} value={countryName}
-                        placeholder='Enter your Country'
-                        inputMode={'text'} />
-                </Pressable>
-                <Pressable onPress={() => toggleVisibility()} style={{
-                    paddingVertical: 10,
-                    backgroundColor: '#fff',
-                    width: '85%',
-                    borderRadius: 25,
-                    marginTop: 15,
-                    paddingHorizontal: 20,
-                    color: '#626262',
-                    elevation: 10
-                }}>
-                    <TextInput style={{ color: '#000' }} value={nameCity} editable={false}
-                        placeholder={'Enter your City'} />
-                </Pressable>
+                        <TextInput style={{ color: '#000' }} value={nameCity} editable={false}
+                            placeholder={'Enter your City'} />
+                    </Pressable>
 
-                <View style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    marginTop: 15,
-                    backgroundColor: '#fff',
-                    elevation: 10,
-                    borderRadius: 25,
-                    width: '85%',
-                    paddingRight: 20
-                }}>
-                    <TextInput onChangeText={text => setUpdateData({ ...updateData, headquater: text })} style={{
-                        height: 50,
-                        paddingHorizontal: 20,
-                        color: '#626262',
-                        flex: 1
-                    }} placeholder={'Enter your HeadQuarter Address'} />
-
-                </View>
-                <Pressable onPress={() => toggleType()}>
                     <View style={{
                         flexDirection: 'row',
                         alignItems: 'center',
@@ -252,29 +234,49 @@ const ProviderProfile = ({ navigation }) => {
                         width: '85%',
                         paddingRight: 20
                     }}>
-
-                        <TextInput value={updateData.type} editable={false}
-                            onChangeText={text => setUpdateData({ ...updateData, type: text })}
-                            style={{
-                                height: 50,
-                                paddingHorizontal: 20,
-                                color: '#626262',
-                                flex: 1
-                            }} placeholder={'Enter your Company Type'} />
+                        <TextInput onChangeText={text => setUpdateData({ ...updateData, headquater: text })} style={{
+                            height: 50,
+                            paddingHorizontal: 20,
+                            color: '#626262',
+                            flex: 1
+                        }} placeholder={'Enter your HeadQuarter Address'} />
 
                     </View>
-                </Pressable>
+                    <Pressable onPress={() => toggleType()}>
+                        <View style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            marginTop: 15,
+                            backgroundColor: '#fff',
+                            elevation: 10,
+                            borderRadius: 25,
+                            width: '85%',
+                            paddingRight: 20
+                        }}>
 
-                <Pressable onPress={() => updateProfile()} style={{
-                    width: '85%',
-                    backgroundColor: '#13A3E1',
-                    alignItems: 'center',
-                    borderRadius: 25,
-                    marginTop: 50,
-                    paddingVertical: 15
-                }}><Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Continue</Text></Pressable>
+                            <TextInput value={updateData.type} editable={false}
+                                onChangeText={text => setUpdateData({ ...updateData, type: text })}
+                                style={{
+                                    height: 50,
+                                    paddingHorizontal: 20,
+                                    color: '#626262',
+                                    flex: 1
+                                }} placeholder={'Enter your Company Type'} />
 
-            </View>
+                        </View>
+                    </Pressable>
+
+                    <Pressable onPress={() => updateProfile()} style={{
+                        width: '85%',
+                        backgroundColor: '#13A3E1',
+                        alignItems: 'center',
+                        borderRadius: 25,
+                        marginTop: 50,
+                        paddingVertical: 15
+                    }}><Text style={{ color: '#fff', fontWeight: '900', fontSize: 15 }}>Continue</Text></Pressable>
+
+                </View>
+            </ScrollView>
             <Toast
                 position='top'
                 bottomOffset={20}

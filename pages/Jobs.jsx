@@ -9,7 +9,7 @@ import Ripple from "react-native-material-ripple";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import NoData from "../Components/NoData";
 
- 
+
 function Jobs({ navigation }) {
 
 	const jobs = useSelector(state => state.job.jobs)
@@ -21,14 +21,34 @@ function Jobs({ navigation }) {
 
 	const [isloading, setIsLoading] = useState(true)
 
+	const [NODATA, setNODATA] = useState();
+
+
 	useEffect(() => {
-		if (success || error || nodata) {
-			console.log("success")
+		if (jobs) {
+			if (jobs?.length === 0) {
+				setNODATA(true)
+				setIsLoading(false)
+			} else {
+				setNODATA(false)
+			} 
+			setIsLoading(false)
+		} else {
+			setNODATA(true)
+		}
+	}, [jobs])
+
+	console.log(NODATA)
+	console.log('jobs', jobs)
+
+	useEffect(() => {
+		if (success || error || NODATA) {
+
 			setIsLoading(false)
 			setData(jobs)
 
 		}
-	}, [success, error, nodata])
+	}, [success, error, NODATA])
 
 	const [data, setData] = useState([])
 
@@ -38,17 +58,11 @@ function Jobs({ navigation }) {
 
 	useEffect(() => {
 		if (ID) {
-			if (isloading) {
-				if (!jobs) {
-					dispatch(AllJobs(ID))
-				} else {
-					setIsLoading(false)
-					setData(jobs)
-
-				}
-			}
+			dispatch(AllJobs(ID))
 		}
-	}, [dispatch, jobs, ID]);
+	}, [dispatch,  ID]);
+
+	console.log('ID', ID)
 
 
 
@@ -85,7 +99,7 @@ function Jobs({ navigation }) {
 					</View>
 					:
 					<>
-						{nodata ? <NoData text={"No Jobs Found"} /> :
+						{NODATA ? <NoData text={"No Jobs Found"} /> :
 							<>
 								{error ?
 									<View style={{ marginTop: 360 }}>

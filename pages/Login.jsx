@@ -12,6 +12,7 @@ import { CheckSeeker } from "../API/actions/seekerActions";
 function Login({ route, navigation }) {
 
     const { USER } = route.params
+    console.log(USER)
 
     const [show, setShow] = useState(false);
     const [email, setEmail] = useState('')

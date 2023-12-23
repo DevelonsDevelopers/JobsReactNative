@@ -9,6 +9,7 @@ function Register({ route, navigation }) {
 
     const dispatch = useDispatch();
     const { USER } = route.params
+    console.log(USER)
 
     const [show, setShow] = useState(true)
     const toggleVisibility = () => setShow(!show);
@@ -87,12 +88,13 @@ function Register({ route, navigation }) {
     useEffect(() => {
         if (buttonClick) {
             if (seekerError || providerError) {
+                console.log('seekerError' , seekerError)
                 toggleLoadingVisibility(false)
                 Toast.show({
                     type: 'error',
                     position: 'top',
                     text1: 'Failed to Register',
-                    text2: 'Company name already exist'
+                    text2: 'Email already exist'
                 })
                 setButtonClick(false)
             } else if (seekerSuccess || providerSuccess) {
