@@ -88,15 +88,6 @@ const JobDetails = ({ route, navigation }) => {
     }, [dispatch, seeker, USERID, navigation]);
 
     useEffect(() => {
-        console.log(seeker)
-        if (seeker?.verified === "true" && check !== 'incomplete' && checkCV !== 'incomplete') {
-            setPlan(true)
-        } else {
-            setPlan(false)
-        }
-    }, [seeker, check, checkCV]);
-
-    useEffect(() => {
         if (USERID) {
             dispatch(JobByID(USERID, ID))
         }

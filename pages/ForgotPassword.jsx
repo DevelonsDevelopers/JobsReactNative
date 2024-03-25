@@ -59,6 +59,7 @@ function ForgotPassword({ route, navigation }) {
                     borderRadius: 15,
                     marginTop: 40,
                     paddingVertical: 7,
+                    marginBottom: 40,
                 }}><Text style={{ color: '#fff', fontFamily: 'poppins_semibold', fontSize: 15 }}>Send </Text></Pressable>
             </View>
             <Toast position='top' bottomOffset={20} />

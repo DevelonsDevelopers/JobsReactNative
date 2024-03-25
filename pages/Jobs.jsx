@@ -39,7 +39,6 @@ function Jobs({ navigation }) {
 	}, [jobs])
 
 	console.log(NODATA)
-	console.log('jobs', jobs)
 
 	useEffect(() => {
 		if (success || error || NODATA) {
@@ -62,8 +61,6 @@ function Jobs({ navigation }) {
 		}
 	}, [dispatch,  ID]);
 
-	console.log('ID', ID)
-
 
 
 	const JobClick = (val) => {
@@ -83,9 +80,9 @@ function Jobs({ navigation }) {
 		const id = await AsyncStorage.getItem('ID')
 		setID(id);
 	}
-	useEffect(() => {
-		console.log(jobs)
-	}, [jobs])
+	// useEffect(() => {
+	// 	console.log(jobs)
+	// }, [jobs])
 
 
 
@@ -146,7 +143,7 @@ function Jobs({ navigation }) {
 													style={{ marginHorizontal: 0, marginTop: 10 }} data={jobs}
 													keyExtractor={(item, index) => String(index)}
 													renderItem={({ item, index }) => (
-														<Ripple rippleColor="#13a3e1" rippleOpacity={0.2} onPress={() => JobClick(item)}><View style={{
+														<Ripple rippleColor="#13a3e1" rippleOpacity={1} onPress={() => JobClick(item)}><View style={{
 															marginLeft: 25,
 															marginRight: 25,
 															marginBottom: 8,
@@ -179,21 +176,7 @@ function Jobs({ navigation }) {
 																		fontSize: 12
 																	}}>{item.company === '0' ? item.company_n : item.company_name}</Text>
 																</View>
-																{item.bookmark === 0 ?
-																	<Image style={{
-																		width: 20,
-																		height: 20,
-																		marginLeft: 'auto',
-																		marginTop: 10
-																	}} source={require('../assets/bookmarked.png')} />
-																	:
-																	<Image style={{
-																		width: 20,
-																		height: 20,
-																		marginLeft: 'auto',
-																		marginTop: 10
-																	}} source={require('../assets/bookmark.png')} />
-																}
+													
 															</View>
 															<View style={{ flex: 1 }}>
 																<Text style={{

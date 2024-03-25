@@ -142,23 +142,8 @@ function JobsByCity({ route, navigation }) {
 															fontSize: 12
 														}}>{item.company_name}</Text>
 													</View>
-													{item.bookmark === 0 ?
-														<Image style={{
-															width: 20,
-															height: 20,
-															marginLeft: 'auto',
-															marginTop: 10
-														}} source={require('../assets/bookmarked.png')} />
-														:
-														<Image style={{
-															width: 20,
-															height: 20,
-															marginLeft: 'auto',
-															marginTop: 10
-														}} source={require('../assets/bookmark.png')} />
-													}
 												</View>
-												<View style={{ flexDirection: 'row', flex: 1 }}>
+												<View style={{ flex: 1 }}>
 													<Text style={{
 														fontFamily: 'poppins_bold',
 

@@ -719,11 +719,11 @@ function PersonalInfo({ navigation }) {
                                     backgroundColor: '#000',
                                     borderWidth: 1,
                                     borderRadius: 25,
-
                                     alignItems: 'center',
                                     padding: 15,
                                     marginTop: 15,
                                     marginHorizontal: 25,
+                                    marginBottom: 25,
                                 }}><Text style={{ color: '#fff', fontWeight: '800', fontSize: 15 }}>Verify
                                     Phone</Text></Pressable>
                             :

@@ -135,13 +135,7 @@ const Saved = ({ navigation }) => {
                                                                 fontSize: 12
                                                             }}>{item.company_name}</Text>
                                                         </View>
-                                                        <Image style={{
-                                                            width: 20,
-                                                            height: 20,
-                                                            marginLeft: 'auto',
-                                                            marginTop: 10
-                                                        }}
-                                                            source={require('../assets/bookmarkIcon.png')} />
+                                            
                                                     </View>
                                                     <View style={{ flex: 1 }}>
                                                         <Text style={{

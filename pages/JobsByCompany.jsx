@@ -160,7 +160,7 @@ function JobsByCompany({ route, navigation }) {
                                                     </View>
                                                    
                                                 </View>
-                                                <View style={{ flexDirection: 'row', flex: 1 }}>
+                                                <View style={{ flex: 1 }}>
                                                     <Text style={{
                                                         fontFamily: 'poppins_bold',
 

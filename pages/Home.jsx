@@ -233,12 +233,11 @@ function Home({ route, navigation }) {
 									alignItems: 'center',
 									flexDirection: 'row'
 								}}>
-								<View style={{ flexDirection: 'column', paddingHorizontal: 8 }}>
+								<View style={{ flexDirection: 'column', paddingHorizontal: 8 }}> 
 									<Text style={{
 										color: '#000',
 										fontFamily: 'poppins_medium',
 										fontSize: 18,
-
 										textAlign: 'center'
 									}}>Recommended jobs</Text>
 									<Text style={{

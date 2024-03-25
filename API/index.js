@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const API_URL = "http://182.176.99.175/job";
+export const API_URL = "https://jobss.com.au/api";
 // export const API_URL = "http://182.176.99.175/api";
 
 const API = axios.create({ baseURL: `${API_URL}`})

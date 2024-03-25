@@ -290,7 +290,7 @@ function Login({ route, navigation }) {
                         width: '85%',
                         backgroundColor: '#fff',
                         alignItems: 'center',
-                        borderRadius: 25,
+                        borderRadius: 30,
                         marginTop: 15,
                         paddingVertical: 15,
                         marginRight: 5,
