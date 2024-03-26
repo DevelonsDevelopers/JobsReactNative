@@ -147,5 +147,4 @@ const company = createSlice({
     }
 })
 
-export default company.reducer
-export const { successListener } = company.actions
+export default company.reducer;

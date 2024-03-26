@@ -31,5 +31,4 @@ const country = createSlice({
     }
 })
 
-export default country.reducer
-export const { successListener } = country.actions
+export default country.reducer;

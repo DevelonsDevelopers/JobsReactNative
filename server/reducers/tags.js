@@ -33,5 +33,4 @@ const tags = createSlice({
         })    }
 })
 
-export default tags.reducer
-export const { successListener } = tags.actions
+export default tags.reducer;

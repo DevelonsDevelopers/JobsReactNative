@@ -72,7 +72,7 @@ const roleUpdate = createAsyncThunk('roleUpdate', async (payload) => {
 })
 
 const seekerSlice = createSlice({
-    name: "seeker",
+    name: "seekerSlice",
     initialState,
     extraReducers: builder => {
         builder
