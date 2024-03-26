@@ -372,29 +372,118 @@ function Home({ route, navigation }) {
 									/>
 								</SafeAreaView>
 							</>}
+
+						<View
+							style={{
+								flex: 1,
+								flexDirection: 'row',
+								marginTop: 20,
+								borderRadius: 25,
+								alignItems: 'center',
+								paddingHorizontal: 30
+							}}>
+							<Text ellipsizeMode={'tail'} numberOfLines={1}
+								style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Featured Jobs</Text>
+							<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100} style={{ marginLeft: 'auto', backgroundColor: '#d7d7d7', paddingHorizontal: 10, paddingVertical: 1, borderRadius: 10 }}
+								onPress={() => navigation.push('FeatureJobs')}>
+								<Text numberOfLines={1} style={{ fontFamily: 'poppins_light', fontSize: 12, }}
+								>Show All</Text></Ripple>
+						</View>
+						{error ?
+							<View>
+								<Image source={require('../assets/delete.png')} style={{ width: 30, height: 30, marginLeft: 190, marginBottom: -20, marginTop: 40 }} />
+								<Text style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network Error...!</Text>
+							</View> : <>
+							<SafeAreaView style={{ flexDirection: 'row' }}>
+									<FlatList
+										horizontal
+										scrollEnabled={true}
+										nestedScrollEnabled={true}
+										style={{ marginHorizontal: 10, marginTop: 10, flexDirection: 'row', }}
+										data={recentJobs}
+										showsHorizontalScrollIndicator={false}
+										keyExtractor={(item) => item.id.toString()}
+										renderItem={({ item }) => (
+											<Ripple rippleColor="#13a3e1" rippleOpacity={0.2} onPress={() => JobClick(item)}><View style={{
+												margin: 8,
+												borderColor: '#4C4C4C',
+												borderRadius: 15,
+												paddingHorizontal: 27,
+												paddingVertical: 15,
+												display: "flex",
+												flexDirection: "column",
+												backgroundColor: '#fff',
+												marginRight: 5,
+												width: 290,
+												elevation: 5
+											}}>
+												<View style={{ flex: 1, flexDirection: 'row' }}>
+													<View style={{ flex: 0.8 }}>
+														<Text numberOfLines={1} style={{
+															fontFamily: 'poppins_medium',
+															marginTop: 5,
+															fontSize: 15
+														}}>{item.title}</Text>
+													</View>
+												</View>
+												<View style={{ flex: 1 }}>
+													<Text style={{
+														fontFamily: 'poppins_medium',
+														fontSize: 13,
+														marginTop: 4
+													}}>{item.category_name}</Text>
+												
+												</View>
+												
+												<View style={{
+													flexDirection: 'row',
+													flex: 1,
+												}}>
+													<View style={{
+														paddingHorizontal: 10,
+														paddingTop: 5,
+													}}>
+														<Text style={{ color: '#103952', fontSize: 13, fontFamily: 'poppins_bold', }}>{item.type}</Text>
+													</View>
+													<Text style={{
+														marginLeft: 'auto',
+														textAlign: 'right',
+														fontFamily: 'poppins_medium',
+														fontSize: 13,
+														paddingTop: 6,
+													}}>{item.city_name}</Text>
+												</View>
+											</View>
+											</Ripple>
+										)}
+									/>
+								</SafeAreaView>
+							</>}
+
+
+
 						<View style={{
 							flex: 1,
 							flexDirection: 'row',
 							marginVertical: 20,
-							marginHorizontal: 35
+							marginHorizontal: 25
 						}}>
 							<Ripple rippleColor="#13A3E1" rippleOpacity={0.3} rippleDuration={300} rippleSize={200}
 								onPress={() => navigation.push('Cities')}
 								style={{
-									flex: 0.5,
-									flexDirection: 'column',
-									marginRight: 7,
+									flex: 1,
+ 									marginRight: 7,
 									backgroundColor: 'white',
 									borderColor: '#c2c2c2',
 									elevation: 5,
 									paddingVertical: 19,
 									justifyContent: 'center',
-									alignItems: 'center',
-									borderRadius: 25
+									borderRadius: 25,
+									alignItems:'center'
 								}}>
-								<Text style={{ fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCities"}</Text>
+								<Text style={{ fontFamily: 'poppins_bold', fontSize: 13, textAlign: 'center', color: '#13A3E1' }}>{"Browse By Cities"}</Text>
 							</Ripple>
-							<Ripple rippleColor="#13A3E1" rippleOpacity={0.3} rippleDuration={300} rippleSize={200}
+							{/* <Ripple rippleColor="#13A3E1" rippleOpacity={0.3} rippleDuration={300} rippleSize={200}
 								onPress={() => navigation.push('Companies')}
 								style={{
 									flex: 0.5,
@@ -408,7 +497,7 @@ function Home({ route, navigation }) {
 									borderRadius: 25
 								}}>
 								<Text style={{ fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCompanies"}</Text>
-							</Ripple>
+							</Ripple> */}
 						</View>
 						<View style={{ height: 90 }} />
 					</ScrollView>
@@ -476,22 +565,22 @@ function Home({ route, navigation }) {
 									justifyContent: 'center',
 									alignItems: 'center',
 									width: '22%',
-
+								 
 								}}>
-								<View >
+								<View  style={{ backgroundColor:'white' , borderRadius:60 , padding:20 }}>
 									<Image style={{
 										width: 20,
 										height: 20,
-										tintColor: '#fff',
+										tintColor: 'black',
 										marginLeft: 'auto',
 										marginRight: 'auto'
 									}} source={require('../assets/applied.png')} alt={'Okay'} />
 									<Text numberOfLines={1}
-										style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#fff', marginTop: 2 }}>Applied</Text>
+										style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#000000', marginTop: 2 }}>Applied</Text>
 								</View>
 							</Ripple>
 
-							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
+							{/* <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 								onPress={() => {
 									if (login) {
 										navigation.push('Offers')
@@ -520,8 +609,9 @@ function Home({ route, navigation }) {
 										style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Offers</Text>
 									<View style={{ height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E', marginLeft: -4 }} />
 								</View>
-							</Ripple>
-							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
+							</Ripple> */}
+
+							{/* <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 								onPress={() => {
 									if (login) {
 										navigation.push('History')
@@ -552,7 +642,7 @@ function Home({ route, navigation }) {
 									color: '#fff',
 									marginTop: 2
 								}}>History</Text>
-							</Ripple>
+							</Ripple> */}
 							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 								onPress={() => {
 									if (login) {
