@@ -17,7 +17,7 @@ const fetchPlansByType = createAsyncThunk('fetchPlansByType', async (payload) =>
 })
 
 const planSlice = createSlice({
-    name: "plan",
+    name: "planSlice",
     initialState,
     extraReducers: builder => {
         builder
