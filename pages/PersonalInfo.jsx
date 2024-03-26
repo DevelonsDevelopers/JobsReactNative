@@ -135,6 +135,9 @@ function PersonalInfo({ navigation }) {
         }
     }, [seeker])
 
+
+    console.log('seeker ' , seeker);
+
     const updateGender = (gender) => {
         setSeekerData({ ...seekerData, gender: gender })
         setGen(gender)
@@ -605,7 +608,7 @@ function PersonalInfo({ navigation }) {
                                 borderBottomLeftRadius: 30,
                                 backgroundColor: '#E6E6E6',
                             }}>Phone</TextInput>
-                            <TextInput editable={!verified} placeholder="country code" onTouchStart={() => { if (!verified) { togglePhoneVisible() } }} style={{
+                            <TextInput editable={!seeker?.code} placeholder="country code" onTouchStart={() => { if (!seeker?.code)  { togglePhoneVisible() } }} style={{
                                 textAlign: 'center',
                                 paddingHorizontal: 6,
                                 marginTop: 'auto',
@@ -616,7 +619,7 @@ function PersonalInfo({ navigation }) {
                                 borderBottomWidth: 1,
                                 borderRightWidth: 1
                             }}>{phoneCode}</TextInput>
-                            <TextInput editable={!verified} onChangeText={text => setSeekerData({ ...seekerData, phone: text })}
+                            <TextInput editable={!seeker?.phone} onChangeText={text => setSeekerData({ ...seekerData, phone: text })}
                                 placeholder="Enter Your Number" style={{
                                     textAlign: 'left',
                                     paddingHorizontal: 10,

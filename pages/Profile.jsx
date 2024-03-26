@@ -228,7 +228,7 @@ function Profile({ navigation }) {
                                         textAlign: 'center'
                                     }}>Manage Your Resume</Text>
                                 </View></Pressable>
-                            <View style={{ backgroundColor: '#000', height: 3 }} />
+                            {/* <View style={{ backgroundColor: '#000', height: 3 }} />
                             <Pressable onPress={() => navigation.push('History')}>
                                 <View style={{ flex: 1, paddingVertical: 10, marginBottom: 10 }}>
                                     <Text style={{
@@ -239,7 +239,7 @@ function Profile({ navigation }) {
                                         textAlign: 'center'
                                     }}>History</Text>
                                 </View>
-                            </Pressable>
+                            </Pressable> */}
                         </View>
                         <View style={{
                             flexDirection: 'column',

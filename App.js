@@ -80,6 +80,7 @@ import { StatusBar } from 'react-native';
 import Applied from './pages/Applied';
 import Saved from './pages/Saved';
 import Web from './pages/WebView';
+import FeatureJobs from './pages/FeatureJobs';
 
 
 
@@ -248,6 +249,8 @@ function App() {
                             options={{ title: 'saved', headerShown: false }} />
                         <Stack.Screen name='Web' component={Web}
                             options={{ title: 'Web', headerShown: false }} />
+                        <Stack.Screen name='FeatureJobs' component={FeatureJobs}
+                            options={{ title: 'FeatureJobs', headerShown: false }} />
                         
 
                     </Stack.Navigator>
