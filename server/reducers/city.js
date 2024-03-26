@@ -21,7 +21,7 @@ const city = createSlice({
         })
         builder.addCase(allCities.fulfilled, (state, action) => {
             state.loading = false;
-            state.cities = action.payload.cities;
+            state.cities = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(allCities.rejected, (state, action) => {
@@ -30,3 +30,6 @@ const city = createSlice({
         })
     }
 })
+
+export default city.reducer
+export const { successListener } = city.actions

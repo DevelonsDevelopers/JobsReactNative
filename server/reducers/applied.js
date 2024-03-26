@@ -31,7 +31,7 @@ const category = createSlice({
         })
         builder.addCase(createApplied.fulfilled, (state, action) => {
             state.loading = false;
-            state.applied = action.payload.applied;
+            state.applied = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(createApplied.rejected, (state, action) => {
@@ -44,7 +44,7 @@ const category = createSlice({
         })
         builder.addCase(appliedByUser.fulfilled, (state, action) => {
             state.loading = false;
-            state.applied = action.payload.applied;
+            state.applied = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(appliedByUser.rejected, (state, action) => {
@@ -57,7 +57,7 @@ const category = createSlice({
         })
         builder.addCase(applyByJob.fulfilled, (state, action) => {
             state.loading = false;
-            state.applied = action.payload.applied;
+            state.applied = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(applyByJob.rejected, (state, action) => {
@@ -70,7 +70,7 @@ const category = createSlice({
         })
         builder.addCase(applyByCompany.fulfilled, (state, action) => {
             state.loading = false;
-            state.applied = action.payload.applied;
+            state.applied = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(applyByCompany.rejected, (state, action) => {
@@ -79,3 +79,6 @@ const category = createSlice({
         })
     }
 })
+
+export default applied.reducer
+export const { successListener } = applied.actions

@@ -51,3 +51,6 @@ const category = createSlice({
         })
     }
 })
+
+export default category.reducer
+export const { successListener } = category.actions

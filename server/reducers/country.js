@@ -21,7 +21,7 @@ const country = createSlice({
         })
         builder.addCase(allCountries.fulfilled, (state, action) => {
             state.loading = false;
-            state.countries = action.payload.countries;
+            state.countries = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(allCountries.rejected, (state, action) => {

@@ -67,7 +67,7 @@ const company = createSlice({
         })
         builder.addCase(allCompanies.fulfilled, (state, action) => {
             state.loading = false;
-            state.companies = action.payload.companies;
+            state.companies = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(allCompanies.rejected, (state, action) => {
@@ -81,7 +81,7 @@ const company = createSlice({
         })
         builder.addCase(getCompany.fulfilled, (state, action) => {
             state.loading = false;
-            state.companies = action.payload.companies;
+            state.companies = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(getCompany.rejected, (state, action) => {
@@ -107,7 +107,7 @@ const company = createSlice({
         })
         builder.addCase(verifyCompany.fulfilled, (state, action) => {
             state.loading = false;
-            state.verifyCompany = action.payload;
+            state.verifyCompany = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(verifyCompany.rejected, (state, action) => {
@@ -121,7 +121,7 @@ const company = createSlice({
         })
         builder.addCase(completeCompany.fulfilled, (state, action) => {
             state.loading = false;
-            state.completeCompany = action.payload;
+            state.completeCompany = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(completeCompany.rejected, (state, action) => {
@@ -135,7 +135,7 @@ const company = createSlice({
         })
         builder.addCase(completeRegistration.fulfilled, (state, action) => {
             state.loading = false;
-            state.completeRegistration = action.payload;
+            state.completeRegistration = action.payload.data;
             state.fetched = true;
         })
         builder.addCase(completeRegistration.rejected, (state, action) => {
