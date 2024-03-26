@@ -30,6 +30,4 @@ const city = createSlice({
         })
     }
 })
-
-export default city.reducer
-export const { successListener } = city.actions
+export default city.reducer;

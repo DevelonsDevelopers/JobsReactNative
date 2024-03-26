@@ -1,11 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import category from "../../API/reducers/category";
-import job from "../reducers/jobs"
+import jobs from "../reducers/jobs"
+import cv from "../reducers/cv";
+import apiJobs from '../reducers/apijobs';
 
 const store = configureStore({
     reducer: {
         category: category,
-        job : job,
+        job : jobs,
+        cv : cv,
+        apijobs : apiJobs,
+        
     }
 })
 

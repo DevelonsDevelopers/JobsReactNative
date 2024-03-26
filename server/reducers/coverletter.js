@@ -34,3 +34,5 @@ const coverletter = createSlice({
 
     }
 })
+
+export default coverletter.reducer;

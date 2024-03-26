@@ -22,8 +22,8 @@ const applyByCompany = createAsyncThunk('applyByCompany',() => {
 })
 
 
-const category = createSlice({
-    name: "category",
+const applied = createSlice({
+    name: "applied",
     initialState,
     extraReducers: builder => {
         builder.addCase(createApplied.pending, state => {
@@ -80,5 +80,4 @@ const category = createSlice({
     }
 })
 
-export default applied.reducer
-export const { successListener } = applied.actions
+export default applied.reducer;
