@@ -7,6 +7,7 @@ import { AllApplied } from "../API/actions/appliedActions";
 import Ripple from 'react-native-material-ripple';
 import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 import NoData from '../Components/NoData';
+import appliedService from '../server/services/appliedService';
  
 
 const Applied = ({ navigation }) => {
@@ -22,6 +23,8 @@ const Applied = ({ navigation }) => {
     // const noData = useSelector(state => state.nodata.allAppliedNoData)
     const [noData, setnoData] = useState();
     const success = useSelector(state => state.success.allAppliedSuccess)
+
+    // const [succeess, setSuccess] = useState()
 
     const [isLoading, setIsLoading] = useState(false)
 
@@ -70,10 +73,14 @@ const Applied = ({ navigation }) => {
 
     useEffect(() => {
         if (ID && !applied) {
-            dispatch(AllApplied(ID))
-            setData(applied)
+            // dispatch(AllApplied(ID))
+            appliedService.applyByUser({user : ID}).then((res) => {
+                setData(res.data)
+            }).catch(err => {
+                console.error(err);
+            })
         }
-    }, [dispatch, ID]);
+    }, [ID]);
 
     useEffect(() => {
         GetData()

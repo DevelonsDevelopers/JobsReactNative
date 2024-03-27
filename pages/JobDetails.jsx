@@ -22,6 +22,7 @@ import {
   // import ManageCoverLetter from "./ManageCoverLetter";
   import Ripple from "react-native-material-ripple";
   import WebsiteModal from "../Components/WebsiteModal";
+import seekerService from "../server/services/seekerService";
   
   const JobDetails = ({ route, navigation }) => {
     const { ID } = route.params;
@@ -33,7 +34,8 @@ import {
     const nodata = useSelector((state) => state.nodata.jobNoData);
     const success = useSelector((state) => state.success.jobSuccess);
   
-    const check = useSelector((state) => state.seeker.check);
+    // const check = useSelector((state) => state.seeker.check);
+    const [check, setCheck] = useState([])
     const checkCV = useSelector((state) => state.cv.check);
     console.log("check", check);
     console.log("checkCVVV", checkCV);
@@ -86,6 +88,10 @@ import {
       if (USERID) {
         if (!seeker) {
           dispatch(fetchSeeker(USERID));
+          seekerService.fetchById({id: USERID}).then((response) => {
+            setCheck(response.data)
+          })
+
         } else if (seeker.id.toString() !== USERID) {
           dispatch(fetchSeeker(USERID));
         }

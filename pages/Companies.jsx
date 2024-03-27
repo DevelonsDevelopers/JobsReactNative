@@ -6,19 +6,22 @@ import { AllCompanies } from "../API/actions/companyActions";
 import { ActivityIndicator } from "react-native";
 import Ripple from "react-native-material-ripple";
 import NoData from "../Components/NoData";
+import companyService from "../server/services/companyService";
 
 
 
 
 function Companies({ navigation }) {
 
-    const companies = useSelector(state => state.company.companies)
+    // const companies = useSelector(state => state.company.companies)
     const noData = useSelector(state => state.nodata.allCompanyNoData)
     const error = useSelector(state => state.error.allCompanyError)
     const success = useSelector(state => state.success.allCompanySuccess)
     const dispatch = useDispatch()
     const [data, setData] = useState()
     const [isLoading, setIsLoading] = useState(true)
+
+    const [companies, setCompanies] = useState([])
 
     useEffect(() => {
         if (success || noData || error) {
@@ -27,12 +30,11 @@ function Companies({ navigation }) {
     }, [success, error, noData])
 
     useEffect(() => {
-        if (!companies) {
-            dispatch(AllCompanies())
-        } else {
-            setIsLoading(false)
-        }
-    }, [dispatch, navigation, companies]);
+         dispatch(AllCompanies())
+        companyService.all().then((response) => {
+         setCompanies(response.data)   
+        })
+    }, []);
 
     useEffect(() => {
         if (companies) {

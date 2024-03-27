@@ -5,16 +5,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { AllCities } from "../API/actions/cityActions";
 import { ActivityIndicator } from 'react-native'
 import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
+import cityService from '../server/services/cityService';
 
 function Cities({ navigation }) {
 
-    const cities = useSelector(state => state.city.cities)
+    // const cities = useSelector(state => state.city.cities)
 
     const success = useSelector(state => state.success.allCitySuccess)
     const error = useSelector(state => state.error.allCityError)
     const dispatch = useDispatch()
     const [data, setData] = useState()
     const [isLoading, setIsLoading] = useState(true)
+    const [cities, setCities] = useState();
 
     useEffect(() => {
         if (success || error) {
@@ -25,7 +27,12 @@ function Cities({ navigation }) {
 
     useEffect(() => {
         if (!cities) {
-            dispatch(AllCities())
+            // dispatch(AllCities())
+            cityService.all().then(response => {
+                setCities(response.data);
+            }).catch(error => {
+                console.log(error);
+            })
         } else {
             setIsLoading(false)
         }

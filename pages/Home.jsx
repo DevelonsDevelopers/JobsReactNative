@@ -12,6 +12,10 @@ import CompleteProfileSeekerModal from "../Components/CompleteProfileSeekerModal
 import { fetchSeeker } from "../API/actions/seekerActions";
 import { getApiJobsRecent } from "../API/actions/jobsApi";
 import ProfileVerficationModal from "../Components/ProfileVerification";
+import jobService from "../server/services/jobService";
+import categoryService from "../server/services/categoryService";
+import seekerService from "../server/services/seekerService";
+import jobsApiService from "../server/services/jobsApiService";
 
 
 function Home({ route, navigation }) {
@@ -19,23 +23,32 @@ function Home({ route, navigation }) {
 	const dispatch = useDispatch();
 	const [login, isLogin] = useState(true);
 	const [search, setSearch] = useState('');
-	const seeker = useSelector(state => state.seeker.seeker)
-	const categories = useSelector(state => state.category.featured_categories)
-	const recentJobs = useSelector(state => state.job.recentJobs)
+	// const seeker = useSelector(state => state.seeker.seeker)
+	// const categories = useSelector(state => state.category.featured_categories)
+	// const recentJobs = useSelector(state => state.job.recentJobs)
+	const [seeker, setSeeker] = useState();
+	const [recentJobs, setRecentJobs] = useState()
+	const [categories, setCategories] = useState()
 
 	// console.log("seeker", seeker)
 
 
 	useEffect(() => {
-		dispatch(RecentJobs())
-	}, [dispatch])
+		// dispatch(RecentJobs())
+		jobService.recent().then(response => {
+			setRecentJobs(response.data)
+		}).catch(error => {
+			console.log(error);
+		});
+	}, [])
 
 
 	const error = useSelector(state => state.error.featuredCategoryError)
 	const success = useSelector(state => state.success.featuredCategorySuccess)
 	const nodata = useSelector(state => state.nodata.featuredCategoryNoData)
-	const check = useSelector(state => state.seeker.check)
+	// const check = useSelector(state => state.seeker.check)
 
+	const [check, setCheck] = useState()
 	const [ID, setID] = useState()
 
 	const [loginval, setLoginVal] = useState(false)
@@ -44,14 +57,14 @@ function Home({ route, navigation }) {
 	const toggleVisibility = () => setVisible(!visible)
 
 	useEffect(() => {
-		if (!categories) {
-			dispatch(FeaturedCategories())
-		} else {
-			setIsLoading(false)
-		}
-	}, [dispatch, categories]);
+		categoryService.featured().then((response) => {
+			setCategories(response.data)
+		}).catch((error) => {
+			console.log(error);
+		});
+	}, []);
 
-	const [isloading, setIsLoading] = useState(true)
+	const [isloading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		if (error || success || nodata) {
@@ -63,18 +76,29 @@ function Home({ route, navigation }) {
 	useEffect(() => {
 		if (ID) {
 			if (!seeker) {
-				dispatch(fetchSeeker(ID))
+				// dispatch(fetchSeeker(ID))
+				seekerService.fetchById(ID).then((res) =>{
+					setSeeker(res.data)
+				})
+
 			} else if ((seeker.id).toString() !== ID) {
-				dispatch(fetchSeeker(ID))
+				// dispatch(fetchSeeker(ID))
+				setSeeker(res.data)
 			}
 		}
-	}, [dispatch, seeker, ID]);
+	}, [seeker, ID]);
 
 	useEffect(() => {
 		if (!recentJobs) {
-			dispatch(getApiJobsRecent(search))
+			// dispatch(getApiJobsRecent(search))
+			jobsApiService.fetchApiJobsRecent(search).then((res) => {
+				setCheck(res.data)
+				console.log(res.data);
+			}).catch((err) => {
+				console.log(err)
+			});
 		}
-	}, [dispatch, recentJobs, search]);
+	}, [recentJobs, search]);
 
 
 	useEffect(() => {

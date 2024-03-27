@@ -32,6 +32,7 @@ import PersonalStatementModal from "../Components/PersonalStatementModal";
 import RoleModal from "../Components/RoleModal";
 import DeleteModal from "../Components/DeleteModal";
 import NoData from "../Components/NoData";
+import cvService from "../server/services/cvService";
 
 function AccountInfo({ route, navigation }) {
 
@@ -39,7 +40,7 @@ function AccountInfo({ route, navigation }) {
 
 	const dispatch = useDispatch()
 
-	const cv = useSelector(state => state.cv.cv);
+	// const cv = useSelector(state => state.cv.cv);
 	const data = useSelector(state => state.nodata.cvNoData);
 	const error = useSelector(state => state.error.cvError);
 	const success = useSelector(state => state.success.cvSuccess);
@@ -69,7 +70,14 @@ function AccountInfo({ route, navigation }) {
 	const [ID, setID] = useState()
 	const [infoVisible, setInfoVisible] = useState(false)
 	const [roleVisible, setRoleVisible] = useState(false)
-
+	const [cv, setCV] = useState()
+	const [checkCv, setCheckCv] = useState()
+	const [cvEducation, setCVEducation] = useState()
+	const [career, setCareer] = useState()
+	const [interest, setInterest] = useState()
+	const [lang, setLang] = useState()
+	const [course, setCourse] = useState()
+	const [skills, setSkills] = useState()
 
 	console.log(cv)
 
@@ -83,14 +91,19 @@ function AccountInfo({ route, navigation }) {
 
 	useEffect(() => {
 		if (ID) {
-			dispatch(CVByUser(ID))
-			setIsLoading(true)
+			// dispatch(CVByUser(ID))
+			cvService.fetchByUser(ID).then((res) =>{
+				console.log(res.data);
+			})
 		}
 	}, [ID, trigger])
 
 	useEffect(() => {
 		if (ID) {
-			dispatch(CheckCV(ID))
+			// dispatch(CheckCV(ID))
+			cvService.check(ID).then((res) => {
+				setCheckCv(res.data)
+			});
 		}
 	}, [cv]);
 
@@ -156,7 +169,11 @@ function AccountInfo({ route, navigation }) {
 	console.log(cv?.statement)
 
 	const addEducation = (qualification, timeperiod, institute) => {
-		dispatch(CVEducation(cv.id, qualification, timeperiod, institute))
+		// dispatch(CVEducation(cv.id, qualification, timeperiod, institute))
+		cvService.addCVEducation(cv.id, qualification, timeperiod, institute).then((res) => {
+			setCVEducation(res.data)
+		});
+		
 		setTrigger(!trigger)
 	}
 
@@ -177,7 +194,10 @@ function AccountInfo({ route, navigation }) {
 	}
 
 	const addCareer = (company, job, timeperiod, address, phone) => {
-		dispatch(CVCareer(cv.id, company, job, timeperiod, address, phone))
+		// dispatch(CVCareer(cv.id, company, job, timeperiod, address, phone))
+		cvService.addCVCareer(company, job, timeperiod, address, phone).then((res) => {
+			setCareer(res.data)
+		});
 		setTrigger(!trigger)
 	}
 
@@ -198,7 +218,10 @@ function AccountInfo({ route, navigation }) {
 	}
 
 	const addCourse = (course, timeperiod, institute) => {
-		dispatch(CVCourse(cv.id, course, timeperiod, institute))
+		// dispatch(CVCourse(cv.id, course, timeperiod, institute))
+		cvService.addCVCourse(cv.id, course, timeperiod, institute).then((res) => {
+			setCourse(res.data)
+		});
 		setTrigger(!trigger)
 	}
 
@@ -219,7 +242,10 @@ function AccountInfo({ route, navigation }) {
 	}
 
 	const addInterest = (interest) => {
-		dispatch(CVInterest(cv.id, interest))
+		// dispatch(CVInterest(cv.id, interest))
+		cvService.addCVInterest(cv.id, interest).then((res) => {
+			setInterest(res.data)
+		});
 		setTrigger(!trigger)
 	}
 
@@ -240,7 +266,10 @@ function AccountInfo({ route, navigation }) {
 	}
 
 	const addLanguage = (language) => {
-		dispatch(CVLanguage(cv.id, language))
+		// dispatch(CVLanguage(cv.id, language))
+		cvService.addCVLanguage(cv.id, language).then((res) => {
+			setLang(res.data)
+		});
 		setTrigger(!trigger)
 	}
 
@@ -282,7 +311,10 @@ function AccountInfo({ route, navigation }) {
 	}
 
 	const addSkill = (skill) => {
-		dispatch(CVSkill(cv.id, skill))
+		// dispatch(CVSkill(cv.id, skill))
+		cvService.addCVSkill(cv.id, skill).then((res) => {
+			setSkills(res.data)
+		});
 		setTrigger(!trigger)
 	}
 

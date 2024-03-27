@@ -9,6 +9,7 @@ import moment from "moment/moment";
 import { recordInteraction } from "../API";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import NoData from "../Components/NoData";
+import tagService from "../server/services/tagService";
 
 
 
@@ -21,8 +22,10 @@ function Recommendedjobs({ navigation }) {
 	const [data, setData] = useState([])
 	const [noData, setnoData] = useState();
 
-	const topTags = useSelector(state => state.tag.topTags)
+	// const topTags = useSelector(state => state.tag.topTags)
 	const recommendedJobs = useSelector(state => state.job.recommendedJobs)
+
+	const [topTags, setTopTags] = useState();
 
 	const success = useSelector(state => state.success.recommendedJobSuccess)
 	const error = useSelector(state => state.error.recommendedJobError)
@@ -38,9 +41,15 @@ function Recommendedjobs({ navigation }) {
 
 	useEffect(() => {
 		if (ID) {
-			dispatch(TopTags(ID))
+			// dispatch(TopTags(ID))
+			tagService.fetchtopTags({user : ID}).then((response) => {
+				setTopTags(response.data)
+			}).catch(error => {
+				console.log(error);
+			})
+
 		}
-	}, [ID]);
+	}, []);
 
 	useEffect(() => {
 		if (ID) {

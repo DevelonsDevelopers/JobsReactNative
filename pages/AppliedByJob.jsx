@@ -5,6 +5,7 @@ import Ripple from "react-native-material-ripple";
 import { FetchAppliedByJob } from "../API/actions/appliedActions";
 import moment from "moment/moment";
 import NoData from "../Components/NoData";
+import appliedService from "../server/services/appliedService";
 
 function AppliedByJob({ route, navigation }) {
 
@@ -15,7 +16,9 @@ function AppliedByJob({ route, navigation }) {
     const success = useSelector(state => state.success.appliedJobSuccess)
     const error = useSelector(state => state.error.appliedJobError)
     const nodata = useSelector(state => state.nodata.appliedJobNoData)
-    const appliedUsers = useSelector(state => state.applied.appliedUsers)
+    // const appliedUsers = useSelector(state => state.applied.appliedUsers)
+
+    const [appliedUsers, setAppliedUsers] = useState()
 
     const [loading, setLoading] = useState(true)
 
@@ -28,8 +31,13 @@ function AppliedByJob({ route, navigation }) {
     useEffect(() => {
         if (job) {
             dispatch(FetchAppliedByJob(job))
+            appliedService.applyByJob({job: job}).then((res) => {
+                setAppliedUsers(res.data)
+            }).catch(err => {
+                console.error(err);
+            })
         }
-    }, [dispatch, navigation, job]);
+    }, [navigation, job]);
 
     useEffect(() => {
         console.log(appliedUsers)

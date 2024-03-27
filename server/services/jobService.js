@@ -33,7 +33,7 @@ const jobService = {
             throw error;
         }
     },
-    getByCategory: async () => {
+    getByCategory: async (payload) => {
         try {
             const response = await axiosInstance.post('/jobs/category', payload)
             return response.data;
@@ -41,7 +41,7 @@ const jobService = {
             throw error;
         }
     },
-    getByCity: async () => {
+    getByCity: async (payload) => {
         try {
             const response = await axiosInstance.post('/jobs/city', payload)
             return response.data;

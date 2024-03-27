@@ -1,17 +1,20 @@
 import { Button, Image, ImageBackground, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useDispatch, useSelector } from "react-redux";
-import { CheckSeeker } from "../API/actions/seekerActions";
-import { CheckCV } from "../API/actions/cvActions";
+// import { useDispatch, useSelector } from "react-redux";
+// import { CheckSeeker } from "../API/actions/seekerActions";
+// import { CheckCV } from "../API/actions/cvActions";
+import cvService from "../server/services/cvService";
+import seekerService from "../server/services/seekerService";
 
 function Splash({ navigation }) {
 
-    const dispatch = useDispatch()
+    // const check = useSelector(state => state.seeker.check)
+    // const checkCV = useSelector(state => state.cv.check)
 
-    const check = useSelector(state => state.seeker.check)
-    const checkCV = useSelector(state => state.cv.check)
-
+    
+    const [checkCV, setCheckCV] = useState();
+    const [check, setCheck] = useState()
     const [user, setUser] = useState()
     const [ID, setID] = useState()
 
@@ -46,8 +49,21 @@ function Splash({ navigation }) {
     useEffect(() => {
         if (ID) {
             if (user === "SEEKER") {
-                dispatch(CheckCV(ID))
-                dispatch(CheckSeeker(ID))
+                cvService.check({user: ID}).then((response) => {
+                    if (response){
+                        setCheckCV(response.status)
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                })
+                // dispatch(CheckSeeker(ID))
+                seekerService.checkSeeker(ID).then(response => {
+                    if (response) {
+                        setCheck(response.status)
+                    }
+                }).catch(err => {
+                    console.log(err);
+                })
             }
         }
     }, [ID]);
@@ -65,6 +81,7 @@ function Splash({ navigation }) {
                     navigation.replace('Home')
                     await AsyncStorage.setItem("ID", "0")
                     await AsyncStorage.setItem("LOGIN", 'false')
+                    
                 }
             })
         }
@@ -72,12 +89,6 @@ function Splash({ navigation }) {
 
     return (
         <View style={{ flex: 1, backgroundColor: '#fff',marginTop:'auto',marginBottom:'auto' }}>
-            {/* <ImageBackground
-                style={{ width: 270, height: 282, paddingLeft: 20, paddingRight: 40, justifyContent: 'center' }}
-                source={require('../assets/circle_blue.png')}>
-                <Text style={{ textAlign: 'center', fontSize: 18, fontFamily: 'poppins_semibold', color: '#fff' }}>We will
-                    connect with hiring agencies, job banks and recruiters to place your CV</Text>
-            </ImageBackground> */}
             <Image style={{ width: 250, height: 150, marginTop: 'auto', alignSelf: 'center' }}
                 source={require('../assets/splash_icon.png')} alt={'Okay'} />
             <Image style={{ width: 250, height: 50, marginTop: 10, alignSelf: 'center', padding: 10, zIndex: 1,marginBottom:'auto' }}

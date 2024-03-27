@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import { Image, Pressable, ScrollView, Text, TextInput, View } from 'react-native'
-import { FetchOffer } from '../API/actions/offersActions'
-import { useDispatch, useSelector } from 'react-redux'
 import Toast from "react-native-toast-message";
 import moment from "moment";
 import { offerResponse } from "../API";
+import offerService from '../server/services/offerService';
 
 const AcceptResponse = ({ route, navigation }) => {
 
     const { ID } = route.params
 
-    const dispatch = useDispatch()
-
-    const offer = useSelector(state => state.offers.offer)
-
+    const [offer, setOffer] = useState()
     const [thank, setThank] = useState()
     const [issue, setIssue] = useState()
     const [great, setGreat] = useState()
 
     useEffect(() => {
         if (ID) {
-            dispatch(FetchOffer(ID))
+            offerService.offerById(ID).then(response => {
+                setOffer(response.data)
+            }).catch(err => {
+                console.error(err);
+            })
         }
-    }, [dispatch, ID])
+    }, [ID])
 
     useEffect(() => {
         if (offer) {

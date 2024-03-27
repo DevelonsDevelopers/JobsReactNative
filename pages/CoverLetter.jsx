@@ -24,12 +24,14 @@ const CoverLetter = ({ route, navigation }) => {
 
 	const dispatch = useDispatch();
 
-	const cv = useSelector((state) => state.cv.cv);
+	// const cv = useSelector((state) => state.cv.cv);
 	const success = useSelector(state => state.success.cvSuccess);
 	const error = useSelector(state => state.error.cvError);
 	const nodata = useSelector(state => state.nodata.cvNoData);
 	const date = moment().format("DD MMM YYYY")
 	const [isLoading, setIsLoading] = useState(true)
+
+	const [cv, setCV] = useState()
 
 	const [ID, setID] = useState()
 	useEffect(() => {
@@ -48,10 +50,16 @@ const CoverLetter = ({ route, navigation }) => {
 	};
 
 	useEffect(() => {
-		if (ID) {
 			dispatch(CVByUser(ID));
+			if (ID) {
+				// dispatch(CVByUser(ID));
+				cvService.fetchByUser({user : ID}).then((res) => {
+					setCV(res.data)
+				}).catch(err => {
+					console.error(err);
+				})
 		}
-	}, [dispatch, ID]);
+	}, [ID]);
 
 
 	const ApplyJob = () => {

@@ -8,14 +8,18 @@ import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import NoData from "../Components/NoData";
+import jobService from "../server/services/jobService";
 
 
 function JobsByCategory({ route, navigation }) {
 
 	const { CATID } = route.params
-	console.log(CATID)
+	console.log('cat', CATID)
 
-	const jobs = useSelector(state => state.job.categoryJobs)
+	// const jobs = useSelector(state => state.job.categoryJobs)
+
+	const [jobs, setJobs] = useState([])
+
 	const success = useSelector(state => state.success.categoryJobSuccess)
 	const [nodata, setNodata] = useState();
 	const error = useSelector(state => state.error.categoryJobError)
@@ -27,10 +31,12 @@ function JobsByCategory({ route, navigation }) {
 
 
 	useEffect(() => {
-		dispatch(CategoryJobs(ID, CATID))
-		setData(jobs)
+		// dispatch(CategoryJobs(ID, CATID))
+		jobService.getByCategory({user: ID,  category: CATID}).then((res) => {
+			setJobs(res.data)
+		});
 
-	}, [dispatch])
+	}, [])
 
 
 

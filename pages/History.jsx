@@ -7,17 +7,20 @@ import { AllInteractions } from "../API/actions/interactionsActions";
 import moment from "moment";
 import Ripple from 'react-native-material-ripple'
 import NoData from '../Components/NoData';
+import interactionService from '../server/services/interactionService';
 
 
 
 const History = ({ navigation }) => {
 
 	const dispatch = useDispatch();
-	const history = useSelector(state => state.interactions.interactions)
+	// const history = useSelector(state => state.interactions.interactions)
 	const error = useSelector(state => state.error.allInteractionError)
 	const success = useSelector(state => state.success.allInteractionSuccess)
 	const nodata = useSelector(state => state.nodata.allInteractionNoData)
 
+
+	const [history, setHistory] = useState()
 	const [isLoading, setIsLoading] = useState(true)
 	const [ID, setID] = useState()
 
@@ -31,7 +34,12 @@ const History = ({ navigation }) => {
 
 	useEffect(() => {
 		if (ID) {
-			dispatch(AllInteractions(ID))
+			// dispatch(AllInteractions(ID))
+			interactionService.all({user: ID}).then((res) => {
+				setHistory(res.data)
+			}).catch(err => {
+                console.error(err);
+            })
 		}
 	}, [ID])
 

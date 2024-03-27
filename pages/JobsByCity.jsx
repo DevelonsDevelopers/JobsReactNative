@@ -8,6 +8,8 @@ import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import NoData from "../Components/NoData";
+import cityService from "../server/services/cityService";
+import jobService from "../server/services/jobService";
 
 
 function JobsByCity({ route, navigation }) {
@@ -15,13 +17,17 @@ function JobsByCity({ route, navigation }) {
 	
 	const { CITYID } = route.params
 
-	const jobs = useSelector(state => state.job.cityJobs)
+	// const jobs = useSelector(state => state.job.cityJobs)
+
+	const [jobs, setJobs] = useState([])
+
+
 	const error = useSelector(state => state.error.cityJobError)
 
 	const [nodata, setNodata] = useState(false)
 	const success = useSelector(state => state.success.cityJobSuccess)
 	const dispatch = useDispatch()
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(false)
 	const [data, setData] = useState([])
 
 	const [ID, setID] = useState()
@@ -30,7 +36,16 @@ function JobsByCity({ route, navigation }) {
 
 	useEffect(() => {
 		dispatch(CityJobs(ID, CITYID))
-	}, [dispatch])
+		jobService.getByCity({ user: ID, id: CITYID })
+        .then((response) => {
+          console.log(ID, CITYID);
+          setJobs(response.data);
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+	}, [ID, CITYID])
 
 	useEffect(() => {
 		if (jobs?.length === 0) {

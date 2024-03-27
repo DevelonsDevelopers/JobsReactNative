@@ -8,11 +8,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ripple from "react-native-material-ripple";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import NoData from "../Components/NoData";
+import jobService from "../server/services/jobService";
 
 
 function Jobs({ navigation }) {
 
-	const jobs = useSelector(state => state.job.jobs)
+	// const jobs = useSelector(state => state.job.jobs)
 
 	const error = useSelector(state => state.error.jobError)
 	const nodata = useSelector(state => state.nodata.jobNoData)
@@ -20,7 +21,7 @@ function Jobs({ navigation }) {
 	const loading = useSelector(state => state.loading.allJobLoading)
 
 	const [isloading, setIsLoading] = useState(true)
-
+	const [jobs, setJobs] = useState()
 	const [NODATA, setNODATA] = useState();
 
 
@@ -58,6 +59,12 @@ function Jobs({ navigation }) {
 	useEffect(() => {
 		if (ID) {
 			dispatch(AllJobs(ID))
+			jobService.all({user: ID}).then((res) => {
+				setJobs(res.data)
+			}).catch(err => {
+                console.error(err);
+            })
+
 		}
 	}, [dispatch,  ID]);
 

@@ -6,16 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { AllCategories } from "../API/actions/categoryActions";
 import { BannerAd, BannerAdSize } from 'react-native-google-mobile-ads';
 import NoData from '../Components/NoData';
+import categoryService from '../server/services/categoryService';
 
 function Categories({ navigation }) {
 
-    const categories = useSelector(state => state.category.categories)
+    // const categories = useSelector(state => state.category.categories)
     const noData = useSelector(state => state.nodata.allCategoryNoData)
+
+    const [categories, setCategories] = useState()
+
     const success = useSelector(state => state.success.allCategorySuccess)
     const error = useSelector(state => state.error.allCategoryError)
     const dispatch = useDispatch();
     const [data, setData] = useState()
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         if (success || error || noData) {
@@ -25,13 +29,11 @@ function Categories({ navigation }) {
 
 
     useEffect(() => {
-        if (isLoading) {
-            if (!categories) {
-                dispatch(AllCategories())
-            } else {
-                setIsLoading(false)
-            }
-        }
+       categoryService.all().then(response => {
+            setCategories(response.data)
+       }).catch(err => {
+        console.error(err);
+    })
     }, [dispatch, navigation, categories]);
 
     useEffect(() => {
