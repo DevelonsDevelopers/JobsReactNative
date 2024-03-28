@@ -79,7 +79,6 @@ function Profile({ navigation }) {
         await AsyncStorage.setItem("NAME", '')
         await AsyncStorage.setItem("EMAIL", '')
         await AsyncStorage.setItem("USERNAME", '')
-        setLoginVal(false)
         toggleLoadingVisibility()
         navigation.popToTop()
         navigation.replace('Home')

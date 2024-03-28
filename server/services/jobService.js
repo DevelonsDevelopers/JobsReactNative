@@ -65,7 +65,7 @@ const jobService = {
             throw error;
         }
     },
-    getByProviderFeatured: async () => {
+    getByProviderFeatured: async (payload) => {
         try {
             const response = await axiosInstance.post('/jobs/providerFeatured', payload)
             return response.data;

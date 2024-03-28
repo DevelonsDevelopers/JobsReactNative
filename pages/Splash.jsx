@@ -1,13 +1,17 @@
-import { Image, View } from "react-native";
+import { Button, Image, ImageBackground, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import cvService from "../server/services/cvService";
-import seekerService from "../server/services/seekerService";
+import { useDispatch, useSelector } from "react-redux";
+import { CheckSeeker } from "../API/actions/seekerActions";
+import { CheckCV } from "../API/actions/cvActions";
 
 function Splash({ navigation }) {
 
-    const [checkCV, setCheckCV] = useState();
-    const [check, setCheck] = useState()
+    const dispatch = useDispatch()
+
+    const check = useSelector(state => state.seeker.check)
+    const checkCV = useSelector(state => state.cv.check)
+
     const [user, setUser] = useState()
     const [ID, setID] = useState()
 
@@ -18,8 +22,9 @@ function Splash({ navigation }) {
         GetData()
     }, []);
 
+
     const GetData = async () => {
-        const id = await AsyncStorage.getItem('ID')
+        const id = await AsyncStorage.getItem('ID');
         const value = await AsyncStorage.getItem('USER')
         console.log(id)
         console.log(value)
@@ -39,27 +44,6 @@ function Splash({ navigation }) {
         }
     }
 
-    useEffect(() => {
-        if (ID && ID !== "0") {
-            if (user === "SEEKER") {
-                cvService.check({user: ID}).then((response) => {
-                    if (response){
-                        setCheckCV(response.status)
-                    }
-                }).catch((error) => {
-                    console.log(error);
-                })
-                // dispatch(CheckSeeker(ID))
-                seekerService.checkSeeker({id: ID}).then(response => {
-                    if (response) {
-                        setCheck(response.status)
-                    }
-                }).catch(err => {
-                    console.log(err);
-                })
-            }
-        }
-    }, [ID]);
 
     useEffect(() => {
         console.log(check)
@@ -74,21 +58,18 @@ function Splash({ navigation }) {
                     navigation.replace('Home')
                     await AsyncStorage.setItem("ID", "0")
                     await AsyncStorage.setItem("LOGIN", 'false')
-
                 }
             })
         }
     }, [check]);
 
-    return (
-        <View style={{ flex: 1, backgroundColor: '#fff',marginTop:'auto',marginBottom:'auto' }}>
-            <Image style={{ width: 250, height: 150, marginTop: 'auto', alignSelf: 'center' }}
-                source={require('../assets/splash_icon.png')} alt={'Okay'} />
-            <Image style={{ width: 250, height: 50, marginTop: 10, alignSelf: 'center', padding: 10, zIndex: 1,marginBottom:'auto' }}
-                source={require('../assets/logo.png')} alt={'Okay'} />
 
+    return (
+        <View style={{ flex: 1, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center' }}>
+            <Image style={{ width: 250, height: 150 }} source={require('../assets/splash_icon.png')} alt="Splash Icon" />
+            <Image style={{ width: 250, height: 50, marginTop: 10 }} source={require('../assets/logo.png')} alt="Logo" />
         </View>
     );
 }
 
-export default Splash
+export default Splash;

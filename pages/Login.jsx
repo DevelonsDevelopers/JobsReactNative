@@ -19,11 +19,9 @@ function Login({ route, navigation }) {
     const [password, setPassword] = useState('')
 
     const [buttonClick, setButtonClick] = useState(false)
-
     const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
     const dispatch = useDispatch()
-
     const toggleVisibility = () => setShow(!show)
 
     const seekerError = useSelector(state => state.error.seekerLoginError)
@@ -179,6 +177,7 @@ function Login({ route, navigation }) {
             }
         }
     };
+
 
     return (
         <View style={{ flex:1 }}>

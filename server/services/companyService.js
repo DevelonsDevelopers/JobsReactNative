@@ -1,7 +1,6 @@
 import axiosInstance from "./axiosInstance";
 
 const companyService = {
-    
     all: async () => {
         try {
             const response = await axiosInstance.get('/companies/all');
@@ -10,15 +9,15 @@ const companyService = {
             throw error
         }
     },
-    get: async () => {
+    get: async (payload) => {
         try {
-            const response = await axiosInstance.get('/companies/get');
+            const response = await axiosInstance.post('/companies/get' , payload);
             return response.data;
         } catch (error) {
             throw error
         }
     },
-    updateCompany: async () => {
+    updateCompany: async (payload) => {
         try {
             const response = await axiosInstance.put('/companies/update', payload);
             return response.data;

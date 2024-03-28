@@ -111,6 +111,7 @@ function App() {
     if (!fontLoad) {
         return <AppLoading />
     }
+  
 
     return (
         <StripeProvider publishableKey="pk_test_51NpsCXBA5mbdD8e2Tg8MVBCXtomGyF11MzP1eFRceziDGIOGxMwmjToCNFLQEc2zXeYnBUhk89oKcJ9ffXpSikqU00bObmoUIu">

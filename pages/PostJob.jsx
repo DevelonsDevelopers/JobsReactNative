@@ -94,12 +94,17 @@ function PostJob({ navigation }) {
       // dispatch(FeaturedProviderJobs(ID))
       jobService.getByProviderFeatured({ id: ID }).then((res) => {
         setCompanyJobs(res?.data);
-      });
+      }).catch(err => {
+        console.log('error in gets provider' , err);
+      })
 
       //   dispatch(CompanyData(ID));
       companyService.get({ id: ID }).then((res) => {
         setCompany(res?.data);
-      });
+
+      }).catch(err => {
+        console.log('error in gets company ' , err);
+      })
     }
   }, [ ID]);
 

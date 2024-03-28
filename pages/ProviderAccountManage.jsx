@@ -87,8 +87,10 @@ const ProviderAccountManage = ({ navigation }) => {
   useEffect(() => {
     if (ID) {
       //   dispatch(CompanyData(ID));
+      setIsLoading(true)
       companyService.get({ id: ID }).then((res) => {
         setCompany(res?.data);
+        setIsLoading(false)
       });
     }
   }, [ID, trigger]);
@@ -165,11 +167,16 @@ const ProviderAccountManage = ({ navigation }) => {
       })
       .then((res) => {
         console.log(res);
-      });
+      }).catch(err => {
+        console.log('error' , err);
+      })
     setLoadingVisible(false);
     setTrigger(!trigger);
-    navigation.replace("ProviderAccountManage");
-  };
+    setTimeout(() => {
+      navigation.popToTop();
+    }, 500);
+    // navigation.replace('PostJob')
+   };
 
   const setCode = (code) => {
     setPhoneCode(code);
@@ -741,7 +748,7 @@ const ProviderAccountManage = ({ navigation }) => {
                   borderBottomLeftRadius: 25,
                   marginLeft: "auto",
                 }}
-                placeholder="country code"
+                placeholder="code"
               >
                 {phoneCode}
               </TextInput>
