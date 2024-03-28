@@ -17,6 +17,14 @@ const companyService = {
             throw error
         }
     },
+    getCompanyById: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/companies/user' , payload);
+            return response.data;
+        } catch (error) {
+            throw error
+        }
+    },
     updateCompany: async (payload) => {
         try {
             const response = await axiosInstance.put('/companies/update', payload);

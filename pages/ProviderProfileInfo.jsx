@@ -53,7 +53,7 @@ const ProviderProfileInfo = ({ navigation }) => {
       // dispatch(CompanyData(ID))
       //   dispatch(CompanyData(ID));
       companyService
-        .get({ id: ID })
+        .getCompanyById({ id: ID })
         .then((res) => {
           setCompany(res?.data);
           setLoading(false);

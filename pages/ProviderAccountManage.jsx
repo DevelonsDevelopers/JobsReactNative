@@ -88,9 +88,10 @@ const ProviderAccountManage = ({ navigation }) => {
     if (ID) {
       //   dispatch(CompanyData(ID));
       setIsLoading(true)
-      companyService.get({ id: ID }).then((res) => {
+      companyService.getCompanyById({ id: ID }).then((res) => {
         setCompany(res?.data);
         setIsLoading(false)
+        console.log('company detail' , res?.data);
       });
     }
   }, [ID, trigger]);

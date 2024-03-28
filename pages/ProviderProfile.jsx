@@ -111,28 +111,18 @@ const ProviderProfile = ({ navigation }) => {
                 // )
                 companyService
                   .updateCompany({
-                    
                     country: updateData.country,
                     city: updateData.city,
                     code: phoneCode,
                     phone: updateData.phone,
-                    headquater:updateData.headquater,
+                    headquater: updateData.headquater,
                     type: updateData.type,
                     id: ID,
-                    
                   })
                   .then((res) => {
-                    const {
-                      data: { data },
-                    } = res;
-                    const {
-                      data: { responseCode },
-                    } = res;
-                    const {
-                      data: { message },
-                    } = res;
-                    console.log(message);
-                    if (responseCode === 200) {
+                    console.log('res of update company' , res);
+
+                    if (res?.responseCode === 200) {
                       navigation.replace("PostJob");
                     } else {
                       Toast.show({

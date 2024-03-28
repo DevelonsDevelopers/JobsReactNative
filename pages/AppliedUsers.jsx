@@ -57,7 +57,7 @@ function AppliedUsers({ navigation }) {
                 if (res?.length > 0) {
                     setNoData(false)
                 } else {
-                    setNoData(false)
+                    setNoData(true)
                 }
             }) 
             .catch((error) => {

@@ -84,61 +84,61 @@ function PostJob({ navigation }) {
   const [isloading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (companyJobs && company ) {
+    if (companyJobs && company) {
       setIsLoading(false);
     }
-  }, [companyJobs , company]);
+  }, [companyJobs, company]);
 
   useEffect(() => {
     if (ID) {
       // dispatch(FeaturedProviderJobs(ID))
-      jobService.getByProviderFeatured({ id: ID }).then((res) => {
-        setCompanyJobs(res?.data);
-      }).catch(err => {
-        console.log('error in gets provider' , err);
-      })
+      jobService
+        .getByProviderFeatured({ id: ID })
+        .then((res) => {
+          setCompanyJobs(res?.data);
+        })
+        .catch((err) => {
+          console.log("error in gets provider", err);
+        });
 
       //   dispatch(CompanyData(ID));
-      companyService.get({ id: ID }).then((res) => {
-        setCompany(res?.data);
-
-      }).catch(err => {
-        console.log('error in gets company ' , err);
-      })
+      companyService
+        .getCompanyById({ id: ID })
+        .then((res) => {
+          setCompany(res?.data);
+        })
+        .catch((err) => {
+          console.log("error in gets company ", err);
+        });
     }
-  }, [ ID]);
+  }, [ID]);
 
   useEffect(() => {
     console.log("company", company);
     if (company) {
-      if (company.id === Number(ID)) {
-        if (noCompany === "YES") {
-          setIsComplete(false);
-          setIsVerified(false);
-        } else {
-          setIsComplete(true);
-          if (company?.verified === "true") {
-            setIsVerified(true);
-          } else {
-            setIsVerified(false);
-          }
-        }
+      if (company?.city === 0 && company?.country === 0) {
+        setIsComplete(false);
+      } else {
+        setIsComplete(true);
       }
-    } else {
-      setIsVerified(false);
-      setIsComplete(false);
+      if (company?.verified === "true") {
+        setIsVerified(true);
+      } else {
+        setIsVerified(false);
+      }
     }
-  }, [ID, company, noCompany]);
+  }, [ID, company]);
 
-  useEffect(() => {
-    if (company?.verified === "true") {
-      setIsVerified(true);
-    } else {
-      setIsVerified(false);
-    }
-  }, [company]);
+  // useEffect(() => {
+  //   if (company?.verified === "true") {
+  //     setIsVerified(true);
+  //   } else {
+  //     setIsVerified(false);
+  //   }
+  // }, [company]);
 
   console.log("company ", company?.verified);
+  console.log("company complete", isComplete );
 
   const Logout = async () => {
     await AsyncStorage.setItem("LOGIN", "false");
@@ -250,7 +250,7 @@ function PostJob({ navigation }) {
                 Welcome Back !
               </Text>
             </View>
-            {isComplete && isVerified ? (
+            {isComplete && isVerified  && company?.plan !== 0 ? (
               <>
                 <View
                   style={{
@@ -655,6 +655,7 @@ function PostJob({ navigation }) {
                           source={require("../assets/verified.png")}
                         />
                         <Text
+                          //  onPress={() => navigation.push("ProviderProfile")}
                           style={{
                             color: "green",
                             fontSize: 14,
@@ -784,7 +785,7 @@ function PostJob({ navigation }) {
                     </View>
                   )}
 
-                  {/* <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, padding: 2 }}>
+                  <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, padding: 2 }}>
                                         <Text style={{
                                             textAlign: 'center',
                                             color: 'black',
@@ -797,9 +798,9 @@ function PostJob({ navigation }) {
                                             fontSize: 14,
                                             fontFamily: 'poppins_bold',
                                         }}>Buy a Plan</Text>
-                                    </View> */}
-                  {/* <Text style={{ paddingLeft: 20 }}>Buy a plan to post your jobs</Text>
-                                    {isPaid ?
+                                    </View>
+                  <Text style={{ paddingLeft: 20 }}>Buy a plan to post your jobs</Text>
+                                    {company?.plan !== 0 ?
 
                                         <View style={{ flexDirection: 'row', gap: 40, marginTop: 10 }}>
                                             <Image style={{ width: 20, height: 20, marginTop: 5 }}
@@ -820,7 +821,7 @@ function PostJob({ navigation }) {
                                                 color: 'blue',
                                                 fontSize: 14,
                                                 marginLeft: -32,
-                                                fontFamily: 'poppins_light',
+                                                fontFamily: 'poppins_bold',
                                                 marginTop: 4
                                             }}
                                                 onPress={() => {
@@ -831,7 +832,7 @@ function PostJob({ navigation }) {
                                                     }
                                                 }}>(Buy Plan)</Text>
                                         </View>
-                                    } */}
+                                    }
                 </View>
               </View>
             )}

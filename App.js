@@ -108,9 +108,9 @@ function App() {
         'poppins_black': require('./assets/fonts/poppins_black.ttf'),
     });
 
-    if (!fontLoad) {
-        return <AppLoading />
-    }
+    // if (!fontLoad) {
+    //     return <AppLoading />
+    // }
   
 
     return (
