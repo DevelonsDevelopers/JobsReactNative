@@ -9,70 +9,43 @@ import Ripple from "react-native-material-ripple";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import NoData from "../Components/NoData";
 import jobService from "../server/services/jobService";
+import jobsApiService from "../server/services/jobsApiService";
 
 
 function Jobs({ navigation }) {
 
-	// const jobs = useSelector(state => state.job.jobs)
-
-	const error = useSelector(state => state.error.jobError)
-	const nodata = useSelector(state => state.nodata.jobNoData)
-	const success = useSelector(state => state.success.jobSuccess)
-	const loading = useSelector(state => state.loading.allJobLoading)
-
 	const [isloading, setIsLoading] = useState(true)
-	const [jobs, setJobs] = useState()
-	const [NODATA, setNODATA] = useState();
-
-
-	useEffect(() => {
-		if (jobs) {
-			if (jobs?.length === 0) {
-				setNODATA(true)
-				setIsLoading(false)
-			} else {
-				setNODATA(false)
-			} 
-			setIsLoading(false)
-		} else {
-			setNODATA(true)
-		}
-	}, [jobs])
-
-	console.log(NODATA)
-
-	useEffect(() => {
-		if (success || error || NODATA) {
-
-			setIsLoading(false)
-			setData(jobs)
-
-		}
-	}, [success, error, NODATA])
-
-	const [data, setData] = useState([])
-
-	const dispatch = useDispatch()
-
+	const [fetched, setFetched] = useState(false)
+	const [error, setError] = useState(false)
+	const [jobs, setJobs] = useState([])
 	const [ID, setID] = useState()
 
 	useEffect(() => {
+		if (fetched) {
+			setIsLoading(false)
+		}
+	}, [fetched])
+
+	useEffect(() => {
 		if (ID) {
-			dispatch(AllJobs(ID))
-			jobService.all({user: ID}).then((res) => {
+			jobsApiService.all({search: ''}).then((res) => {
 				setJobs(res.data)
+				setFetched(true)
 			}).catch(err => {
-                console.error(err);
-            })
+				console.error(err);
+				setFetched(true)
+				setError(true)
+			})
 
 		}
-	}, [dispatch,  ID]);
+	}, [ID]);
 
-
+	useEffect(() => {
+		GetData()
+	}, []);
 
 	const JobClick = (val) => {
 		let num = Number(val.company)
-		console.log(num)
 		if (isNaN(num)) {
 			navigation.push('ApiDescription', { ID: val.id })
 		} else {
@@ -80,19 +53,10 @@ function Jobs({ navigation }) {
 		}
 	}
 
-	useEffect(() => {
-		GetData()
-	}, []);
 	const GetData = async () => {
 		const id = await AsyncStorage.getItem('ID')
 		setID(id);
 	}
-	// useEffect(() => {
-	// 	console.log(jobs)
-	// }, [jobs])
-
-
-
 
 	return (
 		<View style={{ flex: 1 }}>
@@ -103,7 +67,7 @@ function Jobs({ navigation }) {
 					</View>
 					:
 					<>
-						{NODATA ? <NoData text={"No Jobs Found"} /> :
+						{jobs.length === 0 ? <NoData text={"No Jobs Found"} /> :
 							<>
 								{error ?
 									<View style={{ marginTop: 360 }}>
@@ -183,7 +147,7 @@ function Jobs({ navigation }) {
 																		fontSize: 12
 																	}}>{item.company === '0' ? item.company_n : item.company_name}</Text>
 																</View>
-													
+
 															</View>
 															<View style={{ flex: 1 }}>
 																<Text style={{

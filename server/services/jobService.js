@@ -9,9 +9,9 @@ const jobService = {
             throw error;
         }
     },
-    all: async () => {
+    all: async (payload) => {
         try {
-            const response = await axiosInstance.get('/jobs/jobs')
+            const response = await axiosInstance.post('/jobs/jobs', payload)
             return response.data;
         } catch (error) {
             throw error;

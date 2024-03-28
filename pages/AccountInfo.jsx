@@ -92,7 +92,7 @@ function AccountInfo({ route, navigation }) {
 	useEffect(() => {
 		if (ID) {
 			// dispatch(CVByUser(ID))
-			cvService.fetchByUser(ID).then((res) =>{
+			cvService.fetchByUser({user: ID}).then((res) =>{
 				console.log(res.data);
 			})
 		}
@@ -173,7 +173,7 @@ function AccountInfo({ route, navigation }) {
 		cvService.addCVEducation(cv.id, qualification, timeperiod, institute).then((res) => {
 			setCVEducation(res.data)
 		});
-		
+
 		setTrigger(!trigger)
 	}
 

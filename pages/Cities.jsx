@@ -9,34 +9,30 @@ import cityService from '../server/services/cityService';
 
 function Cities({ navigation }) {
 
-    // const cities = useSelector(state => state.city.cities)
-
-    const success = useSelector(state => state.success.allCitySuccess)
-    const error = useSelector(state => state.error.allCityError)
-    const dispatch = useDispatch()
     const [data, setData] = useState()
     const [isLoading, setIsLoading] = useState(true)
     const [cities, setCities] = useState();
+    const [nodata, setNodata] = useState(false)
+    const [fetched, setFetched] = useState(false)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
-        if (success || error) {
+        if (fetched) {
             setIsLoading(false)
         }
-    }, [success, error])
+    }, [fetched])
 
 
     useEffect(() => {
-        if (!cities) {
-            // dispatch(AllCities())
             cityService.all().then(response => {
                 setCities(response.data);
+                setFetched(true)
             }).catch(error => {
                 console.log(error);
+                setFetched(true)
+                setError(false)
             })
-        } else {
-            setIsLoading(false)
-        }
-    }, [dispatch, navigation, cities]);
+    }, []);
 
     useEffect(() => {
         if (cities) {
@@ -50,8 +46,6 @@ function Cities({ navigation }) {
         })
         setData(searched)
     }
-    console.log(data)
-    const [nodata, setNodata] = useState(false)
 
     useEffect(() => {
         if (data?.length === 0) {
@@ -97,13 +91,13 @@ function Cities({ navigation }) {
                                             }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
                                         <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
                                             <Pressable
-                                          
+
                                             ><Image
                                                     style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
                                                     source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
                                         </View>
                                     </View>
- 
+
                                     <View>
                                         <TextInput onChangeText={text => search(text)} style={{
                                             backgroundColor: '#fff',
@@ -137,7 +131,7 @@ function Cities({ navigation }) {
                                             borderTopRightRadius: 40,
                                             marginTop: 9
                                         }}>
-                                           
+
                                             <FlatList scrollEnabled={false} nestedScrollEnabled={true}
                                                 style={{ marginHorizontal: 0, marginTop: 10 }} data={data}
                                                 renderItem={({ item }) => (

@@ -20,33 +20,17 @@ import jobsApiService from "../server/services/jobsApiService";
 
 function Home({ route, navigation }) {
 
-	const dispatch = useDispatch();
 	const [login, isLogin] = useState(true);
 	const [search, setSearch] = useState('');
-	// const seeker = useSelector(state => state.seeker.seeker)
-	// const categories = useSelector(state => state.category.featured_categories)
-	// const recentJobs = useSelector(state => state.job.recentJobs)
 	const [seeker, setSeeker] = useState();
-	const [recentJobs, setRecentJobs] = useState()
-	const [categories, setCategories] = useState()
-
-	// console.log("seeker", seeker)
-
-
-	useEffect(() => {
-		// dispatch(RecentJobs())
-		jobService.recent().then(response => {
-			setRecentJobs(response.data)
-		}).catch(error => {
-			console.log(error);
-		});
-	}, [])
-
-
-	const error = useSelector(state => state.error.featuredCategoryError)
-	const success = useSelector(state => state.success.featuredCategorySuccess)
-	const nodata = useSelector(state => state.nodata.featuredCategoryNoData)
-	// const check = useSelector(state => state.seeker.check)
+	const [recentJobs, setRecentJobs] = useState([])
+	const [apiRecentJobs, setApiRecentJobs] = useState([])
+	const [categories, setCategories] = useState([])
+	const [isloading, setIsLoading] = useState(true);
+	const [categoriesFetched, setCategoriesFetched] = useState(false)
+	const [jobsFetched, setJobsFetched] = useState(false)
+	const [apiJobsFetched, setApiJobsFetched] = useState(false)
+	const [error, setError] = useState(false)
 
 	const [check, setCheck] = useState()
 	const [ID, setID] = useState()
@@ -59,46 +43,44 @@ function Home({ route, navigation }) {
 	useEffect(() => {
 		categoryService.featured().then((response) => {
 			setCategories(response.data)
+			setCategoriesFetched(true)
 		}).catch((error) => {
 			console.log(error);
+			setCategoriesFetched(true)
+		});
+		jobsApiService.fetchApiJobsRecent().then((response) => {
+			setApiRecentJobs(response.data)
+			setApiJobsFetched(true)
+		}).catch((err) => {
+			console.log(err.message)
+			setApiJobsFetched(true)
+		});
+		jobService.recent().then(response => {
+			setRecentJobs(response.data)
+			setJobsFetched(true)
+		}).catch(error => {
+			console.log(error);
+			setJobsFetched(true)
 		});
 	}, []);
 
-	const [isloading, setIsLoading] = useState(false);
-
 	useEffect(() => {
-		if (error || success || nodata) {
+		if (categoriesFetched && jobsFetched && apiJobsFetched) {
 			setIsLoading(false)
-			// dispatch({ type: RESET })
 		}
-	}, [error, success, nodata])
+	}, [categoriesFetched, jobsFetched, apiJobsFetched])
 
 	useEffect(() => {
-		if (ID) {
+		if (ID && ID !== "0") {
 			if (!seeker) {
-				// dispatch(fetchSeeker(ID))
-				seekerService.fetchById(ID).then((res) =>{
+				seekerService.fetchById({id: ID}).then((res) =>{
 					setSeeker(res.data)
 				})
-
 			} else if ((seeker.id).toString() !== ID) {
-				// dispatch(fetchSeeker(ID))
 				setSeeker(res.data)
 			}
 		}
 	}, [seeker, ID]);
-
-	useEffect(() => {
-		if (!recentJobs) {
-			// dispatch(getApiJobsRecent(search))
-			jobsApiService.fetchApiJobsRecent(search).then((res) => {
-				setCheck(res.data)
-				console.log(res.data);
-			}).catch((err) => {
-				console.log(err)
-			});
-		}
-	}, [recentJobs, search]);
 
 
 	useEffect(() => {
@@ -107,9 +89,7 @@ function Home({ route, navigation }) {
 
 	const GetData = async () => {
 		const value = await AsyncStorage.getItem('LOGIN')
-		console.log('value', value)
 		const userID = await AsyncStorage.getItem("ID")
-		console.log('id', userID)
 		setLoginVal(value);
 		setID(userID)
 	}
@@ -121,9 +101,6 @@ function Home({ route, navigation }) {
 			isLogin(false)
 		}
 	}, [loginval])
-
-	// console.log("loginval" , loginval)
-
 
 	const Logout = async () => {
 		await AsyncStorage.setItem("LOGIN", 'false')
@@ -148,23 +125,15 @@ function Home({ route, navigation }) {
 
 	useEffect(() => {
 		if (login) {
-			console.log("login is true")
-			console.log("chuna lagna laga ha  ")
 			if (check === "complete") {
 				setCompleteVisible(false)
-				console.log("chuna ni laga ")
 			} else if (check === undefined) {
 				setCompleteVisible(false)
-				console.log("chuna ni laga ")
 			} else {
 				setCompleteVisible(true)
-				console.log("chuna lag gia ")
 			}
 		}
 	}, [check, login]);
-
-	console.log("check", check)
-	// console.log("login", login)
 
 	const [profileVerifiedVisibility, setProfileVerifiedVisibility] = useState(false)
 
@@ -257,7 +226,7 @@ function Home({ route, navigation }) {
 									alignItems: 'center',
 									flexDirection: 'row'
 								}}>
-								<View style={{ flexDirection: 'column', paddingHorizontal: 8 }}> 
+								<View style={{ flexDirection: 'column', paddingHorizontal: 8 }}>
 									<Text style={{
 										color: '#000',
 										fontFamily: 'poppins_medium',
@@ -367,7 +336,7 @@ function Home({ route, navigation }) {
 								<SafeAreaView style={{ flex: 1 }}>
 
 									<FlatList scrollEnabled={false} nestedScrollEnabled={true}
-										style={{ marginHorizontal: 30, marginTop: 10 }} data={recentJobs} renderItem={({ item }) => (
+										style={{ marginHorizontal: 30, marginTop: 10 }} data={apiRecentJobs} renderItem={({ item }) => (
 											<Ripple rippleColor="#13A3E1" rippleOpacity={0.5} rippleDuration={300} rippleSize={200}
 												onPress={() => JobClick(item)}
 												style={{
@@ -390,7 +359,7 @@ function Home({ route, navigation }) {
 													fontSize: 9,
 													marginLeft: 'auto',
 
-												}}>{item.city_name}</Text>
+												}}>{item.locations}</Text>
 											</Ripple>
 										)}
 									/>
@@ -456,9 +425,9 @@ function Home({ route, navigation }) {
 														fontSize: 13,
 														marginTop: 4
 													}}>{item.category_name}</Text>
-												
+
 												</View>
-												
+
 												<View style={{
 													flexDirection: 'row',
 													flex: 1,
@@ -507,21 +476,6 @@ function Home({ route, navigation }) {
 								}}>
 								<Text style={{ fontFamily: 'poppins_bold', fontSize: 13, textAlign: 'center', color: '#13A3E1' }}>{"Browse By Cities"}</Text>
 							</Ripple>
-							{/* <Ripple rippleColor="#13A3E1" rippleOpacity={0.3} rippleDuration={300} rippleSize={200}
-								onPress={() => navigation.push('Companies')}
-								style={{
-									flex: 0.5,
-									flexDirection: 'column',
-									backgroundColor: 'white',
-									borderColor: '#c2c2c2',
-									elevation: 5,
-									paddingVertical: 19,
-									justifyContent: 'center',
-									alignItems: 'center',
-									borderRadius: 25
-								}}>
-								<Text style={{ fontFamily: 'poppins_bold', fontSize: 13, marginTop: 10, textAlign: 'center', color: '#13A3E1' }}>{"Browse By\nCompanies"}</Text>
-							</Ripple> */}
 						</View>
 						<View style={{ height: 90 }} />
 					</ScrollView>
@@ -572,15 +526,11 @@ function Home({ route, navigation }) {
 
 							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 								onPress={() => {
-									// if (login) {
-									// 	if (check === "complete") {
-									navigation.push('applied')
-									// 	} else {
-									// 		toggleProfile()
-									// 	}
-									// } else {
-									// 	toggleRequireVisible()
-									// }
+									if (login) {
+										navigation.push('applied')
+									} else {
+										toggleRequireVisible()
+									}
 								}}
 								style={{
 									height: '100%',
@@ -589,7 +539,7 @@ function Home({ route, navigation }) {
 									justifyContent: 'center',
 									alignItems: 'center',
 									width: '22%',
-								 
+
 								}}>
 								<View  style={{ backgroundColor:'white' , borderRadius:60 , padding:20 }}>
 									<Image style={{
@@ -603,70 +553,6 @@ function Home({ route, navigation }) {
 										style={{ fontFamily: 'poppins_medium', fontSize: 9, color: '#000000', marginTop: 2 }}>Applied</Text>
 								</View>
 							</Ripple>
-
-							{/* <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
-								onPress={() => {
-									if (login) {
-										navigation.push('Offers')
-									} else {
-
-										toggleRequireVisible()
-									}
-								}}
-								style={{
-									height: '100%',
-									flex: 1,
-									flexDirection: 'column',
-									justifyContent: 'center',
-									alignItems: 'center',
-									width: '20%'
-								}}>
-								<View >
-									<Image style={{
-										width: 32,
-										height: 28,
-										tintColor: '#fff',
-										marginLeft: 'auto',
-										marginRight: 'auto'
-									}} source={require('../assets/offersss.png')} alt={'Okay'} />
-									<Text numberOfLines={1}
-										style={{ fontFamily: 'poppins_medium', fontSize: 12, color: '#fff', marginTop: 2, marginLeft: 3 }}>Offers</Text>
-									<View style={{ height: 4, width: 50, borderRadius: 2, backgroundColor: '#F0A51E', marginLeft: -4 }} />
-								</View>
-							</Ripple> */}
-
-							{/* <Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
-								onPress={() => {
-									if (login) {
-										navigation.push('History')
-									} else {
-
-										toggleRequireVisible()
-									}
-								}}
-								style={{
-									height: '100%',
-									flex: 1,
-									flexDirection: 'column',
-									justifyContent: 'center',
-									marginLeft: -4,
-									alignItems: 'center',
-									width: '20%'
-								}}>
-								<Image style={{
-									width: 20,
-									height: 19,
-									tintColor: '#fff',
-									marginLeft: 'auto',
-									marginRight: 'auto'
-								}} source={require('../assets/history.png')} alt={'Okay'} />
-								<Text numberOfLines={1} style={{
-									fontFamily: 'poppins_medium',
-									fontSize: 9,
-									color: '#fff',
-									marginTop: 2
-								}}>History</Text>
-							</Ripple> */}
 							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={900} rippleSize={200}
 								onPress={() => {
 									if (login) {

@@ -8,64 +8,44 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Ripple from "react-native-material-ripple";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import NoData from "../Components/NoData";
+import jobService from "../server/services/jobService";
 
 
 function FeatureJobs({ navigation }) {
 
-	const jobs = useSelector(state => state.job.jobs)
-
-	const error = useSelector(state => state.error.jobError)
-	const nodata = useSelector(state => state.nodata.jobNoData)
-	const success = useSelector(state => state.success.jobSuccess)
-	const loading = useSelector(state => state.loading.allJobLoading)
 
 	const [isloading, setIsLoading] = useState(true)
-
-	const [NODATA, setNODATA] = useState();
-
-
-	useEffect(() => {
-		if (jobs) {
-			if (jobs?.length === 0) {
-				setNODATA(true)
-				setIsLoading(false)
-			} else {
-				setNODATA(false)
-			} 
-			setIsLoading(false)
-		} else {
-			setNODATA(true)
-		}
-	}, [jobs])
-
-	console.log(NODATA)
-
-	useEffect(() => {
-		if (success || error || NODATA) {
-
-			setIsLoading(false)
-			setData(jobs)
-
-		}
-	}, [success, error, NODATA])
-
-	const [data, setData] = useState([])
-
-	const dispatch = useDispatch()
-
+	const [fetched, setFetched] = useState(false)
+	const [error, setError] = useState(false)
+	const [jobs, setJobs] = useState([])
 	const [ID, setID] = useState()
 
 	useEffect(() => {
-		if (ID) {
-			dispatch(AllJobs(ID))
+		if (fetched) {
+			setIsLoading(false)
 		}
-	}, [dispatch,  ID]);
+	}, [fetched])
 
+	useEffect(() => {
+		if (ID) {
+			jobService.all({user: ID}).then((res) => {
+				setJobs(res.data)
+				setFetched(true)
+			}).catch(err => {
+				console.error(err);
+				setFetched(true)
+				setError(true)
+			})
 
+		}
+	}, [ID]);
+
+	useEffect(() => {
+		GetData()
+	}, []);
 
 	const JobClick = (val) => {
 		let num = Number(val.company)
-		console.log(num)
 		if (isNaN(num)) {
 			navigation.push('ApiDescription', { ID: val.id })
 		} else {
@@ -73,19 +53,10 @@ function FeatureJobs({ navigation }) {
 		}
 	}
 
-	useEffect(() => {
-		GetData()
-	}, []);
 	const GetData = async () => {
 		const id = await AsyncStorage.getItem('ID')
 		setID(id);
 	}
-	// useEffect(() => {
-	// 	console.log(jobs)
-	// }, [jobs])
-
-
-
 
 	return (
 		<View style={{ flex: 1 }}>
@@ -96,7 +67,7 @@ function FeatureJobs({ navigation }) {
 					</View>
 					:
 					<>
-						{NODATA ? <NoData text={"No Jobs Found"} /> :
+						{jobs.length === 0 ? <NoData text={"No Jobs Found"} /> :
 							<>
 								{error ?
 									<View style={{ marginTop: 360 }}>
@@ -136,103 +107,100 @@ function FeatureJobs({ navigation }) {
 													textAlign: 'left',
 													marginVertical: 20,
 													padding: 0
-												}}>Features Jobs</Text>
+												}}>Jobs</Text>
 											</View>
 											<SafeAreaView>
 												<FlatList nestedScrollEnabled={false} scrollEnabled={false}
-													style={{ marginHorizontal: 0, marginTop: 10 }} data={jobs}
-													keyExtractor={(item, index) => String(index)}
-													renderItem={({ item, index }) => (
-														<Ripple rippleColor="#13a3e1" rippleOpacity={1} onPress={() => JobClick(item)}><View style={{
-															marginLeft: 25,
-															marginRight: 25,
-															marginBottom: 8,
-															borderColor: '#4C4C4C',
-															borderRadius: 15,
-															paddingHorizontal: 25,
-															paddingVertical: 15,
-															display: "flex",
-															flexDirection: "column",
-															backgroundColor: '#fff'
-														}}>
-															<View style={{ flexDirection: 'row', flex: 1 }}>
-																<Text style={{
-																	marginLeft: 'auto',
-																	textAlign: 'right',
-																	fontFamily: 'poppins_medium',
-																	fontSize: 13
-																}}>{moment(item.created).format("MMM Do YY")}</Text>
-															</View>
-															<View style={{ flex: 1, flexDirection: 'row' }}>
-																<View style={{ flex: 0.8 }}>
-																	<Text numberOfLines={1} style={{
-																		fontFamily: 'poppins_bold',
-																		marginTop: 5,
-																		fontSize: 15
-																	}}>{item.title}</Text>
-																	<Text style={{
-																		fontFamily: 'poppins_regular',
-																		marginTop: 0,
-																		fontSize: 12
-																	}}>{item.company === '0' ? item.company_n : item.company_name}</Text>
-																</View>
-													
-															</View>
-															<View style={{ flex: 1 }}>
-																<Text style={{
-																	fontFamily: 'poppins_bold',
+														  style={{ marginHorizontal: 0, marginTop: 10 }} data={jobs}
+														  keyExtractor={(item, index) => String(index)}
+														  renderItem={({ item, index }) => (
+															  <Ripple rippleColor="#13a3e1" rippleOpacity={1} onPress={() => JobClick(item)}><View style={{
+																  marginLeft: 25,
+																  marginRight: 25,
+																  marginBottom: 8,
+																  borderColor: '#4C4C4C',
+																  borderRadius: 15,
+																  paddingHorizontal: 25,
+																  paddingVertical: 15,
+																  display: "flex",
+																  flexDirection: "column",
+																  backgroundColor: '#fff'
+															  }}>
+																  <View style={{ flexDirection: 'row', flex: 1 }}>
+																	  <Text style={{
+																		  marginLeft: 'auto',
+																		  textAlign: 'right',
+																		  fontFamily: 'poppins_medium',
+																		  fontSize: 13
+																	  }}>{moment(item.created).format("MMM Do YY")}</Text>
+																  </View>
+																  <View style={{ flex: 1, flexDirection: 'row' }}>
+																	  <View style={{ flex: 0.8 }}>
+																		  <Text numberOfLines={1} style={{
+																			  fontFamily: 'poppins_bold',
+																			  marginTop: 5,
+																			  fontSize: 15
+																		  }}>{item.title}</Text>
+																		  <Text style={{
+																			  fontFamily: 'poppins_regular',
+																			  marginTop: 0,
+																			  fontSize: 12
+																		  }}>{item.company === '0' ? item.company_n : item.company_name}</Text>
+																	  </View>
 
-																	fontSize: 16,
-																}}>{item.category_name}</Text>
-																<Text style={{
-																	marginLeft: 'auto',
-																	textAlign: 'right',
-																	fontFamily: 'poppins_medium',
-																	fontSize: 13
-																}}>{item.qualification}</Text>
-															</View>
-                              {item.salary ? 
-															<View style={{
-																marginTop: 4,
-																backgroundColor: '#d9d9d9',
-																paddingHorizontal: 20,
-																paddingVertical: 2,
-																borderRadius: 10,
-																marginLeft: 'auto',
-																marginRight: 'auto'
-															}}>
-																<Text style={{ fontFamily: 'poppins_medium', fontSize: 13, textAlign: 'center', }}>
-																	Salary {item.salary}
-																</Text>
-															</View>
-:
-''
-                            }
-															<View style={{
-																flexDirection: 'row',
-																flex: 1,
-																marginTop: 7,
-															}}>
-																<View style={{
-																	backgroundColor: '#13a3e1',
-																	paddingHorizontal: 10,
-																	paddingTop: 5,
-																	borderRadius: 14
-																}}>
-																	<Text style={{ color: 'white', fontSize: 15, fontFamily: 'poppins_medium', }}>{item.type}</Text>
-																</View>
-																<Text style={{
-																	marginLeft: 'auto',
-																	textAlign: 'right',
-																	fontFamily: 'poppins_medium',
-																	fontSize: 13,
-																	paddingTop: 6,
-																}}>{item.city_name}</Text>
-															</View>
+																  </View>
+																  <View style={{ flex: 1 }}>
+																	  <Text style={{
+																		  fontFamily: 'poppins_bold',
+
+																		  fontSize: 16,
+																	  }}>{item.category_name}</Text>
+																	  <Text style={{
+																		  marginLeft: 'auto',
+																		  textAlign: 'right',
+																		  fontFamily: 'poppins_medium',
+																		  fontSize: 13
+																	  }}>{item.qualification}</Text>
+																  </View>
+																  <View style={{
+																	  marginTop: 4,
+																	  backgroundColor: '#d9d9d9',
+																	  paddingHorizontal: 20,
+																	  paddingVertical: 2,
+																	  borderRadius: 10,
+																	  marginLeft: 'auto',
+																	  marginRight: 'auto'
+																  }}>
+																	  <Text style={{ fontFamily: 'poppins_medium', fontSize: 13, textAlign: 'center', }}>
+																		  Salary {item.salary}
+																	  </Text>
+																  </View>
+
+																  <View style={{
+																	  flexDirection: 'row',
+																	  flex: 1,
+																	  marginTop: 7,
+																  }}>
+																	  <View style={{
+																		  backgroundColor: '#13a3e1',
+																		  paddingHorizontal: 10,
+																		  paddingTop: 5,
+																		  borderRadius: 14
+																	  }}>
+																		  <Text style={{ color: 'white', fontSize: 15, fontFamily: 'poppins_medium', }}>{item.type}</Text>
+																	  </View>
+																	  <Text style={{
+																		  marginLeft: 'auto',
+																		  textAlign: 'right',
+																		  fontFamily: 'poppins_medium',
+																		  fontSize: 13,
+																		  paddingTop: 6,
+																	  }}>{item.city_name}</Text>
+																  </View>
 
 
-														</View></Ripple>
-													)} />
+															  </View></Ripple>
+														  )} />
 											</SafeAreaView>
 										</View>
 									</>

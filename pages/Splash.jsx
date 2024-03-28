@@ -1,18 +1,11 @@
-import { Button, Image, ImageBackground, Text, View } from "react-native";
+import { Image, View } from "react-native";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { useDispatch, useSelector } from "react-redux";
-// import { CheckSeeker } from "../API/actions/seekerActions";
-// import { CheckCV } from "../API/actions/cvActions";
 import cvService from "../server/services/cvService";
 import seekerService from "../server/services/seekerService";
 
 function Splash({ navigation }) {
 
-    // const check = useSelector(state => state.seeker.check)
-    // const checkCV = useSelector(state => state.cv.check)
-
-    
     const [checkCV, setCheckCV] = useState();
     const [check, setCheck] = useState()
     const [user, setUser] = useState()
@@ -47,7 +40,7 @@ function Splash({ navigation }) {
     }
 
     useEffect(() => {
-        if (ID) {
+        if (ID && ID !== "0") {
             if (user === "SEEKER") {
                 cvService.check({user: ID}).then((response) => {
                     if (response){
@@ -57,7 +50,7 @@ function Splash({ navigation }) {
                     console.log(error);
                 })
                 // dispatch(CheckSeeker(ID))
-                seekerService.checkSeeker(ID).then(response => {
+                seekerService.checkSeeker({id: ID}).then(response => {
                     if (response) {
                         setCheck(response.status)
                     }
@@ -81,7 +74,7 @@ function Splash({ navigation }) {
                     navigation.replace('Home')
                     await AsyncStorage.setItem("ID", "0")
                     await AsyncStorage.setItem("LOGIN", 'false')
-                    
+
                 }
             })
         }
@@ -93,7 +86,7 @@ function Splash({ navigation }) {
                 source={require('../assets/splash_icon.png')} alt={'Okay'} />
             <Image style={{ width: 250, height: 50, marginTop: 10, alignSelf: 'center', padding: 10, zIndex: 1,marginBottom:'auto' }}
                 source={require('../assets/logo.png')} alt={'Okay'} />
-           
+
         </View>
     );
 }

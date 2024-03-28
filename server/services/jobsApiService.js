@@ -1,6 +1,14 @@
 import axiosInstance from "./axiosInstance";
 
 const jobsApiService = {
+    all: async (payload) => {
+        try {
+            const response = await axiosInstance.post('apiJobs/jobs', payload)
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    },
     fetchJobsApiId: async (payload) => {
         try {
             const response = await axiosInstance.post('/apiJobs/job', payload);
@@ -9,9 +17,9 @@ const jobsApiService = {
             throw error
         }
     },
-    fetchApiJobsRecent: async (payload) => {
+    fetchApiJobsRecent: async () => {
         try {
-            const response = await axiosInstance.post('/apiJobs/recent', payload);
+            const response = await axiosInstance.get('/apiJobs/recent');
             return response.data;
         } catch (error) {
             throw error

@@ -14,58 +14,40 @@ import jobService from "../server/services/jobService";
 function JobsByCategory({ route, navigation }) {
 
 	const { CATID } = route.params
-	console.log('cat', CATID)
-
-	// const jobs = useSelector(state => state.job.categoryJobs)
 
 	const [jobs, setJobs] = useState([])
-
-	const success = useSelector(state => state.success.categoryJobSuccess)
-	const [nodata, setNodata] = useState();
-	const error = useSelector(state => state.error.categoryJobError)
-	const dispatch = useDispatch()
+	const [nodata, setNodata] = useState(false);
 	const [loading, setLoading] = useState(true)
 	const [data, setData] = useState([])
-
 	const [ID, setID] = useState()
+	const [fetched, setFetched] = useState(false)
+	const [error, setError] = useState(false)
 
 
 	useEffect(() => {
-		// dispatch(CategoryJobs(ID, CATID))
 		jobService.getByCategory({user: ID,  category: CATID}).then((res) => {
 			setJobs(res.data)
+			setData(res.data)
+			setFetched(true)
+		}).catch(error => {
+			setFetched(true)
+			setError(true)
 		});
-
 	}, [])
 
-
-
 	useEffect(() => {
-		if (jobs) {
-			setData(jobs)
-		}
-	}, [jobs]);
-
-
-	useEffect(() => {
-		if (jobs?.length === 0) {
+		if (jobs.length === 0) {
 			setNodata(true)
-		}
-		else {
+		} else {
 			setNodata(false)
 		}
 	}, [jobs])
 
 	useEffect(() => {
-		if (data) {
+		if (fetched) {
 			setLoading(false)
-		} else {
-			setLoading(true)
 		}
-	}, [data])
-
-
-	
+	}, [fetched])
 
 	const JobClick = (id) => {
 		recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
@@ -80,7 +62,6 @@ function JobsByCategory({ route, navigation }) {
 		const id = await AsyncStorage.getItem('ID')
 		setID(id);
 	}
-	// const height = Dimensions.get("window").height;
 
 	return (
 		<View style={{ flex: 1, backgroundColor: '#F1F1F1' }}>
