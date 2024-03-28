@@ -17,6 +17,14 @@ const cvService = {
             throw error
         }
     },
+    roleUpdate: async (payload) => {
+        try {
+            const response = await axiosInstance.post('/seekers/role', payload);
+            return response.data;
+        } catch (error) {
+            throw error
+        }
+    },
     cvStatement: async (payload) => {
         try {
             const response = await axiosInstance.post('/cv/statement', payload);

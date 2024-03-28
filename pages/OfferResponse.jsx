@@ -4,6 +4,7 @@ import { Image, TextInput, Text, Pressable, FlatList, SafeAreaView, ScrollView, 
 import { useDispatch, useSelector } from 'react-redux';
 import { FetchOffer } from '../API/actions/offersActions';
 import ContactModal from "../Components/ContactModal";
+import offerService from '../server/services/offerService';
 
 
 const OfferResponse = ({ route, navigation }) => {
@@ -12,9 +13,13 @@ const OfferResponse = ({ route, navigation }) => {
 
     const { ID } = route.params
 
-    const offer = useSelector(state => state.offers.offer)
-    const success = useSelector(state => state.success.offerSuccess)
-    const error = useSelector(state => state.error.offerError)
+    // const offer = useSelector(state => state.offers.offer)
+    // const success = useSelector(state => state.success.offerSuccess)
+    // const error = useSelector(state => state.error.offerError)
+
+const [offer , setOffer] = useState()
+const [error , setError] = useState(false)
+
 
     const [isLoading, setIsLoading] = useState(true)
     const [response, setResponse] = useState()
@@ -31,6 +36,14 @@ const OfferResponse = ({ route, navigation }) => {
     useEffect(() => {
         if (ID) {
             dispatch(FetchOffer(ID))
+            setIsLoading(true)
+            offerService.offerById({id : ID}).then((res) => {
+                setOffer(res?.data)
+                setIsLoading(false)
+            }).catch(err => {
+                setError(true)
+                setIsLoading(false)
+            })
         }
     }, [dispatch, ID])
 

@@ -1,6 +1,7 @@
 import axiosInstance from "./axiosInstance";
 
 const companyService = {
+    
     all: async () => {
         try {
             const response = await axiosInstance.get('/companies/all');

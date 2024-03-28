@@ -133,7 +133,7 @@ function JobsByCategory({ route, navigation }) {
 															backgroundColor: '#fff'
 														}}>
 															<View style={{ flexDirection: 'row', flex: 1 }}>
-																<Text style={{
+																{/* <Text style={{
 																	color: '#207A00',
 																	backgroundColor: 'rgba(0,180,18,0.2)',
 																	paddingHorizontal: 10,
@@ -141,7 +141,7 @@ function JobsByCategory({ route, navigation }) {
 																	fontSize: 10,
 																	fontFamily: 'poppins_medium',
 																	borderRadius: 5
-																}}>NEW</Text>
+																}}>NEW</Text> */}
 																<Text style={{
 																	marginLeft: 'auto',
 																	textAlign: 'right',
@@ -176,7 +176,7 @@ function JobsByCategory({ route, navigation }) {
 																	fontSize: 13
 																}}>{item.qualification}</Text>
 															</View>
-
+															{item.salary ?
 															<View style={{
 																marginTop: 4,
 																backgroundColor: '#d9d9d9',
@@ -190,7 +190,9 @@ function JobsByCategory({ route, navigation }) {
 																	Salary {item.salary}
 																</Text>
 															</View>
-
+:
+''
+														}
 
 															<View style={{ flexDirection: 'row', flex: 1, marginTop: 7, }}>
 																<View style={{

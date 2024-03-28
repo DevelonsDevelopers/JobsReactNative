@@ -7,8 +7,7 @@ const ManageCoverLetter = ({ navigation, route }) => {
     const { job } = route.params
     const { role } = route.params
 
-    console.log("Job", job)
-    console.log("role", role)
+ 
 
     const [proposal, setProposal] = useState('')
     const [intro, setIntro] = useState('')

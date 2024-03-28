@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CVByUser } from "../API/actions/cvActions";
 import Ripple from "react-native-material-ripple";
+import cvService from '../server/services/cvService';
 
 const ViewResume = ({ route, navigation }) => {
 
@@ -16,21 +17,24 @@ const ViewResume = ({ route, navigation }) => {
 
 	const [isLoading, setIsLoading] = useState(true);
 
-	const cv = useSelector((state) => state.cv.cv);
-	const success = useSelector((state) => state.success.cvSuccess);
-	const error = useSelector((state) => state.success.cvError);
+	// const cv = useSelector((state) => state.cv.cv);
+	const [cv , setCv] = useState()
+
 
 	useEffect(() => {
+		// dispatch(CVByUser(ID));
 		if (ID) {
-			dispatch(CVByUser(ID));
+			setIsLoading(true)
+			cvService.fetchByUser({ user: ID }).then((res) => {
+				setCv(res?.data);
+				setIsLoading(false)
+			}).catch(err => {
+				setIsLoading(false)
+			})	
 		}
-	}, [dispatch, ID]);
+	  }, [ ID]);
 
-	useEffect(() => {
-		if (success || error) {
-			setIsLoading(false);
-		}
-	}, [success, error]);
+	
 
 	return (
 		<View style={{ flex: 1 }}>

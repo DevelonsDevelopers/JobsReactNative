@@ -5,6 +5,7 @@ import { FetchOffer, FetchOffers } from '../API/actions/offersActions';
 import Toast from 'react-native-toast-message';
 import { offerResponse } from "../API";
 import moment from "moment";
+import offerService from '../server/services/offerService';
 
 const SeeekerNegotiate = ({ route, navigation }) => {
 
@@ -15,13 +16,17 @@ const SeeekerNegotiate = ({ route, navigation }) => {
     const [issue, setIssue] = useState('')
     const [great, setGreat] = useState()
 
-    const offer = useSelector(state => state.offers.offer)
+    // const offer = useSelector(state => state.offers.offer)
+    const [offer , setOffer] = useState()
 
     useEffect(() => {
         if (ID) {
-            dispatch(FetchOffer(ID))
+            // dispatch(FetchOffer(ID))
+            offerService.offerById({id : ID}).then((res) => {
+                setOffer(res?.data)
+            })
         }
-    }, [dispatch, ID])
+    }, [ ID])
 
     useEffect(() => {
         if (offer) {
@@ -36,7 +41,7 @@ const SeeekerNegotiate = ({ route, navigation }) => {
             if (issue.length >= 20) {
                 if (great.length >= 20) {
                     const jsonString = `{ "text1": "${thank}", "text2": "${issue}", "text3": "${great}" }`;
-                    offerResponse("Negotiate", jsonString, postDate, offer.id).then((res) => {
+                    offerService.offerResponse({status :"Negotiate", response :jsonString,responseDate: postDate,id: offer.id}).then((res) => {
                         navigation.push('Home')
                     })
                 } else {

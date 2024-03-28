@@ -1,6 +1,14 @@
-import { Image, Text, Pressable, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from "react-native";
-import React, { useEffect, useState } from 'react'
-import { View } from 'react-native'
+import {
+  Image,
+  Text,
+  Pressable,
+  FlatList,
+  SafeAreaView,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import CitySelectModal from "../Components/CitySelectModal";
 import CategorySelectModal from "../Components/CategorySelectModal";
@@ -10,202 +18,282 @@ import moment from "moment/moment";
 import { recordInteraction } from "../API";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
-
+import searchService from "../server/services/searchService";
 
 function Search({ route, navigation }) {
+  const { query } = route.params;
 
-    const { query } = route.params;
+  const [partTime, setPartTime] = useState(false);
+  const [fullTime, setFullTime] = useState(false);
+  const [remote, setReomote] = useState(false);
 
-    const [partTime, setPartTime] = useState(false)
-    const [fullTime, setFullTime] = useState(false)
-    const [remote, setReomote] = useState(false)
+  const [search, setSearch] = useState(query);
+  const [country, setCountry] = useState("");
+  const [countryID, setCountryID] = useState(0);
+  const [category, setCategory] = useState([]);
+  const [categoryID, setCategoryID] = useState();
+  const [city, setCity] = useState("");
+  const [cityID, setCityID] = useState();
+  const [company, setCompany] = useState("");
+  const [companyID, setCompanyID] = useState();
+  const [startSalary, setStartSalary] = useState("");
+  const [salaryEnd, setSalaryEnd] = useState("");
+  const [type, setType] = useState("");
+  const [isCountry, setIsCountry] = useState("false");
+  const [isCategory, setIsCategory] = useState("false");
+  const [isCity, setIsCity] = useState("false");
+  const [isCompany, setIsCompany] = useState("false");
+  const [isSalary, setIsSalary] = useState("false");
+  const [isType, setIsType] = useState("false");
 
-    const [search, setSearch] = useState(query)
-    const [country, setCountry] = useState("")
-    const [countryID, setCountryID] = useState(0)
-    const [category, setCategory] = useState([])
-    const [categoryID, setCategoryID] = useState()
-    const [city, setCity] = useState("")
-    const [cityID, setCityID] = useState()
-    const [company, setCompany] = useState("")
-    const [companyID, setCompanyID] = useState()
-    const [startSalary, setStartSalary] = useState("")
-    const [salaryEnd, setSalaryEnd] = useState("")
-    const [type, setType] = useState("")
-    const [isCountry, setIsCountry] = useState("false")
-    const [isCategory, setIsCategory] = useState("false")
-    const [isCity, setIsCity] = useState("false")
-    const [isCompany, setIsCompany] = useState("false")
-    const [isSalary, setIsSalary] = useState("false")
-    const [isType, setIsType] = useState("false")
+  const categories = useSelector((state) => state.category.categories);
+  const cities = useSelector((state) => state.city.cities);
+  const companies = useSelector((state) => state.company.companies);
+  //   const searchJobs = useSelector((state) => state.job.searchJobs);
 
-    const categories = useSelector(state => state.category.categories)
-    const cities = useSelector(state => state.city.cities)
-    const companies = useSelector(state => state.company.companies)
-    const searchJobs = useSelector(state => state.job.searchJobs)
+  const [searchJobs, setSearchJobs] = useState([]);
 
-    const error = useSelector(state => state.error.searchJobError)
-    const [nodata, setnodata] = useState(false);
-    const success = useSelector(state => state.success.searchJobSuccess)
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState()
-    const dispatch = useDispatch();
-    const [ID, setID] = useState()
+  const [nodata, setnodata] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState();
+  const dispatch = useDispatch();
+  const [ID, setID] = useState();
 
-    const [cityVisibility, setCityVisibility] = useState(false)
-    const [categoryVisibility, setCategoryVisibility] = useState(false)
-    const [companyVisibility, setCompanyVisibility] = useState(false)
+  const [cityVisibility, setCityVisibility] = useState(false);
+  const [categoryVisibility, setCategoryVisibility] = useState(false);
+  const [companyVisibility, setCompanyVisibility] = useState(false);
 
-    const toggleCityVisibility = () => setCityVisibility(!cityVisibility)
-    const toggleCategoryVisibility = () => setCategoryVisibility(!categoryVisibility)
-    const toggleCompanyVisibility = () => setCompanyVisibility(!companyVisibility)
+  const toggleCityVisibility = () => setCityVisibility(!cityVisibility);
+  const toggleCategoryVisibility = () =>
+    setCategoryVisibility(!categoryVisibility);
+  const toggleCompanyVisibility = () =>
+    setCompanyVisibility(!companyVisibility);
 
-    useEffect(() => {
+  useEffect(() => {
+    // dispatch(SearchJobs(search, countryID,/ categoryID, cityID, companyID, startSalary,  salaryEnd, type,  isCountry,   isCategory,  isCity,  isCompany, isSalary, isType))
 
-        dispatch(SearchJobs(search, countryID, categoryID, cityID, companyID, startSalary, salaryEnd, type, isCountry, isCategory, isCity, isCompany, isSalary, isType))
+    setLoading(true);
 
-    }, [dispatch]);
-
-    useEffect(() => {
-        if (searchJobs) {
-            setData(searchJobs)
-        }
-    }, [searchJobs])
-
-    useEffect(() => {
-        if (data) {
-
+    searchService
+      .search({
+        search: search,
+        country: countryID,
+        category: categoryID,
+        city: cityID,
+        company: companyID,
+        salaryStart: startSalary,
+        salaryEnd: salaryEnd,
+        type: type,
+        isCountry: isCountry,
+        isCategory: isCategory,
+        isCity: isCity,
+        isCompany: isCompany,
+        isSalary: isSalary,
+        isType: isType,
+      })
+      .then((res) => {
+        setSearchJobs(res?.data);
+        setLoading(false);
+        if (res?.data?.length > 0) {
+          setnodata(false);
+          setLoading(false);
         } else {
-            setData(searchJobs)
+          setnodata(true);
+          setLoading(false);
         }
-    }, [searchJobs])
+      });
+  }, [navigation]);
 
-    useEffect(() => {
-        if (searchJobs?.length === 0) {
-            setnodata(true)
-            setLoading(false)
-        } else {
-            setnodata(false)
-        }
-    }, [searchJobs])
-
-
-    useEffect(() => {
-        if (data) {
-            setLoading(false)
-        }
-    }, [data]);
-
-
-    const cityClick = (item) => {
-        toggleCityVisibility()
-        setCity(item.name)
-        setCityID(item.id)
+  useEffect(() => {
+    if (searchJobs) {
+      setData(searchJobs);
     }
-
-    const categoryClick = (item) => {
-        toggleCategoryVisibility()
-        setCategory(category => [...category, item.name])
-        setCategoryID(item.id)
-    }
-
-    const companyClick = (item) => {
-        toggleCompanyVisibility()
-        setCompany(item.name)
-        setCompanyID(item.id)
-    }
-
-    const JobClick = (id) => {
-        recordInteraction(id, ID, '', '', 'JOB').then(res => console.log(res))
-        navigation.push('JobDetails', { ID: id })
-    }
-
-    useEffect(() => {
-        GetData()
-    }, []);
-
-    const GetData = async () => {
-        const id = await AsyncStorage.getItem('ID')
-        setID(id);
-    }
+  }, [searchJobs]);
 
 
 
-    return (
-        <View style={{ flex: 1 }}>
-            <CitySelectModal visible={cityVisibility} toggleVisibility={toggleCityVisibility} list={cities}
-                click={cityClick} />
-            <CategorySelectModal visible={categoryVisibility} toggleVisibility={toggleCategoryVisibility}
-                list={categories} click={categoryClick} />
-            <CompanySelectModal visible={companyVisibility} toggleVisibility={toggleCompanyVisibility} list={companies}
-                click={companyClick} />
+  const cityClick = (item) => {
+    toggleCityVisibility();
+    setCity(item.name);
+    setCityID(item.id);
+  };
 
-            <ScrollView style={{ flex: 1, backgroundColor: '#F1F1F1' }} keyboardShouldPersistTaps="handled">
-                <View style={{}}>
-                    <View style={{ flexDirection: 'row', height: 90, marginBottom: 20 }}>
-                        <Pressable onPress={() => navigation.goBack()} style={{ justifyContent: 'center', paddingHorizontal: 15, paddingTop: 20, marginTop: 60, paddingBottom: 20 }}><Image style={{
-                            width: 22,
-                            height: 20,
+  const categoryClick = (item) => {
+    toggleCategoryVisibility();
+    setCategory((category) => [...category, item.name]);
+    setCategoryID(item.id);
+  };
 
-                            tintColor: '#000'
-                        }} source={require('../assets/back_arrow.png')} alt={'Okay'} /></Pressable>
-                        <View style={{ width: '100%', marginTop: 0, paddingEnd: 90 }}>
-                            <Pressable
+  const companyClick = (item) => {
+    toggleCompanyVisibility();
+    setCompany(item.name);
+    setCompanyID(item.id);
+  };
 
-                            ><Image
-                                    style={{ width: 150, height: 40, marginTop: 60, alignSelf: 'center' }}
-                                    source={require('../assets/logo.png')} alt={'Okay'} /></Pressable>
-                        </View>
-                    </View>
-                    <Text style={{ fontSize: 16, fontFamily: 'poppins_medium', marginLeft: 20, marginTop: 20 }}>Searched Job</Text>
-                    {nodata ?
-                        <View style={{ marginTop: 360 }}>
+  const JobClick = (id) => {
+    recordInteraction(id, ID, "", "", "JOB").then((res) => console.log(res));
+    navigation.push("JobDetails", { ID: id });
+  };
+
+  useEffect(() => {
+    GetData();
+  }, []);
+
+  const GetData = async () => {
+    const id = await AsyncStorage.getItem("ID");
+    setID(id);
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <CitySelectModal
+        visible={cityVisibility}
+        toggleVisibility={toggleCityVisibility}
+        list={cities}
+        click={cityClick}
+      />
+      <CategorySelectModal
+        visible={categoryVisibility}
+        toggleVisibility={toggleCategoryVisibility}
+        list={categories}
+        click={categoryClick}
+      />
+      <CompanySelectModal
+        visible={companyVisibility}
+        toggleVisibility={toggleCompanyVisibility}
+        list={companies}
+        click={companyClick}
+      />
+
+      <ScrollView
+        style={{ flex: 1, backgroundColor: "#F1F1F1" }}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View style={{}}>
+          <View style={{ flexDirection: "row", height: 90, marginBottom: 20 }}>
+            <Pressable
+              onPress={() => navigation.goBack()}
+              style={{
+                justifyContent: "center",
+                paddingHorizontal: 15,
+                paddingTop: 20,
+                marginTop: 60,
+                paddingBottom: 20,
+              }}
+            >
+              <Image
+                style={{
+                  width: 22,
+                  height: 20,
+
+                  tintColor: "#000",
+                }}
+                source={require("../assets/back_arrow.png")}
+                alt={"Okay"}
+              />
+            </Pressable>
+            <View style={{ width: "100%", marginTop: 0, paddingEnd: 90 }}>
+              <Pressable>
+                <Image
+                  style={{
+                    width: 150,
+                    height: 40,
+                    marginTop: 60,
+                    alignSelf: "center",
+                  }}
+                  source={require("../assets/logo.png")}
+                  alt={"Okay"}
+                />
+              </Pressable>
+            </View>
+          </View>
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: "poppins_medium",
+              marginLeft: 20,
+              marginTop: 20,
+            }}
+          >
+            Searched Job
+          </Text>
+          {nodata ? (
+            <View style={{ marginTop: 360 }}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  marginVertical: 20,
+                  fontFamily: "poppins_medium",
+                }}
+              >
+                {" "}
+                No Search Found{" "}
+              </Text>
+            </View>
+          ) : (
+            <>
+              {loading ? (
+                <View style={{ marginTop: "50%" }}>
+                  <ActivityIndicator size={60} color="#13A3E1" />
+                </View>
+              ) : (
+                <SafeAreaView>
+                  <FlatList
+                    nestedScrollEnabled={false}
+                    scrollEnabled={false}
+                    style={{ marginHorizontal: 0, marginTop: 20 }}
+                    data={data}
+                    renderItem={({ item }) => (
+                      <Pressable onPress={() => JobClick(item.id)}>
+                        <View
+                          style={{
+                            marginLeft: 25,
+                            marginRight: 25,
+                            marginBottom: 8,
+                            borderColor: "#4C4C4C",
+                            borderRadius: 15,
+                            paddingHorizontal: 25,
+                            paddingVertical: 15,
+                            display: "flex",
+                            flexDirection: "column",
+                            backgroundColor: "#fff",
+                          }}
+                        >
+                          <View style={{ flexDirection: "row", flex: 1 }}>
                             <Text
-                                style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}> No Search Found </Text>
-                        </View>
-                        : <>
-                            {loading ?
-                                <View style={{ marginTop: '50%' }}>
-                                    <ActivityIndicator size={60} color="#13A3E1" />
-                                </View>
-                                :
-                                <SafeAreaView>
-                                    <FlatList nestedScrollEnabled={false} scrollEnabled={false}
-                                        style={{ marginHorizontal: 0, marginTop: 20 }} data={data} renderItem={({ item }) => (
-                                            <Pressable onPress={() => JobClick(item.id)}><View style={{
-                                                marginLeft: 25,
-                                                marginRight: 25,
-                                                marginBottom: 8,
-                                                borderColor: '#4C4C4C',
-                                                borderRadius: 15,
-                                                paddingHorizontal: 25,
-                                                paddingVertical: 15,
-                                                display: "flex",
-                                                flexDirection: "column",
-                                                backgroundColor: '#fff'
-                                            }}>
-                                                <View style={{ flexDirection: 'row', flex: 1 }}>
-                                                    <Text style={{
-                                                        marginLeft: 'auto',
-                                                        textAlign: 'right',
-                                                        fontFamily: 'poppins_medium',
-                                                        fontSize: 13
-                                                    }}>{moment(item.created).format("MMM Do YY")}</Text>
-                                                </View>
-                                                <View style={{ flex: 1, flexDirection: 'row' }}>
-                                                    <View style={{ flex: 0.8 }}>
-                                                        <Text numberOfLines={1} style={{
-                                                            fontFamily: 'poppins_bold',
-                                                            marginTop: 5,
-                                                            fontSize: 15
-                                                        }}>{item.title}</Text>
-                                                        <Text style={{
-                                                            fontFamily: 'poppins_regular',
-                                                            marginTop: 0,
-                                                            fontSize: 12
-                                                        }}>{item.company_name}</Text>
-                                                    </View>
-                                                    {/* {item.bookmark === 0 ?
+                              style={{
+                                marginLeft: "auto",
+                                textAlign: "right",
+                                fontFamily: "poppins_medium",
+                                fontSize: 13,
+                              }}
+                            >
+                              {moment(item.created).format("MMM Do YY")}
+                            </Text>
+                          </View>
+                          <View style={{ flex: 1, flexDirection: "row" }}>
+                            <View style={{ flex: 0.8 }}>
+                              <Text
+                                numberOfLines={1}
+                                style={{
+                                  fontFamily: "poppins_bold",
+                                  marginTop: 5,
+                                  fontSize: 15,
+                                }}
+                              >
+                                {item.title}
+                              </Text>
+                              <Text
+                                style={{
+                                  fontFamily: "poppins_regular",
+                                  marginTop: 0,
+                                  fontSize: 12,
+                                }}
+                              >
+                                {item.company_name}
+                              </Text>
+                            </View>
+                            {/* {item.bookmark === 0 ?
                                         <Image style={{
                                             width: 20,
                                             height: 20,
@@ -220,77 +308,103 @@ function Search({ route, navigation }) {
                                             marginTop: 10
                                         }} source={require('../assets/bookmark.png')}/>
                                     } */}
-                                                </View>
-                                                <View style={{ flex: 1 }}>
+                          </View>
+                          <View style={{ flex: 1 }}>
+                            <Text
+                              style={{
+                                fontFamily: "poppins_bold",
+                                fontSize: 16,
+                              }}
+                            >
+                              {item.category_name}
+                            </Text>
+                            <Text
+                              style={{
+                                marginLeft: "auto",
+                                textAlign: "right",
+                                fontFamily: "poppins_medium",
+                                fontSize: 13,
+                              }}
+                            >
+                              {item.qualification}
+                            </Text>
+                          </View>
 
-                                                    <Text style={{
-                                                        fontFamily: 'poppins_bold',
-                                                        fontSize: 16,
-                                                    }}>{item.category_name}</Text>
-                                                    <Text style={{
-                                                        marginLeft: 'auto',
-                                                        textAlign: 'right',
-                                                        fontFamily: 'poppins_medium',
-                                                        fontSize: 13
-                                                    }}>{item.qualification}</Text>
-                                                </View>
-                                                <View style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-                                                    <Text style={{
-                                                        fontFamily: 'poppins_medium',
-                                                        fontSize: 13,
-                                                        textAlign: 'center',
-                                                        marginTop: 4,
-                                                        backgroundColor: '#d9d9d9',
-                                                        paddingHorizontal: 10,
-                                                        paddingVertical: 2,
-                                                        borderRadius: 10,
-                                                        margin: 'auto',
-                                                    }}>
-                                                        Salary {item.salary}
-                                                    </Text>
-                                                </View>
+{item?.salary ?
 
-                                                <View style={{
-                                                    flexDirection: 'row',
-                                                    flex: 1,
-                                                    marginTop: 7,
-                                                }}>
-                                                    <Text style={{
-                                                        color: 'white',
-                                                        backgroundColor: '#13a3e1',
-                                                        paddingHorizontal: 10,
-                                                        paddingTop: 5,
-                                                        fontSize: 15,
-                                                        fontFamily: 'poppins_medium',
-                                                        borderRadius: 14
-                                                    }}>{item.type}</Text>
-                                                    <Text style={{
-                                                        marginLeft: 'auto',
-                                                        textAlign: 'right',
-                                                        fontFamily: 'poppins_medium',
-                                                        fontSize: 13,
-                                                        paddingTop: 6,
-                                                    }}>{item.city_name}</Text>
-                                                </View>
-
-                                            </View>
-                                            </Pressable>
-                                        )} />
-                                </SafeAreaView>
+                          <View
+                            style={{ marginLeft: "auto", marginRight: "auto" }}
+                          >
+                            <Text
+                              style={{
+                                fontFamily: "poppins_medium",
+                                fontSize: 13,
+                                textAlign: "center",
+                                marginTop: 4,
+                                backgroundColor: "#d9d9d9",
+                                paddingHorizontal: 10,
+                                paddingVertical: 2,
+                                borderRadius: 10,
+                                margin: "auto",
+                              }}
+                            >
+                              Salary {item.salary}
+                            </Text>
+                          </View>
+:
+''
                             }
-                        </>}
-                </View>
-            </ScrollView>
-            <BannerAd
-                unitId="ca-app-pub-3940256099942544/6300978111"
-                size={BannerAdSize.FULL_BANNER}
-                requestOptions={{
-                    requestNonPersonalizedAdsOnly: true,
-                }}
-            />
-
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              flex: 1,
+                              marginTop: 7,
+                            }}
+                          >
+                            <Text
+                              style={{
+                                color: "white",
+                                backgroundColor: "#13a3e1",
+                                paddingHorizontal: 10,
+                                paddingTop: 5,
+                                fontSize: 15,
+                                fontFamily: "poppins_medium",
+                                borderRadius: 14,
+                              }}
+                            >
+                              {item.type}
+                            </Text>
+                            <Text
+                              style={{
+                                marginLeft: "auto",
+                                textAlign: "right",
+                                fontFamily: "poppins_medium",
+                                fontSize: 13,
+                                paddingTop: 6,
+                              }}
+                            >
+                              {item.city_name}
+                            </Text>
+                          </View>
+                        </View>
+                      </Pressable>
+                    )}
+                  />
+                </SafeAreaView>
+              )}
+            </>
+          )}
         </View>
-    )
+      </ScrollView>
+      <BannerAd
+        unitId="ca-app-pub-3940256099942544/6300978111"
+        size={BannerAdSize.FULL_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
+        }}
+      />
+    </View>
+  );
 }
 
-export default Search
+export default Search;

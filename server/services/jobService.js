@@ -25,7 +25,7 @@ const jobService = {
             throw error;
         }
     },
-    getByID: async () => {
+    getByID: async (payload) => {
         try {
             const response = await axiosInstance.post('/jobs/get', payload)
             return response.data;
@@ -49,7 +49,7 @@ const jobService = {
             throw error;
         }
     },
-    getByCompany: async () => {
+    getByCompany: async (payload) => {
         try {
             const response = await axiosInstance.post('/jobs/company', payload)
             return response.data;
@@ -57,7 +57,7 @@ const jobService = {
             throw error;
         }
     },
-    getByProvider: async () => {
+    getByProvider: async (payload) => {
         try {
             const response = await axiosInstance.post('/jobs/provider', payload)
             return response.data;
@@ -72,7 +72,7 @@ const jobService = {
         } catch (error) {
             throw error;
         }
-    },
+    },  
 }
 
 export default jobService;

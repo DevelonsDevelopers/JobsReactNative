@@ -27,9 +27,10 @@ function Profile({ navigation }) {
     const [fetched, setFetched] = useState(false)
     const [seeker, setSeeker] = useState()
 
-    const error = useSelector(state => state.error.seekerError)
-    const success = useSelector(state => state.success.seekerSuccess)
-    const check = useSelector(state => state.seeker.check)
+
+    const [checkSeeker , setCheckSeeker] = useState()
+
+    // const check = useSelector(state => state.seeker.check)
     const checkCV = useSelector(state => state.cv.check)
 
     useEffect(() => {
@@ -54,7 +55,15 @@ function Profile({ navigation }) {
                 setFetched(true)
             }).catch(error => {
                 setFetched(true)
+            })  
+            seekerService
+            .checkSeeker({ id: ID })
+            .then((res) => {
+              setCheckSeeker(res?.status);
             })
+            .catch((err) => {
+              console.log("error ", err);
+            });
         }
     }, [ID]);
 
@@ -205,13 +214,13 @@ function Profile({ navigation }) {
                             marginTop: 20
                         }}>
                             <Pressable onPress={() => {
-                                if (check === "complete") {
+                                if (checkSeeker === "complete") {
                                     navigation.push('AccountInfo', { role: seeker?.role })
                                 } else {
                                     navigation.push('VerificationProfile')
                                 }
                             }}><View
-                                style={{ flex: 1, paddingVertical: 10, marginTop: 10 }}>
+                                style={{ flex: 1, paddingVertical: 10,  }}>
                                     <Text style={{
                                         color: '#000',
                                         fontSize: 15,

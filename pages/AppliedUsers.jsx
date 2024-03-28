@@ -15,6 +15,8 @@ import { AppliedByCompany } from "../API/actions/appliedActions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment/moment";
 import NoData from "../Components/NoData";
+import appliedService from "../server/services/appliedService";
+import company from '../API/reducers/company';
 
 function AppliedUsers({ navigation }) {
 
@@ -23,11 +25,15 @@ function AppliedUsers({ navigation }) {
     const [ID, setID] = useState()
     const [loading, setLoading] = useState(true)
 
-    const companyApplied = useSelector(state => state.applied.companyApplied)
-    const success = useSelector(state => state.success.appliedCompanySuccess)
-    const noData = useSelector(state => state.nodata.appliedCompanyNoData)
-    const error = useSelector(state => state.error.appliedCompanyError)
+    // const companyApplied = useSelector(state => state.applied.companyApplied)
+    // const success = useSelector(state => state.success.appliedCompanySuccess)
+    // const noData = useSelector(state => state.nodata.appliedCompanyNoData)
+    // const error = useSelector(state => state.error.appliedCompanyError)
 
+
+    const [companyApplied , setCompanyApplied] = useState([])
+    const [noData , setNoData] = useState(false)
+    const [error , setError] = useState(false)
 
 
     console.log("companyApplied", companyApplied)
@@ -43,15 +49,26 @@ function AppliedUsers({ navigation }) {
 
     useEffect(() => {
         if (ID) {
-            dispatch(AppliedByCompany(ID))
-        }
-    }, [dispatch, navigation, ID]);
+            // dispatch(AppliedByCompany(ID))
+            setLoading(true)
+            appliedService.applyByCompany({company:ID }).then((res)=> {
+                setCompanyApplied(res.data)
+                setLoading(false)
+                if (res?.length > 0) {
+                    setNoData(false)
+                } else {
+                    setNoData(false)
+                }
+            }) 
+            .catch((error) => {
+                setError(true) 
+                setLoading(false)
+            })
 
-    useEffect(() => {
-        if (success || noData || error) {
-            setLoading(false)
+            
         }
-    }, [success, noData, error]);
+    }, [navigation, ID]);
+
 
     return (
         <View style={{ flex: 1 }}>

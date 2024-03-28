@@ -216,7 +216,7 @@ function Home({ route, navigation }) {
 
 						{login ?
 							<Ripple rippleColor="white" rippleOpacity={0.3} rippleDuration={600} rippleSize={400}
-								onPress={() => navigation.push('Recommendedjobs')} aria-hidden={true} style={{
+								onPress={() => navigation.push('FeatureJobs')} aria-hidden={true} style={{
 									backgroundColor: '#F0A51E',
 									borderRadius: 25,
 									height: 100,
@@ -312,59 +312,6 @@ function Home({ route, navigation }) {
 							}
 						</SafeAreaView>
 
-						<View
-							style={{
-								flex: 1,
-								flexDirection: 'row',
-								marginTop: 20,
-								borderRadius: 25,
-								alignItems: 'center',
-								paddingHorizontal: 30
-							}}>
-							<Text ellipsizeMode={'tail'} numberOfLines={1}
-								style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Recent Jobs</Text>
-							<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100} style={{ marginLeft: 'auto', backgroundColor: '#d7d7d7', paddingHorizontal: 10, paddingVertical: 1, borderRadius: 10 }}
-								onPress={() => navigation.push('Jobs')}>
-								<Text numberOfLines={1} style={{ fontFamily: 'poppins_light', fontSize: 12, }}
-								>Show All</Text></Ripple>
-						</View>
-						{error ?
-							<View>
-								<Image source={require('../assets/delete.png')} style={{ width: 30, height: 30, marginLeft: 190, marginBottom: -20, marginTop: 40 }} />
-								<Text style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network Error...!</Text>
-							</View> : <>
-								<SafeAreaView style={{ flex: 1 }}>
-
-									<FlatList scrollEnabled={false} nestedScrollEnabled={true}
-										style={{ marginHorizontal: 30, marginTop: 10 }} data={apiRecentJobs} renderItem={({ item }) => (
-											<Ripple rippleColor="#13A3E1" rippleOpacity={0.5} rippleDuration={300} rippleSize={200}
-												onPress={() => JobClick(item)}
-												style={{
-													flex: 1,
-													flexDirection: 'row',
-													margin: 5,
-													backgroundColor: '#fff',
-													borderColor: '#c2c2c2',
-													borderWidth: 1,
-													height: 50,
-													borderRadius: 25,
-													elevation: 5,
-													alignItems: 'center',
-													paddingHorizontal: 20
-												}}>
-												<Text ellipsizeMode={'tail'} numberOfLines={1}
-													style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.title}</Text>
-												<Text numberOfLines={1} style={{
-													fontFamily: 'poppins_light',
-													fontSize: 9,
-													marginLeft: 'auto',
-
-												}}>{item.locations}</Text>
-											</Ripple>
-										)}
-									/>
-								</SafeAreaView>
-							</>}
 
 						<View
 							style={{
@@ -454,6 +401,66 @@ function Home({ route, navigation }) {
 							</>}
 
 
+
+
+
+
+
+						<View
+							style={{
+								flex: 1,
+								flexDirection: 'row',
+								marginTop: 20,
+								borderRadius: 25,
+								alignItems: 'center',
+								paddingHorizontal: 30
+							}}>
+							<Text ellipsizeMode={'tail'} numberOfLines={1}
+								style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 15 }}>Recent Jobs</Text>
+							<Ripple rippleColor="black" rippleOpacity={0.3} rippleDuration={300} rippleSize={100} style={{ marginLeft: 'auto', backgroundColor: '#d7d7d7', paddingHorizontal: 10, paddingVertical: 1, borderRadius: 10 }}
+								onPress={() => navigation.push('Jobs')}>
+								<Text numberOfLines={1} style={{ fontFamily: 'poppins_light', fontSize: 12, }}
+								>Show All</Text></Ripple>
+						</View>
+						{error ?
+							<View>
+								<Image source={require('../assets/delete.png')} style={{ width: 30, height: 30, marginLeft: 190, marginBottom: -20, marginTop: 40 }} />
+								<Text style={{ textAlign: 'center', marginVertical: 20, fontFamily: 'poppins_medium' }}>Network Error...!</Text>
+							</View> : <>
+								<SafeAreaView style={{ flex: 1 }}>
+
+									<FlatList scrollEnabled={false} nestedScrollEnabled={true}
+										style={{ marginHorizontal: 30, marginTop: 10 }} data={apiRecentJobs} renderItem={({ item }) => (
+											<Ripple rippleColor="#13A3E1" rippleOpacity={0.5} rippleDuration={300} rippleSize={200}
+												onPress={() => JobClick(item)}
+												style={{
+													flex: 1,
+													flexDirection: 'row',
+													margin: 5,
+													backgroundColor: '#fff',
+													borderColor: '#c2c2c2',
+													borderWidth: 1,
+													height: 50,
+													borderRadius: 25,
+													elevation: 5,
+													alignItems: 'center',
+													paddingHorizontal: 20
+												}}>
+												<Text ellipsizeMode={'tail'} numberOfLines={1}
+													style={{ width: '60%', fontFamily: 'poppins_bold', fontSize: 12 }}>{item.title}</Text>
+												<Text numberOfLines={1} style={{
+													fontFamily: 'poppins_light',
+													fontSize: 9,
+													marginLeft: 'auto',
+
+												}}>{item.locations}</Text>
+											</Ripple>
+										)}
+									/>
+								</SafeAreaView>
+							</>}
+
+					
 
 						<View style={{
 							flex: 1,

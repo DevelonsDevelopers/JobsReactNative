@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import WebView from 'react-native-webview'
 
-const Test = ({ route }) => {
+const Test = ({ route , navigation}) => {
 
     const { url } = route.params;
 

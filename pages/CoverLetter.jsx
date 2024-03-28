@@ -25,20 +25,13 @@ const CoverLetter = ({ route, navigation }) => {
 	const dispatch = useDispatch();
 
 	// const cv = useSelector((state) => state.cv.cv);
-	const success = useSelector(state => state.success.cvSuccess);
-	const error = useSelector(state => state.error.cvError);
-	const nodata = useSelector(state => state.nodata.cvNoData);
 	const date = moment().format("DD MMM YYYY")
 	const [isLoading, setIsLoading] = useState(true)
 
 	const [cv, setCV] = useState()
 
 	const [ID, setID] = useState()
-	useEffect(() => {
-		if (success || error || nodata) {
-			setIsLoading(false)
-		}
-	}, [success, nodata, error])
+
 
 	useEffect(() => {
 		GetData();
@@ -50,13 +43,17 @@ const CoverLetter = ({ route, navigation }) => {
 	};
 
 	useEffect(() => {
-			dispatch(CVByUser(ID));
-			if (ID) {
+			// dispatch(CVByUser(ID));
+			if (ID && ID !== '0') {
 				// dispatch(CVByUser(ID));
+				setIsLoading(true) 
 				cvService.fetchByUser({user : ID}).then((res) => {
 					setCV(res.data)
+					setIsLoading(false)
+					
 				}).catch(err => {
 					console.error(err);
+					setIsLoading(false)
 				})
 		}
 	}, [ID]);
