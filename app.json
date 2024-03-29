@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Jobs Australia",
+    "name": "Jobss.com.au",
     "slug": "jobsapplication",
     "plugins": [
       "@react-native-google-signin/google-signin",
@@ -22,7 +22,7 @@
         }
       ]
     ],
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -46,7 +46,7 @@
       },
       "googleServicesFile": "./google-services.json",
       "package": "com.anonymous.jobsApplication",
-      "versionCode": 1
+      "versionCode": 2
     },
     "packagerOpts": {
       "sourceExts": [ "js", "json", "ts", "tsx", "jsx", "vue"]
