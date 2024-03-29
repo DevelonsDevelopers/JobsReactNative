@@ -22,7 +22,7 @@
         }
       ]
     ],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -46,7 +46,7 @@
       },
       "googleServicesFile": "./google-services.json",
       "package": "com.anonymous.jobsApplication",
-      "versionCode": 2
+      "versionCode": 3
     },
     "packagerOpts": {
       "sourceExts": [ "js", "json", "ts", "tsx", "jsx", "vue"]
