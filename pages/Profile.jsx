@@ -213,11 +213,9 @@ function Profile({ navigation }) {
                             marginTop: 20
                         }}>
                             <Pressable onPress={() => {
-                                if (checkSeeker === "complete") {
+                             
                                     navigation.push('AccountInfo', { role: seeker?.role })
-                                } else {
-                                    navigation.push('VerificationProfile')
-                                }
+                             
                             }}><View
                                 style={{ flex: 1, paddingVertical: 10,  }}>
                                     <Text style={{

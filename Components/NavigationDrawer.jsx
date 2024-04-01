@@ -95,24 +95,7 @@ const NavigationDrawer = ({ visible, toggleVisibility, navigation, isLogin, togg
                                     </View>
                                 </Ripple>
 
-                                <Ripple rippleColor="white"
-                                    onPress={() => {
-                                        toggleVisibility()
-                                        navigation.push('History')
-                                    }}>
-                                    <View style={{
-                                        flexDirection: 'row',
-                                        alignItems: 'center',
-                                        backgroundColor: '#13A3E1',
-                                        padding: 15,
-                                        borderRadius: 10,
-                                        marginTop: 4
-                                    }}>
-                                        <Text style={{ width: '100%', fontFamily: 'poppins_semibold', color: '#fff' }}>History</Text>
-                                        <Image style={{ width: 15, height: 15, marginLeft: 'auto', tintColor: '#fff' }}
-                                            source={require('../assets/arrowRight.png')} />
-                                    </View>
-                                </Ripple>
+                               
                             </>
                             :
                             <Text></Text>

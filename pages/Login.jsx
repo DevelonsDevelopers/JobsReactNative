@@ -90,9 +90,9 @@ function Login({ route, navigation }) {
                 if (responseCode === 200) {
                     let ID
                     if (data.affectedRows === 1) {
-                        ID = (data.insertId).toString()
+                        ID = (data.insertId)?.toString()
                     } else {
-                        ID = (data.id).toString()
+                        ID = (data.id)?.toString()
                     }
 
                     dispatch(CheckCV(ID))
@@ -139,9 +139,9 @@ function Login({ route, navigation }) {
                 console.log(data)
                 if (responseCode === 200) {
                     if (data.affectedRows === 1) {
-                        var ID = (data.insertId).toString()
+                        var ID = (data.insertId)?.toString()
                     } else {
-                        var ID = (data.id).toString()
+                        var ID = (data.id)?.toString()
                     }
                     if (data.affectedRows === 1) {
                         toggleLoadingVisibility(false)

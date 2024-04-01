@@ -61,7 +61,7 @@ function Splash({ navigation }) {
                 }
             })
         }
-    }, [check]);
+    }, [check , user]);
 
 
     return (
