@@ -169,7 +169,7 @@ function Profile({ navigation }) {
                             <Pressable onPress={() => navigation.push('saved')} style={{ flex: 1, paddingVertical: 20 }}>
                                 <Text style={{
                                     color: '#fff',
-                                    fontSize: 14,
+                                    fontSize: 20,
                                     fontFamily: 'poppins_medium',
                                     width: '100%',
                                     textAlign: 'center'
@@ -183,7 +183,7 @@ function Profile({ navigation }) {
                                     marginTop: 20
                                 }}>{seeker?.saved}</Text>
                             </Pressable>
-                            <View style={{ backgroundColor: '#fff', width: 3 }} />
+                            {/* <View style={{ backgroundColor: '#fff', width: 3 }} />
                             <Pressable onPress={() => navigation.push('applied')} style={{ flex: 1, paddingVertical: 20 }}>
                                 <Text style={{
                                     color: '#fff',
@@ -200,7 +200,7 @@ function Profile({ navigation }) {
                                     textAlign: 'center',
                                     marginTop: 20
                                 }}>{seeker?.applied}</Text>
-                            </Pressable>
+                            </Pressable> */}
                         </View>
                         <View style={{
                             flexDirection: 'column',
@@ -209,7 +209,7 @@ function Profile({ navigation }) {
                             marginHorizontal: 10,
                             marginRight: 30,
                             marginLeft: 30,
-                            borderRadius: 30,
+                            borderRadius: 14,
                             marginTop: 20
                         }}>
                             <Pressable onPress={() => {

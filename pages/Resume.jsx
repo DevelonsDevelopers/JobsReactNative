@@ -18,16 +18,18 @@ import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import cvService from "../server/services/cvService";
 import seekerService from "../server/services/seekerService";
 import BuyPlanModal from "../Components/BuyPlanModal";
+import VerificationStatusModal from "../Components/VerificationStatusModal";
 
 function Resume({ navigation }) {
   const dispatch = useDispatch();
   const [ID, setID] = useState();
   // const cv = useSelector((state) => state.cv.cv);
+
+  const [cvCheck, setCvCheck] = useState();
   const [cv, setCv] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
-  const [seeker , setSeeker] = useState()
-
+  const [seeker, setSeeker] = useState();
 
   useEffect(() => {
     GetData();
@@ -38,6 +40,9 @@ function Resume({ navigation }) {
     setID(value);
   };
 
+  useEffect(() => {
+    cvService.check({ user: ID }).then((res) => setCvCheck(res?.status));
+  }, [ID]);
 
   useEffect(() => {
     if (ID) {
@@ -60,8 +65,6 @@ function Resume({ navigation }) {
     }
   }, [ID]);
 
-  
-
   const [verify, setVerify] = useState(false);
   const toggleDistributeVisible = (dis) => {
     if (dis) {
@@ -77,17 +80,28 @@ function Resume({ navigation }) {
     setVerify(!verify);
   };
 
+  const [visible, setVisible] = useState(false);
+  const toggleVisible = () => setVisible(!visible);
 
-  const [visible ,setVisible] = useState(false)
-  const toggleVisible = () => setVisible(!visible)
+  const [complete, setComplete] = useState(false);
+  const toggleModal = () => setComplete(!complete);
 
   return (
     <View style={{ flex: 1 }}>
+      <VerificationStatusModal
+        visible={complete}
+        toggleVisibility={toggleModal}
+        line={"Complete your resume first"}
+      />
       <DistributeModal
         visible={verify}
         toggleVisible={toggleDistributeVisible}
       />
-      <BuyPlanModal visible={visible}  toggleVisible={toggleVisible}  navigation={navigation} />
+      <BuyPlanModal
+        visible={visible}
+        toggleVisible={toggleVisible}
+        navigation={navigation}
+      />
       <ScrollView style={{ backgroundColor: "#F1F1F1" }}>
         {isLoading ? (
           <View style={{ marginTop: 400 }}>
@@ -512,11 +526,15 @@ function Resume({ navigation }) {
       </ScrollView>
       <Pressable
         onPress={() => {
-          if (!seeker?.plan === 0) {
-            toggleDistributeVisible(true);
+          if (cvCheck === "complete") {
+            if (!seeker?.plan === 0) {
+              toggleDistributeVisible(true);
+            } else {
+              // navigation.push("SeekerPlans");
+              toggleVisible();
+            }
           } else {
-            // navigation.push("SeekerPlans");
-            toggleVisible()
+            toggleModal();
           }
         }}
         style={{

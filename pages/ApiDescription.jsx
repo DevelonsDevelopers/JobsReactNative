@@ -14,11 +14,28 @@ import WebsiteModal from "../Components/WebsiteModal";
 import Ripple from "react-native-material-ripple";
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import jobsApiService from "../server/services/jobsApiService";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import LoginRequireModal from "../Components/LoginRequireModal";
 
 const ApiDescription = ({ route, navigation }) => {
   const { ID } = route.params;
 
   const [job, setJob] = useState();
+  const [loginVal, setLoginVal] = useState();
+
+  useEffect(() => {
+    const fetchLoginValue = async () => {
+      try {
+        const value = await AsyncStorage.getItem("LOGIN");
+        setLoginVal(value);
+        console.log('login value' ,value);
+      } catch (error) {
+        console.error("Error retrieving ID:", error);
+      }
+    };
+
+    fetchLoginValue();
+  }, []);
 
   useEffect(() => {
     if (ID && ID !== "0") {
@@ -28,16 +45,20 @@ const ApiDescription = ({ route, navigation }) => {
     }
   }, [ID]);
 
-  useEffect(() => {
-    console.log(job);
-  }, [job]);
-
   const [webVisible, setWebVisible] = useState(false);
   const toggWebVisibility = () => setWebVisible(!webVisible);
+
+  const [loginVisible, setLoginVisible] = useState(false);
+  const toggleLoginVisible = () => setLoginVisible(!loginVisible);
 
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
+      <LoginRequireModal
+          visible={loginVisible}
+          toggleRequireVisible={toggleLoginVisible}
+          navigation={navigation}
+        />
         <WebsiteModal
           visible={webVisible}
           toggleRequireVisible={toggWebVisibility}
@@ -184,7 +205,13 @@ const ApiDescription = ({ route, navigation }) => {
 
       <Ripple
         rippleColor="white"
-        onPress={() => toggWebVisibility()}
+        onPress={() => {
+          if (loginVal === 'true') {
+            toggWebVisibility();
+          } else {
+            toggleLoginVisible()
+          }
+        }}
         style={{
           height: 50,
           backgroundColor: "#13A3E1",

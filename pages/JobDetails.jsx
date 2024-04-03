@@ -564,16 +564,16 @@ const JobDetails = ({ route, navigation }) => {
             <Pressable
               onPress={() => {
                 if (login) {
-                  if (checkCv ==='complete' && checkSeeker?.status === 'complete' && checkSeeker?.data?.verified === 'true' ) {
-                    if (job?.link) {
-                      toggWebVisibility();
-                    } else {
+                  if (job?.link) {
+                    toggWebVisibility();
+                  }
+                    else if(checkCv ==='complete' && checkSeeker?.status === 'complete' && checkSeeker?.data?.verified === 'true') {
                       navigation.push("ManageCoverLetter", {
                         job: job?.id,
                         role: job?.role,
                       });
                     }
-                  } else {
+                  else {
                     navigation.push("VerificationProfile", {
                       checkCv: checkCv,
                       checkSeeker: checkSeeker,
