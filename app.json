@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Jobss.com.au",
-    "slug": "jobsapplication",
+    "slug": "jobsreactnative",
     "plugins": [
       "@react-native-google-signin/google-signin",
       "@react-native-firebase/app",
@@ -49,17 +49,24 @@
       "versionCode": 4
     },
     "packagerOpts": {
-      "sourceExts": [ "js", "json", "ts", "tsx", "jsx", "vue"]
+      "sourceExts": [
+        "js",
+        "json",
+        "ts",
+        "tsx",
+        "jsx",
+        "vue"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "7060e1ae-b62b-4807-9345-9f3a2baf0afc"
+        "projectId": "3ce3684e-5090-4db0-bf5e-07f922c04b47"
       }
     },
-    "owner": "tayyabrana"
+    "owner": "abubakar2255"
   },
   "react-native-google-mobile-ads": {
     "android_app_id": "ca-app-pub-3940256099942544~3347511713",

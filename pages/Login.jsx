@@ -110,6 +110,11 @@ function Login({ route, navigation }) {
                     })
                 } else {
                     toggleLoadingVisibility(false)
+                    Toast.show({
+                        type: 'error',
+                        position: 'top',
+                        text1: 'Unexpected Error Occured',
+                    })
                 }
             })
         } catch (error) {
