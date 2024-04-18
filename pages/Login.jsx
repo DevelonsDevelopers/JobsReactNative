@@ -284,15 +284,14 @@ import {
   
           toggleLoadingVisibility(true);
           await google(
-            `uid_${credentialState.name}`,
-            credentialState.givenName +
-              credentialState.id.substring(credentialState.id.length - 6),
-            `${credentialState.email}`,
+            credentialState.FULL_NAME,
+            `${credentialState.FULL_NAME}`,
+            `${credentialState.EMAIL}`,
             "",
             "",
             "",
             "",
-            credentialState.id,
+           `uid_${credentialState.FULL_NAME.split(0,3)} ${credentialState.EMAIL.split(0,5)}`,
             "Apple"
           ).then(async (res) => {
             const {
@@ -315,13 +314,13 @@ import {
   
               sleep(2000).then(async () => {
                 await AsyncStorage.setItem("LOGIN", "true");
-                await AsyncStorage.setItem("ID", credentialState.id);
+                await AsyncStorage.setItem("ID", `uid_${credentialState.FULL_NAME.split(0,3)} ${credentialState.EMAIL.split(0,5)}`);
                 await AsyncStorage.setItem("USER", "SEEKER");
-                await AsyncStorage.setItem("NAME", credentialState.name);
-                await AsyncStorage.setItem("EMAIL", credentialState.email);
+                await AsyncStorage.setItem("NAME", credentialState.FULL_NAME);
+                await AsyncStorage.setItem("EMAIL", credentialState.EMAIL);
                 await AsyncStorage.setItem(
                   "USERNAME",
-                  credentialState.id.substring(credentialState.id.length - 6)
+                  credentialState.FULL_NAME
                 );
                 toggleLoadingVisibility(false);
                 navigation.popToTop();
