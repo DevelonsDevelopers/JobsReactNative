@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "404623696003-809hulg0aokn2apkgsdrm94t1kt7imqt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.jobsApplication",
+            "certificate_hash": "1d3e075eff4002d67968695f1f26fa3f3aba5b09"
+          }
+        },
+        {
+          "client_id": "404623696003-ejvegqrri81pr0fhf4kdi383abhk25s4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.jobsApplication",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "404623696003-iuru6r0573jj00s67quubv36j4aenv1q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -47,10 +63,46 @@
               "client_type": 3
             },
             {
-              "client_id": "404623696003-tsj6kofl9jsis8jro1o68l4ohp09t1i1.apps.googleusercontent.com",
+              "client_id": "404623696003-tio3g6nvvisk28u7c3g998v9h9ldtb4u.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "host.exp.exponent"
+                "bundle_id": "com.anonymous.jobsApplication"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404623696003:android:7c33d9b2839dcbea9ebbb6",
+        "android_client_info": {
+          "package_name": "com.jobss.australia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "404623696003-doe1cpjrlljj8om770ha3ri9s9vatoc8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc1v0XzNdnm0y0_JZgB85k6cXvxocVZyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "404623696003-75v7bge4t1fcsj0a6gtipgqgcsj35j6q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "404623696003-tio3g6nvvisk28u7c3g998v9h9ldtb4u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anonymous.jobsApplication"
               }
             }
           ]

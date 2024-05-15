@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Jobss.com.au",
-    "slug": "jobsapplication",
+    "slug": "jobssaustralia",
     "plugins": [
       "@react-native-google-signin/google-signin",
       "@react-native-firebase/app",
@@ -45,7 +45,7 @@
         "backgroundColor": "#ffffff"
       },
       "googleServicesFile": "./google-services.json",
-      "package": "com.anonymous.jobsApplication",
+      "package": "com.jobss.australia",
       "versionCode": 4
     },
     "packagerOpts": {
