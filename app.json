@@ -22,7 +22,7 @@
         }
       ]
     ],
-    "version": "1.0.3",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -46,7 +46,7 @@
       },
       "googleServicesFile": "./google-services.json",
       "package": "com.jobss.australia",
-      "versionCode": 4
+      "versionCode": 1
     },
     "packagerOpts": {
       "sourceExts": [
@@ -63,7 +63,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "7060e1ae-b62b-4807-9345-9f3a2baf0afc"
+        "projectId": "053d0188-4cff-4cbf-a8e6-797dda5c8ded"
       }
     }
   },
