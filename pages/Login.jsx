@@ -2,6 +2,7 @@ import {
     ActivityIndicator,
     Image,
     Modal,
+    Platform,
     Pressable,
     ScrollView,
     Text,
@@ -580,6 +581,7 @@ import {
                 Log In
               </Text>
             </Pressable>
+{Platform.OS === "android" && (
             <View style={{ flexDirection: "row" }}>
               <Pressable
                 onPress={() => {
@@ -617,7 +619,9 @@ import {
                 </Text>
               </Pressable>
             </View>
-            <View style={{ flexDirection: "row" }}>
+)}
+
+            {/* <View style={{ flexDirection: "row" }}>
               <Pressable
                 onPress={() => onAppleButtonPress()}
                 style={{
@@ -647,7 +651,7 @@ import {
                   Apple
                 </Text>
               </Pressable>
-            </View>
+            </View> */}
   
             <View
               style={{ flexDirection: "row", marginTop: 25, marginBottom: 30 }}
