@@ -37,7 +37,7 @@
     "ios": {
       "bundleIdentifier": "com.anonymous.jobsApplication",
       "googleServicesFile": "./GoogleService-Info.plist",
-      "usesAppleSignIn": true
+      "supportsTablet": "false"
     },
     "android": {
       "adaptiveIcon": {
