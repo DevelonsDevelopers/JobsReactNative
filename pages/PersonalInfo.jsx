@@ -9,6 +9,7 @@ import {
   ScrollView,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -35,6 +36,7 @@ import { checkCV } from "../API";
 import seekerService from "../server/services/seekerService";
 import cityService from "../server/services/cityService";
 import countryService from "../server/services/countryService";
+import DeleteAccountModal from "../Components/DeleteAccountModal";
 
 function PersonalInfo({ navigation }) {
   const [stateCheck, setStateCheck] = useState(false);
@@ -167,7 +169,7 @@ function PersonalInfo({ navigation }) {
     }
   }, [seeker]);
 
-  console.log("seeker ", seeker);
+  console.log("seeker id", seeker?.id);
 
   const updateGender = (gender) => {
     setSeekerData({ ...seekerData, gender: gender });
@@ -272,8 +274,22 @@ function PersonalInfo({ navigation }) {
     setCitiesData(searched);
   }, [country]);
 
+  const [accountDelete , setAccountDelete] = useState(false)
+  const toggleAccountDelete = () => {
+    setAccountDelete(!accountDelete)
+  }
+  const [seekerId , setSeekerId] = useState(seeker?.id)
+
+  useEffect(() => {
+    if(!seekerId) {
+      setSeekerId(seeker?.id)
+    }
+  },[seeker])
+
   return (
     <View style={{ flex: 1 }}>
+
+      <DeleteAccountModal  visible={accountDelete} toggleVisibility={toggleAccountDelete} navigation={navigation} id={seekerId} user={'seeker'} />
       <DatePicker
         modal
         open={open}
@@ -1016,8 +1032,7 @@ function PersonalInfo({ navigation }) {
                   padding: 15,
                   marginTop: 15,
                   marginHorizontal: 25,
-                  marginBottom: 25,
-                }}
+                 }}
               >
                 <Text
                   style={{ color: "#fff", fontWeight: "800", fontSize: 15 }}
@@ -1028,6 +1043,28 @@ function PersonalInfo({ navigation }) {
             ) : (
               ""
             )}
+<TouchableOpacity
+                onPress={() => {
+                  toggleAccountDelete()
+                }}
+                style={{
+                  borderColor: "#ff0000",
+                  backgroundColor: "#ff0000",
+                  borderWidth: 1,
+                  borderRadius: 25,
+                  alignItems: "center",
+                  padding: 15,
+                  marginTop: 15,
+                  marginHorizontal: 25,
+                 }}
+              >
+                <Text
+                  style={{ color: "#fff", fontWeight: "800", fontSize: 15 }}
+                >
+                Delete Account
+                </Text>
+              </TouchableOpacity>
+
             {/* {seeker?.plan === 0 ?
                             <Ripple rippleColor="white"
                                 onPress={() => {

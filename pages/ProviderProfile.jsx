@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { Button, Pressable, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import CitySelectModal from "../Components/CitySelectModal";
 import { AllCities } from "../API/actions/cityActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +31,8 @@ const ProviderProfile = ({ navigation }) => {
   const [phoneCode, setPhoneCode] = useState("");
 
   const [type, setType] = useState(false);
-  const toggleType = () => setType(!type);
+  const toggleType = () =>{ setType(!type)  
+  console.log('clicked')};
 
   const [phoneVisible, setPhoneVisible] = useState(false);
   const togglePhoneVisible = () => setPhoneVisible(!phoneVisible);
@@ -357,8 +358,11 @@ const ProviderProfile = ({ navigation }) => {
               placeholder={"Enter your HeadQuarter Address"}
             />
           </View>
-          <Pressable onPress={() => toggleType()}>
-            <View
+          <  >
+
+ 
+            <TouchableOpacity
+            onPress={() => toggleType()}
               style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -370,22 +374,26 @@ const ProviderProfile = ({ navigation }) => {
                 paddingRight: 20,
               }}
             >
-              <TextInput
+              <Text
+              // onPress={() => toggleType()}
                 value={updateData.type}
                 editable={false}
                 onChangeText={(text) =>
                   setUpdateData({ ...updateData, type: text })
                 }
                 style={{
-                  height: 50,
+                  
                   paddingHorizontal: 20,
                   color: "#626262",
                   flex: 1,
+                  alignItems:'center',
+                  alignContent:'center',
+                  paddingVertical:15
                 }}
-                placeholder={"Enter your Company Type"}
-              />
-            </View>
-          </Pressable>
+
+              > {updateData.type ? updateData.type : 'Enter your Company Type'} </Text>
+            </TouchableOpacity>
+          </>
 
           <Pressable
             onPress={() => updateProfile()}

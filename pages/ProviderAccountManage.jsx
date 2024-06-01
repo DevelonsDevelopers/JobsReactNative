@@ -192,6 +192,8 @@ const ProviderAccountManage = ({ navigation }) => {
     setCitiesData(searched);
   }, [country]);
 
+  console.log('company ' , company)
+
   return (
     <View style={{ flex: 1 }}>
       <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
