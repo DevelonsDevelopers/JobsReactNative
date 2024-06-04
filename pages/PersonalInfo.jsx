@@ -37,6 +37,8 @@ import seekerService from "../server/services/seekerService";
 import cityService from "../server/services/cityService";
 import countryService from "../server/services/countryService";
 import DeleteAccountModal from "../Components/DeleteAccountModal";
+import deleteService from "../server/services/deleteService";
+import Toast from "react-native-toast-message";
 
 function PersonalInfo({ navigation }) {
   const [stateCheck, setStateCheck] = useState(false);
@@ -286,10 +288,37 @@ function PersonalInfo({ navigation }) {
     }
   },[seeker])
 
+
+  const Logout = async () => {
+    await AsyncStorage.setItem("LOGIN", 'false')
+    await AsyncStorage.setItem("ID", '')
+    await AsyncStorage.setItem("NAME", '')
+    await AsyncStorage.setItem("EMAIL", '')
+    await AsyncStorage.setItem("USERNAME", '')
+    navigation.popToTop()
+    navigation.replace('Home')
+}
+
+
+  const handleDelete = async () => {
+      try {
+        const res = await deleteService.deleteSeeker(seekerId);
+        console.log("res", res);
+        if (res?.responseCode === 200) {
+          toggleAccountDelete()
+          Logout()
+        }
+      } catch (err) {
+        console.log("err", err);
+        Toast.show({ type: 'error', position: 'top', text1: 'unexpected error occured' , text2:'try again in a few moment' })
+
+      }
+  };
+
   return (
     <View style={{ flex: 1 }}>
 
-      <DeleteAccountModal  visible={accountDelete} toggleVisibility={toggleAccountDelete} navigation={navigation} id={seekerId} user={'seeker'} />
+      <DeleteAccountModal  visible={accountDelete} toggleVisibility={toggleAccountDelete} handleDelete={handleDelete}/>
       <DatePicker
         modal
         open={open}
@@ -1101,6 +1130,7 @@ function PersonalInfo({ navigation }) {
           </>
         )}
       </ScrollView>
+      <Toast position='top' bottomOffset={20} />
     </View>
   );
 }

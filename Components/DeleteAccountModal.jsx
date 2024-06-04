@@ -12,34 +12,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import DeleteButton from "./DeleteButton";
 import deleteService from "../server/services/deleteService";
 
-const DeleteAccountModal = ({ visible, toggleVisibility, id, user , navigation}) => {
+const DeleteAccountModal = ({ visible, toggleVisibility, handleDelete}) => {
 
-
-
-
-  const handleDelete = async () => {
-    if (user === "seeker") {
-      try {
-        const res = await deleteService.deleteSeeker(id);
-        console.log("res", res);
-        if (res?.responseCode === 200) {
-            
-            toggleVisibility()
-        }
-  
-        // navigation.popToTop();
-        // navigation.replace("Home");
-      } catch (err) {
-        console.log("err", err);
-  
-        // navigation.popToTop();
-        // navigation.replace("Home");
-      }
-    }
-  };
-  
-
-  console.log("id", id);
 
   return (
     <Modal
