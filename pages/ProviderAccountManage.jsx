@@ -10,6 +10,7 @@ import {
   ScrollView,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,6 +28,9 @@ import { RESET } from "../Utils/Constants";
 import cityService from "../server/services/cityService";
 import countryService from "../server/services/countryService";
 import companyService from "../server/services/companyService";
+import DeleteAccountModal from "../Components/DeleteAccountModal";
+import deleteService from "../server/services/deleteService";
+import Toast from "react-native-toast-message";
 
 const ProviderAccountManage = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -194,8 +198,49 @@ const ProviderAccountManage = ({ navigation }) => {
 
   console.log('company ' , company)
 
+  const [accountDelete , setAccountDelete] = useState(false)
+  const toggleAccountDelete = () => {
+    setAccountDelete(!accountDelete)
+  }
+  const [providerId , setproviderId] = useState(company?.id)
+
+  useEffect(() => {
+    if(!providerId) {
+      setproviderId(company?.id)
+    }
+  },[company])
+
+
+  const Logout = async () => {
+    await AsyncStorage.setItem("LOGIN", "false");
+    await AsyncStorage.setItem("ID", "");
+    await AsyncStorage.setItem("USER", "");
+    await AsyncStorage.setItem("NAME", "");
+    await AsyncStorage.setItem("EMAIL", "");
+    navigation.popToTop()
+    navigation.replace('Home')
+   };
+
+  const handleDelete = async () => {
+    try {
+      const res = await deleteService.deleteProvider(providerId);
+      console.log("res", res);
+      if (res?.responseCode === 200) {
+        Logout()
+        toggleAccountDelete()
+      }
+    } catch (err) {
+      console.log("err", err);
+      Toast.show({ type: 'error', position: 'top', text1: 'unexpected error occured' , text2:'try again in a few moment' })
+
+    }
+};
+console.log('provider id' , providerId)
+
   return (
     <View style={{ flex: 1 }}>
+            <DeleteAccountModal  visible={accountDelete} toggleVisibility={toggleAccountDelete} handleDelete={handleDelete}/>
+
       <Modal visible={loadingVisible} animationType={"fade"} transparent={true}>
         <View
           style={{
@@ -854,6 +899,27 @@ const ProviderAccountManage = ({ navigation }) => {
                 </Text>
               </Pressable>
             )}
+            <TouchableOpacity
+                onPress={() => {
+                  toggleAccountDelete()
+                }}
+                style={{
+                  borderColor: "#ff0000",
+                  backgroundColor: "#ff0000",
+                  borderWidth: 1,
+                  borderRadius: 25,
+                  alignItems: "center",
+                  padding: 15,
+                  marginTop: 15,
+                  marginHorizontal: 25,
+                 }}
+              >
+                <Text
+                  style={{ color: "#fff", fontWeight: "800", fontSize: 15 }}
+                >
+                Delete Account
+                </Text>
+              </TouchableOpacity>
           </ScrollView>
         </>
       )}

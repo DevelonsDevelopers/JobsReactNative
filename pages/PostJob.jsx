@@ -138,7 +138,7 @@ function PostJob({ navigation }) {
   // }, [company]);
 
   console.log("company ", company?.verified);
-  console.log("company complete", isComplete );
+  console.log("company complete", isComplete);
 
   const Logout = async () => {
     await AsyncStorage.setItem("LOGIN", "false");
@@ -250,7 +250,7 @@ function PostJob({ navigation }) {
                 Welcome Back !
               </Text>
             </View>
-            {isComplete && isVerified  && company?.plan !== 0 ? (
+            {isComplete && isVerified && company?.plan !== 0 ? (
               <>
                 <View
                   style={{
@@ -655,7 +655,9 @@ function PostJob({ navigation }) {
                           source={require("../assets/verified.png")}
                         />
                         <Text
-                          //  onPress={() => navigation.push("ProviderProfile")}
+                          onPress={() =>
+                            navigation.push("ProviderProfile", { id: ID })
+                          }
                           style={{
                             color: "green",
                             fontSize: 14,
@@ -674,7 +676,9 @@ function PostJob({ navigation }) {
                           source={require("../assets/unverified.png")}
                         />
                         <Text
-                          onPress={() => navigation.push("ProviderProfile")}
+                          onPress={() =>
+                            navigation.push("ProviderProfile", { id: ID })
+                          }
                           style={{
                             color: "blue",
                             fontSize: 14,
@@ -785,54 +789,86 @@ function PostJob({ navigation }) {
                     </View>
                   )}
 
-                  <View style={{ flexDirection: 'row', gap: 4, paddingLeft: 10, padding: 2 }}>
-                                        <Text style={{
-                                            textAlign: 'center',
-                                            color: 'black',
-                                            fontSize: 14,
-                                            fontFamily: 'poppins_bold',
-                                        }}>3)</Text>
-                                        <Text style={{
-                                            textAlign: 'center',
-                                            color: 'black',
-                                            fontSize: 14,
-                                            fontFamily: 'poppins_bold',
-                                        }}>Buy a Plan</Text>
-                                    </View>
-                  <Text style={{ paddingLeft: 20 }}>Buy a plan to post your jobs</Text>
-                                    {company?.plan !== 0 ?
-
-                                        <View style={{ flexDirection: 'row', gap: 40, marginTop: 10 }}>
-                                            <Image style={{ width: 20, height: 20, marginTop: 5 }}
-                                                source={require('../assets/verified.png')} />
-                                            <Text style={{
-                                                color: 'green',
-                                                fontSize: 14,
-                                                marginLeft: -32,
-                                                fontFamily: 'poppins_bold',
-                                                marginTop: 4
-                                            }}>Purchased</Text>
-                                        </View>
-                                        :
-                                        <View style={{ flexDirection: 'row', gap: 40, marginTop: 10 }}>
-                                            <Image style={{ width: 20, height: 20, marginTop: 5 }}
-                                                source={require('../assets/unverified.png')} />
-                                            <Text style={{
-                                                color: 'blue',
-                                                fontSize: 14,
-                                                marginLeft: -32,
-                                                fontFamily: 'poppins_bold',
-                                                marginTop: 4
-                                            }}
-                                                onPress={() => {
-                                                    if (isVerified) {
-                                                        navigation.push('Plans')
-                                                    } else {
-                                                        click('Please Verify Account ')
-                                                    }
-                                                }}>(Buy Plan)</Text>
-                                        </View>
-                                    }
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      gap: 4,
+                      paddingLeft: 10,
+                      padding: 2,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        textAlign: "center",
+                        color: "black",
+                        fontSize: 14,
+                        fontFamily: "poppins_bold",
+                      }}
+                    >
+                      3)
+                    </Text>
+                    <Text
+                      style={{
+                        textAlign: "center",
+                        color: "black",
+                        fontSize: 14,
+                        fontFamily: "poppins_bold",
+                      }}
+                    >
+                      Buy a Plan
+                    </Text>
+                  </View>
+                  <Text style={{ paddingLeft: 20 }}>
+                    Buy a plan to post your jobs
+                  </Text>
+                  {company?.plan !== 0 ? (
+                    <View
+                      style={{ flexDirection: "row", gap: 40, marginTop: 10 }}
+                    >
+                      <Image
+                        style={{ width: 20, height: 20, marginTop: 5 }}
+                        source={require("../assets/verified.png")}
+                      />
+                      <Text
+                        style={{
+                          color: "green",
+                          fontSize: 14,
+                          marginLeft: -32,
+                          fontFamily: "poppins_bold",
+                          marginTop: 4,
+                        }}
+                      >
+                        Purchased
+                      </Text>
+                    </View>
+                  ) : (
+                    <View
+                      style={{ flexDirection: "row", gap: 40, marginTop: 10 }}
+                    >
+                      <Image
+                        style={{ width: 20, height: 20, marginTop: 5 }}
+                        source={require("../assets/unverified.png")}
+                      />
+                      <Text
+                        style={{
+                          color: "blue",
+                          fontSize: 14,
+                          marginLeft: -32,
+                          fontFamily: "poppins_bold",
+                          marginTop: 4,
+                        }}
+                        onPress={() => {
+                          if (isVerified) {
+                            navigation.push("Plans");
+                          } else {
+                            click("Please Verify Account ");
+                          }
+                        }}
+                      >
+                        (Buy Plan)
+                      </Text>
+                    </View>
+                  )}
                 </View>
               </View>
             )}

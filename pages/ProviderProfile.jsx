@@ -14,8 +14,25 @@ import cityService from "../server/services/cityService";
 import countryService from "../server/services/countryService";
 import companyService from "../server/services/companyService";
 
-const ProviderProfile = ({ navigation }) => {
+const ProviderProfile = ({ navigation , route }) => {
   const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const { id } = route.params;
+  console.log('user id ' , id)
+const [company , setCompany] = useState()
+
+  useEffect(() => {
+    
+      companyService
+        .getCompanyById({ id: id })
+        .then((res) => {
+          setCompany(res?.data);
+        })
+        .catch((err) => {
+          console.log("error in gets company ", err);
+        });
+    
+  }, [id]);
+  console.log('company data' , company)
 
   const dispatch = useDispatch();
 
@@ -43,7 +60,23 @@ const ProviderProfile = ({ navigation }) => {
     phone: "",
     headquater: "",
     type: "",
+    email:company?.email ,
+    size:company?.size
   });
+
+  useEffect(() => {
+    setUpdateData(prevData => ({
+      ...prevData,
+      email: company?.email,
+      size: company?.size
+    }));
+  }, [company]);
+  
+
+console.log('updated data' , updateData)
+
+
+
   const toggleVisibility = () => setCityVisible(!cityVisible);
   const toggleCountryVisibility = () => setCountryVisible(!countryVisible);
 
@@ -119,6 +152,8 @@ const ProviderProfile = ({ navigation }) => {
                     headquater: updateData.headquater,
                     type: updateData.type,
                     id: ID,
+                    email:updateData?.email,
+                    size:updateData?.size,
                   })
                   .then((res) => {
                     console.log('res of update company' , res);

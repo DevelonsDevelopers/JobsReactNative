@@ -9,6 +9,16 @@ const deleteService = {
             throw error
         }
     },
+    deleteProvider: async (id) => {
+        console.log('id delete provider', id);
+        try {
+            const response = await axiosInstance.delete('/companies/delete', { data: { id } });
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    },
+    
 
 }
 export default deleteService
